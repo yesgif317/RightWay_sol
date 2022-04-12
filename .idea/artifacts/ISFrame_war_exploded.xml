@@ -1,0 +1,45 @@
+<component name="ArtifactManager">
+  <artifact type="exploded-war" name="ISFrame:war exploded">
+    <output-path>$PROJECT_DIR$/out/artifacts/ISFrame_war_exploded</output-path>
+    <root id="root">
+      <element id="javaee-facet-resources" facet="ISFrame/web/Web" />
+      <element id="directory" name="WEB-INF">
+        <element id="directory" name="classes">
+          <element id="module-output" name="ISFrame" />
+        </element>
+        <element id="directory" name="lib">
+          <element id="library" level="project" name="Spring-5.2.3.RELEASE" />
+          <element id="library" level="project" name="Spring MVC-5.2.3.RELEASE" />
+          <element id="library" level="project" name="Maven: javax.activation:activation:1.1" />
+          <element id="library" level="project" name="Maven: commons-pool:commons-pool:1.5.4" />
+          <element id="library" level="project" name="Maven: javax.inject:javax.inject:1" />
+          <element id="library" level="project" name="Maven: org.springframework:spring-context:4.3.3.RELEASE" />
+          <element id="library" level="project" name="Maven: org.springframework:spring-aop:4.3.3.RELEASE" />
+          <element id="library" level="project" name="Maven: org.springframework:spring-beans:4.3.3.RELEASE" />
+          <element id="library" level="project" name="Maven: org.springframework:spring-core:4.3.3.RELEASE" />
+          <element id="library" level="project" name="Maven: org.springframework:spring-expression:4.3.3.RELEASE" />
+          <element id="library" level="project" name="Maven: org.springframework:spring-webmvc:4.3.3.RELEASE" />
+          <element id="library" level="project" name="Maven: org.springframework:spring-web:4.3.3.RELEASE" />
+          <element id="library" level="project" name="Maven: org.springframework:spring-context-support:4.3.3.RELEASE" />
+          <element id="library" level="project" name="Maven: com.sun.mail:javax.mail:1.6.1" />
+          <element id="library" level="project" name="Maven: commons-fileupload:commons-fileupload:1.2.1" />
+          <element id="library" level="project" name="Maven: commons-io:commons-io:2.4" />
+          <element id="library" level="project" name="Maven: org.mariadb.jdbc:mariadb-java-client:2.5.2" />
+          <element id="library" level="project" name="Maven: commons-dbcp:commons-dbcp:1.4" />
+          <element id="library" level="project" name="Maven: org.springframework:spring-jdbc:5.2.2.RELEASE" />
+          <element id="library" level="project" name="Maven: org.springframework:spring-tx:5.2.2.RELEASE" />
+          <element id="library" level="project" name="Maven: org.springframework:spring-test:4.3.3.RELEASE" />
+          <element id="library" level="project" name="Maven: org.aspectj:aspectjrt:1.6.10" />
+          <element id="library" level="project" name="Maven: org.slf4j:slf4j-api:1.6.6" />
+          <element id="library" level="project" name="Maven: org.slf4j:jcl-over-slf4j:1.6.6" />
+          <element id="library" level="project" name="Maven: org.slf4j:slf4j-log4j12:1.6.6" />
+          <element id="library" level="project" name="Maven: log4j:log4j:1.2.15" />
+          <element id="library" level="project" name="Maven: javax.servlet:jstl:1.2" />
+          <element id="library" level="project" name="Maven: org.mybatis:mybatis:3.5.3" />
+          <element id="library" level="project" name="Maven: org.mybatis:mybatis-spring:2.0.3" />
+          <element id="library" level="project" name="Maven: org.bgee.log4jdbc-log4j2:log4jdbc-log4j2-jdbc4:1.16" />
+        </element>
+      </element>
+    </root>
+  </artifact>
+</component>
