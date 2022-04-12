@@ -2,7 +2,6 @@
   <artifact type="exploded-war" name="ISFrame:war exploded">
     <output-path>$PROJECT_DIR$/out/artifacts/ISFrame_war_exploded</output-path>
     <root id="root">
-      <element id="javaee-facet-resources" facet="ISFrame/web/Web" />
       <element id="directory" name="WEB-INF">
         <element id="directory" name="classes">
           <element id="module-output" name="ISFrame" />
@@ -40,6 +39,7 @@
           <element id="library" level="project" name="Maven: org.bgee.log4jdbc-log4j2:log4jdbc-log4j2-jdbc4:1.16" />
         </element>
       </element>
+      <element id="javaee-facet-resources" facet="ISFrame/web/웹" />
     </root>
   </artifact>
 </component>
