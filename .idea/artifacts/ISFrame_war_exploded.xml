@@ -37,6 +37,13 @@
           <element id="library" level="project" name="Maven: org.mybatis:mybatis:3.5.3" />
           <element id="library" level="project" name="Maven: org.mybatis:mybatis-spring:2.0.3" />
           <element id="library" level="project" name="Maven: org.bgee.log4jdbc-log4j2:log4jdbc-log4j2-jdbc4:1.16" />
+          <element id="library" level="project" name="Maven: com.oracle.database.ha:ons:11.2.0.4" />
+          <element id="library" level="project" name="Maven: com.oracle.database.ha:simplefan:11.2.0.4" />
+          <element id="library" level="project" name="Maven: com.oracle.database.jdbc:ucp:11.2.0.4" />
+          <element id="library" level="project" name="Maven: com.oracle.database.jdbc:ojdbc6:11.2.0.4" />
+          <element id="library" level="project" name="Maven: com.oracle.database.security:oraclepki:11.2.0.4" />
+          <element id="library" level="project" name="Maven: com.oracle.database.security:osdt_cert:11.2.0.4" />
+          <element id="library" level="project" name="Maven: com.oracle.database.security:osdt_core:11.2.0.4" />
         </element>
       </element>
       <element id="javaee-facet-resources" facet="ISFrame/web/웹" />

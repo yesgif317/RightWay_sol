@@ -4,19 +4,33 @@
        xmlns:context="http://www.springframework.org/schema/context"
        xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd http://www.springframework.org/schema/context https://www.springframework.org/schema/context/spring-context.xsd">
 
-    <!-- MariaDB JDBC DataSource -->
-    <bean id="dataSource" class="org.springframework.jdbc.datasource.DriverManagerDataSource">
-        <property name="driverClassName" value="org.mariadb.jdbc.Driver" />
-        <property name="url" value="jdbc:mariadb://127.0.0.1:3306/board"/>
-        <property name="username" value="root"/>
-        <property name="password" value="1234"/>
+<!--    &lt;!&ndash; MariaDB JDBC DataSource &ndash;&gt;-->
+<!--    <bean id="dataSource" class="org.springframework.jdbc.datasource.DriverManagerDataSource">-->
+<!--        <property name="driverClassName" value="org.oracle.jdbc.Driver" />-->
+<!--        <property name="url" value="jdbc:oracle://127.0.0.1:3306/board"/>-->
+<!--        <property name="username" value="root"/>-->
+<!--        <property name="password" value="1234"/>-->
+<!--    </bean>-->
+    <!-- mybatis SqlSessionFactoryBean -->
+<!--    <bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">-->
+<!--        <property name="dataSource" ref="dataSource" />-->
+<!--        <property name="configLocation" value="classpath:/mybatis-config.xml" />-->
+<!--        <property name="mapperLocations" value="classpath:/mappers/**/*Mapper.xml" />-->
+<!--    </bean>-->
+
+    <bean class="org.springframework.jdbc.datasource.DriverManagerDataSource" id="dataSource">
+        <property value="oracle.jdbc.driver.OracleDriver" name="driverClassName" />
+        <property value="jdbc:oracle:thin:@localhost:1521:xe" name="url" />
+        <!-- 오라클 사용자 이름 -->
+        <property value="scott" name="username" />
+        <!-- 오라클 사용자 비밀번호 -->
+        <property value="tiger" name="password" />
     </bean>
 
-    <!-- mybatis SqlSessionFactoryBean -->
-    <bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
+    <bean class="org.mybatis.spring.SqlSessionFactoryBean" id="sqlSessionFactory">
         <property name="dataSource" ref="dataSource" />
-        <property name="configLocation" value="classpath:/mybatis-config.xml" />
-        <property name="mapperLocations" value="classpath:/mappers/**/*Mapper.xml" />
+        <property value="classpath:/mybatis-config.xml" name="configLocation" />
+        <property value="classpath:/mappers/*Mapper.xml" name="mapperLocations" />
     </bean>
 
     <!-- mybatis -->

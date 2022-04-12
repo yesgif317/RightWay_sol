@@ -23,6 +23,9 @@ public class MainController {
         return "index";
     }
 
+    @RequestMapping(value = "/login.do",method = RequestMethod.GET)
+    public String login(){return "login";}
+
     //테이블 페이지 이동
     @RequestMapping(value = "/tables.do", method = RequestMethod.GET)
     public String tables(Model model){
