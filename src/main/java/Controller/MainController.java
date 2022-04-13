@@ -26,6 +26,16 @@ public class MainController {
     @RequestMapping(value = "/login.do",method = RequestMethod.GET)
     public String login(){return "login";}
 
+    @RequestMapping(value = "/register.do", method = RequestMethod.GET)
+    public String register() {
+        return "register";
+    }
+
+    @RequestMapping(value = "/forgot_password.do", method = RequestMethod.GET)
+    public String forgot_password() {
+        return "forgot_password";
+    }
+
     //테이블 페이지 이동
     @RequestMapping(value = "/tables.do", method = RequestMethod.GET)
     public String tables(Model model){
