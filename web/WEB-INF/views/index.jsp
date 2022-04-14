@@ -90,7 +90,20 @@
                 </div>
             </div>
         </li>
-
+        <!-- Nav Item - Utilities Collapse Menu -->
+        <li class="nav-item">
+            <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapse3" aria-expanded="true" aria-controls="collapse3">
+                <i class="fa-solid fa-person-circle-check"></i>
+                <span>투입인력</span>
+            </a>
+            <div id="collapse3" class="collapse" aria-labelledby="headingUtilities" data-parent="#accordionSidebar">
+                <div class="bg-white py-2 collapse-inner rounded">
+                    <h6 class="collapse-header">투입인력</h6>
+                    <a class="collapse-item font-weight-bold text-gray-600" href="../utilities-color.html">투입인력관리</a>
+                    <a class="collapse-item font-weight-bold text-gray-600" href="../utilities-border.html">투입인력보고</a>
+                </div>
+            </div>
+        </li>
         <!-- Divider -->
         <hr class="sidebar-divider">
 
@@ -189,7 +202,6 @@
                             <a class="dropdown-item text-gray-600" href="#">프로젝트B</a>
                             <a class="dropdown-item text-gray-600" href="#">프로젝트C</a>
                         </div>
-                        </a>
                     </li>
 
                 </ul>
@@ -349,13 +361,13 @@
                                 </div>
                                 <div class="mt-4 text-center small">
                     <span class="mr-2">
-                      <i class="fas fa-circle text-secondary"></i> 대기
+                      <i class="fas fa-circle text-secondary"> 대기</i>
                     </span>
                                     <span class="mr-2">
-                      <i class="fas fa-circle text-warning"></i> 진행중
+                      <i class="fas fa-circle text-warning"> 처리 중</i>
                     </span>
                                     <span class="mr-2">
-                      <i class="fas fa-circle text-success"></i> 완료
+                      <i class="fas fa-circle text-success"> 완료</i>
                     </span>
                                 </div>
                             </div>
