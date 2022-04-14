@@ -1,7 +1,7 @@
 package Controller;
 
-import Dto.BoardVO;
-import Service.BoardService;
+import Board.Dto.BoardVO;
+import Board.Service.BoardService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
