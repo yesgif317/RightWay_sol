@@ -1,8 +1,8 @@
-package Dao;
+package Board.Dao;
 
 import java.util.List;
 
-import  Dto.BoardVO;
+import Board.Dto.BoardVO;
 
 public interface BoardDao {
     List<BoardVO> selectAll();

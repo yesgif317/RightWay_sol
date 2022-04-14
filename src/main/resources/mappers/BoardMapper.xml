@@ -14,6 +14,7 @@
        이렇게 해야 한다.
    -->
 
+    <!--보드-->
     <!-- Select 문 -->
     <select id="selectBoard" resultType="BoardVO">
         SELECT * FROM notice

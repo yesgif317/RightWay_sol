@@ -1,6 +1,6 @@
-package Service;
+package Board.Service;
 
-import Dto.BoardVO;
+import Board.Dto.BoardVO;
 
 import java.util.List;
 

@@ -1,11 +1,10 @@
-package Service;
+package Board.Service;
 
-import Dao.BoardDao;
-import Dto.BoardVO;
+import Board.Dao.BoardDao;
+import Board.Dto.BoardVO;
 import org.springframework.stereotype.Service;
 
 import javax.inject.Inject;
-import javax.inject.Named;
 import java.util.List;
 
 @Service

@@ -1,10 +1,10 @@
-package Dao;
+package Board.Dao;
 
 import javax.inject.Inject;
 
 import java.util.List;
 
-import Dto.BoardVO;
+import Board.Dto.BoardVO;
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.stereotype.Repository;
 
