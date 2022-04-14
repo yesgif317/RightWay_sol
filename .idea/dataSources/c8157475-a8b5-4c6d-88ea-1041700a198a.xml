@@ -1040,37 +1040,5 @@
     <user id="332" parent="1" name="root">
       <Host>localhost</Host>
     </user>
-    <table id="333" parent="324" name="notice"/>
-    <column id="334" parent="333" name="no">
-      <DataType>int(11)|0s</DataType>
-      <NotNull>1</NotNull>
-      <Position>1</Position>
-      <SequenceIdentity>null</SequenceIdentity>
-    </column>
-    <column id="335" parent="333" name="writer">
-      <DataType>varchar(45)|0s</DataType>
-      <Position>2</Position>
-    </column>
-    <column id="336" parent="333" name="title">
-      <DataType>varchar(45)|0s</DataType>
-      <Position>3</Position>
-    </column>
-    <column id="337" parent="333" name="contents">
-      <DataType>varchar(200)|0s</DataType>
-      <Position>4</Position>
-    </column>
-    <column id="338" parent="333" name="refdate">
-      <DataType>date|0s</DataType>
-      <Position>5</Position>
-    </column>
-    <column id="339" parent="333" name="count">
-      <DataType>int(11)|0s</DataType>
-      <Position>6</Position>
-    </column>
-    <key id="340" parent="333" name="PRIMARY">
-      <ColNames>no</ColNames>
-      <NameSurrogate>1</NameSurrogate>
-      <Primary>1</Primary>
-    </key>
   </database-model>
 </dataSource>
