@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.mark.mappers.ProjectMapper">
+
+    <!--Customer-->
+    <!-- Select 문 -->
+    <select id="selectCustomer" resultType="ProjectVO">
+        SELECT * FROM project
+    </select>
+
+    <!-- 프로젝트 추가(Insert) -->
+    <insert id="insertCustomer" parameterType="ProjectVO" >
+        insert into project(c_id, c_pwd, c_name, c_email, c_phone,c_dep,c_position,com_num,c_state)
+        values (#{p_num}, #{p_name}, #{c_nume})
+    </insert>
+</mapper>

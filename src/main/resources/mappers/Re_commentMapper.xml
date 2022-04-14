@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.mark.mappers.Re_CommentMapper">
+
+    <!--Customer-->
+    <!-- Select 문 -->
+    <select id="selectAll" resultType="Re_CommentVO">
+        SELECT * FROM re_comment
+    </select>
+
+    <!-- 프로젝트 추가(Insert) -->
+    <insert id="insertRe_Comment" parameterType="Re_CommentVO" >
+        insert into re_comment(comm_num, c_num, recomment, recomment_date)
+        values (#{comm_num}, #{c_num}, #{recomment}, #{recomment_date})
+    </insert>
+</mapper>
