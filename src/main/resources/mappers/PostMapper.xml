@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.mark.mappers.PostMapper">
+
+    <!--Customer-->
+    <!-- Select 문 -->
+    <select id="selectPost" resultType="PostVO">
+        SELECT * FROM post
+    </select>
+
+    <!-- 게시물 작성(Insert) -->
+    <insert id="insertPost" parameterType="PostVO" >
+        insert into post(p_num , p_caption, p_title, p_date, p_update_date, c_num, b_no)
+        values (#{p_num}, #{p_caption}, #{p_title},#{p_date},#{p_update_date},#{c_num},#{b_no})
+    </insert>
+
+</mapper>
