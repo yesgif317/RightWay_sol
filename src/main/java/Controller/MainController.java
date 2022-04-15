@@ -36,6 +36,18 @@ public class MainController {
         return "forgot_password";
     }
 
+    //adminpermission page
+    @RequestMapping(value = "/adminpermission.do", method = RequestMethod.GET)
+    public String adminpermission(Model model) {
+        //service 클래스에서 Dao 로 접근하여 쿼리 결과값 가져오기
+        List<BoardVO> boardVoList = service.selectAll();
+
+        // .jsp 파일로 DB 결과값 전달하기
+        model.addAttribute("BoardList", boardVoList);
+
+        return "adminpermission";
+    }
+
     //테이블 페이지 이동
     @RequestMapping(value = "/tables.do", method = RequestMethod.GET)
     public String tables(Model model){

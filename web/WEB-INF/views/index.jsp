@@ -70,8 +70,8 @@
                     <a class="collapse-item font-weight-bold text-gray-600" href="../cards.html">정기보고</a>
                     <a class="collapse-item font-weight-bold text-gray-600" href="../cards.html">팀관리</a>
                     <a class="collapse-item font-weight-bold text-gray-600" href="../cards.html">행사관리</a>
-                    <a class="collapse-item font-weight-bold text-gray-600" href="../cards.html">업체관리</a>
-                    <a class="collapse-item font-weight-bold text-gray-600" href="../cards.html">관리자승인</a>
+                    <a class="collapse-item font-weight-bold text-gray-600" href="/tables.do">업체관리</a>
+                    <a class="collapse-item font-weight-bold text-gray-600" href="/adminpermission.do">관리자승인</a>
                 </div>
             </div>
         </li>
