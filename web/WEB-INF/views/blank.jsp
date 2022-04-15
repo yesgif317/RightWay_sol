@@ -8,7 +8,7 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 
 <jsp:include page="include/header.jsp" flush="true" />
-<jsp:include page="include/navbar.jsp" flush="true" />
+<jsp:include page="include/sidebar.jsp" flush="true" />
 
 <!-- Content Wrapper -->
 <div id="content-wrapper" class="d-flex flex-column" >
@@ -40,6 +40,6 @@
 
 
 
-<jsp:include page="include/scripts.jsp" flush="true" />
+<jsp:include page="include/logoutModal.jsp" flush="true" />
 
 
