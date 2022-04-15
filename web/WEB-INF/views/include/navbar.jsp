@@ -58,6 +58,20 @@
                 </div>
             </div>
         </li>
+        <!-- Nav Item - Utilities Collapse Menu -->
+        <li class="nav-item">
+            <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapse3" aria-expanded="true" aria-controls="collapse3">
+                <i class="fa-solid fa-person-circle-check"></i>
+                <span>투입인력</span>
+            </a>
+            <div id="collapse3" class="collapse" aria-labelledby="headingUtilities" data-parent="#accordionSidebar">
+                <div class="bg-white py-2 collapse-inner rounded">
+                    <h6 class="collapse-header">투입인력</h6>
+                    <a class="collapse-item font-weight-bold text-gray-600" href="../utilities-color.html">투입인력관리</a>
+                    <a class="collapse-item font-weight-bold text-gray-600" href="../utilities-border.html">투입인력보고</a>
+                </div>
+            </div>
+        </li>
 
         <!-- Divider -->
         <hr class="sidebar-divider">
