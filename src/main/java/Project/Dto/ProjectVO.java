@@ -1,6 +1,6 @@
 package Project.Dto;
 
-public class ProjectVo {
+public class ProjectVO {
 
     int p_num;
     String p_name;

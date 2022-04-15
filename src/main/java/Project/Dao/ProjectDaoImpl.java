@@ -1,10 +1,9 @@
 package Project.Dao;
 
-import Project.Dto.ProjectVo;
+import Project.Dto.ProjectVO;
 import org.apache.ibatis.session.SqlSession;
 
 import javax.inject.Inject;
-import javax.xml.stream.events.Namespace;
 import java.util.List;
 
 public class ProjectDaoImpl implements ProjectDao{
@@ -12,12 +11,12 @@ public class ProjectDaoImpl implements ProjectDao{
     private SqlSession sqlSession;
     private static final String Namespace = "com.mark.mappers.ProjectMapper";
     @Override
-    public List<ProjectVo> selectAll() {
+    public List<ProjectVO> selectAll() {
         return sqlSession.selectList(Namespace + "selectProject");
     }
 
     @Override
-    public String insertProject(ProjectVo projectVo) {
+    public String insertProject(ProjectVO projectVo) {
         return sqlSession.insert(Namespace + "insertProject",projectVo)+"";
     }
 }

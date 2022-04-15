@@ -1,8 +1,7 @@
 package Project.Service;
 
-import Customer.Service.CustomerService;
 import Project.Dao.ProjectDao;
-import Project.Dto.ProjectVo;
+import Project.Dto.ProjectVO;
 import org.springframework.stereotype.Service;
 
 import javax.inject.Inject;
@@ -14,8 +13,8 @@ public class ProjectServiceImpl implements ProjectService {
     private ProjectDao dao;
 
     //전체 유저 가져오기
-    public List<ProjectVo> selectAll(){return dao.selectAll();}
+    public List<ProjectVO> selectAll(){return dao.selectAll();}
 
     //회원가입(Insert)
-    public String insertProject(ProjectVo projectVO){return dao.insertProject(projectVO);}
+    public String insertProject(ProjectVO projectVO){return dao.insertProject(projectVO);}
 }
