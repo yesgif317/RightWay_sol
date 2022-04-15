@@ -98,4 +98,10 @@ public class MainController {
         return "tables";
     }
 
+    // blank page
+    @RequestMapping(value = "/blank.do", method = RequestMethod.GET)
+    public String blank() {
+        return "blank";
+    }
+
 }
