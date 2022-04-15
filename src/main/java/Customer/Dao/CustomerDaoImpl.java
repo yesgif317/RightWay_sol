@@ -12,8 +12,8 @@ public class CustomerDaoImpl implements CustomerDao {
 
     @Inject
     private SqlSession sqlSession;
-
     private  static final String Namespace = "com.mark.mappers.CustomerMapper";
+
     @Override
     public List<CustomerVO> selectAll(){
         return sqlSession.selectList(Namespace+".selectCustomer");

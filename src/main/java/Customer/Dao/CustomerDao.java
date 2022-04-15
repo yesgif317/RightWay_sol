@@ -1,7 +1,6 @@
 package Customer.Dao;
 
 import Customer.Dto.CustomerVO;
-
 import java.util.List;
 
 public interface CustomerDao {
