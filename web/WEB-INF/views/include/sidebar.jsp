@@ -58,6 +58,20 @@
                 </div>
             </div>
         </li>
+        <!-- Nav Item - Utilities Collapse Menu -->
+        <li class="nav-item">
+            <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapse3" aria-expanded="true" aria-controls="collapse3">
+                <i class="fa-solid fa-person-circle-check"></i>
+                <span>투입인력</span>
+            </a>
+            <div id="collapse3" class="collapse" aria-labelledby="headingUtilities" data-parent="#accordionSidebar">
+                <div class="bg-white py-2 collapse-inner rounded">
+                    <h6 class="collapse-header">투입인력</h6>
+                    <a class="collapse-item font-weight-bold text-gray-600" href="../utilities-color.html">투입인력관리</a>
+                    <a class="collapse-item font-weight-bold text-gray-600" href="../utilities-border.html">투입인력보고</a>
+                </div>
+            </div>
+        </li>
 
         <!-- Divider -->
         <hr class="sidebar-divider">
@@ -151,3 +165,21 @@
             </div>
         </div>
     </div>
+
+
+<!-- Bootstrap core JavaScript-->
+<script src="<c:url value="/resources/vendor/jquery/jquery.min.js"/>"></script>
+<script src="<c:url value="/resources/vendor/bootstrap/js/bootstrap.bundle.min.js"/>"></script>
+
+<!-- Core plugin JavaScript-->
+<script src="<c:url value="/resources/vendor/jquery-easing/jquery.easing.min.js"/>"></script>
+
+<!-- Custom scripts for all pages-->
+<script src="<c:url value="/resources/js/sb-admin-2.min.js"/>"></script>
+
+<!-- Page level plugins -->
+<script src="<c:url value="/resources/vendor/chart.js/Chart.min.js"/>"></script>
+
+<!-- Page level custom scripts -->
+<script src="<c:url value="/resources/js/demo/chart-bar-demo.js"/>"></script>
+<script src="<c:url value="/resources/js/demo/chart-pie-demo.js"/>"></script>

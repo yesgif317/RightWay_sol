@@ -1,11 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <dataSource name="@127.0.0.1">
   <database-model serializer="dbm" dbms="MARIADB" family-id="MARIADB" format-version="4.32">
-    <root id="1">
-      <DefaultCasing>lower/lower</DefaultCasing>
-      <DefaultEngine>InnoDB</DefaultEngine>
-      <ServerVersion>10.2.14</ServerVersion>
-    </root>
+    <root id="1"/>
     <collation id="2" parent="1" name="armscii8_bin">
       <Charset>armscii8</Charset>
     </collation>

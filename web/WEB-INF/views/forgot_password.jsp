@@ -20,7 +20,7 @@
 
 </head>
 
-<body class="bg-gradient-primary">
+<body class="bg-gradient-dark">
 
 <div class="container">
 
@@ -44,7 +44,7 @@
                                     <div class="form-group">
                                         <input type="email" class="form-control form-control-user" id="exampleInputEmail" aria-describedby="emailHelp" placeholder="Enter Email Address...">
                                     </div>
-                                    <a href="/login.do" class="btn btn-primary btn-user btn-block">
+                                    <a href="/login.do" class="btn btn-dark btn-user btn-block">
                                         Reset Password
                                     </a>
                                 </form>
