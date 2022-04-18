@@ -31,6 +31,27 @@ public class MainController {
         return "register";
     }
 
+    @RequestMapping(value = "/outputs_write.do", method = RequestMethod.GET)
+    public String outputs_write() {
+        return "outputs_write";
+    }
+
+    @RequestMapping(value = "/outputs.do", method = RequestMethod.GET)
+    public String outputs(Model model) {
+        //service 클래스에서 Dao 로 접근하여 쿼리 결과값 가져오기
+        List<BoardVO> boardVoList = service.selectAll();
+
+        // .jsp 파일로 DB 결과값 전달하기
+        model.addAttribute("BoardList", boardVoList);
+
+        return "outputs";
+    }
+
+    @RequestMapping(value = "/outputs_content.do", method = RequestMethod.GET)
+    public String outputs_content() {
+        return "outputs_content";
+    }
+
     @RequestMapping(value = "/forgot_password.do", method = RequestMethod.GET)
     public String forgot_password() {
         return "forgot_password";
@@ -81,7 +102,7 @@ public class MainController {
         // .jsp 파일로 DB 결과값 전달하기
         model.addAttribute("BoardList", boardVoList);
 
-        return "tables";
+        return "outputs";
     }
 
     // 글 수정 페이지 이동
