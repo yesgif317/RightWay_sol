@@ -11,7 +11,7 @@
     <meta name="description" content="DataTable Example">
     <meta name="author" content="RightWay">
 
-    <title>ISFrame</title>
+    <title>솔리데오 프로젝트관리</title>
     <script src="https://kit.fontawesome.com/55082abfe9.js" crossorigin="anonymous"></script>
     <!-- Custom fonts for this template-->
     <link href="<c:url value="/resources/vendor/fontawesome-free/css/all.min.css"/>" rel="stylesheet" type="text/css">
@@ -19,6 +19,9 @@
 
     <!-- Custom styles for this template-->
     <link href="<c:url value="/resources/css/sb-admin-2.min.css"/>" rel="stylesheet">
+
+    <!-- Custom styles for this page -->
+    <link href="<c:url value="/resources/vendor/datatables/dataTables.bootstrap4.min.css"/>" rel="stylesheet">
 
 </head>
 
