@@ -47,6 +47,7 @@
         </element>
       </element>
       <element id="javaee-facet-resources" facet="ISFrame/web/웹" />
+      <element id="javaee-facet-resources" facet="ISFrame/web/Web" />
     </root>
   </artifact>
 </component>

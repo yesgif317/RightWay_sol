@@ -70,8 +70,8 @@
                     <a class="collapse-item font-weight-bold text-gray-600" href="../cards.html">정기보고</a>
                     <a class="collapse-item font-weight-bold text-gray-600" href="../cards.html">팀관리</a>
                     <a class="collapse-item font-weight-bold text-gray-600" href="../cards.html">행사관리</a>
-                    <a class="collapse-item font-weight-bold text-gray-600" href="../cards.html">업체관리</a>
-                    <a class="collapse-item font-weight-bold text-gray-600" href="../cards.html">관리자승인</a>
+                    <a class="collapse-item font-weight-bold text-gray-600" href="/tables.do">업체관리</a>
+                    <a class="collapse-item font-weight-bold text-gray-600" href="/adminpermission.do">관리자승인</a>
                 </div>
             </div>
         </li>
@@ -147,6 +147,16 @@
             <a class="nav-link" href="#" data-toggle="modal" data-target="#logoutModal">
                 <i class="fa-solid fa-sign-out-alt"></i>
                 <span>로그아웃</span></a>
+        </li>
+
+        <!-- Divider -->
+        <hr class="sidebar-divider d-none d-md-block">
+
+        <li class="nav-item">
+            <!--<a class="nav-link" href="/blank.do" data-toggle="modal" data-target="#logoutModal">-->
+            <a class="nav-link" href="/blank.do">
+                <i class="fa-solid fa-sign-out-alt"></i>
+                <span>blank</span></a>
         </li>
 
         <!-- Divider -->
