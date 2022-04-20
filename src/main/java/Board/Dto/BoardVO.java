@@ -3,19 +3,19 @@ package Board.Dto;
 import java.util.Date;
 
 public class BoardVO {
-    public int no;
+    public int num;
     public String writer;
     public String title;
     public String contents;
     public Date refdate;
     public int count;
 
-    public int getNo() {
-        return no;
+    public int getNum() {
+        return num;
     }
 
-    public void setNo(int no) {
-        this.no = no;
+    public void setNum(int num) {
+        this.num = num;
     }
 
     public String getWriter() {

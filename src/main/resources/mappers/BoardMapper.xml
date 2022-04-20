@@ -29,7 +29,18 @@
     <update id="updateBoard" parameterType="BoardVO" >
         update notice
         set title = #{title}, contents =#{contents}, refdate = SYSDATE
-        where no = #{no}
+        where num = #{num}
     </update>
+
+    <select id="viewBoard" resultType="BoardVO">
+
+        SELECT writer, title, contents,num FROM notice where num=#{num}
+    </select>
+
+    <delete id="delete">
+
+        delete from notice where num=#{num}
+
+    </delete>
 
 </mapper>

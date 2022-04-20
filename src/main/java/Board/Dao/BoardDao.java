@@ -12,4 +12,9 @@ public interface BoardDao {
 
     //글 수정 Update
     String updateBoard(BoardVO boardVO);
+
+    //글 조회 Update
+    BoardVO viewBoard(int num);
+
+    int delete(int num);
 }

@@ -6,6 +6,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import javax.inject.Inject;
 import javax.servlet.http.HttpServletRequest;
@@ -46,13 +47,47 @@ public class MainController {
     }
 
     @RequestMapping(value = "/outputs_content.do", method = RequestMethod.GET)//산출물 작성글 보기
-    public String outputs_content() {
-        return "outputs_content";
+    public String outputs_content(@RequestParam("num") int num, Model model)  {
+        BoardVO Result = service.viewBoard(num);
+
+        List<BoardVO> boardVoList = service.selectAll();
+        // .jsp 파일로 DB 결과값 전달하기
+        model.addAttribute("BoardList", Result);
+        return "outputs_content"; }
+
+    @RequestMapping(value = "/outputs_delete.do", method = RequestMethod.GET)//산출물 작성글 삭제
+    public String outputs_delete(@RequestParam("num") int num) {
+
+        service.delete(num);
+
+        return "redirect:/outputs.do";
     }
-    @RequestMapping(value = "/issue.do", method = RequestMethod.GET)//산출물 작성글 보기
-    public String issue() {
+    @RequestMapping(value = "/outputs_update.do", method = RequestMethod.GET)  //산출물 게시글 수정
+    public String outputs_update() {
+        return "outputs_update";
+    }
+    @RequestMapping(value = "/outputs_move_update.do", method = RequestMethod.GET)//산출물 작성글 수정
+    public String outputs_move_update(Model model,BoardVO boardVO) {
+
+        model.addAttribute("BoardList", service.updateBoard(boardVO));
+        return "redirect:/outputs.do";
+    }
+
+
+
+
+
+
+    @RequestMapping(value = "/issue.do", method = RequestMethod.GET)//이슈 게시판 글목록 보기
+    public String issue(Model model) {
+        //service 클래스에서 Dao 로 접근하여 쿼리 결과값 가져오기
+        List<BoardVO> boardVoList = service.selectAll();
+        // .jsp 파일로 DB 결과값 전달하기
+        model.addAttribute("BoardList", boardVoList);
         return "issue";
     }
+
+
 
     @RequestMapping(value = "/forgot_password.do", method = RequestMethod.GET)
     public String forgot_password() {
@@ -104,14 +139,14 @@ public class MainController {
         // .jsp 파일로 DB 결과값 전달하기
         model.addAttribute("BoardList", boardVoList);
 
-        return "outputs";
+        return "tables";
     }
 
     // 글 수정 페이지 이동
     @RequestMapping(value = "/move_update.do", method = RequestMethod.GET)
     public String update(Model model, HttpServletRequest request) {
         String id = request.getParameter("id");
-        //BoardVO result = service.selectboard();
+        //BoardVO result = service.selectboard()selectboard();
         //model.addAttribute("BoardList", boardVoList);
         return "update";
     }

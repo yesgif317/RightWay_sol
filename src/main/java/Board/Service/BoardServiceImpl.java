@@ -30,4 +30,13 @@ public class BoardServiceImpl implements BoardService {
     public String updateBoard(BoardVO boardVO){
         return dao.updateBoard(boardVO);
     }
+
+    @Override
+    public BoardVO viewBoard(int num){
+        return dao.viewBoard(num);
+    }
+    @Override
+    public int delete(int num) { return
+        dao.delete(num);
+    }
 }
