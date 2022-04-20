@@ -23,12 +23,12 @@
     <!-- 회원가입(Insert) -->
     <insert id="insertBoard" parameterType="BoardVO" >
        insert into notice(writer, title, contents, refdate, count)
-       values (#{writer}, #{title}, #{contents}, now(), 0)
+       values (#{writer}, #{title}, #{contents}, SYSDATE, 0)
     </insert>
 
     <update id="updateBoard" parameterType="BoardVO" >
         update notice
-        set title = #{title}, contents =#{contents}, refdate = now()
+        set title = #{title}, contents =#{contents}, refdate = SYSDATE
         where no = #{no}
     </update>
 

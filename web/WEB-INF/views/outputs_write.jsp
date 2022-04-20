@@ -1,26 +1,31 @@
+<%--
+  Created by IntelliJ IDEA.
+  User: hate5
+  Date: 2020-09-06
+  Time: 오후 9:25
+  To change this template use File | Settings | File Templates.
+--%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ko">
+
 <head>
-    <meta charset="UTF-8">
-    <title><!DOCTYPE html>
-        <html lang="en">
 
-        <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="DataTable Example">
+    <meta name="author" content="JeongU">
 
-        <meta charset="utf-8">
-        <meta http-equiv="X-UA-Compatible" content="IE=edge">
-        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-        <meta name="description" content="">
-        <meta name="author" content="">
-
-        <title>SB Admin 2 - Blank</title>
+    <title>산출물 작성</title>
 
     <!-- Custom fonts for this template-->
-    <link href="vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
+    <link href="<c:url value="/resources/vendor/fontawesome-free/css/all.min.css"/>" rel="stylesheet" type="text/css">
     <link href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i" rel="stylesheet">
 
     <!-- Custom styles for this template-->
-    <link href="css/sb-admin-2.min.css" rel="stylesheet">
+    <link href="<c:url value="/resources/css/sb-admin-2.min.css"/>" rel="stylesheet">
 
 </head>
 
@@ -59,16 +64,16 @@
         </div>
 
         <!-- Nav Item - Pages Collapse Menu -->
-        <li class="nav-item">
-            <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="true" aria-controls="collapseTwo">
+        <li class="nav-item active">
+            <a class="nav-link" href="#" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="true" aria-controls="collapseTwo">
                 <i class="fas fa-fw fa-cog"></i>
                 <span>Components</span>
             </a>
-            <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
+            <div id="collapseTwo" class="collapse show" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
                 <div class="bg-white py-2 collapse-inner rounded">
                     <h6 class="collapse-header">Custom Components:</h6>
                     <a class="collapse-item" href="buttons.html">Buttons</a>
-                    <a class="collapse-item" href="cards.html">Cards</a>
+                    <a class="collapse-item active" href="cards.html">Cards</a>
                 </div>
             </div>
         </li>
@@ -82,10 +87,10 @@
             <div id="collapseUtilities" class="collapse" aria-labelledby="headingUtilities" data-parent="#accordionSidebar">
                 <div class="bg-white py-2 collapse-inner rounded">
                     <h6 class="collapse-header">Custom Utilities:</h6>
-                    <a class="collapse-item" href="utilities-color.html">Colors</a>
-                    <a class="collapse-item" href="utilities-border.html">Borders</a>
-                    <a class="collapse-item" href="utilities-animation.html">Animations</a>
-                    <a class="collapse-item" href="utilities-other.html">Other</a>
+                    <a class="collapse-item" href="utilities-color.html"/>">Colors</a>
+                    <a class="collapse-item" href="utilities-border.html"/>">Borders</a>
+                    <a class="collapse-item" href="utilities-animation.html"/>">Animations</a>
+                    <a class="collapse-item" href="utilities-other.html"/>">Other</a>
                 </div>
             </div>
         </li>
@@ -99,37 +104,37 @@
         </div>
 
         <!-- Nav Item - Pages Collapse Menu -->
-        <li class="nav-item active">
-            <a class="nav-link" href="#" data-toggle="collapse" data-target="#collapsePages" aria-expanded="true" aria-controls="collapsePages">
+        <li class="nav-item">
+            <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapsePages" aria-expanded="true" aria-controls="collapsePages">
                 <i class="fas fa-fw fa-folder"></i>
                 <span>Pages</span>
             </a>
-            <div id="collapsePages" class="collapse show" aria-labelledby="headingPages" data-parent="#accordionSidebar">
+            <div id="collapsePages" class="collapse" aria-labelledby="headingPages" data-parent="#accordionSidebar">
                 <div class="bg-white py-2 collapse-inner rounded">
                     <h6 class="collapse-header">Login Screens:</h6>
-                    <a class="collapse-item" href="login.html">Login</a>
-                    <a class="collapse-item" href="register.html">Register</a>
-                    <a class="collapse-item" href="forgot-password.html">Forgot Password</a>
+                    <a class="collapse-item" href="login.html"/>">Login</a>
+                    <a class="collapse-item" href="register.html"/>">Register</a>
+                    <a class="collapse-item" href="forgot-password.html"/>">Forgot Password</a>
                     <div class="collapse-divider"></div>
                     <h6 class="collapse-header">Other Pages:</h6>
-                    <a class="collapse-item" href="404.html">404 Page</a>
-                    <a class="collapse-item active" href="blank.html">Blank Page</a>
+                    <a class="collapse-item" href="404.html"/>">404 Page</a>
+                    <a class="collapse-item" href="blank.html"/>">Blank Page</a>
                 </div>
             </div>
         </li>
 
         <!-- Nav Item - Charts -->
         <li class="nav-item">
-            <a class="nav-link" href="charts.html">
-                <i class="fas fa-fw fa-chart-area"></i>
-                <span>Charts</span></a>
+            <a class="nav-link" href="charts.html"/>">
+            <i class="fas fa-fw fa-chart-area"></i>
+            <span>Charts</span></a>
         </li>
 
         <!-- Nav Item - Tables -->
         <li class="nav-item">
             <a class="nav-link" href="tables.html">
                 <i class="fas fa-fw fa-table"></i>
-                <span>Tables</span></a>
+                <span>산출물</span></a>
         </li>
 
         <!-- Divider -->
@@ -336,7 +341,139 @@
             <div class="container-fluid">
 
                 <!-- Page Heading -->
-                <h1 class="h3 mb-4 text-gray-800">Blank Page</h1>
+                <h1 class="h3 mb-2 text-gray-800">산출물</h1>
+                <p class="mb-4"> 산출물이란 프로젝트나 프로그램의 가시적이고 측정 가능한 결과물을 말합니다.
+                    <br>
+                    산출물에는 설계 모델, 사양 문서, 원형 등이 있습니다.
+                    <br>
+                    이 페이지에서 산출물에 가입하고 산출물을 참조할 수 있습니다.
+                    <a target="_blank" href="https://datatables.net">official DataTables documentation</a>.</p>
+
+                <div class="row">
+                    <div class="col-lg-12">
+
+                        <!-- Collapsable Card Example -->
+                        <div class="card shadow mb-4">
+                            <!-- Card Header - Accordion -->
+                            <a href="#collapseCardExample" class="d-block card-header py-3" data-toggle="collapse" role="button" aria-expanded="true" aria-controls="collapseCardExample">
+                                <h6 class="m-0 font-weight-bold text-primary">산출물 게시물 작성 중</h6>
+
+                            </a>
+                            <!-- Card Content - Collapse -->
+                            <div class="collapse show" id="collapseCardExample">
+                                <div class="card-body">
+                                    <form method="post" action="tableswrite.do" id="tableswriteform" enctype="application/x-www-form-urlencoded" class="form-horizontal">
+                                        <div class="row form-group">
+                                            <div class="col col-md-2"><label for="title" class=" form-control-label">제목</label></div>
+                                            <div class="col-12 col-md-7"><input type="text" id="title" name="title" placeholder="Text" class="form-control"><small class="form-text text-muted">This is a help text</small></div>
+                                        </div>
+                                        <div class="row form-group">
+                                            <div class="col col-md-2"><label class=" form-control-label">작성자</label></div>
+                                            <div class="col-12 col-md-7">작성자 및 직책 자동으로 입력(db연동)<small class="help-block form-text">name from your login information</small></div>
+                                        </div>
+                                        <div class="row form-group">
+                                            <div class="col col-md-2"><label class=" form-control-label">이메일</label></div>
+                                            <div class="col-11 col-md-7">이메일 자동으로 입력(db연동)<small class="help-block form-text">email from your login information</small></div>
+                                        </div>
+                                        <%--<div class="row form-group">
+                                            <div class="col col-md-2"><label class=" form-control-label">참고사항</label></div>
+                                            <div class="col-12 col-md-7"><input type="number" id="no" name="no" placeholder="Text" class="form-control"><small class="help-block form-text">산출물에 대해 작성해주세요.</small></div>
+                                        </div>--%>
+                                        <div class="row form-group">
+                                            <div class="col col-md-2"><label class=" form-control-label">작성자</label></div>
+                                            <div class="col-12 col-md-7"><input type="text" id="writer" name="writer" placeholder="Text" class="form-control"><small class="help-block form-text">산출물에 대해 작성해주세요.</small></div>
+                                        </div>
+
+                                        <%--<div class="row form-group">
+                                            <div class="col col-md-2"><label class=" form-control-label">이메일</label></div>
+                                            <div class="col-12 col-md-7"><input type="email" id="email" name="email" placeholder="Text" class="form-control"><small class="help-block form-text">산출물에 대해 작성해주세요.</small></div>
+                                        </div>--%>
+                                        <%--<div class="row form-group">
+                                            <div class="col col-md-2"><label class=" form-control-label">내용</label></div>
+                                            <div class="col-12 col-md-7"><input type="text" id="contents" name="contents" placeholder="Text" class="form-control"><small class="help-block form-text">산출물에 대해 작성해주세요.</small></div>
+                                        </div>--%>
+                                        <%--<div class="row form-group">
+                                            <div class="col col-md-2"><label class=" form-control-label">날짜</label></div>
+                                            <div class="col-12 col-md-7"><input type="text" id="refdate" name="refdate" placeholder="Text" class="form-control"><small class="help-block form-text">산출물에 대해 작성해주세요.</small></div>
+                                        </div>
+                                        <div class="row form-group">
+                                            <div class="col col-md-2"><label class=" form-control-label">카운트</label></div>
+                                            <div class="col-12 col-md-7"><input type="text" id="refdate" name="refdate" placeholder="Text" class="form-control"><small class="help-block form-text">산출물에 대해 작성해주세요.</small></div>
+                                        </div>--%>
+                                        <%--<div class="row form-group">
+                                            <div class="col col-md-2"><label class=" form-control-label">산출물 종류 구분</label></div>
+                                            <div class="col-12 col-md-7">
+                                                <form>
+                                                    <select name="outputs category">
+                                                        <option>선택</option>
+                                                        <option>인증</option>
+                                                        <option>사양</option>
+                                                        <option>설계모델</option>
+                                                        <option value="etc">기타</option>
+                                                    </select>
+                                                </form>
+                                                <small class="help-block form-text">choose outputs category</small></div>
+                                        </div>--%>
+                                        <%--<div class="row form-group">
+                                            <div class="col col-md-2"><label  class=" form-control-label">프로젝트 선택</label></div>
+                                            <div class="col-12 col-md-7">
+                                                <form action="http://localhost/order.php">
+                                                    <input type="checkbox" name="instrument" value="guitar" checked>솔리데오
+                                                    <input type="checkbox" name="instrument" value="bass" checked>티에이
+                                                    <input type="checkbox" name="instrument" value="drums">비트
+                                                </form>
+                                                <small class="help-block form-text">choose project</small></div>
+                                        </div>--%>
+                                        <%--<div class="row form-group">
+                                            <div class="col col-md-2"><label  class=" form-control-label">첨부파일</label></div>
+                                            <body>
+                                            <form action="http://localhost/upload.php" method="post" enctype="multipart/form-data">
+                                                <input type="file" name="profile">
+                                                <input type="submit">
+                                            </form>type="text"
+                                            </body>
+                                            <div class="col-12 col-md-7">파일 첨부가 가능합니다.<small class="help-block form-text">pdf, hwp, xlxs, txt, zip,doc 파일 첨부 가능</small></div>
+                                        </div>--%>
+                                        <%--<div class="row form-group">
+                                            <div class="col col-md-2"><label class=" form-control-label">내용</label></div>
+                                            <div class="col-12 col-md-7"><input type="text" id="contents" name="contents" placeholder="Text" rows="9" class="form-control"><small class="help-block form-text">산출물에 대해 작성해주세요.</small></div>
+                                        </div>--%>
+                                        <div class="row form-group">
+                                            <div class="col col-md-2"><label for="contents" class=" form-control-label">내용 작성</label></div>
+                                            <div class="col-12 col-md-7"> <textarea name="contents" id="contents" rows="9" placeholder="Content" class="form-control"></textarea></div>
+                                        </div>
+                                        <div style="text-align: center">
+                                            <a href="javascript:goSubmit();" class="btn btn-primary btn-icon-split">
+                          <span class="icon text-white-50">
+                            <i class="fas fa-pen"></i>
+                          </span>
+                                                <span class="text">  글쓰기</span>
+                                            </a>
+                                            <a href="javascript:goSubmit();" class="btn btn-primary btn-icon-split">
+                          <span class="icon text-white-50">
+                            <i class="fas fa-pen"></i>
+                          </span>
+                                                <span class="text">  임시저장</span>
+
+                                            </a>
+                                            <a href="javascript:goSubmit();" class="btn btn-primary btn-icon-split">
+                          <span class="icon text-white-50">
+                            <i class="fas fa-pen"></i>
+                          </span>
+                                                <span class="text">  불러오기</span>
+
+                                            </a>
+                                        </div>
+                                        <br>
+                                        <br>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+
+                </div>
 
             </div>
             <!-- /.container-fluid -->
@@ -385,15 +522,21 @@
 </div>
 
 <!-- Bootstrap core JavaScript-->
-<script src="vendor/jquery/jquery.min.js"></script>
-<script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+<script src="<c:url value="/resources/vendor/jquery/jquery.min.js"/>"></script>
+<script src="<c:url value="/resources/vendor/bootstrap/js/bootstrap.bundle.min.js"/>"></script>
+
+<script src="<c:url value="/resources/vendor/datatables/dataTable.js"/>"></script>
 
 <!-- Core plugin JavaScript-->
-<script src="vendor/jquery-easing/jquery.easing.min.js"></script>
+<script src="<c:url value="/resources/vendor/jquery-easing/jquery.easing.min.js"/>"></script>
 
 <!-- Custom scripts for all pages-->
-<script src="js/sb-admin-2.min.js"></script>
+<script src="<c:url value="/resources/js/sb-admin-2.min.js"/>"></script>
+
+<script type="text/javascript">
+    function goSubmit() {
+        var form = document.getElementById('tableswriteform').submit();
+    }
+</script>
 
 </body>
-
-</html>
