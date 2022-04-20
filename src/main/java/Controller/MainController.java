@@ -83,10 +83,40 @@ public class MainController {
         return "event";
     }
 
-    //테이블 글쓰기 페이지 이동
+    //행사관리 글쓰기 페이지 이동
     @RequestMapping(value = "/event_write.do", method = RequestMethod.GET)
     public String event_write(){
         return "event_write";
+    }
+
+    //행사관리 상세 페이지 이동
+    @RequestMapping(value = "/event_content.do", method = RequestMethod.GET)
+    public String event_content(){
+        return "event_content";
+    }
+
+    //company page
+    @RequestMapping(value = "/company.do", method = RequestMethod.GET)
+    public String company(Model model) {
+        //service 클래스에서 Dao 로 접근하여 쿼리 결과값 가져오기
+        List<BoardVO> boardVoList = service.selectAll();
+
+        // .jsp 파일로 DB 결과값 전달하기
+        model.addAttribute("BoardList", boardVoList);
+
+        return "company";
+    }
+
+    //company 글쓰기 페이지 이동
+    @RequestMapping(value = "/company_write.do", method = RequestMethod.GET)
+    public String company_write(){
+        return "company_write";
+    }
+
+    //company 상세 페이지 이동
+    @RequestMapping(value = "/company_content.do", method = RequestMethod.GET)
+    public String company_content(){
+        return "company_content";
     }
 
     //테이블 페이지 이동

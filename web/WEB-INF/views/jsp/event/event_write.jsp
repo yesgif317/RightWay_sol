@@ -20,14 +20,14 @@
                         <div class="card shadow mb-4">
                             <!-- Card Header - Accordion -->
                             <a class="d-block card-header py-3">
-                                <h6 class="m-0 font-weight-bold text-primary">행사 등록</h6>
+                                <h6 class="m-0 font-weight-bold text-primary text-center">행사 등록</h6>
                             </a>
                             <!-- Card Content - Collapse -->
                             <div class="collapse show" id="collapseCardExample">
                                 <div class="card-body">
                                     <form method="post" action="update.do" id="updateform" enctype="application/x-www-form-urlencoded" class="form-horizontal">
                                         <div class="row form-group">
-                                            <div class="col col-md-3 text-right"><label for="title-input" class=" form-control-label"><sup>*</sup>행사명</label></div>
+                                            <div class="col col-md-3 text-right"><label for="title-input" class=" form-control-label"><sup class="text-danger">*</sup>행사명</label></div>
                                             <div class="col-12 col-md-7"><input type="text" id="title-input" name="text-input" placeholder="행사명을 입력해주세요." class="form-control" value="${title}"></div>
                                         </div>
                                         <div class="row form-group">
@@ -35,7 +35,7 @@
                                             <div class="col-12 col-md-7"><input type="email" id="purpose-input" name="purpose-input" placeholder="행사목적을 입력해주세요." class="form-control" value="${writer}"></div>
                                         </div>
                                         <div class="row form-group">
-                                            <div class="col col-md-3 text-right"><label for="date-input" class=" form-control-label"><sup>*</sup>행사기간</label></div>
+                                            <div class="col col-md-3 text-right"><label for="date-input" class=" form-control-label"><sup class="text-danger">*</sup>행사기간</label></div>
                                             <div class="col-12 col-md-2"><input name="date-input" id="date-input" placeholder="행사시작일" class="form-control" disabled>${contents}</input></div>
                                             <div>달력</div>
                                             <div class="col-12 col-md-1 text-center">~</div>
@@ -51,7 +51,7 @@
                                             <div class="col-12 col-md-7"><input type="text" id="supervise-input" name="supervise-input" placeholder="행사주관을 입력해주세요." class="form-control" value="${writer}"></div>
                                         </div>
                                         <div class="row form-group">
-                                            <div class="col col-md-3 text-right"><label for="location-input" class=" form-control-label"><sup>*</sup>행사장소</label></div>
+                                            <div class="col col-md-3 text-right"><label for="location-input" class=" form-control-label"><sup class="text-danger">*</sup>행사장소</label></div>
                                             <div class="col-12 col-md-7"><input type="text" id="location-input" name="location-input" placeholder="행사장소를 입력해주세요." class="form-control" value="${writer}"></div>
                                         </div>
                                         <div class="row form-group">
@@ -63,19 +63,19 @@
                                             <div class="col-12 col-md-7"><textarea name="contents" id="contents" rows="5" placeholder="행사내용을 입력해주세요." class="form-control"></textarea></div>
                                         </div>
                                         <div class="row form-group">
-                                            <div class="col col-md-3 text-right"><label for="price-input" class=" form-control-label"><sup>*</sup>참가비용</label></div>
+                                            <div class="col col-md-3 text-right"><label for="price-input" class=" form-control-label"><sup class="text-danger">*</sup>참가비용</label></div>
                                             <div class="col-12 col-md-7"><input type="number" id="price-input" name="price-input" placeholder="참가비용을 입력해주세요." class="form-control" value="${writer}"></div>
                                         </div>
                                         <div class="row form-group">
-                                            <div class="col col-md-3 text-right"><label for="limit-input" class=" form-control-label"><sup>*</sup>정원</label></div>
+                                            <div class="col col-md-3 text-right"><label for="limit-input" class=" form-control-label"><sup class="text-danger">*</sup>정원</label></div>
                                             <div class="col-12 col-md-7"><input type="number" id="limit-input" name="limit-input" placeholder="정원을 입력해주세요." class="form-control" value="${writer}"></div>
                                         </div>
                                         <div class="row form-group">
-                                            <div class="col col-md-3 text-right"><label for="accceptdate-input" class=" form-control-label"><sup>*</sup>행사기간</label></div>
-                                            <div class="col-12 col-md-2"><input name="accceptdate-input" id="accceptdate-input" placeholder="행사시작일" class="form-control" disabled>${contents}</input></div>
+                                            <div class="col col-md-3 text-right"><label for="accceptdate-input" class=" form-control-label"><sup class="text-danger">*</sup>접수기간</label></div>
+                                            <div class="col-12 col-md-2"><input name="accceptdate-input" id="accceptdate-input" placeholder="접수시작일" class="form-control" disabled>${contents}</input></div>
                                             <div>달력</div>
                                             <div class="col-12 col-md-1 text-center">~</div>
-                                            <div class="col-12 col-md-2"><input name="accceptdate-input2" id="accceptdate-input2" placeholder="행사종료일" class="form-control" disabled>${contents}</input></div>
+                                            <div class="col-12 col-md-2"><input name="accceptdate-input2" id="accceptdate-input2" placeholder="접수종료일" class="form-control" disabled>${contents}</input></div>
                                             <div>달력</div>
                                         </div>
 

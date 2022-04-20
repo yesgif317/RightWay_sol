@@ -44,17 +44,17 @@
                             </thead>
 
                             <tbody>
-                            <c:forEach items="${BoardList}" var="board">
+                            <c:forEach items="${PostList}" var="post">
                                 <tr>
-                                    <td>${board.no}</td>
-                                    <td><a href ="event_write.do?id=${board.no}">${board.title}</a></td>
-                                    <td>${board.writer}</td>
-                                    <td>${board.writer}</td>
-                                    <td>${board.writer}</td>
-                                    <td>${board.writer}</td>
-                                    <td>${board.writer}</td>
-                                    <td>${board.refdate}</td>
-                                    <td>${board.refdate}</td>
+                                    <td>${post.no}</td>
+                                    <td><a href ="event_content.jsp.do?id=${post.no}">${post.title}</a></td>
+                                    <td>${post.writer}</td>
+                                    <td>${post.writer}</td>
+                                    <td>${post.writer}</td>
+                                    <td>${post.writer}</td>
+                                    <td>${post.writer}</td>
+                                    <td>${post.refdate}</td>
+                                    <td>${post.refdate}</td>
                                 </tr>
                             </c:forEach>
                             </tbody>
