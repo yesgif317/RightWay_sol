@@ -47,22 +47,22 @@ public class MainController {
     }
 
     @RequestMapping(value = "/outputs_content.do", method = RequestMethod.GET)//산출물 작성글 보기
-    public String outputs_content(@RequestParam("num") int num, Model model)  {
-        BoardVO Result = service.viewBoard(num);
+    public String outputs_content(@RequestParam("no") int no, Model model)  {
+        BoardVO Result = service.viewBoard(no);
 
         model.addAttribute("BoardList", Result);
         return "outputs_content"; }
 
     @RequestMapping(value = "/outputs_delete.do", method = RequestMethod.GET)//산출물 작성글 삭제
-    public String outputs_delete(@RequestParam("num") int num) {
+    public String outputs_delete(@RequestParam("no") int no) {
 
-        service.delete(num);
+        service.delete(no);
 
         return "redirect:/outputs.do";
     }
     @RequestMapping(value = "/outputs_update.do", method = RequestMethod.GET)  //산출물 게시글 수정 페이지
-    public String outputs_update(@RequestParam("num") int num, Model model) {
-        BoardVO Result = service.viewBoard(num);
+    public String outputs_update(@RequestParam("no") int no, Model model) {
+        BoardVO Result = service.viewBoard(no);
         model.addAttribute("BoardList", Result);
         return "outputs_update";
     }
