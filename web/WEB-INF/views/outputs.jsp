@@ -53,7 +53,7 @@
                     산출물에는 설계 모델, 사양 문서, 원형 등이 있습니다.
                     <br>
                     이 페이지에서 산출물에 가입하고 산출물을 참조할 수 있습니다.
-                    <a target="_blank" href="https://datatables.net">official DataTables documentation</a>.</p>
+                </p>
 
                 <!-- DataTales Example -->
                 <div class="card shadow mb-4">
@@ -64,9 +64,9 @@
                         <div class="table-responsive">
                             <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
                                 <thead>
-                                <tr>
+                                <tr bgcolor="#dcdcdc">
                                     <th>번호</th>
-                                    <th width="50%">제목</th>
+                                    <th width="50%">산출물</th>
                                     <th>작성자</th>
                                     <th>작성날짜</th>
                                     <th>조회수</th>
@@ -77,8 +77,8 @@
                                 <tbody>
                                 <c:forEach items="${BoardList}" var="board">
                                     <tr>
-                                        <td>${board.no}</td>
-                                        <td><a href ="move_update.do?id=${board.no}">${board.title}</a></td>
+                                        <td>${board.num}</td>
+                                        <td><a href ="outputs_content.do?num=${board.num}">${board.title}</a></td>
                                         <td>${board.writer}</td>
                                         <td>${board.refdate}</td>
                                         <td>${board.count}</td>
@@ -86,6 +86,7 @@
                                 </c:forEach>
                                 </tbody>
                             </table>
+
                             <div style="text-align: center">
                                 <a href="/outputs_write.do" class="btn btn-primary btn-icon-split">
                           <span class="icon text-white-50">

@@ -181,18 +181,18 @@
                                 </thead>
                                 <tfoot>
                                 <tr>
-                                    <th>No</th>
+                                    <th>num</th>
                                     <th>title</th>
                                     <th>writer</th>
-                                    <th>redate</th>
+                                    <th>refdate</th>
                                     <th>count</th>
                                 </tr>
                                 </tfoot>
                                 <tbody>
                                 <c:forEach items="${BoardList}" var="board">
                                     <tr>
-                                        <td>${board.no}</td>
-                                        <td><a href ="move_update.do?id=${board.no}">${board.title}</a></td>
+                                        <td>${board.num}</td>
+                                        <td><a href ="move_update.do?num=${board.num}">${board.title}</a></td>
                                         <td>${board.writer}</td>
                                         <td>${board.refdate}</td>
                                         <td>${board.count}</td>

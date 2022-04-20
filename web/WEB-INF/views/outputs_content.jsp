@@ -5,8 +5,10 @@
   Time: 오후 9:25
   To change this template use File | Settings | File Templates.
 --%>
+
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html lang="ko">
 
@@ -59,7 +61,11 @@
                     산출물에는 설계 모델, 사양 문서, 원형 등이 있습니다.
                     <br>
                     이 페이지에서 산출물에 가입하고 산출물을 참조할 수 있습니다.
-                    <a target="_blank" href="https://datatables.net">official DataTables documentation</a>.</p>
+                </p>
+
+
+
+
 
                 <div class="row">
                     <div class="col-lg-12">
@@ -74,20 +80,23 @@
                             <!-- Card Content - Collapse -->
                             <div class="collapse show" id="collapseCardExample">
                                 <div class="card-body">
-                                    <form method="post"  id="tableswriteform" enctype="application/x-www-form-urlencoded" class="form-horizontal">
+
+
+                                    <form autocomplete="off" method="post" role="form">
                                         <div class="row form-group">
-                                            <div class="col col-md-2"><label class=" form-control-label">제목</label></div>
-                                            <div class="col-12 col-md-7">평가인증 보고서<small class="form-text text-muted">This is a help text</small></div>
-                                        </div>
-                                        <div class="row form-group">
-                                            <div class="col col-md-2"><label class=" form-control-label">작성자</label></div>
-                                            <div class="col-12 col-md-7">작성자 및 직책 자동으로 입력(db연동)<small class="help-block form-text">name from your login information</small></div>
+                                            <div class="col col-md-2"><label class=" form-control-label">글번호</label></div>
+                                            <div class="col-12 col-md-7"><input type="text" id="num" name="num" value="${BoardList.num}" readonly="readonly" /><small class="help-block form-text">name from your login information</small></div>
                                         </div>
                                         <div class="row form-group">
                                             <div class="col col-md-2"><label  class=" form-control-label">이메일</label></div>
-                                            <div class="col-11 col-md-7">이메일 자동으로 입력(db연동)<small class="help-block form-text">email from your login information</small></div>
+                                            <div class="col-11 col-md-7">
+                                                이메일 자동으로 입력(db연동)<small class="help-block form-text">email from your login information</small>
+                                            </div>
                                         </div>
-
+                                        <div class="row form-group">
+                                            <div class="col col-md-2"><label class=" form-control-label">작성자</label></div>
+                                            <div class="col-12 col-md-7"><input type="text" id="writer" name="writer" value="${BoardList.writer}" readonly="readonly" /><small class="help-block form-text">name from your login information</small></div>
+                                        </div>
 
                                         <div class="row form-group">
                                             <div class="col col-md-2"><label class=" form-control-label">참고사항</label></div>
@@ -98,36 +107,35 @@
                                             <div class="col-12 col-md-7">설계모델<small class="help-block form-text">choose outputs category</small></div>
                                         </div>
                                         <div class="row form-group">
-                                            <div class="col col-md-2"><label class=" form-control-label">프로젝트 선택</label></div>
-                                            <div class="col-12 col-md-7">솔리데오
-                                                <small class="help-block form-text">choose project</small></div>
+                                        <div class="col col-md-2"><label class=" form-control-label">내용 작성</label></div>
+                                            <div class="col-12 col-md-7">
+                                            <textarea name="contents" id="contents" rows="9" placeholder="Content" class="form-control">${BoardList.contents}</textarea>
+                                            </div>
+
+
+                                            <%--<input type="text" id="contents" name="contents" value="${BoardList.contents}" readonly="readonly" />--%>
+
                                         </div>
-                                        <div class="row form-group">
-                                            <div class="col col-md-2"><label class=" form-control-label">첨부파일</label></div>
-                                            <div class="col-12 col-md-7">평가보고서.pdf<small class="help-block form-text">다운로드하세요.</small></div>
-                                        </div>
-                                        <div class="row form-group">
-                                            <div class="col col-md-2"><label class=" form-control-label">내용 작성</label></div>
-                                            <div class="col-12 col-md-7">객체지향 분석과 설계 과정은 순차적이 아니다. 객체지향 방법으로 개발하는 대부분의 기관에서는 반복 및 점증적 개발 프로세스를 사용하고 있다. 그 이유는 객체지향 패러다임은 설계와 구현 작업 사이에 공통의 개념들을 사용하고 있기 때문에 전환에 전환이 쉽다는 것이다. 즉 분석과 설계 단계에서 이해했던 시스템의 작은 부분도 바로 프로그래밍할 수 있고 분석이 다시 필요하면 언제든지 나머지 부분을 추가하여 분석할 수 있다. 시스템이 한 번의 사이클에 완성되는 것이 아니라 반복적인 사이클을 거치면서 점차적으로 확장되고 완성되어 가는 것이다.</div>
-                                        </div>
+                                </form>
+
                                         <br>
                                         <br>
                                         <br>
                                         <div style="text-align: center">
-                                            <a href="javascript:goSubmit();" class="btn btn-primary btn-icon-split">
+                                            <a href="outputs_delete.do?num=${BoardList.num}" class="btn btn-primary btn-icon-split">
                           <span class="icon text-white-50">
                             <i class="fas fa-pen"></i>
                           </span>
                                                 <span class="text">  삭제</span>
                                             </a>
-                                            <a href="javascript:goSubmit();" class="btn btn-primary btn-icon-split">
+                                            <a href="outputs_update.do?num=${BoardList.num}" class="btn btn-primary btn-icon-split">
                           <span class="icon text-white-50">
                             <i class="fas fa-pen"></i>
                           </span>
                                                 <span class="text">  수정</span>
 
                                             </a>
-                                            <a href="http://localhost:8088/outputs.do" class="btn btn-primary btn-icon-split">
+                                            <a href="http://localhost:8089/outputs.do" class="btn btn-primary btn-icon-split">
                           <span class="icon text-white-50">
                             <i class="fas fa-pen"></i>
                           </span>
@@ -136,14 +144,14 @@
                                                       >  목차보기</span>
 
                                             </a>
-                                            <a href="javascript:goSubmit();" class="btn btn-primary btn-icon-split">
+                                            <a href ="outputs_content.do?num=${BoardList.num}" class="btn btn-primary btn-icon-split">
                           <span class="icon text-white-50">
                             <i class="fas fa-pen"></i>
                           </span>
                                                 <span class="text">  이전글</span>
 
                                             </a>
-                                            <a href="javascript:goSubmit();" class="btn btn-primary btn-icon-split">
+                                            <a href ="outputs_content.do?num=${BoardList.num}" class="btn btn-primary btn-icon-split">
                           <span class="icon text-white-50">
                             <i class="fas fa-pen"></i>
                           </span>
@@ -153,7 +161,6 @@
                                         </div>
                                         <br>
                                         <br>
-                                    </form>
                                 </div>
                             </div>
                         </div>
