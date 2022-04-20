@@ -10,24 +10,7 @@
 <!DOCTYPE html>
 <html lang="en">
 
-<head>
-
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <meta name="description" content="DataTable Example">
-    <meta name="author" content="RightWay">
-
-    <title>ISFrame</title>
-    <script src="https://kit.fontawesome.com/55082abfe9.js" crossorigin="anonymous"></script>
-    <!-- Custom fonts for this template-->
-    <link href="<c:url value="/resources/vendor/fontawesome-free/css/all.min.css"/>" rel="stylesheet" type="text/css">
-    <link href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i" rel="stylesheet">
-
-    <!-- Custom styles for this template-->
-    <link href="<c:url value="/resources/css/sb-admin-2.min.css"/>" rel="stylesheet">
-
-</head>
+<%@include file="include/head.jsp"%>
 
 <body id="page-top">
 
@@ -58,7 +41,8 @@
 
         <!-- Nav Item - Pages Collapse Menu -->
         <li class="nav-item">
-            <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="true" aria-controls="collapseTwo">
+            <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseTwo"
+               aria-expanded="true" aria-controls="collapseTwo">
                 <i class="fas fa-fw fa-cog"></i>
                 <span>프로젝트관리/보고</span>
             </a>
@@ -78,11 +62,13 @@
 
         <!-- Nav Item - Utilities Collapse Menu -->
         <li class="nav-item">
-            <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseUtilities" aria-expanded="true" aria-controls="collapseUtilities">
+            <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseUtilities"
+               aria-expanded="true" aria-controls="collapseUtilities">
                 <i class="fas fa-fw fa-wrench"></i>
                 <span>위험 및 이슈</span>
             </a>
-            <div id="collapseUtilities" class="collapse" aria-labelledby="headingUtilities" data-parent="#accordionSidebar">
+            <div id="collapseUtilities" class="collapse" aria-labelledby="headingUtilities"
+                 data-parent="#accordionSidebar">
                 <div class="bg-white py-2 collapse-inner rounded">
                     <h6 class="collapse-header">위험 및 이슈</h6>
                     <a class="collapse-item font-weight-bold text-gray-600" href="../utilities-color.html">위험</a>
@@ -92,7 +78,8 @@
         </li>
         <!-- Nav Item - Utilities Collapse Menu -->
         <li class="nav-item">
-            <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapse3" aria-expanded="true" aria-controls="collapse3">
+            <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapse3" aria-expanded="true"
+               aria-controls="collapse3">
                 <i class="fa-solid fa-person-circle-check"></i>
                 <span>투입인력</span>
             </a>
@@ -171,74 +158,75 @@
     <!-- End of Sidebar -->
 
     <!-- Content Wrapper -->
-    <div id="content-wrapper" class="d-flex flex-column" >
+    <div id="content-wrapper" class="d-flex flex-column">
 
         <!-- Main Content -->
         <div id="content">
+            <%@ include file="include/header.jsp" %>
 
             <!-- Topbar -->
-            <nav class="navbar navbar-expand navbar-light bg-white topbar mb-4 static-top shadow">
+            <%--            <nav class="navbar navbar-expand navbar-light bg-white topbar mb-4 static-top shadow">--%>
 
-                <!-- Sidebar Toggle (Topbar) -->
-                <button id="sidebarToggleTop" class="btn btn-link d-md-none rounded-circle mr-3">
-                    <i class="fa fa-bars text-gray-600"></i>
-                </button>
+            <%--                <!-- Sidebar Toggle (Topbar) -->--%>
+            <%--                <button id="sidebarToggleTop" class="btn btn-link d-md-none rounded-circle mr-3">--%>
+            <%--                    <i class="fa fa-bars text-gray-600"></i>--%>
+            <%--                </button>--%>
 
-                <!-- Topbar Search -->
-                <form class="d-none d-sm-inline-block form-inline mr-auto ml-md-3 my-2 my-md-0 mw-100 navbar-search">
-                    <div class="d-sm-flex align-items-center justify-content-between mb-4"></div>
-                    <div class="dropdown no-arrow mb-4">
-                        <button class="btn btn-dark.disabled dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                            <i class="fa-solid fa-align-justify"> 프로젝트 선택</i>
-                        </button>
-                        <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                            <a class="dropdown-item text-gray-600" href="#" >프로젝트A</a>
-                            <a class="dropdown-item text-gray-600" href="#">프로젝트B</a>
-                            <a class="dropdown-item text-gray-600" href="#">프로젝트C</a>
-                        </div>
-                    </div>
-                </form>
+            <%--                <!-- Topbar Search -->--%>
+            <%--                <form class="d-none d-sm-inline-block form-inline mr-auto ml-md-3 my-2 my-md-0 mw-100 navbar-search">--%>
+            <%--                    <div class="d-sm-flex align-items-center justify-content-between mb-4"></div>--%>
+            <%--                    <div class="dropdown no-arrow mb-4">--%>
+            <%--                        <button class="btn btn-dark.disabled dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">--%>
+            <%--                            <i class="fa-solid fa-align-justify"> 프로젝트 선택</i>--%>
+            <%--                        </button>--%>
+            <%--                        <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">--%>
+            <%--                            <a class="dropdown-item text-gray-600" href="#" >프로젝트A</a>--%>
+            <%--                            <a class="dropdown-item text-gray-600" href="#">프로젝트B</a>--%>
+            <%--                            <a class="dropdown-item text-gray-600" href="#">프로젝트C</a>--%>
+            <%--                        </div>--%>
+            <%--                    </div>--%>
+            <%--                </form>--%>
 
 
-                <!-- Topbar Navbar -->
-                <ul class="navbar-nav ml-auto">
-                    <!-- Nav Item - Search Dropdown (Visible Only XS) -->
-                    <li class="nav-item dropdown no-arrow d-sm-none">
-                        <button class="btn btn-dark.disabled dropdown-toggle" type="button" id="dropdownMenuButton2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" >
-                            <i class="fa-solid fa-angles-down"></i>
-                        </button>
-                        <div class="dropdown-menu" aria-labelledby="dropdownMenuButton2">
-                            <a class="dropdown-item text-gray-600" href="#">프로젝트A</a>
-                            <a class="dropdown-item text-gray-600" href="#">프로젝트B</a>
-                            <a class="dropdown-item text-gray-600" href="#">프로젝트C</a>
-                        </div>
-                    </li>
+            <%--                <!-- Topbar Navbar -->--%>
+            <%--                <ul class="navbar-nav ml-auto">--%>
+            <%--                    <!-- Nav Item - Search Dropdown (Visible Only XS) -->--%>
+            <%--                    <li class="nav-item dropdown no-arrow d-sm-none">--%>
+            <%--                        <button class="btn btn-dark.disabled dropdown-toggle" type="button" id="dropdownMenuButton2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" >--%>
+            <%--                            <i class="fa-solid fa-angles-down"></i>--%>
+            <%--                        </button>--%>
+            <%--                        <div class="dropdown-menu" aria-labelledby="dropdownMenuButton2">--%>
+            <%--                            <a class="dropdown-item text-gray-600" href="#">프로젝트A</a>--%>
+            <%--                            <a class="dropdown-item text-gray-600" href="#">프로젝트B</a>--%>
+            <%--                            <a class="dropdown-item text-gray-600" href="#">프로젝트C</a>--%>
+            <%--                        </div>--%>
+            <%--                    </li>--%>
 
-                </ul>
+            <%--                </ul>--%>
 
-                    <ul class="navbar-nav ml-auto">
-                    <!-- Nav Item - User Information -->
-                    <li class="nav-item dropdown no-arrow">
-                        <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                            <i class="fa-solid fa-user text-gray-700"> 솔리데오/개발1팀/사원/박현수</i>
-                        </a>
-                        <!-- Dropdown - User Information -->
-                        <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in" aria-labelledby="userDropdown">
-                            <a class="dropdown-item" href="#">
-                                <i class="fa-solid fa-id-card fa-sm fa-fw mr-2 text-gray-400"></i>
-                                MyPage
-                            </a>
-                            <div class="dropdown-divider"></div>
-                            <a class="dropdown-item" href="#" data-toggle="modal" data-target="#logoutModal">
-                                <i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>
-                                Logout
-                            </a>
-                        </div>
-                    </li>
+            <%--                    <ul class="navbar-nav ml-auto">--%>
+            <%--                    <!-- Nav Item - User Information -->--%>
+            <%--                    <li class="nav-item dropdown no-arrow">--%>
+            <%--                        <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">--%>
+            <%--                            <i class="fa-solid fa-user text-gray-700"> 솔리데오/개발1팀/사원/박현수</i>--%>
+            <%--                        </a>--%>
+            <%--                        <!-- Dropdown - User Information -->--%>
+            <%--                        <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in" aria-labelledby="userDropdown">--%>
+            <%--                            <a class="dropdown-item" href="#">--%>
+            <%--                                <i class="fa-solid fa-id-card fa-sm fa-fw mr-2 text-gray-400"></i>--%>
+            <%--                                MyPage--%>
+            <%--                            </a>--%>
+            <%--                            <div class="dropdown-divider"></div>--%>
+            <%--                            <a class="dropdown-item" href="#" data-toggle="modal" data-target="#logoutModal">--%>
+            <%--                                <i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>--%>
+            <%--                                Logout--%>
+            <%--                            </a>--%>
+            <%--                        </div>--%>
+            <%--                    </li>--%>
 
-                </ul>
+            <%--                </ul>--%>
 
-            </nav>
+            <%--            </nav>--%>
             <!-- End of Topbar -->
 
 
@@ -253,7 +241,8 @@
                             <div class="card-body">
                                 <div class="row no-gutters align-items-center">
                                     <div class="col mr-2">
-                                        <div class="text-xs font-weight-bold text-info text-uppercase mb-1">금일 휴가자 수</div>
+                                        <div class="text-xs font-weight-bold text-info text-uppercase mb-1">금일 휴가자 수
+                                        </div>
                                         <div class="h5 mb-0 font-weight-bold text-gray-800">5명</div>
                                     </div>
                                     <div class="col-auto">
@@ -269,7 +258,9 @@
                             <div class="card-body">
                                 <div class="row no-gutters align-items-center">
                                     <div class="col mr-2">
-                                        <div class="text-xs font-weight-bold text-success text-uppercase mb-1">프로젝트 D-day</div>
+                                        <div class="text-xs font-weight-bold text-success text-uppercase mb-1">프로젝트
+                                            D-day
+                                        </div>
                                         <div class="h5 mb-0 font-weight-bold text-gray-800">D-20</div>
                                     </div>
                                     <div class="col-auto">
@@ -285,7 +276,9 @@
                             <div class="card-body">
                                 <div class="row no-gutters align-items-center">
                                     <div class="col mr-2">
-                                        <div class="text-xs font-weight-bold text-warning text-uppercase mb-1">내게 할당된 진행중 이슈/위험</div>
+                                        <div class="text-xs font-weight-bold text-warning text-uppercase mb-1">내게 할당된
+                                            진행중 이슈/위험
+                                        </div>
                                         <div class="h5 mb-0 font-weight-bold text-gray-800">10건</div>
                                     </div>
                                     <div class="col-auto">
@@ -301,7 +294,8 @@
                             <div class="card-body">
                                 <div class="row no-gutters align-items-center">
                                     <div class="col mr-2">
-                                        <div class="text-xs font-weight-bold text-danger text-uppercase mb-1">긴급 이슈/위험</div>
+                                        <div class="text-xs font-weight-bold text-danger text-uppercase mb-1">긴급 이슈/위험
+                                        </div>
                                         <div class="row no-gutters align-items-center">
                                             <div class="col-auto">
                                                 <div class="h5 mb-0 mr-3 font-weight-bold text-gray-800">1건</div>
@@ -328,13 +322,17 @@
                                 <h6 class="m-0 font-weight-bold text-gray-700">주간 이슈/위험 등록 현황</h6>
                                 <div class="dropdown no-arrow">
 
-                                    <a class="dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                    <a class="dropdown-toggle" href="#" role="button" id="dropdownMenuLink"
+                                       data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                         <i class="fa-solid fa-caret-down text-gray-600"> 이슈</i>
                                     </a>
-                                    <div class="dropdown-menu dropdown-menu-right shadow animated--fade-in" aria-labelledby="dropdownMenuLink">
-                                        <a class="dropdown-header" href="#"><i class="fa-solid fa-bug text-gray-600">&nbsp이슈</i> </a>
+                                    <div class="dropdown-menu dropdown-menu-right shadow animated--fade-in"
+                                         aria-labelledby="dropdownMenuLink">
+                                        <a class="dropdown-header" href="#"><i class="fa-solid fa-bug text-gray-600">&nbsp이슈</i>
+                                        </a>
                                         <div class="dropdown-divider"></div>
-                                        <a class="dropdown-header" href="#"><i class="fa-solid fa-explosion text-gray-600">&nbsp위험</i></a>
+                                        <a class="dropdown-header" href="#"><i
+                                                class="fa-solid fa-explosion text-gray-600">&nbsp위험</i></a>
                                     </div>
                                 </div>
                             </div>
@@ -354,13 +352,17 @@
                             <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
                                 <h6 class="m-0 font-weight-bold text-gray-700">전체 이슈/위험</h6>
                                 <div class="dropdown no-arrow">
-                                    <a class="dropdown-toggle" href="#" role="button" id="dropdownMenuLink1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                    <a class="dropdown-toggle" href="#" role="button" id="dropdownMenuLink1"
+                                       data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                         <i class="fa-solid fa-caret-down text-gray-600"> 이슈</i>
                                     </a>
-                                    <div class="dropdown-menu dropdown-menu-right shadow animated--fade-in" aria-labelledby="dropdownMenuLink">
-                                        <a class="dropdown-header" href="#"><i class="fa-solid fa-bug text-gray-600">&nbsp이슈</i> </a>
+                                    <div class="dropdown-menu dropdown-menu-right shadow animated--fade-in"
+                                         aria-labelledby="dropdownMenuLink">
+                                        <a class="dropdown-header" href="#"><i class="fa-solid fa-bug text-gray-600">&nbsp이슈</i>
+                                        </a>
                                         <div class="dropdown-divider"></div>
-                                        <a class="dropdown-header" href="#"><i class="fa-solid fa-explosion text-gray-600">&nbsp위험</i></a>
+                                        <a class="dropdown-header" href="#"><i
+                                                class="fa-solid fa-explosion text-gray-600">&nbsp위험</i></a>
                                     </div>
                                 </div>
                             </div>
@@ -394,11 +396,11 @@
                             <div class="card-body">
                                 <div class="row no-gutters align-items-center">
                                     <div class="col mr-2">
-                                        <div class="h5 mb-0 font-weight-bold text-gray-800">- </div>
-                                        <div class="h5 mb-0 font-weight-bold text-gray-800">- </div>
-                                        <div class="h5 mb-0 font-weight-bold text-gray-800">- </div>
-                                        <div class="h5 mb-0 font-weight-bold text-gray-800">- </div>
-                                        <div class="h5 mb-0 font-weight-bold text-gray-800">- </div>
+                                        <div class="h5 mb-0 font-weight-bold text-gray-800">-</div>
+                                        <div class="h5 mb-0 font-weight-bold text-gray-800">-</div>
+                                        <div class="h5 mb-0 font-weight-bold text-gray-800">-</div>
+                                        <div class="h5 mb-0 font-weight-bold text-gray-800">-</div>
+                                        <div class="h5 mb-0 font-weight-bold text-gray-800">-</div>
                                     </div>
                                 </div>
                             </div>
@@ -412,11 +414,11 @@
                             <div class="card-body">
                                 <div class="row no-gutters align-items-center">
                                     <div class="col mr-2">
-                                        <div class="h5 mb-0 font-weight-bold text-gray-800">- </div>
-                                        <div class="h5 mb-0 font-weight-bold text-gray-800">- </div>
-                                        <div class="h5 mb-0 font-weight-bold text-gray-800">- </div>
-                                        <div class="h5 mb-0 font-weight-bold text-gray-800">- </div>
-                                        <div class="h5 mb-0 font-weight-bold text-gray-800">- </div>
+                                        <div class="h5 mb-0 font-weight-bold text-gray-800">-</div>
+                                        <div class="h5 mb-0 font-weight-bold text-gray-800">-</div>
+                                        <div class="h5 mb-0 font-weight-bold text-gray-800">-</div>
+                                        <div class="h5 mb-0 font-weight-bold text-gray-800">-</div>
+                                        <div class="h5 mb-0 font-weight-bold text-gray-800">-</div>
                                     </div>
                                 </div>
                             </div>
@@ -430,11 +432,11 @@
                             <div class="card-body">
                                 <div class="row no-gutters align-items-center">
                                     <div class="col mr-2">
-                                        <div class="h5 mb-0 font-weight-bold text-gray-800">- </div>
-                                        <div class="h5 mb-0 font-weight-bold text-gray-800">- </div>
-                                        <div class="h5 mb-0 font-weight-bold text-gray-800">- </div>
-                                        <div class="h5 mb-0 font-weight-bold text-gray-800">- </div>
-                                        <div class="h5 mb-0 font-weight-bold text-gray-800">- </div>
+                                        <div class="h5 mb-0 font-weight-bold text-gray-800">-</div>
+                                        <div class="h5 mb-0 font-weight-bold text-gray-800">-</div>
+                                        <div class="h5 mb-0 font-weight-bold text-gray-800">-</div>
+                                        <div class="h5 mb-0 font-weight-bold text-gray-800">-</div>
+                                        <div class="h5 mb-0 font-weight-bold text-gray-800">-</div>
                                     </div>
                                 </div>
                             </div>
@@ -450,13 +452,7 @@
         <!-- End of Main Content -->
 
         <!-- Footer -->
-        <footer class="sticky-footer bg-white">
-            <div class="container my-auto">
-                <div class="copyright text-center my-auto">
-                    <span>Copyright &copy; Your Website 2020</span>
-                </div>
-            </div>
-        </footer>
+        <%@ include file="include/footer.jsp"%>
         <!-- End of Footer -->
 
     </div>
@@ -471,7 +467,8 @@
 </a>
 
 <!-- Logout Modal-->
-<div class="modal fade" id="logoutModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+<div class="modal fade" id="logoutModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+     aria-hidden="true">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-header">
@@ -490,21 +487,7 @@
 </div>
 
 <!-- Bootstrap core JavaScript-->
-<script src="<c:url value="/resources/vendor/jquery/jquery.min.js"/>"></script>
-<script src="<c:url value="/resources/vendor/bootstrap/js/bootstrap.bundle.min.js"/>"></script>
-
-<!-- Core plugin JavaScript-->
-<script src="<c:url value="/resources/vendor/jquery-easing/jquery.easing.min.js"/>"></script>
-
-<!-- Custom scripts for all pages-->
-<script src="<c:url value="/resources/js/sb-admin-2.min.js"/>"></script>
-
-<!-- Page level plugins -->
-<script src="<c:url value="/resources/vendor/chart.js/Chart.min.js"/>"></script>
-
-<!-- Page level custom scripts -->
-<script src="<c:url value="/resources/js/demo/chart-bar-demo.js"/>"></script>
-<script src="<c:url value="/resources/js/demo/chart-pie-demo.js"/>"></script>
+<%@ include file="include/plugin.jsp"%>
 
 </body>
 

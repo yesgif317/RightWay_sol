@@ -7,7 +7,7 @@
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 
-<jsp:include page="include/header.jsp" flush="true" />
+<jsp:include page="include/head.jsp" flush="true" />
 <jsp:include page="include/sidebar.jsp" flush="true" />
 
 <!-- Content Wrapper -->
@@ -16,7 +16,7 @@
     <!-- Main Content -->
     <div id="content">
 
-        <jsp:include page="include/topbar.jsp" flush="true" />
+        <jsp:include page="include/header.jsp" flush="true" />
 
 
 

@@ -5,16 +5,40 @@
 
 <mapper namespace="com.mark.mappers.CustomerMapper">
 
+    <resultMap id="customerVOResultMap" type="CustomerVO">
+        <result property="c_id" column="c_id"/>
+        <result property="c_pwd" column="c_pwd"/>
+        <result property="c_name" column="c_name"/>
+        <result property="c_email" column="c_email"/>
+        <result property="c_phone" column="c_phone"/>
+        <result property="c_dep" column="c_dep"/>
+        <result property="c_position" column="c_position"/>
+    </resultMap>
+
     <!--Customer-->
+
+    <!-- id 중복 확인 -->
+<!--    <select id="idCheck" parameterType="String" resultType="CustomerVO">-->
+<!--        select *-->
+<!--        from customer-->
+<!--        where c_id = #{c_id}-->
+<!--    </select>-->
+
+    <!-- 로그인시 아이디와 비밀번호 확인 -->
+    <select id="login"  resultType="CustomerVO" parameterType="CustomerVO">
+        select * from customer where c_id = #{c_id}
+    </select>
+
     <!-- Select 문 -->
     <select id="selectCustomer" resultType="CustomerVO">
-        SELECT * FROM customer
+        SELECT *
+        FROM customer
     </select>
 
     <!-- 회원가입(Insert) -->
-    <insert id="insertCustomer" parameterType="CustomerVO" >
-        insert into customer(c_id, c_pwd, c_name, c_email, c_phone,c_dep,c_position,com_num,c_state)
-        values (#{c_id}, #{c_pwd}, #{c_name},#{c_email},#{c_phone},#{c_dep},#{c_position},#{com_num},#{c_state})
+    <insert id="insertCustomer">
+        insert into customer(c_id, c_pwd, c_name, c_email, c_phone, c_dep, c_position)
+        values (#{c_id}, #{c_pwd}, #{c_name}, #{c_email}, #{c_phone}, #{c_dep}, #{c_position})
     </insert>
 
 </mapper>

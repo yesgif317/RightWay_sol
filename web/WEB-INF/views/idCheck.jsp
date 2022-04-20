@@ -12,25 +12,34 @@
 
     <!-- Custom styles for this template-->
     <link href="<c:url value="/resources/css/sb-admin-2.min.css"/>" rel="stylesheet">
+
+    <script src="/resources/vendor/jquery/jquery.min.js"></script>.
+    <script src="/resources/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+
+    <!-- Core plugin JavaScript-->
+    <script src="/resources/vendor/jquery-easing/jquery.easing.min.js"></script>
+
+    <!-- Custom scripts for all pages-->
+    <script src="/resources/js/sb-admin-2.min.js"></script>
 </head>
 <body>
 <script type="text/javascript">
     function idok() {
-        opener.joinform.id.value = "${id}";
+        opener.joinform.c_id.value = "${id}";
         opener.joinform.reid.value = "${id}";
         self.close();
     }
 
 </script>
 
-<form method="post" class="form-signin" action="id_check_form" name="joinform">
+<form method="post" class="form-signin" action="/idCheck.do" name="joinform">
     <div class="form-label-group">
         <input type="text" id="id" name="id" class="form-control" value="${id}"/>
     </div>
 
     <div class="form-label-group">
         <input class="btn btn-lg btn-secondary btn-block text-uppercase"
-               type="submit" value="check">
+               type="submit" value="중복확인">
     </div>
 
     <!-- 아이디가 존재할 때 -->
@@ -52,14 +61,7 @@
 
 </form>
 
-<script src="/resources/vendor/jquery/jquery.min.js"></script>
-<script src="/resources/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
 
-<!-- Core plugin JavaScript-->
-<script src="/resources/vendor/jquery-easing/jquery.easing.min.js"></script>
-
-<!-- Custom scripts for all pages-->
-<script src="/resources/js/sb-admin-2.min.js"></script>
 </body>
 
 </html>
