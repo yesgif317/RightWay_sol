@@ -39,16 +39,16 @@ public class BoardDaoImpl implements  BoardDao {
     }
 
     @Override
-    public BoardVO viewBoard(int num) {
+    public BoardVO viewBoard(int no) {
 
         //Ibatis Update 사용법
-        return sqlSession.selectOne(Namespace+".viewBoard",num);
+        return sqlSession.selectOne(Namespace+".viewBoard",no);
     }
 
-    public int delete(int num) {
+    public int delete(int no) {
 
         //Ibatis Update 사용법
-        return sqlSession.delete(Namespace+".delete",num);
+        return sqlSession.delete(Namespace+".delete",no);
     }
 
 

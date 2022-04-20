@@ -22,24 +22,24 @@
 
     <!-- 회원가입(Insert) -->
     <insert id="insertBoard" parameterType="BoardVO" >
-       insert into notice(num,writer, title, contents, refdate, count)
+       insert into notice(no,writer, title, contents, refdate, count)
        values (USER_SEQ.NEXTVAL,#{writer}, #{title}, #{contents}, SYSDATE, 0)
     </insert>
 
     <update id="updateBoard" parameterType="BoardVO" >
         update notice
         set title = #{title}, contents =#{contents}, refdate = SYSDATE
-        where num = #{num}
+        where no = #{no}
     </update>
 
     <select id="viewBoard" resultType="BoardVO">
 
-        SELECT writer, title, contents,num FROM notice where num=#{num}
+        SELECT writer, title, contents,no FROM notice where no=#{no}
     </select>
 
     <delete id="delete">
 
-        delete from notice where num=#{num}
+        delete from notice where no=#{no}
 
     </delete>
 

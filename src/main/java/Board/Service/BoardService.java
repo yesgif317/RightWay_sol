@@ -14,8 +14,8 @@ public interface BoardService {
     //글 수정(Update)
     String updateBoard(BoardVO boardVO);
 
-    int delete(int num);
+    int delete(int no);
 
     //글 조회(View)
-    BoardVO viewBoard(int num);
+    BoardVO viewBoard(int no);
 }

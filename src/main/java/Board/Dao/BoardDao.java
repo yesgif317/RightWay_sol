@@ -14,7 +14,7 @@ public interface BoardDao {
     String updateBoard(BoardVO boardVO);
 
     //글 조회 Update
-    BoardVO viewBoard(int num);
+    BoardVO viewBoard(int no);
 
-    int delete(int num);
+    int delete(int no);
 }

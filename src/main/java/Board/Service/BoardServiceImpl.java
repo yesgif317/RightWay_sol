@@ -32,11 +32,11 @@ public class BoardServiceImpl implements BoardService {
     }
 
     @Override
-    public BoardVO viewBoard(int num){
-        return dao.viewBoard(num);
+    public BoardVO viewBoard(int no){
+        return dao.viewBoard(no);
     }
     @Override
-    public int delete(int num) { return
-        dao.delete(num);
+    public int delete(int no) { return
+        dao.delete(no);
     }
 }
