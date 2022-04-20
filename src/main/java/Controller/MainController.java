@@ -32,7 +32,7 @@ public class MainController {
         return "register";
     }
 
-    @RequestMapping(value = "/outputs_write.do", method = RequestMethod.GET)  //산출물 게시글 작성
+    @RequestMapping(value = "/outputs_write.do", method = RequestMethod.GET)  //산출물 게시글 작성 페이지
     public String outputs_write() {
         return "outputs_write";
     }
@@ -50,8 +50,6 @@ public class MainController {
     public String outputs_content(@RequestParam("num") int num, Model model)  {
         BoardVO Result = service.viewBoard(num);
 
-        List<BoardVO> boardVoList = service.selectAll();
-        // .jsp 파일로 DB 결과값 전달하기
         model.addAttribute("BoardList", Result);
         return "outputs_content"; }
 
@@ -62,16 +60,29 @@ public class MainController {
 
         return "redirect:/outputs.do";
     }
-    @RequestMapping(value = "/outputs_update.do", method = RequestMethod.GET)  //산출물 게시글 수정
-    public String outputs_update() {
+    @RequestMapping(value = "/outputs_update.do", method = RequestMethod.GET)  //산출물 게시글 수정 페이지
+    public String outputs_update(@RequestParam("num") int num, Model model) {
+        BoardVO Result = service.viewBoard(num);
+        model.addAttribute("BoardList", Result);
         return "outputs_update";
     }
-    @RequestMapping(value = "/outputs_move_update.do", method = RequestMethod.GET)//산출물 작성글 수정
+    @RequestMapping(value = "/outputs_move_update.do", method = RequestMethod.POST)//산출물 작성글 수정 기능
     public String outputs_move_update(Model model,BoardVO boardVO) {
 
-        model.addAttribute("BoardList", service.updateBoard(boardVO));
+        String Result =service.updateBoard(boardVO);
+        model.addAttribute("BoardList", Result);
         return "redirect:/outputs.do";
     }
+    @RequestMapping(value = "/outputs_move_write.do", method = RequestMethod.POST)// 산출물 게시글 작성 기능
+    public String outputs_move_write(Model model, BoardVO boardVO){
+        String Result = service.insertBoard(boardVO);
+        List<BoardVO> boardVoList = service.selectAll();
+        // .jsp 파일로 DB 결과값 전달하기
+        model.addAttribute("BoardList", Result);
+
+        return "redirect:/outputs.do";
+    }
+
 
 
 
@@ -116,30 +127,24 @@ public class MainController {
         // .jsp 파일로 DB 결과값 전달하기
         model.addAttribute("BoardList", boardVoList);
 
-        return "tables";
+        return "redirect:/outputs.do";
     }
 
     //테이블 글쓰기 페이지 이동
-    @RequestMapping(value = "/move_tableswrite.do", method = RequestMethod.GET)
+    /*@RequestMapping(value = "/move_tableswrite.do", method = RequestMethod.GET)
     public String tableswrite(){
         return "tableswrite";
-    }
+    }*/
 
     //글 작성 버튼 작동
     @RequestMapping(value = "/tableswrite.do", method = RequestMethod.POST)
     public String tableswrite(Model model, BoardVO boardVO){
-
-
-        //
         String Result = service.insertBoard(boardVO);
-
-        //service 클래스에서 Dao 로 접근하여 쿼리 결과값 가져오기
         List<BoardVO> boardVoList = service.selectAll();
-
         // .jsp 파일로 DB 결과값 전달하기
-        model.addAttribute("BoardList", boardVoList);
+        model.addAttribute("BoardList", Result);
 
-        return "tables";
+        return "outputs";
     }
 
     // 글 수정 페이지 이동
