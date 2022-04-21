@@ -32,4 +32,15 @@
         where no = #{no}
     </update>
 
+    <select id="viewBoard" resultType="BoardVO">
+
+        SELECT writer, title, contents,no FROM notice where no=#{no}
+    </select>
+
+    <delete id="delete">
+
+        delete from notice where no=#{no}
+
+    </delete>
+
 </mapper>

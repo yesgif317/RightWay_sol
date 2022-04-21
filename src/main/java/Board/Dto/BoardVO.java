@@ -10,11 +10,11 @@ public class BoardVO {
     public Date refdate;
     public int count;
 
-    public int getNo() {
+    public int getno() {
         return no;
     }
 
-    public void setNo(int no) {
+    public void setno(int no) {
         this.no = no;
     }
 

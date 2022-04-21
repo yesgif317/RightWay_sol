@@ -10,8 +10,8 @@
     <mvc:resources mapping="/resources/**" location="/resources/"/>
 
     <bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
-        <property name="prefix" value="/WEB-INF/views/"/>
-        <property name="suffix" value=".jsp"/>
+        <property name="prefix" value="/WEB-INF/views/jsp/" />
+        <property name="suffix" value=".jsp" />
     </bean>
 
     <!-- 로그인 인터셉터 클래스를 스프링에서 인터셉터로 인식시킴 -->

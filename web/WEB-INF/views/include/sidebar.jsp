@@ -33,13 +33,13 @@
             <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
                 <div class="bg-white py-2 collapse-inner rounded">
                     <h6 class="collapse-header ">프로젝트관리/보고</h6>
-                    <a class="collapse-item font-weight-bold text-gray-600" href="../buttons.html">산출물</a>
-                    <a class="collapse-item font-weight-bold text-gray-600" href="../cards.html">회의록</a>
-                    <a class="collapse-item font-weight-bold text-gray-600" href="../cards.html">정기보고</a>
-                    <a class="collapse-item font-weight-bold text-gray-600" href="../cards.html">팀관리</a>
-                    <a class="collapse-item font-weight-bold text-gray-600" href="/event.do">행사관리</a>
-                    <a class="collapse-item font-weight-bold text-gray-600" href="../cards.html">업체관리</a>
-                    <a class="collapse-item font-weight-bold text-gray-600" href="/adminpermission.do">관리자승인</a>
+                    <a class="collapse-item font-weight-bold text-gray-600" href="outputs.do">산출물</a>
+                    <a class="collapse-item font-weight-bold text-gray-600" href="meetingrecord.do">회의록</a>
+                    <a class="collapse-item font-weight-bold text-gray-600" href="regularreport.do">정기보고</a>
+                    <a class="collapse-item font-weight-bold text-gray-600" href="team.do">팀관리</a>
+                    <a class="collapse-item font-weight-bold text-gray-600" href="event.do">행사관리</a>
+                    <a class="collapse-item font-weight-bold text-gray-600" href="company.do">업체관리</a>
+                    <a class="collapse-item font-weight-bold text-gray-600" href="adminpermission.do">관리자승인</a>
                 </div>
             </div>
         </li>
@@ -53,8 +53,8 @@
             <div id="collapseUtilities" class="collapse" aria-labelledby="headingUtilities" data-parent="#accordionSidebar">
                 <div class="bg-white py-2 collapse-inner rounded">
                     <h6 class="collapse-header">위험 및 이슈</h6>
-                    <a class="collapse-item font-weight-bold text-gray-600" href="../utilities-color.html">위험</a>
-                    <a class="collapse-item font-weight-bold text-gray-600" href="../utilities-border.html">이슈</a>
+                    <a class="collapse-item font-weight-bold text-gray-600" href="danger.do">위험</a>
+                    <a class="collapse-item font-weight-bold text-gray-600" href="issue.do">이슈</a>
                 </div>
             </div>
         </li>
@@ -67,8 +67,8 @@
             <div id="collapse3" class="collapse" aria-labelledby="headingUtilities" data-parent="#accordionSidebar">
                 <div class="bg-white py-2 collapse-inner rounded">
                     <h6 class="collapse-header">투입인력</h6>
-                    <a class="collapse-item font-weight-bold text-gray-600" href="../utilities-color.html">투입인력관리</a>
-                    <a class="collapse-item font-weight-bold text-gray-600" href="../utilities-border.html">투입인력보고</a>
+                    <a class="collapse-item font-weight-bold text-gray-600" href="usermanagement.do">투입인력관리</a>
+                    <a class="collapse-item font-weight-bold text-gray-600" href="userreport.do">투입인력보고</a>
                 </div>
             </div>
         </li>
@@ -83,20 +83,20 @@
 
         <!-- Nav Item - Charts -->
         <li class="nav-item">
-            <a class="nav-link" href="/charts.html">
+            <a class="nav-link" href="notice.do">
                 <i class="fa-solid fa-bullhorn"></i>
                 <span>공지사항</span></a>
         </li>
 
         <!-- Nav Item - Tables -->
         <li class="nav-item">
-            <a class="nav-link" href="/tables.do">
+            <a class="nav-link" href="datacenter.do">
                 <i class="fa-solid fa-book"></i>
                 <span>자료실</span></a>
         </li>
         <!-- Nav Item - Tables -->
         <li class="nav-item">
-            <a class="nav-link" href="/tables.do">
+            <a class="nav-link" href="request.do">
                 <i class="fa-solid fa-check"></i>
                 <span>요청사항</span></a>
         </li>
@@ -108,7 +108,7 @@
         </div>
         <!-- Nav Item - Mypage -->
         <li class="nav-item">
-            <a class="nav-link" href="/tables.do">
+            <a class="nav-link" href="mypage.do">
                 <i class="fa-solid fa-id-card"></i>
                 <span>마이페이지</span></a>
         </li>
@@ -116,16 +116,6 @@
             <a class="nav-link" href="#" data-toggle="modal" data-target="#logoutModal">
                 <i class="fa-solid fa-sign-out-alt"></i>
                 <span>로그아웃</span></a>
-        </li>
-
-        <!-- Divider -->
-        <hr class="sidebar-divider d-none d-md-block">
-
-        <li class="nav-item">
-            <!--<a class="nav-link" href="/blank.do" data-toggle="modal" data-target="#logoutModal">-->
-            <a class="nav-link" href="/blank.do">
-                <i class="fa-solid fa-sign-out-alt"></i>
-                <span>blank</span></a>
         </li>
 
         <!-- Divider -->
