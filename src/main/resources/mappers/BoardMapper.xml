@@ -22,8 +22,8 @@
 
     <!-- 회원가입(Insert) -->
     <insert id="insertBoard" parameterType="BoardVO" >
-       insert into notice(no,writer, title, contents, refdate, count)
-       values (USER_SEQ.NEXTVAL,#{writer}, #{title}, #{contents}, SYSDATE, 0)
+       insert into notice(writer, title, contents, refdate, count)
+       values (#{writer}, #{title}, #{contents}, SYSDATE, 0)
     </insert>
 
     <update id="updateBoard" parameterType="BoardVO" >
