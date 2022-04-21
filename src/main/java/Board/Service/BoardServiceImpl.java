@@ -35,6 +35,7 @@ public class BoardServiceImpl implements BoardService {
     public BoardVO viewBoard(int no){
         return dao.viewBoard(no);
     }
+
     @Override
     public int delete(int no) { return
         dao.delete(no);

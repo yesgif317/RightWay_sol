@@ -29,7 +29,7 @@ public class MainController {
 
     @RequestMapping(value = "/register.do", method = RequestMethod.GET)
     public String register() {
-        return "jsp/register";
+        return "register";
     }
 
     @RequestMapping(value = "/outputs_write.do", method = RequestMethod.GET)  //산출물 게시글 작성 페이지
@@ -64,7 +64,7 @@ public class MainController {
     public String outputs_update(@RequestParam("no") int no, Model model) {
         BoardVO Result = service.viewBoard(no);
         model.addAttribute("BoardList", Result);
-        return "jsp/outputs_update";
+        return "outputs_update";
     }
     @RequestMapping(value = "/outputs_move_update.do", method = RequestMethod.POST)//산출물 작성글 수정 기능
     public String outputs_move_update(Model model,BoardVO boardVO) {
@@ -95,14 +95,14 @@ public class MainController {
         List<BoardVO> boardVoList = service.selectAll();
         // .jsp 파일로 DB 결과값 전달하기
         model.addAttribute("BoardList", boardVoList);
-        return "jsp/issue";
+        return "issue";
     }
 
 
 
     @RequestMapping(value = "/forgot_password.do", method = RequestMethod.GET)
     public String forgot_password() {
-        return "jsp/forgot_password";
+        return "forgot_password";
     }
 
     //adminpermission page
@@ -126,19 +126,19 @@ public class MainController {
         // .jsp 파일로 DB 결과값 전달하기
         model.addAttribute("BoardList", boardVoList);
 
-        return "event";
+        return "event/event";
     }
 
     //행사관리 글쓰기 페이지 이동
     @RequestMapping(value = "/event_write.do", method = RequestMethod.GET)
     public String event_write(){
-        return "event_write";
+        return "event/event_write";
     }
 
     //행사관리 상세 페이지 이동
     @RequestMapping(value = "/event_content.do", method = RequestMethod.GET)
     public String event_content(){
-        return "event_content";
+        return "event/event_content";
     }
 
     //company page
@@ -150,19 +150,19 @@ public class MainController {
         // .jsp 파일로 DB 결과값 전달하기
         model.addAttribute("BoardList", boardVoList);
 
-        return "company";
+        return "company/company";
     }
 
     //company 글쓰기 페이지 이동
     @RequestMapping(value = "/company_write.do", method = RequestMethod.GET)
     public String company_write(){
-        return "company_write";
+        return "company/company_write";
     }
 
     //company 상세 페이지 이동
     @RequestMapping(value = "/company_content.do", method = RequestMethod.GET)
     public String company_content(){
-        return "company_content";
+        return "company/company_content";
     }
 
     //테이블 페이지 이동
@@ -179,10 +179,10 @@ public class MainController {
     }
 
     //테이블 글쓰기 페이지 이동
-    /*@RequestMapping(value = "/move_tableswrite.do", method = RequestMethod.GET)
+    @RequestMapping(value = "/move_tableswrite.do", method = RequestMethod.GET)
     public String tableswrite(){
         return "tableswrite";
-    }*/
+    }
 
     //글 작성 버튼 작동
     @RequestMapping(value = "/tableswrite.do", method = RequestMethod.POST)
@@ -192,7 +192,7 @@ public class MainController {
         // .jsp 파일로 DB 결과값 전달하기
         model.addAttribute("BoardList", Result);
 
-        return "outputs";
+        return "tables";
     }
 
     // 글 수정 페이지 이동
@@ -218,13 +218,13 @@ public class MainController {
         // .jsp 파일로 DB 결과값 전달하기
         model.addAttribute("BoardList", boardVoList);
 
-        return "jsp/tables";
+        return "tables";
     }
 
     // blank page
     @RequestMapping(value = "/blank.do", method = RequestMethod.GET)
     public String blank() {
-        return "jsp/blank";
+        return "blank";
     }
 
 }
