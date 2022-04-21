@@ -11506,7 +11506,7 @@
 			 *      } );
 			 *    } );
 			 */
-			"sInfo": "Showing _START_ to _END_ of _TOTAL_ entries",
+			"sInfo": "총 _TOTAL_ 개 중 _START_ ~ _END_",
 	
 	
 			/**
@@ -11527,7 +11527,7 @@
 			 *      } );
 			 *    } );
 			 */
-			"sInfoEmpty": "Showing 0 to 0 of 0 entries",
+			"sInfoEmpty": "조회된 데이터가 없습니다.",
 	
 	
 			/**
@@ -11667,7 +11667,7 @@
 			 *      } );
 			 *    } );
 			 */
-			"sLengthMenu": "Show _MENU_ entries",
+			"sLengthMenu": "_MENU_ 개씩 보기",
 	
 	
 			/**
@@ -11747,7 +11747,7 @@
 			 *      } );
 			 *    } );
 			 */
-			"sSearch": "Search:",
+			"sSearch": "검색:",
 	
 	
 			/**

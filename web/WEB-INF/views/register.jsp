@@ -64,7 +64,7 @@
                                 <input type="email" class="form-control form-control-user" id="Email" placeholder="Email">
                             </div>
                             <div class="form-group">
-                                <input type="email" class="form-control form-control-user" id="Phone" placeholder="연락처 (-제외 숫자만 입력)">
+                                <input type="tel" class="form-control form-control-user" id="Phone" placeholder="연락처 (-제외 숫자만 입력)">
                             </div>
                             <div class="form-group row">
                                 <div class="col-sm-3 mb-3 mb-sm-0">

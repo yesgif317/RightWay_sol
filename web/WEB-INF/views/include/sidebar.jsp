@@ -33,11 +33,11 @@
             <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
                 <div class="bg-white py-2 collapse-inner rounded">
                     <h6 class="collapse-header ">프로젝트관리/보고</h6>
-                    <a class="collapse-item font-weight-bold text-gray-600" href="../buttons.html">산출물</a>
+                    <a class="collapse-item font-weight-bold text-gray-600" href="/outputs.do">산출물</a>
                     <a class="collapse-item font-weight-bold text-gray-600" href="../cards.html">회의록</a>
                     <a class="collapse-item font-weight-bold text-gray-600" href="../cards.html">정기보고</a>
-                    <a class="collapse-item font-weight-bold text-gray-600" href="../cards.html">팀관리</a>
-                    <a class="collapse-item font-weight-bold text-gray-600" href="../cards.html">행사관리</a>
+                    <a class="collapse-item font-weight-bold text-gray-600" href="/company.do">팀관리</a>
+                    <a class="collapse-item font-weight-bold text-gray-600" href="/event.do">행사관리</a>
                     <a class="collapse-item font-weight-bold text-gray-600" href="../cards.html">업체관리</a>
                     <a class="collapse-item font-weight-bold text-gray-600" href="/adminpermission.do">관리자승인</a>
                 </div>
@@ -167,19 +167,3 @@
     </div>
 
 
-<!-- Bootstrap core JavaScript-->
-<script src="<c:url value="/resources/vendor/jquery/jquery.min.js"/>"></script>
-<script src="<c:url value="/resources/vendor/bootstrap/js/bootstrap.bundle.min.js"/>"></script>
-
-<!-- Core plugin JavaScript-->
-<script src="<c:url value="/resources/vendor/jquery-easing/jquery.easing.min.js"/>"></script>
-
-<!-- Custom scripts for all pages-->
-<script src="<c:url value="/resources/js/sb-admin-2.min.js"/>"></script>
-
-<!-- Page level plugins -->
-<script src="<c:url value="/resources/vendor/chart.js/Chart.min.js"/>"></script>
-
-<!-- Page level custom scripts -->
-<script src="<c:url value="/resources/js/demo/chart-bar-demo.js"/>"></script>
-<script src="<c:url value="/resources/js/demo/chart-pie-demo.js"/>"></script>

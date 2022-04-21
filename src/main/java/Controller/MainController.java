@@ -34,7 +34,7 @@ public class MainController {
 
     @RequestMapping(value = "/outputs_write.do", method = RequestMethod.GET)  //산출물 게시글 작성 페이지
     public String outputs_write() {
-        return "outputs_write";
+        return "/jsp/outputs/outputs_write";
     }
 
     @RequestMapping(value = "/outputs.do", method = RequestMethod.GET)//산출물 게시판 글목록 보기
@@ -43,7 +43,7 @@ public class MainController {
         List<BoardVO> boardVoList = service.selectAll();
         // .jsp 파일로 DB 결과값 전달하기
         model.addAttribute("BoardList", boardVoList);
-        return "outputs";
+        return "/jsp/outputs/outputs";
     }
 
     @RequestMapping(value = "/outputs_content.do", method = RequestMethod.GET)//산출물 작성글 보기
@@ -51,7 +51,7 @@ public class MainController {
         BoardVO Result = service.viewBoard(no);
 
         model.addAttribute("BoardList", Result);
-        return "outputs_content"; }
+        return "/jsp/outputs/outputs_content"; }
 
     @RequestMapping(value = "/outputs_delete.do", method = RequestMethod.GET)//산출물 작성글 삭제
     public String outputs_delete(@RequestParam("no") int no) {
@@ -115,6 +115,54 @@ public class MainController {
         model.addAttribute("BoardList", boardVoList);
 
         return "adminpermission";
+    }
+
+    //event page
+    @RequestMapping(value = "/event.do", method = RequestMethod.GET)
+    public String event(Model model) {
+        //service 클래스에서 Dao 로 접근하여 쿼리 결과값 가져오기
+        List<BoardVO> boardVoList = service.selectAll();
+
+        // .jsp 파일로 DB 결과값 전달하기
+        model.addAttribute("BoardList", boardVoList);
+
+        return "event";
+    }
+
+    //행사관리 글쓰기 페이지 이동
+    @RequestMapping(value = "/event_write.do", method = RequestMethod.GET)
+    public String event_write(){
+        return "event_write";
+    }
+
+    //행사관리 상세 페이지 이동
+    @RequestMapping(value = "/event_content.do", method = RequestMethod.GET)
+    public String event_content(){
+        return "event_content";
+    }
+
+    //company page
+    @RequestMapping(value = "/company.do", method = RequestMethod.GET)
+    public String company(Model model) {
+        //service 클래스에서 Dao 로 접근하여 쿼리 결과값 가져오기
+        List<BoardVO> boardVoList = service.selectAll();
+
+        // .jsp 파일로 DB 결과값 전달하기
+        model.addAttribute("BoardList", boardVoList);
+
+        return "company";
+    }
+
+    //company 글쓰기 페이지 이동
+    @RequestMapping(value = "/company_write.do", method = RequestMethod.GET)
+    public String company_write(){
+        return "company_write";
+    }
+
+    //company 상세 페이지 이동
+    @RequestMapping(value = "/company_content.do", method = RequestMethod.GET)
+    public String company_content(){
+        return "company_content";
     }
 
     //테이블 페이지 이동

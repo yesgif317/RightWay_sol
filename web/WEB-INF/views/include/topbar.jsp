@@ -24,9 +24,9 @@
                 <i class="fa-solid fa-align-justify"> 프로젝트 선택</i>
             </button>
             <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                <a class="dropdown-item text-gray-600" href="#" >프로젝트A</a>
-                <a class="dropdown-item text-gray-600" href="#">프로젝트B</a>
-                <a class="dropdown-item text-gray-600" href="#">프로젝트C</a>
+                <a class="dropdown-item text-gray-600 text-lg" href="#" >프로젝트A</a>
+                <a class="dropdown-item text-gray-600 text-lg" href="#">프로젝트B</a>
+                <a class="dropdown-item text-gray-600 text-lg" href="#">프로젝트C</a>
             </div>
         </div>
     </form>
