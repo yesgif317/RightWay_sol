@@ -37,33 +37,35 @@
                         <div class="card shadow mb-4">
                             <!-- Card Header - Accordion -->
                             <a href="#collapseCardExample" class="d-block card-header py-3" data-toggle="collapse" role="button" aria-expanded="true" aria-controls="collapseCardExample">
-                                <h6 class="m-0 font-weight-bold text-primary">산출물 게시물 작성 중</h6>
+                                <h6 class="m-0 font-weight-bold text-primary">산출물 게시물 수정 중</h6>
 
                             </a>
                             <!-- Card Content - Collapse -->
                             <div class="collapse show" id="collapseCardExample">
                                 <div class="card-body">
-                                    <form method="post" action="outputs_move_write.do" id="tableswriteform" enctype="application/x-www-form-urlencoded" class="form-horizontal">
+                                    <form autocomplete="off" method="post" role="form" id="outputsupdateform" action="outputs_move_update.do">
                                         <div class="row form-group">
-                                            <div class="col col-md-2"><label for="title" class=" form-control-label">제목</label></div>
-                                            <div class="col-12 col-md-7"><input type="text" id="title" name="title" placeholder="Text" class="form-control"><small class="form-text text-muted">This is a help text</small></div>
+                                            <div class="col col-md-2"><label  class=" form-control-label">제목</label></div>
+                                            <div class="col-12 col-md-7"><input type="text" id="no" name="no" value="${BoardList.no}" readonly="readonly" ><small class="form-text text-muted">This is a help text</small></div>
                                         </div>
-
                                         <div class="row form-group">
-                                            <div class="col col-md-2"><label class=" form-control-label">작성자</label></div>
-                                            <div class="col-12 col-md-7"><input type="text" id="writer" name="writer" placeholder="Text" class="form-control"><small class="help-block form-text">산출물에 대해 작성해주세요.</small></div>
+                                            <div class="col col-md-2"><label  class=" form-control-label">제목</label></div>
+                                            <div class="col-12 col-md-7"><input type="text" id="title" name="title" value="${BoardList.title}"  ><small class="form-text text-muted">This is a help text</small></div>
                                         </div>
 
                                         <div class="row form-group">
                                             <div class="col col-md-2"><label for="contents" class=" form-control-label">내용 작성</label></div>
-                                            <div class="col-12 col-md-7"> <textarea name="contents" id="contents" rows="9" placeholder="Content" class="form-control"></textarea></div>
+                                            <div class="col-12 col-md-7"> <textarea name="contents" id="contents" rows="9" placeholder="Content" class="form-control">${BoardList.contents}</textarea></div>
                                         </div>
+
                                         <div style="text-align: center">
-                                            <a <%--href="javascript:goSubmit();"--%> class="btn btn-primary btn-icon-split">
-                          <span class="icon text-white-50">
-                            <i class="fas fa-pen"></i>
-                          </span>
-                                                <span class="text"> <input type="submit" value="전송"> 글쓰기</span>
+
+                                            <a  class="btn btn-primary btn-icon-split">
+
+                                             <span class="icon text-white-50"><input type="submit" value="전송">
+                                                  <i class="fas fa-pen"></i>
+                                               </span>
+                                                <span class="text">  글 수정하기</span>
                                             </a>
                                             <a href="javascript:goSubmit();" class="btn btn-primary btn-icon-split">
                           <span class="icon text-white-50">
@@ -97,16 +99,18 @@
         </div>
         <!-- End of Main Content -->
 
-        <jsp:include page="../../include/footer.jsp" flush="true" />
+
+        <jsp:include page="include/footer.jsp" flush="true" />
 
     </div>
         <!-- End of Page Wrapper -->
+
 <!-- Scroll to Top Button-->
 <a class="scroll-to-top rounded" href="#page-top">
     <i class="fas fa-angle-up"></i>
 </a>
 
-        <jsp:include page="../../include/logoutModal.jsp" flush="true" />
+        <jsp:include page="include/logoutModal.jsp" flush="true" />
 <!-- Bootstrap core JavaScript-->
 <script src="<c:url value="/resources/vendor/jquery/jquery.min.js"/>"></script>
 <script src="<c:url value="/resources/vendor/bootstrap/js/bootstrap.bundle.min.js"/>"></script>
@@ -121,7 +125,7 @@
 
 <script type="text/javascript">
     function goSubmit() {
-        var form = document.getElementById('tableswriteform').submit();
+        var form = document.getElementById('outputsupdateform').submit();
     }
 </script>
 

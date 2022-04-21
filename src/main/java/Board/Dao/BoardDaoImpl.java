@@ -37,4 +37,19 @@ public class BoardDaoImpl implements  BoardDao {
         //Ibatis Update 사용법
         return sqlSession.update(Namespace+".updateBoard", boardVO)+"";
     }
+
+    @Override
+    public BoardVO viewBoard(int no) {
+
+        //Ibatis Update 사용법
+        return sqlSession.selectOne(Namespace+".viewBoard",no);
+    }
+
+    public int delete(int no) {
+
+        //Ibatis Update 사용법
+        return sqlSession.delete(Namespace+".delete",no);
+    }
+
+
 }
