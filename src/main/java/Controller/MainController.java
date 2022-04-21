@@ -49,15 +49,12 @@ public class MainController {
     @RequestMapping(value = "/outputs_content.do", method = RequestMethod.GET)//산출물 작성글 보기
     public String outputs_content(@RequestParam("no") int no, Model model)  {
         BoardVO Result = service.viewBoard(no);
-
         model.addAttribute("BoardList", Result);
         return "/outputs/outputs_content"; }
 
     @RequestMapping(value = "/outputs_delete.do", method = RequestMethod.GET)//산출물 작성글 삭제
     public String outputs_delete(@RequestParam("no") int no) {
-
         service.delete(no);
-
         return "redirect:/outputs.do";
     }
     @RequestMapping(value = "/outputs_update.do", method = RequestMethod.GET)  //산출물 게시글 수정 페이지
@@ -68,7 +65,6 @@ public class MainController {
     }
     @RequestMapping(value = "/outputs_move_update.do", method = RequestMethod.POST)//산출물 작성글 수정 기능
     public String outputs_move_update(Model model,BoardVO boardVO) {
-
         String Result =service.updateBoard(boardVO);
         model.addAttribute("BoardList", Result);
         return "redirect:/outputs.do";
@@ -79,15 +75,8 @@ public class MainController {
         List<BoardVO> boardVoList = service.selectAll();
         // .jsp 파일로 DB 결과값 전달하기
         model.addAttribute("BoardList", Result);
-
         return "redirect:/outputs.do";
     }
-
-
-
-
-
-
 
     @RequestMapping(value = "/issue.do", method = RequestMethod.GET)//이슈 게시판 글목록 보기
     public String issue(Model model) {
@@ -95,9 +84,19 @@ public class MainController {
         List<BoardVO> boardVoList = service.selectAll();
         // .jsp 파일로 DB 결과값 전달하기
         model.addAttribute("BoardList", boardVoList);
-        return "issue";
+        return "issue/issue";
     }
+    @RequestMapping(value = "/issue_content.do", method = RequestMethod.GET)//이슈 작성글 보기
+    public String issue_content(@RequestParam("no") int no, Model model)  {
+        BoardVO Result = service.viewBoard(no);
+        model.addAttribute("BoardList", Result);
+        return "/issue/issue_content"; }
 
+    @RequestMapping(value = "/issue_delete.do", method = RequestMethod.GET)//이슈 작성글 삭제
+    public String issue_delete(@RequestParam("no") int no) {
+        service.delete(no);
+        return "redirect:/issue.do";
+    }
 
 
     @RequestMapping(value = "/forgot_password.do", method = RequestMethod.GET)

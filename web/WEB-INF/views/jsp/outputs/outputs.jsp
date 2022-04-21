@@ -7,11 +7,10 @@
 --%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %><!DOCTYPE html>
-
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 
     <jsp:include page="../../include/header.jsp" flush="true" />
     <jsp:include page="../../include/sidebar.jsp" flush="true" />
-
     <!-- Content Wrapper -->
     <div id="content-wrapper" class="d-flex flex-column" >
 
@@ -22,6 +21,7 @@
             <!-- Begin Page Content -->
             <div class="container-fluid">
 
+
                 <!-- Page Heading -->
                 <h1 class="h3 mb-2 text-gray-800">산출물</h1>
                 <p class="mb-4"> 산출물이란 프로젝트나 프로그램의 가시적이고 측정 가능한 결과물을 말합니다.
@@ -31,6 +31,7 @@
                     이 페이지에서 산출물에 가입하고 산출물을 참조할 수 있습니다.
                 </p>
 
+
                 <!-- DataTales Example -->
                 <div class="card shadow mb-4">
                     <div class="card-header py-3">
@@ -38,9 +39,10 @@
                     </div>
                     <div class="card-body">
                         <div class="table-responsive">
-                            <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+
+                            <table class="table table-hover table-striped table-bordered border-primary" id="dataTable" width="100%" cellspacing="0" >
                                 <thead>
-                                <tr bgcolor="#dcdcdc">
+                                <tr >
                                     <th>번호</th>
                                     <th width="50%">산출물</th>
                                     <th>작성자</th>
@@ -56,7 +58,8 @@
                                         <td>${board.no}</td>
                                         <td><a href ="outputs_content.do?no=${board.no}">${board.title}</a></td>
                                         <td>${board.writer}</td>
-                                        <td>${board.refdate}</td>
+                                        <td><fmt:formatDate value="${board.refdate}" pattern="yyyy-MM-dd" /></td>
+
                                         <td>${board.count}</td>
                                     </tr>
                                 </c:forEach>
@@ -111,6 +114,7 @@
 
 <script src="<c:url value="/resources/js/demo/datatables-demo.js"/>"></script>
 <script src="https://kit.fontawesome.com/55082abfe9.js" crossorigin="anonymous"></script>
+
 </body>
 
 </html>
