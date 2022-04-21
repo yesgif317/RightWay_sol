@@ -35,13 +35,13 @@
 
 <!-- Page Wrapper -->
 <div id="wrapper">
-    <jsp:include page="include/sidebar.jsp" flush="true" />
+    <jsp:include page="../../include/sidebar.jsp" flush="true" />
     <!-- Content Wrapper -->
     <div id="content-wrapper" class="d-flex flex-column">
 
         <!-- Main Content -->
         <div id="content">
-            <jsp:include page="include/topbar.jsp" flush="true" />
+            <jsp:include page="../../include/topbar.jsp" flush="true" />
 
             <!-- Begin Page Content -->
             <div class="container-fluid">

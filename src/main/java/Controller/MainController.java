@@ -33,7 +33,7 @@ public class MainController {
 
     @RequestMapping(value = "/outputs_write.do", method = RequestMethod.GET)  //산출물 게시글 작성
     public String outputs_write() {
-        return "outputs_write";
+        return "outputs/outputs_write";
     }
 
     @RequestMapping(value = "/outputs.do", method = RequestMethod.GET)//산출물 게시판 글목록 보기
@@ -42,13 +42,14 @@ public class MainController {
         List<BoardVO> boardVoList = service.selectAll();
         // .jsp 파일로 DB 결과값 전달하기
         model.addAttribute("BoardList", boardVoList);
-        return "outputs";
+        return "outputs/outputs";
     }
 
     @RequestMapping(value = "/outputs_content.do", method = RequestMethod.GET)//산출물 작성글 보기
     public String outputs_content() {
         return "outputs_content";
     }
+
     @RequestMapping(value = "/issue.do", method = RequestMethod.GET)//산출물 작성글 보기
     public String issue() {
         return "issue";
@@ -68,7 +69,7 @@ public class MainController {
         // .jsp 파일로 DB 결과값 전달하기
         model.addAttribute("BoardList", boardVoList);
 
-        return "adminpermission";
+        return "adminpermission/adminpermission";
     }
 
     //event page
@@ -80,19 +81,19 @@ public class MainController {
         // .jsp 파일로 DB 결과값 전달하기
         model.addAttribute("BoardList", boardVoList);
 
-        return "event";
+        return "event/event";
     }
 
     //행사관리 글쓰기 페이지 이동
     @RequestMapping(value = "/event_write.do", method = RequestMethod.GET)
     public String event_write(){
-        return "event_write";
+        return "event/event_write";
     }
 
     //행사관리 상세 페이지 이동
     @RequestMapping(value = "/event_content.do", method = RequestMethod.GET)
     public String event_content(){
-        return "event_content";
+        return "event/event_content";
     }
 
     //company page
@@ -104,19 +105,19 @@ public class MainController {
         // .jsp 파일로 DB 결과값 전달하기
         model.addAttribute("BoardList", boardVoList);
 
-        return "company";
+        return "company/company";
     }
 
     //company 글쓰기 페이지 이동
     @RequestMapping(value = "/company_write.do", method = RequestMethod.GET)
     public String company_write(){
-        return "company_write";
+        return "company/company_write";
     }
 
     //company 상세 페이지 이동
     @RequestMapping(value = "/company_content.do", method = RequestMethod.GET)
     public String company_content(){
-        return "company_content";
+        return "company/company_content";
     }
 
     //테이블 페이지 이동

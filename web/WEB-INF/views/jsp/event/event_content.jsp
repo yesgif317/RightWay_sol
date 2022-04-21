@@ -1,15 +1,15 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 
-<jsp:include page="include/header.jsp" flush="true" />
-<jsp:include page="include/sidebar.jsp" flush="true" />
+<jsp:include page="../../include/header.jsp" flush="true" />
+<jsp:include page="../../include/sidebar.jsp" flush="true" />
 
 <!-- Content Wrapper -->
 <div id="content-wrapper" class="d-flex flex-column" >
 
     <!-- Main Content -->
     <div id="content">
-        <jsp:include page="include/topbar.jsp" flush="true" />
+        <jsp:include page="../../include/topbar.jsp" flush="true" />
         <!-- Begin Page Content -->
         <div class="container-fluid">
 
@@ -120,9 +120,9 @@
 
 
 
-    <jsp:include page="include/footer.jsp" flush="true" />
+    <jsp:include page="../../include/footer.jsp" flush="true" />
 
-    <jsp:include page="include/logoutModal.jsp" flush="true" />
+    <jsp:include page="../../include/logoutModal.jsp" flush="true" />
 
     <!-- Bootstrap core JavaScript-->
     <script src="<c:url value="/resources/vendor/jquery/jquery.min.js"/>"></script>
