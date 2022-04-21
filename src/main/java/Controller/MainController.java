@@ -29,12 +29,12 @@ public class MainController {
 
     @RequestMapping(value = "/register.do", method = RequestMethod.GET)
     public String register() {
-        return "register";
+        return "jsp/register";
     }
 
     @RequestMapping(value = "/outputs_write.do", method = RequestMethod.GET)  //산출물 게시글 작성 페이지
     public String outputs_write() {
-        return "/jsp/outputs/outputs_write";
+        return "/outputs/outputs_write";
     }
 
     @RequestMapping(value = "/outputs.do", method = RequestMethod.GET)//산출물 게시판 글목록 보기
@@ -43,7 +43,7 @@ public class MainController {
         List<BoardVO> boardVoList = service.selectAll();
         // .jsp 파일로 DB 결과값 전달하기
         model.addAttribute("BoardList", boardVoList);
-        return "/jsp/outputs/outputs";
+        return "/outputs/outputs";
     }
 
     @RequestMapping(value = "/outputs_content.do", method = RequestMethod.GET)//산출물 작성글 보기
@@ -51,7 +51,7 @@ public class MainController {
         BoardVO Result = service.viewBoard(no);
 
         model.addAttribute("BoardList", Result);
-        return "/jsp/outputs/outputs_content"; }
+        return "/outputs/outputs_content"; }
 
     @RequestMapping(value = "/outputs_delete.do", method = RequestMethod.GET)//산출물 작성글 삭제
     public String outputs_delete(@RequestParam("no") int no) {
@@ -64,7 +64,7 @@ public class MainController {
     public String outputs_update(@RequestParam("no") int no, Model model) {
         BoardVO Result = service.viewBoard(no);
         model.addAttribute("BoardList", Result);
-        return "outputs_update";
+        return "jsp/outputs_update";
     }
     @RequestMapping(value = "/outputs_move_update.do", method = RequestMethod.POST)//산출물 작성글 수정 기능
     public String outputs_move_update(Model model,BoardVO boardVO) {
@@ -95,14 +95,14 @@ public class MainController {
         List<BoardVO> boardVoList = service.selectAll();
         // .jsp 파일로 DB 결과값 전달하기
         model.addAttribute("BoardList", boardVoList);
-        return "issue";
+        return "jsp/issue";
     }
 
 
 
     @RequestMapping(value = "/forgot_password.do", method = RequestMethod.GET)
     public String forgot_password() {
-        return "forgot_password";
+        return "jsp/forgot_password";
     }
 
     //adminpermission page
@@ -114,7 +114,7 @@ public class MainController {
         // .jsp 파일로 DB 결과값 전달하기
         model.addAttribute("BoardList", boardVoList);
 
-        return "adminpermission";
+        return "adminpermission/adminpermission";
     }
 
     //event page
@@ -218,13 +218,13 @@ public class MainController {
         // .jsp 파일로 DB 결과값 전달하기
         model.addAttribute("BoardList", boardVoList);
 
-        return "tables";
+        return "jsp/tables";
     }
 
     // blank page
     @RequestMapping(value = "/blank.do", method = RequestMethod.GET)
     public String blank() {
-        return "blank";
+        return "jsp/blank";
     }
 
 }
