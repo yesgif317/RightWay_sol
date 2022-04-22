@@ -47,7 +47,7 @@
 
     <jsp:include page="../include/footer.jsp" flush="true" />
 
-    <jsp:include page="../include/logoutModal.jsp" flush="true" />
+    <jsp:include page="include/logoutModal.jsp" flush="true" />
 
     <!-- Bootstrap core JavaScript-->
     <script src="<c:url value="/resources/vendor/jquery/jquery.min.js"/>"></script>

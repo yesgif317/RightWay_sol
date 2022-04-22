@@ -15,7 +15,8 @@
 
     <!-- Custom fonts for this template-->
     <link href="/resources/vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
-    <link href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i"
+          rel="stylesheet">
 
     <!-- Custom styles for this template-->
     <link href="<c:url value="/resources/css/sb-admin-2.min.css"/>" rel="stylesheet">
@@ -36,35 +37,45 @@
                         <div class="text-center">
                             <h1 class="h4 text-gray-900 mb-4">회원가입</h1>
                         </div>
-                        <form class="user">
+
+                        <!-- form -->
+                        <form class="register" action="/register.do" method="POST" name="joinform">
                             <div class="form-group row">
-                                <div class="col-sm-9 mb-3 mb-sm-0">
-                                    <input type="text" class="form-control form-control-user" id="ID" placeholder="ID">
+                                <div class="form-label-group">
+                                    <input type="text" name="c_id" class="form-control" placeholder="ID" required autofocus value="${c_id}">
+                                    <input type="hidden" name="reid" id="reid">
                                 </div>
 
-                                <div class="col-sm-3">
-                                    <a href="" class="btn btn-dark btn-user btn-block">
-                                    중복확인
-                                </a>
+                                <div class="form-label-group">
+                                    <button
+                                            class="btn btn-dark btn-user btn-block"
+                                            type="button" onclick="idcheck()">중복 확인
+                                    </button>
                                 </div>
+
                             </div>
 
                             <div class="form-group row">
                                 <div class="col-sm-6 mb-3 mb-sm-0">
-                                    <input type="password" class="form-control form-control-user" id="InputPassword" placeholder="비밀번호">
+                                    <input type="password" class="form-control form-control-user" name="c_pwd"
+                                           placeholder="비밀번호">
                                 </div>
                                 <div class="col-sm-6">
-                                    <input type="password" class="form-control form-control-user" id="RepeatPassword" placeholder="비밀번호 확인">
+                                    <input type="password" class="form-control form-control-user" name="c_pwdcheck"
+                                           placeholder="비밀번호 확인">
                                 </div>
                             </div>
                             <div class="form-group">
-                                <input type="email" class="form-control form-control-user" id="Name" placeholder="이름">
+                                <input type="text" class="form-control form-control-user" name="c_name"
+                                       placeholder="이름">
                             </div>
                             <div class="form-group">
-                                <input type="email" class="form-control form-control-user" id="Email" placeholder="Email">
+                                <input type="email" class="form-control form-control-user" name="c_email"
+                                       placeholder="Email">
                             </div>
                             <div class="form-group">
-                                <input type="tel" class="form-control form-control-user" id="Phone" placeholder="연락처 (-제외 숫자만 입력)">
+                                <input type="text" class="form-control form-control-user" name="c_phone"
+                                       placeholder="연락처 (-제외 숫자만 입력)">
                             </div>
                             <div class="form-group row">
                                 <div class="col-sm-3 mb-3 mb-sm-0">
@@ -73,18 +84,21 @@
                                     </a>
                                 </div>
                                 <div class="col-sm-9 ">
-                                    <input type="text" class="form-control form-control-user" id="Company" placeholder="회사명" disabled>
+                                    <input type="text" class="form-control form-control-user" name="com_name"
+                                           placeholder="회사명" disabled>
                                 </div>
                             </div>
                             <div class="form-group">
-                                <input type="email" class="form-control form-control-user" id="Dep" placeholder="부서명">
+                                <input type="text" class="form-control form-control-user" name="c_dep"
+                                       placeholder="부서명">
                             </div>
                             <div class="form-group">
-                                <input type="email" class="form-control form-control-user" id="Position" placeholder="직책">
+                                <input type="text" class="form-control form-control-user" name="c_position"
+                                       placeholder="직책">
                             </div>
-                            <a href="/login.do" class="btn btn-dark btn-user btn-block">
-                               회원가입
-                            </a>
+                            <div class="form-group">
+                                <button type="submit" class="d-block text-center mt-2 small">회원 가입</button>
+                            </div>
                         </form>
                         <hr>
                         <div class="text-center">
@@ -102,14 +116,29 @@
 </div>
 
 <!-- Bootstrap core JavaScript-->
-<script src="vendor/jquery/jquery.min.js"></script>
-<script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+<script src="/resources/vendor/jquery/jquery.min.js"></script>
+<script src="/resources/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
 
 <!-- Core plugin JavaScript-->
-<script src="vendor/jquery-easing/jquery.easing.min.js"></script>
+<script src="/resources/vendor/jquery-easing/jquery.easing.min.js"></script>
 
 <!-- Custom scripts for all pages-->
-<script src="js/sb-admin-2.min.js"></script>
+<script src="/resources/js/sb-admin-2.min.js"></script>
+
+<script>
+    function idcheck() {
+        if (document.joinform.c_id.value == "") {
+            alert("아이디를 입력해주세요.");
+            document.joinform.c_id.focus();
+            return false;
+        }
+
+        var url = "/idCheck.do";
+
+        window.open(url, "_blank_1",
+            "toolbar=no, menubar=no, scrollbars=yes, resizable=no, width=500, height=300");
+    }
+</script>
 
 </body>
 

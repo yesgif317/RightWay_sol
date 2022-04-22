@@ -15,7 +15,8 @@
 
     <!-- Custom fonts for this template-->
     <link href="/resources/vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
-    <link href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i"
+          rel="stylesheet">
 
     <!-- Custom styles for this template-->
     <link href="<c:url value="/resources/css/sb-admin-2.min.css"/>" rel="stylesheet">
@@ -38,22 +39,23 @@
                         <div class="col-lg-5 d-none d-lg-block bg-login-image"></div>
                         <div class="col-lg-7">
                             <div class="p-5">
-                                <form class="user">
+                                <form class="form-signin" id="join" action="/loginPost.do" method="post">
                                     <div class="form-group">
-                                        <input type="text" class="form-control form-control-user" id="InputID" aria-describedby="emailHelp" placeholder="ID">
+                                        <input type="text" class="form-control form-control-user" id="c_id" name="c_id"
+                                               placeholder="ID">
                                     </div>
                                     <div class="form-group">
-                                        <input type="password" class="form-control form-control-user" id="InputPassword" placeholder="Password">
+                                        <input type="password" class="form-control form-control-user" id="c_pwd" name="c_pwd"
+                                               placeholder="Password">
                                     </div>
                                     <div class="form-group">
-                                        <div class="custom-control custom-checkbox small">
-                                            <input type="checkbox" class="custom-control-input" id="customCheck">
-                                            <label class="custom-control-label" for="customCheck">아이디 저장</label>
+                                        <div class="custom-checkbox">
+                                            <label>
+                                                <input type="checkbox" name="useCookie">로그인유지
+                                            </label>
                                         </div>
                                     </div>
-                                    <a href="/index.do" class="btn btn-dark btn-user btn-block">
-                                        Login
-                                    </a>
+                                    <button type="submit" class="btn btn-dark btn-user btn-block">Login</button>
                                 </form>
                                 <hr>
                                 <div class="text-center">
@@ -74,15 +76,26 @@
 
 </div>
 
+<script>
+
+    var msg = "${msg}";
+    if (msg === "REGISTERED") {
+        alert("회원가입이 완료되었습니다. 승인후 로그인 해주세요");
+    } else if (msg === "FAILURE") {
+        alert("아이디와 비밀번호를 다시 확인해주세요.");
+    }
+
+</script>
+
 <!-- Bootstrap core JavaScript-->
-<script src="vendor/jquery/jquery.min.js"></script>
-<script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+<script src="/resources/vendor/jquery/jquery.min.js"></script>
+<script src="/resources/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
 
 <!-- Core plugin JavaScript-->
-<script src="vendor/jquery-easing/jquery.easing.min.js"></script>
+<script src="/resources/vendor/jquery-easing/jquery.easing.min.js"></script>
 
 <!-- Custom scripts for all pages-->
-<script src="js/sb-admin-2.min.js"></script>
+<script src="/resources/js/sb-admin-2.min.js"></script>
 
 </body>
 
