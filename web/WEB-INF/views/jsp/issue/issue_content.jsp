@@ -92,11 +92,42 @@
                                 <br>
                                 <br>
                                 <div style="text-align: center">
-                                    <a href="outputs_delete.do?no=${BoardList.no}" class="btn btn-primary btn-icon-split">
+                                    <a class="btn btn-primary btn-icon-split" data-toggle="modal" data-target="#exampleModal">
                           <span class="icon text-white-50">
                             <i class="fas fa-pen"></i>
                           </span>
                                         <span class="text">  삭제</span>
+
+
+
+
+
+
+
+                                        <!-- Modal -->
+                                        <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                            <div class="modal-dialog" role="document">
+                                                <div class="modal-content">
+                                                    <div class="modal-header">
+                                                        <h5 class="modal-title" id="exampleModalLabel">게시물 삭제</h5>
+                                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                            <span aria-hidden="true">&times;</span>
+                                                        </button>
+                                                    </div>
+                                                    <div class="modal-body">
+                                                        게시물을 정말 삭제하시겠습니까?
+                                                    </div>
+                                                    <div class="modal-footer">
+                                                        <button href="outputs_delete.do?no=${BoardList.no}" type="button" class="btn btn-primary">삭제하기</button>
+                                                        <button type="button" class="btn btn-secondary" data-dismiss="modal">취소하기</button>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+
+
+
+
                                     </a>
                                     <a href="outputs_update.do?no=${BoardList.no}" class="btn btn-primary btn-icon-split">
                           <span class="icon text-white-50">

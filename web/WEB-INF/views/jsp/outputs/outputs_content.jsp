@@ -67,11 +67,10 @@
                                         </div>
                                         <div class="row form-group">
                                             <div class="col col-md-2"><%--<label  class=" form-control-label">이메일</label>--%></div>
-                                            <div class="col-11 col-md-2">이메일 자동으로 입력(db연동)
+                                            <div class="col-11 col-md-3">이메일 자동으로 입력(db연동)
                                                 <small class="help-block form-text">이메일</small>
                                             </div>
-                                            <div class="col col-md-2"><%--<label class=" form-control-label">작성자</label>--%></div>
-                                            <div class="col-12 col-md-2"><input style="border:0 solid whitesmoke;" type="text" id="writer" name="writer" value="${BoardList.writer}" readonly="readonly" />
+                                            <div class="col-12 col-md-3"><input style="border:0 solid whitesmoke;" type="text" id="writer" name="writer" value="${BoardList.writer}" readonly="readonly" />
                                                 <small class="help-block form-text">작성자</small></div>
                                         </div>
                                         <%--<div class="row form-group" >
@@ -82,10 +81,9 @@
 
                                         <div class="row form-group">
                                             <div class="col col-md-2"><%--<label class=" form-control-label">참고사항</label>--%></div>
-                                            <div class="col-12 col-md-2">고객사와 회의한 내용을 반영하여 수행함
+                                            <div class="col-12 col-md-3">고객사와 회의한 내용을 반영하여 수행함
                                                 <small class="help-block form-text">요구사항</small></div>
-                                            <div class="col col-md-2"><%--<label class=" form-control-label">산출물 구분</label>--%></div>
-                                            <div class="col-12 col-md-2">설계모델
+                                            <div class="col-12 col-md-3">설계모델
                                                 <small class="help-block form-text">산출물 구분</small></div>
                                         </div>
                                         <%--<div class="row form-group">
@@ -109,11 +107,35 @@
                                         <br>
                                         <br>
                                         <div style="text-align: center">
-                                            <a href="outputs_delete.do?no=${BoardList.no}" class="btn btn-primary btn-icon-split">
+                                            <a  class="btn btn-primary btn-icon-split" data-toggle="modal" data-target="#exampleModal">
                           <span class="icon text-white-50">
                             <i class="fas fa-pen"></i>
                           </span>
-                                                <span class="text">  삭제</span>
+                                                <span class="text" style="color:white">  삭제</span>
+
+                                                <!-- Modal -->
+                                                <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                                    <div class="modal-dialog" role="document">
+                                                        <div class="modal-content">
+                                                            <div class="modal-header">
+                                                                <h5 class="modal-title" id="exampleModalLabel">게시물 삭제</h5>
+                                                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                                    <span aria-hidden="true">&times;</span>
+                                                                </button>
+                                                            </div>
+                                                            <div class="modal-body">
+                                                                게시물을 정말 삭제하시겠습니까?
+                                                            </div>
+                                                            <div class="modal-footer">
+                                                                <button href="outputs_delete.do?no=${BoardList.no}" type="button" class="btn btn-primary">삭제하기</button>
+                                                                <button type="button" class="btn btn-secondary" data-dismiss="modal">취소하기</button>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+
+
+
                                             </a>
                                             <a href="outputs_update.do?no=${BoardList.no}" class="btn btn-primary btn-icon-split">
                           <span class="icon text-white-50">

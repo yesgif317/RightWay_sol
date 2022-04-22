@@ -43,7 +43,8 @@
                             <!-- Card Content - Collapse -->
                             <div class="collapse show" id="collapseCardExample">
                                 <div class="card-body">
-                                    <form method="post" action="outputs_move_write.do" id="tableswriteform" enctype="application/x-www-form-urlencoded" class="form-horizontal">
+                                    <form method="post" action="outputs_move_write.do" id="outputswriteform" enctype="application/x-www-form-urlencoded" class="form-horizontal">
+
                                         <div class="row form-group">
                                             <div class="col col-md-2"><label for="title" class=" form-control-label">제목</label></div>
                                             <div class="col-12 col-md-7"><input type="text" id="title" name="title" placeholder="Text" class="form-control"><small class="form-text text-muted">This is a help text</small></div>
@@ -59,23 +60,66 @@
                                             <div class="col-12 col-md-7"> <textarea name="contents" id="contents" rows="9" placeholder="Content" class="form-control"></textarea></div>
                                         </div>
                                         <div style="text-align: center">
-                                            <a <%--href="javascript:goSubmit();"--%> class="btn btn-primary btn-icon-split">
-                          <span class="icon text-white-50">
-                            <i class="fas fa-pen"></i>
-                          </span>
-                                                <span class="text"> <input type="submit" value="전송"> 글쓰기</span>
+                                            <%--<button type="submit" style="border:none;">--%>
+                                            <a <%--href="javascript:goSubmit();"--%>  onclick="return chk_form()" class="btn btn-primary btn-icon-split">
+                                                <span class="icon text-white-50">
+                                                       <i class="fas fa-pen"></i>
+                                                </span>
+
+                                                <span class="text" style="color:white">  글쓰기</span>
+
+                                                <script>
+                                                    function chk_form() {
+                                                        if( document.getElementById("contents").value==''){
+                                                            $('#exampleModal').modal('show')
+                                                        }
+                                                        else if ( document.getElementById("title").value=='' ) {
+                                                            $('#exampleModal').modal('show')
+                                                            }
+                                                        else {
+                                                                document.getElementById('outputswriteform').submit();
+                                                            }
+                                                    }
+                                                </script>
+
+
+
+                                                <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                                    <div class="modal-dialog" role="document">
+                                                        <div class="modal-content">
+                                                            <div class="modal-header">
+                                                                <h5 class="modal-title" id="exampleModalLabel" align="center">작성글 확인</h5>
+                                                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                                    <span aria-hidden="true">&times;</span>
+                                                                </button>
+                                                            </div>
+                                                            <div class="modal-body">
+                                                                제목 또는 내용이 작성되지 않았습니다.
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+
+                                            </a>
+                                            <%--</button>--%>
+                                            <a href="outputs.do;" class="btn btn-primary btn-icon-split">
+                                                <span class="icon text-white-50">
+                                                       <i class="fas fa-pen"></i>
+                                                </span>
+                                                <span class="text">  돌아가기</span>
+
                                             </a>
                                             <a href="javascript:goSubmit();" class="btn btn-primary btn-icon-split">
-                          <span class="icon text-white-50">
-                            <i class="fas fa-pen"></i>
-                          </span>
+                                                <span class="icon text-white-50">
+                                                       <i class="fas fa-pen"></i>
+                                                </span>
                                                 <span class="text">  임시저장</span>
 
                                             </a>
                                             <a href="javascript:goSubmit();" class="btn btn-primary btn-icon-split">
-                          <span class="icon text-white-50">
-                            <i class="fas fa-pen"></i>
-                          </span>
+                                                 <span class="icon text-white-50">
+                                                        <i class="fas fa-pen"></i>
+                                                 </span>
                                                 <span class="text">  불러오기</span>
 
                                             </a>
