@@ -103,6 +103,45 @@ public class MainController {
         model.addAttribute("BoardList", Result);
         return "/issue/issue_update";
     }
+    @RequestMapping(value = "/meetingrecord.do", method = RequestMethod.GET)//회의록 목록 보기
+    public String meetingrecord(Model model) {
+        //service 클래스에서 Dao 로 접근하여 쿼리 결과값 가져오기
+        List<BoardVO> boardVoList = service.selectAll();
+        // .jsp 파일로 DB 결과값 전달하기
+        model.addAttribute("BoardList", boardVoList);
+        return "meetingrecord/meetingrecord";
+    }
+    @RequestMapping(value = "/meetingrecord_content.do", method = RequestMethod.GET)//회의록 작성글 보기
+    public String meetingrecord_content(@RequestParam("no") int no, Model model)  {
+        BoardVO Result = service.viewBoard(no);
+        model.addAttribute("BoardList", Result);
+        return "/meetingrecord/meetingrecord_content"; }
+    @RequestMapping(value = "/regularreport.do", method = RequestMethod.GET)//정기보고 목록 보기
+    public String regularreport(Model model) {
+        //service 클래스에서 Dao 로 접근하여 쿼리 결과값 가져오기
+        List<BoardVO> boardVoList = service.selectAll();
+        // .jsp 파일로 DB 결과값 전달하기
+        model.addAttribute("BoardList", boardVoList);
+        return "regularreport/regularreport";
+    }
+    @RequestMapping(value = "/regularreport_content.do", method = RequestMethod.GET)//정기보고 작성글 보기
+    public String regularreport_content(@RequestParam("no") int no, Model model)  {
+        BoardVO Result = service.viewBoard(no);
+        model.addAttribute("BoardList", Result);
+        return "/regularreport/regularreport_content"; }
+    @RequestMapping(value = "/danger.do", method = RequestMethod.GET)//위험관리 목록 보기
+    public String danger(Model model) {
+        //service 클래스에서 Dao 로 접근하여 쿼리 결과값 가져오기
+        List<BoardVO> boardVoList = service.selectAll();
+        // .jsp 파일로 DB 결과값 전달하기
+        model.addAttribute("BoardList", boardVoList);
+        return "danger/danger";
+    }
+    @RequestMapping(value = "/danger_content.do", method = RequestMethod.GET)//위험관리 작성글 보기
+    public String danger_content(@RequestParam("no") int no, Model model)  {
+        BoardVO Result = service.viewBoard(no);
+        model.addAttribute("BoardList", Result);
+        return "/danger/danger_content"; }
 
 
 

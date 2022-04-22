@@ -23,13 +23,19 @@
         <div class="container-fluid">
 
             <!-- Page Heading -->
-            <h1 class="display-4"<%--class="h3 mb-2 text-gray-800"--%>>이슈관리</h1>
-            <p class="mb-4"> 이슈(Issue, 혹은 Problem)은 프로젝트 진행에 차질을 가져올 수 있는 “발생된(Realized)” 위험으로 정의합니다..
-                <br>
-                버그, 요구사항, 작업내용 등이 있을 때 해당 시스템에 게시물 형태로 올립니다.
-                <br>
-                이슈ID(착수/계획/분석/설계/구현및인도/완료/하자보수/전체공정) 이슈등급(A/B/C)
-            </p>
+            <div class="col-11 col-md-2" style="float:left">
+                <!-- Page Heading -->
+                <h1 <%--class="h3 mb-2 text-gray-800"--%>>이슈관리</h1>
+            </div>
+            <div class="col-11 col-md-8" style="float:right">
+                <h6 > 이슈(Issue, 혹은 Problem)은 프로젝트 진행에 차질을 가져올 수 있는 “발생된(Realized)” 위험으로 정의합니다..
+                    <br>
+                    버그, 요구사항, 작업내용 등이 있을 때 해당 시스템에 게시물 형태로 올립니다.
+                    <br>
+                    이슈ID(착수/계획/분석/설계/구현및인도/완료/하자보수/전체공정) 이슈등급(A/B/C)
+                </h6>
+            </div>
+            <br><br><br>
 
             <!-- DataTales Example -->
             <div class="card shadow mb-4">
@@ -43,11 +49,15 @@
                             <thead>
                             <tr >
                                 <th>번호</th>
-                                <th width="50%">이슈</th>
+                                <th width="30%">이슈</th>
                                 <th>담당자</th>
+                                <th>프로젝트</th>
                                 <th>이슈등급</th>
                                 <th>진행상황</th>
-                                <th>발생날짜</th>
+                                <th width="10%">발생일자</th>
+                                <th width="10%">마감기한</th>
+                                <th>남은날짜</th>
+                                <th>진행률</th>
                                 <th>이슈ID</th>
                             </tr>
                             </thead>
@@ -61,7 +71,11 @@
                                     <td>${board.writer}</td>
                                     <td>${board.writer}</td>
                                     <td>${board.writer}</td>
+                                    <td>${board.writer}</td>
                                     <td><fmt:formatDate value="${board.refdate}" pattern="yyyy-MM-dd" /></td>
+                                    <td><fmt:formatDate value="${board.refdate}" pattern="yyyy-MM-dd" /></td>
+                                    <td>16일</td>
+                                    <td>55%</td>
                                     <td>${board.count}</td>
                                 </tr>
                             </c:forEach>
