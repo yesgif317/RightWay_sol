@@ -61,7 +61,7 @@ public class MainController {
     public String outputs_update(@RequestParam("no") int no, Model model) {
         BoardVO Result = service.viewBoard(no);
         model.addAttribute("BoardList", Result);
-        return "outputs_update";
+        return "/outputs/outputs_update";
     }
     @RequestMapping(value = "/outputs_move_update.do", method = RequestMethod.POST)//산출물 작성글 수정 기능
     public String outputs_move_update(Model model,BoardVO boardVO) {
