@@ -149,16 +149,13 @@ public class MainController {
     @RequestMapping(value = "/outputs_content.do", method = RequestMethod.GET)//산출물 작성글 보기
     public String outputs_content(@RequestParam("no") int no, Model model) {
         BoardVO Result = service.viewBoard(no);
-
         model.addAttribute("BoardList", Result);
         return "/outputs/outputs_content";
     }
 
     @RequestMapping(value = "/outputs_delete.do", method = RequestMethod.GET)//산출물 작성글 삭제
     public String outputs_delete(@RequestParam("no") int no) {
-
         service.delete(no);
-
         return "redirect:/outputs.do";
     }
 
@@ -166,7 +163,7 @@ public class MainController {
     public String outputs_update(@RequestParam("no") int no, Model model) {
         BoardVO Result = service.viewBoard(no);
         model.addAttribute("BoardList", Result);
-        return "outputs_update";
+        return "/outputs/outputs_update";
     }
 
     @RequestMapping(value = "/outputs_move_update.do", method = RequestMethod.POST)//산출물 작성글 수정 기능
@@ -183,7 +180,6 @@ public class MainController {
         List<BoardVO> boardVoList = service.selectAll();
         // .jsp 파일로 DB 결과값 전달하기
         model.addAttribute("BoardList", Result);
-
         return "redirect:/outputs.do";
     }
 
@@ -194,7 +190,24 @@ public class MainController {
         List<BoardVO> boardVoList = service.selectAll();
         // .jsp 파일로 DB 결과값 전달하기
         model.addAttribute("BoardList", boardVoList);
-        return "issue";
+        return "issue/issue";
+    }
+    @RequestMapping(value = "/issue_content.do", method = RequestMethod.GET)//이슈 작성글 보기
+    public String issue_content(@RequestParam("no") int no, Model model)  {
+        BoardVO Result = service.viewBoard(no);
+        model.addAttribute("BoardList", Result);
+        return "/issue/issue_content"; }
+
+    @RequestMapping(value = "/issue_delete.do", method = RequestMethod.GET)//이슈 작성글 삭제
+    public String issue_delete(@RequestParam("no") int no) {
+        service.delete(no);
+        return "redirect:/issue.do";
+    }
+    @RequestMapping(value = "/issue_update.do", method = RequestMethod.GET)  //산출물 게시글 수정 페이지
+    public String issue_update(@RequestParam("no") int no, Model model) {
+        BoardVO Result = service.viewBoard(no);
+        model.addAttribute("BoardList", Result);
+        return "/issue/issue_update";
     }
 
 

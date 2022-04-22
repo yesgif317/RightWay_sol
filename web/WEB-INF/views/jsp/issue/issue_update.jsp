@@ -22,12 +22,12 @@
             <div class="container-fluid">
 
                 <!-- Page Heading -->
-                <h1 class="h3 mb-2 text-gray-800">산출물</h1>
-                <p class="mb-4"> 산출물이란 프로젝트나 프로그램의 가시적이고 측정 가능한 결과물을 말합니다.
+                <h1 class="display-4"<%--class="h3 mb-2 text-gray-800"--%>>이슈관리</h1>
+                <p class="mb-4"> 이슈(Issue, 혹은 Problem)은 프로젝트 진행에 차질을 가져올 수 있는 “발생된(Realized)” 위험으로 정의합니다..
                     <br>
-                    산출물에는 설계 모델, 사양 문서, 원형 등이 있습니다.
+                    버그, 요구사항, 작업내용 등이 있을 때 해당 시스템에 게시물 형태로 올립니다.
                     <br>
-                    이 페이지에서 산출물에 가입하고 산출물을 참조할 수 있습니다.
+                    이슈ID(착수/계획/분석/설계/구현및인도/완료/하자보수/전체공정) 이슈등급(A/B/C)
                 </p>
 
                 <div class="row">
@@ -37,90 +37,64 @@
                         <div class="card shadow mb-4">
                             <!-- Card Header - Accordion -->
                             <a href="#collapseCardExample" class="d-block card-header py-3" data-toggle="collapse" role="button" aria-expanded="true" aria-controls="collapseCardExample">
-                                <h6 class="m-0 font-weight-bold text-primary">산출물 게시물 작성 중</h6>
+                                <h6 class="m-0 font-weight-bold text-primary">산출물 게시물 수정 중</h6>
 
                             </a>
                             <!-- Card Content - Collapse -->
                             <div class="collapse show" id="collapseCardExample">
                                 <div class="card-body">
-                                    <form method="post" action="outputs_move_write.do" id="outputswriteform" enctype="application/x-www-form-urlencoded" class="form-horizontal">
-
+                                    <form autocomplete="off" method="post" role="form" id="outputsupdateform" action="outputs_move_update.do">
                                         <div class="row form-group">
-                                            <div class="col col-md-3 text-right"><label for="title" class=" form-control-label">제목</label></div>
-                                            <div class="col-12 col-md-7"><input type="text" id="title" name="title" placeholder="Text" class="form-control"><small class="form-text text-muted">산출물 형식에 맞추어 작성해 주세요</small></div>
+                                            <div class="col col-md-3 text-right"><label  class=" form-control-label">제목</label></div>
+                                            <div class="col-12 col-md-7"><input type="text" id="no" name="no" value="${BoardList.no}" readonly="readonly" ><small class="form-text text-muted">This is a help text</small></div>
                                         </div>
-
                                         <div class="row form-group">
-                                            <div class="col col-md-3 text-right"><label class=" form-control-label">작성자</label></div>
-                                            <div class="col-12 col-md-7"><input type="text" id="writer" name="writer" placeholder="Text" class="form-control"><small class="help-block form-text">업무 담당자가 작성해 주세요</small></div>
+                                            <div class="col col-md-3 text-right"><label  class=" form-control-label">제목</label></div>
+                                            <div class="col-12 col-md-7"><input type="text" id="title" name="title" value="${BoardList.title}"  ><small class="form-text text-muted">This is a help text</small></div>
                                         </div>
 
                                         <div class="row form-group">
                                             <div class="col col-md-3 text-right"><label for="contents" class=" form-control-label">내용 작성</label></div>
-                                            <div class="col-12 col-md-7"> <textarea name="contents" id="contents" rows="9" placeholder="Content" class="form-control"></textarea></div>
+                                            <div class="col-12 col-md-7"> <textarea name="contents" id="contents" rows="9" placeholder="Content" class="form-control">${BoardList.contents}</textarea></div>
                                         </div>
+
                                         <div style="text-align: center">
-                                            <%--<button type="submit" style="border:none;">--%>
-                                            <a <%--href="javascript:goSubmit();"--%>  onclick="return chk_form()" class="btn btn-primary btn-icon-split">
-                                                <span class="icon text-white-50">
-                                                       <i class="fas fa-pen"></i>
-                                                </span>
 
-                                                <span class="text" style="color:white">  글쓰기</span>
-
-                                                <script>
-                                                    function chk_form() {
-                                                        if( document.getElementById("contents").value==''){
-                                                            $('#exampleModal').modal('show')
-                                                        }
-                                                        else if ( document.getElementById("title").value=='' ) {
-                                                            $('#exampleModal').modal('show')
-                                                            }
-                                                        else {
-                                                                document.getElementById('outputswriteform').submit();
-                                                            }
-                                                    }
-                                                </script>
-
+                                            <a  class="btn btn-primary btn-icon-split" data-toggle="modal" data-target="#exampleModal">
+                          <span class="icon text-white-50">
+                            <i class="fas fa-pen"></i>
+                          </span>
+                                                <span class="text" style="color:white">  수정하기</span>
 
 
                                                 <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
                                                     <div class="modal-dialog" role="document">
                                                         <div class="modal-content">
                                                             <div class="modal-header">
-                                                                <h5 class="modal-title" id="exampleModalLabel" align="center">작성글 확인</h5>
+                                                                <h5 class="modal-title" id="exampleModalLabel">게시물 수정</h5>
                                                                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                                                     <span aria-hidden="true">&times;</span>
                                                                 </button>
                                                             </div>
                                                             <div class="modal-body">
-                                                                제목 또는 내용이 작성되지 않았습니다.
+                                                                게시물을 정말 수정하시겠습니까?
+                                                            </div>
+                                                            <div class="modal-footer">
+                                                                <span href="javascript:goSubmit();" type="button" class="btn btn-primary">수정하기</span>
+                                                                <button type="button" class="btn btn-secondary" data-dismiss="modal">취소하기</button>
                                                             </div>
                                                         </div>
                                                     </div>
                                                 </div>
 
+
+
                                             </a>
-                                            <%--</button>--%>
-                                            <a href="outputs.do;" class="btn btn-primary btn-icon-split">
+                                            <a  class="btn btn-primary btn-icon-split" value="BACK" onClick="history.go(-1)">
                                                 <span class="icon text-white-50">
                                                        <i class="fas fa-pen"></i>
                                                 </span>
-                                                <span class="text">  돌아가기</span>
-
-                                            </a>
-                                            <a href="javascript:goSubmit();" class="btn btn-primary btn-icon-split">
-                                                <span class="icon text-white-50">
-                                                       <i class="fas fa-pen"></i>
-                                                </span>
-                                                <span class="text">  임시저장</span>
-
-                                            </a>
-                                            <a href="javascript:goSubmit();" class="btn btn-primary btn-icon-split">
-                                                 <span class="icon text-white-50">
-                                                        <i class="fas fa-pen"></i>
-                                                 </span>
-                                                <span class="text">  불러오기</span>
+                                                <span class="text" tyle="color:white">  돌아가기</span>
 
                                             </a>
                                         </div>
@@ -141,10 +115,12 @@
         </div>
         <!-- End of Main Content -->
 
+
         <jsp:include page="../../include/footer.jsp" flush="true" />
 
     </div>
         <!-- End of Page Wrapper -->
+
 <!-- Scroll to Top Button-->
 <a class="scroll-to-top rounded" href="#page-top">
     <i class="fas fa-angle-up"></i>
@@ -165,7 +141,7 @@
 
 <script type="text/javascript">
     function goSubmit() {
-        var form = document.getElementById('tableswriteform').submit();
+        var form = document.getElementById('outputsupdateform').submit();
     }
 </script>
 

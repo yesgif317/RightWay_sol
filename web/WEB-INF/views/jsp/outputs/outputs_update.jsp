@@ -137,25 +137,41 @@
 
                                         <div style="text-align: center">
 
-                                            <a  class="btn btn-primary btn-icon-split">
-
-                                             <span class="icon text-white-50"><input type="submit" value="전송">
-                                                  <i class="fas fa-pen"></i>
-                                               </span>
-                                                <span class="text">  글 수정하기</span>
-                                            </a>
-                                            <a href="javascript:goSubmit();" class="btn btn-primary btn-icon-split">
+                                            <a  class="btn btn-primary btn-icon-split" data-toggle="modal" data-target="#exampleModal">
                           <span class="icon text-white-50">
                             <i class="fas fa-pen"></i>
                           </span>
-                                                <span class="text">  임시저장</span>
+                                                <span class="text" style="color:white">  수정하기</span>
+
+
+                                                <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                                    <div class="modal-dialog" role="document">
+                                                        <div class="modal-content">
+                                                            <div class="modal-header">
+                                                                <h5 class="modal-title" id="exampleModalLabel">게시물 수정</h5>
+                                                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                                    <span aria-hidden="true">&times;</span>
+                                                                </button>
+                                                            </div>
+                                                            <div class="modal-body">
+                                                                게시물을 정말 수정하시겠습니까?
+                                                            </div>
+                                                            <div class="modal-footer">
+                                                                <span href="javascript:goSubmit();" type="button" class="btn btn-primary">수정하기</span>
+                                                                <button type="button" class="btn btn-secondary" data-dismiss="modal">취소하기</button>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+
+
 
                                             </a>
-                                            <a href="javascript:goSubmit();" class="btn btn-primary btn-icon-split">
-                          <span class="icon text-white-50">
-                            <i class="fas fa-pen"></i>
-                          </span>
-                                                <span class="text">  불러오기</span>
+                                            <a  class="btn btn-primary btn-icon-split" value="BACK" onClick="history.go(-1)">
+                                                <span class="icon text-white-50">
+                                                       <i class="fas fa-pen"></i>
+                                                </span>
+                                                <span class="text" tyle="color:white">  돌아가기</span>
 
                                             </a>
                                         </div>
