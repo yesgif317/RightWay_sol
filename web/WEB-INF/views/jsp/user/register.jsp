@@ -133,7 +133,7 @@
             return false;
         }
 
-        var url = "/idCheck.do"+document.joinform.c_id.value;
+        var url = "/idCheck.do";
 
         window.open(url, "_blank_1",
             "toolbar=no, menubar=no, scrollbars=yes, resizable=no, width=500, height=300");
