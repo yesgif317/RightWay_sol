@@ -4,9 +4,9 @@
     <title>Title</title>
 </head>
 <body>
-    <script>
-        alert("아이디와 비밀번호를 확인하세요");
-        self.location = "/login.do";
-    </script>
+<script>
+    alert("로그아웃 되었습니다.");
+    self.location = "user/login.do";
+</script>
 </body>
 </html>

@@ -17,16 +17,33 @@
 
     <!--Customer-->
 
-    <!-- id 중복 확인 -->
-<!--    <select id="idCheck" parameterType="String" resultType="CustomerVO">-->
-<!--        select *-->
-<!--        from customer-->
-<!--        where c_id = #{c_id}-->
-<!--    </select>-->
+    <!--     id 중복 확인-->
+    <select id="idCheck" parameterType="String" resultType="CustomerVO">
+        select *
+        from customer
+        where c_id = #{c_id}
+    </select>
 
     <!-- 로그인시 아이디와 비밀번호 확인 -->
-    <select id="login"  resultType="CustomerVO" parameterType="CustomerVO">
-        select * from customer where c_id = #{c_id}
+    <select id="login" resultMap="customerVOResultMap">
+        select *
+        from customer
+        where c_id = #{c_id}
+    </select>
+
+
+    <!-- 로그인 유지-->
+    <update id="keepLogin">
+        UPDATE customer
+        set session_key   = #{sessionId}
+          , session_limit = #{sessionLimit}
+        where c_id = #{c_id}
+    </update>
+
+    <select id = "checkUserWithSessionKey" resultMap="customerVOResultMap">
+        select *
+        from customer
+        where session_key = #{value}
     </select>
 
     <!-- Select 문 -->

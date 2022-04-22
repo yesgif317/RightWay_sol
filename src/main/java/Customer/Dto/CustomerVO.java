@@ -40,6 +40,7 @@ public class CustomerVO {
                 "c_id='" + c_id + '\'' +
                 ", c_pwd='" + c_pwd + '\'' +
                 ", c_name='" + c_name + '\'' +
+                ", session_key='" + session_key + '\'' +
                 '}';
     }
 

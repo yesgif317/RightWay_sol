@@ -53,33 +53,50 @@
 
 
                                     <form autocomplete="off" method="post" role="form">
-                                        <div class="row form-group">
-                                            <div class="col col-md-2"><label class=" form-control-label">글번호</label></div>
-                                            <div class="col-12 col-md-7"><input type="text" id="no" name="no" value="${BoardList.no}" readonly="readonly" /><small class="help-block form-text">name from your login information</small></div>
-                                        </div>
-                                        <div class="row form-group">
-                                            <div class="col col-md-2"><label  class=" form-control-label">이메일</label></div>
-                                            <div class="col-11 col-md-7">
-                                                이메일 자동으로 입력(db연동)<small class="help-block form-text">email from your login information</small>
+                                       <%-- <div class="row form-group" >
+                                            <div class="col col-md-2">&lt;%&ndash;<label class=" form-control-label">글번호</label>&ndash;%&gt;</div>
+                                            <div class="col-12 col-md-7" style="border-top: 4px groove #808080;;"><input style="border:0 ;outline:none;" type="text" id="no" name="no" value="${BoardList.no}" readonly="readonly"  />
+                                                <small class="help-block form-text">글번호</small></div>
+                                        </div>--%>
+                                        <div class="row form-group" >
+                                            <div class="col col-md-2"><%--<label  class=" form-control-label">이메일</label>--%></div>
+                                            <div class="col-11 col-md-7" style="border-bottom: 2px dotted #808080;border-top: 4px groove #808080;">
+                                                <input style="font-size:30px;border:0 solid whitesmoke;outline:none;" type="text" id="title" name="title" value="${BoardList.title}" readonly="readonly" />
+                                                <small class="help-block form-text">제목</small>
                                             </div>
                                         </div>
                                         <div class="row form-group">
-                                            <div class="col col-md-2"><label class=" form-control-label">작성자</label></div>
-                                            <div class="col-12 col-md-7"><input type="text" id="writer" name="writer" value="${BoardList.writer}" readonly="readonly" /><small class="help-block form-text">name from your login information</small></div>
+                                            <div class="col col-md-2"><%--<label  class=" form-control-label">이메일</label>--%></div>
+                                            <div class="col-11 col-md-2">이메일 자동으로 입력(db연동)
+                                                <small class="help-block form-text">이메일</small>
+                                            </div>
+                                            <div class="col col-md-2"><%--<label class=" form-control-label">작성자</label>--%></div>
+                                            <div class="col-12 col-md-2"><input style="border:0 solid whitesmoke;" type="text" id="writer" name="writer" value="${BoardList.writer}" readonly="readonly" />
+                                                <small class="help-block form-text">작성자</small></div>
                                         </div>
+                                        <%--<div class="row form-group" >
+                                            <div class="col col-md-2">&lt;%&ndash;<label class=" form-control-label">작성자</label>&ndash;%&gt;</div>
+                                            <div class="col-12 col-md-7"><input style="border:0 solid whitesmoke;" type="text" id="writer" name="writer" value="${BoardList.writer}" readonly="readonly" />
+                                                <small class="help-block form-text">작성자</small></div>
+                                        </div>--%>
 
                                         <div class="row form-group">
-                                            <div class="col col-md-2"><label class=" form-control-label">참고사항</label></div>
-                                            <div class="col-12 col-md-7">고객사와 회의한 내용을 반영하여 수행함<small class="help-block form-text">산출물에 대해 작성해주세요.</small></div>
+                                            <div class="col col-md-2"><%--<label class=" form-control-label">참고사항</label>--%></div>
+                                            <div class="col-12 col-md-2">고객사와 회의한 내용을 반영하여 수행함
+                                                <small class="help-block form-text">요구사항</small></div>
+                                            <div class="col col-md-2"><%--<label class=" form-control-label">산출물 구분</label>--%></div>
+                                            <div class="col-12 col-md-2">설계모델
+                                                <small class="help-block form-text">산출물 구분</small></div>
                                         </div>
+                                        <%--<div class="row form-group">
+                                            <div class="col col-md-2">&lt;%&ndash;<label class=" form-control-label">산출물 구분</label>&ndash;%&gt;</div>
+                                            <div class="col-12 col-md-7">설계모델
+                                                <small class="help-block form-text">산출물 구분</small></div>
+                                        </div>--%>
                                         <div class="row form-group">
-                                            <div class="col col-md-2"><label class=" form-control-label">산출물 구분</label></div>
-                                            <div class="col-12 col-md-7">설계모델<small class="help-block form-text">choose outputs category</small></div>
-                                        </div>
-                                        <div class="row form-group">
-                                        <div class="col col-md-2"><label class=" form-control-label">내용 작성</label></div>
-                                            <div class="col-12 col-md-7">
-                                            <textarea name="contents" id="contents" rows="9" placeholder="Content" class="form-control">${BoardList.contents}</textarea>
+                                        <div class="col col-md-2" ><%--<label class=" form-control-label">내용 작성</label>--%></div>
+                                            <div class="col-12 col-md-7" style="border-top:  2px dotted #808080;border-bottom: 4px groove #808080;">
+                                            <textarea style="font-size:20px;border:0 solid whitesmoke;" name="contents" id="contents" rows="4" placeholder="Content" class="form-control">${BoardList.contents}</textarea>
                                             </div>
 
 

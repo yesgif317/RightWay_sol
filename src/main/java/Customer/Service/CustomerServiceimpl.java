@@ -6,7 +6,7 @@ import Customer.Dto.LoginDTO;
 import org.springframework.stereotype.Service;
 
 import javax.inject.Inject;
-import java.util.List;
+import java.util.*;
 
 @Service
 public class CustomerServiceimpl implements CustomerService {
@@ -15,7 +15,7 @@ public class CustomerServiceimpl implements CustomerService {
     private final CustomerDao dao;
 
     @Inject
-    public CustomerServiceimpl(CustomerDao customerDao){
+    public CustomerServiceimpl(CustomerDao customerDao) {
         this.dao = customerDao;
     }
 
@@ -26,16 +26,29 @@ public class CustomerServiceimpl implements CustomerService {
         return dao.selectAll();
     }
 
-//    @Override
-//    public CustomerVO idCheck(String c_id) {
-//        return dao.idCheck(c_id);
-//    }
-
 
     //로그인
     @Override
     public CustomerVO login(LoginDTO loginDTO) throws Exception {
         return dao.login(loginDTO);
+    }
+
+    //아이디 체크
+    @Override
+    public CustomerVO idCheck(String id) throws Exception{
+        return dao.idCheck(id);
+    }
+
+
+    //자동 로그인 서비스 계층
+    @Override
+    public void keepLogin(String c_id, String sessionId, Date sessionLimit) throws Exception {
+        dao.keepLogin(c_id, sessionId, sessionLimit);
+    }
+
+    @Override
+    public CustomerVO checkLoginBefore(String value) throws Exception {
+        return dao.checkUserWithSessionKey(value);
     }
 
     //회원가입

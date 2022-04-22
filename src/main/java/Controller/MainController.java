@@ -13,11 +13,14 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.util.WebUtils;
 
 import javax.inject.Inject;
+import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
-import java.util.List;
+import java.util.*;
 
 @Controller
 public class MainController {
@@ -37,56 +40,62 @@ public class MainController {
     //로그인 GET,POST
     @RequestMapping(value = "/login.do", method = RequestMethod.GET)
     public String loginGET(@ModelAttribute("LoginDTO") LoginDTO loginDTO) {
-        return "login";
+        return "user/login";
     }
 
     @RequestMapping(value = "/loginPost.do", method = RequestMethod.POST)
     public void loginPOST(LoginDTO loginDTO, HttpSession httpSession, Model model) throws Exception {
 
         System.out.println(loginDTO.getC_id()); //웹상에 입력한 아이디값
-        String id = loginDTO.getC_id();
         CustomerVO customerVO = customerService.login(loginDTO);
         System.out.println(customerVO + "--------------------------");
 
         System.out.println("객체 확인");
-        if (customerVO == null || !BCrypt.checkpw(loginDTO.getC_pwd(), customerVO.getC_pwd()) ){
+        if (customerVO == null || !BCrypt.checkpw(loginDTO.getC_pwd(), customerVO.getC_pwd())) {
             return;
         }
         model.addAttribute("customerVO", customerVO);
+
+        // 로그인 유지를 선택할 경우
+        if (loginDTO.isUseCookie()) {
+            int amount = 60 * 60 * 4;  // 4시간
+            Date sessionLimit = new Date(System.currentTimeMillis() + (1000 * amount)); // 로그인 유지기간 설정
+            customerService.keepLogin(customerVO.getC_id(), httpSession.getId(), sessionLimit);
+        }
     }
 
-//    //아이디 중복체크
-//    @RequestMapping(value = "/idCheck.do")
-//    public String idCheckFormView(@RequestParam(value = "id", defaultValue = "", required = false) String c_id,
-//                                  Model model) {
-//        model.addAttribute("id", c_id);
-//        return "idCheck";
-//    }
-//
-//    @RequestMapping(value = "/idCheck.do", method = RequestMethod.POST)
-//    public String idCheckAction(HttpServletRequest request, Model model, CustomerVO customerVO) {
-//        String c_id = request.getParameter("id");
-//        CustomerVO vo = customerService.idCheck(c_id);
-//
-//        if (vo == null) {
-//            model.addAttribute("check", 0);
-//        } else {
-//            model.addAttribute("check", 1);
-//        }
-//
-//        model.addAttribute("id", c_id);
-//        return "idCheck";
-//    }
+    //아이디 중복체크
+    @RequestMapping(value = "/idCheck.do", method = RequestMethod.GET)
+    public String idCheckGET(@RequestParam(value = "c_id", defaultValue = "", required = false) String c_id, Model model) {
+        model.addAttribute("c_id", c_id);
+        return "user/idCheck";
+    }
+
+    @RequestMapping(value = "/idCheck.do", method = RequestMethod.POST)
+    public String idCheckPOST(HttpServletRequest request, Model model) throws Exception{
+        String c_id = request.getParameter("c_id");
+        CustomerVO customerVO = customerService.idCheck(c_id);
+
+        if (customerVO == null) {
+            model.addAttribute("check", 0);
+        } else {
+            model.addAttribute("check", 1);
+        }
+        model.addAttribute("c_id", c_id);
+        return "user/idCheck";
+    }
+
 
     //회원가입 GET, POST
     @RequestMapping(value = "/register.do", method = RequestMethod.GET)
     public String registerGET() throws Exception {
-        return "register";
+        return "user/register";
     }
 
     @RequestMapping(value = "/register.do", method = RequestMethod.POST)
     public String registerPOST(CustomerVO customerVO, RedirectAttributes redirectAttributes) throws Exception {
 
+        System.out.println("Post register");
         String hashedPw = BCrypt.hashpw(customerVO.getC_pwd(), BCrypt.gensalt());
         customerVO.setC_pwd(hashedPw);
         customerService.insertCustomer(customerVO);
@@ -95,15 +104,35 @@ public class MainController {
         return "redirect:/login.do";
     }
 
+    @RequestMapping(value = "/logout.do", method = RequestMethod.GET)
+    public String logout(HttpServletRequest request,
+                         HttpServletResponse response,
+                         HttpSession httpSession) throws Exception {
 
+        Object object = httpSession.getAttribute("login");
 
+        if (object != null) {
+            CustomerVO customerVO = (CustomerVO) object;
+            httpSession.removeAttribute("login");
+            httpSession.invalidate();
+            Cookie loginCookie = WebUtils.getCookie(request, "loginCookie");
+            if (loginCookie != null) {
+                System.out.println("login Cookie != null");
+                loginCookie.setPath("/");
+                loginCookie.setMaxAge(0);
+                response.addCookie(loginCookie);
+                customerService.keepLogin(customerVO.getC_id(), "none", new Date());
+            }
+        }
+
+        return "user/logout";
+    }
 
 
     @RequestMapping(value = "/forgot_password.do", method = RequestMethod.GET)
     public String forgot_password() {
-        return "forgot_password";
+        return "user/forgot_password";
     }
-
 
 
     @RequestMapping(value = "/outputs_write.do", method = RequestMethod.GET)  //산출물 게시글 작성 페이지
@@ -121,11 +150,12 @@ public class MainController {
     }
 
     @RequestMapping(value = "/outputs_content.do", method = RequestMethod.GET)//산출물 작성글 보기
-    public String outputs_content(@RequestParam("no") int no, Model model)  {
+    public String outputs_content(@RequestParam("no") int no, Model model) {
         BoardVO Result = service.viewBoard(no);
 
         model.addAttribute("BoardList", Result);
-        return "/outputs/outputs_content"; }
+        return "/outputs/outputs_content";
+    }
 
     @RequestMapping(value = "/outputs_delete.do", method = RequestMethod.GET)//산출물 작성글 삭제
     public String outputs_delete(@RequestParam("no") int no) {
@@ -134,21 +164,24 @@ public class MainController {
 
         return "redirect:/outputs.do";
     }
+
     @RequestMapping(value = "/outputs_update.do", method = RequestMethod.GET)  //산출물 게시글 수정 페이지
     public String outputs_update(@RequestParam("no") int no, Model model) {
         BoardVO Result = service.viewBoard(no);
         model.addAttribute("BoardList", Result);
         return "outputs_update";
     }
-    @RequestMapping(value = "/outputs_move_update.do", method = RequestMethod.POST)//산출물 작성글 수정 기능
-    public String outputs_move_update(Model model,BoardVO boardVO) {
 
-        String Result =service.updateBoard(boardVO);
+    @RequestMapping(value = "/outputs_move_update.do", method = RequestMethod.POST)//산출물 작성글 수정 기능
+    public String outputs_move_update(Model model, BoardVO boardVO) {
+
+        String Result = service.updateBoard(boardVO);
         model.addAttribute("BoardList", Result);
         return "redirect:/outputs.do";
     }
+
     @RequestMapping(value = "/outputs_move_write.do", method = RequestMethod.POST)// 산출물 게시글 작성 기능
-    public String outputs_move_write(Model model, BoardVO boardVO){
+    public String outputs_move_write(Model model, BoardVO boardVO) {
         String Result = service.insertBoard(boardVO);
         List<BoardVO> boardVoList = service.selectAll();
         // .jsp 파일로 DB 결과값 전달하기
@@ -194,13 +227,13 @@ public class MainController {
 
     //행사관리 글쓰기 페이지 이동
     @RequestMapping(value = "/event_write.do", method = RequestMethod.GET)
-    public String event_write(){
+    public String event_write() {
         return "event/event_write";
     }
 
     //행사관리 상세 페이지 이동
     @RequestMapping(value = "/event_content.do", method = RequestMethod.GET)
-    public String event_content(){
+    public String event_content() {
         return "event/event_content";
     }
 
@@ -218,13 +251,13 @@ public class MainController {
 
     //company 글쓰기 페이지 이동
     @RequestMapping(value = "/company_write.do", method = RequestMethod.GET)
-    public String company_write(){
+    public String company_write() {
         return "company/company_write";
     }
 
     //company 상세 페이지 이동
     @RequestMapping(value = "/company_content.do", method = RequestMethod.GET)
-    public String company_content(){
+    public String company_content() {
         return "company/company_content";
     }
 

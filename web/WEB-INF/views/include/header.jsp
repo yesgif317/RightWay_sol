@@ -1,119 +1,21 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 
-<!-- Topbar -->
-<nav class="navbar navbar-expand navbar-light bg-white topbar mb-10 static-top shadow">
+<head>
 
-    <div class="navbar-custom-menu">
-        <ul class="nav navbar-nav">
-            <c:if test="${not empty login}">
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="DataTable Example">
+    <meta name="author" content="RightWay">
 
-                <!-- Sidebar Toggle (Topbar) -->
-                <button id="sidebarToggleTop" class="btn btn-link d-md-none rounded-circle mr-3">
-                    <i class="fa fa-bars text-gray-600"></i>
-                </button>
+    <title>솔리데오 프로젝트관리</title>
+    <script src="https://kit.fontawesome.com/55082abfe9.js" crossorigin="anonymous"></script>
+    <!-- Custom fonts for this template-->
+    <link href="<c:url value="/resources/vendor/fontawesome-free/css/all.min.css"/>" rel="stylesheet" type="text/css">
+    <link href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i" rel="stylesheet">
 
-                <!-- Topbar Search -->
-                <form class="d-none d-sm-inline-block form-inline mr-auto ml-md-3 my-2 my-md-0 mw-100 navbar-search">
-                    <div class="d-sm-flex align-items-center justify-content-between mb-4"></div>
-                    <div class="dropdown no-arrow mb-4">
-                        <button class="btn btn-dark.disabled dropdown-toggle" type="button" id="dropdownMenuButton"
-                                data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                            <i class="fa-solid fa-align-justify"> 프로젝트 선택</i>
-                        </button>
-                        <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                            <a class="dropdown-item text-gray-600" href="#">프로젝트A</a>
-                            <a class="dropdown-item text-gray-600" href="#">프로젝트B</a>
-                            <a class="dropdown-item text-gray-600" href="#">프로젝트C</a>
-                        </div>
-                    </div>
-                </form>
+    <!-- Custom styles for this template-->
+    <link href="<c:url value="/resources/css/sb-admin-2.min.css"/>" rel="stylesheet">
 
-
-                <!-- Topbar Navbar -->
-                <ul class="navbar-nav ml-auto">
-                    <!-- Nav Item - Search Dropdown (Visible Only XS) -->
-                    <li class="nav-item dropdown no-arrow d-sm-none">
-                        <button class="btn btn-dark.disabled dropdown-toggle" type="button" id="dropdownMenuButton2"
-                                data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                            <i class="fa-solid fa-angles-down"></i>
-                        </button>
-                        <div class="dropdown-menu" aria-labelledby="dropdownMenuButton2">
-                            <a class="dropdown-item text-gray-600" href="#">프로젝트A</a>
-                            <a class="dropdown-item text-gray-600" href="#">프로젝트B</a>
-                            <a class="dropdown-item text-gray-600" href="#">프로젝트C</a>
-                        </div>
-                        </a>
-                    </li>
-
-                </ul>
-
-                <ul class="navbar-nav ml-auto">
-                    <!-- Nav Item - User Information -->
-                    <li class="nav-item dropdown no-arrow">
-                        <a href="#" class="nav-link dropdown-toggle" role="button"
-                           data-toggle="dropdown"
-                           aria-haspopup="true" aria-expanded="false">
-                            <span class="hidden-xs"> ${login.c_name}</span>
-                        </a>
-                        <!-- Dropdown - User Information -->
-                        <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in"
-                             aria-labelledby="userDropdown">
-                            <a class="dropdown-item" href="/tables.do">
-                                <i class="fa-solid fa-id-card fa-sm fa-fw mr-2 text-gray-400"></i>
-                                마이페이지
-                            </a>
-                            <div class="dropdown-divider"></div>
-                            <a class="dropdown-item" href="#" data-toggle="modal" data-target="#logoutModal">
-                                <i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>
-                                로그아웃
-                            </a>
-                        </div>
-                    </li>
-                </ul>
-            </c:if>
-
-            <c:if test="${empty login}">
-
-                <form class="d-none d-sm-inline-block form-inline mr-auto ml-md-3 my-2 my-md-0 mw-100 navbar-search">
-                    <div class="d-sm-flex align-items-center justify-content-between mb-4"></div>
-                    <div class="dropdown no-arrow mb-4">
-                        <button class="btn btn-dark.disabled dropdown-toggle" type="button"
-                                data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                            <i class="fa-solid fa-align-justify"> 해당 프로젝트가 없습니다.</i>
-                        </button>
-                        <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                        </div>
-                    </div>
-                </form>
-
-
-                <!-- Topbar Navbar -->
-                <ul class="navbar-nav ml-auto">
-                    <!-- Nav Item - Search Dropdown (Visible Only XS) -->
-                    <li class="nav-item dropdown no-arrow d-sm-none">
-                        <button class="btn btn-dark.disabled dropdown-toggle" type="button"
-                                data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                            <i class="fa-solid fa-angles-down"></i>
-                        </button>
-                        <div class="dropdown-menu" aria-labelledby="dropdownMenuButton2">
-                        </div>
-                        </a>
-                    </li>
-
-
-                    <li class="nav-item dropdown no-arrow">
-                        <a href="/login.do" class="nav-link dropdown-toggle text-right" role="button"
-                           data-toggle="dropdown"
-                           aria-haspopup="true" aria-expanded="false">
-                            <span class="hidden-xs"> 회원가입 또는 로그인 </span>
-                        </a>
-                        <!-- Dropdown - User Information -->
-                    </li>
-                </ul>
-            </c:if>
-
-        </ul>
-    </div>
-</nav>
-<!-- End of Topbar -->
+</head>

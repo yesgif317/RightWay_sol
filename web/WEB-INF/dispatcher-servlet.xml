@@ -10,13 +10,16 @@
     <mvc:resources mapping="/resources/**" location="/resources/"/>
 
     <bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
-        <property name="prefix" value="/WEB-INF/views/jsp/" />
-        <property name="suffix" value=".jsp" />
+        <property name="prefix" value="/WEB-INF/views/jsp/"/>
+        <property name="suffix" value=".jsp"/>
     </bean>
 
-    <!-- 로그인 인터셉터 클래스를 스프링에서 인터셉터로 인식시킴 -->
+
+    <!-- interceptor -->
     <bean id="loginInterceptor" class="Commons.Interceptor.LoginInterceptor"/>
     <bean id="authInterceptor" class="Commons.Interceptor.AuthInterceptor"/>
+    <bean id="rememberMeInterceptor" class="Commons.Interceptor.RememberMeInterceptor"/>
+    <bean id="loginAfterInterceptor" class="Commons.Interceptor.LoginAfterInterceptor"/>
 
     <mvc:interceptors>
         <mvc:interceptor>
@@ -27,18 +30,16 @@
             <mvc:mapping path="/index.do"/>
             <ref bean="authInterceptor"/>
         </mvc:interceptor>
+        <mvc:interceptor>
+            <mvc:mapping path="/**/"/>
+            <ref bean="rememberMeInterceptor"/>
+        </mvc:interceptor>
+        <mvc:interceptor>
+            <mvc:mapping path="/login.do"/>
+            <mvc:mapping path="/register.do"/>
+            <ref bean="loginAfterInterceptor"/>
+        </mvc:interceptor>
     </mvc:interceptors>
-
-    <!-- 권한 인터셉터 설정 -->
-    <!-- 게시판 뷰 생성시 추가 설정 예정-->
-
-    <!--    <bean id="authInterceptor" class="Commons.Commons.Interceptor.AuthInterceptor"/>-->
-    <!--    <mvc:interceptors>-->
-    <!--        <mvc:interceptor>-->
-    <!--            <mvc:mapping path="test"/>-->
-    <!--            <ref bean="authInterceptor"/>-->
-    <!--        </mvc:interceptor>-->
-    <!--    </mvc:interceptors>-->
 
 
 </beans>

@@ -8,7 +8,7 @@ import org.springframework.stereotype.Repository;
 import javax.inject.Inject;
 import javax.naming.Name;
 import java.sql.SQLOutput;
-import java.util.List;
+import java.util.*;
 
 @Repository
 public class CustomerDaoImpl implements CustomerDao {
@@ -21,14 +21,19 @@ public class CustomerDaoImpl implements CustomerDao {
         this.sqlSession = sqlSession;
     }
 
+    //아이디 체크
+    @Override
+    public CustomerVO idCheck(String c_id) throws Exception {
+        System.out.println("--> sqlsellection idCheck() 기능처리 ");
+        return sqlSession.selectOne(Namespace + ".idCheck", c_id);
+    }
 
-//    @Override
-//    public CustomerVO idCheck(String c_id) {
-//        System.out.println("--> idCheck() 기능 처리");
-//        CustomerVO vo = sqlSession.selectOne(Namespace + ".idCheck", c_id);
-//        return vo;
-//    }
+    @Override
+    public List<CustomerVO> selectAll() {
+        return sqlSession.selectList(Namespace + ".selectCustomer");
+    }
 
+    // 로그인 처리
     @Override
     public CustomerVO login(LoginDTO loginDTO) throws Exception {
 
@@ -38,9 +43,21 @@ public class CustomerDaoImpl implements CustomerDao {
         return sqlSession.selectOne(Namespace + ".login", loginDTO);
     }
 
+    // 로그인 유지 처리
     @Override
-    public List<CustomerVO> selectAll() {
-        return sqlSession.selectList(Namespace + ".selectCustomer");
+    public void keepLogin(String c_id, String sessionId, Date sessionLimit) throws Exception {
+        Map<String, Object> paramMap = new HashMap<>();
+        paramMap.put("c_id", c_id);
+        paramMap.put("sessionId", sessionId);
+        paramMap.put("sessionLimit", sessionLimit);
+
+        sqlSession.update(Namespace + ".keepLogin", paramMap);
+    }
+
+    // 세션키 검증
+    @Override
+    public CustomerVO checkUserWithSessionKey(String value) throws Exception {
+        return sqlSession.selectOne(Namespace + ".checkUserWithSessionKey", value);
     }
 
     //회원가입 Insert
