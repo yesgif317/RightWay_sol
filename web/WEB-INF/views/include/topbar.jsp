@@ -64,7 +64,7 @@
                         마이페이지
                     </a>
                     <div class="dropdown-divider"></div>
-                    <a class="dropdown-item" href="/logoutModal.do" data-toggle="modal" data-target="#logoutModal">
+                    <a class="dropdown-item" href="/logout.do" data-toggle="modal" data-target="#logoutModal">
                         <i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>
                         로그아웃
                     </a>

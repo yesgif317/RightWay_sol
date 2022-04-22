@@ -19,3 +19,7 @@
     <link href="<c:url value="/resources/css/sb-admin-2.min.css"/>" rel="stylesheet">
 
 </head>
+
+<body id="page-top">
+
+<div id="wrapper">

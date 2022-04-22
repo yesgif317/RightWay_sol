@@ -31,9 +31,10 @@ public class RememberMeInterceptor extends HandlerInterceptorAdapter {
             logger.info("loginCookie not null");
             CustomerVO customerVO = customerService.checkLoginBefore(loginCookie.getValue());
 
-            if (customerVO != null)
+            if (customerVO != null) {
                 logger.info("customerVO not null");
-            httpSession.setAttribute("login", customerVO);
+                httpSession.setAttribute("login", customerVO);
+            }
         }
 
         return true;

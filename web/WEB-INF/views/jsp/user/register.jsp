@@ -39,11 +39,13 @@
                         </div>
 
                         <!-- form -->
-                        <form class="register" action="/register.do" method="POST">
+                        <form class="register" action="/register.do" method="POST" name="joinform">
                             <div class="form-group row">
                                 <div class="form-label-group">
-                                    <input type="text" name="c_id" class="form-control" placeholder="ID">
+                                    <input type="text" name="c_id" class="form-control" placeholder="ID" required autofocus value="${c_id}">
+                                    <input type="hidden" name="reid" id="reid">
                                 </div>
+
                                 <div class="form-label-group">
                                     <button
                                             class="btn btn-dark btn-user btn-block"
@@ -124,13 +126,18 @@
 <script src="/resources/js/sb-admin-2.min.js"></script>
 
 <script>
-    $(function () {
-        $('input').iCheck({
-            checkboxClass: 'icheckbox_square-blue',
-            radioClass: 'iradio_square-blue',
-            increaseArea: '20%' // optional
-        });
-    });
+    function idcheck() {
+        if (document.joinform.c_id.value == "") {
+            alert("아이디를 입력해주세요.");
+            document.joinform.c_id.focus();
+            return false;
+        }
+
+        var url = "/idCheck.do"+document.joinform.c_id.value;
+
+        window.open(url, "_blank_1",
+            "toolbar=no, menubar=no, scrollbars=yes, resizable=no, width=500, height=300");
+    }
 </script>
 
 </body>

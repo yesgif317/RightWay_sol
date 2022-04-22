@@ -5,21 +5,18 @@ import Board.Service.BoardService;
 import Customer.Dto.CustomerVO;
 import Customer.Dto.LoginDTO;
 import Customer.Service.CustomerService;
+import org.apache.commons.io.FileUtils;
 import org.mindrot.jbcrypt.BCrypt;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.util.WebUtils;
 
 import javax.inject.Inject;
-import javax.servlet.http.Cookie;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
+import javax.servlet.http.*;
+import java.io.*;
 import java.util.*;
 
 @Controller
@@ -72,7 +69,7 @@ public class MainController {
     }
 
     @RequestMapping(value = "/idCheck.do", method = RequestMethod.POST)
-    public String idCheckPOST(HttpServletRequest request, Model model) throws Exception{
+    public String idCheckPOST(HttpServletRequest request, Model model) throws Exception {
         String c_id = request.getParameter("c_id");
         CustomerVO customerVO = customerService.idCheck(c_id);
 
@@ -327,6 +324,39 @@ public class MainController {
     @RequestMapping(value = "/blank.do", method = RequestMethod.GET)
     public String blank() {
         return "blank";
+    }
+
+
+    @GetMapping("/file-upload.do")
+    public void uploadAjax() {
+        System.out.println("upload ajax");
+    }
+
+    @PostMapping("/file-upload.do")
+    public void uploadAjaxPost(MultipartFile[] uploadFile) {
+        System.out.println("update ajax post.................");
+
+        String uploadFolder = "C:\\upload";
+
+        for(MultipartFile multipartFile : uploadFile) {
+            System.out.println("---------------------------------");
+            System.out.println("Upload File Name :"+multipartFile.getOriginalFilename());
+            System.out.println("Upload File Size : " + multipartFile.getSize());
+
+            String uploadFileName = multipartFile.getOriginalFilename();
+
+            //IE has file path
+            uploadFileName = uploadFileName.substring(uploadFileName.lastIndexOf("\\") + 1);
+            System.out.println("only file name : " + uploadFileName);
+
+            File saveFile = new File(uploadFolder, uploadFileName);
+
+            try {
+                multipartFile.transferTo(saveFile);
+            }catch (Exception e) {
+                System.out.println(e.getMessage());
+            }//end catch
+        }//end for
     }
 
 }

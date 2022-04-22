@@ -6,7 +6,8 @@
 <body>
 <script>
     alert("로그아웃 되었습니다.");
-    self.location = "user/login.do";
+    self.location = "/user/login.do";
+
 </script>
 </body>
 </html>
