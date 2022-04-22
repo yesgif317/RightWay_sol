@@ -22,12 +22,12 @@
         <div class="container-fluid">
 
             <!-- Page Heading -->
-            <h1 class="h3 mb-2 text-gray-800">산출물</h1>
-            <p class="mb-4"> 산출물이란 프로젝트나 프로그램의 가시적이고 측정 가능한 결과물을 말합니다.
+            <h1 class="display-4"<%--class="h3 mb-2 text-gray-800"--%>>이슈관리</h1>
+            <p class="mb-4"> 이슈(Issue, 혹은 Problem)은 프로젝트 진행에 차질을 가져올 수 있는 “발생된(Realized)” 위험으로 정의합니다..
                 <br>
-                산출물에는 설계 모델, 사양 문서, 원형 등이 있습니다.
+                버그, 요구사항, 작업내용 등이 있을 때 해당 시스템에 게시물 형태로 올립니다.
                 <br>
-                이 페이지에서 산출물에 가입하고 산출물을 참조할 수 있습니다.
+                이슈ID(착수/계획/분석/설계/구현및인도/완료/하자보수/전체공정) 이슈등급(A/B/C)
             </p>
 
             <div class="row">
@@ -45,17 +45,17 @@
                             <div class="card-body">
                                 <form method="post" action="outputs_move_write.do" id="tableswriteform" enctype="application/x-www-form-urlencoded" class="form-horizontal">
                                     <div class="row form-group">
-                                        <div class="col col-md-2"><label for="title" class=" form-control-label">제목</label></div>
+                                        <div class="col col-md-3 text-right"><label for="title" class=" form-control-label">제목</label></div>
                                         <div class="col-12 col-md-7"><input type="text" id="title" name="title" placeholder="Text" class="form-control"><small class="form-text text-muted">This is a help text</small></div>
                                     </div>
 
                                     <div class="row form-group">
-                                        <div class="col col-md-2"><label class=" form-control-label">작성자</label></div>
-                                        <div class="col-12 col-md-7"><input type="text" id="writer" name="writer" placeholder="Text" class="form-control"><small class="help-block form-text">산출물에 대해 작성해주세요.</small></div>
+                                        <div class="col col-md-3 text-right"><label class=" form-control-label">작성자</label></div>
+                                        <div class="col-12 col-md-7"><input type="text" id="wr ㅠiter" name="writer" placeholder="Text" class="form-control"><small class="help-block form-text">산출물에 대해 작성해주세요.</small></div>
                                     </div>
 
                                     <div class="row form-group">
-                                        <div class="col col-md-2"><label for="contents" class=" form-control-label">내용 작성</label></div>
+                                        <div class="col col-md-3 text-right"><label for="contents" class=" form-control-label">내용 작성</label></div>
                                         <div class="col-12 col-md-7"> <textarea name="contents" id="contents" rows="9" placeholder="Content" class="form-control"></textarea></div>
                                     </div>
                                     <div style="text-align: center">

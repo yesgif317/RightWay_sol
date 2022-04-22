@@ -46,17 +46,17 @@
                                     <form method="post" action="outputs_move_write.do" id="outputswriteform" enctype="application/x-www-form-urlencoded" class="form-horizontal">
 
                                         <div class="row form-group">
-                                            <div class="col col-md-2"><label for="title" class=" form-control-label">제목</label></div>
-                                            <div class="col-12 col-md-7"><input type="text" id="title" name="title" placeholder="Text" class="form-control"><small class="form-text text-muted">This is a help text</small></div>
+                                            <div class="col col-md-3 text-right"><label for="title" class=" form-control-label">제목</label></div>
+                                            <div class="col-12 col-md-7"><input type="text" id="title" name="title" placeholder="Text" class="form-control"><small class="form-text text-muted">산출물 형식에 맞추어 작성해 주세요</small></div>
                                         </div>
 
                                         <div class="row form-group">
-                                            <div class="col col-md-2"><label class=" form-control-label">작성자</label></div>
-                                            <div class="col-12 col-md-7"><input type="text" id="writer" name="writer" placeholder="Text" class="form-control"><small class="help-block form-text">산출물에 대해 작성해주세요.</small></div>
+                                            <div class="col col-md-3 text-right"><label class=" form-control-label">작성자</label></div>
+                                            <div class="col-12 col-md-7"><input type="text" id="writer" name="writer" placeholder="Text" class="form-control"><small class="help-block form-text">업무 담당자가 작성해 주세요</small></div>
                                         </div>
 
                                         <div class="row form-group">
-                                            <div class="col col-md-2"><label for="contents" class=" form-control-label">내용 작성</label></div>
+                                            <div class="col col-md-3 text-right"><label for="contents" class=" form-control-label">내용 작성</label></div>
                                             <div class="col-12 col-md-7"> <textarea name="contents" id="contents" rows="9" placeholder="Content" class="form-control"></textarea></div>
                                         </div>
                                         <div style="text-align: center">

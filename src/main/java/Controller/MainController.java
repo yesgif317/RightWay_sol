@@ -97,6 +97,13 @@ public class MainController {
         service.delete(no);
         return "redirect:/issue.do";
     }
+    @RequestMapping(value = "/issue_update.do", method = RequestMethod.GET)  //산출물 게시글 수정 페이지
+    public String issue_update(@RequestParam("no") int no, Model model) {
+        BoardVO Result = service.viewBoard(no);
+        model.addAttribute("BoardList", Result);
+        return "/issue/issue_update";
+    }
+
 
 
     @RequestMapping(value = "/forgot_password.do", method = RequestMethod.GET)
