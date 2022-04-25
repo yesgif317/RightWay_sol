@@ -13,12 +13,99 @@
         <!-- Begin Page Content -->
         <div class="container-fluid">
 
+            <div class="row">
+                <div class="col-lg-12">
 
-            페이지 본문내용 여기에 입력
+                    <!-- Collapsable Card Example -->
+                    <div class="card shadow mb-4">
+                        <!-- Card Header - Accordion -->
+                        <a class="d-block card-header py-3">
+                            <h5 class="m-0 font-weight-bold text-primary text-center">팀상세</h5>
+                        </a>
+                        <!-- Card Content - Collapse -->
+                        <div class="collapse show" id="collapseCardExample">
+                            <div class="card-body">
+                                <form method="post" action="update.do" id="updateform" enctype="application/x-www-form-urlencoded" class="form-horizontal">
+                                    <div class="row form-group">
+                                        <div class="col col-md-3 text-right"><label class="form-control-label fa-solid m-2">팀명</label></div>
+                                        <div class="col-12 col-md-7 text-gray-900 fa-solid m-2">${title} 개발1팀</div>
+                                    </div>
+                                    <div class="row form-group">
+                                        <div class="col col-md-3 text-right"><label class="form-control-label fa-solid m-2">회사</label></div>
+                                        <div class="col-12 col-md-7 text-gray-900 fa-solid m-2">${title} 솔리데오시스템즈</div>
+                                    </div>
+                                    <div class="row form-group">
+                                        <div class="col col-md-3 text-right"><label class="form-control-label fa-solid m-2">팀장</label></div>
+                                        <div class="col-12 col-md-7 text-gray-900 fa-solid m-2">${title} 윤정석</div>
+                                    </div>
+                                    <div class="row form-group">
+                                        <div class="col col-md-3 text-right"><label class="form-control-label fa-solid m-2">팀설명</label></div>
+                                        <div class="col-12 col-md-7 text-gray-900 fa-solid m-2" style="line-height: 130%">${title} 솔리데오 시스템즈 개발1팀입니다.8976458768796489765879643212463985443524618745235290784568261923490708</div>
+                                    </div>
+                                    <div class="row form-group">
+                                        <div class="col col-md-3 text-right"><label class="form-control-label fa-solid m-2">등록일</label></div>
+                                        <div class="col-12 col-md-7 text-gray-900 fa-solid m-2">${title}2022-04-21</div>
+                                    </div>
+
+                                    <div class="row form-group">
+                                        <div class="col col-md-3 text-right"><label class="form-control-label fa-solid m-2">팀원목록</label></div>
+                                        <div class="col-12 col-md-7 text-gray-900 fa-solid m-2">
+                                            <!-- DataTales Example -->
+                                            <div class="card mb-4">
+                                                <div class="card-body">
+                                                    <div class="table-responsive">
+                                                        <table class="table table-bordered" id="dataTable">
+                                                            <thead>
+                                                            <tr>
+                                                                <th>번호</th>
+                                                                <th>회사명</th>
+                                                                <th>직급</th>
+                                                                <th>이름</th>
+                                                            </tr>
+                                                            </thead>
+
+                                                            <tbody>
+                                                            <c:forEach items="${BoardList}" var="board">
+                                                                <tr>
+                                                                    <td>${board.no}</td>
+                                                                    <td>${board.writer}</td>
+                                                                    <td>${board.writer}</td>
+                                                                    <td>${board.writer}</td>
+                                                                </tr>
+                                                            </c:forEach>
+                                                            </tbody>
+                                                        </table>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
 
 
+
+
+
+
+                                </form>
+                            </div>
+                            <div class="text-center d-block card-header py-3">
+                                <a href="/team.do" class="btn btn-secondary btn-icon-split">
+                                                <span class="icon text-white-50">
+                                                    <i class="fas fa-list"></i>
+                                                </span>
+                                    <span class="text">목록</span>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+
+            </div>
 
         </div>
+        <!-- /.container-fluid -->
+
     </div>
     <!-- End of Main Content -->
 
@@ -71,4 +158,5 @@
 
     <!-- Page level custom scripts -->
     <script src="<c:url value="/resources/js/demo/chart-bar-demo.js"/>"></script>
+    <script src="<c:url value="/resources/js/demo/chart-pie-demo.js"/>"></script>
     <script src="<c:url value="/resources/js/demo/chart-pie-demo.js"/>"></script>

@@ -6,6 +6,7 @@
 <mapper namespace="com.mark.mappers.CustomerMapper">
 
     <resultMap id="customerVOResultMap" type="CustomerVO">
+        <result property="c_num" column="c_num"/>
         <result property="c_id" column="c_id"/>
         <result property="c_pwd" column="c_pwd"/>
         <result property="c_name" column="c_name"/>
@@ -13,6 +14,10 @@
         <result property="c_phone" column="c_phone"/>
         <result property="c_dep" column="c_dep"/>
         <result property="c_position" column="c_position"/>
+        <result property="session_key" column="session_key"/>
+        <result property="session_limit" column="session_limit"/>
+        <result property="com_num" column="com_num"/>
+        <result property="c_state" column="c_state"/>
     </resultMap>
 
     <!--Customer-->

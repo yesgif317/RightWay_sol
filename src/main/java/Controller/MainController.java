@@ -310,6 +310,30 @@ public class MainController {
         return "company/company_content";
     }
 
+    //team page
+    @RequestMapping(value = "/team.do", method = RequestMethod.GET)
+    public String team(Model model) {
+        //service 클래스에서 Dao 로 접근하여 쿼리 결과값 가져오기
+        List<BoardVO> boardVoList = service.selectAll();
+
+        // .jsp 파일로 DB 결과값 전달하기
+        model.addAttribute("BoardList", boardVoList);
+
+        return "team/team";
+    }
+
+    //team 글쓰기 페이지 이동
+    @RequestMapping(value = "/team_write.do", method = RequestMethod.GET)
+    public String team_write() {
+        return "team/team_write";
+    }
+
+    //team 상세 페이지 이동
+    @RequestMapping(value = "/team_content.do", method = RequestMethod.GET)
+    public String team_content() {
+        return "team/team_content";
+    }
+
     //테이블 페이지 이동
     @RequestMapping(value = "/tables.do", method = RequestMethod.GET)
     public String tables(Model model) {
