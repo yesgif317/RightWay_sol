@@ -23,23 +23,26 @@
         <div class="container-fluid">
 
             <!-- Page Heading -->
-            <div class="col-11 col-md-2" style="float:left">
-                <h1 <%--class="h3 mb-2 text-gray-800"--%>>위험관리</h1>
+            <div class="box-container">
+                <div class="col-11 col-md-2" style="float:left">
+                    <h1 >위험관리</h1>
+                </div>
+                <div class="col-11 col-md-8" style="float:right">
+                    <h6 > 리스크를 처리하고 잠재적인 결과를 파악합니다.
+                        <br>
+                        위험요소를 식별하고 평가합니다.
+                        <br>
+                        법적 책임, 자연 재해, 사고, 관리 오류, 사이버 보안 위협 등 다양한 분야에서 발생할 수 있습니다.
+                    </h6>
+                </div>
             </div>
-            <div class="col-11 col-md-8" style="float:right">
-                <h6 > 리스크를 처리하고 잠재적인 결과를 파악합니다.
-                    <br>
-                    위험요소를 식별하고 평가합니다.
-                    <br>
-                    법적 책임, 자연 재해, 사고, 관리 오류, 사이버 보안 위협 등 다양한 분야에서 발생할 수 있습니다.
-                </h6>
-            </div>
+            \
             <br><br><br>
 
             <!-- DataTales Example -->
             <div class="card shadow mb-4">
                 <div class="card-header py-3">
-                    <h6 class="m-0 font-weight-bold text-primary">이슈 목록</h6>
+                    <h6 class="m-0 font-weight-bold text-primary">위험 목록</h6>
                 </div>
                 <div class="card-body">
                     <div class="table-responsive">
@@ -48,16 +51,16 @@
                             <thead>
                             <tr >
                                 <th>번호</th>
-                                <th width="30%">이슈</th>
+                                <th width="30%">위험</th>
                                 <th>담당자</th>
                                 <th>프로젝트</th>
-                                <th>이슈등급</th>
+                                <th>위험등급</th>
                                 <th>진행상황</th>
                                 <th width="10%">발생일자</th>
                                 <th width="10%">마감기한</th>
                                 <th>남은날짜</th>
                                 <th>진행률</th>
-                                <th>이슈ID</th>
+                                <th>위험ID</th>
                             </tr>
                             </thead>
                             <tfoot>

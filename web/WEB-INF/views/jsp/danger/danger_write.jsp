@@ -21,16 +21,18 @@
         <!-- Begin Page Content -->
         <div class="container-fluid">
 
-            <div class="col-11 col-md-2" style="float:left">
-                <h1 <%--class="h3 mb-2 text-gray-800"--%>>위험관리</h1>
-            </div>
-            <div class="col-11 col-md-8" style="float:right">
-                <h6 > 리스크를 처리하고 잠재적인 결과를 파악합니다.
-                    <br>
-                    위험요소를 식별하고 평가합니다.
-                    <br>
-                    법적 책임, 자연 재해, 사고, 관리 오류, 사이버 보안 위협 등 다양한 분야에서 발생할 수 있습니다.
-                </h6>
+            <div class="box-container">
+                <div class="col-11 col-md-2" style="float:left">
+                    <h1 >위험관리</h1>
+                </div>
+                <div class="col-11 col-md-8" style="float:right">
+                    <h6 > 리스크를 처리하고 잠재적인 결과를 파악합니다.
+                        <br>
+                        위험요소를 식별하고 평가합니다.
+                        <br>
+                        법적 책임, 자연 재해, 사고, 관리 오류, 사이버 보안 위협 등 다양한 분야에서 발생할 수 있습니다.
+                    </h6>
+                </div>
             </div>
             <br><br><br>
 

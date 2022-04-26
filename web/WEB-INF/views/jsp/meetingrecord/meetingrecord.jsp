@@ -22,17 +22,18 @@
         <!-- Begin Page Content -->
         <div class="container-fluid">
 
-            <div class="col-11 col-md-2" style="float:left">
-                <h1 >희의록</h1>
-            </div>
-
-            <div class="col-11 col-md-8" style="float:right">
-                <h6 > 회의 이후 작성해 주시길 바랍니다.
-                    <br>
-                    회의록은 내 정보교환과 문제해결을 위한 자료가 됩니다.
-                    <br>
-                    제안된 안건과 처리사항을 기록합니다.
-                </h6>
+            <div class="box-container">
+                <div class="col-3 " style="float:left">
+                    <h1 >회의록</h1>
+                </div>
+                <div class="col-11 " >
+                    <h6 > 회의록이란 프로젝트나 프로그램의 가시적이고 측정 가능한 결과물을 말합니다.
+                        <br>
+                        회의록에는 설계 모델, 사양 문서, 원형 등이 있습니다.
+                        <br>
+                        이 페이지에서 회의록에 가입하고 회의록을 참조할 수 있습니다.
+                    </h6>
+                </div>
             </div>
             <br><br><br>
             <!-- DataTales Example -->
@@ -46,7 +47,7 @@
                             <thead>
                             <tr >
                                 <th>번호</th>
-                                <th width="50%">산출물</th>
+                                <th width="50%">회의록</th>
                                 <th>작성자</th>
                                 <th>작성날짜</th>
                                 <th>조회수</th>

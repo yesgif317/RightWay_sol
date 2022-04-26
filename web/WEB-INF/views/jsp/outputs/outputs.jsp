@@ -5,77 +5,36 @@
   Time: 오후 5:22
   To change this template use File | Settings | File Templates.
 --%>
-<!DOCTYPE html>
+
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
-<html>
-<head>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 
-    <script>
-        jQuery(function($){
-            $("#dataTable").DataTable({
-            });
-        });
-    </script>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <meta name="description" content="DataTable Example">
-    <meta name="author" content="RightWay">
 
-    <title>솔리데오 프로젝트관리</title>
-    <!-- Custom fonts for this template-->
-    <link href="<c:url value="/resources/vendor/fontawesome-free/css/all.min.css"/>" rel="stylesheet" type="text/css">
-    <link href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i" rel="stylesheet">
+<jsp:include page="../../include/header.jsp" flush="true" />
+<jsp:include page="../../include/sidebar.jsp" flush="true" />
 
-    <!-- Custom styles for this template-->
-    <link href="<c:url value="/resources/css/sb-admin-2.min.css"/>" rel="stylesheet">
+<!-- Content Wrapper -->
+<div id="content-wrapper" class="d-flex flex-column" >
 
-    <style>
-        .box-container{
-            display: inline-block;
-            border: 2px solid ;
-            margin: 5px 15px;
-        }
-        .box-container div{
-            float:left;
-            width: 360px;
-            height: 80px;
-            font-size: 15px;
-        }
-        #box1{ margin: 10px;  padding: 0; }
-        #box2{ margin: 5px 25px; padding: 0; }
-        #box3{ margin: 0;  padding: 10px 30px 5px; }
-        #box4{ margin: 10px; padding: 10px 20px; }
-        #box5{ margin: 10px 30px 0 50px; padding: 30px 0 }
-    </style>
-</head>
-
-<body id="page-top">
-
-<div id="wrapper">
-    <jsp:include page="../../include/sidebar.jsp" flush="true" />
-    <!-- Content Wrapper -->
-    <div id="content-wrapper" class="d-flex flex-column" >
-
-        <!-- Main Content -->
-        <div id="content">
+    <!-- Main Content -->
+    <div id="content">
 
             <jsp:include page="../../include/topbar.jsp" flush="true" />
             <!-- Begin Page Content -->
             <div class="container-fluid">
-
-                <div class="col-11 col-md-2" style="float:left">
+                <div class="box-container">
+                <div class="col-3 " style="float:left">
                     <h1 >산출물</h1>
                 </div>
-                <div class="col-11 col-md-8" style="float:right">
+                <div class="col-11 " >
                     <h6 > 산출물이란 프로젝트나 프로그램의 가시적이고 측정 가능한 결과물을 말합니다.
                         <br>
                         산출물에는 설계 모델, 사양 문서, 원형 등이 있습니다.
                         <br>
                         이 페이지에서 산출물에 가입하고 산출물을 참조할 수 있습니다.
                     </h6>
+                </div>
                 </div>
                 <br>
                 <br>

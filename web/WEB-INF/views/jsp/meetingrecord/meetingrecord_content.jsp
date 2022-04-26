@@ -24,16 +24,18 @@
         <!-- Begin Page Content -->
         <div class="container-fluid">
 
-            <div class="col-11 col-md-2" style="float:left">
-                <h1 >산출물</h1>
-            </div>
-            <div class="col-11 col-md-8" style="float:right">
-                <h6 > 산출물이란 프로젝트나 프로그램의 가시적이고 측정 가능한 결과물을 말합니다.
-                    <br>
-                    산출물에는 설계 모델, 사양 문서, 원형 등이 있습니다.
-                    <br>
-                    이 페이지에서 산출물에 가입하고 산출물을 참조할 수 있습니다.
-                </h6>
+            <div class="box-container">
+                <div class="col-3 " style="float:left">
+                    <h1 >회의록</h1>
+                </div>
+                <div class="col-11 " >
+                    <h6 > 회의록이란 프로젝트나 프로그램의 가시적이고 측정 가능한 결과물을 말합니다.
+                        <br>
+                        회의록에는 설계 모델, 사양 문서, 원형 등이 있습니다.
+                        <br>
+                        이 페이지에서 회의록에 가입하고 회의록을 참조할 수 있습니다.
+                    </h6>
+                </div>
             </div>
             <br><br><br>
 
@@ -48,7 +50,7 @@
                     <div class="card shadow mb-4">
                         <!-- Card Header - Accordion -->
                         <a href="#collapseCardExample" class="d-block card-header py-3" data-toggle="collapse" role="button" aria-expanded="true" aria-controls="collapseCardExample">
-                            <h6 class="m-0 font-weight-bold text-primary">산출물 게시물 조회</h6>
+                            <h6 class="m-0 font-weight-bold text-primary">회의록 게시물 조회</h6>
 
                         </a>
                         <!-- Card Content - Collapse -->
@@ -88,12 +90,12 @@
                                         <div class="col-12 col-md-3">고객사와 회의한 내용을 반영하여 수행함
                                             <small class="help-block form-text">요구사항</small></div>
                                         <div class="col-12 col-md-3">설계모델
-                                            <small class="help-block form-text">산출물 구분</small></div>
+                                            <small class="help-block form-text">회의록 구분</small></div>
                                     </div>
                                     <%--<div class="row form-group">
-                                        <div class="col col-md-2">&lt;%&ndash;<label class=" form-control-label">산출물 구분</label>&ndash;%&gt;</div>
+                                        <div class="col col-md-2">&lt;%&ndash;<label class=" form-control-label">회의록 구분</label>&ndash;%&gt;</div>
                                         <div class="col-12 col-md-7">설계모델
-                                            <small class="help-block form-text">산출물 구분</small></div>
+                                            <small class="help-block form-text">회의록 구분</small></div>
                                     </div>--%>
                                     <div class="row form-group">
                                         <div class="col col-md-2" ><%--<label class=" form-control-label">내용 작성</label>--%></div>
