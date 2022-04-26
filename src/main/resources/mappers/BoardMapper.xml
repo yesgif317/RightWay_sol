@@ -22,8 +22,8 @@
 
     <!-- 회원가입(Insert) -->
     <insert id="insertBoard" parameterType="BoardVO" >
-       insert into notice(writer, title, contents, refdate, count)
-       values (#{writer}, #{title}, #{contents}, SYSDATE, 0)
+       insert into notice(no ,writer, title, contents, refdate, count)
+       values (#{no},#{writer}, #{title}, #{contents}, SYSDATE, 0)
     </insert>
 
     <update id="updateBoard" parameterType="BoardVO" >
@@ -34,11 +34,10 @@
 
     <select id="viewBoard" resultType="BoardVO">
 
-        SELECT writer, title, contents,no FROM notice where no=#{no}
+        SELECT writer, title, contents, refdate,no FROM notice where no=#{no}
     </select>
 
     <delete id="delete">
-
         delete from notice where no=#{no}
 
     </delete>

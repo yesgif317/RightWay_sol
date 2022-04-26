@@ -5,6 +5,35 @@
   Time: 오후 5:22
   To change this template use File | Settings | File Templates.
 --%>
+<style media="screen">
+    div.dt_title{
+        color:green;
+        float:left;
+        font-size:20px;
+    }
+    div.dt_btn{
+        padding:5px;
+    }
+</style>
+<script type="text/javascript">
+
+    var example_tbl = null
+    $(function() {
+        example_tbl = $('#dataTable').DataTable( {
+            dom: '<"dt_title">fti<"dt_btn">'
+        });
+
+        $("div.dt_title").html('dom 커스텀 하기');
+        $("div.dt_btn").html('<button id="btn1" class="btn btn-info pull-right">버튼1</button>');
+
+        $('#btn1').click(function(){
+            $('#example th, #example td').css("background-color",'#'+Math.random().toString(16).substr(-6))
+        })
+    });
+</script>
+
+
+
 
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
@@ -49,7 +78,7 @@
                     <div class="card-body"  >
                         <div class="table-responsive" >
 
-                            <table class="table table-bordered table-hover row-border" id="dataTable" width="100%" cellspacing="0" style="scroll: no;overflow: hidden;overflow-x: hidden;">
+                            <table class="table table-bordered table-hover row-border" id="dataTable" width="90%" cellspacing="0" style="scroll: no;overflow: hidden;overflow-x: hidden;">
                                 <thead>
                                 <tr >
                                     <th width="10%">번호</th>

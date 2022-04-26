@@ -54,17 +54,21 @@
                                     <div class="row form-group" >
                                         <div class="col col-md-2"><%--<label  class=" form-control-label">이메일</label>--%></div>
                                         <div class="col-11 col-md-7" style="border-bottom: 2px dotted #808080;border-top: 4px groove #808080;">
+
                                             <input style="font-size:30px;border:0 solid whitesmoke;outline:none;" type="text" id="title" name="title" value="${BoardList.title}" readonly="readonly" />
-                                            <small class="help-block form-text">제목</small>
+
                                         </div>
                                     </div>
                                     <div class="row form-group">
                                         <div class="col col-md-2"><%--<label  class=" form-control-label">이메일</label>--%></div>
-                                        <div class="col-11 col-md-3">이메일 자동으로 입력(db연동)
-                                            <small class="help-block form-text">이메일</small>
+                                        <div class="col-11 col-md-3">
+                                            <label for="date">등록일 :</label>
+                                            <input style="border:0 solid whitesmoke;" type="text" id="date" name="date" value="" readonly="readonly" />
                                         </div>
-                                        <div class="col-12 col-md-3"><input style="border:0 solid whitesmoke;" type="text" id="writer" name="writer" value="${BoardList.writer}" readonly="readonly" />
-                                            <small class="help-block form-text">작성자</small></div>
+                                        <div class="col-12 col-md-3">
+                                            <label for="writer">이름 :</label>
+                                            <input style="border:0 solid whitesmoke;" type="text" id="writer" name="writer" value="${BoardList.writer}" readonly="readonly" />
+
                                     </div>
                                     <%--<div class="row form-group" >
                                         <div class="col col-md-2">&lt;%&ndash;<label class=" form-control-label">작성자</label>&ndash;%&gt;</div>
@@ -74,10 +78,15 @@
 
                                     <div class="row form-group">
                                         <div class="col col-md-2"><%--<label class=" form-control-label">참고사항</label>--%></div>
-                                        <div class="col-12 col-md-3">고객사와 회의한 내용을 반영하여 수행함
-                                            <small class="help-block form-text">참고</small></div>
-                                        <div class="col-12 col-md-3">설계모델
-                                            <small class="help-block form-text">이슈 구분</small></div>
+                                        <div class="col-12 col-md-3">
+                                            <label for="finaldate">마감일 :</label>
+                                            <input style="border:0 solid whitesmoke;" type="text" id="finaldate" name="writer" value="" readonly="readonly" />
+
+                                        </div>
+                                        <div class="col-12 col-md-3">
+                                            <label for="ID">이슈ID :</label>
+                                            <input style="border:0 solid whitesmoke;" type="text" id="ID" name="writer" value="" readonly="readonly" />
+                                        </div>
                                     </div>
                                     <%--<div class="row form-group">
                                         <div class="col col-md-2">&lt;%&ndash;<label class=" form-control-label">산출물 구분</label>&ndash;%&gt;</div>
@@ -87,7 +96,7 @@
                                     <div class="row form-group">
                                         <div class="col col-md-2" ><%--<label class=" form-control-label">내용 작성</label>--%></div>
                                         <div class="col-12 col-md-7" style="border-top:  2px dotted #808080;border-bottom: 4px groove #808080;">
-                                            <textarea style="font-size:20px;border:0 solid whitesmoke;" name="contents" id="contents" rows="4" placeholder="Content" class="form-control">${BoardList.contents}</textarea>
+                                            <textarea style="font-size:20px;border:0 solid whitesmoke;" name="contents" id="contents" rows="4" placeholder="Content" class="form-control" readonly="readonly">${BoardList.contents}</textarea>
                                         </div>
 
 

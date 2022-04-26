@@ -39,57 +39,29 @@
                         <!-- Collapsable Card Example -->
                         <div class="card shadow mb-4">
                             <!-- Card Header - Accordion -->
-                            <a href="#collapseCardExample" class="d-block card-header py-3" data-toggle="collapse" role="button" aria-expanded="true" aria-controls="collapseCardExample">
-                                <h6 class="m-0 font-weight-bold text-primary">산출물 게시물 조회</h6>
-
+                            <a href="#collapseCardExample" class="d-block card-header py-3"  style="text-align: center">
+                                <h6 class="m-0 font-weight-bold text-primary"> ${BoardList.title}
+                                </h6>
                             </a>
                             <!-- Card Content - Collapse -->
                             <div class="collapse show" id="collapseCardExample">
                                 <div class="card-body">
-
-
                                     <form autocomplete="off" method="post" role="form">
-                                       <%-- <div class="row form-group" >
-                                            <div class="col col-md-2">&lt;%&ndash;<label class=" form-control-label">글번호</label>&ndash;%&gt;</div>
-                                            <div class="col-12 col-md-7" style="border-top: 4px groove #808080;;"><input style="border:0 ;outline:none;" type="text" id="no" name="no" value="${BoardList.no}" readonly="readonly"  />
-                                                <small class="help-block form-text">글번호</small></div>
-                                        </div>--%>
-                                        <div class="row form-group" >
-                                            <div class="col col-md-2"><%--<label  class=" form-control-label">이메일</label>--%></div>
-                                            <div class="col-11 col-md-7" style="border-bottom: 2px dotted #808080;border-top: 4px groove #808080;">
-                                                <input style="font-size:30px;border:0 solid whitesmoke;outline:none;" type="text" id="title" name="title" value="${BoardList.title}" readonly="readonly" />
-                                                <small class="help-block form-text">제목</small>
-                                            </div>
-                                        </div>
                                         <div class="row form-group">
-                                            <div class="col col-md-2"><%--<label  class=" form-control-label">이메일</label>--%></div>
-                                            <div class="col-11 col-md-3">이메일 자동으로 입력(db연동)
-                                                <small class="help-block form-text">이메일</small>
-                                            </div>
-                                            <div class="col-12 col-md-3"><input style="border:0 solid whitesmoke;" type="text" id="writer" name="writer" value="${BoardList.writer}" readonly="readonly" />
-                                                <small class="help-block form-text">작성자</small></div>
-                                        </div>
-                                        <%--<div class="row form-group" >
-                                            <div class="col col-md-2">&lt;%&ndash;<label class=" form-control-label">작성자</label>&ndash;%&gt;</div>
-                                            <div class="col-12 col-md-7"><input style="border:0 solid whitesmoke;" type="text" id="writer" name="writer" value="${BoardList.writer}" readonly="readonly" />
-                                                <small class="help-block form-text">작성자</small></div>
-                                        </div>--%>
+                                            <div class="col-3"></div>
+                                            <div class="col-4" >
+                                                <label for="date">작성일 :</label>
+                                                <input style="border:0 solid whitesmoke;"  id="date" name="date" value="${BoardList.refdate}" readonly="readonly" />
 
-                                        <div class="row form-group">
-                                            <div class="col col-md-2"><%--<label class=" form-control-label">참고사항</label>--%></div>
-                                            <div class="col-12 col-md-3">고객사와 회의한 내용을 반영하여 수행함
-                                                <small class="help-block form-text">요구사항</small></div>
-                                            <div class="col-12 col-md-3">설계모델
-                                                <small class="help-block form-text">산출물 구분</small></div>
+                                            </div>
+                                            <div class="col-4 ">
+                                                <label for="writer">작성자 :</label>
+                                                <input style="border:0 solid whitesmoke;" type="text" id="writer" name="writer" value="${BoardList.writer}" readonly="readonly" />
+                                            </div>
                                         </div>
-                                        <%--<div class="row form-group">
-                                            <div class="col col-md-2">&lt;%&ndash;<label class=" form-control-label">산출물 구분</label>&ndash;%&gt;</div>
-                                            <div class="col-12 col-md-7">설계모델
-                                                <small class="help-block form-text">산출물 구분</small></div>
-                                        </div>--%>
                                         <div class="row form-group">
-                                        <div class="col col-md-2" ><%--<label class=" form-control-label">내용 작성</label>--%></div>
-                                            <div class="col-12 col-md-7" style="border-top:  2px dotted #808080;border-bottom: 4px groove #808080;">
+                                            <div class="col-2"></div>
+                                            <div class="col-8" style="border-top:  2px solid #808080;border-bottom: 4px groove #808080;">
                                             <textarea style="font-size:20px;border:0 solid whitesmoke;" name="contents" id="contents" rows="4" placeholder="Content" class="form-control">${BoardList.contents}</textarea>
                                             </div>
 
