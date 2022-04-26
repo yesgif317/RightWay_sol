@@ -23,8 +23,8 @@
             <jsp:include page="../../include/topbar.jsp" flush="true" />
             <!-- Begin Page Content -->
             <div class="container-fluid">
-                <div class="box-container">
-                <div class="col-3 " style="float:left">
+                <%--<div class="box-container">
+                <div class="col-2 " style="float:left">
                     <h1 >산출물</h1>
                 </div>
                 <div class="col-11 " >
@@ -35,6 +35,12 @@
                         이 페이지에서 산출물에 가입하고 산출물을 참조할 수 있습니다.
                     </h6>
                 </div>
+                </div>--%>
+                <div class="box-container">
+                    <h1 class="h4 mb-2 text-gray-800 ">산출물</h1>
+                    <p class="mb-4">
+                        산출물이란 프로젝트나 프로그램의 가시적이고 측정 가능한 결과물을 말합니다.
+                    </p>
                 </div>
                 <br>
                 <br>
@@ -49,10 +55,10 @@
                     <div class="card-body"  >
                         <div class="table-responsive" >
 
-                            <table class="table table-hover " id="dataTable" width="90%" cellspacing="0" style="scroll: no;overflow: hidden;overflow-x: hidden;">
+                            <table class="table display-1 table-hover row-border" id="dataTable" width="90%" cellspacing="0" style="scroll: no;overflow: hidden;overflow-x: hidden;">
                                 <thead>
                                 <tr >
-                                    <th>번호</th>
+                                    <th width="5%">번호</th>
                                     <th width="50%">산출물</th>
                                     <th>작성자</th>
                                     <th>작성날짜</th>

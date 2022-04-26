@@ -22,18 +22,12 @@
         <!-- Begin Page Content -->
         <div class="container-fluid">
 
+
             <div class="box-container">
-                <div class="col-3 " style="float:left">
-                    <h1 >회의록</h1>
-                </div>
-                <div class="col-11 " >
-                    <h6 > 회의록이란 프로젝트나 프로그램의 가시적이고 측정 가능한 결과물을 말합니다.
-                        <br>
-                        회의록에는 설계 모델, 사양 문서, 원형 등이 있습니다.
-                        <br>
-                        이 페이지에서 회의록에 가입하고 회의록을 참조할 수 있습니다.
-                    </h6>
-                </div>
+                <h1 class="h4 mb-2 text-gray-800 ">회의록</h1>
+                <p class="mb-4">
+                    이 페이지에서 회의록에 가입하고 회의록을 참조할 수 있습니다.
+                </p>
             </div>
             <br><br><br>
             <!-- DataTales Example -->

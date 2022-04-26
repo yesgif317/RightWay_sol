@@ -22,17 +22,10 @@
         <div class="container-fluid">
 
             <div class="box-container">
-                <div class="col-11 col-md-2" style="float:left">
-                    <h1 >정기보고서</h1>
-                </div>
-                <div class="col-11 col-md-8" style="float:right">
-                    <h6 > 기한 안에 작성해 주시길 바랍니다.
-                        <br>
-                        사업내용 등을 기재한 사업•반기•분기보고서
-                        <br>
-                        제출 담당자 혹은 권한을 위암받은 계정이 작성할 수 있습니다.
-                    </h6>
-                </div>
+                <h1 class="h4 mb-2 text-gray-800 ">정기보고서</h1>
+                <p class="mb-4">
+                    사업내용 등을 기재한 사업•반기•분기보고서
+                </p>
             </div>
             <br><br><br>
 

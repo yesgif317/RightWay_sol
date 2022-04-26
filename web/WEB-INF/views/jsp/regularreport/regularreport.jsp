@@ -22,7 +22,7 @@
         <!-- Begin Page Content -->
         <div class="container-fluid">
 
-            <div class="box-container">
+            <%--<div class="box-container">
                 <div class="col-11 col-md-2" style="float:left">
                     <h1 >정기보고서</h1>
                 </div>
@@ -34,6 +34,12 @@
                         제출 담당자 혹은 권한을 위암받은 계정이 작성할 수 있습니다.
                     </h6>
                 </div>
+            </div>--%>
+            <div class="box-container">
+                <h1 class="h4 mb-2 text-gray-800 ">정기보고서</h1>
+                <p class="mb-4">
+                    사업내용 등을 기재한 사업•반기•분기보고서
+                </p>
             </div>
             <br><br><br>
 
