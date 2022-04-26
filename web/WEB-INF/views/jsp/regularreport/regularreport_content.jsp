@@ -23,17 +23,10 @@
         <jsp:include page="../../include/topbar.jsp" flush="true" />
         <!-- Begin Page Content -->
         <div class="container-fluid">
-            <div class="box-container">
-                <h1 class="h4 mb-2 text-gray-800 ">정기보고서</h1>
-                <p class="mb-4">
-                    사업내용 등을 기재한 사업•반기•분기보고서
-                </p>
-            </div>
-
-            <br><br><br>
-
-            <br><br><br>
-
+            <h1 class="h4 mb-2 text-gray-800 ">정기보고서</h1>
+            <p class="mb-4">
+                사업내용 등을 기재한 사업•반기•분기보고서
+            </p>
 
 
             <div class="row">

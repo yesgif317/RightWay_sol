@@ -35,13 +35,10 @@
                     </h6>
                 </div>
             </div>--%>
-            <div class="box-container">
                 <h1 class="h4 mb-2 text-gray-800 ">정기보고서</h1>
                 <p class="mb-4">
                     사업내용 등을 기재한 사업•반기•분기보고서
                 </p>
-            </div>
-            <br><br><br>
 
             <!-- DataTales Example -->
             <div class="card shadow mb-4">
@@ -50,7 +47,7 @@
                 </div>
                 <div class="card-body">
                     <div class="table-responsive">
-                        <table class="table table-hover " id="dataTable" width="100%" cellspacing="0" >
+                        <table class="table table-bordered table-hover row-border" id="dataTable" width="100%" cellspacing="0" >
                             <thead>
                             <tr >
                                 <th>번호</th>

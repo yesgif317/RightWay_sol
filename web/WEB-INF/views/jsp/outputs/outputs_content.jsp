@@ -24,13 +24,10 @@
             <!-- Begin Page Content -->
             <div class="container-fluid">
 
-                <div class="box-container">
-                    <h1 class="h4 mb-2 text-gray-800 ">산출물</h1>
-                    <p class="mb-4">
-                        산출물이란 프로젝트나 프로그램의 가시적이고 측정 가능한 결과물을 말합니다.
-                    </p>
-                </div>
-                <br><br><br>
+                <h1 class="h4 mb-2 text-gray-800 ">산출물</h1>
+                <p class="mb-4">
+                    산출물이란 프로젝트나 프로그램의 가시적이고 측정 가능한 결과물을 말합니다.
+                </p>
 
 
 

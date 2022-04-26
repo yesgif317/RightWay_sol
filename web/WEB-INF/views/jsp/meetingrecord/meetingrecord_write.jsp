@@ -21,12 +21,12 @@
         <!-- Begin Page Content -->
         <div class="container-fluid">
 
-            <div class="box-container">
+
                 <h1 class="h4 mb-2 text-gray-800 ">회의록</h1>
                 <p class="mb-4">
                     이 페이지에서 회의록에 가입하고 회의록을 참조할 수 있습니다.
                 </p>
-            </div>
+
 
             <div class="row">
                 <div class="col-lg-12">

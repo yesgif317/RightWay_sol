@@ -21,13 +21,10 @@
         <!-- Begin Page Content -->
         <div class="container-fluid">
 
-            <div class="box-container">
-                <h1 class="h4 mb-2 text-gray-800 ">위험관리</h1>
-                <p class="mb-4">
-                    위험요소를 식별하고 평가합니다.
-                </p>
-            </div>
-            <br><br><br>
+            <h1 class="h4 mb-2 text-gray-800 ">위험관리</h1>
+            <p class="mb-4">
+                위험요소를 식별하고 평가합니다.
+            </p>
 
             <div class="row">
                 <div class="col-lg-12">

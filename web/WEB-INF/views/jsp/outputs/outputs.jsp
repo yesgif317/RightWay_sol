@@ -36,16 +36,10 @@
                     </h6>
                 </div>
                 </div>--%>
-                <div class="box-container">
                     <h1 class="h4 mb-2 text-gray-800 ">산출물</h1>
                     <p class="mb-4">
                         산출물이란 프로젝트나 프로그램의 가시적이고 측정 가능한 결과물을 말합니다.
                     </p>
-                </div>
-                <br>
-                <br>
-                <br>
-
 
                 <!-- DataTales Example -->
                 <div class="card shadow mb-4">
@@ -55,10 +49,10 @@
                     <div class="card-body"  >
                         <div class="table-responsive" >
 
-                            <table class="table display-1 table-hover row-border" id="dataTable" width="90%" cellspacing="0" style="scroll: no;overflow: hidden;overflow-x: hidden;">
+                            <table class="table table-bordered table-hover row-border" id="dataTable" width="100%" cellspacing="0" style="scroll: no;overflow: hidden;overflow-x: hidden;">
                                 <thead>
                                 <tr >
-                                    <th width="5%">번호</th>
+                                    <th width="10%">번호</th>
                                     <th width="50%">산출물</th>
                                     <th>작성자</th>
                                     <th>작성날짜</th>
@@ -82,12 +76,12 @@
                             </table>
 
                             <div style="text-align: center">
-                                <%--<a href="/outputs_write.do" class="btn btn-primary btn-icon-split">
+                                <a href="/outputs_write.do" class="btn btn-primary btn-icon-split">
                           <span class="icon text-white-50">
                             <i class="fas fa-pen"></i>
                           </span>
                                     <span class="text">글 작성</span>
-                                </a>--%>
+                                </a>
 
 
                             </div>

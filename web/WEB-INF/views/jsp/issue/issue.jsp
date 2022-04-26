@@ -23,14 +23,11 @@
         <div class="container-fluid">
 
             <!-- Page Heading -->
-            <div class="box-container">
-                    <h1 class="h4 mb-2 text-gray-800 ">이슈관리</h1>
+                <h1 class="h4 mb-2 text-gray-800 ">이슈관리</h1>
                 <p class="mb-4">
                         이슈ID(착수/계획/분석/설계/구현및인도/완료/하자보수/전체공정) 이슈등급(A/B/C)
                 </p>
-            </div>
 
-            <br><br><br>
 
             <!-- DataTales Example -->
             <div class="card shadow mb-4">

@@ -23,13 +23,10 @@
         <div class="container-fluid">
 
 
-            <div class="box-container">
-                <h1 class="h4 mb-2 text-gray-800 ">회의록</h1>
-                <p class="mb-4">
-                    이 페이지에서 회의록에 가입하고 회의록을 참조할 수 있습니다.
-                </p>
-            </div>
-            <br><br><br>
+            <h1 class="h4 mb-2 text-gray-800 ">회의록</h1>
+            <p class="mb-4">
+                이 페이지에서 회의록에 가입하고 회의록을 참조할 수 있습니다.
+            </p>
             <!-- DataTales Example -->
             <div class="card shadow mb-4">
                 <div class="card-header py-3">
@@ -37,7 +34,7 @@
                 </div>
                 <div class="card-body">
                     <div class="table-responsive">
-                        <table class="table table-hover " id="dataTable" width="100%" cellspacing="0" >
+                        <table class="table table-bordered table-hover row-border" id="dataTable" width="100%" cellspacing="0" >
                             <thead>
                             <tr >
                                 <th>번호</th>
