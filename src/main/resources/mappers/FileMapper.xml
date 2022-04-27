@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.mark.mappers.FileMapper">
+
+    <!--Customer-->
+    <!-- Select 문 -->
+    <select id="selectFile" resultType="FileVO">
+        SELECT * FROM files
+    </select>
+
+    <!-- 게시물 작성(Insert) -->
+    <insert id="insertFile" parameterType="FileVO" >
+        insert into files(post_num , division_num, file_name)
+        values (#{post_num}, #{division_num}, #{file_name})
+    </insert>
+
+</mapper>

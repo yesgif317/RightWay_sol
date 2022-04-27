@@ -5,7 +5,8 @@ import Board.Service.BoardService;
 import Customer.Dto.CustomerVO;
 import Customer.Dto.LoginDTO;
 import Customer.Service.CustomerService;
-import org.apache.commons.io.FileUtils;
+import File.Dto.FileVO;
+import File.Service.FileService;
 import org.mindrot.jbcrypt.BCrypt;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -27,6 +28,11 @@ public class MainController {
 
     @Inject
     private CustomerService customerService;
+
+    @Inject
+    private FileService fileService;
+
+
 
     // 메인 페이지 이동
     @RequestMapping(value = "/index.do", method = RequestMethod.GET)
@@ -429,30 +435,12 @@ public class MainController {
     }
 
     @PostMapping("/file-upload.do")
-    public void uploadAjaxPost(MultipartFile[] uploadFile) {
+    public String uploadAjaxPost(MultipartFile[] uploadFile, @RequestParam(value = "title") String title,
+        @RequestParam(value = "writer") String writer, @RequestParam(value = "contents") String contents){
         System.out.println("update ajax post.................");
-
-        String uploadFolder = "C:\\upload";
-
-        for(MultipartFile multipartFile : uploadFile) {
-            System.out.println("---------------------------------");
-            System.out.println("Upload File Name :"+multipartFile.getOriginalFilename());
-            System.out.println("Upload File Size : " + multipartFile.getSize());
-
-            String uploadFileName = multipartFile.getOriginalFilename();
-
-            //IE has file path
-            uploadFileName = uploadFileName.substring(uploadFileName.lastIndexOf("\\") + 1);
-            System.out.println("only file name : " + uploadFileName);
-
-            File saveFile = new File(uploadFolder, uploadFileName);
-
-            try {
-                multipartFile.transferTo(saveFile);
-            }catch (Exception e) {
-                System.out.println(e.getMessage());
-            }//end catch
-        }//end for
+        System.out.println(title + writer + contents);
+        fileService.insertFile(uploadFile,1,1);
+        return "index";
     }
 
 }
