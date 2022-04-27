@@ -183,6 +183,31 @@ public class MainController {
         return "redirect:/outputs.do";
     }
 
+    @RequestMapping(value = "/issue_update.do", method = RequestMethod.GET)  //산출물 게시글 수정 페이지
+    public String issue_update(@RequestParam("no") int no, Model model) {
+        BoardVO Result = service.viewBoard(no);
+        model.addAttribute("BoardList", Result);
+        return "/issue/issue_update";
+    }
+
+    @RequestMapping(value = "/notice.do", method = RequestMethod.GET)//공지사항 게시판 글목록 보기
+    public String notice(Model model) {
+        //service 클래스에서 Dao 로 접근하여 쿼리 결과값 가져오기
+        List<BoardVO> boardVoList = service.selectAll();
+        // .jsp 파일로 DB 결과값 전달하기
+        model.addAttribute("BoardList", boardVoList);
+        return "/notice/notice";
+    }
+
+    @RequestMapping(value = "/request.do", method = RequestMethod.GET)//요청사항 게시판 글목록 보기
+    public String request(Model model) {
+        //service 클래스에서 Dao 로 접근하여 쿼리 결과값 가져오기
+        List<BoardVO> boardVoList = service.selectAll();
+        // .jsp 파일로 DB 결과값 전달하기
+        model.addAttribute("BoardList", boardVoList);
+        return "/request/request";
+    }
+
 
     @RequestMapping(value = "/issue.do", method = RequestMethod.GET)//이슈 게시판 글목록 보기
     public String issue(Model model) {
@@ -203,12 +228,7 @@ public class MainController {
         service.delete(no);
         return "redirect:/issue.do";
     }
-    @RequestMapping(value = "/issue_update.do", method = RequestMethod.GET)  //산출물 게시글 수정 페이지
-    public String issue_update(@RequestParam("no") int no, Model model) {
-        BoardVO Result = service.viewBoard(no);
-        model.addAttribute("BoardList", Result);
-        return "/issue/issue_update";
-    }
+
     @RequestMapping(value = "/meetingrecord.do", method = RequestMethod.GET)//회의록 목록 보기
     public String meetingrecord(Model model) {
         //service 클래스에서 Dao 로 접근하여 쿼리 결과값 가져오기

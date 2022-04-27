@@ -5,32 +5,8 @@
   Time: 오후 5:22
   To change this template use File | Settings | File Templates.
 --%>
-<style media="screen">
-    div.dt_title{
-        color:green;
-        float:left;
-        font-size:20px;
-    }
-    div.dt_btn{
-        padding:5px;
-    }
-</style>
-<script type="text/javascript">
 
-    var example_tbl = null
-    $(function() {
-        example_tbl = $('#dataTable').DataTable( {
-            dom: '<"dt_title">fti<"dt_btn">'
-        });
 
-        $("div.dt_title").html('dom 커스텀 하기');
-        $("div.dt_btn").html('<button id="btn1" class="btn btn-info pull-right">버튼1</button>');
-
-        $('#btn1').click(function(){
-            $('#example th, #example td').css("background-color",'#'+Math.random().toString(16).substr(-6))
-        })
-    });
-</script>
 
 
 
@@ -43,6 +19,16 @@
 <jsp:include page="../../include/header.jsp" flush="true" />
 <jsp:include page="../../include/sidebar.jsp" flush="true" />
 
+<style>
+    div.box1 {
+        width: 150px;
+        height: 50px;
+        margin: 10px 0px 0px 0px;
+    }
+
+</style>
+
+
 <!-- Content Wrapper -->
 <div id="content-wrapper" class="d-flex flex-column" >
 
@@ -52,19 +38,6 @@
             <jsp:include page="../../include/topbar.jsp" flush="true" />
             <!-- Begin Page Content -->
             <div class="container-fluid">
-                <%--<div class="box-container">
-                <div class="col-2 " style="float:left">
-                    <h1 >산출물</h1>
-                </div>
-                <div class="col-11 " >
-                    <h6 > 산출물이란 프로젝트나 프로그램의 가시적이고 측정 가능한 결과물을 말합니다.
-                        <br>
-                        산출물에는 설계 모델, 사양 문서, 원형 등이 있습니다.
-                        <br>
-                        이 페이지에서 산출물에 가입하고 산출물을 참조할 수 있습니다.
-                    </h6>
-                </div>
-                </div>--%>
                     <h1 class="h4 mb-2 text-gray-800 ">산출물</h1>
                     <p class="mb-4">
                         산출물이란 프로젝트나 프로그램의 가시적이고 측정 가능한 결과물을 말합니다.
@@ -93,12 +66,12 @@
                                 <tbody>
                                 <c:forEach items="${BoardList}" var="board">
                                     <tr>
-                                        <td>${board.no}</td>
-                                        <td><a href ="outputs_content.do?no=${board.no}">${board.title}</a></td>
-                                        <td>${board.writer}</td>
-                                        <td><fmt:formatDate value="${board.refdate}" pattern="yyyy-MM-dd" /></td>
+                                        <td>${board.p_num}${board.b_num}</td>
+                                        <td>ss<%--<a href ="outputs_content.do?p_num=${board.p_num}">${board.p_title}</a>--%></td>
+                                        <td>${board.c_num}${board.p_update_date}</td>
+                                        <td>ss<%--<fmt:formatDate value="${board.p_date}" pattern="yyyy-MM-dd" />--%>${board.p_date}</td>
 
-                                        <td>${board.count}</td>
+                                        <td>${board.p_caption}</td>
                                     </tr>
                                 </c:forEach>
                                 </tbody>

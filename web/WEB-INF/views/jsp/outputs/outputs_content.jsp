@@ -64,10 +64,6 @@
                                             <div class="col-8" style="border-top:  2px solid #808080;border-bottom: 4px groove #808080;">
                                             <textarea style="font-size:20px;border:0 solid whitesmoke;" name="contents" id="contents" rows="4" placeholder="Content" class="form-control">${BoardList.contents}</textarea>
                                             </div>
-
-
-                                            <%--<input type="text" id="contents" name="contents" value="${BoardList.contents}" readonly="readonly" />--%>
-
                                         </div>
                                 </form>
 

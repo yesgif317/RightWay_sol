@@ -67,7 +67,7 @@
                             <c:forEach items="${BoardList}" var="board">
                                 <tr>
                                     <td>${board.no}</td>
-                                    <td><a href ="issue_content.do?no=${board.no}">${board.title}</a></td>
+                                    <td><a href ="danger_content.do?no=${board.no}">${board.title}</a></td>
                                     <td>${board.writer}</td>
                                     <td>${board.writer}</td>
                                     <td>${board.writer}</td>
@@ -83,7 +83,7 @@
                         </table>
 
                         <div style="text-align: center">
-                            <a href="/issue_write.do" class="btn btn-primary btn-icon-split">
+                            <a href="/danger_write.do" class="btn btn-primary btn-icon-split">
                           <span class="icon text-white-50">
                             <i class="fas fa-pen"></i>
                           </span>
