@@ -7,12 +7,12 @@
 
     <!--Customer-->
     <!-- Select 문 -->
-    <select id="selectPost" resultType="PostVO">
+    <select id="selectPost" resultType="NormalVO">
         SELECT * FROM post
     </select>
 
     <!-- 게시물 작성(Insert) -->
-    <insert id="insertPost" parameterType="PostVO" >
+    <insert id="insertPost" parameterType="NormalVO" >
         insert into post(p_num , p_caption, p_title, p_date, p_update_date, c_num, b_no)
         values (#{p_num}, #{p_caption}, #{p_title},#{p_date},#{p_update_date},#{c_num},#{b_no})
     </insert>

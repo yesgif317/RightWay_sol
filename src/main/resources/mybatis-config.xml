@@ -9,7 +9,8 @@
         <typeAlias type="Project.Dto.ProjectVO" alias="ProjectVO"/>
         <typeAlias type="Comment.Dto.CommentVO" alias="CommentVO"/>
         <typeAlias type="Re_Comment.Dto.Re_CommentVO" alias="Re_CommentVO"/>
-        <typeAlias type="Post.Dto.PostVO" alias="PostVO"/>
+        <typeAlias type="Post.Dto.NormalVO" alias="NormalVO"/>
+        <typeAlias type="File.Dto.FileVO" alias="FileVO"/>
     </typeAliases>
 
     <typeHandlers> <!-- java.sql.Timestamp 를 java.util.Date 형으로 반환 -->
