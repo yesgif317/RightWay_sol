@@ -11,7 +11,7 @@
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>SB Admin 2 - Register</title>
+    <title>Register</title>
 
     <!-- Custom fonts for this template-->
     <link href="/resources/vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
@@ -42,7 +42,8 @@
                         <form class="register" action="/register.do" method="POST" name="joinform">
                             <div class="form-group row">
                                 <div class="form-label-group">
-                                    <input type="text" name="c_id" class="form-control" placeholder="ID" required autofocus value="${c_id}">
+                                    <input type="text" name="cus_id" class="form-control text-lowercase" placeholder="ID" required
+                                           autofocus value="${cus_id}">
                                     <input type="hidden" name="reid" id="reid">
                                 </div>
 
@@ -57,26 +58,29 @@
 
                             <div class="form-group row">
                                 <div class="col-sm-6 mb-3 mb-sm-0">
-                                    <input type="password" class="form-control form-control-user" name="c_pwd"
+                                    <input type="password" class="form-control form-control-user" name="cus_pwd"
                                            placeholder="비밀번호">
                                 </div>
                                 <div class="col-sm-6">
-                                    <input type="password" class="form-control form-control-user" name="c_pwdcheck"
+                                    <input type="password" class="form-control form-control-user" name="cus_pwdcheck"
                                            placeholder="비밀번호 확인">
                                 </div>
                             </div>
                             <div class="form-group">
-                                <input type="text" class="form-control form-control-user" name="c_name"
+                                <input type="text" class="form-control form-control-user" name="cus_name"
                                        placeholder="이름">
                             </div>
                             <div class="form-group">
-                                <input type="email" class="form-control form-control-user" name="c_email"
+                                <input type="email" class="form-control form-control-user" name="cus_email"
                                        placeholder="Email">
                             </div>
                             <div class="form-group">
-                                <input type="text" class="form-control form-control-user" name="c_phone"
+                                <input type="text" class="form-control form-control-user" name="cus_phone"
                                        placeholder="연락처 (-제외 숫자만 입력)">
                             </div>
+
+
+
                             <div class="form-group row">
                                 <div class="col-sm-3 mb-3 mb-sm-0">
                                     <a href="" class="btn btn-dark btn-user btn-block">
@@ -88,14 +92,17 @@
                                            placeholder="회사명" disabled>
                                 </div>
                             </div>
+
                             <div class="form-group">
-                                <input type="text" class="form-control form-control-user" name="c_dep"
+                                <input type="text" class="form-control form-control-user" name="cus_dep"
                                        placeholder="부서명">
                             </div>
                             <div class="form-group">
-                                <input type="text" class="form-control form-control-user" name="c_position"
+                                <input type="text" class="form-control form-control-user" name="cus_position"
                                        placeholder="직책">
                             </div>
+                            <input type="hidden" name="cus_state" value="0">
+                            <input type="hidden" name="com_num" value="1">
                             <div class="form-group">
                                 <button type="submit" class="d-block text-center mt-2 small">회원 가입</button>
                             </div>
@@ -127,16 +134,18 @@
 
 <script>
     function idcheck() {
-        if (document.joinform.c_id.value == "") {
+        if (document.joinform.cus_id.value == "") {
             alert("아이디를 입력해주세요.");
-            document.joinform.c_id.focus();
+            document.joinform.cus_id.focus();
             return false;
         }
+
 
         var url = "/idCheck.do";
 
         window.open(url, "_blank_1",
             "toolbar=no, menubar=no, scrollbars=yes, resizable=no, width=500, height=300");
+
     }
 </script>
 

@@ -14,10 +14,10 @@ public interface CustomerService {
     CustomerVO login(LoginDTO loginDTO) throws Exception;
 
     //아이디 체크
-    CustomerVO idCheck(String id) throws Exception;
+    CustomerVO idCheck(String cus_id) throws Exception;
 
     //자동 로그인 서비스 계층
-    void keepLogin(String userId, String sessionId, Date next) throws Exception;
+    void keepLogin(String cus_id, String cus_sess_key, Date cus_sess_lim) throws Exception;
 
     CustomerVO checkLoginBefore(String value) throws Exception;
 

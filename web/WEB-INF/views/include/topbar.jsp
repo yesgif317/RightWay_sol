@@ -54,7 +54,7 @@
                 <a href="#" class="nav-link dropdown-toggle" role="button"
                    data-toggle="dropdown"
                    aria-haspopup="true" aria-expanded="false">
-                    <i class="fa-solid fa-user text-gray-700">${login.c_dep}/${login.c_position}/${login.c_name}</i>
+                    <i class="fa-solid fa-user text-gray-700">${login.cus_dep}/${login.cus_position}/${login.cus_name}</i>
                 </a>
                 <!-- Dropdown - User Information -->
                 <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in"

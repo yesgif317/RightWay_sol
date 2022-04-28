@@ -41,11 +41,11 @@
                             <div class="p-5">
                                 <form class="form-signin" id="join" action="/loginPost.do" method="post">
                                     <div class="form-group">
-                                        <input type="text" class="form-control form-control-user" id="c_id" name="c_id"
+                                        <input type="text" class="form-control form-control-user" id="cus_id" name="cus_id"
                                                placeholder="ID">
                                     </div>
                                     <div class="form-group">
-                                        <input type="password" class="form-control form-control-user" id="c_pwd" name="c_pwd"
+                                        <input type="password" class="form-control form-control-user" id="cus_pwd" name="cus_pwd"
                                                placeholder="Password">
                                     </div>
                                     <div class="form-group">

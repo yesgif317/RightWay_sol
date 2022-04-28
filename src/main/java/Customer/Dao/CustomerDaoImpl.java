@@ -23,9 +23,9 @@ public class CustomerDaoImpl implements CustomerDao {
 
     //아이디 체크
     @Override
-    public CustomerVO idCheck(String c_id) throws Exception {
+    public CustomerVO idCheck(String cus_id) throws Exception {
         System.out.println("--> sqlsellection idCheck() 기능처리 ");
-        return sqlSession.selectOne(Namespace + ".idCheck", c_id);
+        return sqlSession.selectOne(Namespace + ".idCheck", cus_id);
     }
 
     @Override
@@ -37,19 +37,19 @@ public class CustomerDaoImpl implements CustomerDao {
     @Override
     public CustomerVO login(LoginDTO loginDTO) throws Exception {
 
-        System.out.println(loginDTO.getC_id()+"-------------------");
-        System.out.println(loginDTO.getC_pwd()+"-------------------");
+        System.out.println(loginDTO.getCus_id()+"-------------------");
+        System.out.println(loginDTO.getCus_pwd()+"-------------------");
         System.out.println(loginDTO);
         return sqlSession.selectOne(Namespace + ".login", loginDTO);
     }
 
     // 로그인 유지 처리
     @Override
-    public void keepLogin(String c_id, String sessionId, Date sessionLimit) throws Exception {
+    public void keepLogin(String cus_id, String cus_sess_key, Date cus_sess_lim) throws Exception {
         Map<String, Object> paramMap = new HashMap<>();
-        paramMap.put("c_id", c_id);
-        paramMap.put("sessionId", sessionId);
-        paramMap.put("sessionLimit", sessionLimit);
+        paramMap.put("cus_id", cus_id);
+        paramMap.put("cus_sess_key", cus_sess_key);
+        paramMap.put("cus_sess_lim", cus_sess_lim);
 
         sqlSession.update(Namespace + ".keepLogin", paramMap);
     }

@@ -26,8 +26,8 @@
 <body>
 <script type="text/javascript">
     function idok() {
-        opener.joinform.c_id.value = "${c_id}";
-        opener.joinform.reid.value = "${c_id}";
+        opener.joinform.cus_id.value = "${cus_id}";
+        opener.joinform.reid.value = "${cus_id}";
         self.close();
     }
 
@@ -35,27 +35,27 @@
 
 <form method="post" class="form-signin" action="/idCheck.do" name="joinform">
     <div class="form-label-group">
-        <input type="text" id="c_id" name="c_id" class="form-control" value="${c_id}"/>
+        <input type="text" id="cus_id" name="cus_id" class="form-control" value="${cus_id}"/>
     </div>
 
     <div class="form-label-group">
-        <input class="btn btn-lg btn-secondary btn-block text-uppercase"
+        <input class="btn btn-lg btn-secondary btn-block text-lowercase"
                type="submit" value="중복확인">
     </div>
 
     <!-- 아이디가 존재할 때 -->
     <c:if test="${check == 1}">
         <script>
-            opener.document.joinform.id.value = "";
+            opener.document.joinform.cus_id.value = "";
         </script>
-        ${id}는 사용중인 아이디입니다.
+        ${cus_id}는 사용중인 아이디입니다.
     </c:if>
 
     <!-- 아이디가 존재하지 않을 때 -->
     <c:if test="${check == 0 }">
-        ${id}는 사용가능한 아이디입니다.
+        ${cus_id}는 사용가능한 아이디입니다.
         <div class="form-label-group">
-            <input class="btn btn-lg btn-secondary btn-block text-uppercase"
+            <input class="btn btn-lg btn-secondary btn-block text-lowercase"
                    type="button" value="use this ID" onclick="idok()">
         </div>
     </c:if>
