@@ -4,15 +4,15 @@ import lombok.Data;
 
 @Data
 public class LoginDTO {
-    private String c_id;
-    private String c_pwd;
+    private String cus_id;
+    private String cus_pwd;
     private boolean useCookie;
 
     @Override
     public String toString() {
         return "LoginDTO{" +
-                "c_id='" + c_id + '\'' +
-                ", c_pwd='" + c_pwd + '\'' +
+                "c_id='" + cus_id + '\'' +
+                ", c_pwd='" + cus_pwd + '\'' +
                 ", useCookie=" + useCookie +
                 '}';
     }

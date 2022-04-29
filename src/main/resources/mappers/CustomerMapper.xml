@@ -7,13 +7,16 @@
 
     <resultMap id="customerVOResultMap" type="CustomerVO">
         <result property="c_num" column="c_num"/>
-        <result property="c_id" column="c_id"/>
-        <result property="c_pwd" column="c_pwd"/>
-        <result property="c_name" column="c_name"/>
-        <result property="c_email" column="c_email"/>
-        <result property="c_phone" column="c_phone"/>
-        <result property="c_dep" column="c_dep"/>
-        <result property="c_position" column="c_position"/>
+        <result property="cus_num" column="cus_num"/>
+        <result property="cus_id" column="cus_id"/>
+        <result property="cus_pwd" column="cus_pwd"/>
+        <result property="cus_name" column="cus_name"/>
+        <result property="cus_email" column="cus_email"/>
+        <result property="cus_phone" column="cus_phone"/>
+        <result property="cus_dep" column="cus_dep"/>
+        <result property="cus_position" column="cus_position"/>
+        <result property="cus_state" column="cus_state"/>
+        <result property="com_num" column="com_num"/>
         <result property="session_key" column="session_key"/>
         <result property="session_limit" column="session_limit"/>
         <result property="com_num" column="com_num"/>
@@ -26,29 +29,29 @@
     <select id="idCheck" parameterType="String" resultType="CustomerVO">
         select *
         from customer
-        where c_id = #{c_id}
+        where cus_id = #{cus_id}
     </select>
 
     <!-- 로그인시 아이디와 비밀번호 확인 -->
     <select id="login" resultMap="customerVOResultMap">
         select *
         from customer
-        where c_id = #{c_id}
+        where cus_id = #{cus_id}
     </select>
 
 
     <!-- 로그인 유지-->
     <update id="keepLogin">
         UPDATE customer
-        set session_key   = #{sessionId}
-          , session_limit = #{sessionLimit}
-        where c_id = #{c_id}
+        set cus_sess_key   = #{cus_sess_key}
+          , cus_sess_lim = #{cus_sess_lim}
+        where cus_id = #{cus_id}
     </update>
 
     <select id = "checkUserWithSessionKey" resultMap="customerVOResultMap">
         select *
         from customer
-        where session_key = #{value}
+        where cus_sess_key = #{value}
     </select>
 
     <!-- Select 문 -->
@@ -59,8 +62,18 @@
 
     <!-- 회원가입(Insert) -->
     <insert id="insertCustomer">
-        insert into customer(c_id, c_pwd, c_name, c_email, c_phone, c_dep, c_position)
-        values (#{c_id}, #{c_pwd}, #{c_name}, #{c_email}, #{c_phone}, #{c_dep}, #{c_position})
+        insert into customer( cus_num ,cus_id, cus_pwd, cus_name, cus_email, cus_phone, cus_dep, cus_position, cus_state, com_num)
+        values ( cus_seq.NEXTVAL,#{cus_id}, #{cus_pwd}, #{cus_name}, #{cus_email}, #{cus_phone}, #{cus_dep}, #{cus_position}, #{cus_state} , #{com_num})
     </insert>
+
+
+
+
+    <!-- excel로 회원 업로딩 및 다운로드 , 임시로 c_num으로 내림차순 정렬해둠( 나중에 수정) -->
+    <select id="getUserExcel" parameterType="CustomerVO"  resultType="CustomerVO">
+        SELECT *
+        FROM customer
+        Order by cus_num asc
+    </select>
 
 </mapper>
