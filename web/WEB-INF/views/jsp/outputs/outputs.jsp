@@ -66,12 +66,12 @@
                                 <tbody>
                                 <c:forEach items="${BoardList}" var="board">
                                     <tr>
-                                        <td>${board.p_num}${board.b_num}</td>
-                                        <td>ss<%--<a href ="outputs_content.do?p_num=${board.p_num}">${board.p_title}</a>--%></td>
-                                        <td>${board.c_num}${board.p_update_date}</td>
-                                        <td>ss<%--<fmt:formatDate value="${board.p_date}" pattern="yyyy-MM-dd" />--%>${board.p_date}</td>
+                                        <td>${board.no}</td>
+                                        <td><a href ="outputs_content.do?no=${board.no}">${board.title}</a></td>
+                                        <td>${board.writer}</td>
+                                        <td><fmt:formatDate value="${board.refdate}" pattern="yyyy-MM-dd" /></td>
 
-                                        <td>${board.p_caption}</td>
+                                        <td>${board.count}</td>
                                     </tr>
                                 </c:forEach>
                                 </tbody>
