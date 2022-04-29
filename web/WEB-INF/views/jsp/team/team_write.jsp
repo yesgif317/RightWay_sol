@@ -88,7 +88,7 @@
 
                                 </a>
                                 <%--</button>--%>
-                                <a href="outputs.do" class="btn btn-secondary">
+                                <a href="team.do" class="btn btn-secondary">
                                                 <span class="icon text-white-50">
                                                        <i class="fas fa-list"></i>
                                                 </span>

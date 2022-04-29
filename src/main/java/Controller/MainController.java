@@ -9,6 +9,8 @@ import java.util.List;
 import Board.Dto.BoardVO;
 import Board.Service.BoardService;
 import Commons.Excel.Service.ExcelService;
+import Company.Dto.CompanyVO;
+import Company.Service.Service.CompanyService;
 import Customer.Dto.CustomerVO;
 import Customer.Dto.LoginDTO;
 import Customer.Service.CustomerService;
@@ -40,6 +42,9 @@ public class MainController {
 
     @Inject
     private CustomerService customerService;
+
+    @Inject
+    private CompanyService companyService;
 
     @Inject
     private ExcelService excelService;
@@ -188,7 +193,9 @@ public class MainController {
     // 산출물 게시글 작성 기능
     @RequestMapping(value = "/outputs_move_write.do", method = RequestMethod.POST)
     public String outputs_move_write(Model model, BoardVO boardVO) {
+
         String Result = service.insertBoard(boardVO);
+
         List<BoardVO> boardVoList = service.selectAll();
         // .jsp 파일로 DB 결과값 전달하기
         model.addAttribute("BoardList", Result);
@@ -353,10 +360,9 @@ public class MainController {
     @RequestMapping(value = "/company.do", method = RequestMethod.GET)
     public String company(Model model) {
         //service 클래스에서 Dao 로 접근하여 쿼리 결과값 가져오기
-        List<BoardVO> boardVoList = service.selectAll();
-
+        List<CompanyVO> companyVOList = companyService.selectCompany();
         // .jsp 파일로 DB 결과값 전달하기
-        model.addAttribute("BoardList", boardVoList);
+        model.addAttribute("CompanyList", companyVOList);
 
         return "company/company";
     }
@@ -371,6 +377,16 @@ public class MainController {
     @RequestMapping(value = "/company_content.do", method = RequestMethod.GET)
     public String company_content() {
         return "company/company_content";
+    }
+
+    //company insert
+    @RequestMapping(value = "/company_insert.do", method = RequestMethod.POST)
+    public String company_insert(Model model, CompanyVO companyVO) {
+        System.out.println(companyVO.getCom_contract());
+        System.out.println(companyVO.getCom_name());
+        String Result = companyService.insertCompany(companyVO);
+        model.addAttribute("CompanyList", Result);
+        return "redirect:/company.do";
     }
 
     //team page

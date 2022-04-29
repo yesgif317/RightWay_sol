@@ -54,7 +54,7 @@
                     </div>
                 </div>
                 <div class="text-center d-block card-header py-3">
-                    <a href="/issue_write.do" class="btn btn-info btn-icon-split">
+                    <a href="/team_write.do" class="btn btn-info">
                           <span class="icon text-white-50">
                             <i class="fas fa-pen"></i>
                           </span>
