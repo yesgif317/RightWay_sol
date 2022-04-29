@@ -61,7 +61,7 @@
                         </table>
 
                         <div style="text-align: center">
-                            <a href="/issue_write.do" class="btn btn-primary btn-icon-split">
+                            <a href="/meetingrecord_write.do" class="btn btn-primary btn-icon-split">
                           <span class="icon text-white-50">
                             <i class="fas fa-pen"></i>
                           </span>
