@@ -14,14 +14,14 @@
         <div class="container-fluid">
 
             <!-- Page Heading -->
-            <h1 class="h3 mb-2 text-gray-800">팀관리</h1>
-            <p class="mb-4">팀별 정보를 관리하는 페이지입니다.</p>
+            <h1 class="h3 mb-2 text-gray-800">프로젝트 관리</h1>
+            <p class="mb-4">전체 프로젝트를 관리하는 페이지입니다.</p>
 
             <!-- DataTales Example -->
             <div class="card shadow mb-4">
                 <div class="card-header py-3">
                     <div class="col-auto text-left">
-                        <h6 class="m-0 font-weight-bold text-primary">팀 목록</h6>
+                        <h6 class="m-0 font-weight-bold text-primary">프로젝트 목록</h6>
                     </div>
                 </div>
                 <div class="card-body">
@@ -30,10 +30,8 @@
                             <thead>
                             <tr>
                                 <th>NO</th>
-                                <th>팀명</th>
-                                <th>팀설명</th>
-                                <th>팀장</th>
-                                <th>인원수</th>
+                                <th>프로젝트명</th>
+                                <th>프로젝트리더</th>
                                 <th>등록일</th>
                             </tr>
                             </thead>
@@ -42,9 +40,7 @@
                             <c:forEach items="${PostList}" var="post">
                                 <tr>
                                     <td>${post.no}</td>
-                                    <td><a href ="team_content.jsp.do?id=${post.no}">${post.title}</a></td>
-                                    <td>${post.writer}</td>
-                                    <td>${post.writer}</td>
+                                    <td><a href ="project_content.jsp.do?id=${post.no}">${post.title}</a></td>
                                     <td>${post.writer}</td>
                                     <td>${post.writer}</td>
                                 </tr>
@@ -54,11 +50,11 @@
                     </div>
                 </div>
                 <div class="text-center d-block card-header py-3">
-                    <a href="/issue_write.do" class="btn btn-info btn-icon-split">
+                    <a href="/project_write.do" class="btn btn-info btn-icon-split">
                           <span class="icon text-white-50">
                             <i class="fas fa-pen"></i>
                           </span>
-                        <span class="text">팀등록</span>
+                        <span class="text">프로젝트 등록</span>
                     </a>
                 </div>
             </div>

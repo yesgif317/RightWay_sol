@@ -81,18 +81,15 @@
                             </c:forEach>
                             </tbody>
                         </table>
-
-                        <div style="text-align: center">
-                            <a href="/danger_write.do" class="btn btn-primary btn-icon-split">
+                    </div>
+                </div>
+                <div class="text-center d-block card-header py-3">
+                    <a href="/issue_write.do" class="btn btn-info btn-icon-split">
                           <span class="icon text-white-50">
                             <i class="fas fa-pen"></i>
                           </span>
-                                <span class="text">글 작성</span>
-                            </a>
-
-
-                        </div>
-                    </div>
+                        <span class="text">위험등록</span>
+                    </a>
                 </div>
             </div>
 

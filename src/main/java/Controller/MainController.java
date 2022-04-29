@@ -228,8 +228,8 @@ public class MainController {
         model.addAttribute("BoardList", boardVoList);
         return "/request/request";
     }
-
-    @RequestMapping(value = "/issue.do", method = RequestMethod.GET)//이슈 게시판 글목록 보기
+    //이슈 게시판 글목록 보기
+    @RequestMapping(value = "/issue.do", method = RequestMethod.GET)
     public String issue(Model model) {
         //service 클래스에서 Dao 로 접근하여 쿼리 결과값 가져오기
         List<BoardVO> boardVoList = service.selectAll();
@@ -237,15 +237,20 @@ public class MainController {
         model.addAttribute("BoardList", boardVoList);
         return "issue/issue";
     }
-
-    @RequestMapping(value = "/issue_content.do", method = RequestMethod.GET)//이슈 작성글 보기
+    //위험관리 등록
+    @RequestMapping(value = "/issue_write.do", method = RequestMethod.GET)
+    public String issue_write() {
+        return "/issue/issue_write";
+    }
+    //이슈 작성글 보기
+    @RequestMapping(value = "/issue_content.do", method = RequestMethod.GET)
     public String issue_content(@RequestParam("no") int no, Model model) {
         BoardVO Result = service.viewBoard(no);
         model.addAttribute("BoardList", Result);
         return "/issue/issue_content";
     }
-
-    @RequestMapping(value = "/issue_delete.do", method = RequestMethod.GET)//이슈 작성글 삭제
+    //이슈 작성글 삭제
+    @RequestMapping(value = "/issue_delete.do", method = RequestMethod.GET)
     public String issue_delete(@RequestParam("no") int no) {
         service.delete(no);
         return "redirect:/issue.do";
@@ -273,13 +278,14 @@ public class MainController {
         model.addAttribute("BoardList", boardVoList);
         return "regularreport/regularreport";
     }
-
-    @RequestMapping(value = "/regularreport_content.do", method = RequestMethod.GET)//정기보고 작성글 보기
+    //정기보고 작성글 보기
+    @RequestMapping(value = "/regularreport_content.do", method = RequestMethod.GET)
     public String regularreport_content(@RequestParam("no") int no, Model model)  {
         BoardVO Result = service.viewBoard(no);
         model.addAttribute("BoardList", Result);
         return "/regularreport/regularreport_content"; }
-    @RequestMapping(value = "/danger.do", method = RequestMethod.GET)//위험관리 목록 보기
+    //위험관리 목록 보기
+    @RequestMapping(value = "/danger.do", method = RequestMethod.GET)
     public String danger(Model model) {
         //service 클래스에서 Dao 로 접근하여 쿼리 결과값 가져오기
         List<BoardVO> boardVoList = service.selectAll();
@@ -287,11 +293,17 @@ public class MainController {
         model.addAttribute("BoardList", boardVoList);
         return "danger/danger";
     }
-    @RequestMapping(value = "/danger_content.do", method = RequestMethod.GET)//위험관리 작성글 보기
+    //위험관리 작성글 보기
+    @RequestMapping(value = "/danger_content.do", method = RequestMethod.GET)
     public String danger_content(@RequestParam("no") int no, Model model) {
         BoardVO Result = service.viewBoard(no);
         model.addAttribute("BoardList", Result);
         return "/danger/danger_content";
+    }
+    //위험관리 등록
+    @RequestMapping(value = "/danger_write.do", method = RequestMethod.GET)
+    public String danger_write() {
+        return "/danger/danger_write";
     }
 
     //adminpermission page
@@ -375,6 +387,30 @@ public class MainController {
     @RequestMapping(value = "/team_content.do", method = RequestMethod.GET)
     public String team_content() {
         return "team/team_content";
+    }
+
+    //project page
+    @RequestMapping(value = "/project.do", method = RequestMethod.GET)
+    public String project(Model model) {
+        //service 클래스에서 Dao 로 접근하여 쿼리 결과값 가져오기
+        List<BoardVO> boardVoList = service.selectAll();
+
+        // .jsp 파일로 DB 결과값 전달하기
+        model.addAttribute("BoardList", boardVoList);
+
+        return "project/project";
+    }
+
+    //project 글쓰기 페이지 이동
+    @RequestMapping(value = "/project_write.do", method = RequestMethod.GET)
+    public String project_write() {
+        return "project/project_write";
+    }
+
+    //project 상세 페이지 이동
+    @RequestMapping(value = "/project_content.do", method = RequestMethod.GET)
+    public String project_content() {
+        return "project/project_content";
     }
 
     //테이블 페이지 이동

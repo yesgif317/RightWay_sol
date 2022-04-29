@@ -41,13 +41,14 @@
                         <!-- form -->
                         <form class="register" action="/register.do" method="POST" name="joinform">
                             <div class="form-group row">
+                                <div class="col-sm-6 mb-3 mb-sm-0">
                                 <div class="form-label-group">
-                                    <input type="text" name="cus_id" class="form-control text-lowercase" placeholder="ID" required
+                                    <input type="text" name="cus_id" class="form-control text-lowercase" placeholder="아이디" required
                                            autofocus value="${cus_id}">
                                     <input type="hidden" name="reid" id="reid">
                                 </div>
-
-                                <div class="form-label-group">
+                                </div>
+                                <div class="form-label-group col-sm-3">
                                     <button
                                             class="btn btn-dark btn-user btn-block"
                                             type="button" onclick="idcheck()">중복 확인
@@ -83,7 +84,7 @@
 
                             <div class="form-group row">
                                 <div class="col-sm-3 mb-3 mb-sm-0">
-                                    <a href="" class="btn btn-dark btn-user btn-block">
+                                    <a class="btn btn-dark btn-user btn-block">
                                         회사선택
                                     </a>
                                 </div>
@@ -104,7 +105,7 @@
                             <input type="hidden" name="cus_state" value="0">
                             <input type="hidden" name="com_num" value="1">
                             <div class="form-group">
-                                <button type="submit" class="d-block text-center mt-2 small">회원 가입</button>
+                                <button type="submit" class="btn btn-dark btn-user btn-block">회원 가입</button>
                             </div>
                         </form>
                         <hr>

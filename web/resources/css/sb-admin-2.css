@@ -10047,11 +10047,11 @@ a:focus {
 }
 
 .border-left-warning {
-  border-left: 0.25rem solid #80641e !important;
+  border-left: 0.25rem solid #f6c23e !important;
 }
 
 .border-bottom-warning {
-  border-bottom: 0.25rem solid #80641EFF !important;
+  border-bottom: 0.25rem solid #f6c23e !important;
 }
 
 .border-left-danger {
@@ -10059,7 +10059,7 @@ a:focus {
 }
 
 .border-bottom-danger {
-  border-bottom: 0.25rem solid #942e26 !important;
+  border-bottom: 0.25rem solid #BE3C30FF !important;
 }
 
 .border-left-light {

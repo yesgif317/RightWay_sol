@@ -31,38 +31,66 @@
                                         <div class="col-12 col-md-7"><input type="text" id="title-input" name="text-input" placeholder="제목을 입력해주세요." class="form-control" value="${title}"></div>
                                     </div>
                                     <div class="row form-group">
-                                        <div class="col col-md-3 text-right"><label for="purpose-input" class=" form-control-label fa-solid text-gray-800 mt-2">담당자</label></div>
-                                        <div class="col-12 col-md-7"><input type="email" id="purpose-input" name="purpose-input" placeholder="담당자를 지정해주세요." class="form-control" value="${writer}"></div>
+                                        <div class="col col-md-3 text-right"><label class=" form-control-label fa-solid text-gray-800 mt-2">담당자</label></div>
+                                        <div class="dropdown col-md-5">
+                                            <button class="btn btn-secondary" type="button" id="managerbtn">
+                                            담당자선택
+                                        </button>
+                                        </div>
                                     </div>
+
                                     <div class="row form-group">
-                                        <div class="col col-md-3 text-right"><label for="host-input" class=" form-control-label fa-solid text-gray-800 mt-2"><sup class="text-danger small">*</sup>중요도</label></div>
-                                        <div class="dropdown mb-4 col-md-2">
-                                            <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                        <div class="col col-md-3 text-right"><label for="impMenuButton" class=" form-control-label fa-solid text-gray-800 mt-2"><sup class="text-danger small">*</sup>중요도</label></div>
+                                        <div class="dropdown col-md-7">
+                                            <button class="btn btn-secondary dropdown-toggle" type="button" id="impMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                                 중요도선택
                                             </button>
-                                            <div class="dropdown-menu animated--fade-in" aria-labelledby="dropdownMenuButton">
-                                                <a class="dropdown-item" href="#">A</a>
-                                                <a class="dropdown-item" href="#">B</a>
-                                                <a class="dropdown-item" href="#">C</a>
+                                            <div class="dropdown-menu animated--fade-in" aria-labelledby="impMenuButton">
+                                                <a class="dropdown-item text-danger" href="#">High</a>
+                                                <div class="dropdown-divider"></div>
+                                                <a class="dropdown-item text-warning" href="#">Medium</a>
+                                                <div class="dropdown-divider"></div>
+                                                <a class="dropdown-item text-info" href="#">Low</a>
+                                            </div>
+                                            <label class="ml-2" for="impMenuButton" id="implabel">중요도를 선택해주세요.</label>
+                                        </div>
+                                    </div>
+
+                                    <div class="row form-group">
+                                        <div class="col col-md-3 text-right"></div>
+                                        <div class="dropdown col-md-7">
+                                            <div class="card mb-4">
+                                                <!-- Card Header - Accordion -->
+                                                <a href="#impguide" class="d-block card-header py-2 collapsed" data-toggle="collapse" aria-expanded="true" aria-controls="impguide">
+                                                    <small class="font-weight-bold text-primary">중요도 가이드</small>
+                                                </a>
+                                                <div class="collapse" id="impguide">
+                                                    <div class="card-body">
+                                                        <div><strong class="text-danger">High  </strong> - 회사나 프로젝트에 치명적인 영향을 미치는 수준의 문제</div>
+                                                        <div><strong class="text-warning">Medium  </strong> - 프로젝트에서 처리가 가능하나 종결까지 10일 초과가 예상되는 문제</div>
+                                                        <div><strong class="text-info">Low  </strong> - 프로젝트에서 10일 이내에 처리할수 있는 문제</div>
+                                                    </div>
+                                                </div>
                                             </div>
                                         </div>
-                                        <div class="col-12 col-md-5"><input type="text" id="host-input" name="host-input" placeholder="중요도를 선택해주세요." class="form-control" value="${writer}"></div>
                                     </div>
 
                                     <%--수정시에만 나오도록--%>
                                     <div class="row form-group">
-                                        <div class="col col-md-3 text-right"><label for="supervise-input" class=" form-control-label fa-solid text-gray-800 mt-2">진행상태</label></div>
-                                        <div class="dropdown mb-4 col-md-2">
+                                        <div class="col col-md-3 text-right"><label class=" form-control-label fa-solid text-gray-800 mt-2">진행상태</label></div>
+                                        <div class="dropdown col-md-5">
                                             <button class="btn btn-secondary dropdown-toggle" type="button" id="progressbtn" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                                 진행상태
                                             </button>
                                             <div class="dropdown-menu animated--fade-in" aria-labelledby="dropdownMenuButton">
                                                 <a class="dropdown-item" href="#">대기</a>
+                                                <div class="dropdown-divider"></div>
                                                 <a class="dropdown-item" href="#">진행 중</a>
+                                                <div class="dropdown-divider"></div>
                                                 <a class="dropdown-item" href="#">종료</a>
                                             </div>
+                                            <label class="ml-2" for="progressbtn" id="progresslabel">진행상태를 선택해주세요.</label>
                                         </div>
-                                        <div class="col-12 col-md-5"><input type="text" id="supervise-input" name="supervise-input" placeholder="진행상태 입력해주세요." class="form-control" value="${writer}"></div>
                                     </div>
 
                                     <div class="row form-group">
@@ -71,9 +99,9 @@
                                     </div>
                                     <div class="row form-group">
                                         <div class="col col-md-3 text-right"><label for="accceptdate-input" class=" form-control-label fa-solid text-gray-800 mt-2">발생일자/해결일자</label></div>
-                                        <div class="col-12 col-md-3"><input type="date" name="accceptdate-input" id="accceptdate-input" class="form-control"></div>
-                                        <div class="col-12 col-md-1 text-center fa-solid text-gray-800 mt-2">~</div>
-                                        <div class="col-12 col-md-3"><input type="date" name="accceptdate-input2" id="accceptdate-input2" class="form-control"></div>
+                                        <div class="col-12 col-md-2"><input type="date" name="accceptdate-input" id="accceptdate-input" class="form-control"></div>
+                                        <div class="text-center fa-solid text-gray-800 mt-2">~</div>
+                                        <div class="col-12 col-md-2"><input type="date" name="accceptdate-input2" id="accceptdate-input2" class="form-control"></div>
                                     </div>
                                     <div class="row form-group">
                                         <div class="col col-md-3 text-right"><label for="contents" class=" form-control-label fa-solid text-gray-800 mt-2">첨부파일</label></div>

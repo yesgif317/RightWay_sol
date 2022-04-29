@@ -34,20 +34,14 @@
                                             <div class="col col-md-3 text-right"><label for="purpose-input" class=" form-control-label fa-solid text-gray-800 mt-2">행사목적</label></div>
                                             <div class="col-12 col-md-7"><input type="email" id="purpose-input" name="purpose-input" placeholder="행사목적을 입력해주세요." class="form-control" value="${writer}"></div>
                                         </div>
+
                                         <div class="row form-group">
-                                            <div class="col col-md-3 text-right"><label for="date-input" class=" form-control-label fa-solid text-gray-800 mt-2"><sup class="text-danger small">*</sup>행사기간</label></div>
-                                            <div class="col-12 col-md-2"><input name="date-input" id="date-input" placeholder="행사시작일" class="form-control" disabled>${contents}</div>
-                                            <div>
-                                                <a href="" class="btn btn-secondary mt-1">
-                                                    <i class="fa-solid fa-calendar-days"></i>
-                                                </a>
-                                            </div>
-                                            <div class="col-12 col-md-1 text-center fa-solid text-gray-800 mt-2">~</div>
-                                            <div class="col-12 col-md-2"><input name="date-input2" id="date-input2" placeholder="행사종료일" class="form-control" disabled>${contents}</div>
-                                            <div><a href="" class="btn btn-secondary mt-1">
-                                                    <i class="fa-solid fa-calendar-days"></i>
-                                                </a></div>
+                                            <div class="col col-md-3 text-right"><label for="start-date-input" class=" form-control-label fa-solid text-gray-800 mt-2">행사기간</label></div>
+                                            <div class="col-12 col-md-2"><input type="date" name="start-date-input" id="start-date-input" class="form-control"></div>
+                                            <div class="text-center fa-solid text-gray-800 mt-2">~</div>
+                                            <div class="col-12 col-md-2"><input type="date" name="end-date-input" id="nd-date-input" class="form-control"></div>
                                         </div>
+
                                         <div class="row form-group">
                                             <div class="col col-md-3 text-right"><label for="host-input" class=" form-control-label fa-solid text-gray-800 mt-2">행사주최</label></div>
                                             <div class="col-12 col-md-7"><input type="text" id="host-input" name="host-input" placeholder="행사주최를 입력해주세요." class="form-control" value="${writer}"></div>
@@ -77,16 +71,10 @@
                                             <div class="col-12 col-md-7"><input type="number" id="limit-input" name="limit-input" placeholder="정원을 입력해주세요." class="form-control" value="${writer}"></div>
                                         </div>
                                         <div class="row form-group">
-                                            <div class="col col-md-3 text-right"><label for="accceptdate-input" class=" form-control-label fa-solid text-gray-800 mt-2"><sup class="text-danger small">*</sup>접수기간</label></div>
-                                            <div class="col-12 col-md-2"><input name="accceptdate-input" id="accceptdate-input" placeholder="접수시작일" class="form-control" disabled>${contents}</div>
-                                            <div><a href="" class="btn btn-secondary mt-1">
-                                                    <i class="fa-solid fa-calendar-days"></i>
-                                                </a></div>
-                                            <div class="col-12 col-md-1 text-center fa-solid text-gray-800 mt-2">~</div>
-                                            <div class="col-12 col-md-2"><input name="accceptdate-input2" id="accceptdate-input2" placeholder="접수종료일" class="form-control" disabled>${contents}</div>
-                                            <div><a href="" class="btn btn-secondary mt-1">
-                                                    <i class="fa-solid fa-calendar-days"></i>
-                                                </a></div>
+                                            <div class="col col-md-3 text-right"><label for="act-start-date-input" class=" form-control-label fa-solid text-gray-800 mt-2">접수기간</label></div>
+                                            <div class="col-12 col-md-2"><input type="date" name="act-start-date-input" id="act-start-date-input" class="form-control"></div>
+                                            <div class="text-center fa-solid text-gray-800 mt-2">~</div>
+                                            <div class="col-12 col-md-2"><input type="date" name="act-end-date-input" id="act-end-date-input" class="form-control"></div>
                                         </div>
                                     </form>
                                 </div>
