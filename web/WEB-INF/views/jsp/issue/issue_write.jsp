@@ -1,10 +1,3 @@
-<%--
-  Created by IntelliJ IDEA.
-  User: hate5
-  Date: 2020-09-06
-  Time: 오후 9:25
-  To change this template use File | Settings | File Templates.
---%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
@@ -20,13 +13,6 @@
         <jsp:include page="../../include/topbar.jsp" flush="true" />
         <!-- Begin Page Content -->
         <div class="container-fluid">
-
-            <!-- Page Heading -->
-            <h1 class="h4 mb-2 text-gray-800 ">이슈관리</h1>
-            <p class="mb-4">
-                이슈ID(착수/계획/분석/설계/구현및인도/완료/하자보수/전체공정) 이슈등급(A/B/C)
-            </p>
-
             <div class="row">
                 <div class="col-lg-12">
 

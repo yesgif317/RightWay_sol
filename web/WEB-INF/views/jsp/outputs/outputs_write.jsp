@@ -1,15 +1,7 @@
-<%--
-  Created by IntelliJ IDEA.
-  User: hate5
-  Date: 2020-09-06
-  Time: 오후 9:25
-  To change this template use File | Settings | File Templates.
---%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
-    <jsp:include page="../../include/header.jsp" flush="true" />
-    <jsp:include page="../../include/sidebar.jsp" flush="true" />
+<jsp:include page="../../include/header.jsp" flush="true" />
+<jsp:include page="../../include/sidebar.jsp" flush="true" />
 
     <!-- Content Wrapper -->
     <div id="content-wrapper" class="d-flex flex-column" >
@@ -20,21 +12,14 @@
             <jsp:include page="../../include/topbar.jsp" flush="true" />
             <!-- Begin Page Content -->
             <div class="container-fluid">
-
-                <!-- Page Heading -->
-                <h1 class="h4 mb-2 text-gray-800 ">산출물</h1>
-                <p class="mb-4">
-                    산출물이란 프로젝트나 프로그램의 가시적이고 측정 가능한 결과물을 말합니다.
-                </p>
-
                 <div class="row">
                     <div class="col-lg-12">
 
                         <!-- Collapsable Card Example -->
                         <div class="card shadow mb-4">
                             <!-- Card Header - Accordion -->
-                            <a href="#collapseCardExample" class="d-block card-header py-3" data-toggle="collapse" role="button" aria-expanded="true" aria-controls="collapseCardExample">
-                                <h6 class="m-0 font-weight-bold text-primary">산출물 게시물 작성 중</h6>
+                            <a class="d-block card-header py-3">
+                                <h6 class="m-0 font-weight-bold text-primary text-center">산출물 등록</h6>
 
                             </a>
                             <!-- Card Content - Collapse -->
@@ -43,87 +28,66 @@
                                     <form method="post" action="outputs_move_write.do" id="outputswriteform" enctype="application/x-www-form-urlencoded" class="form-horizontal">
 
                                         <div class="row form-group">
-                                            <div class="col col-md-3 text-right"><label for="title" class=" form-control-label">제목</label></div>
-                                            <div class="col-12 col-md-7"><input type="text" id="title" name="title" placeholder="Text" class="form-control"><small class="form-text text-muted">산출물 형식에 맞추어 작성해 주세요</small></div>
+                                            <div class="col col-md-3 text-right"><label for="title" class=" form-control-label fa-solid text-gray-800 mt-2"><sup class="text-danger small">*</sup>제목</label></div>
+                                            <div class="col-12 col-md-7"><input type="text" id="title" name="title" placeholder="제목을 입력해주세요." class="form-control" value=""></div>
                                         </div>
-
                                         <div class="row form-group">
-                                            <div class="col col-md-3 text-right"><label class=" form-control-label">작성자</label></div>
-                                            <div class="col-12 col-md-7"><input type="text" id="writer" name="writer" placeholder="Text" class="form-control"><small class="help-block form-text">업무 담당자가 작성해 주세요</small></div>
+                                            <div class="col col-md-3 text-right"><label for="contents" class=" form-control-label fa-solid text-gray-800 mt-2"><sup class="text-danger small">*</sup>내용</label></div>
+                                            <div class="col-12 col-md-7"> <textarea name="contents" id="contents" rows="9" placeholder="산출물 내용을 입력해주세요." class="form-control"></textarea></div>
                                         </div>
-
                                         <div class="row form-group">
-                                            <div class="col col-md-3 text-right"><label for="contents" class=" form-control-label">내용 작성</label></div>
-                                            <div class="col-12 col-md-7"> <textarea name="contents" id="contents" rows="9" placeholder="Content" class="form-control"></textarea></div>
+                                            <div class="col col-md-3 text-right"><label for="contents" class=" form-control-label fa-solid text-gray-800 mt-2">첨부파일</label></div>
+                                            <div class="col-12 col-md-9"><input type="file" name="uploadFile" multiple></div>
                                         </div>
-                                        <div style="text-align: center">
-                                            <%--<button type="submit" style="border:none;">--%>
-                                            <a <%--href="javascript:goSubmit();"--%>  onclick="return chk_form()" class="btn btn-primary btn-icon-split">
+                                    </form>
+
+                                </div>
+
+                                <div class="text-center d-block card-header py-3">
+                                    <%--<button type="submit" style="border:none;">--%>
+                                    <a <%--href="javascript:goSubmit();"--%>  onclick="return chk_form()" class="btn btn-info">
                                                 <span class="icon text-white-50">
                                                        <i class="fas fa-pen"></i>
                                                 </span>
-
-                                                <span class="text" style="color:white">  글쓰기</span>
-
-                                                <script>
-                                                    function chk_form() {
-                                                        if( document.getElementById("contents").value==''){
-                                                            $('#exampleModal').modal('show')
-                                                        }
-                                                        else if ( document.getElementById("title").value=='' ) {
-                                                            $('#exampleModal').modal('show')
-                                                            }
-                                                        else {
-                                                                document.getElementById('outputswriteform').submit();
-                                                            }
-                                                    }
-                                                </script>
-
-
-
-                                                <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                                                    <div class="modal-dialog" role="document">
-                                                        <div class="modal-content">
-                                                            <div class="modal-header">
-                                                                <h5 class="modal-title" id="exampleModalLabel" align="center">작성글 확인</h5>
-                                                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                                                    <span aria-hidden="true">&times;</span>
-                                                                </button>
-                                                            </div>
-                                                            <div class="modal-body">
-                                                                제목 또는 내용이 작성되지 않았습니다.
-                                                            </div>
-                                                        </div>
+                                        <span class="text" style="color:white">등록</span>
+                                        <script>
+                                            function chk_form() {
+                                                if( document.getElementById("contents").value==''||document.getElementById("title").value==''){
+                                                    $('#exampleModal').modal('show')
+                                                }
+                                                else {
+                                                    document.getElementById('outputswriteform').submit();
+                                                }
+                                            }
+                                        </script>
+                                        <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                            <div class="modal-dialog" role="document">
+                                                <div class="modal-content">
+                                                    <div class="modal-header">
+                                                        <h5 class="modal-title" id="exampleModalLabel">작성글 확인</h5>
+                                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                            <span aria-hidden="true">&times;</span>
+                                                        </button>
+                                                    </div>
+                                                    <div class="modal-body">
+                                                        제목 또는 내용이 작성되지 않았습니다.
+                                                    </div>
+                                                    <div class="modal-footer">
+                                                        <button class="btn btn-secondary" type="button" data-dismiss="modal">확인</button>
                                                     </div>
                                                 </div>
-
-                                            </a>
-                                            <%--</button>--%>
-                                            <a href="outputs.do;" class="btn btn-primary btn-icon-split">
-                                                <span class="icon text-white-50">
-                                                       <i class="fas fa-pen"></i>
-                                                </span>
-                                                <span class="text">  돌아가기</span>
-
-                                            </a>
-                                            <a href="javascript:goSubmit();" class="btn btn-primary btn-icon-split">
-                                                <span class="icon text-white-50">
-                                                       <i class="fas fa-pen"></i>
-                                                </span>
-                                                <span class="text">  임시저장</span>
-
-                                            </a>
-                                            <a href="javascript:goSubmit();" class="btn btn-primary btn-icon-split">
-                                                 <span class="icon text-white-50">
-                                                        <i class="fas fa-pen"></i>
-                                                 </span>
-                                                <span class="text">  불러오기</span>
-
-                                            </a>
+                                            </div>
                                         </div>
-                                        <br>
-                                        <br>
-                                    </form>
+
+                                    </a>
+                                    <%--</button>--%>
+                                    <a href="outputs.do" class="btn btn-secondary">
+                                                <span class="icon text-white-50">
+                                                       <i class="fas fa-list"></i>
+                                                </span>
+                                        <span class="text">취소</span>
+
+                                    </a>
                                 </div>
                             </div>
                         </div>
@@ -142,17 +106,11 @@
 
     </div>
         <!-- End of Page Wrapper -->
-<!-- Scroll to Top Button-->
-<a class="scroll-to-top rounded" href="#page-top">
-    <i class="fas fa-angle-up"></i>
-</a>
 
         <jsp:include page="../../include/logoutModal.jsp" flush="true" />
 <!-- Bootstrap core JavaScript-->
 <script src="<c:url value="/resources/vendor/jquery/jquery.min.js"/>"></script>
 <script src="<c:url value="/resources/vendor/bootstrap/js/bootstrap.bundle.min.js"/>"></script>
-
-<script src="<c:url value="/resources/vendor/datatables/dataTable.js"/>"></script>
 
 <!-- Core plugin JavaScript-->
 <script src="<c:url value="/resources/vendor/jquery-easing/jquery.easing.min.js"/>"></script>
@@ -165,5 +123,3 @@
         var form = document.getElementById('tableswriteform').submit();
     }
 </script>
-
-</body>

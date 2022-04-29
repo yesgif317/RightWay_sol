@@ -2,6 +2,8 @@ package Controller;
 
 import Board.Dto.BoardVO;
 import Board.Service.BoardService;
+import Comment.Dto.CommentVO;
+import Comment.Service.CommentService;
 import Customer.Dto.CustomerVO;
 import Customer.Dto.LoginDTO;
 import Customer.Service.CustomerService;
@@ -45,7 +47,7 @@ public class MainController {
     public String loginGET(@ModelAttribute("LoginDTO") LoginDTO loginDTO) {
         return "user/login";
     }
-
+    //로그인 Post
     @RequestMapping(value = "/loginPost.do", method = RequestMethod.POST)
     public void loginPOST(LoginDTO loginDTO, HttpSession httpSession, Model model) throws Exception {
 
@@ -137,13 +139,13 @@ public class MainController {
         return "user/forgot_password";
     }
 
-
-    @RequestMapping(value = "/outputs_write.do", method = RequestMethod.GET)  //산출물 게시글 작성 페이지
+    //산출물 게시글 작성 페이지
+    @RequestMapping(value = "/outputs_write.do", method = RequestMethod.GET)
     public String outputs_write() {
         return "/outputs/outputs_write";
     }
-
-    @RequestMapping(value = "/outputs.do", method = RequestMethod.GET)//산출물 게시판 글목록 보기
+    //산출물 게시판 글목록 보기
+    @RequestMapping(value = "/outputs.do", method = RequestMethod.GET)
     public String outputs(Model model) {
         //service 클래스에서 Dao 로 접근하여 쿼리 결과값 가져오기
         List<BoardVO> boardVoList = service.selectAll();
@@ -151,36 +153,36 @@ public class MainController {
         model.addAttribute("BoardList", boardVoList);
         return "/outputs/outputs";
     }
-
-    @RequestMapping(value = "/outputs_content.do", method = RequestMethod.GET)//산출물 작성글 보기
+    //산출물 작성글 보기
+    @RequestMapping(value = "/outputs_content.do", method = RequestMethod.GET)
     public String outputs_content(@RequestParam("no") int no, Model model) {
         BoardVO Result = service.viewBoard(no);
         model.addAttribute("BoardList", Result);
         return "/outputs/outputs_content";
     }
-
-    @RequestMapping(value = "/outputs_delete.do", method = RequestMethod.GET)//산출물 작성글 삭제
+    //산출물 작성글 삭제
+    @RequestMapping(value = "/outputs_delete.do", method = RequestMethod.GET)
     public String outputs_delete(@RequestParam("no") int no) {
         service.delete(no);
         return "redirect:/outputs.do";
     }
-
-    @RequestMapping(value = "/outputs_update.do", method = RequestMethod.GET)  //산출물 게시글 수정 페이지
+    //산출물 게시글 수정 페이지
+    @RequestMapping(value = "/outputs_update.do", method = RequestMethod.GET)
     public String outputs_update(@RequestParam("no") int no, Model model) {
         BoardVO Result = service.viewBoard(no);
         model.addAttribute("BoardList", Result);
         return "/outputs/outputs_update";
     }
-
-    @RequestMapping(value = "/outputs_move_update.do", method = RequestMethod.POST)//산출물 작성글 수정 기능
+    //산출물 작성글 수정 기능
+    @RequestMapping(value = "/outputs_move_update.do", method = RequestMethod.POST)
     public String outputs_move_update(Model model, BoardVO boardVO) {
 
         String Result = service.updateBoard(boardVO);
         model.addAttribute("BoardList", Result);
         return "redirect:/outputs.do";
     }
-
-    @RequestMapping(value = "/outputs_move_write.do", method = RequestMethod.POST)// 산출물 게시글 작성 기능
+    // 산출물 게시글 작성 기능
+    @RequestMapping(value = "/outputs_move_write.do", method = RequestMethod.POST)
     public String outputs_move_write(Model model, BoardVO boardVO) {
         String Result = service.insertBoard(boardVO);
         List<BoardVO> boardVoList = service.selectAll();
@@ -188,15 +190,15 @@ public class MainController {
         model.addAttribute("BoardList", Result);
         return "redirect:/outputs.do";
     }
-
-    @RequestMapping(value = "/issue_update.do", method = RequestMethod.GET)  //산출물 게시글 수정 페이지
+    //산출물 게시글 수정 페이지
+    @RequestMapping(value = "/issue_update.do", method = RequestMethod.GET)
     public String issue_update(@RequestParam("no") int no, Model model) {
         BoardVO Result = service.viewBoard(no);
         model.addAttribute("BoardList", Result);
         return "/issue/issue_update";
     }
-
-    @RequestMapping(value = "/notice.do", method = RequestMethod.GET)//공지사항 게시판 글목록 보기
+    //공지사항 게시판 글목록 보기
+    @RequestMapping(value = "/notice.do", method = RequestMethod.GET)
     public String notice(Model model) {
         //service 클래스에서 Dao 로 접근하여 쿼리 결과값 가져오기
         List<BoardVO> boardVoList = service.selectAll();
@@ -205,7 +207,10 @@ public class MainController {
         return "/notice/notice";
     }
 
-    @RequestMapping(value = "/request.do", method = RequestMethod.GET)//요청사항 게시판 글목록 보기
+
+
+    //요청사항 게시판 글목록 보기
+    @RequestMapping(value = "/request.do", method = RequestMethod.GET)
     public String request(Model model) {
         //service 클래스에서 Dao 로 접근하여 쿼리 결과값 가져오기
         List<BoardVO> boardVoList = service.selectAll();
@@ -213,7 +218,6 @@ public class MainController {
         model.addAttribute("BoardList", boardVoList);
         return "/request/request";
     }
-
 
     @RequestMapping(value = "/issue.do", method = RequestMethod.GET)//이슈 게시판 글목록 보기
     public String issue(Model model) {
@@ -223,6 +227,7 @@ public class MainController {
         model.addAttribute("BoardList", boardVoList);
         return "issue/issue";
     }
+
     @RequestMapping(value = "/issue_content.do", method = RequestMethod.GET)//이슈 작성글 보기
     public String issue_content(@RequestParam("no") int no, Model model)  {
         BoardVO Result = service.viewBoard(no);
@@ -243,11 +248,13 @@ public class MainController {
         model.addAttribute("BoardList", boardVoList);
         return "meetingrecord/meetingrecord";
     }
+
     @RequestMapping(value = "/meetingrecord_content.do", method = RequestMethod.GET)//회의록 작성글 보기
     public String meetingrecord_content(@RequestParam("no") int no, Model model)  {
         BoardVO Result = service.viewBoard(no);
         model.addAttribute("BoardList", Result);
         return "/meetingrecord/meetingrecord_content"; }
+
     @RequestMapping(value = "/regularreport.do", method = RequestMethod.GET)//정기보고 목록 보기
     public String regularreport(Model model) {
         //service 클래스에서 Dao 로 접근하여 쿼리 결과값 가져오기
@@ -256,11 +263,13 @@ public class MainController {
         model.addAttribute("BoardList", boardVoList);
         return "regularreport/regularreport";
     }
+
     @RequestMapping(value = "/regularreport_content.do", method = RequestMethod.GET)//정기보고 작성글 보기
     public String regularreport_content(@RequestParam("no") int no, Model model)  {
         BoardVO Result = service.viewBoard(no);
         model.addAttribute("BoardList", Result);
         return "/regularreport/regularreport_content"; }
+
     @RequestMapping(value = "/danger.do", method = RequestMethod.GET)//위험관리 목록 보기
     public String danger(Model model) {
         //service 클래스에서 Dao 로 접근하여 쿼리 결과값 가져오기
@@ -269,19 +278,24 @@ public class MainController {
         model.addAttribute("BoardList", boardVoList);
         return "danger/danger";
     }
+
+    //위험관리 글쓰기 페이지 이동
+    @RequestMapping(value = "/danger_write.do", method = RequestMethod.GET)
+    public String danger_write() {
+        return "danger/danger_write";
+    }
+
     @RequestMapping(value = "/danger_content.do", method = RequestMethod.GET)//위험관리 작성글 보기
     public String danger_content(@RequestParam("no") int no, Model model)  {
         BoardVO Result = service.viewBoard(no);
         model.addAttribute("BoardList", Result);
         return "/danger/danger_content"; }
 
-
     //adminpermission page
     @RequestMapping(value = "/adminpermission.do", method = RequestMethod.GET)
     public String adminpermission(Model model) {
         //service 클래스에서 Dao 로 접근하여 쿼리 결과값 가져오기
         List<BoardVO> boardVoList = service.selectAll();
-
         // .jsp 파일로 DB 결과값 전달하기
         model.addAttribute("BoardList", boardVoList);
 
@@ -427,7 +441,6 @@ public class MainController {
     public String blank() {
         return "blank";
     }
-
 
     @GetMapping("/file-upload.do")
     public void uploadAjax() {

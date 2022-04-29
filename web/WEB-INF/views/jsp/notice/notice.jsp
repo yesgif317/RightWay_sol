@@ -40,7 +40,7 @@
                 <div class="card-body"  >
                     <div class="table-responsive" >
 
-                        <table class="table table-bordered table-hover row-border" id="dataTable" width="90%" cellspacing="0" style="scroll: no;overflow: hidden;overflow-x: hidden;">
+                        <table class="table table-bordered table-hover row-border" id="dataTable" cellspacing="0" style="scroll: no;overflow: hidden;overflow-x: hidden;">
                             <thead>
                             <tr >
                                 <th width="10%">번호</th>
