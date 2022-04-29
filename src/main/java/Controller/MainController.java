@@ -176,13 +176,7 @@ public class MainController {
         service.delete(no);
         return "redirect:/outputs.do";
     }
-    //산출물 게시글 수정 페이지
-    @RequestMapping(value = "/outputs_update.do", method = RequestMethod.GET)
-    public String outputs_update(@RequestParam("no") int no, Model model) {
-        BoardVO Result = service.viewBoard(no);
-        model.addAttribute("BoardList", Result);
-        return "/outputs/outputs_update";
-    }
+
     //산출물 작성글 수정 기능
     @RequestMapping(value = "/outputs_move_update.do", method = RequestMethod.POST)
     public String outputs_move_update(Model model, BoardVO boardVO) {
