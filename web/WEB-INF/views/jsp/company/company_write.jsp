@@ -20,33 +20,59 @@
                     <div class="card shadow mb-4">
                         <!-- Card Header - Accordion -->
                         <a class="d-block card-header py-3">
-                            <h6 class="m-0 font-weight-bold text-primary text-center">업체등록</h6>
+                            <%
+                                int test = Integer.parseInt(request.getParameter("update")) ;
+                                pageContext.setAttribute("test", test) ;
+                            %>
+                            <c:choose>
+                                <c:when test="${test eq '1'}">
+                                    <h6 class="m-0 font-weight-bold text-primary text-center">업체 수정</h6>
+                                </c:when>
+                                <c:otherwise>
+                                    <h6 class="m-0 font-weight-bold text-primary text-center">업체 등록</h6>
+                                </c:otherwise>
+                            </c:choose>
                         </a>
                         <!-- Card Content - Collapse -->
                         <div class="collapse show" id="collapseCardExample">
                             <div class="card-body">
-                                <form method="post" action="company_insert.do" id="companyinsertform" enctype="application/x-www-form-urlencoded" class="form-horizontal">
+
+                                <c:choose>
+                                    <c:when test="${test eq '1'}">
+                                    <form method="post" action="company_update.do?com_num=${CompanyList.com_num}" id="companyupdateform" enctype="application/x-www-form-urlencoded" class="form-horizontal">
+                                    </c:when>
+                                            <c:otherwise>
+                                        <form method="post" action="company_insert.do" id="companywriteform" enctype="application/x-www-form-urlencoded" class="form-horizontal">
+                                            </c:otherwise>
+                                            </c:choose>
                                     <div class="row form-group">
                                         <div class="col col-md-3 text-right"><label for="com_name" class=" form-control-label fa-solid text-gray-800 m-2"><sup class="text-danger small">*</sup>회사명</label></div>
-                                        <div class="col-12 col-md-7"><input type="text" id="com_name" name="com_name" placeholder="회사명을 입력해주세요." class="form-control" value="${title}"></div>
+                                        <div class="col-12 col-md-7"><input type="text" id="com_name" name="com_name" placeholder="회사명을 입력해주세요." class="form-control" value="${CompanyList.com_name}"></div>
                                     </div>
                                     <div class="row form-group">
                                         <div class="col col-md-3 text-right"><label for="com_tel" class=" form-control-label fa-solid text-gray-800 m-2">전화번호</label></div>
-                                        <div class="col-12 col-md-7 col-sm-4"><input type="tel" id="com_tel" name="com_tel" placeholder="회사 대표번호를 입력해주세요." class="form-control" value="${writer}"></div>
+                                        <div class="col-12 col-md-7 col-sm-4"><input type="tel" id="com_tel" name="com_tel" placeholder="회사 대표번호를 입력해주세요." class="form-control" value="${CompanyList.com_tel}"></div>
                                     </div>
                                     <div class="row form-group">
                                         <div class="col col-md-3 text-right"><label for="com_addr" class=" form-control-label fa-solid text-gray-800 m-2">회사주소</label></div>
-                                        <div class="col-12 col-md-7 col-sm-4"><input type="text" id="com_addr" name="com_addr" placeholder="주소를 입력해주세요." class="form-control" value="${writer}"></div>
+                                        <div class="col-12 col-md-7 col-sm-4"><input type="text" id="com_addr" name="com_addr" placeholder="주소를 입력해주세요." class="form-control" value="${CompanyList.com_addr}"></div>
                                     </div>
                                     <div class="row form-group">
                                         <div class="col col-md-3 text-right"><label for="com_business" class=" form-control-label fa-solid text-gray-800 m-2">주요업무</label></div>
-                                        <div class="col-12 col-md-7 col-sm-4"><input type="text" id="com_business" name="com_business" placeholder="주요업무 입력해주세요." class="form-control" value="${writer}"></div>
+                                        <div class="col-12 col-md-7 col-sm-4"><input type="text" id="com_business" name="com_business" placeholder="주요업무 입력해주세요." class="form-control" value="${CompanyList.com_business}"></div>
                                     </div>
                                     <div class="row form-group">
-                                        <div class="col col-md-3 text-right"><label for="progressbtn" class="form-control-label fa-solid text-gray-800 mt-2">회사규모</label></div>
+                                        <div class="col col-md-3 text-right"><label class="form-control-label fa-solid text-gray-800 mt-2">회사규모</label></div>
                                         <div class="dropdown col-md-5">
                                             <button class="btn btn-secondary dropdown-toggle" type="button" id="progressbtn" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                                회사규모
+                                                <c:choose>
+                                                    <c:when test="${test eq '1'}">
+                                                        ${CompanyList.com_scale}
+                                                    </c:when>
+                                                    <c:otherwise>
+                                                        회사규모
+                                                    </c:otherwise>
+                                                </c:choose>
                                             </button>
                                             <div class="dropdown-menu animated--fade-in" aria-labelledby="dropdownMenuButton">
                                                 <a class="dropdown-item" onclick="return select_comsize(1)">대기업</a>
@@ -73,23 +99,30 @@
                                                 }
                                             }
                                         </script>
-                                        <input type="hidden" id="com_scale" name = "com_scale" value="${com_scale}"/>
+                                        <input type="hidden" id="com_scale" name = "com_scale" value="${CompanyList.com_scale}"/>
                                     </div>
 
                                    <div class="row form-group">
                                          <div class="col col-md-3 text-right"><label for="com_contract" class=" form-control-label fa-solid text-gray-800 m-2">계약일</label></div>
-                                         <div class="col-12 col-md-2 col-sm-2"><input type="date" id="com_contract" name="com_contract" class="form-control" value="2022-04-29"></div>
+                                         <div class="col-12 col-md-2 col-sm-2"><input type="date" id="com_contract" name="com_contract" class="form-control" value="${CompanyList.com_contract}"></div>
                                    </div>
                                  </form>
 
                              </div>
 
                              <div class="text-center d-block card-header py-3">
-                                <a  onclick="return chk_form()" class="btn btn-info">
+                                <a onclick="return chk_form()" class="btn btn-info">
                                                 <span class="icon text-white-50">
                                                        <i class="fas fa-pen"></i>
                                                 </span>
-                                    <span class="text" style="color:white">등록</span>
+                                    <c:choose>
+                                        <c:when test="${test eq '1'}">
+                                            <span OnClick="location.href='javascript:goSubmit();'" class="text" style="color:white">수정</span>
+                                        </c:when>
+                                        <c:otherwise>
+                                            <span OnClick="location.href='javascript:goSubmit();'" class="text" style="color:white">등록</span>
+                                        </c:otherwise>
+                                    </c:choose>
                                     <script>
 
                                         function chk_form() {
@@ -97,7 +130,14 @@
                                                 $('#exampleModal').modal('show')
                                             }
                                             else {
-                                                document.getElementById('companyinsertform').submit();
+                                                <c:choose>
+                                                <c:when test="${test eq '1'}">
+                                                document.getElementById('companyupdateform').submit();
+                                                </c:when>
+                                                <c:otherwise>
+                                                document.getElementById('companywriteform').submit();
+                                                </c:otherwise>
+                                                </c:choose>
                                             }
                                         }
                                     </script>

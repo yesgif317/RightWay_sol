@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.mark.mappers.EventMapper">
+    <!--보드-->
+    <!-- Select 문 -->
+    <select id="selectEvent" resultType="EventVO">
+        SELECT post_num,cate,evt_tit, cus_num,evt_sbj,evt_host,evt_supervise,evt_loc,evt_url,evt_cnt,evt_pri,evt_limit,to_char(evt_start,'YYYY-MM-DD') AS evt_start,to_char(evt_end,'YYYY-MM-DD') AS evt_end,to_char(evt_acptstart,'YYYY-MM-DD') AS evt_acptstart,to_char(evt_acptend,'YYYY-MM-DD') AS evt_acptend,evt_reg,evt_upd,prj_num
+        FROM Event
+    </select>
+
+    <!-- 행사등록(Insert) -->
+    <insert id="insertEvent" parameterType="EventVO" >
+        insert into Event(post_num ,cate, evt_tit, cus_num,evt_sbj,evt_host,evt_supervise,evt_loc,evt_url,evt_cnt,evt_pri,evt_limit,evt_start,evt_end,evt_acptstart,evt_acptend,prj_num,evt_reg)
+        values (evt_seq.NEXTVAL,5, #{evt_tit},11,#{evt_sbj},#{evt_host},#{evt_supervise},#{evt_loc},#{evt_url},#{evt_cnt},#{evt_pri},#{evt_limit},to_date(#{evt_start},'YYYY-MM-DD'),to_date(#{evt_end},'YYYY-MM-DD'),to_date(#{evt_acptstart},'YYYY-MM-DD'),to_date(#{evt_acptend},'YYYY-MM-DD'),2,sysdate)
+    </insert>
+
+    <update id="updateEvent" parameterType="EventVO" >
+        update Event
+        set evt_tit = #{evt_tit},evt_sbj =#{evt_sbj},evt_host =#{evt_host},evt_supervise =#{evt_supervise},evt_loc =#{evt_loc},evt_url =#{evt_url},evt_cnt =#{evt_cnt},evt_pri =#{evt_pri},evt_limit =#{evt_limit},evt_start = to_date(#{evt_start},'YYYY-MM-DD'),evt_end = to_date(#{evt_end},'YYYY-MM-DD'),evt_acptstart = to_date(#{evt_acptstart},'YYYY-MM-DD'),evt_acptend = to_date(#{evt_acptend},'YYYY-MM-DD'),evt_upd = sysdate
+        where post_num = #{post_num}
+    </update>
+
+    <select id="viewEvent" resultType="EventVO">
+        SELECT post_num,evt_tit, cus_num, evt_sbj,evt_host,evt_supervise,evt_loc,evt_url,evt_cnt,evt_pri,evt_limit,to_char(evt_start,'YYYY-MM-DD') AS evt_start,to_char(evt_end,'YYYY-MM-DD') AS evt_end,to_char(evt_acptstart,'YYYY-MM-DD') AS evt_acptstart,to_char(evt_acptend,'YYYY-MM-DD') AS evt_acptend,prj_num,evt_reg,evt_upd FROM Event where post_num=#{post_num}
+    </select>
+
+    <delete id="delete">
+        delete from Event where post_num=#{post_num}
+    </delete>
+
+</mapper>

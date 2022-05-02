@@ -57,9 +57,9 @@
                                             <small class="help-block form-text">회사규모</small>
                                             <input style="border:0 solid whitesmoke;" type="text"  value="${CompanyList.com_scale}" readonly="readonly" disabled/>
                                         </div>
-                                        <div class="col-4 ">
+                                        <div class="col-5">
                                             <small class="help-block form-text">회사주소</small>
-                                            <input style="border:0 solid whitesmoke;" type="text"  value="${CompanyList.com_addr}" readonly="readonly" disabled/>
+                                            <textarea style="border:0 solid whitesmoke;" type="text" disabled>${CompanyList.com_addr}</textarea>
                                         </div>
 
                                     </div>
@@ -69,7 +69,7 @@
 
                         <!-- 수정/삭제/목록 버튼 -->
                         <div class="text-center d-block card-header py-3">
-                            <a href="outputs_update.do?com_num=${CompanyList.com_num}" class="btn btn-info">
+                            <a href="/company_write.do?com_num=${CompanyList.com_num}&update=1" class="btn btn-info">
                                               <span class="icon text-white-50">
                                               <i class="fas fa-pen"></i>
                                               </span>
@@ -96,7 +96,7 @@
                                                 게시물을 정말 삭제하시겠습니까?
                                             </div>
                                             <div class="modal-footer">
-                                                <button onclick = "location.href = 'company_delete.do?com_num=${CompanyList.com_num}" type="button" class="btn btn-danger">삭제하기</button>
+                                                <button onclick = "location.href = 'company_delete.do?com_num=${CompanyList.com_num}'" type="button" class="btn btn-danger">삭제하기</button>
                                                 <button type="button" class="btn btn-secondary" data-dismiss="modal">취소하기</button>
                                             </div>
                                         </div>

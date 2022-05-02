@@ -52,7 +52,7 @@
                     </div>
                 </div>
                 <div class="text-center d-block card-header py-3">
-                    <a href="/company_write.do" class="btn btn-info">
+                    <a href="/company_write.do?com_num=0&update=0" class="btn btn-info">
                           <span class="icon text-white-50">
                             <i class="fas fa-pen"></i>
                           </span>

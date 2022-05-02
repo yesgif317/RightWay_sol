@@ -29,28 +29,24 @@
                             <tr>
                                 <th>NO</th>
                                 <th>행사명</th>
-                                <th>행사장소</th>
-                                <th>행사구분</th>
                                 <th>행사일자</th>
-                                <th>기간</th>
+                                <th>행사장소</th>
                                 <th>참여/정원</th>
-                                <th>접수시작일</th>
-                                <th>접수종료일</th>
+                                <th>접수일자</th>
+                                <th>작성자</th>
                             </tr>
                             </thead>
 
                             <tbody>
-                            <c:forEach items="${PostList}" var="post">
+                            <c:forEach items="${EventList}" var="event">
                                 <tr>
-                                    <td>${post.no}</td>
-                                    <td><a href ="event_content.jsp.do?id=${post.no}">${post.title}</a></td>
-                                    <td>${post.writer}</td>
-                                    <td>${post.writer}</td>
-                                    <td>${post.writer}</td>
-                                    <td>${post.writer}</td>
-                                    <td>${post.writer}</td>
-                                    <td>${post.refdate}</td>
-                                    <td>${post.refdate}</td>
+                                    <td>${event.post_num}</td>
+                                    <td><a href ="event_content.do?post_num=${event.post_num}">${event.evt_tit}</a></td>
+                                    <td>${event.evt_start}~${event.evt_end}</td>
+                                    <td>${event.evt_loc}</td>
+                                    <td>${event.evt_limit}</td>
+                                    <td>${event.evt_acptstart}~${event.evt_acptend}</td>
+                                    <td>${event.cus_num}</td>
                                 </tr>
                             </c:forEach>
                             </tbody>
@@ -58,7 +54,7 @@
                     </div>
                 </div>
                 <div class="text-center d-block card-header py-3">
-                    <a href="/event_write.do" class="btn btn-info">
+                    <a href="/event_write.do?post_num=0&update=0" class="btn btn-info">
                           <span class="icon text-white-50">
                             <i class="fas fa-pen"></i>
                           </span>
