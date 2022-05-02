@@ -1,5 +1,6 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 
 <jsp:include page="../../include/header.jsp" flush="true" />
 <jsp:include page="../../include/sidebar.jsp" flush="true" />
@@ -30,11 +31,11 @@
                                         <div class="col-3"></div>
                                         <div class="col-4 ">
                                             <small class="help-block form-text">회사명</small>
-                                            <input style="border:0 solid whitesmoke;" type="text" id="writer" name="writer" value="${BoardList.writer}회사명" readonly="readonly" disabled/>
+                                            <input style="border:0 solid whitesmoke;" type="text" value="${CompanyList.com_name}" readonly="readonly" disabled/>
                                         </div>
                                         <div class="col-4" >
                                             <small class="help-block form-text">계약일</small>
-                                            <input style="border:0 solid whitesmoke;"  id="date" name="date" value="${BoardList.refdate}2022-04-20" readonly="readonly" disabled/>
+                                            <input style="border:0 solid whitesmoke;" value="${CompanyList.com_contract}" readonly="readonly" disabled/>
                                         </div>
                                     </div>
 
@@ -42,19 +43,23 @@
                                         <div class="col-3"></div>
                                         <div class="col-4 ">
                                             <small class="help-block form-text">전화번호</small>
-                                            <input style="border:0 solid whitesmoke;" type="text" id="com_tel" name="writer" value="${BoardList.writer}전화번호" readonly="readonly" disabled/>
+                                            <input style="border:0 solid whitesmoke;" type="text"  value="${CompanyList.com_tel}" readonly="readonly" disabled/>
                                         </div>
                                         <div class="col-4" >
                                             <small class="help-block form-text">주요업무</small>
-                                            <input style="border:0 solid whitesmoke;"  id="com_work" name="date" value="${BoardList.refdate}개발" readonly="readonly" disabled/>
+                                            <input style="border:0 solid whitesmoke;"  value="${CompanyList.com_business}" readonly="readonly" disabled/>
                                         </div>
                                     </div>
 
                                     <div class="row form-group">
                                         <div class="col-3"></div>
                                         <div class="col-4 ">
-                                            <small class="help-block form-text">전화번호</small>
-                                            <input style="border:0 solid whitesmoke;" type="text" id="com_tel" name="writer" value="${BoardList.writer}전화번호" readonly="readonly" disabled/>
+                                            <small class="help-block form-text">회사규모</small>
+                                            <input style="border:0 solid whitesmoke;" type="text"  value="${CompanyList.com_scale}" readonly="readonly" disabled/>
+                                        </div>
+                                        <div class="col-4 ">
+                                            <small class="help-block form-text">회사주소</small>
+                                            <input style="border:0 solid whitesmoke;" type="text"  value="${CompanyList.com_addr}" readonly="readonly" disabled/>
                                         </div>
 
                                     </div>
@@ -64,7 +69,7 @@
 
                         <!-- 수정/삭제/목록 버튼 -->
                         <div class="text-center d-block card-header py-3">
-                            <a href="outputs_update.do?no=${BoardList.no}" class="btn btn-info">
+                            <a href="outputs_update.do?com_num=${CompanyList.com_num}" class="btn btn-info">
                                               <span class="icon text-white-50">
                                               <i class="fas fa-pen"></i>
                                               </span>
@@ -75,7 +80,7 @@
                                                  <span class="icon text-white-50">
                                                    <i class="fa-regular fa-trash-can"></i>
                                                  </span>
-                                <span class="text" style="color:white">  삭제</span>
+                                <span class="text" style="color:white"> 삭제</span>
 
                                 <!-- Modal -->
                                 <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -91,7 +96,7 @@
                                                 게시물을 정말 삭제하시겠습니까?
                                             </div>
                                             <div class="modal-footer">
-                                                <button href="outputs_delete.do?no=${BoardList.no}" type="button" class="btn btn-primary">삭제하기</button>
+                                                <button onclick = "location.href = 'company_delete.do?com_num=${CompanyList.com_num}" type="button" class="btn btn-danger">삭제하기</button>
                                                 <button type="button" class="btn btn-secondary" data-dismiss="modal">취소하기</button>
                                             </div>
                                         </div>
@@ -99,7 +104,7 @@
                                 </div>
                             </a>
 
-                            <a href="http://localhost:8089/outputs.do" class="btn btn-secondary">
+                            <a href="company.do" class="btn btn-secondary">
                                              <span class="icon text-white-50">
                                               <i class="fas fa-list"></i>
                                              </span>
@@ -159,14 +164,3 @@
     <!-- Page level plugins -->
     <script src="<c:url value="/resources/vendor/datatables/jquery.dataTables.min.js"/>"></script>
     <script src="<c:url value="/resources/vendor/datatables/dataTables.bootstrap4.min.js"/>"></script>
-
-    <!-- Page level custom scripts -->
-    <script src="<c:url value="/resources/js/demo/datatables-demo.js"/>"></script>
-
-    <!-- Page level plugins -->
-    <script src="<c:url value="/resources/vendor/chart.js/Chart.min.js"/>"></script>
-
-    <!-- Page level custom scripts -->
-    <script src="<c:url value="/resources/js/demo/chart-bar-demo.js"/>"></script>
-    <script src="<c:url value="/resources/js/demo/chart-pie-demo.js"/>"></script>
-    <script src="<c:url value="/resources/js/demo/chart-pie-demo.js"/>"></script>

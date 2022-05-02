@@ -12,7 +12,7 @@ import Board.Service.BoardService;
 import Commons.Excel.Dto.ExcelVO;
 import Commons.Excel.Service.ExcelService;
 import Company.Dto.CompanyVO;
-import Company.Service.Service.CompanyService;
+import Company.Service.CompanyService;
 import Customer.Dto.CustomerVO;
 import Customer.Dto.LoginDTO;
 import Customer.Service.CustomerService;
@@ -549,7 +549,9 @@ public class MainController {
 
     //company 상세 페이지 이동
     @RequestMapping(value = "/company_content.do", method = RequestMethod.GET)
-    public String company_content() {
+    public String company_content(@RequestParam("com_num") int com_num, Model model) {
+        CompanyVO companyVO = companyService.viewCompany(com_num);
+        model.addAttribute("CompanyList",companyVO);
         return "company/company_content";
     }
 
@@ -560,6 +562,13 @@ public class MainController {
         System.out.println(companyVO.getCom_name());
         String Result = companyService.insertCompany(companyVO);
         model.addAttribute("CompanyList", Result);
+        return "redirect:/company.do";
+    }
+
+    //company delete
+    @RequestMapping(value = "/company_delete.do", method = RequestMethod.GET)
+    public String company_delete(@RequestParam("com_num") int com_num) {
+        companyService.delete(com_num);
         return "redirect:/company.do";
     }
 

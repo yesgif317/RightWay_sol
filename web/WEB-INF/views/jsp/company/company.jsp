@@ -40,7 +40,7 @@
                             <c:forEach items="${CompanyList}" var="com">
                                 <tr>
                                     <td>${com.com_num}</td>
-                                    <td><a href ="company_content.jsp.do?id=${com.com_num}">${com.com_name}</a></td>
+                                    <td><a href ="company_content.do?com_num=${com.com_num}">${com.com_name}</a></td>
                                     <td>${com.com_tel}</td>
                                     <td>${com.com_addr}</td>
                                     <td>${com.com_business}</td>

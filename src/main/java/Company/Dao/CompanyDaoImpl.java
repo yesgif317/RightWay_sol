@@ -39,16 +39,16 @@ public class CompanyDaoImpl implements CompanyDao {
     }
 
     @Override
-    public CompanyVO viewCompany(int no) {
+    public CompanyVO viewCompany(int com_num) {
 
         //Ibatis Update 사용법
-        return sqlSession.selectOne(Namespace+".viewCompany",no);
+        return sqlSession.selectOne(Namespace+".viewCompany",com_num);
     }
 
-    public int delete(int no) {
+    public int delete(int com_num) {
 
         //Ibatis Update 사용법
-        return sqlSession.delete(Namespace+".delete",no);
+        return sqlSession.delete(Namespace+".delete",com_num);
     }
 
 

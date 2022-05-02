@@ -10,26 +10,24 @@
         SELECT * FROM company
     </select>
 
-    <!-- 회원가입(Insert) -->
+    <!-- 업체등록(Insert) -->
     <insert id="insertCompany" parameterType="CompanyVO" >
         insert into company(com_num ,com_name, com_tel, com_addr, com_scale, com_business, com_contract)
-        values (com_seq.NEXTVAL,#{com_name}, #{com_tel}, #{com_addr}, #{com_scale}, #{com_business},#{com_contract})
+        values (com_seq.NEXTVAL,#{com_name}, #{com_tel}, #{com_addr}, #{com_scale}, #{com_business},to_date(#{com_contract},'YYYY-MM-DD'))
     </insert>
 
     <update id="updateCompany" parameterType="CompanyVO" >
         update company
         set com_name = #{com_name}, com_tel =#{com_tel}, com_addr =#{com_addr},com_scale =#{com_scale},com_business =#{com_business},com_contract =#{com_contract}
-        where no = #{no}
+        where com_num = #{com_num}
     </update>
 
     <select id="viewCompany" resultType="CompanyVO">
-
-        SELECT writer, title, contents, refdate,no FROM company where no=#{no}
+        SELECT com_num, com_name, com_tel, com_addr, com_scale, com_business, to_char(com_contract,'YYYY-MM-DD') AS com_contract FROM company where com_num=#{com_num}
     </select>
 
     <delete id="delete">
         delete from company where com_num=#{com_num}
-
     </delete>
 
 </mapper>
