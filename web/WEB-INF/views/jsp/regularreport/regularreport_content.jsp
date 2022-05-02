@@ -35,106 +35,80 @@
                     <!-- Collapsable Card Example -->
                     <div class="card shadow mb-4">
                         <!-- Card Header - Accordion -->
-                        <a href="#collapseCardExample" class="d-block card-header py-3" data-toggle="collapse" role="button" aria-expanded="true" aria-controls="collapseCardExample">
-                            <h6 class="m-0 font-weight-bold text-primary">이슈 조회</h6>
-
+                        <a class="d-block card-header py-3"  style="text-align: center">
+                            <h6 class="m-0 font-weight-bold text-primary"> ${BoardList.title}
+                            </h6>
                         </a>
                         <!-- Card Content - Collapse -->
                         <div class="collapse show" id="collapseCardExample">
                             <div class="card-body">
-
-
                                 <form autocomplete="off" method="post" role="form">
                                     <div class="row form-group">
                                         <div class="col-3"></div>
-                                        <div class="col-4" >
-                                            <label for="date">작성일 :</label>
-                                            <input style="border:0 solid whitesmoke;"  id="date" name="date" value="${BoardList.refdate}" readonly="readonly" />
-
-                                        </div>
                                         <div class="col-4 ">
-                                            <label for="writer">작성자 :</label>
-                                            <input style="border:0 solid whitesmoke;" type="text" id="writer" name="writer" value="${BoardList.writer}" readonly="readonly" />
+                                            <small class="help-block form-text">작성자</small>
+                                            <input style="border:0 solid whitesmoke;" type="text" id="regularreport_writer" name="regularreport_writer" value="${BoardList.writer}" readonly="readonly" disabled/>
+                                        </div>
+                                        <div class="col-4" >
+                                            <small class="help-block form-text">작성일</small>
+                                            <input style="border:0 solid whitesmoke; width:100%;"  id="regularreport_date" name="regularreport_date" value="${BoardList.refdate}" readonly="readonly" disabled/>
+
                                         </div>
                                     </div>
                                     <div class="row form-group">
                                         <div class="col-2"></div>
-                                        <div class="col-8" style="border-top:  2px solid #808080;border-bottom: 4px groove #808080;">
-                                            <textarea style="font-size:20px;border:0 solid whitesmoke;" name="contents" id="contents" rows="4" placeholder="Content" class="form-control">${BoardList.contents}</textarea>
+                                        <div class="col-8" style="border-top:  2px solid #808080;border-bottom: 2px solid #808080;">
+                                            <textarea style="border:0 solid whitesmoke;" name="contents" id="contents" rows="5" class="form-control mt-3 mb-3" readonly="readonly" disabled>${BoardList.contents}</textarea>
                                         </div>
                                     </div>
                                 </form>
-
-                                <br>
-                                <br>
-                                <br>
-                                <div style="text-align: center">
-                                    <a  class="btn btn-primary btn-icon-split" data-toggle="modal" data-target="#exampleModal">
-                          <span class="icon text-white-50">
-                            <i class="fas fa-pen"></i>
-                          </span>
-                                        <span class="text" style="color:white">  삭제</span>
-
-                                        <!-- Modal -->
-                                        <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                                            <div class="modal-dialog" role="document">
-                                                <div class="modal-content">
-                                                    <div class="modal-header">
-                                                        <h5 class="modal-title" id="exampleModalLabel">게시물 삭제</h5>
-                                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                                            <span aria-hidden="true">&times;</span>
-                                                        </button>
-                                                    </div>
-                                                    <div class="modal-body">
-                                                        게시물을 정말 삭제하시겠습니까?
-                                                    </div>
-                                                    <div class="modal-footer">
-                                                        <button href="outputs_delete.do?no=${BoardList.no}" type="button" class="btn btn-primary">삭제하기</button>
-                                                        <button type="button" class="btn btn-secondary" data-dismiss="modal">취소하기</button>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-
-
-
-                                    </a>
-                                    <a href="outputs_update.do?no=${BoardList.no}" class="btn btn-primary btn-icon-split">
-                          <span class="icon text-white-50">
-                            <i class="fas fa-pen"></i>
-                          </span>
-                                        <span class="text">  수정</span>
-
-                                    </a>
-                                    <a href="http://localhost:8089/outputs.do" class="btn btn-primary btn-icon-split">
-                          <span class="icon text-white-50">
-                            <i class="fas fa-pen"></i>
-                          </span>
-                                        <span class="text"
-
-                                        >  목차보기</span>
-
-                                    </a>
-                                    <a href ="outputs_content.do?no=${BoardList.no}" class="btn btn-primary btn-icon-split">
-                          <span class="icon text-white-50">
-                            <i class="fas fa-pen"></i>
-                          </span>
-                                        <span class="text">  이전글</span>
-
-                                    </a>
-                                    <a href ="outputs_content.do?no=${BoardList.no}" class="btn btn-primary btn-icon-split">
-                          <span class="icon text-white-50">
-                            <i class="fas fa-pen"></i>
-                          </span>
-                                        <span class="text">  다음글</span>
-
-                                    </a>
-                                </div>
-                                <br>
-                                <br>
                             </div>
                         </div>
-                    </div>
+
+                        <!-- 수정/삭제/목록 버튼 -->
+                        <div class="text-center d-block card-header py-3">
+                            <a href="outputs_update.do?no=${BoardList.no}" class="btn btn-info">
+                                              <span class="icon text-white-50">
+                                              <i class="fas fa-pen"></i>
+                                              </span>
+                                <span class="text"> 수정</span>
+                            </a>
+
+                            <a  class="btn btn-danger" data-toggle="modal" data-target="#exampleModal">
+                                                 <span class="icon text-white-50">
+                                                   <i class="fa-regular fa-trash-can"></i>
+                                                 </span>
+                                <span class="text" style="color:white">  삭제</span>
+
+                                <!-- Modal -->
+                                <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                    <div class="modal-dialog" role="document">
+                                        <div class="modal-content">
+                                            <div class="modal-header">
+                                                <h5 class="modal-title" id="exampleModalLabel">게시물 삭제</h5>
+                                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                    <span aria-hidden="true">&times;</span>
+                                                </button>
+                                            </div>
+                                            <div class="modal-body">
+                                                게시물을 정말 삭제하시겠습니까?
+                                            </div>
+                                            <div class="modal-footer">
+                                                <button href="outputs_delete.do?no=${BoardList.no}" type="button" class="btn btn-primary">삭제하기</button>
+                                                <button type="button" class="btn btn-secondary" data-dismiss="modal">취소하기</button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </a>
+
+                            <a href="http://localhost:8089/outputs.do" class="btn btn-secondary">
+                                             <span class="icon text-white-50">
+                                              <i class="fas fa-list"></i>
+                                             </span>
+                                <span class="text">목록</span>
+                            </a>
+                        </div>  <!-- end of button list -->
 
                 </div>
 

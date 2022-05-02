@@ -31,14 +31,14 @@
                                     <form autocomplete="off" method="post" role="form">
                                         <div class="row form-group">
                                             <div class="col-3"></div>
-                                            <div class="col-4" >
-                                                <small class="help-block form-text">작성일</small>
-                                                <input style="border:0 solid whitesmoke;"  id="date" name="date" value="${BoardList.refdate}" readonly="readonly" disabled/>
-
-                                            </div>
                                             <div class="col-4 ">
                                                 <small class="help-block form-text">작성자</small>
                                                 <input style="border:0 solid whitesmoke;" type="text" id="writer" name="writer" value="${BoardList.writer}" readonly="readonly" disabled/>
+                                            </div>
+                                            <div class="col-4" >
+                                                <small class="help-block form-text">작성일</small>
+                                                <input style="border:0 solid whitesmoke; width:100%;"  id="date" name="date" value="${BoardList.refdate}" readonly="readonly" disabled/>
+
                                             </div>
                                         </div>
                                         <div class="row form-group">
@@ -47,10 +47,11 @@
                                             <textarea style="border:0 solid whitesmoke;" name="contents" id="contents" rows="5" class="form-control mt-3 mb-3" readonly="readonly" disabled>${BoardList.contents}</textarea>
                                             </div>
                                         </div>
-                                </form>
+                                    </form>
                                 </div>
                             </div>
 
+                            <!-- 수정/삭제/목록 버튼 -->
                             <div class="text-center d-block card-header py-3">
                                 <a href="outputs_update.do?no=${BoardList.no}" class="btn btn-info">
                                               <span class="icon text-white-50">
@@ -93,7 +94,7 @@
                                              </span>
                                     <span class="text">목록</span>
                                 </a>
-                            </div>
+                            </div>  <!-- end of button list -->
                         </div>
 
                     </div>

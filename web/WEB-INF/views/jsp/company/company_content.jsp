@@ -25,38 +25,88 @@
                         <!-- Card Content - Collapse -->
                         <div class="collapse show" id="collapseCardExample">
                             <div class="card-body">
-                                <form method="post" action="update.do" id="updateform" enctype="application/x-www-form-urlencoded" class="form-horizontal">
+                                <form autocomplete="off" method="post" role="form">
                                     <div class="row form-group">
-                                        <div class="col col-md-3 text-right"><label class="form-control-label">회사명</label></div>
-                                        <div class="col-12 col-md-7 text-gray-900">${title} 회사명</div>
+                                        <div class="col-3"></div>
+                                        <div class="col-4 ">
+                                            <small class="help-block form-text">회사명</small>
+                                            <input style="border:0 solid whitesmoke;" type="text" id="writer" name="writer" value="${BoardList.writer}회사명" readonly="readonly" disabled/>
+                                        </div>
+                                        <div class="col-4" >
+                                            <small class="help-block form-text">계약일</small>
+                                            <input style="border:0 solid whitesmoke;"  id="date" name="date" value="${BoardList.refdate}2022-04-20" readonly="readonly" disabled/>
+                                        </div>
                                     </div>
+
                                     <div class="row form-group">
-                                        <div class="col col-md-3 text-right"><label class="form-control-label">전화번호</label></div>
-                                        <div class="col-12 col-md-7 text-gray-900">${title} 전화번호</div>
+                                        <div class="col-3"></div>
+                                        <div class="col-4 ">
+                                            <small class="help-block form-text">전화번호</small>
+                                            <input style="border:0 solid whitesmoke;" type="text" id="com_tel" name="writer" value="${BoardList.writer}전화번호" readonly="readonly" disabled/>
+                                        </div>
+                                        <div class="col-4" >
+                                            <small class="help-block form-text">주요업무</small>
+                                            <input style="border:0 solid whitesmoke;"  id="com_work" name="date" value="${BoardList.refdate}개발" readonly="readonly" disabled/>
+                                        </div>
                                     </div>
+
                                     <div class="row form-group">
-                                        <div class="col col-md-3 text-right"><label class="form-control-label">주요업무</label></div>
-                                        <div class="col-12 col-md-7 text-gray-900">${title} 개발</div>
-                                    </div>
-                                    <div class="row form-group">
-                                        <div class="col col-md-3 text-right"><label class="form-control-label">회사규모</label></div>
-                                        <div class="col-12 col-md-7 text-gray-900">${title} 중소기업/중견기업/대기업/공기업</div>
-                                    </div>
-                                    <div class="row form-group">
-                                        <div class="col col-md-3 text-right"><label class="form-control-label">계약일</label></div>
-                                        <div class="col-12 col-md-7 text-gray-900">${title} 2022-04-20</div>
-                                    </div>
-                                    <div class="text-center">
-                                        <a href="/company.do" class="btn btn-secondary btn-icon-split">
-                                                <span class="icon text-white-50">
-                                                    <i class="fas fa-list"></i>
-                                                </span>
-                                            <span class="text">목록</span>
-                                        </a>
+                                        <div class="col-3"></div>
+                                        <div class="col-4 ">
+                                            <small class="help-block form-text">전화번호</small>
+                                            <input style="border:0 solid whitesmoke;" type="text" id="com_tel" name="writer" value="${BoardList.writer}전화번호" readonly="readonly" disabled/>
+                                        </div>
+
                                     </div>
                                 </form>
                             </div>
                         </div>
+
+                        <!-- 수정/삭제/목록 버튼 -->
+                        <div class="text-center d-block card-header py-3">
+                            <a href="outputs_update.do?no=${BoardList.no}" class="btn btn-info">
+                                              <span class="icon text-white-50">
+                                              <i class="fas fa-pen"></i>
+                                              </span>
+                                <span class="text"> 수정</span>
+                            </a>
+
+                            <a  class="btn btn-danger" data-toggle="modal" data-target="#exampleModal">
+                                                 <span class="icon text-white-50">
+                                                   <i class="fa-regular fa-trash-can"></i>
+                                                 </span>
+                                <span class="text" style="color:white">  삭제</span>
+
+                                <!-- Modal -->
+                                <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                    <div class="modal-dialog" role="document">
+                                        <div class="modal-content">
+                                            <div class="modal-header">
+                                                <h5 class="modal-title" id="exampleModalLabel">게시물 삭제</h5>
+                                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                    <span aria-hidden="true">&times;</span>
+                                                </button>
+                                            </div>
+                                            <div class="modal-body">
+                                                게시물을 정말 삭제하시겠습니까?
+                                            </div>
+                                            <div class="modal-footer">
+                                                <button href="outputs_delete.do?no=${BoardList.no}" type="button" class="btn btn-primary">삭제하기</button>
+                                                <button type="button" class="btn btn-secondary" data-dismiss="modal">취소하기</button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </a>
+
+                            <a href="http://localhost:8089/outputs.do" class="btn btn-secondary">
+                                             <span class="icon text-white-50">
+                                              <i class="fas fa-list"></i>
+                                             </span>
+                                <span class="text">목록</span>
+                            </a>
+                        </div>  <!-- end of button list -->
+
                     </div>
 
                 </div>
