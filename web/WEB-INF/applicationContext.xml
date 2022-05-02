@@ -50,6 +50,8 @@
     <context:component-scan base-package="java"/>
     <context:component-scan base-package="File.Dao"/>
     <context:component-scan base-package="File.Service"/>
+    <context:component-scan base-package="Post.Dao"/>
+    <context:component-scan base-package="Post.Service"/>
 
 
 </beans>

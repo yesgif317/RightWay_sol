@@ -16,6 +16,8 @@ import Company.Service.Service.CompanyService;
 import Customer.Dto.CustomerVO;
 import Customer.Dto.LoginDTO;
 import Customer.Service.CustomerService;
+import Post.Dto.NormalVO;
+import Post.Service.NormalService;
 
 import org.apache.poi.ss.usermodel.Cell;
 import org.apache.poi.ss.usermodel.Row;
@@ -56,6 +58,8 @@ public class MainController {
 
     @Inject
     private FileService fileService;
+    @Inject
+    private NormalService normalService;
 
 
     // 메인 페이지 이동
@@ -162,79 +166,291 @@ public class MainController {
 
     //산출물 게시글 작성 페이지
     @RequestMapping(value = "/outputs_write.do", method = RequestMethod.GET)
-    public String outputs_write() {
+    public String outputs_write(@RequestParam("post_num") int no, Model model) {
+        if(no>0) {
+            NormalVO Result = normalService.viewPost(no);
+            model.addAttribute("PostList", Result);
+        }
+        else{}
         return "/outputs/outputs_write";
     }
     //산출물 게시판 글목록 보기
     @RequestMapping(value = "/outputs.do", method = RequestMethod.GET)
     public String outputs(Model model) {
         //service 클래스에서 Dao 로 접근하여 쿼리 결과값 가져오기
-        List<BoardVO> boardVoList = service.selectAll();
+        List<NormalVO> postVoList = normalService.selectPost();
+
         // .jsp 파일로 DB 결과값 전달하기
-        model.addAttribute("BoardList", boardVoList);
+        model.addAttribute("PostList", postVoList);
+        List<NormalVO> prj_numList = normalService.selectPrj_num();
+        model.addAttribute("prj_numList", prj_numList);
         return "/outputs/outputs";
     }
     //산출물 작성글 보기
     @RequestMapping(value = "/outputs_content.do", method = RequestMethod.GET)
-    public String outputs_content(@RequestParam("no") int no, Model model) {
-        BoardVO Result = service.viewBoard(no);
-        model.addAttribute("BoardList", Result);
+    public String outputs_content(@RequestParam("post_num") int no, Model model) {
+        NormalVO Result = normalService.viewPost(no);
+        model.addAttribute("PostList", Result);
+
         return "/outputs/outputs_content";
     }
     //산출물 작성글 삭제
     @RequestMapping(value = "/outputs_delete.do", method = RequestMethod.GET)
-    public String outputs_delete(@RequestParam("no") int no) {
-        service.delete(no);
+    public String outputs_delete(@RequestParam("post_num") int no) {
+        normalService.deletePost(no);
         return "redirect:/outputs.do";
     }
-
     //산출물 작성글 수정 기능
-    @RequestMapping(value = "/outputs_move_update.do", method = RequestMethod.POST)
-    public String outputs_move_update(Model model, BoardVO boardVO) {
+    @RequestMapping(value = "/outputs_update.do", method = RequestMethod.POST)
+    public String outputs_move_update(Model model, NormalVO postVO) {
 
-        String Result = service.updateBoard(boardVO);
-        model.addAttribute("BoardList", Result);
+        String Result = normalService.updatePost(postVO);
+        model.addAttribute("PostList", Result);
         return "redirect:/outputs.do";
     }
     // 산출물 게시글 작성 기능
-    @RequestMapping(value = "/outputs_move_write.do", method = RequestMethod.POST)
-    public String outputs_move_write(Model model, BoardVO boardVO) {
-
-        String Result = service.insertBoard(boardVO);
-
-        List<BoardVO> boardVoList = service.selectAll();
-        // .jsp 파일로 DB 결과값 전달하기
-        model.addAttribute("BoardList", Result);
+    @RequestMapping(value = "/outputs_insert.do", method = RequestMethod.POST)
+    public String outputs_insert(Model model, NormalVO postVO) {
+        String Result = normalService.insertPost(postVO);
+        model.addAttribute("PostList", Result);
         return "redirect:/outputs.do";
     }
-    //산출물 게시글 수정 페이지
-    @RequestMapping(value = "/issue_update.do", method = RequestMethod.GET)
-    public String issue_update(@RequestParam("no") int no, Model model) {
-        BoardVO Result = service.viewBoard(no);
-        model.addAttribute("BoardList", Result);
-        return "/issue/issue_update";
+    //회의록 게시글 작성 페이지
+    @RequestMapping(value = "/meetingrecord_write.do", method = RequestMethod.GET)
+    public String meetingrecord_write(@RequestParam("post_num") int no,Model model) {
+        if(no>0) {
+            NormalVO Result = normalService.viewPost(no);
+            model.addAttribute("PostList", Result);
+        }
+        else{}
+        return "/meetingrecord/meetingrecord_write";
+    }
+    //회의록 목록 보기
+    @RequestMapping(value = "/meetingrecord.do", method = RequestMethod.GET)
+    public String meetingrecord(Model model) {
+        //service 클래스에서 Dao 로 접근하여 쿼리 결과값 가져오기
+        List<NormalVO> PostVoList = normalService.selectPost();
+        // .jsp 파일로 DB 결과값 전달하기
+        model.addAttribute("PostList", PostVoList);
+        return "meetingrecord/meetingrecord";
+    }
+    //회의록 작성글 보기
+    @RequestMapping(value = "/meetingrecord_content.do", method = RequestMethod.GET)
+    public String meetingrecord_content(@RequestParam("post_num") int no, Model model) {
+        NormalVO Result = normalService.viewPost(no);
+        model.addAttribute("PostList", Result);
+        return "/meetingrecord/meetingrecord_content"; }
+    //회의록 작성글 삭제
+    @RequestMapping(value = "/meetingrecord_delete.do", method = RequestMethod.GET)
+    public String meetingrecord_delete(@RequestParam("post_num") int no) {
+        normalService.deletePost(no);
+        return "redirect:/meetingrecord.do";
+    }
+    //회의록 작성글 수정 기능
+    @RequestMapping(value = "/meetingrecord_update.do", method = RequestMethod.POST)
+    public String meetingrecord_move_update(Model model, NormalVO postVO) {
+
+        String Result = normalService.updatePost(postVO);
+        model.addAttribute("PostList", Result);
+        return "redirect:/meetingrecord.do";
+    }
+    // 회의록 게시글 작성 기능
+    @RequestMapping(value = "/meetingrecord_insert.do", method = RequestMethod.POST)
+    public String meetingrecord_insert(Model model, NormalVO postVO) {
+        String Result = normalService.insertPost(postVO);
+        model.addAttribute("PostList", Result);
+        return "redirect:/meetingrecord.do";
+    }
+
+
+    //정기보고 게시글 작성 페이지
+    @RequestMapping(value = "/regularreport_write.do", method = RequestMethod.GET)
+    public String regularreport_write(@RequestParam("post_num") int no,Model model) {
+        if(no>0) {
+            NormalVO Result = normalService.viewPost(no);
+            model.addAttribute("PostList", Result);
+        }
+        else{}
+        return "/regularreport/regularreport_write";
+    }
+    //정기보고 목록 보기
+    @RequestMapping(value = "/regularreport.do", method = RequestMethod.GET)
+    public String regularreport(Model model) {
+        //service 클래스에서 Dao 로 접근하여 쿼리 결과값 가져오기
+        List<NormalVO> PostVoList = normalService.selectPost();
+        //.jsp 파일로 DB 결과값 전달하기
+        model.addAttribute("PostList", PostVoList);
+        return "regularreport/regularreport";
+    }
+    //정기보고 작성글 보기
+    @RequestMapping(value = "/regularreport_content.do", method = RequestMethod.GET)
+    public String regularreport_content(@RequestParam("post_num") int no, Model model)  {
+        NormalVO Result = normalService.viewPost(no);
+        model.addAttribute("PostList", Result);
+        return "/regularreport/regularreport_content"; }
+    //정기보고 작성글 삭제
+    @RequestMapping(value = "/regularreport_delete.do", method = RequestMethod.GET)
+    public String regularreport_delete(@RequestParam("post_num") int no) {
+        normalService.deletePost(no);
+        return "redirect:/regularreport.do";
+    }
+    //정기보고 작성글 수정 기능
+    @RequestMapping(value = "/regularreport_update.do", method = RequestMethod.POST)
+    public String regularreport_move_update(Model model, NormalVO postVO) {
+
+        String Result = normalService.updatePost(postVO);
+        model.addAttribute("PostList", Result);
+        return "redirect:/regularreport.do";
+    }
+    // 정기보고 게시글 작성 기능
+    @RequestMapping(value = "/regularreport_insert.do", method = RequestMethod.POST)
+    public String regularreport_insert(Model model, NormalVO postVO) {
+        String Result = normalService.insertPost(postVO);
+        model.addAttribute("PostList", Result);
+        return "redirect:/regularreport.do";
+    }
+    //공지사항 게시글 작성 페이지
+    @RequestMapping(value = "/notice_write.do", method = RequestMethod.GET)
+    public String notice_write(@RequestParam("post_num") int no,Model model) {
+        if(no>0) {
+            NormalVO Result = normalService.viewPost(no);
+            model.addAttribute("PostList", Result);
+        }
+        else{}
+        return "/notice/notice_write";
     }
     //공지사항 게시판 글목록 보기
     @RequestMapping(value = "/notice.do", method = RequestMethod.GET)
     public String notice(Model model) {
         //service 클래스에서 Dao 로 접근하여 쿼리 결과값 가져오기
-        List<BoardVO> boardVoList = service.selectAll();
+        List<NormalVO> PostVoList = normalService.selectPost();
         // .jsp 파일로 DB 결과값 전달하기
-        model.addAttribute("BoardList", boardVoList);
+        model.addAttribute("PostList", PostVoList);
         return "/notice/notice";
     }
+    //공지사항 작성글 보기
+    @RequestMapping(value = "/notice_content.do", method = RequestMethod.GET)
+    public String notice_content(@RequestParam("post_num") int no, Model model) {
+        NormalVO Result = normalService.viewPost(no);
+        model.addAttribute("PostList", Result);
+        return "/notice/notice_content";
+    }
+    //공지사항 작성글 삭제
+    @RequestMapping(value = "/notice_delete.do", method = RequestMethod.GET)
+    public String notice_delete(@RequestParam("post_num") int no) {
+        normalService.deletePost(no);
+        return "redirect:/notice.do";
+    }
+    //공지사항 작성글 수정 기능
+    @RequestMapping(value = "/notice_update.do", method = RequestMethod.POST)
+    public String notice_move_update(Model model, NormalVO postVO) {
 
+        String Result = normalService.updatePost(postVO);
+        model.addAttribute("PostList", Result);
+        return "redirect:/notice.do";
+    }
+    // 공지사항 게시글 작성 기능
+    @RequestMapping(value = "/notice_insert.do", method = RequestMethod.POST)
+    public String notice_insert(Model model, NormalVO postVO) {
+        String Result = normalService.insertPost(postVO);
+        model.addAttribute("PostList", Result);
+        return "redirect:/notice.do";
+    }
+    //자료실 게시글 작성 페이지
+    @RequestMapping(value = "/datacenter_write.do", method = RequestMethod.GET)
+    public String datacenter_write(@RequestParam("post_num") int no,Model model) {
+        if(no>0) {
+            NormalVO Result = normalService.viewPost(no);
+            model.addAttribute("PostList", Result);
+        }
+        else{}
+        return "/datacenter/datacenter_write";
+    }
+    //자료실 게시판 글목록 보기
+    @RequestMapping(value = "/datacenter.do", method = RequestMethod.GET)
+    public String datacenter(Model model) {
+        //service 클래스에서 Dao 로 접근하여 쿼리 결과값 가져오기
+        List<NormalVO> PostVoList = normalService.selectPost();
+        // .jsp 파일로 DB 결과값 전달하기
+        model.addAttribute("PostList", PostVoList);
+        return "/datacenter/datacenter";
+    }
+    //자료실 작성글 보기
+    @RequestMapping(value = "/datacenter_content.do", method = RequestMethod.GET)
+    public String datacenter_content(@RequestParam("post_num") int no, Model model) {
+        NormalVO Result = normalService.viewPost(no);
+        model.addAttribute("PostList", Result);
+        return "/datacenter/datacenter_content";
+    }
+    //자료실 작성글 삭제
+    @RequestMapping(value = "/datacenter_delete.do", method = RequestMethod.GET)
+    public String datacenter_delete(@RequestParam("post_num") int no) {
+        normalService.deletePost(no);
+        return "redirect:/datacenter.do";
+    }
+    //자료실 작성글 수정 기능
+    @RequestMapping(value = "/datacenter_update.do", method = RequestMethod.POST)
+    public String datacenter_move_update(Model model, NormalVO postVO) {
 
-
+        String Result = normalService.updatePost(postVO);
+        model.addAttribute("PostList", Result);
+        return "redirect:/datacenter.do";
+    }
+    // 자료실 게시글 작성 기능
+    @RequestMapping(value = "/datacenter_insert.do", method = RequestMethod.POST)
+    public String datacenter_insert(Model model, NormalVO postVO) {
+        String Result = normalService.insertPost(postVO);
+        model.addAttribute("PostList", Result);
+        return "redirect:/datacenter.do";
+    }
+    //요청사항 게시글 작성 페이지
+    @RequestMapping(value = "/request_write.do", method = RequestMethod.GET)
+    public String request_write(@RequestParam("post_num") int no,Model model) {
+        if(no>0) {
+            NormalVO Result = normalService.viewPost(no);
+            model.addAttribute("PostList", Result);
+        }
+        else{}
+        return "/request/request_write";
+    }
     //요청사항 게시판 글목록 보기
     @RequestMapping(value = "/request.do", method = RequestMethod.GET)
     public String request(Model model) {
         //service 클래스에서 Dao 로 접근하여 쿼리 결과값 가져오기
-        List<BoardVO> boardVoList = service.selectAll();
+        List<NormalVO> PostVoList = normalService.selectPost();
         // .jsp 파일로 DB 결과값 전달하기
-        model.addAttribute("BoardList", boardVoList);
+        model.addAttribute("PostList", PostVoList);
         return "/request/request";
     }
+    //요청사항 작성글 보기
+    @RequestMapping(value = "/request_content.do", method = RequestMethod.GET)
+    public String request_content(@RequestParam("post_num") int no, Model model) {
+        NormalVO Result = normalService.viewPost(no);
+        model.addAttribute("PostList", Result);
+        return "/request/request_content";
+    }
+    //요청사항 작성글 삭제
+    @RequestMapping(value = "/request_delete.do", method = RequestMethod.GET)
+    public String request_delete(@RequestParam("post_num") int no) {
+        normalService.deletePost(no);
+        return "redirect:/request.do";
+    }
+    //요청사항 작성글 수정 기능
+    @RequestMapping(value = "/request_update.do", method = RequestMethod.POST)
+    public String request_move_update(Model model, NormalVO postVO) {
+
+        String Result = normalService.updatePost(postVO);
+        model.addAttribute("PostList", Result);
+        return "redirect:/request.do";
+    }
+    // 요청사항 게시글 작성 기능
+    @RequestMapping(value = "/request_insert.do", method = RequestMethod.POST)
+    public String request_insert(Model model, NormalVO postVO) {
+        String Result = normalService.insertPost(postVO);
+        model.addAttribute("PostList", Result);
+        return "redirect:/request.do";
+    }
+
     //이슈 게시판 글목록 보기
     @RequestMapping(value = "/issue.do", method = RequestMethod.GET)
     public String issue(Model model) {
@@ -256,55 +472,7 @@ public class MainController {
         model.addAttribute("BoardList", Result);
         return "/issue/issue_content";
     }
-    //이슈 작성글 삭제
-    @RequestMapping(value = "/issue_delete.do", method = RequestMethod.GET)
-    public String issue_delete(@RequestParam("no") int no) {
-        service.delete(no);
-        return "redirect:/issue.do";
-    }
 
-    //회의록 게시글 작성 페이지
-    @RequestMapping(value = "/meetingrecord_write.do", method = RequestMethod.GET)
-    public String meetingrecord_write() {
-        return "/meetingrecord/meetingrecord_write";
-    }
-    //회의록 목록 보기
-    @RequestMapping(value = "/meetingrecord.do", method = RequestMethod.GET)
-    public String meetingrecord(Model model) {
-        //service 클래스에서 Dao 로 접근하여 쿼리 결과값 가져오기
-        List<BoardVO> boardVoList = service.selectAll();
-        // .jsp 파일로 DB 결과값 전달하기
-        model.addAttribute("BoardList", boardVoList);
-        return "meetingrecord/meetingrecord";
-    }
-    //회의록 작성글 보기
-    @RequestMapping(value = "/meetingrecord_content.do", method = RequestMethod.GET)
-    public String meetingrecord_content(@RequestParam("no") int no, Model model) {
-        BoardVO Result = service.viewBoard(no);
-        model.addAttribute("BoardList", Result);
-        return "/meetingrecord/meetingrecord_content"; }
-
-
-    //정기보고 게시글 작성 페이지
-    @RequestMapping(value = "/regularreport_write.do", method = RequestMethod.GET)
-    public String regularreport_write() {
-        return "/regularreport/regularreport_write";
-    }
-    //정기보고 목록 보기
-    @RequestMapping(value = "/regularreport.do", method = RequestMethod.GET)
-    public String regularreport(Model model) {
-        //service 클래스에서 Dao 로 접근하여 쿼리 결과값 가져오기
-        List<BoardVO> boardVoList = service.selectAll();
-        // .jsp 파일로 DB 결과값 전달하기
-        model.addAttribute("BoardList", boardVoList);
-        return "regularreport/regularreport";
-    }
-    //정기보고 작성글 보기
-    @RequestMapping(value = "/regularreport_content.do", method = RequestMethod.GET)
-    public String regularreport_content(@RequestParam("no") int no, Model model)  {
-        BoardVO Result = service.viewBoard(no);
-        model.addAttribute("BoardList", Result);
-        return "/regularreport/regularreport_content"; }
     //위험관리 목록 보기
     @RequestMapping(value = "/danger.do", method = RequestMethod.GET)
     public String danger(Model model) {
