@@ -29,4 +29,10 @@ public interface CustomerDao {
     //회원정보수정 Update
     //String updateCustomer(CustomerVO customerVO);
 
+    //승인 받지 않은 회원
+    List<CustomerVO> select_nonPermissionCus();
+    void PermissionCustomer(CustomerVO customerVO);
+    //한명 찾기
+    CustomerVO selectCusToNum(int i);
+
 }

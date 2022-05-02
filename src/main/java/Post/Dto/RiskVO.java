@@ -32,17 +32,4 @@ public class RiskVO {
     //프로젝트 번호
     int prj_num;
 
-//    post_num number,
-//    cate number,
-//    risk_tit varchar(100),
-//    cus_num number,
-//    risk_reg date,
-//    risk_upd date,
-//    risk_imp varchar(20),
-//    risk_pgs varchar(20),
-//    risk_con varchar(600),
-//    risk_start Date,
-//    risk_end Date,
-//    prj_num number,
-
 }

@@ -24,4 +24,10 @@ public interface CustomerService {
 
     //회원가입(Insert)
     void insertCustomer(CustomerVO customerVO) throws Exception;
+
+    //승인 받지 않은 회원
+    List<CustomerVO> select_nonPermissionCus();
+
+    List<CustomerVO> select_PermissionCustomer(int[] num);
+    void PermissionCustomer(List<CustomerVO> customerVOList);
 }

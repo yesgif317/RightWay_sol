@@ -75,6 +75,21 @@
         FROM customer
         Order by cus_num asc
     </select>
+    <select id="select_nonPermissionCus" parameterType="CustomerVO" resultType="CustomerVo">
+        SELECT *
+        FROM customer
+        WHERE cus_state = 0
+    </select>
+    <select id="selectCusToNum" resultType="CustomerVO" parameterType="int">
+        SELECT *
+        FROM customer
+        where cus_num = #{cus_num}
+    </select>
+    <update id="PermissionCustomer" parameterType="CustomerVO">
+        UPDATE customer
+        SET cus_state = 1
+        WHERE cus_num = #{cus_num}
+    </update>
 
     <insert id="postUserExcel">
         insert into customer (cus_num, cus_id, cus_pwd, cus_name, cus_email, cus_phone, cus_dep, cus_position, cus_state,

@@ -60,6 +60,25 @@ public class CustomerDaoImpl implements CustomerDao {
         return sqlSession.selectOne(Namespace + ".checkUserWithSessionKey", value);
     }
 
+    @Override
+    public List<CustomerVO> select_nonPermissionCus() {
+        return sqlSession.selectList(Namespace + ".select_nonPermissionCus");
+    }
+
+    //사용자 State 변경
+    @Override
+    public void PermissionCustomer(CustomerVO customerVO) {
+        System.out.println("PermissionCustomer....");
+
+        sqlSession.update(Namespace + ".PermissionCustomer",customerVO);
+    }
+
+    //사용자 ID로 VO객체 반환
+    @Override
+    public CustomerVO selectCusToNum(int i) {
+        return sqlSession.selectOne(Namespace + ".selectCusToNum", i);
+    }
+
     //회원가입 Insert
     @Override
     public void insertCustomer(CustomerVO customerVO) {
