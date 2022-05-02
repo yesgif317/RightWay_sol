@@ -3,6 +3,7 @@
 <jsp:include page="../../include/header.jsp" flush="true" />
 <jsp:include page="../../include/sidebar.jsp" flush="true" />
 
+
     <!-- Content Wrapper -->
     <div id="content-wrapper" class="d-flex flex-column" >
 
@@ -19,25 +20,60 @@
                         <div class="card shadow mb-4">
                             <!-- Card Header - Accordion -->
                             <a class="d-block card-header py-3">
-                                <h6 class="m-0 font-weight-bold text-primary text-center">산출물 등록</h6>
-
+                                <%
+                                    int test = Integer.parseInt(request.getParameter("update")) ;
+                                    pageContext.setAttribute("test", test) ;
+                                %>
+<c:choose>
+    <c:when test="${test eq '1'}">
+                                <h6 class="m-0 font-weight-bold text-primary text-center">산출물 수정</h6>
+</c:when>
+    <c:otherwise>
+                                    <h6 class="m-0 font-weight-bold text-primary text-center">산출물 등록</h6>
+    </c:otherwise>
+</c:choose>
                             </a>
                             <!-- Card Content - Collapse -->
                             <div class="collapse show" id="collapseCardExample">
                                 <div class="card-body">
-                                    <form method="post" action="outputs_move_write.do" id="outputswriteform" enctype="application/x-www-form-urlencoded" class="form-horizontal">
+                                        <c:choose>
+                                            <c:when test="${test eq '1'}">
+                                            <form method="post" action="outputs_update.do" id="outputsupdateform" enctype="application/x-www-form-urlencoded" class="form-horizontal">
+                                            </c:when>
+                                            <c:otherwise>
+                                                <form method="post" action="outputs_insert.do" id="outputswriteform" enctype="application/x-www-form-urlencoded" class="form-horizontal">
+                                            </c:otherwise>
+                                        </c:choose>
+                                        <div class="row form-group">
+                                            <div class="col col-md-3 text-right"><label for="nor_tit" class=" form-control-label fa-solid text-gray-800 mt-2"><sup class="text-danger small">*</sup>제목</label></div>
+                                            <div class="col-12 col-md-7">
+                                                <c:choose>
+                                                <c:when test="${test eq '1'}">
+                                                    <input type="text" id="nor_tit" name="nor_tit"  class="form-control" value=${PostList.nor_tit}>
+                                                    </c:when>
+                                                    <c:otherwise>
+                                                        <input type="text" id="nor_tit" name="nor_tit" placeholder="제목을 입력해주세요." class="form-control" value="">
+                                                        </c:otherwise>
+                                                        </c:choose>
 
-                                        <div class="row form-group">
-                                            <div class="col col-md-3 text-right"><label for="title" class=" form-control-label fa-solid text-gray-800 mt-2"><sup class="text-danger small">*</sup>제목</label></div>
-                                            <div class="col-12 col-md-7"><input type="text" id="title" name="title" placeholder="제목을 입력해주세요." class="form-control" value=""></div>
+                                            </div>
                                         </div>
                                         <div class="row form-group">
-                                            <div class="col col-md-3 text-right"><label for="contents" class=" form-control-label fa-solid text-gray-800 mt-2"><sup class="text-danger small">*</sup>내용</label></div>
-                                            <div class="col-12 col-md-7"> <textarea name="contents" id="contents" rows="9" placeholder="산출물 내용을 입력해주세요." class="form-control"></textarea></div>
+                                            <div class="col col-md-3 text-right"><label for="nor_cnt" class=" form-control-label fa-solid text-gray-800 mt-2"><sup class="text-danger small">*</sup>내용</label></div>
+                                            <div class="col-12 col-md-7">
+                                                <c:choose>
+                                                    <c:when test="${test eq '1'}">
+                                                        <textarea name="nor_cnt" id="nor_cnt" rows="9"  class="form-control">${PostList.nor_cnt}</textarea>
+                                                    </c:when>
+                                                    <c:otherwise>
+                                                        <textarea name="nor_cnt" id="nor_cnt" rows="9" placeholder="산출물 내용을 입력해주세요." class="form-control"></textarea>
+                                                    </c:otherwise>
+                                                </c:choose>
+                                            </div>
                                         </div>
                                         <div class="row form-group">
-                                            <div class="col col-md-3 text-right"><label for="contents" class=" form-control-label fa-solid text-gray-800 mt-2">첨부파일</label></div>
-                                            <div class="col-12 col-md-9"><input type="file" name="uploadFile" multiple></div>
+                                            <div class="col col-md-3 text-right"><label for="file_link" class=" form-control-label fa-solid text-gray-800 mt-2">첨부파일</label></div>
+                                            <div class="col-12 col-md-9"><input type="file" id="file_link" name="file_link" multiple></div>
                                         </div>
                                     </form>
 
@@ -45,18 +81,35 @@
 
                                 <div class="text-center d-block card-header py-3">
                                     <%--<button type="submit" style="border:none;">--%>
-                                    <a <%--href="javascript:goSubmit();"--%>  onclick="return chk_form()" class="btn btn-info">
+                                    <a <%-- href="javascript:goSubmit();"--%> onclick="return chk_form()" class="btn btn-info">
                                                 <span class="icon text-white-50">
                                                        <i class="fas fa-pen"></i>
                                                 </span>
-                                        <span class="text" style="color:white">등록</span>
+                                        <span class="text" style="color:white" >
+                                        <c:choose>
+                                            <c:when test="${test eq '1'}">
+                                                    <span OnClick="location.href='javascript:goSubmit();'" class="text" style="color:white">수정</span>
+                                            </c:when>
+                                            <c:otherwise>
+                                                    <span OnClick="location.href='javascript:goSubmit();'" class="text" style="color:white">등록</span>
+                                            </c:otherwise>
+                                        </c:choose>
+                                            </span>
                                         <script>
                                             function chk_form() {
-                                                if( document.getElementById("contents").value==''||document.getElementById("title").value==''){
+                                                if( document.getElementById("nor_tit").value==''||document.getElementById("nor_cnt").value==''){
                                                     $('#exampleModal').modal('show')
                                                 }
                                                 else {
+                                                    <c:choose>
+                                                    <c:when test="${test eq '1'}">
+                                                    document.getElementById('outputsupdateform').submit();
+                                                    </c:when>
+                                                    <c:otherwise>
                                                     document.getElementById('outputswriteform').submit();
+
+                                                    </c:otherwise>
+                                                    </c:choose>
                                                 }
                                             }
                                         </script>

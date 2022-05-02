@@ -1,11 +1,3 @@
-<%--
-  Created by IntelliJ IDEA.
-  User: hate5
-  Date: 2020-09-06
-  Time: 오후 9:25
-  To change this template use File | Settings | File Templates.
---%>
-
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
@@ -23,16 +15,6 @@
         <jsp:include page="../../include/topbar.jsp" flush="true" />
         <!-- Begin Page Content -->
         <div class="container-fluid">
-
-            <h1 class="h4 mb-2 text-gray-800 ">회의록</h1>
-            <p class="mb-4">
-                이 페이지에서 회의록에 가입하고 회의록을 참조할 수 있습니다.
-            </p>
-
-
-
-
-
             <div class="row">
                 <div class="col-lg-12">
 
@@ -40,7 +22,7 @@
                     <div class="card shadow mb-4">
                         <!-- Card Header - Accordion -->
                         <a class="d-block card-header py-3"  style="text-align: center">
-                            <h6 class="m-0 font-weight-bold text-primary"> ${BoardList.title}
+                            <h6 class="m-0 font-weight-bold text-primary"> ${PostList.nor_tit}
                             </h6>
                         </a>
                         <!-- Card Content - Collapse -->
@@ -51,36 +33,18 @@
                                         <div class="col-3"></div>
                                         <div class="col-4 ">
                                             <small class="help-block form-text">작성자</small>
-                                            <input style="border:0 solid whitesmoke;" type="text" id="meeting_writer" name="writer" value="${BoardList.writer}" readonly="readonly" disabled/>
+                                            <input style="border:0 solid whitesmoke;" type="text" id="writer" name="writer" value="${PostList.cus_num}" readonly="readonly" disabled/>
                                         </div>
                                         <div class="col-4" >
-                                            <small class="help-block form-text">이메일</small>
-                                            <input style="border:0 solid whitesmoke;"  id="meeting_email" name="meeting_email" value="${BoardList.refdate}" readonly="readonly" disabled/>
+                                            <small class="help-block form-text">작성일</small>
+                                            <fmt:formatDate value="${post.nor_reg}" pattern="yyyy-MM-dd" />
 
                                         </div>
                                     </div>
-
-                                    <div class="row form-group">
-                                        <div class="col-3"></div>
-                                        <div class="col-4 ">
-                                            <small class="help-block form-text">회의록 구분</small>
-                                            <input style="border:0 solid whitesmoke;" type="text" id="meeting_subject" name="meeting_subject" value="${BoardList.writer}설계모델" readonly="readonly" disabled/>
-                                        </div>
-                                    </div>
-
-                                    <div class="row form-group">
-                                        <div class="col-3"></div>
-                                        <div class="col-5" >
-                                            <small class="help-block form-text">요구사항</small>
-                                            <textarea style="border:0; solid: whitesmoke; width: 100%; border: none; resize: both">${BoardList.writer}고객사와 회의한 내용을 반영하여 수행함</textarea>
-                                            </style>
-                                        </div>
-                                    </div>
-
                                     <div class="row form-group">
                                         <div class="col-2"></div>
                                         <div class="col-8" style="border-top:  2px solid #808080;border-bottom: 2px solid #808080;">
-                                            <textarea style="border:0 solid whitesmoke;" name="contents" id="contents" rows="5" class="form-control mt-3 mb-3" readonly="readonly" disabled>${BoardList.contents}</textarea>
+                                            <textarea style="border:0 solid whitesmoke;" name="contents" id="contents" rows="5" class="form-control mt-3 mb-3" readonly="readonly" disabled>${PostList.nor_cnt}</textarea>
                                         </div>
                                     </div>
                                 </form>
@@ -89,7 +53,7 @@
 
                         <!-- 수정/삭제/목록 버튼 -->
                         <div class="text-center d-block card-header py-3">
-                            <a href="outputs_update.do?no=${BoardList.no}" class="btn btn-info">
+                            <a href="outputs_write.do?post_num=${PostList.post_num}&update=1" class="btn btn-info">
                                               <span class="icon text-white-50">
                                               <i class="fas fa-pen"></i>
                                               </span>
@@ -116,7 +80,7 @@
                                                 게시물을 정말 삭제하시겠습니까?
                                             </div>
                                             <div class="modal-footer">
-                                                <button href="outputs_delete.do?no=${BoardList.no}" type="button" class="btn btn-primary">삭제하기</button>
+                                                <button onclick = "location.href = 'outputs_delete.do?post_num=${PostList.post_num}' "  type="button" class="btn btn-primary">삭제하기</button>
                                                 <button type="button" class="btn btn-secondary" data-dismiss="modal">취소하기</button>
                                             </div>
                                         </div>
@@ -132,6 +96,7 @@
                             </a>
                         </div>  <!-- end of button list -->
                     </div>
+
                 </div>
 
             </div>
