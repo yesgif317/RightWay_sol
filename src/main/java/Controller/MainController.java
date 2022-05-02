@@ -459,15 +459,11 @@ public class MainController {
     }
 
     //자료실
-    @RequestMapping(value = "/datacenter_write.do", method = RequestMethod.GET)
-    public String datacenter_write(){
-        return "datacenter/datacenter_write";
-    }
-    @RequestMapping(value = "/datacenter.do", method = RequestMethod.GET)
-    public String datacenter(Model model){
-        List<NormalVO> post = normalService.selectDCList();
-        model.addAttribute("PostList", post);
-        return "datacenter/datacenter";
+    @RequestMapping(value = "/datacenter_content.do", method = RequestMethod.GET)
+    public String datacenter_content(@RequestParam("post_num") int no, Model model) {
+        NormalVO Result = normalService.viewPost(no);
+        model.addAttribute("PostList", Result);
+        return "/datacenter/datacenter_content";
     }
 
     @RequestMapping(value = "/datacenter_content",method = RequestMethod.GET)

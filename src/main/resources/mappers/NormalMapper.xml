@@ -22,5 +22,7 @@
         FROM normal
         where cate = 13
     </select>
-
+    <select resultType="NormalVO" id="viewPost">
+        SELECT * FROM normal where post_num=#{post_num}
+    </select>
 </mapper>

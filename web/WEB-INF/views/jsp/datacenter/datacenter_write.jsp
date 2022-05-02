@@ -6,49 +6,73 @@
 <!-- Content Wrapper -->
 <div id="content-wrapper" class="d-flex flex-column">
     <jsp:include page="../../include/topbar.jsp" flush="true"/>
-    <div class="collapse show" id="collapseCardExample">
-        <!-- Main Content -->
+    <!-- Main Content -->
+    <div class="card-body">
+        <div id="content">
+            <!-- Begin Page Content -->
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-lg-12">
+                        <!-- Collapsable Card Example -->
+                        <div class="card shadow mb-4">
+                            <!-- Card Header - Accordion -->
+                            <a class="d-block card-header py-3">
 
-        <div class="card-body">
-            <div id="content">
+                            </a>
+                            <!-- Card Content - Collapse -->
+                            <div class="collapse show" id="collapseCardExample">
+                                <div class="card-body">
+                                    <form method="post" id="file-upload-form" enctype="application/x-www-form-urlencoded" class="form-horizontal">
+                                        <div class="row form-group">
+                                            <div class="col col-md-3 text-right"><label class=" form-control-label fa-solid text-gray-800 mt-2"><sup class="text-danger small">*</sup>제목</label></div>
+                                            <div class="col-12 col-md-7"><input type="text" id="title" name="title" placeholder="제목을 입력해주세요" class="form-control"></div>
+                                        </div>
+                                        <div class="row form-group">
+                                            <div class="col col-md-3 text-right"><label class=" form-control-label fa-solid text-gray-800 mt-2">작성자</label></div>
+                                            <div class="col-12 col-md-7"><input type="email" id="writer" name="writer" placeholder="작성자를 입력해주세요" class="form-control"></div>
+                                        </div>
+                                        <div class="row form-group">
+                                            <div class="col col-md-3 text-right"><label class=" form-control-label fa-solid text-gray-800 mt-2"><sup class="text-danger small">*</sup>내용 작성</label></div>
+                                            <div class="col-12 col-md-7"><textarea name="contents" id="contents" rows="9" placeholder="내용을 입력해주세요" class="form-control"></textarea></div>
+                                        </div>
 
-                <!-- Begin Page Content -->
-                <div class="d-sm-flex align-items-center justify-content-between mb-4">
-                    <h1 class="h3 mb-0 text-gray-800">자료실</h1>
-                </div>
-                <form method="post" id="file-upload-form" enctype="application/x-www-form-urlencoded" class="form-horizontal">
-                    <div class="row form-group">
-                        <div class="col col-md-3"><label for="title" class=" form-control-label">제목</label></div>
-                        <div class="col-12 col-md-9"><input type="text" id="title" name="title" placeholder="Text" class="form-control"><small class="form-text text-muted">This is a help text</small></div>
-                    </div>
-                    <div class="row form-group">
-                        <div class="col col-md-3"><label for="writer" class=" form-control-label">작성자</label></div>
-                        <div class="col-12 col-md-9"><input type="email" id="writer" name="writer" placeholder="Enter Email" class="form-control"><small class="help-block form-text">Please enter your email</small></div>
-                    </div>
-                    <div class="row form-group">
-                        <div class="col col-md-3"><label for="contents" class=" form-control-label">내용 작성</label></div>
-                        <div class="col-12 col-md-9"><textarea name="contents" id="contents" rows="9" placeholder="Content..." class="form-control"></textarea></div>
-                    </div>
+                                        <div class="row form-group">
+                                            <div class="col col-md-3 text-right"><label class=" form-control-label fa-solid text-gray-800 mt-2">업로드 파일</label></div>
+                                            <div class="col-12 col-md-7"><input type="file" name="uploadFile" multiple></div>
+                                        </div>
 
-                    <div class="row form-group">
-                        <div class="col col-md-3"><label for="contents" class=" form-control-label">업로드 파일</label></div>
-                        <div class="col-12 col-md-9"><input type="file" name="uploadFile" multiple></div>
-                    </div>
 
-                    <div>
-                        <a href="javascript:goSubmit();" class="btn btn-primary btn-icon-split" id="uploadBtn">
+
+
+
+
+
+
+                                        <div class="text-center d-block card-header py-3">
+                                            <a href="javascript:goSubmit();" class="btn btn-primary btn-icon-split" id="uploadBtn">
                           <span class="icon text-white-50">
                             <i class="fas fa-pen"></i>
                           </span>
-                            <span class="text">글쓰기</span>
-                        </a>
+                                                <span class="text">글쓰기</span>
+                                            </a>
+                                            <%--</button>--%>
+                                            <a href="outputs.do" class="btn btn-secondary">
+                                                <span class="icon text-white-50">
+                                                       <i class="fas fa-list"></i>
+                                                </span>
+                                                <span class="text">취소</span>
+
+                                            </a>
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
                     </div>
-                </form>
+                </div>
+                <!-- /.container-fluid -->
             </div>
         </div>
-
-
-
     </div>
 
 
