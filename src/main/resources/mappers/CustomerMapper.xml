@@ -43,12 +43,12 @@
     <!-- 로그인 유지-->
     <update id="keepLogin">
         UPDATE customer
-        set cus_sess_key   = #{cus_sess_key}
+        set cus_sess_key = #{cus_sess_key}
           , cus_sess_lim = #{cus_sess_lim}
         where cus_id = #{cus_id}
     </update>
 
-    <select id = "checkUserWithSessionKey" resultMap="customerVOResultMap">
+    <select id="checkUserWithSessionKey" resultMap="customerVOResultMap">
         select *
         from customer
         where cus_sess_key = #{value}
@@ -62,18 +62,26 @@
 
     <!-- 회원가입(Insert) -->
     <insert id="insertCustomer">
-        insert into customer( cus_num ,cus_id, cus_pwd, cus_name, cus_email, cus_phone, cus_dep, cus_position, cus_state, com_num)
-        values ( cus_seq.NEXTVAL,#{cus_id}, #{cus_pwd}, #{cus_name}, #{cus_email}, #{cus_phone}, #{cus_dep}, #{cus_position}, #{cus_state} , #{com_num})
+        insert into customer (cus_num, cus_id, cus_pwd, cus_name, cus_email, cus_phone, cus_dep, cus_position, cus_state,
+                             com_num)
+        values (cus_seq.NEXTVAL, #{cus_id}, #{cus_pwd}, #{cus_name}, #{cus_email}, #{cus_phone}, #{cus_dep},
+                #{cus_position}, #{cus_state}, #{com_num})
     </insert>
 
 
-
-
     <!-- excel로 회원 업로딩 및 다운로드 , 임시로 c_num으로 내림차순 정렬해둠( 나중에 수정) -->
-    <select id="getUserExcel" parameterType="CustomerVO"  resultType="CustomerVO">
+    <select id="getUserExcel" parameterType="CustomerVO" resultType="CustomerVO">
         SELECT *
         FROM customer
         Order by cus_num asc
     </select>
+
+    <insert id="postUserExcel">
+        insert into customer (cus_num, cus_id, cus_pwd, cus_name, cus_email, cus_phone, cus_dep, cus_position, cus_state,
+                             com_num)
+        values (cus_seq.NEXTVAL, #{cus_id}, #{cus_pwd}, #{cus_name}, #{cus_email}, #{cus_phone}, #{cus_dep},
+                #{cus_position}, #{cus_state}, #{com_num})
+    </insert>
+
 
 </mapper>

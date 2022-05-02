@@ -1,11 +1,11 @@
-package Customer.Dto;
+package Commons.Excel.Dto;
 
 import lombok.Data;
 
 import java.util.*;
 
 @Data
-public class CustomerVO {
+public class ExcelVO {
 
     private String cus_num;
     private String cus_id;
@@ -16,16 +16,14 @@ public class CustomerVO {
     private String cus_dep;
     private String cus_position;
     private String cus_state;
-    private String cus_sess_key;
-    private String cus_sess_lim;
     private String com_num;
 
-
-    public CustomerVO(){
+    public ExcelVO(){
 
     }
 
-    public CustomerVO(String cus_num, String cus_id, String cus_pwd, String cus_name, String cus_email, String cus_phone, String cus_dep, String cus_position, String cus_state, String cus_sess_key , String cus_sess_lim , String com_num){
+
+    public ExcelVO(String cus_num, String cus_id, String cus_pwd, String cus_name, String cus_email, String cus_phone, String cus_dep, String cus_position, String cus_state, String cus_sess_key , String cus_sess_lim , String com_num){
         this.cus_num = cus_num;
         this.cus_id = cus_id;
         this.cus_pwd = cus_pwd;
@@ -35,15 +33,13 @@ public class CustomerVO {
         this.cus_dep = cus_dep;
         this.cus_position = cus_position;
         this.cus_state = cus_state;
-        this.cus_sess_key = cus_sess_key;
-        this.cus_sess_lim = cus_sess_lim;
         this.com_num = com_num;
     }
 
 
     @Override
     public String toString() {
-        return "CustomerVO{" +
+        return "ExcelVO{" +
                 "cus_num='" + cus_num + '\'' +
                 ", cus_id='" + cus_id + '\'' +
                 ", cus_pwd='" + cus_pwd + '\'' +
@@ -52,6 +48,7 @@ public class CustomerVO {
                 ", cus_phone='" + cus_phone + '\'' +
                 ", cus_dep='" + cus_dep + '\'' +
                 ", cus_position='" + cus_position + '\'' +
+                ", cus_state='" + cus_state + '\'' +
                 ", com_num='" + com_num + '\'' +
                 '}';
     }

@@ -10,14 +10,64 @@
 
 <!-- Content Wrapper -->
 <div id="content-wrapper" class="d-flex flex-column">
+
+    <!-- Main Content -->
+    <div id="content">
+        <jsp:include page="../../include/topbar.jsp" flush="true"/>
+        <!-- Begin Page Content -->
+        <div class="container-fluid">
+            <div id="contAreaBox">
+                <div class="panel">
+                    <div class="panel-body">
+                        <div class="table-responsive">
+                            <p> TEST 페이지</p>
+
+                            <div>
+                                <form action="/excelform_download.do" method="get">
+                                    <button type="submit">인원관리 양식 다운로드</button>
+                                </form>
+                            </div>
+
+                            <div>
+                                <form id="frmAttachedFiles" class="form-horizontal" enctype="multipart/form-data">
+                                    <div class="btn btn-primary btn-file">
+                                        엑셀업로드
+                                        <input type="file" id="btnUploadExcel" name="btnUploadExcel">
+                                    </div>
+                                </form>
+                            </div>
+
+                            <div>
+                                <form action="/ExcelDownload.do" id="frmExcelDown" method="GET">
+                                    <button type=submit">엑셀다운로드
+                                    </button>
+                                </form>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+        </div>
+    </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.15.5/xlsx.full.min.js"></script>
+    <script src="http://code.jquery.com/jquery-3.3.1.min.js"
+            integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
+            crossorigin="anonymous"></script>
+
     <script>
         // 파일 선택(업로드) 이벤트
-        $("#btnUploadExcel").on("change", function () {
+        $("#btnUploadExcel").on("change", function (e) {
+            console.log("버튼입력 화긴");
             fnUploadExcelRegChk();
         });
 
-        //엑셀업로드 체크
+        // 엑셀업로드 체크
         function fnUploadExcelRegChk() {
+            console.log("엑셀 업로드 화긴");
             let msg = "";
             let input = event.target;
             let reader = new FileReader();
@@ -26,6 +76,9 @@
                 let read_buffer = XLSX.read(fdata, {type: 'binary'});
                 read_buffer.SheetNames.forEach(function (sheetName) {
                     let rowdata = XLSX.utils.sheet_to_json(read_buffer.Sheets[sheetName]); // Excel 입력 데이터
+
+                    console.log('SheetName: ' + sheetName);
+                    console.log(JSON.stringify(rowdata));
                     // 행 수 만큼 반복
                     for (let i = 0; i < rowdata.length; i++) {
                         // 필수값 체크
@@ -55,82 +108,39 @@
                             }
                         }
                     }
-                }
-                //console.log(JSON.stringify(rowdata));
+                })
+                // console.log(JSON.stringify(rowdata));
+                console.log("함수 실행전")
                 fnUploadExcel();
             }
-        )
-        };
-        reader.readAsBinaryString(input.files[0]);
+            reader.readAsBinaryString(input.files[0]);
         }
+
 
         // 엑셀업로드
         function fnUploadExcel() {
-            let apiUrl = "/rest/admin/memberExcelUp.do";
+            var formData = new FormData($("#frmAttachedFiles")[0])
+            console.log(formData)
+            console.log("함수 실행후")
             $.ajax({
-                url: apiUrl,
+                url: "ExcelUpload.do",
                 type: "POST",
-                data: new FormData($("#frmAttachedFiles")[0]),
+                data: formData,
                 dataType: "json",
                 processData: false,
                 contentType: false,
                 success: function (result) {
                     if (result.resultCode == "SUCCESS") {
-                        console.log('업로드 성공');
+                        alert("업로드 성공");
                     } else {
-                        console.log('업로드 실패');
+                        alert("업로드 실패");
                     }
                 }
             });
         }
 
-
     </script>
-    <!-- Main Content -->
-    <div id="content">
-        <jsp:include page="../../include/topbar.jsp" flush="true"/>
-        <!-- Begin Page Content -->
-        <div class="container-fluid">
-            <div id="contAreaBox">
-                <div class="panel">
-                    <div class="panel-body">
-                        <div class="table-responsive">
-                            <p> TEST 페이지</p>
 
-                            <div>
-                                <form action="/excelform_download.do" method="get">
-                                    <button type="submit">인원관리 양식 다운로드</button>
-                                </form>
-                            </div>
-
-                            <div>
-                                <form name="inputForm" method="post" onsubmit="return _onSubmit();"
-                                      action="/usermanagement/usermanagement.do" enctype="multipart/form-data"
-                                      class="form-horizontal">
-                                    <form id="frmAttachedFiles" class="form-horizontal" enctype="multipart/form-data">
-                                        <div class="btn btn-primary btn-file">
-                                            엑셀업로드
-                                            <input type="file" id="btnUploadExcel" name="btnUploadExcel">
-                                        </div>
-                                    </form>
-                                </form>
-                            </div>
-
-                            <div>
-                                <form action="/ExcelDownload.do" id="frmExcelDown" method="GET">
-                                    <button type=submit">엑셀다운로드
-                                    </button>
-                                </form>
-                            </div>
-
-                        </div>
-                    </div>
-                </div>
-
-            </div>
-
-        </div>
-    </div>
     <jsp:include page="../../include/footer.jsp" flush="true"/>
     <!-- End of Main Content -->
 

@@ -2,12 +2,14 @@ package Controller;
 
 import javax.inject.Inject;
 import javax.servlet.http.*;
+import javax.servlet.http.Cookie;
 import java.io.*;
 import java.util.*;
 import java.util.List;
 
 import Board.Dto.BoardVO;
 import Board.Service.BoardService;
+import Commons.Excel.Dto.ExcelVO;
 import Commons.Excel.Service.ExcelService;
 import Company.Dto.CompanyVO;
 import Company.Service.Service.CompanyService;
@@ -20,14 +22,17 @@ import org.apache.poi.ss.usermodel.Row;
 import org.apache.poi.ss.usermodel.Sheet;
 import org.apache.poi.ss.usermodel.Workbook;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
-import File.Dto.FileVO;
+
 import File.Service.FileService;
 import org.mindrot.jbcrypt.BCrypt;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.multipart.MultipartHttpServletRequest;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import org.springframework.web.util.WebUtils;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -118,6 +123,7 @@ public class MainController {
     public String registerPOST(CustomerVO customerVO, RedirectAttributes redirectAttributes) throws Exception {
 
         System.out.println("Post register");
+        System.out.println(customerVO);
         customerService.insertCustomer(customerVO);
         redirectAttributes.addFlashAttribute("msg", "REGISTERED");
 
@@ -520,20 +526,31 @@ public class MainController {
         return "index";
     }
 
+    //페이지 이동
     @RequestMapping(value = "/usermanagement.do", method = RequestMethod.GET)
     public String usermanagement() {
         return "/usermanagement/usermanagement";
     }
 
 
+    //인원관리 엑셀 폼 다운로드
     @RequestMapping(value = "/excelform_download.do", method = RequestMethod.GET)
     public void excelDownload(HttpServletResponse response) throws IOException {
-        System.out.println("로그1");
+        System.out.println("excelform download");
         Workbook wb = new XSSFWorkbook();
         Sheet sheet = wb.createSheet("첫번째 시트");
         Row row = null;
         Cell cell = null;
         int rowNum = 0;
+        sheet.setColumnWidth((short) 0, (short) 3000);
+        sheet.setColumnWidth((short) 1, (short) 6000);
+        sheet.setColumnWidth((short) 2, (short) 3000);
+        sheet.setColumnWidth((short) 3, (short) 6000);
+        sheet.setColumnWidth((short) 4, (short) 5000);
+        sheet.setColumnWidth((short) 5, (short) 5000);
+        sheet.setColumnWidth((short) 6, (short) 3000);
+        sheet.setColumnWidth((short) 7, (short) 3000);
+
 
         // Header
         row = sheet.createRow(rowNum++);
@@ -548,12 +565,17 @@ public class MainController {
         cell = row.createCell(4);
         cell.setCellValue("전화번호");
         cell = row.createCell(5);
-        cell.setCellValue("부서명");
+        cell.setCellValue("팀명");
         cell = row.createCell(6);
-        cell.setCellValue("직책명");
+        cell.setCellValue("직급");
+        cell = row.createCell(7);
+        cell.setCellValue("상태");
+        cell = row.createCell(8);
+        cell.setCellValue("회사번호");
+
 
         // Body
-        for (int i = 0; i < 7; i++) {
+        for (int i = 0; i < 8; i++) {
             row = sheet.createRow(rowNum++);
             cell = row.createCell(0);
             cell.setCellValue(i + "_ID");
@@ -569,6 +591,10 @@ public class MainController {
             cell.setCellValue(i + "_Dep");
             cell = row.createCell(6);
             cell.setCellValue(i + "_Position");
+            cell = row.createCell(7);
+            cell.setCellValue(0);
+            cell = row.createCell(8);
+            cell.setCellValue(1);
         }
 
         // 컨텐츠 타입과 파일명 지정
@@ -581,12 +607,35 @@ public class MainController {
         wb.close();
     }
 
+    //인원관리 엑셀 다운로드
     @RequestMapping(value = "/ExcelDownload.do", method = RequestMethod.GET)
     public void ExcelGET(@ModelAttribute("customerVO") CustomerVO customerVO, HttpServletRequest
             request, HttpServletResponse response, ModelMap model) throws Exception {
         System.out.println("인원관리 다운로드");
         excelService.getUserExcel(customerVO, request, response);
+    }
 
+    //인원관리 엑셀 업로드
+    @ResponseBody
+    @RequestMapping(value = "/ExcelUpload.do", method = RequestMethod.POST)
+    public ResponseEntity<ExcelVO> memberExcelUp(MultipartHttpServletRequest request, HttpServletResponse response) {
+        System.out.println("컨트롤러 넘어옴");
+        ExcelVO excelVO = new ExcelVO();
+        response.setCharacterEncoding("UTF-8");
+        try {
+            MultipartFile file = null;
+            Iterator<String> iterator = request.getFileNames();
+            // Excel 파일 가져오기
+            if (iterator.hasNext()) {
+                file = request.getFile(iterator.next());
+                System.out.println(file);
+            }
+            System.out.println("서비스단 실행전");
+            excelService.memberExcelUp(file);
+            return new ResponseEntity<>(excelVO, HttpStatus.OK);
+        } catch (Exception e) {
+            return new ResponseEntity<>(excelVO, HttpStatus.OK);
+        }
     }
 
 }
