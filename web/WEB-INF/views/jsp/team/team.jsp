@@ -21,9 +21,7 @@
             <div class="card shadow mb-4">
                 <div class="card-header py-3">
                     <div class="col-auto text-left">
-                        <div class="">
-                            <a href="team_write.do" class="btn btn-info btn-user">팀등록</a>
-                        </div>
+                        <h6 class="m-0 font-weight-bold text-primary">팀 목록</h6>
                     </div>
                 </div>
                 <div class="card-body">
@@ -54,6 +52,14 @@
                             </tbody>
                         </table>
                     </div>
+                </div>
+                <div class="text-center d-block card-header py-3">
+                    <a href="/team_write.do" class="btn btn-info">
+                          <span class="icon text-white-50">
+                            <i class="fas fa-pen"></i>
+                          </span>
+                        <span class="text">팀등록</span>
+                    </a>
                 </div>
             </div>
         </div>

@@ -27,83 +27,101 @@
                                 <div class="card-body">
                                     <form method="post" action="update.do" id="updateform" enctype="application/x-www-form-urlencoded" class="form-horizontal">
                                         <div class="row form-group">
-                                            <div class="col col-md-3 text-right"><label for="title-input" class=" form-control-label"><sup class="text-danger">*</sup>행사명</label></div>
+                                            <div class="col col-md-3 text-right"><label for="title-input" class=" form-control-label fa-solid text-gray-800 mt-2"><sup class="text-danger small">*</sup>행사명</label></div>
                                             <div class="col-12 col-md-7"><input type="text" id="title-input" name="text-input" placeholder="행사명을 입력해주세요." class="form-control" value="${title}"></div>
                                         </div>
                                         <div class="row form-group">
-                                            <div class="col col-md-3 text-right"><label for="purpose-input" class=" form-control-label">행사목적</label></div>
+                                            <div class="col col-md-3 text-right"><label for="purpose-input" class=" form-control-label fa-solid text-gray-800 mt-2">행사목적</label></div>
                                             <div class="col-12 col-md-7"><input type="email" id="purpose-input" name="purpose-input" placeholder="행사목적을 입력해주세요." class="form-control" value="${writer}"></div>
                                         </div>
+
                                         <div class="row form-group">
-                                            <div class="col col-md-3 text-right"><label for="date-input" class=" form-control-label"><sup class="text-danger">*</sup>행사기간</label></div>
-                                            <div class="col-12 col-md-2"><input name="date-input" id="date-input" placeholder="행사시작일" class="form-control" disabled>${contents}</input></div>
-                                            <div>달력</div>
-                                            <div class="col-12 col-md-1 text-center">~</div>
-                                            <div class="col-12 col-md-2"><input name="date-input2" id="date-input2" placeholder="행사종료일" class="form-control" disabled>${contents}</input></div>
-                                            <div>달력</div>
+                                            <div class="col col-md-3 text-right"><label for="start-date-input" class=" form-control-label fa-solid text-gray-800 mt-2">행사기간</label></div>
+                                            <div class="col-12 col-md-2"><input type="date" name="start-date-input" id="start-date-input" class="form-control"></div>
+                                            <div class="text-center fa-solid text-gray-800 mt-2">~</div>
+                                            <div class="col-12 col-md-2"><input type="date" name="end-date-input" id="nd-date-input" class="form-control"></div>
                                         </div>
+
                                         <div class="row form-group">
-                                            <div class="col col-md-3 text-right"><label for="host-input" class=" form-control-label">행사주최</label></div>
+                                            <div class="col col-md-3 text-right"><label for="host-input" class=" form-control-label fa-solid text-gray-800 mt-2">행사주최</label></div>
                                             <div class="col-12 col-md-7"><input type="text" id="host-input" name="host-input" placeholder="행사주최를 입력해주세요." class="form-control" value="${writer}"></div>
                                         </div>
                                         <div class="row form-group">
-                                            <div class="col col-md-3 text-right"><label for="supervise-input" class=" form-control-label">행사주관</label></div>
+                                            <div class="col col-md-3 text-right"><label for="supervise-input" class=" form-control-label fa-solid text-gray-800 mt-2">행사주관</label></div>
                                             <div class="col-12 col-md-7"><input type="text" id="supervise-input" name="supervise-input" placeholder="행사주관을 입력해주세요." class="form-control" value="${writer}"></div>
                                         </div>
                                         <div class="row form-group">
-                                            <div class="col col-md-3 text-right"><label for="location-input" class=" form-control-label"><sup class="text-danger">*</sup>행사장소</label></div>
+                                            <div class="col col-md-3 text-right"><label for="location-input" class=" form-control-label fa-solid text-gray-800 mt-2"><sup class="text-danger small">*</sup>행사장소</label></div>
                                             <div class="col-12 col-md-7"><input type="text" id="location-input" name="location-input" placeholder="행사장소를 입력해주세요." class="form-control" value="${writer}"></div>
                                         </div>
                                         <div class="row form-group">
-                                            <div class="col col-md-3 text-right"><label for="url-input" class=" form-control-label">URL</label></div>
+                                            <div class="col col-md-3 text-right"><label for="url-input" class=" form-control-label fa-solid text-gray-800 mt-2">URL</label></div>
                                             <div class="col-12 col-md-7"><input type="text" id="url-input" name="url-input" placeholder="참고URL을 입력해주세요." class="form-control" value="${writer}"></div>
                                         </div>
                                         <div class="row form-group">
-                                            <div class="col col-md-3 text-right"><label for="contents" class=" form-control-label">행사내용</label></div>
+                                            <div class="col col-md-3 text-right"><label for="contents" class=" form-control-label fa-solid text-gray-800 mt-2">행사내용</label></div>
                                             <div class="col-12 col-md-7"><textarea name="contents" id="contents" rows="5" placeholder="행사내용을 입력해주세요." class="form-control"></textarea></div>
                                         </div>
                                         <div class="row form-group">
-                                            <div class="col col-md-3 text-right"><label for="price-input" class=" form-control-label"><sup class="text-danger">*</sup>참가비용</label></div>
+                                            <div class="col col-md-3 text-right"><label for="price-input" class=" form-control-label fa-solid text-gray-800 mt-2"><sup class="text-danger small">*</sup>참가비용</label></div>
                                             <div class="col-12 col-md-7"><input type="number" id="price-input" name="price-input" placeholder="참가비용을 입력해주세요." class="form-control" value="${writer}"></div>
                                         </div>
                                         <div class="row form-group">
-                                            <div class="col col-md-3 text-right"><label for="limit-input" class=" form-control-label"><sup class="text-danger">*</sup>정원</label></div>
+                                            <div class="col col-md-3 text-right"><label for="limit-input" class=" form-control-label fa-solid text-gray-800 mt-2"><sup class="text-danger small">*</sup>정원</label></div>
                                             <div class="col-12 col-md-7"><input type="number" id="limit-input" name="limit-input" placeholder="정원을 입력해주세요." class="form-control" value="${writer}"></div>
                                         </div>
                                         <div class="row form-group">
-                                            <div class="col col-md-3 text-right"><label for="accceptdate-input" class=" form-control-label"><sup class="text-danger">*</sup>접수기간</label></div>
-                                            <div class="col-12 col-md-2"><input name="accceptdate-input" id="accceptdate-input" placeholder="접수시작일" class="form-control" disabled>${contents}</input></div>
-                                            <div>달력</div>
-                                            <div class="col-12 col-md-1 text-center">~</div>
-                                            <div class="col-12 col-md-2"><input name="accceptdate-input2" id="accceptdate-input2" placeholder="접수종료일" class="form-control" disabled>${contents}</input></div>
-                                            <div>달력</div>
-                                        </div>
-
-
-
-                                        <div class="text-center">
-                                            <a href="javascript:goUpdate();" class="btn btn-info btn-icon-split">
-                                                <span class="icon text-white-50">
-                                                    <i class="fas fa-pen"></i>
-                                                </span>
-                                                <span class="text">등록</span>
-                                            </a>
-
-<%--                                            <a href="#" class="btn btn-danger btn-icon-split">--%>
-<%--                                                <span class="icon text-white-50">--%>
-<%--                                                    <i class="fas fa-trash-alt"></i>--%>
-<%--                                                </span>--%>
-<%--                                                <span class="text">글삭제</span>--%>
-<%--                                            </a>--%>
-
-                                            <a href="/event.do" class="btn btn-secondary btn-icon-split">
-                                                <span class="icon text-white-50">
-                                                    <i class="fas fa-list"></i>
-                                                </span>
-                                                <span class="text">취소</span>
-                                            </a>
+                                            <div class="col col-md-3 text-right"><label for="act-start-date-input" class=" form-control-label fa-solid text-gray-800 mt-2">접수기간</label></div>
+                                            <div class="col-12 col-md-2"><input type="date" name="act-start-date-input" id="act-start-date-input" class="form-control"></div>
+                                            <div class="text-center fa-solid text-gray-800 mt-2">~</div>
+                                            <div class="col-12 col-md-2"><input type="date" name="act-end-date-input" id="act-end-date-input" class="form-control"></div>
                                         </div>
                                     </form>
+                                </div>
+                                <div class="text-center d-block card-header py-3">
+                                    <%--<button type="submit" style="border:none;">--%>
+                                    <a <%--href="javascript:goSubmit();"--%>  onclick="return chk_form()" class="btn btn-info">
+                                                <span class="icon text-white-50">
+                                                       <i class="fas fa-pen"></i>
+                                                </span>
+                                        <span class="text" style="color:white">등록</span>
+                                        <script>
+                                            function chk_form() {
+                                                if( document.getElementById("contents").value==''||document.getElementById("title").value==''){
+                                                    $('#exampleModal').modal('show')
+                                                }
+                                                else {
+                                                    document.getElementById('outputswriteform').submit();
+                                                }
+                                            }
+                                        </script>
+                                        <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                            <div class="modal-dialog" role="document">
+                                                <div class="modal-content">
+                                                    <div class="modal-header">
+                                                        <h5 class="modal-title" id="exampleModalLabel">작성글 확인</h5>
+                                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                            <span aria-hidden="true">&times;</span>
+                                                        </button>
+                                                    </div>
+                                                    <div class="modal-body">
+                                                        필수값 데이터가 작성되지 않았습니다.
+                                                    </div>
+                                                    <div class="modal-footer">
+                                                        <button class="btn btn-secondary" type="button" data-dismiss="modal">확인</button>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                    </a>
+                                    <%--</button>--%>
+                                    <a href="event.do" class="btn btn-secondary">
+                                                <span class="icon text-white-50">
+                                                       <i class="fas fa-list"></i>
+                                                </span>
+                                        <span class="text">취소</span>
+                                    </a>
                                 </div>
                             </div>
                         </div>

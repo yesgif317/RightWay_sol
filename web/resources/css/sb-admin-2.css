@@ -10047,11 +10047,11 @@ a:focus {
 }
 
 .border-left-warning {
-  border-left: 0.25rem solid #80641e !important;
+  border-left: 0.25rem solid #f6c23e !important;
 }
 
 .border-bottom-warning {
-  border-bottom: 0.25rem solid #80641EFF !important;
+  border-bottom: 0.25rem solid #f6c23e !important;
 }
 
 .border-left-danger {
@@ -10059,7 +10059,7 @@ a:focus {
 }
 
 .border-bottom-danger {
-  border-bottom: 0.25rem solid #942e26 !important;
+  border-bottom: 0.25rem solid #BE3C30FF !important;
 }
 
 .border-left-light {
@@ -11220,4 +11220,40 @@ footer.sticky-footer .copyright {
 
 body.sidebar-toggled footer.sticky-footer {
   width: 100%;
+}
+
+.filebox input[type="file"] {
+  position: absolute;
+  width: 0;
+  height: 0;
+  padding: 0;
+  overflow: hidden;
+  border: 0;
+}
+
+.filebox label {
+  display: inline-block;
+  padding: 10px 20px;
+  color: #999;
+  vertical-align: middle;
+  background-color: #fdfdfd;
+  cursor: pointer;
+  border: 1px solid #ebebeb;
+  border-radius: 5px;
+}
+
+/* named upload */
+.filebox .upload-name {
+  display: inline-block;
+  height: 35px;
+  font-size:18px;
+  padding: 0 10px;
+  vertical-align: middle;
+  background-color: #f5f5f5;
+  border: 1px solid #ebebeb;
+  border-radius: 5px;
+}
+
+input:disabled {
+  background: #ffffff;
 }

@@ -1,5 +1,6 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 
 <jsp:include page="../../include/header.jsp" flush="true" />
 <jsp:include page="../../include/sidebar.jsp" flush="true" />
@@ -25,38 +26,92 @@
                         <!-- Card Content - Collapse -->
                         <div class="collapse show" id="collapseCardExample">
                             <div class="card-body">
-                                <form method="post" action="update.do" id="updateform" enctype="application/x-www-form-urlencoded" class="form-horizontal">
+                                <form autocomplete="off" method="post" role="form">
                                     <div class="row form-group">
-                                        <div class="col col-md-3 text-right"><label class="form-control-label">회사명</label></div>
-                                        <div class="col-12 col-md-7 text-gray-900">${title} 회사명</div>
+                                        <div class="col-3"></div>
+                                        <div class="col-4 ">
+                                            <small class="help-block form-text">회사명</small>
+                                            <input style="border:0 solid whitesmoke;" type="text" value="${CompanyList.com_name}" readonly="readonly" disabled/>
+                                        </div>
+                                        <div class="col-4" >
+                                            <small class="help-block form-text">계약일</small>
+                                            <input style="border:0 solid whitesmoke;" value="${CompanyList.com_contract}" readonly="readonly" disabled/>
+                                        </div>
                                     </div>
+
                                     <div class="row form-group">
-                                        <div class="col col-md-3 text-right"><label class="form-control-label">전화번호</label></div>
-                                        <div class="col-12 col-md-7 text-gray-900">${title} 전화번호</div>
+                                        <div class="col-3"></div>
+                                        <div class="col-4 ">
+                                            <small class="help-block form-text">전화번호</small>
+                                            <input style="border:0 solid whitesmoke;" type="text"  value="${CompanyList.com_tel}" readonly="readonly" disabled/>
+                                        </div>
+                                        <div class="col-4" >
+                                            <small class="help-block form-text">주요업무</small>
+                                            <input style="border:0 solid whitesmoke;"  value="${CompanyList.com_business}" readonly="readonly" disabled/>
+                                        </div>
                                     </div>
+
                                     <div class="row form-group">
-                                        <div class="col col-md-3 text-right"><label class="form-control-label">주요업무</label></div>
-                                        <div class="col-12 col-md-7 text-gray-900">${title} 개발</div>
-                                    </div>
-                                    <div class="row form-group">
-                                        <div class="col col-md-3 text-right"><label class="form-control-label">회사규모</label></div>
-                                        <div class="col-12 col-md-7 text-gray-900">${title} 중소기업/중견기업/대기업/공기업</div>
-                                    </div>
-                                    <div class="row form-group">
-                                        <div class="col col-md-3 text-right"><label class="form-control-label">계약일</label></div>
-                                        <div class="col-12 col-md-7 text-gray-900">${title} 2022-04-20</div>
-                                    </div>
-                                    <div class="text-center">
-                                        <a href="/company.do" class="btn btn-secondary btn-icon-split">
-                                                <span class="icon text-white-50">
-                                                    <i class="fas fa-list"></i>
-                                                </span>
-                                            <span class="text">목록</span>
-                                        </a>
+                                        <div class="col-3"></div>
+                                        <div class="col-4 ">
+                                            <small class="help-block form-text">회사규모</small>
+                                            <input style="border:0 solid whitesmoke;" type="text"  value="${CompanyList.com_scale}" readonly="readonly" disabled/>
+                                        </div>
+                                        <div class="col-4 ">
+                                            <small class="help-block form-text">회사주소</small>
+                                            <input style="border:0 solid whitesmoke;" type="text"  value="${CompanyList.com_addr}" readonly="readonly" disabled/>
+                                        </div>
+
                                     </div>
                                 </form>
                             </div>
                         </div>
+
+                        <!-- 수정/삭제/목록 버튼 -->
+                        <div class="text-center d-block card-header py-3">
+                            <a href="outputs_update.do?com_num=${CompanyList.com_num}" class="btn btn-info">
+                                              <span class="icon text-white-50">
+                                              <i class="fas fa-pen"></i>
+                                              </span>
+                                <span class="text"> 수정</span>
+                            </a>
+
+                            <a  class="btn btn-danger" data-toggle="modal" data-target="#exampleModal">
+                                                 <span class="icon text-white-50">
+                                                   <i class="fa-regular fa-trash-can"></i>
+                                                 </span>
+                                <span class="text" style="color:white"> 삭제</span>
+
+                                <!-- Modal -->
+                                <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                    <div class="modal-dialog" role="document">
+                                        <div class="modal-content">
+                                            <div class="modal-header">
+                                                <h5 class="modal-title" id="exampleModalLabel">게시물 삭제</h5>
+                                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                    <span aria-hidden="true">&times;</span>
+                                                </button>
+                                            </div>
+                                            <div class="modal-body">
+                                                게시물을 정말 삭제하시겠습니까?
+                                            </div>
+                                            <div class="modal-footer">
+                                                <button onclick = "location.href = 'company_delete.do?com_num=${CompanyList.com_num}" type="button" class="btn btn-danger">삭제하기</button>
+                                                <button type="button" class="btn btn-secondary" data-dismiss="modal">취소하기</button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </a>
+
+                            <a href="company.do" class="btn btn-secondary">
+                                             <span class="icon text-white-50">
+                                              <i class="fas fa-list"></i>
+                                             </span>
+                                <span class="text">목록</span>
+                            </a>
+                        </div>  <!-- end of button list -->
+
                     </div>
 
                 </div>
@@ -109,14 +164,3 @@
     <!-- Page level plugins -->
     <script src="<c:url value="/resources/vendor/datatables/jquery.dataTables.min.js"/>"></script>
     <script src="<c:url value="/resources/vendor/datatables/dataTables.bootstrap4.min.js"/>"></script>
-
-    <!-- Page level custom scripts -->
-    <script src="<c:url value="/resources/js/demo/datatables-demo.js"/>"></script>
-
-    <!-- Page level plugins -->
-    <script src="<c:url value="/resources/vendor/chart.js/Chart.min.js"/>"></script>
-
-    <!-- Page level custom scripts -->
-    <script src="<c:url value="/resources/js/demo/chart-bar-demo.js"/>"></script>
-    <script src="<c:url value="/resources/js/demo/chart-pie-demo.js"/>"></script>
-    <script src="<c:url value="/resources/js/demo/chart-pie-demo.js"/>"></script>

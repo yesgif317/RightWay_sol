@@ -20,11 +20,7 @@
             <!-- DataTales Example -->
             <div class="card shadow mb-4">
                 <div class="card-header py-3">
-                    <div class="col-auto text-left">
-                        <div class="">
-                            <a href="company_write.do" class="btn btn-info btn-user">업체등록</a>
-                        </div>
-                    </div>
+                    <h6 class="m-0 font-weight-bold text-primary">업체 목록</h6>
                 </div>
                 <div class="card-body">
                     <div class="table-responsive">
@@ -35,24 +31,33 @@
                                 <th>업체명</th>
                                 <th>전화번호</th>
                                 <th>업체주소</th>
-                                <th>업체주소</th>
+                                <th>주요사업</th>
                                 <th>가입된 사원수</th>
                             </tr>
                             </thead>
 
                             <tbody>
-                            <c:forEach items="${PostList}" var="post">
+                            <c:forEach items="${CompanyList}" var="com">
                                 <tr>
-                                    <td>${post.no}</td>
-                                    <td><a href ="company_content.jsp.do?id=${post.no}">${post.title}</a></td>
-                                    <td>${post.writer}</td>
-                                    <td>${post.writer}</td>
-                                    <td>${post.writer}</td>
+                                    <td>${com.com_num}</td>
+                                    <td><a href ="company_content.do?com_num=${com.com_num}">${com.com_name}</a></td>
+                                    <td>${com.com_tel}</td>
+                                    <td>${com.com_addr}</td>
+                                    <td>${com.com_business}</td>
+                                    <td>일단보류</td>
                                 </tr>
                             </c:forEach>
                             </tbody>
                         </table>
                     </div>
+                </div>
+                <div class="text-center d-block card-header py-3">
+                    <a href="/company_write.do" class="btn btn-info">
+                          <span class="icon text-white-50">
+                            <i class="fas fa-pen"></i>
+                          </span>
+                        <span class="text">업체등록</span>
+                    </a>
                 </div>
             </div>
         </div>

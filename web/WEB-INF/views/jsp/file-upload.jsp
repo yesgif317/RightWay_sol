@@ -35,6 +35,7 @@
                         <div class="col col-md-3"><label for="contents" class=" form-control-label">업로드 파일</label></div>
                         <div class="col-12 col-md-9"><input type="file" name="uploadFile" multiple></div>
                     </div>
+
                     <div>
                         <a href="javascript:goSubmit();" class="btn btn-primary btn-icon-split" id="uploadBtn">
                           <span class="icon text-white-50">

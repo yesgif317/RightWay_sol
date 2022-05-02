@@ -6,11 +6,13 @@
         <typeAlias type="Board.Dto.BoardVO" alias="BoardVO"/>
         <typeAlias type="Customer.Dto.CustomerVO" alias="CustomerVO"/>
         <typeAlias type="Customer.Dto.LoginDTO" alias="LoginDTO"/>
+        <typeAlias type="Company.Dto.CompanyVO" alias="CompanyVO"/>
         <typeAlias type="Project.Dto.ProjectVO" alias="ProjectVO"/>
         <typeAlias type="Comment.Dto.CommentVO" alias="CommentVO"/>
         <typeAlias type="Re_Comment.Dto.Re_CommentVO" alias="Re_CommentVO"/>
         <typeAlias type="Post.Dto.NormalVO" alias="NormalVO"/>
         <typeAlias type="File.Dto.FileVO" alias="FileVO"/>
+        <typeAlias type="Commons.Excel.Dto.ExcelVO" alias="ExcelVO"/>
     </typeAliases>
 
     <typeHandlers> <!-- java.sql.Timestamp 를 java.util.Date 형으로 반환 -->

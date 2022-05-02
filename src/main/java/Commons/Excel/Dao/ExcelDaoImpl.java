@@ -1,16 +1,12 @@
 package Commons.Excel.Dao;
 
-import Customer.Dao.CustomerDao;
+import Commons.Excel.Dto.ExcelVO;
 import Customer.Dto.CustomerVO;
-import Customer.Dto.LoginDTO;
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.stereotype.Repository;
 
 import javax.inject.Inject;
-import java.util.Date;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 @Repository
 public class ExcelDaoImpl implements ExcelDao {
@@ -26,6 +22,12 @@ public class ExcelDaoImpl implements ExcelDao {
     @Override
     public List<CustomerVO> getUserExcel(CustomerVO customerVO) {
         return sqlSession.selectList(Namespace+".getUserExcel");
+    }
+
+    @Override
+    public void postUserExcel(ExcelVO excelVO) {
+        System.out.println("impl 실행");
+        sqlSession.insert(Namespace+".postUserExcel",excelVO);
     }
 
 

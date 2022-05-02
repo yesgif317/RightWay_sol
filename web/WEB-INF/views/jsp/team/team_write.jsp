@@ -20,31 +20,22 @@
                     <div class="card shadow mb-4">
                         <!-- Card Header - Accordion -->
                         <a class="d-block card-header py-3">
-                            <h5 class="m-0 font-weight-bold text-primary text-center">팀등록</h5>
+                            <h6 class="m-0 font-weight-bold text-primary text-center">팀등록</h6>
                         </a>
                         <!-- Card Content - Collapse -->
                         <div class="collapse show" id="collapseCardExample">
                             <div class="card-body">
                                 <form method="post" action="update.do" id="updateform" enctype="application/x-www-form-urlencoded" class="form-horizontal">
-
                                     <div class="row form-group">
-                                        <div class="col col-md-3 text-right"><button class="btn btn-secondary" type="button" id="company"><sup class="text-danger">*</sup>회사 선택</button></div>
-
-                                        <div class="col-12 col-md-7">
-                                            <input type="text" class="form-control form-control-user" id="companyname" placeholder="회사명" disabled>
-                                        </div>
-                                    </div>
-
-                                    <div class="row form-group">
-                                        <div class="col col-md-3 text-right"><label for="title-input" class=" form-control-label fa-solid m-2"><sup class="text-danger">*</sup>팀명</label></div>
+                                        <div class="col col-md-3 text-right"><label for="title-input" class=" form-control-label fa-solid text-gray-800 m-2"><sup class="text-danger small">*</sup>팀명</label></div>
                                         <div class="col-12 col-md-7"><input type="text" id="title-input" name="text-input" placeholder="팀명을 입력해주세요." class="form-control" value="${title}"></div>
                                     </div>
                                     <div class="row form-group">
-                                        <div class="col col-md-3 text-right"><label for="number-input" class=" form-control-label fa-solid m-2"><sup class="text-danger">*</sup>팀장</label></div>
-                                        <div class="col-12 col-md-7 col-sm-4"><input type="text" id="number-input" name="number-input" placeholder="팀장명을 입력해주세요." class="form-control" value="${writer}"></div>
+                                        <div class="col col-md-3 text-right"><label for="reader-input" class=" form-control-label fa-solid text-gray-800 m-2"><sup class="text-danger small">*</sup>팀장</label></div>
+                                        <div class="col-12 col-md-7 col-sm-4"><input type="text" id="reader-input" name="number-input" placeholder="팀장명을 입력해주세요." class="form-control" value="${writer}"></div>
                                     </div>
                                     <div class="row form-group">
-                                        <div class="col col-md-3 text-right"><label for="detail" class=" form-control-label fa-solid m-2">팀설명</label></div>
+                                        <div class="col col-md-3 text-right"><label for="detail" class=" form-control-label fa-solid text-gray-800 m-2">팀설명</label></div>
                                         <div class="col-12 col-md-7"><textarea name="detail" id="detail" rows="5" placeholder="팀설명을 입력해주세요." class="form-control"></textarea></div>
                                     </div>
                                     <div class="row form-group">
@@ -58,26 +49,51 @@
                                 </form>
 
                             </div>
+
                             <div class="text-center d-block card-header py-3">
-                                <a href="javascript:goUpdate();" class="btn btn-info btn-icon-split">
+                                <%--<button type="submit" style="border:none;">--%>
+                                <a <%--href="javascript:goSubmit();"--%>  onclick="return chk_form()" class="btn btn-info">
                                                 <span class="icon text-white-50">
-                                                    <i class="fas fa-pen"></i>
+                                                       <i class="fas fa-pen"></i>
                                                 </span>
-                                    <span class="text">등록</span>
+                                    <span class="text" style="color:white">등록</span>
+                                    <script>
+                                        function chk_form() {
+                                            if( document.getElementById("title-input").value==''||document.getElementById("reader-input").value==''){
+                                                $('#exampleModal').modal('show')
+                                            }
+                                            else {
+                                                document.getElementById('outputswriteform').submit();
+                                            }
+                                        }
+                                    </script>
+                                    <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                        <div class="modal-dialog" role="document">
+                                            <div class="modal-content">
+                                                <div class="modal-header">
+                                                    <h5 class="modal-title" id="exampleModalLabel">작성글 확인</h5>
+                                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                        <span aria-hidden="true">&times;</span>
+                                                    </button>
+                                                </div>
+                                                <div class="modal-body">
+                                                    팀명 또는 팀장이 작성되지 않았습니다.
+                                                </div>
+                                                <div class="modal-footer">
+                                                    <button class="btn btn-secondary" type="button" data-dismiss="modal">확인</button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
                                 </a>
-
-                                <%--                                            <a href="#" class="btn btn-danger btn-icon-split">--%>
-                                <%--                                                <span class="icon text-white-50">--%>
-                                <%--                                                    <i class="fas fa-trash-alt"></i>
-                                <%--                                                </span>--%>
-                                <%--                                                <span class="text">글삭제</span>
-                                <%--                                            </a>--%>
-
-                                <a href="/company.do" class="btn btn-secondary btn-icon-split">
+                                <%--</button>--%>
+                                <a href="team.do" class="btn btn-secondary">
                                                 <span class="icon text-white-50">
-                                                    <i class="fas fa-list"></i>
+                                                       <i class="fas fa-list"></i>
                                                 </span>
                                     <span class="text">취소</span>
+
                                 </a>
                             </div>
                         </div>
@@ -137,10 +153,3 @@
 
     <!-- Page level custom scripts -->
     <script src="<c:url value="/resources/js/demo/datatables-demo.js"/>"></script>
-
-    <!-- Page level plugins -->
-    <script src="<c:url value="/resources/vendor/chart.js/Chart.min.js"/>"></script>
-
-    <!-- Page level custom scripts -->
-    <script src="<c:url value="/resources/js/demo/chart-bar-demo.js"/>"></script>
-    <script src="<c:url value="/resources/js/demo/chart-pie-demo.js"/>"></script>

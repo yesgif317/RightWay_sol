@@ -31,7 +31,8 @@
     <!-- ojdbc 다운받기위해 추가 -->
     <repositories>
         <repository>
-            <id>oracle</id> <name>ORACLE JDBC Repository</name>
+            <id>oracle</id>
+            <name>ORACLE JDBC Repository</name>
             <url>https://maven.atlassian.com/3rdparty/</url>
         </repository>
     </repositories>

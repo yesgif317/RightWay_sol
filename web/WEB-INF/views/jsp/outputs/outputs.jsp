@@ -10,7 +10,6 @@
 
 
 
-
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
@@ -18,16 +17,6 @@
 
 <jsp:include page="../../include/header.jsp" flush="true" />
 <jsp:include page="../../include/sidebar.jsp" flush="true" />
-
-<style>
-    div.box1 {
-        width: 150px;
-        height: 50px;
-        margin: 10px 0px 0px 0px;
-    }
-
-</style>
-
 
 <!-- Content Wrapper -->
 <div id="content-wrapper" class="d-flex flex-column" >
@@ -41,6 +30,7 @@
                     <h1 class="h4 mb-2 text-gray-800 ">산출물</h1>
                     <p class="mb-4">
                         산출물이란 프로젝트나 프로그램의 가시적이고 측정 가능한 결과물을 말합니다.
+
                     </p>
 
                 <!-- DataTales Example -->
@@ -50,47 +40,43 @@
                     </div>
                     <div class="card-body"  >
                         <div class="table-responsive" >
-
-                            <table class="table table-bordered table-hover row-border" id="dataTable" width="90%" cellspacing="0" style="scroll: no;overflow: hidden;overflow-x: hidden;">
+                            <table class="table table-bordered table-hover row-border" id="dataTable" width="100%" cellspacing="0">
                                 <thead>
                                 <tr >
                                     <th width="10%">번호</th>
                                     <th width="50%">산출물</th>
                                     <th>작성자</th>
                                     <th>작성날짜</th>
-                                    <th>조회수</th>
+                                    <th>프로젝트</th>
                                 </tr>
                                 </thead>
                                 <tfoot>
                                 </tfoot>
                                 <tbody>
-                                <c:forEach items="${BoardList}" var="board">
+                                <c:forEach items="${PostList}" var="post">
+                                    <c:if test="${post.cate eq 1}">
                                     <tr>
-                                        <td>${board.p_num}${board.b_num}</td>
-                                        <td>ss<%--<a href ="outputs_content.do?p_num=${board.p_num}">${board.p_title}</a>--%></td>
-                                        <td>${board.c_num}${board.p_update_date}</td>
-                                        <td>ss<%--<fmt:formatDate value="${board.p_date}" pattern="yyyy-MM-dd" />--%>${board.p_date}</td>
-
-                                        <td>${board.p_caption}</td>
+                                        <td>${post.post_num}</td>
+                                        <td><a href ="outputs_content.do?post_num=${post.post_num}">${post.nor_tit}</a></td>
+                                        <td>${post.cus_num}</td>
+                                        <td><fmt:formatDate value="${post.nor_reg}" pattern="yyyy-MM-dd" /></td>
+                                        <td>${post.prj_num}</td>
                                     </tr>
+                                    </c:if>
                                 </c:forEach>
                                 </tbody>
                             </table>
-
                             <div style="text-align: center">
-                                <a href="/outputs_write.do" class="btn btn-primary btn-icon-split">
+                                <a href="/outputs_write.do?update=0&post_num=0" class="btn btn-primary btn-icon-split">
                           <span class="icon text-white-50">
                             <i class="fas fa-pen"></i>
                           </span>
                                     <span class="text">글 작성</span>
                                 </a>
-
-
                             </div>
                         </div>
                     </div>
                 </div>
-
             </div>
             <!-- /.container-fluid -->
 

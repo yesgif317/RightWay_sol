@@ -44,11 +44,15 @@ public class CustomerVO {
     @Override
     public String toString() {
         return "CustomerVO{" +
-                "cus_num'" + cus_num + '\'' +
-                "cus_id='" + cus_id + '\'' +
+                "cus_num='" + cus_num + '\'' +
+                ", cus_id='" + cus_id + '\'' +
                 ", cus_pwd='" + cus_pwd + '\'' +
                 ", cus_name='" + cus_name + '\'' +
-                ", cus_sess_key='" + cus_sess_key + '\'' +
+                ", cus_email='" + cus_email + '\'' +
+                ", cus_phone='" + cus_phone + '\'' +
+                ", cus_dep='" + cus_dep + '\'' +
+                ", cus_position='" + cus_position + '\'' +
+                ", com_num='" + com_num + '\'' +
                 '}';
     }
 
