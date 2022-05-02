@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <dataSource name="@localhost">
-  <database-model serializer="dbm" dbms="ORACLE" family-id="ORACLE" format-version="4.32">
+  <database-model serializer="dbm" dbms="ORACLE" family-id="ORACLE" format-version="4.38">
     <root id="1">
       <IntrospectionLevel>3</IntrospectionLevel>
       <ServerVersion>11.2.0.2.0</ServerVersion>
@@ -49,6 +49,13 @@
       <ObjectId>9</ObjectId>
     </schema>
     <schema id="16" parent="1" name="PUBLIC">
+      <CreatedTimestamp>2014-05-29.22:10:42</CreatedTimestamp>
+      <DbLinksHash>877183165</DbLinksHash>
+      <IntrospectionL1Timestamp>2022-04-22.19:45:41</IntrospectionL1Timestamp>
+      <IntrospectionL2Timestamp>2022-04-22.19:45:41</IntrospectionL2Timestamp>
+      <IntrospectionL3Timestamp>2022-04-22.19:45:41</IntrospectionL3Timestamp>
+      <IntrospectionVersion>200820</IntrospectionVersion>
+      <ModifiedTimestamp>2014-05-29.22:31:03</ModifiedTimestamp>
       <ObjectId>1</ObjectId>
     </schema>
     <schema id="17" parent="1" name="SCOTT">
@@ -117,184 +124,134 @@
       <Status>E</Status>
     </tablespace>
     <user id="29" parent="1" name="ANONYMOUS">
-      <DefaultTablespace>SYSAUX</DefaultTablespace>
       <ObjectId>35</ObjectId>
-      <TemporaryTablespace>TEMP</TemporaryTablespace>
+      <DefaultTablespaceName>SYSAUX</DefaultTablespaceName>
+      <TemporaryTablespaceName>TEMP</TemporaryTablespaceName>
     </user>
     <user id="30" parent="1" name="APEX_040000">
-      <DefaultTablespace>SYSAUX</DefaultTablespace>
       <Locked>1</Locked>
       <ObjectId>47</ObjectId>
-      <TemporaryTablespace>TEMP</TemporaryTablespace>
+      <DefaultTablespaceName>SYSAUX</DefaultTablespaceName>
+      <TemporaryTablespaceName>TEMP</TemporaryTablespaceName>
     </user>
     <user id="31" parent="1" name="APEX_PUBLIC_USER">
-      <DefaultTablespace>SYSTEM</DefaultTablespace>
       <Locked>1</Locked>
       <ObjectId>45</ObjectId>
-      <TemporaryTablespace>TEMP</TemporaryTablespace>
+      <DefaultTablespaceName>SYSTEM</DefaultTablespaceName>
+      <TemporaryTablespaceName>TEMP</TemporaryTablespaceName>
     </user>
     <user id="32" parent="1" name="APPQOSSYS">
-      <DefaultTablespace>SYSAUX</DefaultTablespace>
       <Expired>1</Expired>
       <Locked>1</Locked>
       <ObjectId>30</ObjectId>
-      <TemporaryTablespace>TEMP</TemporaryTablespace>
+      <DefaultTablespaceName>SYSAUX</DefaultTablespaceName>
+      <TemporaryTablespaceName>TEMP</TemporaryTablespaceName>
     </user>
     <user id="33" parent="1" name="CTXSYS">
-      <DefaultTablespace>SYSAUX</DefaultTablespace>
       <Expired>1</Expired>
       <Locked>1</Locked>
       <ObjectId>32</ObjectId>
-      <TemporaryTablespace>TEMP</TemporaryTablespace>
+      <DefaultTablespaceName>SYSAUX</DefaultTablespaceName>
+      <TemporaryTablespaceName>TEMP</TemporaryTablespaceName>
     </user>
     <user id="34" parent="1" name="DBSNMP">
-      <DefaultTablespace>SYSAUX</DefaultTablespace>
       <Expired>1</Expired>
       <Locked>1</Locked>
       <ObjectId>29</ObjectId>
-      <TemporaryTablespace>TEMP</TemporaryTablespace>
+      <DefaultTablespaceName>SYSAUX</DefaultTablespaceName>
+      <TemporaryTablespaceName>TEMP</TemporaryTablespaceName>
     </user>
     <user id="35" parent="1" name="DIP">
-      <DefaultTablespace>SYSTEM</DefaultTablespace>
       <Expired>1</Expired>
       <Locked>1</Locked>
       <ObjectId>14</ObjectId>
-      <TemporaryTablespace>TEMP</TemporaryTablespace>
+      <DefaultTablespaceName>SYSTEM</DefaultTablespaceName>
+      <TemporaryTablespaceName>TEMP</TemporaryTablespaceName>
     </user>
     <user id="36" parent="1" name="FELIS">
-      <DefaultTablespace>SYSTEM</DefaultTablespace>
       <ObjectId>52</ObjectId>
-      <TemporaryTablespace>TEMP</TemporaryTablespace>
+      <DefaultTablespaceName>SYSTEM</DefaultTablespaceName>
+      <TemporaryTablespaceName>TEMP</TemporaryTablespaceName>
     </user>
     <user id="37" parent="1" name="FLOWS_FILES">
-      <DefaultTablespace>SYSAUX</DefaultTablespace>
       <Locked>1</Locked>
       <ObjectId>44</ObjectId>
-      <TemporaryTablespace>TEMP</TemporaryTablespace>
+      <DefaultTablespaceName>SYSAUX</DefaultTablespaceName>
+      <TemporaryTablespaceName>TEMP</TemporaryTablespaceName>
     </user>
     <user id="38" parent="1" name="HR">
-      <DefaultTablespace>USERS</DefaultTablespace>
       <Expired>1</Expired>
       <Locked>1</Locked>
       <ObjectId>43</ObjectId>
-      <TemporaryTablespace>TEMP</TemporaryTablespace>
+      <DefaultTablespaceName>USERS</DefaultTablespaceName>
+      <TemporaryTablespaceName>TEMP</TemporaryTablespaceName>
     </user>
     <user id="39" parent="1" name="JDBC">
-      <DefaultTablespace>USERS</DefaultTablespace>
       <ObjectId>49</ObjectId>
-      <TemporaryTablespace>TEMP</TemporaryTablespace>
+      <DefaultTablespaceName>USERS</DefaultTablespaceName>
+      <TemporaryTablespaceName>TEMP</TemporaryTablespaceName>
     </user>
     <user id="40" parent="1" name="MDSYS">
-      <DefaultTablespace>SYSAUX</DefaultTablespace>
       <Expired>1</Expired>
       <Locked>1</Locked>
       <ObjectId>42</ObjectId>
-      <TemporaryTablespace>TEMP</TemporaryTablespace>
+      <DefaultTablespaceName>SYSAUX</DefaultTablespaceName>
+      <TemporaryTablespaceName>TEMP</TemporaryTablespaceName>
     </user>
     <user id="41" parent="1" name="ORACLE_OCM">
-      <DefaultTablespace>SYSTEM</DefaultTablespace>
       <Expired>1</Expired>
       <Locked>1</Locked>
       <ObjectId>21</ObjectId>
-      <TemporaryTablespace>TEMP</TemporaryTablespace>
+      <DefaultTablespaceName>SYSTEM</DefaultTablespaceName>
+      <TemporaryTablespaceName>TEMP</TemporaryTablespaceName>
     </user>
     <user id="42" parent="1" name="OUTLN">
-      <DefaultTablespace>SYSTEM</DefaultTablespace>
       <Expired>1</Expired>
       <Locked>1</Locked>
       <ObjectId>9</ObjectId>
-      <TemporaryTablespace>TEMP</TemporaryTablespace>
+      <DefaultTablespaceName>SYSTEM</DefaultTablespaceName>
+      <TemporaryTablespaceName>TEMP</TemporaryTablespaceName>
     </user>
     <user id="43" parent="1" name="SCOTT">
-      <DefaultTablespace>SYSTEM</DefaultTablespace>
       <ObjectId>54</ObjectId>
-      <TemporaryTablespace>TEMP</TemporaryTablespace>
+      <DefaultTablespaceName>SYSTEM</DefaultTablespaceName>
+      <TemporaryTablespaceName>TEMP</TemporaryTablespaceName>
     </user>
     <user id="44" parent="1" name="SOL">
-      <DefaultTablespace>SYSTEM</DefaultTablespace>
       <ObjectId>53</ObjectId>
-      <TemporaryTablespace>TEMP</TemporaryTablespace>
+      <DefaultTablespaceName>SYSTEM</DefaultTablespaceName>
+      <TemporaryTablespaceName>TEMP</TemporaryTablespaceName>
     </user>
     <user id="45" parent="1" name="SYS">
-      <DefaultTablespace>SYSTEM</DefaultTablespace>
       <ObjectId>0</ObjectId>
-      <TemporaryTablespace>TEMP</TemporaryTablespace>
+      <DefaultTablespaceName>SYSTEM</DefaultTablespaceName>
+      <TemporaryTablespaceName>TEMP</TemporaryTablespaceName>
     </user>
     <user id="46" parent="1" name="SYSTEM">
-      <DefaultTablespace>SYSTEM</DefaultTablespace>
       <ObjectId>5</ObjectId>
-      <TemporaryTablespace>TEMP</TemporaryTablespace>
+      <DefaultTablespaceName>SYSTEM</DefaultTablespaceName>
+      <TemporaryTablespaceName>TEMP</TemporaryTablespaceName>
     </user>
     <user id="47" parent="1" name="TEST01">
-      <DefaultTablespace>USERS</DefaultTablespace>
       <ObjectId>50</ObjectId>
-      <TemporaryTablespace>TEMP</TemporaryTablespace>
+      <DefaultTablespaceName>USERS</DefaultTablespaceName>
+      <TemporaryTablespaceName>TEMP</TemporaryTablespaceName>
     </user>
     <user id="48" parent="1" name="XDB">
-      <DefaultTablespace>SYSAUX</DefaultTablespace>
       <Expired>1</Expired>
       <Locked>1</Locked>
       <ObjectId>34</ObjectId>
-      <TemporaryTablespace>TEMP</TemporaryTablespace>
+      <DefaultTablespaceName>SYSAUX</DefaultTablespaceName>
+      <TemporaryTablespaceName>TEMP</TemporaryTablespaceName>
     </user>
     <user id="49" parent="1" name="XS$NULL">
-      <DefaultTablespace>SYSTEM</DefaultTablespace>
       <Expired>1</Expired>
       <Locked>1</Locked>
       <ObjectId>2147483638</ObjectId>
-      <TemporaryTablespace>TEMP</TemporaryTablespace>
+      <DefaultTablespaceName>SYSTEM</DefaultTablespaceName>
+      <TemporaryTablespaceName>TEMP</TemporaryTablespaceName>
     </user>
-    <sequence id="50" parent="17" name="CUS_SEQ">
-      <CacheSize>-2147483648</CacheSize>
-      <CreatedTimestamp>2022-04-28.01:12:33</CreatedTimestamp>
-      <DetailsLevel>2</DetailsLevel>
-      <ModifiedTimestamp>2022-04-28.01:12:33</ModifiedTimestamp>
-      <ObjectId>21423</ObjectId>
-      <SequenceIdentity>1(9)</SequenceIdentity>
-    </sequence>
-    <table id="51" parent="17" name="COMPANY">
-      <CreatedTimestamp>2022-04-27.23:46:45</CreatedTimestamp>
-      <DetailsLevel>3</DetailsLevel>
-      <ModifiedTimestamp>2022-04-27.23:46:45</ModifiedTimestamp>
-      <ObjectId>21411</ObjectId>
-      <TemporaryPreserve>1</TemporaryPreserve>
-    </table>
-    <table id="52" parent="17" name="CUSTOMER">
-      <CreatedTimestamp>2022-04-28.01:12:31</CreatedTimestamp>
-      <DetailsLevel>3</DetailsLevel>
-      <ModifiedTimestamp>2022-04-28.01:12:31</ModifiedTimestamp>
-      <ObjectId>21421</ObjectId>
-      <TemporaryPreserve>1</TemporaryPreserve>
-    </table>
-    <table id="53" parent="17" name="CUSTOMER1">
-      <CreatedTimestamp>2022-04-27.18:40:37</CreatedTimestamp>
-      <DetailsLevel>3</DetailsLevel>
-      <ModifiedTimestamp>2022-04-27.23:46:05</ModifiedTimestamp>
-      <ObjectId>21409</ObjectId>
-      <TemporaryPreserve>1</TemporaryPreserve>
-    </table>
-    <table id="54" parent="17" name="EXCEL">
-      <CreatedTimestamp>2022-04-26.20:42:58</CreatedTimestamp>
-      <DetailsLevel>3</DetailsLevel>
-      <ModifiedTimestamp>2022-04-26.20:42:58</ModifiedTimestamp>
-      <ObjectId>21324</ObjectId>
-      <TemporaryPreserve>1</TemporaryPreserve>
-    </table>
-    <table id="55" parent="17" name="NOTICE">
-      <CreatedTimestamp>2022-04-14.20:08:17</CreatedTimestamp>
-      <DetailsLevel>3</DetailsLevel>
-      <ModifiedTimestamp>2022-04-14.20:08:17</ModifiedTimestamp>
-      <ObjectId>20938</ObjectId>
-      <TemporaryPreserve>1</TemporaryPreserve>
-    </table>
-    <table id="56" parent="17" name="USER_DE">
-      <CreatedTimestamp>2022-04-15.18:16:11</CreatedTimestamp>
-      <DetailsLevel>3</DetailsLevel>
-      <ModifiedTimestamp>2022-04-15.18:16:11</ModifiedTimestamp>
-      <ObjectId>20945</ObjectId>
-      <TemporaryPreserve>1</TemporaryPreserve>
-    </table>
-    <data-file id="57" parent="24" name="C:\ORACLEXE\APP\ORACLE\ORADATA\XE\SYSTEM.DBF">
+    <data-file id="50" parent="24" name="C:\ORACLEXE\APP\ORACLE\ORADATA\XE\SYSTEM.DBF">
       <AutoExtensible>1</AutoExtensible>
       <AvailabilityStatus>A</AvailabilityStatus>
       <FileId>1</FileId>
@@ -305,7 +262,7 @@
       <Position>1</Position>
       <UserSize>45952</UserSize>
     </data-file>
-    <data-file id="58" parent="25" name="C:\ORACLEXE\APP\ORACLE\ORADATA\XE\SYSAUX.DBF">
+    <data-file id="51" parent="25" name="C:\ORACLEXE\APP\ORACLE\ORADATA\XE\SYSAUX.DBF">
       <AutoExtensible>1</AutoExtensible>
       <AvailabilityStatus>A</AvailabilityStatus>
       <FileId>2</FileId>
@@ -316,7 +273,7 @@
       <Position>2</Position>
       <UserSize>88192</UserSize>
     </data-file>
-    <data-file id="59" parent="26" name="C:\ORACLEXE\APP\ORACLE\ORADATA\XE\UNDOTBS1.DBF">
+    <data-file id="52" parent="26" name="C:\ORACLEXE\APP\ORACLE\ORADATA\XE\UNDOTBS1.DBF">
       <AutoExtensible>1</AutoExtensible>
       <AvailabilityStatus>A</AvailabilityStatus>
       <FileId>3</FileId>
@@ -327,7 +284,7 @@
       <Position>3</Position>
       <UserSize>48512</UserSize>
     </data-file>
-    <data-file id="60" parent="27" name="C:\ORACLEXE\APP\ORACLE\ORADATA\XE\TEMP.DBF">
+    <data-file id="53" parent="27" name="C:\ORACLEXE\APP\ORACLE\ORADATA\XE\TEMP.DBF">
       <AutoExtensible>1</AutoExtensible>
       <FileId>1</FileId>
       <FileSize>2560</FileSize>
@@ -336,7 +293,7 @@
       <Position>1</Position>
       <UserSize>2432</UserSize>
     </data-file>
-    <data-file id="61" parent="28" name="C:\ORACLEXE\APP\ORACLE\ORADATA\XE\USERS.DBF">
+    <data-file id="54" parent="28" name="C:\ORACLEXE\APP\ORACLE\ORADATA\XE\USERS.DBF">
       <AutoExtensible>1</AutoExtensible>
       <AvailabilityStatus>A</AvailabilityStatus>
       <FileId>4</FileId>
@@ -347,267 +304,5 @@
       <Position>4</Position>
       <UserSize>12672</UserSize>
     </data-file>
-    <column id="62" parent="51" name="COM_NUM">
-      <DataType>NUMBER(*)|0s</DataType>
-      <NotNull>1</NotNull>
-      <Position>1</Position>
-    </column>
-    <column id="63" parent="51" name="COM_NAME">
-      <DataType>VARCHAR2(60 byte)|0s</DataType>
-      <Position>2</Position>
-    </column>
-    <column id="64" parent="51" name="COM_TEL">
-      <DataType>VARCHAR2(20 byte)|0s</DataType>
-      <Position>3</Position>
-    </column>
-    <column id="65" parent="51" name="COM_ADDR">
-      <DataType>VARCHAR2(100 byte)|0s</DataType>
-      <Position>4</Position>
-    </column>
-    <column id="66" parent="51" name="COM_SCALE">
-      <DataType>VARCHAR2(20 byte)|0s</DataType>
-      <Position>5</Position>
-    </column>
-    <column id="67" parent="51" name="COM_BUSINESS">
-      <DataType>VARCHAR2(60 byte)|0s</DataType>
-      <Position>6</Position>
-    </column>
-    <column id="68" parent="51" name="COM_CONTRACT">
-      <DataType>DATE|0s</DataType>
-      <Position>7</Position>
-    </column>
-    <index id="69" parent="51" name="SYS_C007172">
-      <ColNames>COM_NUM</ColNames>
-      <CreatedTimestamp>2022-04-27.23:46:45</CreatedTimestamp>
-      <ModifiedTimestamp>2022-04-27.23:46:45</ModifiedTimestamp>
-      <NameSurrogate>1</NameSurrogate>
-      <ObjectId>21412</ObjectId>
-      <TablespaceName>SYSTEM</TablespaceName>
-      <Unique>1</Unique>
-    </index>
-    <key id="70" parent="51" name="SYS_C007172">
-      <ColNames>COM_NUM</ColNames>
-      <InitiallyDeferred>1</InitiallyDeferred>
-      <ModifiedTimestamp>2022-04-27.23:46:45</ModifiedTimestamp>
-      <NameSurrogate>1</NameSurrogate>
-      <Primary>1</Primary>
-      <UnderlyingIndexName>SYS_C007172</UnderlyingIndexName>
-    </key>
-    <column id="71" parent="52" name="CUS_NUM">
-      <DataType>NUMBER(*)|0s</DataType>
-      <NotNull>1</NotNull>
-      <Position>1</Position>
-    </column>
-    <column id="72" parent="52" name="CUS_ID">
-      <DataType>VARCHAR2(20 byte)|0s</DataType>
-      <NotNull>1</NotNull>
-      <Position>2</Position>
-    </column>
-    <column id="73" parent="52" name="CUS_PWD">
-      <DataType>VARCHAR2(200 byte)|0s</DataType>
-      <NotNull>1</NotNull>
-      <Position>3</Position>
-    </column>
-    <column id="74" parent="52" name="CUS_NAME">
-      <DataType>VARCHAR2(20 byte)|0s</DataType>
-      <NotNull>1</NotNull>
-      <Position>4</Position>
-    </column>
-    <column id="75" parent="52" name="CUS_EMAIL">
-      <DataType>VARCHAR2(30 byte)|0s</DataType>
-      <Position>5</Position>
-    </column>
-    <column id="76" parent="52" name="CUS_PHONE">
-      <DataType>VARCHAR2(20 byte)|0s</DataType>
-      <Position>6</Position>
-    </column>
-    <column id="77" parent="52" name="CUS_DEP">
-      <DataType>VARCHAR2(20 byte)|0s</DataType>
-      <Position>7</Position>
-    </column>
-    <column id="78" parent="52" name="CUS_POSITION">
-      <DataType>VARCHAR2(20 byte)|0s</DataType>
-      <Position>8</Position>
-    </column>
-    <column id="79" parent="52" name="CUS_STATE">
-      <DataType>NUMBER(*)|0s</DataType>
-      <DefaultExpression>0</DefaultExpression>
-      <Position>9</Position>
-    </column>
-    <column id="80" parent="52" name="CUS_SESS_KEY">
-      <DataType>VARCHAR2(200 byte)|0s</DataType>
-      <DefaultExpression>&apos;none&apos;</DefaultExpression>
-      <Position>10</Position>
-    </column>
-    <column id="81" parent="52" name="CUS_SESS_LIM">
-      <DataType>TIMESTAMP(6)|0s</DataType>
-      <Position>11</Position>
-    </column>
-    <column id="82" parent="52" name="COM_NUM">
-      <DataType>NUMBER(*)|0s</DataType>
-      <Position>12</Position>
-    </column>
-    <foreign-key id="83" parent="52" name="FK_CUSTOMER_COM_NUM">
-      <ColNames>COM_NUM</ColNames>
-      <ModifiedTimestamp>2022-04-28.01:12:31</ModifiedTimestamp>
-      <OnDelete>restrict</OnDelete>
-      <RefKeyName>SYS_C007172</RefKeyName>
-      <RefTableName>COMPANY</RefTableName>
-    </foreign-key>
-    <index id="84" parent="52" name="SYS_C007191">
-      <ColNames>CUS_NUM</ColNames>
-      <CreatedTimestamp>2022-04-28.01:12:31</CreatedTimestamp>
-      <ModifiedTimestamp>2022-04-28.01:12:31</ModifiedTimestamp>
-      <NameSurrogate>1</NameSurrogate>
-      <ObjectId>21422</ObjectId>
-      <TablespaceName>SYSTEM</TablespaceName>
-      <Unique>1</Unique>
-    </index>
-    <key id="85" parent="52" name="SYS_C007191">
-      <ColNames>CUS_NUM</ColNames>
-      <InitiallyDeferred>1</InitiallyDeferred>
-      <ModifiedTimestamp>2022-04-28.01:12:31</ModifiedTimestamp>
-      <NameSurrogate>1</NameSurrogate>
-      <Primary>1</Primary>
-      <UnderlyingIndexName>SYS_C007191</UnderlyingIndexName>
-    </key>
-    <column id="86" parent="53" name="C_NUM">
-      <DataType>NUMBER(*)|0s</DataType>
-      <NotNull>1</NotNull>
-      <Position>1</Position>
-    </column>
-    <column id="87" parent="53" name="C_ID">
-      <DataType>VARCHAR2(20 byte)|0s</DataType>
-      <NotNull>1</NotNull>
-      <Position>2</Position>
-    </column>
-    <column id="88" parent="53" name="C_PWD">
-      <DataType>VARCHAR2(20 byte)|0s</DataType>
-      <NotNull>1</NotNull>
-      <Position>3</Position>
-    </column>
-    <column id="89" parent="53" name="C_NAME">
-      <DataType>VARCHAR2(20 byte)|0s</DataType>
-      <NotNull>1</NotNull>
-      <Position>4</Position>
-    </column>
-    <column id="90" parent="53" name="C_EMAIL">
-      <DataType>VARCHAR2(30 byte)|0s</DataType>
-      <Position>5</Position>
-    </column>
-    <column id="91" parent="53" name="C_PHONE">
-      <DataType>VARCHAR2(20 byte)|0s</DataType>
-      <Position>6</Position>
-    </column>
-    <column id="92" parent="53" name="C_DEP">
-      <DataType>VARCHAR2(20 byte)|0s</DataType>
-      <Position>7</Position>
-    </column>
-    <column id="93" parent="53" name="C_POSITION">
-      <DataType>VARCHAR2(20 byte)|0s</DataType>
-      <Position>8</Position>
-    </column>
-    <column id="94" parent="53" name="COM_NUM">
-      <DataType>NUMBER(*)|0s</DataType>
-      <Position>9</Position>
-    </column>
-    <column id="95" parent="53" name="C_STATE">
-      <DataType>NUMBER(*)|0s</DataType>
-      <DefaultExpression>0</DefaultExpression>
-      <Position>10</Position>
-    </column>
-    <index id="96" parent="53" name="SYS_C007170">
-      <ColNames>C_NUM</ColNames>
-      <CreatedTimestamp>2022-04-27.18:40:38</CreatedTimestamp>
-      <ModifiedTimestamp>2022-04-27.18:40:38</ModifiedTimestamp>
-      <NameSurrogate>1</NameSurrogate>
-      <ObjectId>21410</ObjectId>
-      <TablespaceName>SYSTEM</TablespaceName>
-      <Unique>1</Unique>
-    </index>
-    <key id="97" parent="53" name="SYS_C007170">
-      <ColNames>C_NUM</ColNames>
-      <InitiallyDeferred>1</InitiallyDeferred>
-      <ModifiedTimestamp>2022-04-27.18:40:38</ModifiedTimestamp>
-      <NameSurrogate>1</NameSurrogate>
-      <Primary>1</Primary>
-      <UnderlyingIndexName>SYS_C007170</UnderlyingIndexName>
-    </key>
-    <column id="98" parent="54" name="ID">
-      <DataType>VARCHAR2(20 byte)|0s</DataType>
-      <NotNull>1</NotNull>
-      <Position>1</Position>
-    </column>
-    <column id="99" parent="54" name="NAME">
-      <DataType>VARCHAR2(20 byte)|0s</DataType>
-      <Position>2</Position>
-    </column>
-    <index id="100" parent="54" name="SYS_C007160">
-      <ColNames>ID</ColNames>
-      <CreatedTimestamp>2022-04-26.20:42:58</CreatedTimestamp>
-      <ModifiedTimestamp>2022-04-26.20:42:58</ModifiedTimestamp>
-      <NameSurrogate>1</NameSurrogate>
-      <ObjectId>21325</ObjectId>
-      <TablespaceName>SYSTEM</TablespaceName>
-      <Unique>1</Unique>
-    </index>
-    <key id="101" parent="54" name="SYS_C007160">
-      <ColNames>ID</ColNames>
-      <InitiallyDeferred>1</InitiallyDeferred>
-      <ModifiedTimestamp>2022-04-26.20:42:58</ModifiedTimestamp>
-      <NameSurrogate>1</NameSurrogate>
-      <Primary>1</Primary>
-      <UnderlyingIndexName>SYS_C007160</UnderlyingIndexName>
-    </key>
-    <column id="102" parent="55" name="NO">
-      <DataType>NUMBER(*)|0s</DataType>
-      <Position>1</Position>
-    </column>
-    <column id="103" parent="55" name="WRITER">
-      <DataType>VARCHAR2(20 byte)|0s</DataType>
-      <Position>2</Position>
-    </column>
-    <column id="104" parent="55" name="TITLE">
-      <DataType>VARCHAR2(20 byte)|0s</DataType>
-      <Position>3</Position>
-    </column>
-    <column id="105" parent="55" name="CONTENTS">
-      <DataType>VARCHAR2(20 byte)|0s</DataType>
-      <Position>4</Position>
-    </column>
-    <column id="106" parent="55" name="REFDATE">
-      <DataType>DATE|0s</DataType>
-      <Position>5</Position>
-    </column>
-    <column id="107" parent="55" name="COUNT">
-      <DataType>NUMBER(*)|0s</DataType>
-      <Position>6</Position>
-    </column>
-    <column id="108" parent="56" name="C_NUM">
-      <DataType>NUMBER(*)|0s</DataType>
-      <NotNull>1</NotNull>
-      <Position>1</Position>
-    </column>
-    <column id="109" parent="56" name="C_SES">
-      <DataType>CHAR(500 byte)|0s</DataType>
-      <Position>2</Position>
-    </column>
-    <index id="110" parent="56" name="SYS_C007073">
-      <ColNames>C_NUM</ColNames>
-      <CreatedTimestamp>2022-04-15.18:16:11</CreatedTimestamp>
-      <ModifiedTimestamp>2022-04-15.18:16:11</ModifiedTimestamp>
-      <NameSurrogate>1</NameSurrogate>
-      <ObjectId>20946</ObjectId>
-      <TablespaceName>SYSTEM</TablespaceName>
-      <Unique>1</Unique>
-    </index>
-    <key id="111" parent="56" name="SYS_C007073">
-      <ColNames>C_NUM</ColNames>
-      <InitiallyDeferred>1</InitiallyDeferred>
-      <ModifiedTimestamp>2022-04-15.18:16:11</ModifiedTimestamp>
-      <NameSurrogate>1</NameSurrogate>
-      <Primary>1</Primary>
-      <UnderlyingIndexName>SYS_C007073</UnderlyingIndexName>
-    </key>
   </database-model>
 </dataSource>

@@ -303,16 +303,16 @@ public class MainController {
     }
 
 
-    //adminpermission page
+    //adminpermission page (관리자 승인)
     @RequestMapping(value = "/adminpermission.do", method = RequestMethod.GET)
     public String adminpermission(Model model) {
         //service 클래스에서 Dao 로 접근하여 쿼리 결과값 가져오기
-        List<BoardVO> boardVoList = service.selectAll();
+        List<CustomerVO> customerVOList = customerService.select_nonPermissionCus();
 
         // .jsp 파일로 DB 결과값 전달하기
-        model.addAttribute("BoardList", boardVoList);
+        model.addAttribute("CustomerList", customerVOList);
 
-        return "adminpermission/adminpermission";
+        return "/adminpermission/adminpermission";
     }
 
     //event page
@@ -455,12 +455,21 @@ public class MainController {
         return "blank";
     }
 
+    //자료실
+    @RequestMapping(value = "/datacenter_write.do", method = RequestMethod.GET)
+    public String datacenter_write(){return "datacenter/datacenter_write";}
+    @RequestMapping(value = "/datacenter.do", method = RequestMethod.GET)
+    public String datacenter(){return "datacenter/datacenter";}
+
+    @RequestMapping(value = "/datacenter_content",method = RequestMethod.GET)
+    public String datacenter_content(){return "/datacenter/datacenter_content";}
     //파일 업로드
     @GetMapping("/file-upload.do")
     public void uploadAjax() {
         System.out.println("upload ajax");
     }
 
+    //자료실 파일 업로드
     @PostMapping("/file-upload.do")
     public String uploadAjaxPost(MultipartFile[] uploadFile, @RequestParam(value = "title") String title,
                                  @RequestParam(value = "writer") String writer, @RequestParam(value = "contents") String contents) {
@@ -537,6 +546,24 @@ public class MainController {
         System.out.println("인원관리 다운로드");
         excelService.getUserExcel(customerVO, request, response);
 
+    }
+    //승인 요청 POST
+    @ResponseBody
+    @PostMapping("/permission.do")
+    public String permissionPost(@RequestParam(value = "c_num") String[] c_num) {
+        System.out.println("permission ajax post.................");
+        int[] num = new int[c_num.length];
+        for(int j=0;j<c_num.length;j++) {
+            num[j] = Integer.parseInt(c_num[j]);
+        }
+
+        List<CustomerVO> list = customerService.select_PermissionCustomer(num);
+
+        System.out.println(list);
+
+        customerService.PermissionCustomer(list);
+        System.out.println("Permission complete!");
+        return "index";
     }
 
 }

@@ -1,5 +1,5 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ page contentType="text/html;charset=UTF-8" %>
 
 <jsp:include page="../../include/header.jsp" flush="true" />
 <jsp:include page="../../include/sidebar.jsp" flush="true" />
@@ -20,10 +20,11 @@
             <!-- DataTales Example -->
             <div class="card shadow mb-4">
                 <div class="card-header py-3">
-                    <div class="col-sm-10">
+                    <div class="col-sm-12">
                         <div>
                             <a href="" class="btn btn-info btn-user" >일괄승인</a>
                             <a href="" class="btn btn-danger btn-user" >일괄반려</a>
+                            <button class="btn btn-info btn-user" style="float: right;" id="select_permission" onclick="permission()" >선택승인</button>
                         </div>
                     </div>
                 </div>
@@ -33,40 +34,33 @@
                             <thead>
                             <tr>
                                 <th>
-                                    <input type="checkbox" name="selectall" onclick="selectAll(this)">
+                                    <label>
+                                        <input type="checkbox" name="selectall" onclick="selectAll(this)">
+                                    </label>
                                 </th>
-                                <th>ID</th>
+                                <th>Index</th>
+                                <th>회원번호</th>
+                                <th>아이디</th>
                                 <th>이름</th>
-                                <th>회사</th>
-                                <th>직급</th>
-                                <th>가입일자</th>
-                                <th class="text-center">승인</th>
-                                <th class="text-center">반려</th>
+                                <th>이메일</th>
+                                <th>전화번호</th>
                             </tr>
                             </thead>
 
                             <tbody>
-                            <c:forEach items="${BoardList}" var="board">
+                            <c:forEach items="${CustomerList}" var="customer" varStatus="status">
                                 <tr>
                                     <td>
-                                        <input type="checkbox" name="checkbox" id="checkbox">
+                                        <input type="checkbox" name="checkbox" id="checkbox${status.count}">
                                     </td>
-                                    <td><a href ="move_update.do?id=${board.no}">${board.title}</a></td>
-                                    <td>${board.writer}</td>
-                                    <td>${board.writer}</td>
-                                    <td>${board.writer}</td>
-                                    <td>${board.refdate}</td>
-                                    <td>
-                                        <a href="" class="btn btn-info btn-user btn-block">
-                                            승인
-                                        </a>
-                                    </td>
-                                    <td>
-                                        <a href="" class="btn btn-danger btn-user btn-block">
-                                            반려
-                                        </a>
-                                    </td>
+                                    <td>${status.count}</td>
+                                    <td id="${status.count}">${customer.cus_num}</td>
+                                    <td>${customer.cus_id}</td>
+                                    <td>${customer.cus_name}</td>
+                                    <td>${customer.cus_email}</td>
+                                    <td>${customer.cus_phone}</td>
                                 </tr>
+
                             </c:forEach>
                             </tbody>
                         </table>
@@ -78,6 +72,48 @@
 
 
     </div>
+    <script>
+
+        function permission(){
+            let checked = [];
+            let formdata = new FormData();
+            let arr_Checkbox = document.getElementsByName("checkbox");
+            for(let i=0;i<arr_Checkbox.length;i++){
+                if(arr_Checkbox[i].checked == true) {
+                    checked[i] = true;
+                }else{
+                    checked[i] = false;
+                }
+            }
+
+
+            let c_num = [];
+            for(let i=0;i<checked.length;i++){
+                if(checked[i] == true) {
+                    c_num[i] = document.getElementById((i+1).toString()).innerHTML;
+                    formdata.append("c_num",c_num[i]);
+                }
+            }
+
+            console.log(c_num[1]);
+            $.ajax({
+                url: "permission.do",
+                processData: false,
+                contentType: false,
+                data: formdata,
+                type: "POST",
+                success: function (result) {
+                    alert("Uploaded" + result);
+                    window.location.reload();
+                },
+                error: function (request,error){
+                    window.location.reload();
+                    alert("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);
+                }
+            });
+
+        }
+    </script>
     <!-- End of Main Content -->
 
     <jsp:include page="../../include/footer.jsp" flush="true" />
@@ -101,12 +137,6 @@
     <!-- Page level custom scripts -->
     <script src="<c:url value="/resources/js/demo/datatables-demo.js"/>"></script>
 
-    <!-- Page level plugins -->
-    <script src="<c:url value="/resources/vendor/chart.js/Chart.min.js"/>"></script>
-
-    <!-- Page level custom scripts -->
-    <script src="<c:url value="/resources/js/demo/chart-bar-demo.js"/>"></script>
-    <script src="<c:url value="/resources/js/demo/chart-pie-demo.js"/>"></script>
 
 
 
