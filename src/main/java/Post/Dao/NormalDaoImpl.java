@@ -51,5 +51,10 @@ public class NormalDaoImpl implements NormalDao {
         return sqlSession.delete(Namespace+".deletePost",no);
     }
 
+    @Override
+    public List<NormalVO> selectDCList() {
+        return sqlSession.selectList(Namespace + ".selectDCList");
+    }
+
 
 }

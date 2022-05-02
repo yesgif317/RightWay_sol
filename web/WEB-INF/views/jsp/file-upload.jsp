@@ -17,7 +17,7 @@
                 <div class="d-sm-flex align-items-center justify-content-between mb-4">
                     <h1 class="h3 mb-0 text-gray-800">자료실</h1>
                 </div>
-                <form method="post" action="tableswrite.do" id="file-upload-form" enctype="application/x-www-form-urlencoded" class="form-horizontal">
+                <form method="post" id="file-upload-form" enctype="application/x-www-form-urlencoded" class="form-horizontal">
                     <div class="row form-group">
                         <div class="col col-md-3"><label for="title" class=" form-control-label">제목</label></div>
                         <div class="col-12 col-md-9"><input type="text" id="title" name="title" placeholder="Text" class="form-control"><small class="form-text text-muted">This is a help text</small></div>
@@ -59,7 +59,7 @@
 
     <script>
         $(document).ready(function () {
-            $("#uploadBtn").on("click", function (e) {
+            $("#uploadBtn").on("click", function () {
                 var formData = new FormData();
                 var inputFile = $("input[name='uploadFile']");
                 var title = $("input[name='title']").val();
@@ -85,7 +85,7 @@
                     contentType: false,
                     data: formData,
                     type: "POST",
-                    success: function (result) {
+                    success: function () {
                         alert("Uploaded");
                     },
                     error: function (request,error){

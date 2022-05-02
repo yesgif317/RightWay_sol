@@ -17,4 +17,6 @@ public interface NormalDao {
     NormalVO viewPost(int no);
 
     int deletePost(int no);
+    //자료실 리스트 Select
+    List<NormalVO> selectDCList();
 }

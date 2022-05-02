@@ -20,4 +20,7 @@ public interface NormalService {
 
     //글 조회(View)
     NormalVO viewPost(int no);
+
+    //자료실 LIST SELECT
+    List<NormalVO> selectDCList();
 }

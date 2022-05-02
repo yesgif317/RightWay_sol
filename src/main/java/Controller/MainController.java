@@ -13,6 +13,8 @@ import Customer.Dto.CustomerVO;
 import Customer.Dto.LoginDTO;
 import Customer.Service.CustomerService;
 
+import Post.Dto.NormalVO;
+import Post.Service.NormalService;
 import org.apache.poi.ss.usermodel.Cell;
 import org.apache.poi.ss.usermodel.Row;
 import org.apache.poi.ss.usermodel.Sheet;
@@ -46,6 +48,9 @@ public class MainController {
 
     @Inject
     private FileService fileService;
+
+    @Inject
+    private NormalService normalService;
 
 
     // 메인 페이지 이동
@@ -409,8 +414,6 @@ public class MainController {
     //글 작성 버튼 작동
     @RequestMapping(value = "/tableswrite.do", method = RequestMethod.POST)
     public String tableswrite(Model model, BoardVO boardVO) {
-
-
         //
         String Result = service.insertBoard(boardVO);
 
@@ -427,7 +430,7 @@ public class MainController {
     @RequestMapping(value = "/move_update.do", method = RequestMethod.GET)
     public String update(Model model, HttpServletRequest request) {
         String id = request.getParameter("id");
-        //BoardVO result = service.selectboard()selectboard();
+        //BoardVO result = service.selectboard();
         //model.addAttribute("BoardList", boardVoList);
         return "update";
     }
@@ -457,12 +460,22 @@ public class MainController {
 
     //자료실
     @RequestMapping(value = "/datacenter_write.do", method = RequestMethod.GET)
-    public String datacenter_write(){return "datacenter/datacenter_write";}
+    public String datacenter_write(){
+        return "datacenter/datacenter_write";
+    }
     @RequestMapping(value = "/datacenter.do", method = RequestMethod.GET)
-    public String datacenter(){return "datacenter/datacenter";}
+    public String datacenter(Model model){
+        List<NormalVO> post = normalService.selectDCList();
+        model.addAttribute("PostList", post);
+        return "datacenter/datacenter";
+    }
 
     @RequestMapping(value = "/datacenter_content",method = RequestMethod.GET)
-    public String datacenter_content(){return "/datacenter/datacenter_content";}
+    public String datacenter_content(Model model, HttpServletRequest request){
+        String id = request.getParameter("nor_num");
+
+        return "/datacenter/datacenter_content";
+    }
     //파일 업로드
     @GetMapping("/file-upload.do")
     public void uploadAjax() {
@@ -471,11 +484,11 @@ public class MainController {
 
     //자료실 파일 업로드
     @PostMapping("/file-upload.do")
-    public String uploadAjaxPost(MultipartFile[] uploadFile, @RequestParam(value = "title") String title,
-                                 @RequestParam(value = "writer") String writer, @RequestParam(value = "contents") String contents) {
+    public String uploadAjaxPost(MultipartFile[] uploadFile, @RequestParam(value = "title") String title
+                                 , @RequestParam(value = "contents") String contents) {
         System.out.println("update ajax post.................");
-        System.out.println(title + writer + contents);
-        fileService.insertFile(uploadFile, 1, 1);
+        System.out.println(title + contents);
+        fileService.insertFile(uploadFile, 1, 13);
         return "index";
     }
 

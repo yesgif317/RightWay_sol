@@ -39,7 +39,13 @@ public class NormalServiceImpl implements NormalService {
     }
 
     @Override
+    public List<NormalVO> selectDCList() {
+        return dao.selectDCList();
+    }
+
+    @Override
     public int deletePost(int no) { return
             dao.deletePost(no);
     }
+
 }

@@ -16,5 +16,11 @@
         insert into post(p_num , p_caption, p_title, p_date, p_update_date, c_num, b_no)
         values (#{p_num}, #{p_caption}, #{p_title},#{p_date},#{p_update_date},#{c_num},#{b_no})
     </insert>
+    <!-- 자료실 게시글 리스트 -->
+    <select id="selectDCList" resultType="NormalVO">
+        SELECT *
+        FROM normal
+        where cate = 13
+    </select>
 
 </mapper>
