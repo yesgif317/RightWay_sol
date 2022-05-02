@@ -9,10 +9,14 @@ import java.util.List;
 import Board.Dto.BoardVO;
 import Board.Service.BoardService;
 import Commons.Excel.Service.ExcelService;
+import Company.Dto.CompanyVO;
+import Company.Service.CompanyService;
 import Customer.Dto.CustomerVO;
 import Customer.Dto.LoginDTO;
 import Customer.Service.CustomerService;
 
+import Event.Dto.EventVO;
+import Event.Service.EventService;
 import Post.Dto.NormalVO;
 import Post.Service.NormalService;
 import org.apache.poi.ss.usermodel.Cell;
@@ -51,6 +55,12 @@ public class MainController {
 
     @Inject
     private NormalService normalService;
+
+    @Inject
+    private CompanyService companyService;
+
+    @Inject
+    private EventService eventService;
 
 
     // 메인 페이지 이동
@@ -324,48 +334,106 @@ public class MainController {
     @RequestMapping(value = "/event.do", method = RequestMethod.GET)
     public String event(Model model) {
         //service 클래스에서 Dao 로 접근하여 쿼리 결과값 가져오기
-        List<BoardVO> boardVoList = service.selectAll();
+        List<EventVO> eventVOList = eventService.selectEvent();
 
         // .jsp 파일로 DB 결과값 전달하기
-        model.addAttribute("BoardList", boardVoList);
+        model.addAttribute("EventList", eventVOList);
 
         return "event/event";
     }
 
     //행사관리 글쓰기 페이지 이동
     @RequestMapping(value = "/event_write.do", method = RequestMethod.GET)
-    public String event_write() {
+    public String event_write(@RequestParam("post_num") int post_num, Model model) {
+        if(post_num>0){
+            EventVO Result = eventService.viewEvent(post_num);
+            model.addAttribute("EventList",Result);
+        }
         return "event/event_write";
     }
 
     //행사관리 상세 페이지 이동
     @RequestMapping(value = "/event_content.do", method = RequestMethod.GET)
-    public String event_content() {
+    public String event_content(@RequestParam("post_num") int post_num, Model model) {
+        EventVO Result = eventService.viewEvent(post_num);
+        model.addAttribute("EventList",Result);
         return "event/event_content";
+    }
+
+    //행사관리 insert
+    @RequestMapping(value = "/event_insert.do", method = RequestMethod.POST)
+    public String event_insert(Model model, EventVO eventVO) {
+        String Result = eventService.insertEvent(eventVO);
+        model.addAttribute("EventList", Result);
+        return "redirect:/event.do";
+    }
+
+    //행사관리 delete
+    @RequestMapping(value = "/event_delete.do", method = RequestMethod.GET)
+    public String event_delete(@RequestParam("post_num") int post_num) {
+        eventService.delete(post_num);
+        return "redirect:/event.do";
+    }
+    //행사관리 update
+    @RequestMapping(value = "/event_update.do", method = RequestMethod.POST)
+    public String event_update(Model model, EventVO eventVO) {
+        String Result = eventService.updateEvent(eventVO);
+        model.addAttribute("EventList", Result);
+        return "redirect:/event.do";
     }
 
     //company page
     @RequestMapping(value = "/company.do", method = RequestMethod.GET)
     public String company(Model model) {
         //service 클래스에서 Dao 로 접근하여 쿼리 결과값 가져오기
-        List<BoardVO> boardVoList = service.selectAll();
-
+        List<CompanyVO> companyVOList = companyService.selectCompany();
         // .jsp 파일로 DB 결과값 전달하기
-        model.addAttribute("BoardList", boardVoList);
+        model.addAttribute("CompanyList", companyVOList);
 
         return "company/company";
     }
 
     //company 글쓰기 페이지 이동
     @RequestMapping(value = "/company_write.do", method = RequestMethod.GET)
-    public String company_write() {
+    public String company_write(@RequestParam("com_num") int com_num, Model model) {
+        if(com_num>0){
+            CompanyVO Result = companyService.viewCompany(com_num);
+            model.addAttribute("CompanyList",Result);
+        }
         return "company/company_write";
     }
 
     //company 상세 페이지 이동
     @RequestMapping(value = "/company_content.do", method = RequestMethod.GET)
-    public String company_content() {
+    public String company_content(@RequestParam("com_num") int com_num, Model model) {
+        CompanyVO Result = companyService.viewCompany(com_num);
+        model.addAttribute("CompanyList",Result);
         return "company/company_content";
+    }
+
+    //company insert
+    @RequestMapping(value = "/company_insert.do", method = RequestMethod.POST)
+    public String company_insert(Model model, CompanyVO companyVO) {
+        System.out.println(companyVO.getCom_contract());
+        System.out.println(companyVO.getCom_name());
+        String Result = companyService.insertCompany(companyVO);
+        model.addAttribute("CompanyList", Result);
+        return "redirect:/company.do";
+    }
+
+    //company delete
+    @RequestMapping(value = "/company_delete.do", method = RequestMethod.GET)
+    public String company_delete(@RequestParam("com_num") int com_num) {
+        companyService.delete(com_num);
+        return "redirect:/company.do";
+    }
+
+    //company update
+    @RequestMapping(value = "/company_update.do", method = RequestMethod.POST)
+    public String company_update(Model model, CompanyVO companyVO) {
+        String Result = companyService.updateCompany(companyVO);
+        model.addAttribute("CompanyList", Result);
+        return "redirect:/company.do";
     }
 
     //team page
