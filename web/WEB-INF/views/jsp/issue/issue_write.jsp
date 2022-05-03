@@ -27,7 +27,7 @@
                             <div class="card-body">
                                 <form method="post" action="update.do" id="updateform" enctype="application/x-www-form-urlencoded" class="form-horizontal">
                                     <div class="row form-group">
-                                        <div class="col col-md-3 text-right"><label for="title-input" class=" form-control-label fa-solid text-gray-800 mt-2"><sup class="text-danger small">*</sup>제목</label></div>
+                                        <div class="col col-md-3 text-right"><label for="title-input" class=" form-control-label fa-solid text-gray-800 mt-2"><sup class="text-issue small">*</sup>제목</label></div>
                                         <div class="col-12 col-md-7"><input type="text" id="title-input" name="text-input" placeholder="제목을 입력해주세요." class="form-control" value="${title}"></div>
                                     </div>
                                     <div class="row form-group">
@@ -40,13 +40,13 @@
                                     </div>
 
                                     <div class="row form-group">
-                                        <div class="col col-md-3 text-right"><label for="impMenuButton" class=" form-control-label fa-solid text-gray-800 mt-2"><sup class="text-danger small">*</sup>중요도</label></div>
+                                        <div class="col col-md-3 text-right"><label for="impMenuButton" class=" form-control-label fa-solid text-gray-800 mt-2"><sup class="text-issue small">*</sup>중요도</label></div>
                                         <div class="dropdown col-md-7">
                                             <button class="btn btn-secondary dropdown-toggle" type="button" id="impMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                                 중요도선택
                                             </button>
                                             <div class="dropdown-menu animated--fade-in" aria-labelledby="impMenuButton">
-                                                <a class="dropdown-item text-danger" href="#">Emergency</a>
+                                                <a class="dropdown-item text-issue" href="#">Emergency</a>
                                                 <div class="dropdown-divider"></div>
                                                 <a class="dropdown-item text-warning" href="#">High</a>
                                                 <div class="dropdown-divider"></div>
@@ -68,7 +68,7 @@
                                                 </a>
                                                 <div class="collapse" id="impguide">
                                                     <div class="card-body">
-                                                        <div><strong class="text-danger">Emergency  </strong> - 최우선으로 해결해야 하는 이슈 <small class="text-gray-400">(ex.접속불가,서비스 강제종료 등)</small></div>
+                                                        <div><strong class="text-issue">Emergency  </strong> - 최우선으로 해결해야 하는 이슈 <small class="text-gray-400">(ex.접속불가,서비스 강제종료 등)</small></div>
                                                         <div><strong class="text-warning">High  </strong> - 기능상 문제가 되고 다른기능이나 환경에 영향을 미치는 이슈</div>
                                                         <div><strong class="text-success">Medium  </strong> - 기능상 문제가 있으나 타기능에 영향이 없는 이슈</div>
                                                         <div><strong class="text-info">Low  </strong> - 기능상 문제가 없는 이슈 <small class="text-gray-400">(ex.오탈자,UI 등)</small></div>
@@ -97,7 +97,7 @@
                                     </div>
 
                                     <div class="row form-group">
-                                        <div class="col col-md-3 text-right"><label for="contents" class=" form-control-label fa-solid text-gray-800 mt-2"><sup class="text-danger small">*</sup>이슈내용</label></div>
+                                        <div class="col col-md-3 text-right"><label for="contents" class=" form-control-label fa-solid text-gray-800 mt-2"><sup class="text-issue small">*</sup>이슈내용</label></div>
                                         <div class="col-12 col-md-7"><textarea name="contents" id="contents" rows="8" placeholder="이슈 내용 및 재현경로를 입력해주세요." class="form-control"></textarea></div>
                                     </div>
                                     <div class="row form-group">

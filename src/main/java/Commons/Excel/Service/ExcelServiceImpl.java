@@ -214,7 +214,6 @@ public class ExcelServiceImpl implements ExcelService {
                     cell.setCellType(CellType.STRING); // 숫자만 입력받는 경우를 대비해 STRING 처리
                     excelVO.setCus_position(cell.getStringCellValue().replace(" ", ""));
                 }
-                System.out.println("NUMERIC ERROR CHECK");
 
                 cell = row.getCell(7);
                 if(cell != null)

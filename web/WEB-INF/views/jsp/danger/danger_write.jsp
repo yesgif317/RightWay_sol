@@ -138,7 +138,7 @@
                                                 $('#exampleModal').modal('show')
                                             }
                                             else {
-                                                document.getElementById('dangerwriteform').submit();
+                                                document.getElementById('updateform').submit();
                                             }
                                         }
                                     </script>
