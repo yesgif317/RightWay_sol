@@ -48,11 +48,11 @@
                                         <div class="col-3"></div>
                                         <div class="col-4 ">
                                             <small class="help-block form-text">작성자</small>
-                                            <input style="border:0 solid whitesmoke;" type="text" id="danger_writer" name="danger_writer" value="${BoardList.writer}" readonly="readonly" disabled/>
+                                            <input style="border:0 solid whitesmoke;" type="text" id="issue_writer" name="issue_writer" value="${BoardList.writer}" readonly="readonly" disabled/>
                                         </div>
                                         <div class="col-4" >
                                             <small class="help-block form-text">작성일</small>
-                                            <input style="border:0 solid whitesmoke; width:100%;"  id="danger_date" name="danger_date" value="${BoardList.refdate}Thu Oct 08 00:00:00 KST 2020" readonly="readonly" disabled/>
+                                            <input style="border:0 solid whitesmoke; width:100%;"  id="issue_date" name="issue_date" value="${BoardList.refdate}Thu Oct 08 00:00:00 KST 2020" readonly="readonly" disabled/>
 
                                         </div>
                                     </div>
@@ -61,11 +61,11 @@
                                         <div class="col-3"></div>
                                         <div class="col-4 ">
                                             <small class="help-block form-text">이슈ID</small>
-                                            <input style="border:0 solid whitesmoke;" type="text" id="danger_ID" name="danger_ID" value="${BoardList.writer}" readonly="readonly" disabled/>
+                                            <input style="border:0 solid whitesmoke;" type="text" id="issue_ID" name="issue_ID" value="${BoardList.writer}" readonly="readonly" disabled/>
                                         </div>
                                         <div class="col-4" >
                                             <small class="help-block form-text">마감일</small>
-                                            <input style="border:0 solid whitesmoke; width:100%;"  id="danger_date_end" name="danger_date_end" value="${BoardList.refdate}Thu Oct 08 00:00:00 KST 2020" readonly="readonly" disabled/>
+                                            <input style="border:0 solid whitesmoke; width:100%;"  id="issue_date_end" name="issue_date_end" value="${BoardList.refdate}Thu Oct 08 00:00:00 KST 2020" readonly="readonly" disabled/>
 
                                         </div>
                                     </div>
@@ -89,7 +89,7 @@
                                 <span class="text"> 수정</span>
                             </a>
 
-                            <a  class="btn btn-danger" data-toggle="modal" data-target="#exampleModal">
+                            <a  class="btn btn-issue" data-toggle="modal" data-target="#exampleModal">
                                                  <span class="icon text-white-50">
                                                    <i class="fa-regular fa-trash-can"></i>
                                                  </span>
@@ -137,6 +137,7 @@
 
     <jsp:include page="../../include/footer.jsp" flush="true" />
 
+</div>
 </div>
 <!-- End of Page Wrapper -->
 <!-- Scroll to Top Button-->
