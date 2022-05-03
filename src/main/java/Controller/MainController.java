@@ -19,6 +19,8 @@ import Event.Dto.EventVO;
 import Event.Service.EventService;
 import Post.Dto.NormalVO;
 import Post.Service.NormalService;
+import Project.Dto.ProjectVO;
+import Project.Service.ProjectService;
 import org.apache.poi.ss.usermodel.Cell;
 import org.apache.poi.ss.usermodel.Row;
 import org.apache.poi.ss.usermodel.Sheet;
@@ -61,6 +63,10 @@ public class MainController {
 
     @Inject
     private EventService eventService;
+
+    @Inject
+    private ProjectService projectService;
+
 
 
     // 메인 페이지 이동
@@ -434,6 +440,62 @@ public class MainController {
         String Result = companyService.updateCompany(companyVO);
         model.addAttribute("CompanyList", Result);
         return "redirect:/company.do";
+    }
+
+    //project page
+    @RequestMapping(value = "/project.do", method = RequestMethod.GET)
+    public String project(Model model) {
+        System.out.println("controller");
+        //service 클래스에서 Dao 로 접근하여 쿼리 결과값 가져오기
+
+        List<ProjectVO> projectVOList = projectService.selectProject();
+
+        System.out.println(projectVOList);
+        // .jsp 파일로 DB 결과값 전달하기
+        model.addAttribute("ProjectList", projectVOList);
+
+        return "project/project";
+    }
+
+    //project 글쓰기 페이지 이동
+    @RequestMapping(value = "/project_write.do", method = RequestMethod.GET)
+    public String project_write(@RequestParam("prj_num") int prj_num, Model model) {
+        if(prj_num>0){
+            ProjectVO Result = projectService.viewProject(prj_num);
+            model.addAttribute("ProjectList",Result);
+        }
+        return "project/project_write";
+    }
+
+    //project 상세 페이지 이동
+    @RequestMapping(value = "/project_content.do", method = RequestMethod.GET)
+    public String project_content(@RequestParam("prj_num") int prj_num, Model model) {
+        ProjectVO Result = projectService.viewProject(prj_num);
+        model.addAttribute("ProjectList",Result);
+        return "project/project_content";
+    }
+
+    //project insert
+    @RequestMapping(value = "/project_insert.do", method = RequestMethod.POST)
+    public String project_insert(Model model, ProjectVO projectVO) {
+        String Result = projectService.insertProject(projectVO);
+        model.addAttribute("ProjectList", Result);
+        return "redirect:/project.do";
+    }
+
+    //project delete
+    @RequestMapping(value = "/project_delete.do", method = RequestMethod.GET)
+    public String project_delete(@RequestParam("prj_num") int prj_num) {
+        projectService.delete(prj_num);
+        return "redirect:/project.do";
+    }
+
+    //project update
+    @RequestMapping(value = "/project_update.do", method = RequestMethod.POST)
+    public String project_update(Model model, ProjectVO projectVO) {
+        String Result = projectService.updateProject(projectVO);
+        model.addAttribute("ProjectList", Result);
+        return "redirect:/project.do";
     }
 
     //team page

@@ -1,7 +1,4 @@
 package Company.Dto;
-
-import java.util.Date;
-
 public class CompanyVO {
     public int com_num;
     public String com_name;

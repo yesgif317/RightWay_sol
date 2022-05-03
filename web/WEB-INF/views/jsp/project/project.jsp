@@ -32,17 +32,26 @@
                                 <th>NO</th>
                                 <th>프로젝트명</th>
                                 <th>프로젝트리더</th>
-                                <th>등록일</th>
+                                <th>프로젝트기간</th>
+                                <th>등록/수정일</th>
                             </tr>
                             </thead>
 
                             <tbody>
-                            <c:forEach items="${PostList}" var="post">
+                            <c:forEach items="${ProjectList}" var="project">
                                 <tr>
-                                    <td>${post.no}</td>
-                                    <td><a href ="project_content.jsp.do?id=${post.no}">${post.title}</a></td>
-                                    <td>${post.writer}</td>
-                                    <td>${post.writer}</td>
+                                    <td>${project.prj_num}</td>
+                                    <td><a href ="project_content.do?prj_num=${project.prj_num}">${project.prj_name}</a></td>
+                                    <td>${project.cus_num}</td>
+                                    <td>${project.prj_start}~${project.prj_end}</td>
+                                    <c:choose>
+                                        <c:when test="${project.prj_upd eq null}">
+                                            <td>등록일 : ${project.prj_reg}</td>
+                                        </c:when>
+                                        <c:otherwise>
+                                            <td>수정일 : ${project.prj_upd}</td>
+                                        </c:otherwise>
+                                    </c:choose>
                                 </tr>
                             </c:forEach>
                             </tbody>
@@ -50,7 +59,7 @@
                     </div>
                 </div>
                 <div class="text-center d-block card-header py-3">
-                    <a href="/project_write.do" class="btn btn-info">
+                    <a href="/project_write.do?prj_num=0&update=0" class="btn btn-info">
                           <span class="icon text-white-50">
                             <i class="fas fa-pen"></i>
                           </span>

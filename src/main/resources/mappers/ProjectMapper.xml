@@ -4,16 +4,28 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="com.mark.mappers.ProjectMapper">
-
-    <!--Customer-->
     <!-- Select 문 -->
-    <select id="selectCustomer" resultType="ProjectVO">
-        SELECT * FROM project
+    <select id="selectProject" resultType="ProjectVO">
+        SELECT prj_num,prj_name, cus_num ,to_char(prj_start,'YYYY-MM-DD') AS prj_start ,to_char(prj_end,'YYYY-MM-DD') AS prj_end, prj_reg ,prj_upd FROM project
     </select>
 
     <!-- 프로젝트 추가(Insert) -->
-    <insert id="insertCustomer" parameterType="ProjectVO" >
-        insert into project(c_id, c_pwd, c_name, c_email, c_phone,c_dep,c_position,com_num,c_state)
-        values (#{p_num}, #{p_name}, #{c_nume})
+    <insert id="insertProject" parameterType="ProjectVO" >
+        insert into project(prj_num,prj_name,cus_num,prj_start,prj_end,prj_reg)
+        values (prj_seq.nextval, #{prj_name}, #{cus_num},to_date(#{prj_start},'YYYY-MM-DD'), to_date(#{prj_end},'YYYY-MM-DD'), sysdate)
     </insert>
+
+    <update id="updateProject" parameterType="ProjectVO" >
+        update Project
+        set prj_name = #{prj_name}, cus_num =#{cus_num} ,prj_start = to_date(#{prj_start},'YYYY-MM-DD'), prj_end= to_date(#{prj_end},'YYYY-MM-DD'),prj_upd=sysdate
+        where prj_num = #{prj_num}
+    </update>
+
+    <select id="viewProject" resultType="ProjectVO">
+        SELECT prj_num,prj_name, cus_num ,to_char(prj_start,'YYYY-MM-DD') AS prj_start ,to_char(prj_end,'YYYY-MM-DD') AS prj_end, prj_reg ,prj_upd FROM Project where prj_num=#{prj_num}
+    </select>
+
+    <delete id="delete">
+        delete from Project where prj_num=#{prj_num}
+    </delete>
 </mapper>

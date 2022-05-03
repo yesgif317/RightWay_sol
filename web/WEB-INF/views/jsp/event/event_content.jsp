@@ -31,11 +31,11 @@
                                         <div class="col-3"></div>
                                         <div class="col-4 ">
                                             <small class="help-block form-text">행사명</small>
-                                            <input style="border:0 solid whitesmoke;" type="text"  name="writer" value="${EventList.evt_tit}" readonly="readonly" disabled/>
+                                            <input style="border:0 solid whitesmoke;width:100%" type="text"  name="writer" value="${EventList.evt_tit}" readonly="readonly" disabled/>
                                         </div>
                                         <div class="col-4" >
                                             <small class="help-block form-text">행사목적</small>
-                                            <input style="border:0 solid whitesmoke;" type="text"  name="event_purpose" value="${EventList.evt_sbj}" readonly="readonly" disabled/>
+                                            <input style="border:0 solid whitesmoke;width:100%" type="text"  name="event_purpose" value="${EventList.evt_sbj}" readonly="readonly" disabled/>
                                         </div>
                                     </div>
 
@@ -43,11 +43,11 @@
                                         <div class="col-3"></div>
                                         <div class="col-4 ">
                                             <small class="help-block form-text">행사기간</small>
-                                            <input style="border:0 solid whitesmoke;" type="text"  name="event_purpose" value="${EventList.evt_start}~${EventList.evt_end}" readonly="readonly" disabled/>
+                                            <input style="border:0 solid whitesmoke;width:100%" type="text" value="${EventList.evt_start}~${EventList.evt_end}" readonly="readonly" disabled/>
                                         </div>
                                         <div class="col-4" >
                                             <small class="help-block form-text">행사장소</small>
-                                            <input style="border:0 solid whitesmoke;"  name="event_location" value="${EventList.evt_loc}" readonly="readonly" disabled/>
+                                            <input style="border:0 solid whitesmoke;width:100%"  name="event_location" value="${EventList.evt_loc}" readonly="readonly" disabled/>
                                         </div>
                                     </div>
 
@@ -55,11 +55,11 @@
                                         <div class="col-3"></div>
                                         <div class="col-4 ">
                                             <small class="help-block form-text">행사주관</small>
-                                            <input style="border:0 solid whitesmoke;" type="text" id="event_admin" name="event_admin" value="${EventList.evt_host}" readonly="readonly" disabled/>
+                                            <input style="border:0 solid whitesmoke;width:100%" type="text" id="event_admin" name="event_admin" value="${EventList.evt_host}" readonly="readonly" disabled/>
                                         </div>
                                         <div class="col-4" >
                                             <small class="help-block form-text">행사주최</small>
-                                            <input style="border:0 solid whitesmoke;"  id="event_location" name="event_location" value="${EventList.evt_supervise}" readonly="readonly" disabled/>
+                                            <input style="border:0 solid whitesmoke;width:100%"  id="event_location" name="event_location" value="${EventList.evt_supervise}" readonly="readonly" disabled/>
                                         </div>
                                     </div>
 
@@ -67,11 +67,11 @@
                                         <div class="col-3"></div>
                                         <div class="col-4" >
                                             <small class="help-block form-text">참가비용</small>
-                                            <input style="border:0 solid whitesmoke;"  id="event_price" name="event_price" value="${EventList.evt_pri}원" readonly="readonly" disabled/>
+                                            <input style="border:0 solid whitesmoke;width:100%"  id="event_price" name="event_price" value="${EventList.evt_pri}원" readonly="readonly" disabled/>
                                         </div>
                                         <div class="col-4 ">
                                             <small class="help-block form-text">정원</small>
-                                            <input style="border:0 solid whitesmoke;" type="text" id="event_limit" name="event_limit" value="${EventList.evt_limit}명" readonly="readonly" disabled/>
+                                            <input style="border:0 solid whitesmoke;width:100%" type="text" id="event_limit" name="event_limit" value="${EventList.evt_limit}명" readonly="readonly" disabled/>
                                         </div>
                                     </div>
 
@@ -79,7 +79,7 @@
                                         <div class="col-3"></div>
                                         <div class="col-4 ">
                                             <small class="help-block form-text">접수기간</small>
-                                            <input style="border:0 solid whitesmoke;" type="text"  name="event_purpose" value="${EventList.evt_acptstart}~${EventList.evt_acptend}" readonly="readonly" disabled/>
+                                            <input style="border:0 solid whitesmoke;width:100%" type="text"  name="event_purpose" value="${EventList.evt_acptstart}~${EventList.evt_acptend}" readonly="readonly" disabled/>
                                         </div>
                                         <div class="col-4 ">
                                             <small class="help-block form-text">참고URL</small>
@@ -90,24 +90,24 @@
                                         <div class="col-3"></div>
                                         <div class="col-4 ">
                                             <small class="help-block form-text">등록일</small>
-                                            <input style="border:0 solid whitesmoke;" type="text"  value="${EventList.evt_reg}" readonly="readonly" disabled/>
+                                            <input style="border:0 solid whitesmoke;width:100%" type="text"  value="${EventList.evt_reg}" readonly="readonly" disabled/>
                                         </div>
                                         <div class="col-4" >
                                             <small class="help-block form-text">수정일</small>
-                                            <input style="border:0 solid whitesmoke; width:203px;"  value="${EventList.evt_upd}" readonly="readonly" disabled/>
+                                            <input style="border:0 solid whitesmoke;width:100%;"  value="${EventList.evt_upd}" readonly="readonly" disabled/>
                                         </div>
                                     </div>
                                     <div class="row form-group">
                                         <div class="col-3"></div>
                                         <div class="col-4 ">
                                             <small class="help-block form-text">작성자</small>
-                                            <input style="border:0 solid whitesmoke;" type="text" name="event_limit" value="${EventList.cus_num}" readonly="readonly" disabled/>
+                                            <input style="border:0 solid whitesmoke;width:100%" type="text" name="event_limit" value="${EventList.cus_num}" readonly="readonly" disabled/>
                                         </div>
                                     </div>
                                     <div class="row form-group">
                                         <div class="col-2"></div>
                                         <div class="col-8" style="border-top:  2px solid #808080;border-bottom: 2px solid #808080;">
-                                            <textarea style="border:0 solid whitesmoke;" name="event_contents" id="event_contents" rows="5" class="form-control mt-3 mb-3" readonly="readonly" disabled>${EventList.evt_cnt}
+                                            <textarea style="border:0 solid whitesmoke;width:100%" name="event_contents" id="event_contents" rows="5" class="form-control mt-3 mb-3" readonly="readonly" disabled>${EventList.evt_cnt}
                                             </textarea>
                                         </div>
                                     </div>

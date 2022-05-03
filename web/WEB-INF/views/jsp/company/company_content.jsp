@@ -31,11 +31,11 @@
                                         <div class="col-3"></div>
                                         <div class="col-4 ">
                                             <small class="help-block form-text">회사명</small>
-                                            <input style="border:0 solid whitesmoke;" type="text" value="${CompanyList.com_name}" readonly="readonly" disabled/>
+                                            <input style="border:0 solid whitesmoke;width: 100%;" type="text" value="${CompanyList.com_name}" readonly="readonly" disabled/>
                                         </div>
                                         <div class="col-4" >
                                             <small class="help-block form-text">계약일</small>
-                                            <input style="border:0 solid whitesmoke;" value="${CompanyList.com_contract}" readonly="readonly" disabled/>
+                                            <input style="border:0 solid whitesmoke;width: 100%;" value="${CompanyList.com_contract}" readonly="readonly" disabled/>
                                         </div>
                                     </div>
 
@@ -43,11 +43,11 @@
                                         <div class="col-3"></div>
                                         <div class="col-4 ">
                                             <small class="help-block form-text">전화번호</small>
-                                            <input style="border:0 solid whitesmoke;" type="text"  value="${CompanyList.com_tel}" readonly="readonly" disabled/>
+                                            <input style="border:0 solid whitesmoke;width: 100%;" type="text"  value="${CompanyList.com_tel}" readonly="readonly" disabled/>
                                         </div>
                                         <div class="col-4" >
                                             <small class="help-block form-text">주요업무</small>
-                                            <input style="border:0 solid whitesmoke;"  value="${CompanyList.com_business}" readonly="readonly" disabled/>
+                                            <input style="border:0 solid whitesmoke;width: 100%;"  value="${CompanyList.com_business}" readonly="readonly" disabled/>
                                         </div>
                                     </div>
 
@@ -55,11 +55,11 @@
                                         <div class="col-3"></div>
                                         <div class="col-4 ">
                                             <small class="help-block form-text">회사규모</small>
-                                            <input style="border:0 solid whitesmoke;" type="text"  value="${CompanyList.com_scale}" readonly="readonly" disabled/>
+                                            <input style="border:0 solid whitesmoke;width: 100%;" type="text"  value="${CompanyList.com_scale}" readonly="readonly" disabled/>
                                         </div>
                                         <div class="col-5">
                                             <small class="help-block form-text">회사주소</small>
-                                            <textarea style="border:0 solid whitesmoke;" type="text" disabled>${CompanyList.com_addr}</textarea>
+                                            <textarea style="border:0 solid whitesmoke;width: 100%;background-color:transparent;" type="text"disabled>${CompanyList.com_addr}</textarea>
                                         </div>
 
                                     </div>

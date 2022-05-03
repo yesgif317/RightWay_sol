@@ -24,14 +24,14 @@
                                     int test = Integer.parseInt(request.getParameter("update")) ;
                                     pageContext.setAttribute("test", test) ;
                                 %>
-<c:choose>
-    <c:when test="${test eq '1'}">
-                                <h6 class="m-0 font-weight-bold text-primary text-center">산출물 수정</h6>
-</c:when>
-    <c:otherwise>
-                                    <h6 class="m-0 font-weight-bold text-primary text-center">산출물 등록</h6>
-    </c:otherwise>
-</c:choose>
+                                <c:choose>
+                                  <c:when test="${test eq '1'}">
+                                      <h6 class="m-0 font-weight-bold text-primary text-center">산출물 수정</h6>
+                                  </c:when>
+                                    <c:otherwise>
+                                        <h6 class="m-0 font-weight-bold text-primary text-center">산출물 등록</h6>
+                                    </c:otherwise>
+                                </c:choose>
                             </a>
                             <!-- Card Content - Collapse -->
                             <div class="collapse show" id="collapseCardExample">
@@ -63,7 +63,7 @@
                                             <div class="col-12 col-md-7">
                                                 <c:choose>
                                                     <c:when test="${test eq '1'}">
-                                                        <textarea name="nor_cnt" id="nor_cnt" rows="9"  class="form-control">${PostList.nor_cnt}</textarea>
+                                                        <textarea name="nor_cnt" id="nor_cnt" rows="9"   class="form-control">${PostList.nor_cnt}</textarea>
                                                     </c:when>
                                                     <c:otherwise>
                                                         <textarea name="nor_cnt" id="nor_cnt" rows="9" placeholder="산출물 내용을 입력해주세요." class="form-control"></textarea>

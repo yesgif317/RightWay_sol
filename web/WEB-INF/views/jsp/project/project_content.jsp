@@ -20,7 +20,8 @@
                     <div class="card shadow mb-4">
                         <!-- Card Header - Accordion -->
                         <a class="d-block card-header py-3"  style="text-align: center">
-                            <h6 class="m-0 font-weight-bold text-primary"> ${BoardList.title}
+                            <h6 class="m-0 font-weight-bold text-primary">
+                                프로젝트 상세
                             </h6>
                         </a>
                         <!-- Card Content - Collapse -->
@@ -31,12 +32,12 @@
                                         <div class="col-3"></div>
                                         <div class="col-4 ">
                                             <small class="help-block form-text">프로젝트 명</small>
-                                            <input style="border:0 solid whitesmoke;" type="text" id="project_name" name="project_name" value="${BoardList.writer}개발1프로젝트" readonly="readonly" disabled/>
+                                            <input style="border:0 solid whitesmoke;" type="text" value="${ProjectList.prj_name}" readonly="readonly" disabled/>
                                         </div>
 
                                         <div class="col-4" >
-                                            <small class="help-block form-text">등록일</small>
-                                            <input style="border:0 solid whitesmoke; width:100%;"  id="project_date" name="project_date" value="${BoardList.refdate}2022-04-21" readonly="readonly" disabled/>
+                                            <small class="help-block form-text">PL</small>
+                                            <input style="border:0 solid whitesmoke; width:100%;" type="text" value="${ProjectList.cus_num}" readonly="readonly" disabled/>
 
                                         </div>
                                     </div>
@@ -44,10 +45,22 @@
                                     <div class="row form-group">
                                         <div class="col-3"></div>
                                         <div class="col-4 ">
-                                            <small class="help-block form-text">PL</small>
-                                            <input style="border:0 solid whitesmoke;" type="text" id="project_leader" name="project_leader" value="${BoardList.writer}윤정석" readonly="readonly" disabled/>
+                                            <small class="help-block form-text">프로젝트기간</small>
+                                            <input style="border:0 solid whitesmoke;" type="text" value="${ProjectList.prj_start}~${ProjectList.prj_end}" readonly="readonly" disabled/>
+                                        </div>
+                                    </div>
+                                    <div class="row form-group">
+                                        <div class="col-3"></div>
+                                        <div class="col-4 ">
+                                            <small class="help-block form-text">등록일</small>
+                                            <input style="border:0 solid whitesmoke;" type="text" value="${ProjectList.prj_reg}" readonly="readonly" disabled/>
                                         </div>
 
+                                        <div class="col-4" >
+                                            <small class="help-block form-text">수정일</small>
+                                            <input style="border:0 solid whitesmoke; width:100%;" type="text" value="${ProjectList.prj_upd}" readonly="readonly" disabled/>
+
+                                        </div>
                                     </div>
 
                                     <div class="row form-group">
@@ -56,7 +69,6 @@
                                             <small class="help-block form-text">프로젝트원 목록</small>
                                         </div>
                                     </div>
-
                                     <div class="row form-group">
                                         <div class="col-2"></div>
                                         <div class="col-8" style="border-top:  2px solid #808080;border-bottom: 2px solid #808080;">
@@ -78,14 +90,7 @@
                                                                     </thead>
 
                                                                     <tbody>
-                                                                    <c:forEach items="${BoardList}" var="board">
-                                                                        <tr>
-                                                                            <td>${board.no}</td>
-                                                                            <td>${board.writer}</td>
-                                                                            <td>${board.writer}</td>
-                                                                            <td>${board.writer}</td>
-                                                                        </tr>
-                                                                    </c:forEach>
+
                                                                     </tbody>
                                                                 </table>
                                                             </div>
@@ -101,7 +106,7 @@
 
                         <!-- 수정/삭제/목록 버튼 -->
                         <div class="text-center d-block card-header py-3">
-                            <a href="outputs_update.do?no=${BoardList.no}" class="btn btn-info">
+                            <a href="project_write.do?prj_num=${ProjectList.prj_num}&update=1" class="btn btn-info">
                                               <span class="icon text-white-50">
                                               <i class="fas fa-pen"></i>
                                               </span>
@@ -128,7 +133,7 @@
                                                 게시물을 정말 삭제하시겠습니까?
                                             </div>
                                             <div class="modal-footer">
-                                                <button href="outputs_delete.do?no=${BoardList.no}" type="button" class="btn btn-primary">삭제하기</button>
+                                                <button onclick = "location.href = 'project_delete.do?prj_num=${ProjectList.prj_num}'" type="button" class="btn btn-danger">삭제하기</button>
                                                 <button type="button" class="btn btn-secondary" data-dismiss="modal">취소하기</button>
                                             </div>
                                         </div>
