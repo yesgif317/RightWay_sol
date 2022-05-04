@@ -44,20 +44,18 @@
                                 <th width="50%">공지사항</th>
                                 <th>작성자</th>
                                 <th>작성날짜</th>
-                                <th>프로젝트</th>
                             </tr>
                             </thead>
                             <tfoot>
                             </tfoot>
                             <tbody>
-                            <c:forEach items="${PostList}" var="post">
+                            <c:forEach items="${NormalList}" var="post" varStatus="status">
                                 <c:if test="${post.cate eq 12}">
                                 <tr>
-                                    <td>${post.post_num}</td>
+                                    <td>${status.count}</td>
                                     <td><a href ="notice_content.do?post_num=${post.post_num}">${post.nor_tit}</a></td>
-                                    <td>${post.cus_num}</td>
+                                    <td>${post.cus_name}</td>
                                     <td><fmt:formatDate value="${post.nor_reg}" pattern="yyyy-MM-dd" /></td>
-                                    <td>${post.prj_num}</td>
                                 </tr>
                                 </c:if>
                             </c:forEach>

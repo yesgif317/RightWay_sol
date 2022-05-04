@@ -44,8 +44,19 @@ public class NormalServiceImpl implements NormalService {
     }
 
     @Override
+    public List<NormalVO> selectNotice() {
+        return dao.selectNotice();
+    }
+
+    @Override
+    public List<NormalVO> selectAll(int cate) {
+        return dao.selectAll(cate);
+    }
+
+    @Override
     public int deletePost(int no) { return
             dao.deletePost(no);
     }
+
 
 }

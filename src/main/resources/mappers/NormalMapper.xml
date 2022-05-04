@@ -3,13 +3,27 @@
         PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
-<mapper namespace="com.mark.mappers.PostMapper">
+<mapper namespace="com.mark.mappers.NormalMapper">
 
     <!--Customer-->
     <!-- Select 문 -->
     <select id="selectPost" resultType="NormalVO">
         SELECT * FROM post
     </select>
+    <!-- 공지사항 리스트 -->
+    <select id="selectNoticeList" resultType="NormalVO">
+        SELECT *
+        FROM normal
+        WHERE cate = 12
+    </select>
+
+    <!-- cate 별 전체 리스트-->
+    <select id="selectAll" parameterType="int" resultType="NormalVO">
+        SELECT *
+        FROM normal
+        WHERE cate = ${cate}
+    </select>
+
 
     <!-- 게시물 작성(Insert) -->
     <insert id="insertPost" parameterType="NormalVO" >

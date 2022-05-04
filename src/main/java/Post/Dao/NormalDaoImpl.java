@@ -12,7 +12,7 @@ public class NormalDaoImpl implements NormalDao {
 
     @Inject
     private SqlSession sqlSession;
-    private static final String Namespace = "com.mark.mappers.PostMapper";
+    private static final String Namespace = "com.mark.mappers.NormalMapper";
 
     //전체 게시글
 
@@ -54,6 +54,16 @@ public class NormalDaoImpl implements NormalDao {
     @Override
     public List<NormalVO> selectDCList() {
         return sqlSession.selectList(Namespace + ".selectDCList");
+    }
+
+    @Override
+    public List<NormalVO> selectNotice() {
+        return sqlSession.selectList(Namespace + ".selectNoticeList");
+    }
+
+    @Override
+    public List<NormalVO> selectAll(int cate) {
+        return sqlSession.selectList(Namespace + ".selectAll",cate);
     }
 
 

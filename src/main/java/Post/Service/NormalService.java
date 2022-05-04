@@ -23,4 +23,9 @@ public interface NormalService {
 
     //자료실 LIST SELECT
     List<NormalVO> selectDCList();
+
+    //공지사항
+    List<NormalVO> selectNotice();
+
+    List<NormalVO> selectAll(int cate);
 }

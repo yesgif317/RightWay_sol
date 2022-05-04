@@ -85,4 +85,11 @@ public class CustomerServiceimpl implements CustomerService {
             dao.PermissionCustomer(customerVOList.get(i));
         }
     }
+
+    @Override
+    public String selectNumToName(int cus_num) {
+        return dao.selectNumToName(cus_num);
+    }
+
+
 }

@@ -22,6 +22,8 @@ public class NormalVO {
     //내용(contents)
     String nor_cnt;
 
+    String cus_name;
+
     public void setNor_cnt(String nor_cnt) {
         this.nor_cnt = nor_cnt;
     }

@@ -30,4 +30,7 @@ public interface CustomerService {
 
     List<CustomerVO> select_PermissionCustomer(int[] num);
     void PermissionCustomer(List<CustomerVO> customerVOList);
+
+    //select one
+    String selectNumToName(int cus_num);
 }

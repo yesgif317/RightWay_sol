@@ -98,5 +98,11 @@
                 #{cus_position}, #{cus_state}, #{com_num})
     </insert>
 
+    <select id="selectNumToName" parameterType="int" resultType="String">
+        SELECT cus_name
+        FROM customer
+        WHERE cus_num = ${cus_num}
+    </select>
+
 
 </mapper>

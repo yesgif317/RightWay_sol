@@ -110,7 +110,7 @@
                     type: "POST",
                     success: function () {
                         alert("Uploaded");
-                        location.reload();
+                        location.href = "datacenter.do";
                     },
                     error: function (request,error){
                         alert("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);

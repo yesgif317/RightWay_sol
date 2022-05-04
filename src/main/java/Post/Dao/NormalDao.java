@@ -19,4 +19,10 @@ public interface NormalDao {
     int deletePost(int no);
     //자료실 리스트 Select
     List<NormalVO> selectDCList();
+
+    //공지사항
+    List<NormalVO> selectNotice();
+
+    //구분번호 별 전체 리스트
+    List<NormalVO> selectAll(int cate);
 }

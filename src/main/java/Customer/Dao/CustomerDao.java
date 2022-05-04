@@ -35,4 +35,6 @@ public interface CustomerDao {
     //한명 찾기
     CustomerVO selectCusToNum(int i);
 
+    String selectNumToName(int cus_num);
+
 }

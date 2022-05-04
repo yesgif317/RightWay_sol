@@ -79,6 +79,11 @@ public class CustomerDaoImpl implements CustomerDao {
         return sqlSession.selectOne(Namespace + ".selectCusToNum", i);
     }
 
+    @Override
+    public String selectNumToName(int cus_num) {
+        return sqlSession.selectOne(Namespace + ".selectNumToName",cus_num);
+    }
+
     //회원가입 Insert
     @Override
     public void insertCustomer(CustomerVO customerVO) {
