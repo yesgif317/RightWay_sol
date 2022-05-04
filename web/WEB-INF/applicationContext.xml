@@ -56,6 +56,8 @@
     <context:component-scan base-package="File.Service"/>
     <context:component-scan base-package="Post.Dao"/>
     <context:component-scan base-package="Post.Service"/>
+    <context:component-scan base-package="Team.Dao"/>
+    <context:component-scan base-package="Team.Service"/>
 
 
 </beans>

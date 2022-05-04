@@ -34,27 +34,29 @@
                                 <th>팀설명</th>
                                 <th>팀장</th>
                                 <th>인원수</th>
-                                <th>등록일</th>
                             </tr>
                             </thead>
 
                             <tbody>
-                            <c:forEach items="${PostList}" var="post">
+                            <c:forEach items="${TeamList}" var="team" varStatus="status" >
+                            <c:forEach items="${TeammemberList}" var="teammember" >
+                                <c:if test="${teammember.team_num eq team.team_num }">
                                 <tr>
-                                    <td>${post.no}</td>
-                                    <td><a href ="team_content.jsp.do?id=${post.no}">${post.title}</a></td>
-                                    <td>${post.writer}</td>
-                                    <td>${post.writer}</td>
-                                    <td>${post.writer}</td>
-                                    <td>${post.writer}</td>
+                                    <td>${team.team_num}</td>
+                                    <td><a href ="team_content.do?team_num=${teammember.team_num}">${team.team_name}</a></td>
+                                    <td>${team.team_desc}</td>
+                                    <td>${team.cus_num}</td>
+                                    <td>${teammember.cus_num}</td>
                                 </tr>
+                                </c:if>
+                            </c:forEach>
                             </c:forEach>
                             </tbody>
                         </table>
                     </div>
                 </div>
                 <div class="text-center d-block card-header py-3">
-                    <a href="/team_write.do" class="btn btn-info">
+                    <a href="/team_write.do?update=0&team_num=0" class="btn btn-info">
                           <span class="icon text-white-50">
                             <i class="fas fa-pen"></i>
                           </span>

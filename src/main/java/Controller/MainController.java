@@ -21,6 +21,9 @@ import Post.Dto.NormalVO;
 import Post.Service.NormalService;
 import Project.Dto.ProjectVO;
 import Project.Service.ProjectService;
+import Team.Dto.TeamVO;
+import Team.Dto.TeammemberVO;
+import Team.Service.TeamService;
 import org.apache.poi.ss.usermodel.Cell;
 import org.apache.poi.ss.usermodel.Row;
 import org.apache.poi.ss.usermodel.Sheet;
@@ -67,6 +70,8 @@ public class MainController {
     @Inject
     private ProjectService projectService;
 
+    @Inject
+    private TeamService teamService;
 
 
     // 메인 페이지 이동
@@ -498,30 +503,44 @@ public class MainController {
         return "redirect:/project.do";
     }
 
-    //team page
+    //팀관리 게시글 작성 페이지
+    @RequestMapping(value = "/team_write.do", method = RequestMethod.GET)
+    public String team_write(@RequestParam("team_num") int no, Model model) {
+        if(no>0) {
+            List<TeammemberVO> Result = teamService.viewTeammember(no);
+            model.addAttribute("TeamList", Result);
+        }
+        else{}
+        List<CustomerVO> Result1 = customerService.selectAll();
+        model.addAttribute("CustomerList", Result1);
+        return "/team/team_write";
+    }
+    //팀관리 page
     @RequestMapping(value = "/team.do", method = RequestMethod.GET)
     public String team(Model model) {
-        //service 클래스에서 Dao 로 접근하여 쿼리 결과값 가져오기
-        List<BoardVO> boardVoList = service.selectAll();
-
-        // .jsp 파일로 DB 결과값 전달하기
-        model.addAttribute("BoardList", boardVoList);
-
+        List<TeamVO> teamVoList = teamService.selectTeam();
+        model.addAttribute("TeamList", teamVoList);
+        List<TeammemberVO> teammemberVoList = teamService.countmember();
+        model.addAttribute("TeammemberList", teammemberVoList);
         return "team/team";
     }
 
-    //team 글쓰기 페이지 이동
-    @RequestMapping(value = "/team_write.do", method = RequestMethod.GET)
-    public String team_write() {
-        return "team/team_write";
-    }
-
-    //team 상세 페이지 이동
+    //팀관리 작성글 보기
     @RequestMapping(value = "/team_content.do", method = RequestMethod.GET)
-    public String team_content() {
+    public String team_content(@RequestParam("team_num") int no, Model model) {
+        TeamVO teamVoList = teamService.viewTeam(no);
+        model.addAttribute("TeamList", teamVoList);
+        List<TeammemberVO> Result = teamService.viewTeammember(no);
+        model.addAttribute("TeammemberList", Result);
         return "team/team_content";
     }
-
+    //팀관리 작성글 삭제
+    @RequestMapping(value = "/team_delete.do", method = RequestMethod.GET)
+    public String team_delete(@RequestParam("team_num") int no) {
+        teamService.deleteTeammember(no);
+        teamService.deleteTeam(no);
+        return "redirect:/team.do";
+    }
     //테이블 페이지 이동
     @RequestMapping(value = "/tables.do", method = RequestMethod.GET)
     public String tables(Model model) {

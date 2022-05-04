@@ -4,6 +4,16 @@
 
 <jsp:include page="../../include/header.jsp" flush="true" />
 <jsp:include page="../../include/sidebar.jsp" flush="true" />
+<script>
+    $(document).ready( function() {
+        $('dataTable').dataTable( {
+            // 예시 1)
+            "sDom": '<"top"i>rt<"bottom"><"clear">'
+
+
+        } );
+    } );
+</script>
 
 <!-- Content Wrapper -->
 <div id="content-wrapper" class="d-flex flex-column" >
@@ -31,11 +41,11 @@
                                         <div class="col-3"></div>
                                         <div class="col-4 ">
                                             <small class="help-block form-text">팀명</small>
-                                            <input style="border:0 solid whitesmoke;" type="text" id="team_name" name="team_name" value="${BoardList.writer}개발1팀" readonly="readonly" disabled/>
+                                            <input style="border:0 solid whitesmoke;" value="${TeamList.team_name}" type="text" id="team_name" name="team_name"  readonly="readonly" disabled/>
                                         </div>
                                         <div class="col-4" >
                                             <small class="help-block form-text">등록일</small>
-                                            <input style="border:0 solid whitesmoke;"  id="team_date" name="team_date" value="${BoardList.refdate}2022-04-21" readonly="readonly" disabled/>
+                                            <input style="border:0 solid whitesmoke;"  id="team_date" name="team_date"  readonly="readonly" disabled/>
                                         </div>
                                     </div>
 
@@ -43,11 +53,11 @@
                                         <div class="col-3"></div>
                                         <div class="col-4 ">
                                             <small class="help-block form-text">팀장</small>
-                                            <input style="border:0 solid whitesmoke;" type="text" id="team_leader" name="team_name" value="${BoardList.writer}윤정석" readonly="readonly" disabled/>
+                                            <input style="border:0 solid whitesmoke;" value="${TeamList.cus_num}"type="text" id="team_leader" name="team_name"  readonly="readonly" disabled/>
                                         </div>
                                         <div class="col-4" >
                                             <small class="help-block form-text">회사</small>
-                                            <input style="border:0 solid whitesmoke;"  id="team_company" name="team_company" value="${BoardList.refdate}솔리데오시스템즈" readonly="readonly" disabled/>
+                                            <input style="border:0 solid whitesmoke;" value="${TeamList.team_name}"  id="team_company" name="team_company"  readonly="readonly" disabled/>
                                         </div>
                                     </div>
 
@@ -55,7 +65,7 @@
                                         <div class="col-3"></div>
                                         <div class="col-5">
                                             <small class="help-block form-text">팀설명</small>
-                                            <textarea style="border:0; solid: whitesmoke; width: 100%; border: none; resize: both">${BoardList.writer}솔리데오 시스템즈 개발1팀입니다.99999999999999999999999999998976458768796489765879643212463985443524618745235290784568261923490708</textarea>
+                                            <textarea style="border:0; solid: whitesmoke; width: 100%; border: none; resize: both">${TeamList.team_desc}</textarea>
                                         </div>
                                     </div>
 
@@ -87,12 +97,12 @@
                                                                     </thead>
 
                                                                     <tbody>
-                                                                    <c:forEach items="${BoardList}" var="board">
+                                                                    <c:forEach items="${TeammemberList}" var="teammember">
                                                                         <tr>
-                                                                            <td>${board.no}</td>
-                                                                            <td>${board.writer}</td>
-                                                                            <td>${board.writer}</td>
-                                                                            <td>${board.writer}</td>
+                                                                            <td>${teammember.cus_num}</td>
+                                                                            <td>${teammember.team_num}</td>
+                                                                            <td>추가예정</td>
+                                                                            <td>추가예정</td>
                                                                         </tr>
                                                                     </c:forEach>
                                                                     </tbody>
@@ -110,7 +120,7 @@
 
                         <!-- 수정/삭제/목록 버튼 -->
                         <div class="text-center d-block card-header py-3">
-                            <a href="outputs_update.do?no=${BoardList.no}" class="btn btn-info">
+                            <a href="team_update.do?team_num=${TeamList.team_num}" class="btn btn-info">
                                               <span class="icon text-white-50">
                                               <i class="fas fa-pen"></i>
                                               </span>
@@ -128,16 +138,16 @@
                                     <div class="modal-dialog" role="document">
                                         <div class="modal-content">
                                             <div class="modal-header">
-                                                <h5 class="modal-title" id="exampleModalLabel">게시물 삭제</h5>
+                                                <h5 class="modal-title" id="exampleModalLabel">팀 해체</h5>
                                                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                                     <span aria-hidden="true">&times;</span>
                                                 </button>
                                             </div>
                                             <div class="modal-body">
-                                                게시물을 정말 삭제하시겠습니까?
+                                                팀을 정말 해체하시겠습니까?
                                             </div>
                                             <div class="modal-footer">
-                                                <button href="outputs_delete.do?no=${BoardList.no}" type="button" class="btn btn-primary">삭제하기</button>
+                                                <button onclick = "location.href = 'team_delete.do?team_num=${TeamList.team_num}'" type="button" class="btn btn-primary">해체하기</button>
                                                 <button type="button" class="btn btn-secondary" data-dismiss="modal">취소하기</button>
                                             </div>
                                         </div>
@@ -145,7 +155,7 @@
                                 </div>
                             </a>
 
-                            <a href="http://localhost:8089/outputs.do" class="btn btn-secondary">
+                            <a href="http://localhost:8089/team.do" class="btn btn-secondary">
                                              <span class="icon text-white-50">
                                               <i class="fas fa-list"></i>
                                              </span>
@@ -206,7 +216,7 @@
     <script src="<c:url value="/resources/vendor/datatables/dataTables.bootstrap4.min.js"/>"></script>
 
     <!-- Page level custom scripts -->
-    <script src="<c:url value="/resources/js/demo/datatables-demo.js"/>"></script>
+    <%--<script src="<c:url value="/resources/js/demo/datatables-demo.js"/>"></script>--%>
 
     <!-- Page level plugins -->
     <script src="<c:url value="/resources/vendor/chart.js/Chart.min.js"/>"></script>
