@@ -62,6 +62,12 @@
         where cus_id = #{cus_id}
     </select>
 
+    <!-- Select All -->
+    <select id="selectAllCustomer" resultType="CustomerVO">
+        select *
+        from customer
+    </select>
+
     <!-- 회원가입(Insert) -->
     <insert id="insertCustomer">
         insert into customer (cus_num, cus_id, cus_pwd, cus_name, cus_email, cus_phone, cus_dep, cus_position, cus_state,

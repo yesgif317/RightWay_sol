@@ -9,6 +9,7 @@ import java.util.*;
 public interface CustomerService {
     //전체 유저 가져오기
     List<CustomerVO> selectAll();
+    List<CustomerVO> selectAllCustomer();
 
 
     //로그인

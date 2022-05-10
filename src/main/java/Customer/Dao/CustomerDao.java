@@ -7,6 +7,7 @@ import java.util.*;
 
 public interface CustomerDao {
     List<CustomerVO> selectAll();
+    List<CustomerVO> selectAllCustomer();
 
 
 

@@ -109,7 +109,7 @@ public class MainController {
         if (loginDTO.isUseCookie()) {
             int amount = 60 * 60 * 4;  // 4시간
             Date sessionLimit = new Date(System.currentTimeMillis() + (1000 * amount)); // 로그인 유지기간 설정
-            customerService.keepLogin(customerVO.get(1).getCus_id(), httpSession.getId(), sessionLimit);
+            customerService.keepLogin(customerVO.get(0).getCus_id(), httpSession.getId(), sessionLimit);
         }
     }
 
@@ -335,7 +335,7 @@ public class MainController {
     //issue 글쓰기 페이지 이동
     @RequestMapping(value = "/issue_write.do", method = RequestMethod.GET)
     public String issue_write(@RequestParam("post_num") int post_num, Model model) {
-        List<CustomerVO> customerVOList = customerService.selectAll();
+        List<CustomerVO> customerVOList = customerService.selectAllCustomer();
         model.addAttribute("CustomerList",customerVOList);
         if(post_num>0){
             RiskVO Result = riskService.viewRisk(post_num);
@@ -487,7 +487,7 @@ public class MainController {
     //danger 글쓰기 페이지 이동
     @RequestMapping(value = "/danger_write.do", method = RequestMethod.GET)
     public String danger_write(@RequestParam("post_num") int post_num, Model model) {
-        List<CustomerVO> customerVOList = customerService.selectAll();
+        List<CustomerVO> customerVOList = customerService.selectAllCustomer();
         model.addAttribute("CustomerList",customerVOList);
         if(post_num>0){
             RiskVO Result = riskService.viewRisk(post_num);
@@ -829,16 +829,6 @@ public class MainController {
     public String datacenter_writer() {
         return "/datacenter/datacenter_write";
    }
-
-    @PostMapping("/file-upload.do")
-    public String datacenter_Post(MultipartFile[] uploadFile, @RequestParam(value = "title") String title
-            , @RequestParam(value = "contents") String contents) {
-        System.out.println("update ajax post.................");
-        System.out.println(title + contents);
-        fileService.insertFile(uploadFile, 1, 13);
-
-        return "index";
-    }
 
     //파일 업로드
 //    @GetMapping("/file-upload.do")

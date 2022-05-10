@@ -28,6 +28,11 @@ public class CustomerServiceimpl implements CustomerService {
         return dao.selectAll();
     }
 
+    //전체 회원
+    @Override
+    public List<CustomerVO> selectAllCustomer() {
+        return dao.selectAllCustomer();
+    }
 
     //로그인
     @Override

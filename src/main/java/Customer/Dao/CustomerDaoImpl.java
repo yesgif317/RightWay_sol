@@ -33,6 +33,12 @@ public class CustomerDaoImpl implements CustomerDao {
         return sqlSession.selectList(Namespace + ".selectCustomer");
     }
 
+    @Override
+    public List<CustomerVO> selectAllCustomer() {
+        return sqlSession.selectList(Namespace + ".selectAllCustomer");
+    }
+
+
     // 로그인 처리
     @Override
     public List<CustomerVO> login(LoginDTO loginDTO) throws Exception {

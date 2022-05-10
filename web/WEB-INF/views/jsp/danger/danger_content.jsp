@@ -38,7 +38,7 @@
                                         </div>
                                         <div class="col-4" >
                                             <small class="help-block form-text">담당자</small>
-                                            <input style="border:0 solid whitesmoke;width:100%" placeholder="-" type="text" value="${RiskList.cus_num}" readonly="readonly" disabled/>
+                                            <input style="border:0 solid whitesmoke;width:100%" placeholder="-" type="text" value="${RiskList.mng_name}/${RiskList.mng_position}" readonly="readonly" disabled/>
                                         </div>
                                     </div>
 
@@ -70,7 +70,7 @@
                                         <div class="col-3"></div>
                                         <div class="col-4 ">
                                             <small class="help-block form-text">보고자</small>
-                                            <input style="border:0 solid whitesmoke;width:100%" placeholder="-" type="text" id="danger_ID" name="danger_ID" value="${RiskList.cus_num}" readonly="readonly" disabled/>
+                                            <input style="border:0 solid whitesmoke;width:100%" placeholder="-" type="text" id="danger_ID" name="danger_ID" value="${RiskList.cus_name}/${RiskList.cus_position}" readonly="readonly" disabled/>
                                         </div>
                                         <div class="col-4" >
                                         </div>
@@ -91,7 +91,7 @@
                                     <div class="row form-group">
                                         <div class="col-2"></div>
                                         <div class="col-8" style="border-top:  2px solid #808080;border-bottom: 2px solid #808080;">
-                                            <textarea style="border:0 solid whitesmoke;width:100%;" name="contents" id="contents" rows="5" class="form-control mt-3 mb-3" readonly="readonly" disabled>${RiskList.risk_con}</textarea>
+                                            <textarea style="border:0 solid whitesmoke;width:100%;" name="contents" id="contents" rows="15" class="form-control mt-3 mb-3" readonly="readonly" disabled>${RiskList.risk_con}</textarea>
                                         </div>
                                     </div>
                                 </form>

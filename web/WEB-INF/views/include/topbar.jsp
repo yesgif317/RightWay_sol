@@ -57,8 +57,8 @@
                    data-toggle="dropdown"
                    aria-haspopup="true" aria-expanded="false">
 
-                    <i class="fa-solid fa-user text-gray-700"> ${login.get(1).com_name} / ${login.get(1).cus_dep}
-                        / ${login.get(1).cus_position} / ${login.get(1).cus_name}</i>
+                    <i class="fa-solid fa-user text-gray-700"> ${login.get(0).com_name} / ${login.get(0).cus_dep}
+                        / ${login.get(0).cus_position} / ${login.get(0).cus_name}</i>
 
                 </a>
                 <!-- Dropdown - User Information -->
