@@ -21,6 +21,8 @@ import Post.Dto.NormalVO;
 import Post.Service.NormalService;
 import Project.Dto.ProjectVO;
 import Project.Service.ProjectService;
+import Risk.Dto.RiskVO;
+import Risk.Service.RiskService;
 import Team.Dto.TeamVO;
 import Team.Dto.TeammemberVO;
 import Team.Service.TeamService;
@@ -72,6 +74,9 @@ public class MainController {
 
     @Inject
     private TeamService teamService;
+
+    @Inject
+    private RiskService riskService;
 
 
     // 메인 페이지 이동
@@ -234,13 +239,6 @@ public class MainController {
         return "redirect:/outputs.do";
     }
 
-    @RequestMapping(value = "/issue_update.do", method = RequestMethod.GET)  //산출물 게시글 수정 페이지
-    public String issue_update(@RequestParam("no") int no, Model model) {
-        BoardVO Result = service.viewBoard(no);
-        model.addAttribute("BoardList", Result);
-        return "/issue/issue_update";
-    }
-
     @RequestMapping(value = "/notice.do", method = RequestMethod.GET)//공지사항 게시판 글목록 보기
     public String notice(Model model) {
         //service 클래스에서 Dao 로 접근하여 쿼리 결과값 가져오기
@@ -259,7 +257,6 @@ public class MainController {
         return "/notice/notice_write";
     }
 
-
     @RequestMapping(value = "/request.do", method = RequestMethod.GET)//요청사항 게시판 글목록 보기
     public String request(Model model) {
         //service 클래스에서 Dao 로 접근하여 쿼리 결과값 가져오기
@@ -269,26 +266,62 @@ public class MainController {
         return "/request/request";
     }
 
-
-    @RequestMapping(value = "/issue.do", method = RequestMethod.GET)//이슈 게시판 글목록 보기
+    //issue page
+    @RequestMapping(value = "/issue.do", method = RequestMethod.GET)
     public String issue(Model model) {
         //service 클래스에서 Dao 로 접근하여 쿼리 결과값 가져오기
-        List<BoardVO> boardVoList = service.selectAll();
+        List<RiskVO> riskVOList = riskService.selectIssue();
         // .jsp 파일로 DB 결과값 전달하기
-        model.addAttribute("BoardList", boardVoList);
+        model.addAttribute("RiskList", riskVOList);
+
         return "issue/issue";
     }
 
-    @RequestMapping(value = "/issue_content.do", method = RequestMethod.GET)//이슈 작성글 보기
-    public String issue_content(@RequestParam("no") int no, Model model) {
-        BoardVO Result = service.viewBoard(no);
-        model.addAttribute("BoardList", Result);
-        return "/issue/issue_content";
+    //issue 글쓰기 페이지 이동
+    @RequestMapping(value = "/issue_write.do", method = RequestMethod.GET)
+    public String issue_write(@RequestParam("post_num") int post_num, Model model) {
+        List<CustomerVO> customerVOList = customerService.selectAll();
+        model.addAttribute("CustomerList",customerVOList);
+        if(post_num>0){
+            RiskVO Result = riskService.viewRisk(post_num);
+            model.addAttribute("RiskList",Result);
+        }
+        return "issue/issue_write";
     }
 
-    @RequestMapping(value = "/issue_delete.do", method = RequestMethod.GET)//이슈 작성글 삭제
-    public String issue_delete(@RequestParam("no") int no) {
-        service.delete(no);
+    //issue 상세 페이지 이동
+    @RequestMapping(value = "/issue_content.do", method = RequestMethod.GET)
+    public String issue_content(@RequestParam("post_num") int post_num, Model model) {
+        RiskVO Result = riskService.viewRisk(post_num);
+        model.addAttribute("RiskList",Result);
+        return "issue/issue_content";
+    }
+
+    //issue insert
+    @RequestMapping(value = "/issue_insert.do", method = RequestMethod.POST)
+    public String issue_insert(Model model, RiskVO riskVO) {
+        System.out.println(riskVO.getRisk_imp());
+        String Result = riskService.insertRisk(riskVO);
+        model.addAttribute("RiskList", Result);
+        return "redirect:/issue.do";
+    }
+
+    //issue delete
+    @RequestMapping(value = "/issue_delete.do", method = RequestMethod.GET)
+    public String issue_delete(@RequestParam("post_num") int post_num) {
+        riskService.delete(post_num);
+        return "redirect:/issue.do";
+    }
+
+    //issue update
+    @RequestMapping(value = "/issue_update.do", method = RequestMethod.POST)
+    public String issue_update(Model model, RiskVO riskVO) {
+        System.out.println(riskVO.getRisk_tit());
+        System.out.println(riskVO.getRisk_mng());
+        System.out.println(riskVO.getRisk_pgs());
+        System.out.println(riskVO.getRisk_imp());
+        String Result = riskService.updateRisk(riskVO);
+        model.addAttribute("RiskList", Result);
         return "redirect:/issue.do";
     }
 
@@ -325,20 +358,58 @@ public class MainController {
         return "/regularreport/regularreport_content";
     }
 
-    @RequestMapping(value = "/danger.do", method = RequestMethod.GET)//위험관리 목록 보기
+    //danger page
+    @RequestMapping(value = "/danger.do", method = RequestMethod.GET)
     public String danger(Model model) {
         //service 클래스에서 Dao 로 접근하여 쿼리 결과값 가져오기
-        List<BoardVO> boardVoList = service.selectAll();
+        List<RiskVO> riskVOList = riskService.selectDanger();
         // .jsp 파일로 DB 결과값 전달하기
-        model.addAttribute("BoardList", boardVoList);
+        model.addAttribute("RiskList", riskVOList);
+
         return "danger/danger";
     }
 
-    @RequestMapping(value = "/danger_content.do", method = RequestMethod.GET)//위험관리 작성글 보기
-    public String danger_content(@RequestParam("no") int no, Model model) {
-        BoardVO Result = service.viewBoard(no);
-        model.addAttribute("BoardList", Result);
-        return "/danger/danger_content";
+    //danger 글쓰기 페이지 이동
+    @RequestMapping(value = "/danger_write.do", method = RequestMethod.GET)
+    public String danger_write(@RequestParam("post_num") int post_num, Model model) {
+        List<CustomerVO> customerVOList = customerService.selectAll();
+        model.addAttribute("CustomerList",customerVOList);
+        if(post_num>0){
+            RiskVO Result = riskService.viewRisk(post_num);
+            model.addAttribute("RiskList",Result);
+        }
+        return "danger/danger_write";
+    }
+
+    //danger 상세 페이지 이동
+    @RequestMapping(value = "/danger_content.do", method = RequestMethod.GET)
+    public String danger_content(@RequestParam("post_num") int post_num, Model model) {
+        RiskVO Result = riskService.viewRisk(post_num);
+        model.addAttribute("RiskList",Result);
+        return "danger/danger_content";
+    }
+
+    //danger insert
+    @RequestMapping(value = "/danger_insert.do", method = RequestMethod.POST)
+    public String danger_insert(Model model, RiskVO riskVO) {
+        String Result = riskService.insertRisk(riskVO);
+        model.addAttribute("RiskList", Result);
+        return "redirect:/danger.do";
+    }
+
+    //danger delete
+    @RequestMapping(value = "/danger_delete.do", method = RequestMethod.GET)
+    public String danger_delete(@RequestParam("post_num") int post_num) {
+        riskService.delete(post_num);
+        return "redirect:/danger.do";
+    }
+
+    //danger update
+    @RequestMapping(value = "/danger_update.do", method = RequestMethod.POST)
+    public String danger_update(Model model, RiskVO riskVO) {
+        String Result = riskService.updateRisk(riskVO);
+        model.addAttribute("RiskList", Result);
+        return "redirect:/danger.do";
     }
 
 
@@ -359,7 +430,7 @@ public class MainController {
     public String event(Model model) {
         //service 클래스에서 Dao 로 접근하여 쿼리 결과값 가져오기
         List<EventVO> eventVOList = eventService.selectEvent();
-
+        System.out.println(eventVOList);
         // .jsp 파일로 DB 결과값 전달하기
         model.addAttribute("EventList", eventVOList);
 
@@ -438,8 +509,6 @@ public class MainController {
     //company insert
     @RequestMapping(value = "/company_insert.do", method = RequestMethod.POST)
     public String company_insert(Model model, CompanyVO companyVO) {
-        System.out.println(companyVO.getCom_contract());
-        System.out.println(companyVO.getCom_name());
         String Result = companyService.insertCompany(companyVO);
         model.addAttribute("CompanyList", Result);
         return "redirect:/company.do";
@@ -638,6 +707,7 @@ public class MainController {
    public String datacenter_writer(){
         return "/datacenter/datacenter_write";
    }
+
     @PostMapping("/file-upload.do")
     public String datacenter_Post(MultipartFile[] uploadFile, @RequestParam(value = "title") String title
             , @RequestParam(value = "contents") String contents) {
@@ -649,20 +719,20 @@ public class MainController {
     }
 
     //파일 업로드
-    @GetMapping("/file-upload.do")
-    public void uploadAjax() {
-        System.out.println("upload ajax");
-    }
+//    @GetMapping("/file-upload.do")
+//    public void uploadAjax() {
+//        System.out.println("upload ajax");
+//    }
 
     //자료실 파일 업로드
-    @PostMapping("/file-upload.do")
-    public String uploadAjaxPost(MultipartFile[] uploadFile, @RequestParam(value = "title") String title
-                                 , @RequestParam(value = "contents") String contents) {
-        System.out.println("update ajax post.................");
-        System.out.println(title + contents);
-        fileService.insertFile(uploadFile, 1, 13);
-        return "index";
-    }
+//    @PostMapping("/file-upload.do")
+//    public String uploadAjaxPost(MultipartFile[] uploadFile, @RequestParam(value = "title") String title
+//                                 , @RequestParam(value = "contents") String contents) {
+//        System.out.println("update ajax post.................");
+//        System.out.println(title + contents);
+//        fileService.insertFile(uploadFile, 1, 13);
+//        return "index";
+//    }
 
     @RequestMapping(value = "/usermanagement.do", method = RequestMethod.GET)
     public String usermanagement() {

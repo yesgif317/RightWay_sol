@@ -1,14 +1,7 @@
-<%--
-  Created by IntelliJ IDEA.
-  User: hate5
-  Date: 2020-09-06
-  Time: 오후 5:22
-  To change this template use File | Settings | File Templates.
---%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<%@ page contentType="text/html;charset=UTF-8" language="java" %><!DOCTYPE html>
+<%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
-
+<!DOCTYPE html>
 <jsp:include page="../../include/header.jsp" flush="true" />
 <jsp:include page="../../include/sidebar.jsp" flush="true" />
 
@@ -24,10 +17,6 @@
 
             <!-- Page Heading -->
                 <h1 class="h4 mb-2 text-gray-800 ">이슈관리</h1>
-                <p class="mb-4">
-                        이슈ID(착수/계획/분석/설계/구현및인도/완료/하자보수/전체공정) 이슈등급(A/B/C)
-                </p>
-
 
             <!-- DataTales Example -->
             <div class="card shadow mb-4">
@@ -36,39 +25,33 @@
                 </div>
                 <div class="card-body">
                     <div class="table-responsive">
-                        <table class="table <%--table-borderless--%> table-sm" id="dataTable" width="100%" height="500" cellspacing="0">
+                        <table class="table table-bordered table-hover" id="dataTable">
 
                             <thead>
                             <tr >
                                 <th>번호</th>
-                                <th width="30%">이슈</th>
+                                <th width="25%">제목</th>
+                                <th>중요도</th>
                                 <th>담당자</th>
-                                <th>프로젝트</th>
-                                <th>이슈등급</th>
-                                <th>진행상황</th>
-                                <th width="10%">발생일자</th>
-                                <th width="10%">마감기한</th>
-                                <th>남은날짜</th>
-                                <th>진행률</th>
-                                <th>이슈ID</th>
+                                <th>진행상태</th>
+                                <th>보고자</th>
+                                <th>시작/종료일</th>
+                                <th>등록/수정일</th>
                             </tr>
                             </thead>
                             <tfoot>
                             </tfoot>
                             <tbody>
-                            <c:forEach items="${BoardList}" var="board">
+                            <c:forEach items="${RiskList}" var="risk">
                                 <tr>
-                                    <td>${board.no}</td>
-                                    <td><a href ="issue_content.do?no=${board.no}">${board.title}</a></td>
-                                    <td>${board.writer}</td>
-                                    <td>${board.writer}</td>
-                                    <td>${board.writer}</td>
-                                    <td>${board.writer}</td>
-                                    <td><fmt:formatDate value="${board.refdate}" pattern="yyyy-MM-dd" /></td>
-                                    <td><fmt:formatDate value="${board.refdate}" pattern="yyyy-MM-dd" /></td>
-                                    <td>16일</td>
-                                    <td>55%</td>
-                                    <td>${board.count}</td>
+                                    <td>${risk.post_num}</td>
+                                    <td><a href ="issue_content.do?post_num=${risk.post_num}">${risk.risk_tit}</a></td>
+                                    <td>${risk.risk_imp}</td>
+                                    <td>${risk.mng_name}/${risk.mng_position}</td>
+                                    <td>${risk.risk_pgs}</td>
+                                    <td>${risk.cus_name}/${risk.cus_position}</td>
+                                    <td>${risk.risk_start} ~ ${risk.risk_end}</td>
+                                    <td>${risk.risk_reg}</td>
                                 </tr>
                             </c:forEach>
                             </tbody>
@@ -77,7 +60,7 @@
                     </div>
                 </div>
                 <div class="text-center d-block card-header py-3">
-                    <a href="/issue_write.do" class="btn btn-info btn-icon-split">
+                    <a href="/issue_write.do?post_num=0&update=0" class="btn btn-info">
                           <span class="icon text-white-50">
                             <i class="fas fa-pen"></i>
                           </span>
@@ -120,6 +103,3 @@
 
 <script src="<c:url value="/resources/js/demo/datatables-demo.js"/>"></script>
 <script src="https://kit.fontawesome.com/55082abfe9.js" crossorigin="anonymous"></script>
-</body>
-
-</html>

@@ -11257,3 +11257,8 @@ body.sidebar-toggled footer.sticky-footer {
 input:disabled {
   background: #ffffff;
 }
+
+contentsbox{
+  border:0 solid whitesmoke;
+  width:100%;
+}

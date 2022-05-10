@@ -47,6 +47,8 @@
     <context:component-scan base-package="Company.Service"/>
     <context:component-scan base-package="Event.Dao"/>
     <context:component-scan base-package="Event.Service"/>
+    <context:component-scan base-package="Risk.Dao"/>
+    <context:component-scan base-package="Risk.Service"/>
     <context:component-scan base-package="Project.Dao"/>
     <context:component-scan base-package="Project.Service"/>
     <context:component-scan base-package="Commons.Excel.Dao"/>

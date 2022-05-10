@@ -12,7 +12,7 @@ public interface EventService {
     //글 수정(Update)
     String updateEvent(EventVO eventVO);
     //삭제
-    int delete(int com_num);
+    int delete(int post_num);
     //글 조회(View)
-    EventVO viewEvent(int com_num);
+    EventVO viewEvent(int post_num);
 }

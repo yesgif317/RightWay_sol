@@ -1,11 +1,3 @@
-<%--
-  Created by IntelliJ IDEA.
-  User: hate5
-  Date: 2020-09-06
-  Time: 오후 9:25
-  To change this template use File | Settings | File Templates.
---%>
-
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
@@ -23,57 +15,83 @@
         <jsp:include page="../../include/topbar.jsp" flush="true" />
         <!-- Begin Page Content -->
         <div class="container-fluid">
-            <!-- Page Heading -->
-            <h1 class="h4 mb-2 text-gray-800 ">이슈관리</h1>
-            <p class="mb-4">
-                이슈ID(착수/계획/분석/설계/구현및인도/완료/하자보수/전체공정) 이슈등급(A/B/C)
-            </p>
-
-
             <div class="row">
                 <div class="col-lg-12">
 
                     <!-- Collapsable Card Example -->
                     <div class="card shadow mb-4">
                         <!-- Card Header - Accordion -->
-                        <a href="#collapseCardExample" class="d-block card-header py-3"  style="text-align: center">
-                            <h6 class="m-0 font-weight-bold text-primary"> ${BoardList.title}
+                        <a class="d-block card-header py-3"  style="text-align: center">
+                            <h6 class="m-0 font-weight-bold text-primary"> ${RiskList.risk_tit}
                             </h6>
                         </a>
                         <!-- Card Content - Collapse -->
                         <div class="collapse show" id="collapseCardExample">
                             <div class="card-body">
                                 <form autocomplete="off" method="post" role="form">
+
                                     <div class="row form-group">
                                         <div class="col-3"></div>
                                         <div class="col-4 ">
-                                            <small class="help-block form-text">작성자</small>
-                                            <input style="border:0 solid whitesmoke;" type="text" id="issue_writer" name="issue_writer" value="${BoardList.writer}" readonly="readonly" disabled/>
+                                            <small class="help-block form-text">이슈번호</small>
+                                            <input style="border:0 solid whitesmoke;width:100%" placeholder="-" type="text" value="${RiskList.post_num}" readonly="readonly" disabled/>
                                         </div>
                                         <div class="col-4" >
-                                            <small class="help-block form-text">작성일</small>
-                                            <input style="border:0 solid whitesmoke; width:100%;"  id="issue_date" name="issue_date" value="${BoardList.refdate}Thu Oct 08 00:00:00 KST 2020" readonly="readonly" disabled/>
-
+                                            <small class="help-block form-text">담당자</small>
+                                            <input style="border:0 solid whitesmoke;width:100%" placeholder="-" type="text" value="${RiskList.mng_name}/${RiskList.mng_position}" readonly="readonly" disabled/>
                                         </div>
                                     </div>
 
                                     <div class="row form-group">
                                         <div class="col-3"></div>
                                         <div class="col-4 ">
-                                            <small class="help-block form-text">이슈ID</small>
-                                            <input style="border:0 solid whitesmoke;" type="text" id="issue_ID" name="issue_ID" value="${BoardList.writer}" readonly="readonly" disabled/>
+                                            <small class="help-block form-text">중요도</small>
+                                            <input style="border:0 solid whitesmoke;width:100%" placeholder="-" type="text" value="${RiskList.risk_imp}" readonly="readonly" disabled/>
                                         </div>
                                         <div class="col-4" >
-                                            <small class="help-block form-text">마감일</small>
-                                            <input style="border:0 solid whitesmoke; width:100%;"  id="issue_date_end" name="issue_date_end" value="${BoardList.refdate}Thu Oct 08 00:00:00 KST 2020" readonly="readonly" disabled/>
+                                            <small class="help-block form-text">진행상태</small>
+                                            <input style="border:0 solid whitesmoke;width:100%" placeholder="-" value="${RiskList.risk_pgs}" readonly="readonly" disabled/>
+                                        </div>
+                                    </div>
 
+                                    <div class="row form-group">
+                                        <div class="col-3"></div>
+                                        <div class="col-4 ">
+                                            <small class="help-block form-text">이슈 발생일</small>
+                                            <input style="border:0 solid whitesmoke;width:100%" placeholder="-" type="text" value="${RiskList.risk_start}" readonly="readonly" disabled/>
+                                        </div>
+                                        <div class="col-4" >
+                                            <small class="help-block form-text">이슈 해결일</small>
+                                            <input style="border:0 solid whitesmoke;width:100%" placeholder="-" type="text" value="${RiskList.risk_end}" readonly="readonly" disabled/>
+                                        </div>
+                                    </div>
+
+                                    <div class="row form-group">
+                                        <div class="col-3"></div>
+                                        <div class="col-4 ">
+                                            <small class="help-block form-text">보고자</small>
+                                            <input style="border:0 solid whitesmoke;width:100%" placeholder="-" type="text" id="issue_ID" name="issue_ID" value="${RiskList.cus_name}/${RiskList.cus_position}" readonly="readonly" disabled/>
+                                        </div>
+                                        <div class="col-4" >
+                                        </div>
+                                    </div>
+
+                                    <div class="row form-group">
+                                        <div class="col-3"></div>
+                                        <div class="col-4 ">
+                                            <small class="help-block form-text">등록일</small>
+                                            <input style="border:0 solid whitesmoke;width:100%" placeholder="-" type="text" value="${RiskList.risk_reg}" readonly="readonly" disabled/>
+                                        </div>
+                                        <div class="col-4" >
+                                            <small class="help-block form-text">수정일</small>
+                                            <input style="border:0 solid whitesmoke;width:100%;" placeholder="-" value="${RiskList.risk_upd}" readonly="readonly" disabled/>
                                         </div>
                                     </div>
 
                                     <div class="row form-group">
                                         <div class="col-2"></div>
                                         <div class="col-8" style="border-top:  2px solid #808080;border-bottom: 2px solid #808080;">
-                                            <textarea style="border:0 solid whitesmoke;" name="contents" id="contents" rows="5" class="form-control mt-3 mb-3" readonly="readonly" disabled>${BoardList.contents}</textarea>
+                                            <textarea style="border:0 solid whitesmoke;width:100%;" name="contents" id="contents" rows="15" class="form-control mt-3 mb-3" readonly="readonly" disabled>${RiskList.risk_con}</textarea>
                                         </div>
                                     </div>
                                 </form>
@@ -82,14 +100,14 @@
 
                         <!-- 수정/삭제/목록 버튼 -->
                         <div class="text-center d-block card-header py-3">
-                            <a href="outputs_update.do?no=${BoardList.no}" class="btn btn-info">
+                            <a href="issue_write.do?post_num=${RiskList.post_num}&update=1" class="btn btn-info">
                                               <span class="icon text-white-50">
                                               <i class="fas fa-pen"></i>
                                               </span>
                                 <span class="text"> 수정</span>
                             </a>
 
-                            <a  class="btn btn-issue" data-toggle="modal" data-target="#exampleModal">
+                            <a  class="btn btn-danger" data-toggle="modal" data-target="#exampleModal">
                                                  <span class="icon text-white-50">
                                                    <i class="fa-regular fa-trash-can"></i>
                                                  </span>
@@ -109,7 +127,7 @@
                                                 게시물을 정말 삭제하시겠습니까?
                                             </div>
                                             <div class="modal-footer">
-                                                <button href="outputs_delete.do?no=${BoardList.no}" type="button" class="btn btn-primary">삭제하기</button>
+                                                <button onclick = "location.href ='issue_delete.do?post_num=${RiskList.post_num}'" type="button" class="btn btn-danger">삭제하기</button>
                                                 <button type="button" class="btn btn-secondary" data-dismiss="modal">취소하기</button>
                                             </div>
                                         </div>
@@ -117,7 +135,7 @@
                                 </div>
                             </a>
 
-                            <a href="http://localhost:8089/outputs.do" class="btn btn-secondary">
+                            <a href="issue.do" class="btn btn-secondary">
                                              <span class="icon text-white-50">
                                               <i class="fas fa-list"></i>
                                              </span>
@@ -140,10 +158,6 @@
 </div>
 </div>
 <!-- End of Page Wrapper -->
-<!-- Scroll to Top Button-->
-<a class="scroll-to-top rounded" href="#page-top">
-    <i class="fas fa-angle-up"></i>
-</a>
 
 <jsp:include page="../../include/logoutModal.jsp" flush="true" />
 <!-- Bootstrap core JavaScript-->
@@ -156,19 +170,8 @@
 <!-- Custom scripts for all pages-->
 <script src="<c:url value="/resources/js/sb-admin-2.min.js"/>"></script>
 
-<script src="<c:url value="/resources/vendor/datatables/dataTable.js"/>"></script>
-<!-- Page level plugins -->
-<script src="<c:url value="/resources/vendor/chart.js/Chart.min.js"/>"></script>
-
-<!-- Page level custom scripts -->
-<script src="<c:url value="/resources/js/demo/chart-bar-demo.js"/>"></script>
-<script src="<c:url value="/resources/js/demo/chart-pie-demo.js"/>"></script>
 <script type="text/javascript">
     function goSubmit() {
         var form = document.getElementById('tableswriteform').submit();
     }
 </script>
-
-</body>
-
-</html>
