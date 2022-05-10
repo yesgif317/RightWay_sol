@@ -44,8 +44,7 @@
                                 <div class="col-sm-6 mb-3 mb-sm-0">
                                     <div class="form-label-group">
                                         <input type="text" name="cus_id" id="cus_id" class="form-control text-lowercase"
-                                               placeholder="아이디" required
-                                               autofocus value="${cus_id}">
+                                               placeholder="아이디" required autofocus value="${cus_id}">
                                         <input type="hidden" name="reid" id="reid">
                                     </div>
                                 </div>
@@ -58,17 +57,15 @@
 
                             </div>
 
-                            <div class="form-group row">
-                                <div class="col-sm-6 mb-3 mb-sm-0">
-                                    <input type="password" class="form-control form-control-user" name="cus_pwd"
-                                           id="cus_pwd"
-                                           placeholder="최소 8자, 하나의 이상의 대소문자 및 하나의 숫자, 하나의 특수문자">
-                                </div>
-                                <div class="col-sm-6">
-                                    <input type="password" class="form-control form-control-user" name="cus_pwdcheck"
-                                           id="cus_pwdcheck"
-                                           placeholder="비밀번호 확인">
-                                </div>
+                            <div class="form-group">
+                                <input type="password" class="form-control form-control-user" name="cus_pwd"
+                                       id="cus_pwd"
+                                       placeholder="최소 8자, 하나의 이상의 대소문자 및 하나의 숫자, 하나의 특수문자">
+                            </div>
+                            <div class="form-group">
+                                <input type="password" class="form-control form-control-user" name="cus_pwdcheck"
+                                       id="cus_pwdcheck"
+                                       placeholder="비밀번호 확인">
                             </div>
                             <div class="form-group">
                                 <input type="text" class="form-control form-control-user" name="cus_name" id="cus_name"
@@ -87,16 +84,17 @@
 
 
                             <div class="form-group row">
-                                <div class="col-sm-3 mb-3 mb-sm-0">
+                                <div class="col-sm-6 mb-3 mb-sm-0">
+                                    <input type="text" class="form-control text" name="com_name" id="com_name"
+                                           placeholder="회사명" value="${com_name}" disabled>
+                                    <input type="hidden" class="form-control text" name="com_num" id="com_num"
+                                           value="${com_num}">
+                                </div>
+                                <div class="form-label-group col-sm-3">
                                     <button
                                             class="btn btn-dark btn-user btn-block"
-                                            type="button" onclick="comcheck()">회사선택
+                                            type="button" onclick="comcheck()">회사 선택
                                     </button>
-                                </div>
-                                <div class="col-sm-9 ">
-                                    <input type="text" class="form-control form-control-user" name="com_name"
-                                           id="com_name"
-                                           placeholder="회사명" disabled>
                                 </div>
                             </div>
 
@@ -104,13 +102,15 @@
                                 <input type="text" class="form-control form-control-user" name="cus_dep" id="cus_dep"
                                        placeholder="부서명">
                             </div>
+
                             <div class="form-group">
                                 <input type="text" class="form-control form-control-user" name="cus_position"
                                        id="cus_position"
                                        placeholder="직책">
                             </div>
+
+
                             <input type="hidden" name="cus_state" value="0"> <!-- 회원가입 확인하려고 만든 임시변수 -->
-                            <input type="hidden" name="com_num" value="1"> <!-- 회원가입 확인하려고 만든 임시변수 -->
                             <div class="form-group">
                                 <input type="button" onclick="chk_form()" class="btn btn-dark btn-user btn-block"
                                        value="회원 가입"/>
@@ -155,11 +155,11 @@
         var id = document.joinform.cus_id.value;
 
         window.open("/idCheck.do?cus_id=" + id, "",
-            "toolbar=no, menubar=no, scrollbars=yes, resizable=no, width=500, height=300");
+            "toolbar=no, menubar=no, scrollbars=yes, resizable=no, width=600, height=300");
     }
 
     function comcheck() {
-        window.open("/comCheck.do?", "", "toolbar=no, menubar=no, scrollbars=yes, resizable=no, width=500, height=300")
+        window.open("/comCheck.do?", "", "toolbar=no, menubar=yes, scrollbars=yes, resizable=no, width=800, height=500")
 
     }
 
@@ -187,6 +187,10 @@
             exit;
         } else if (document.getElementById("reid").value == '') {
             alert("아이디 중복을 확인해주세요.");
+            document.joinform.cus_id.focus();
+            exit;
+        } else if (document.getElementById("reid").value != document.getElementById("cus_id").value) {
+            alert("아이디 중복을 다시 확인해주세요.");
             document.joinform.cus_id.focus();
             exit;
         } else if (document.getElementById("cus_pwd").value == '') {

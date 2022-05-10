@@ -53,7 +53,6 @@
     <context:component-scan base-package="Project.Service"/>
     <context:component-scan base-package="Commons.Excel.Dao"/>
     <context:component-scan base-package="Commons.Excel.Service"/>
-    <context:component-scan base-package="java"/>
     <context:component-scan base-package="File.Dao"/>
     <context:component-scan base-package="File.Service"/>
     <context:component-scan base-package="Post.Dao"/>

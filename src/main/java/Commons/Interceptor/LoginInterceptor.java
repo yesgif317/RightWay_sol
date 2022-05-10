@@ -1,5 +1,6 @@
 package Commons.Interceptor;
 
+import com.sun.org.apache.xpath.internal.operations.Mod;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.ui.ModelMap;
@@ -23,10 +24,12 @@ public class LoginInterceptor extends HandlerInterceptorAdapter {
         ModelMap modelMap = modelAndView.getModelMap();
         Object customerVO = modelMap.get("customerVO");
 
+
         logger.info("log test");
         if (customerVO != null) {
             logger.info("new login success");
             httpSession.setAttribute(LOGIN, customerVO);
+            System.out.println(customerVO);
 
             if (request.getParameter("useCookie") != null) {
                 logger.info("remember me...");

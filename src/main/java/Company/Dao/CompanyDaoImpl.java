@@ -23,6 +23,13 @@ public class CompanyDaoImpl implements CompanyDao {
         return sqlSession.selectList(Namespace+".selectCompany");
     }
 
+    //회원가입시 회사선택 select
+    @Override
+    public List<CompanyVO> checkCompany(String com_name) throws Exception {
+        return sqlSession.selectList(Namespace+".checkCompany",com_name);
+    }
+
+
     // 게시판 글 작성
     @Override
     public String insertCompany(CompanyVO CompanyVO) {

@@ -63,5 +63,15 @@ public class NormalVO {
 
     private int prevNum; //이전글의 글번호를 담을 필드
     private int nextNum; //다음글의 글번호를 담을 필드
+    public NormalVO(){
+
+    }
+    public NormalVO(int cate,int prj_num,String nor_tit,String nor_cnt,int cus_num){
+        setCate(cate);
+        setPrj_num(prj_num);
+        setNor_tit(nor_tit);
+        setNor_cnt(nor_cnt);
+        setCus_num(cus_num);
+    }
 
 }

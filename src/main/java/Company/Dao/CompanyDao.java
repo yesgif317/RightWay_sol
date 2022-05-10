@@ -7,6 +7,9 @@ import Company.Dto.CompanyVO;
 public interface CompanyDao {
     List<CompanyVO> selectCompany();
 
+    //회원가입시 회사선택 select
+    List<CompanyVO> checkCompany(String com_name) throws Exception;
+
     //글 작성 Insert
     String insertCompany(CompanyVO CompanyVO);
 

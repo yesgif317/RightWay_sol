@@ -19,13 +19,15 @@ public class CustomerVO {
     private String cus_sess_key;
     private String cus_sess_lim;
     private String com_num;
+    private String com_name;
+    private String prj_name;
+    private String prj_num;
 
-
-    public CustomerVO(){
+    public CustomerVO() {
 
     }
 
-    public CustomerVO(String cus_num, String cus_id, String cus_pwd, String cus_name, String cus_email, String cus_phone, String cus_dep, String cus_position, String cus_state, String cus_sess_key , String cus_sess_lim , String com_num){
+    public CustomerVO(String cus_num, String cus_id, String cus_pwd, String cus_name, String cus_email, String cus_phone, String cus_dep, String cus_position, String cus_state, String cus_sess_key, String cus_sess_lim, String com_num, String com_name, String prj_name, String prj_num) {
         this.cus_num = cus_num;
         this.cus_id = cus_id;
         this.cus_pwd = cus_pwd;
@@ -38,6 +40,9 @@ public class CustomerVO {
         this.cus_sess_key = cus_sess_key;
         this.cus_sess_lim = cus_sess_lim;
         this.com_num = com_num;
+        this.com_name = com_name;
+        this.prj_num = prj_num;
+        this.prj_name = prj_name;
     }
 
 
@@ -53,6 +58,9 @@ public class CustomerVO {
                 ", cus_dep='" + cus_dep + '\'' +
                 ", cus_position='" + cus_position + '\'' +
                 ", com_num='" + com_num + '\'' +
+                ", com_name='" + com_name + '\'' +
+                ", prj_num='" + prj_num + '\'' +
+                ", prj_name='" + prj_name + '\'' +
                 '}';
     }
 

@@ -1,4 +1,5 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="C" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 
 <!-- Topbar -->
@@ -14,17 +15,18 @@
         </button>
 
         <!-- Topbar Search -->
+
         <form class="d-none d-sm-inline-block form-inline mr-auto ml-md-3 my-2 my-md-0 mw-100 navbar-search">
             <div class="d-sm-flex align-items-center justify-content-between mb-4"></div>
             <div class="dropdown no-arrow mb-4">
                 <button class="btn btn-dark.disabled dropdown-toggle" type="button" id="dropdownMenuButton"
                         data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                    <i class="fa-solid fa-align-justify"> 프로젝트 선택</i>
+                    <i class="fa-solid fa-align-justify"></i>
                 </button>
                 <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                    <a class="dropdown-item text-gray-600" href="#">프로젝트A</a>
-                    <a class="dropdown-item text-gray-600" href="#">프로젝트B</a>
-                    <a class="dropdown-item text-gray-600" href="#">프로젝트C</a>
+                    <c:forEach items="${login}" var="log">
+                        <a class="dropdown-item text-gray-600" href="#">${log.prj_name}</a>
+                    </c:forEach>
                 </div>
             </div>
         </form>
@@ -39,14 +41,14 @@
                     <i class="fa-solid fa-angles-down"></i>
                 </button>
                 <div class="dropdown-menu" aria-labelledby="dropdownMenuButton2">
-                    <a class="dropdown-item text-gray-600" href="#">프로젝트A</a>
-                    <a class="dropdown-item text-gray-600" href="#">프로젝트B</a>
-                    <a class="dropdown-item text-gray-600" href="#">프로젝트C</a>
+                    <c:forEach items="${login}" var="log">
+                        <a class="dropdown-item text-gray-600" href="#">${log.prj_name}</a>
+                    </c:forEach>
                 </div>
                 </a>
             </li>
-
         </ul>
+
 
         <ul class="navbar-nav ml-auto">
             <!-- Nav Item - User Information -->
@@ -54,12 +56,15 @@
                 <a href="#" class="nav-link dropdown-toggle" role="button"
                    data-toggle="dropdown"
                    aria-haspopup="true" aria-expanded="false">
-                    <i class="fa-solid fa-user text-gray-700">${login.cus_dep}/${login.cus_position}/${login.cus_name}</i>
+
+                    <i class="fa-solid fa-user text-gray-700"> ${login.get(1).com_name} / ${login.get(1).cus_dep}
+                        / ${login.get(1).cus_position} / ${login.get(1).cus_name}</i>
+
                 </a>
                 <!-- Dropdown - User Information -->
                 <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in"
                      aria-labelledby="userDropdown">
-                    <a class="dropdown-item" href="/tables.do">
+                    <a class="dropdown-item" href="/mypage.do">
                         <i class="fa-solid fa-id-card fa-sm fa-fw mr-2 text-gray-400"></i>
                         마이페이지
                     </a>
@@ -71,6 +76,7 @@
                 </div>
             </li>
         </ul>
+
     </c:if>
 
     <c:if test="${empty login}">

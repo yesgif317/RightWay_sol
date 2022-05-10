@@ -2,6 +2,7 @@ package Customer.Service;
 
 import Customer.Dto.CustomerVO;
 import Customer.Dto.LoginDTO;
+import jdk.internal.org.objectweb.asm.tree.LookupSwitchInsnNode;
 
 import java.util.*;
 
@@ -11,7 +12,7 @@ public interface CustomerService {
 
 
     //로그인
-    CustomerVO login(LoginDTO loginDTO) throws Exception;
+    List<CustomerVO> login(LoginDTO loginDTO) throws Exception;
 
     //아이디 체크
     CustomerVO idCheck(String cus_id) throws Exception;

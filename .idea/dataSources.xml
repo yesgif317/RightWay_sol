@@ -10,7 +10,7 @@
         <property name="serverTimezone" value="UTC" />
       </driver-properties>
     </data-source>
-    <data-source source="LOCAL" name="@localhost" uuid="73b3e006-b0ef-4b36-9ffc-76f12baa1bda">
+    <data-source source="LOCAL" name="@localhost" uuid="3d72d70f-66a3-4fa4-b0a4-ef9f6865c7d5">
       <driver-ref>oracle.19</driver-ref>
       <synchronize>true</synchronize>
       <auto-commit>false</auto-commit>
@@ -18,7 +18,7 @@
       <jdbc-url>jdbc:oracle:thin:@localhost:1521:XE</jdbc-url>
       <working-dir>$ProjectFileDir$</working-dir>
     </data-source>
-    <data-source source="LOCAL" name="Oracle - @localhost" uuid="b1c8ed81-ff9c-41b9-aa52-75c8c201c1f8">
+    <data-source source="LOCAL" name="rightway_sol_db" uuid="a6d244db-4d97-410e-b356-be6e0b9ce4b7">
       <driver-ref>oracle.19</driver-ref>
       <synchronize>true</synchronize>
       <auto-commit>false</auto-commit>

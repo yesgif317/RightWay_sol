@@ -31,9 +31,10 @@ public class CustomerServiceimpl implements CustomerService {
 
     //로그인
     @Override
-    public CustomerVO login(LoginDTO loginDTO) throws Exception {
+    public List<CustomerVO> login(LoginDTO loginDTO) throws Exception {
         return dao.login(loginDTO);
     }
+
 
     //아이디 체크
     @Override
