@@ -7,27 +7,51 @@
     <!--보드-->
     <!-- Select 문 -->
     <select id="selectCompany" resultType="CompanyVO">
-        SELECT * FROM company
+        SELECT *
+        FROM company
+    </select>
+
+    <!-- 회사이름 select 문-->
+    <select id="checkCompany" resultType="CompanyVO" parameterType="String">
+        select com_num, com_name
+        from company
+        where com_name = #{com_name}
     </select>
 
     <!-- 업체등록(Insert) -->
-    <insert id="insertCompany" parameterType="CompanyVO" >
-        insert into company(com_num ,com_name, com_tel, com_addr, com_scale, com_business, com_contract)
-        values (com_seq.NEXTVAL,#{com_name}, #{com_tel}, #{com_addr}, #{com_scale}, #{com_business},to_date(#{com_contract},'YYYY-MM-DD'))
+    <insert id="insertCompany" parameterType="CompanyVO">
+        insert into company(com_num, com_name, com_tel, com_addr, com_scale, com_business, com_contract)
+        values (com_seq.NEXTVAL, #{com_name}, #{com_tel}, #{com_addr}, #{com_scale}, #{com_business},
+                to_date(#{com_contract}, 'YYYY-MM-DD'))
     </insert>
 
-    <update id="updateCompany" parameterType="CompanyVO" >
+    <update id="updateCompany" parameterType="CompanyVO">
         update company
-        set com_name = #{com_name}, com_tel =#{com_tel}, com_addr =#{com_addr},com_scale =#{com_scale},com_business =#{com_business},com_contract =#{com_contract}
+        set com_name     = #{com_name},
+            com_tel      =#{com_tel},
+            com_addr     =#{com_addr},
+            com_scale    =#{com_scale},
+            com_business =#{com_business},
+            com_contract =#{com_contract}
         where com_num = #{com_num}
     </update>
 
     <select id="viewCompany" resultType="CompanyVO">
-        SELECT com_num, com_name, com_tel, com_addr, com_scale, com_business, to_char(com_contract,'YYYY-MM-DD') AS com_contract FROM company where com_num=#{com_num}
+        SELECT com_num,
+               com_name,
+               com_tel,
+               com_addr,
+               com_scale,
+               com_business,
+               to_char(com_contract, 'YYYY-MM-DD') AS com_contract
+        FROM company
+        where com_num = #{com_num}
     </select>
 
     <delete id="delete">
-        delete from company where com_num=#{com_num}
+        delete
+        from company
+        where com_num = #{com_num}
     </delete>
 
 </mapper>

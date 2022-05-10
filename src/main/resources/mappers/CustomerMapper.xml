@@ -19,7 +19,9 @@
         <result property="com_num" column="com_num"/>
         <result property="session_key" column="session_key"/>
         <result property="session_limit" column="session_limit"/>
-        <result property="com_num" column="com_num"/>
+        <result property="com_name" column="com_name"/>
+        <result property="prj_name" column="prj_name"/>
+        <result property="prj_num" column="prj_num"/>
         <result property="c_state" column="c_state"/>
     </resultMap>
 
@@ -35,10 +37,9 @@
     <!-- 로그인시 아이디와 비밀번호 확인 -->
     <select id="login" resultMap="customerVOResultMap">
         select *
-        from customer
+        from customer natural join company natural join project
         where cus_id = #{cus_id}
     </select>
-
 
     <!-- 로그인 유지-->
     <update id="keepLogin">
@@ -56,8 +57,9 @@
 
     <!-- Select 문 -->
     <select id="selectCustomer" resultType="CustomerVO">
-        SELECT *
-        FROM customer
+        select cus_id , prj_num, prj_name
+        from customer natural join project
+        where cus_id = #{cus_id}
     </select>
 
     <!-- 회원가입(Insert) -->

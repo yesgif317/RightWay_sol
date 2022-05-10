@@ -24,12 +24,12 @@ import Project.Service.ProjectService;
 import Team.Dto.TeamVO;
 import Team.Dto.TeammemberVO;
 import Team.Service.TeamService;
+import com.sun.org.apache.xpath.internal.operations.Mod;
 import org.apache.poi.ss.usermodel.Cell;
 import org.apache.poi.ss.usermodel.Row;
 import org.apache.poi.ss.usermodel.Sheet;
 import org.apache.poi.ss.usermodel.Workbook;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
-import File.Dto.FileVO;
 import File.Service.FileService;
 import org.mindrot.jbcrypt.BCrypt;
 import org.springframework.stereotype.Controller;
@@ -74,9 +74,9 @@ public class MainController {
     private TeamService teamService;
 
 
-    // 메인 페이지 이동
+    // 메인 페이지 이동 및 차트 데이터 가져오기
     @RequestMapping(value = "/index.do", method = RequestMethod.GET)
-    public String main() {
+    public String main(Model model) {
         return "index";
     }
 
@@ -90,11 +90,12 @@ public class MainController {
     public void loginPOST(LoginDTO loginDTO, HttpSession httpSession, Model model) throws Exception {
 
         System.out.println(loginDTO.getCus_id()); //웹상에 입력한 아이디값
-        CustomerVO customerVO = customerService.login(loginDTO);
+        List<CustomerVO> customerVO = customerService.login(loginDTO);
         System.out.println(customerVO + "--------------------------");
+        System.out.println();
 
         System.out.println("객체 확인");
-        if (customerVO == null || !BCrypt.checkpw(loginDTO.getCus_pwd(), customerVO.getCus_pwd())) {
+        if (customerVO == null || !BCrypt.checkpw(loginDTO.getCus_pwd(), customerVO.get(1).getCus_pwd())) {
             return;
         }
         model.addAttribute("customerVO", customerVO);
@@ -103,11 +104,11 @@ public class MainController {
         if (loginDTO.isUseCookie()) {
             int amount = 60 * 60 * 4;  // 4시간
             Date sessionLimit = new Date(System.currentTimeMillis() + (1000 * amount)); // 로그인 유지기간 설정
-            customerService.keepLogin(customerVO.getCus_id(), httpSession.getId(), sessionLimit);
+            customerService.keepLogin(customerVO.get(1).getCus_id(), httpSession.getId(), sessionLimit);
         }
     }
 
-    //아이디 중복체크
+    //아이디 중복체크 GET, POST
     @RequestMapping(value = "/idCheck.do", method = RequestMethod.GET)
     public String idCheckGET(@RequestParam(value = "cus_id", defaultValue = "", required = false) String cus_id, Model model) {
         model.addAttribute("cus_id", cus_id);
@@ -128,10 +129,29 @@ public class MainController {
         return "user/idCheck";
     }
 
+    //회사선택 GET, POST
+    @RequestMapping(value = "/comCheck.do", method = RequestMethod.GET)
+    public String comCheckGET() {
+        return "user/comCheck";
+    }
+
+    @RequestMapping(value = "/comCheck.do", method = RequestMethod.POST)
+    public String comCheckPOST(HttpServletRequest request, Model model) throws Exception {
+        String com_name = request.getParameter("com_name");
+
+        List<CompanyVO> companyList = companyService.checkCompany(com_name);
+
+
+        model.addAttribute("companyList", companyList);
+        System.out.println(companyList);
+
+        return "user/comCheck";
+    }
+
 
     //회원가입 GET, POST
     @RequestMapping(value = "/register.do", method = RequestMethod.GET)
-    public String registerGET() throws Exception {
+    public String registerGET() {
         return "user/register";
     }
 
@@ -145,6 +165,7 @@ public class MainController {
         return "redirect:/login.do";
     }
 
+    //로그아웃
     @RequestMapping(value = "/logout.do", method = RequestMethod.GET)
     public String logout(HttpServletRequest request,
                          HttpServletResponse response,
@@ -175,11 +196,11 @@ public class MainController {
         return "user/forgot_password";
     }
 
-//    마이페이지
-//    @RequestMapping(value = "/mypage.do")
-//    public String mypage(){
-//        return "user/mypage";
-//    }
+    //마이페이지
+    @RequestMapping(value = "/mypage.do", method = RequestMethod.GET)
+    public String mypage() {
+        return "user/mypage";
+    }
 
     //산출물 게시판 글목록 보기 cate=1
     @RequestMapping(value = "/outputs.do", method = RequestMethod.GET)
@@ -236,18 +257,54 @@ public class MainController {
     public String notice(Model model) {
         //service 클래스에서 Dao 로 접근하여 쿼리 결과값 가져오기
         List<NormalVO> normalVOList = normalService.selectNotice();
-        for(int i = 0; i<normalVOList.size();i++){
-           normalVOList.get(i).setCus_name(customerService.selectNumToName(normalVOList.get(i).getCus_num()));
-        }
+        System.out.println(normalVOList);
+
+//        for(int i = 0; i<normalVOList.size();i++){
+//           normalVOList.get(i).setCus_name(customerService.selectNumToName(normalVOList.get(i).getCus_num()));
+//        }
         // .jsp 파일로 DB 결과값 전달하기
         model.addAttribute("NormalList", normalVOList);
         return "/notice/notice";
     }
-
     @RequestMapping(value = "/notice_write.do", method = RequestMethod.GET)
     public String notice_write(Model model){
 
         return "/notice/notice_write";
+    }
+    //작성한 공지사항 DB저장
+    @RequestMapping(value = "/notice_insert.do" , method = RequestMethod.POST)
+    public String notice_insert(HttpServletRequest request){
+        String title = request.getParameter("title");
+        System.out.println(title);
+
+        String contents = request.getParameter("contents");
+        System.out.println(contents);
+
+        String cus_num = request.getParameter("cus_num");
+        System.out.println(cus_num);
+
+        //int prj_num = Integer.parseInt(request.getParameter("prj_num"));
+
+
+
+        NormalVO normal = new  NormalVO(12,2,title,contents,Integer.parseInt(cus_num));
+
+        System.out.println("삽입 전");
+        System.out.println(normal);
+
+        normalService.insertPost(normal);
+
+        System.out.println("삽입 후");
+        System.out.println(normal);
+        return "redirect:/notice.do";
+    }
+
+    @RequestMapping(value = "/notice_content.do", method = RequestMethod.GET)
+    public String notice_content(@RequestParam("post_num") int no, Model model) {
+        NormalVO Result = normalService.viewPost(no);
+        model.addAttribute("PostList", Result);
+
+        return "/notice/notice_content";
     }
 
 
@@ -420,9 +477,9 @@ public class MainController {
     //행사관리 글쓰기 페이지 이동
     @RequestMapping(value = "/event_write.do", method = RequestMethod.GET)
     public String event_write(@RequestParam("post_num") int post_num, Model model) {
-        if(post_num>0){
+        if (post_num > 0) {
             EventVO Result = eventService.viewEvent(post_num);
-            model.addAttribute("EventList",Result);
+            model.addAttribute("EventList", Result);
         }
         return "event/event_write";
     }
@@ -431,7 +488,7 @@ public class MainController {
     @RequestMapping(value = "/event_content.do", method = RequestMethod.GET)
     public String event_content(@RequestParam("post_num") int post_num, Model model) {
         EventVO Result = eventService.viewEvent(post_num);
-        model.addAttribute("EventList",Result);
+        model.addAttribute("EventList", Result);
         return "event/event_content";
     }
 
@@ -449,6 +506,7 @@ public class MainController {
         eventService.delete(post_num);
         return "redirect:/event.do";
     }
+
     //행사관리 update
     @RequestMapping(value = "/event_update.do", method = RequestMethod.POST)
     public String event_update(Model model, EventVO eventVO) {
@@ -471,9 +529,9 @@ public class MainController {
     //company 글쓰기 페이지 이동
     @RequestMapping(value = "/company_write.do", method = RequestMethod.GET)
     public String company_write(@RequestParam("com_num") int com_num, Model model) {
-        if(com_num>0){
+        if (com_num > 0) {
             CompanyVO Result = companyService.viewCompany(com_num);
-            model.addAttribute("CompanyList",Result);
+            model.addAttribute("CompanyList", Result);
         }
         return "company/company_write";
     }
@@ -482,7 +540,7 @@ public class MainController {
     @RequestMapping(value = "/company_content.do", method = RequestMethod.GET)
     public String company_content(@RequestParam("com_num") int com_num, Model model) {
         CompanyVO Result = companyService.viewCompany(com_num);
-        model.addAttribute("CompanyList",Result);
+        model.addAttribute("CompanyList", Result);
         return "company/company_content";
     }
 
@@ -529,9 +587,9 @@ public class MainController {
     //project 글쓰기 페이지 이동
     @RequestMapping(value = "/project_write.do", method = RequestMethod.GET)
     public String project_write(@RequestParam("prj_num") int prj_num, Model model) {
-        if(prj_num>0){
+        if (prj_num > 0) {
             ProjectVO Result = projectService.viewProject(prj_num);
-            model.addAttribute("ProjectList",Result);
+            model.addAttribute("ProjectList", Result);
         }
         return "project/project_write";
     }
@@ -540,7 +598,7 @@ public class MainController {
     @RequestMapping(value = "/project_content.do", method = RequestMethod.GET)
     public String project_content(@RequestParam("prj_num") int prj_num, Model model) {
         ProjectVO Result = projectService.viewProject(prj_num);
-        model.addAttribute("ProjectList",Result);
+        model.addAttribute("ProjectList", Result);
         return "project/project_content";
     }
 
@@ -570,15 +628,16 @@ public class MainController {
     //팀관리 게시글 작성 페이지
     @RequestMapping(value = "/team_write.do", method = RequestMethod.GET)
     public String team_write(@RequestParam("team_num") int no, Model model) {
-        if(no>0) {
+        if (no > 0) {
             List<TeammemberVO> Result = teamService.viewTeammember(no);
             model.addAttribute("TeamList", Result);
+        } else {
         }
-        else{}
         List<CustomerVO> Result1 = customerService.selectAll();
         model.addAttribute("CustomerList", Result1);
         return "/team/team_write";
     }
+
     //팀관리 page
     @RequestMapping(value = "/team.do", method = RequestMethod.GET)
     public String team(Model model) {
@@ -598,6 +657,7 @@ public class MainController {
         model.addAttribute("TeammemberList", Result);
         return "team/team_content";
     }
+
     //팀관리 작성글 삭제
     @RequestMapping(value = "/team_delete.do", method = RequestMethod.GET)
     public String team_delete(@RequestParam("team_num") int no) {
@@ -605,6 +665,7 @@ public class MainController {
         teamService.deleteTeam(no);
         return "redirect:/team.do";
     }
+
     //테이블 페이지 이동
     @RequestMapping(value = "/tables.do", method = RequestMethod.GET)
     public String tables(Model model) {
@@ -645,7 +706,8 @@ public class MainController {
         String id = request.getParameter("id");
         //BoardVO result = service.selectboard();
         //model.addAttribute("BoardList", boardVoList);
-        return "update";
+        return "" +
+                "update";
     }
 
     //글 수정 버튼 작동
@@ -678,25 +740,18 @@ public class MainController {
         model.addAttribute("PostList", Result);
         return "/datacenter/datacenter_content";
     }
-    @RequestMapping(value = "/datacenter.do",method = RequestMethod.GET)
-    public String datacenter(Model model){
+
+    @RequestMapping(value = "/datacenter.do", method = RequestMethod.GET)
+    public String datacenter(Model model) {
         List<NormalVO> normalVOList = normalService.selectAll(13);
-        model.addAttribute("PostList",normalVOList);
+        model.addAttribute("PostList", normalVOList);
 
         return "/datacenter/datacenter";
-   }
-   @RequestMapping(value = "/datacenter_write.do", method = RequestMethod.GET)
-   public String datacenter_writer(){
-        return "/datacenter/datacenter_write";
-   }
-    @PostMapping("/file-upload.do")
-    public String datacenter_Post(MultipartFile[] uploadFile, @RequestParam(value = "title") String title
-            , @RequestParam(value = "contents") String contents) {
-        System.out.println("update ajax post.................");
-        System.out.println(title + contents);
-        fileService.insertFile(uploadFile, 1, 13);
+    }
 
-        return "index";
+    @RequestMapping(value = "/datacenter_write.do", method = RequestMethod.GET)
+    public String datacenter_writer() {
+        return "/datacenter/datacenter_write";
     }
 
     //파일 업로드
@@ -708,7 +763,7 @@ public class MainController {
     //자료실 파일 업로드
     @PostMapping("/file-upload.do")
     public String uploadAjaxPost(MultipartFile[] uploadFile, @RequestParam(value = "title") String title
-                                 , @RequestParam(value = "contents") String contents) {
+            , @RequestParam(value = "contents") String contents) {
         System.out.println("update ajax post.................");
         System.out.println(title + contents);
         fileService.insertFile(uploadFile, 1, 13);
@@ -778,18 +833,19 @@ public class MainController {
 
     @RequestMapping(value = "/ExcelDownload.do", method = RequestMethod.GET)
     public void ExcelGET(@ModelAttribute("customerVO") CustomerVO customerVO, HttpServletRequest
-            request, HttpServletResponse response, ModelMap model) throws Exception {
+            request, HttpServletResponse response) throws Exception {
         System.out.println("인원관리 다운로드");
         excelService.getUserExcel(customerVO, request, response);
 
     }
+
     //승인 요청 POST
     @ResponseBody
     @PostMapping("/permission.do")
     public String permissionPost(@RequestParam(value = "c_num") String[] c_num) {
         System.out.println("permission ajax post.................");
         int[] num = new int[c_num.length];
-        for(int j=0;j<c_num.length;j++) {
+        for (int j = 0; j < c_num.length; j++) {
             num[j] = Integer.parseInt(c_num[j]);
         }
 

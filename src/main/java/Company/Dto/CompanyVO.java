@@ -1,4 +1,8 @@
 package Company.Dto;
+
+import lombok.Data;
+
+@Data
 public class CompanyVO {
     public int com_num;
     public String com_name;

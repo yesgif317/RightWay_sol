@@ -22,17 +22,19 @@
 
     <!-- Custom scripts for all pages-->
     <script src="/resources/js/sb-admin-2.min.js"></script>
+    <script type="text/javascript">
+        function comok(com_name,com_num) {
+            opener.document.joinform.com_name.value = com_name;
+            opener.document.joinform.com_num.value = com_num;
+            self.close();
+        }
+
+    </script>
 </head>
 <body>
-<script type="text/javascript">
-    function idok() {
-        opener.joinform.com_name.value = "${com_name}";
-        self.close();
-    }
 
-</script>
 
-<form method="post" class="form-signin" action="/comCheck.do" name="checkform">
+<form method="post" class="form-signin" action="/comCheck.do" name="joinform">
     <div class="form-label-group">
         <input type="text" id="com_name" name="com_name" class="form-control" value="${com_name}"/>
     </div>
@@ -42,18 +44,19 @@
                type="submit" value="회사 검색">
     </div>
 
-
-    <c:forEach items="${CompanyList}" var="com">
-    <tr>
-        <td>${com.com_name}</td>
-    </tr>
+    <c:forEach items="${companyList}" var="com">
+        <tr>
+            <span style = "font-style : normal; font-size: 1.5em;">회사명 :     </span>
+        </tr>
+        <tr>
+            <span style = "font-style : normal; font-size: 1.5em;">${com.com_name}</span>
+        </tr>
+        <div class="form-label-group">
+            <input class = "btn btn-lg btn-secondary btn-block text-lowercase"
+                   type="button" value="회사선택" onclick="comok('${com.com_name}','${com.com_num}')">
+        </div>
     </c:forEach>
-    <div class="form-label-group">
-        <input class="btn btn-lg btn-secondary btn-block text-lowercase"
-               type="button" value="use this ID" onclick="idok()">
-    </div>
 </form>
-
 
 </body>
 

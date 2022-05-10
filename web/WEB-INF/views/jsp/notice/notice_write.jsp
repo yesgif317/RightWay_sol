@@ -2,12 +2,7 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <jsp:include page="../../include/header.jsp" flush="true" />
 <jsp:include page="../../include/sidebar.jsp" flush="true" />
-<script>
 
-    function file_upload () {
-
-    }
-</script>
 <!-- Content Wrapper -->
 <div id="content-wrapper" class="d-flex flex-column" >
 
@@ -42,24 +37,26 @@
                                 <c:choose>
                                 <c:when test="${test eq '1'}">
                                 <form method="post" action="notice_update.do" id="noticeupdateform" enctype="application/x-www-form-urlencoded" class="form-horizontal">
-                                </c:when>
-                                <c:otherwise>
-                                <form method="post" action="notice_insert.do" id="noticewriteform" enctype="application/x-www-form-urlencoded" class="form-horizontal">
-                                    </c:otherwise>
-                                </c:choose>
-                                    <div class="row form-group">
-                                        <div class="col col-md-3 text-right"><label for="title" class=" form-control-label fa-solid text-gray-800 mt-2"><sup class="text-danger small">*</sup>제목</label></div>
-                                        <div class="col-12 col-md-7"><input type="text" id="title" name="title" placeholder="제목을 입력해주세요." class="form-control" value=""></div>
-                                    </div>
-                                    <div class="row form-group">
-                                        <div class="col col-md-3 text-right"><label for="contents" class=" form-control-label fa-solid text-gray-800 mt-2"><sup class="text-danger small">*</sup>내용</label></div>
-                                        <div class="col-12 col-md-7"> <textarea name="contents" id="contents" rows="9" placeholder="공지사항 내용을 입력해주세요." class="form-control"></textarea></div>
-                                    </div>
-                                    <div class="row form-group">
-                                        <div class="col col-md-3 text-right"><label for="contents" class=" form-control-label fa-solid text-gray-800 mt-2">첨부파일</label></div>
-                                        <div class="col-12 col-md-9"><input type="file" name="uploadFile" multiple></div>
-                                    </div>
-                                </form>
+                                    </c:when>
+                                    <c:otherwise>
+                                    <form method="post" action="notice_insert.do" id="noticewriteform" enctype="application/x-www-form-urlencoded" class="form-horizontal">
+                                        </c:otherwise>
+                                        </c:choose>
+                                        <div class="row form-group">
+                                            <div class="col col-md-3 text-right"><label for="title" class=" form-control-label fa-solid text-gray-800 mt-2"><sup class="text-danger small">*</sup>제목</label></div>
+                                            <div class="col-12 col-md-7"><input type="text" id="title" name="title" placeholder="제목을 입력해주세요." class="form-control" value=""></div>
+                                        </div>
+                                        <div class="row form-group">
+                                            <div class="col col-md-3 text-right"><label for="contents" class=" form-control-label fa-solid text-gray-800 mt-2"><sup class="text-danger small">*</sup>내용</label></div>
+                                            <div class="col-12 col-md-7"> <textarea name="contents" id="contents" rows="9" placeholder="공지사항 내용을 입력해주세요." class="form-control"></textarea></div>
+                                        </div>
+                                        <div class="row form-group">
+                                            <div class="col col-md-3 text-right"><label for="contents" class=" form-control-label fa-solid text-gray-800 mt-2">첨부파일</label></div>
+                                            <div class="col-12 col-md-9"><input type="file" name="uploadFile" multiple></div>
+                                        </div>
+                                        <input type="hidden" name="cus_num" value="${login.get(1).cus_num}">
+                                        <%--                                    <input type="hidden" name = "prj_num" value="${login.prj_num}">--%>
+                                    </form>
 
                             </div>
                             <div class="text-center d-block card-header py-3">
@@ -86,41 +83,9 @@
                                             else if ( document.getElementById("title").value=='' ) {
                                                 $('#exampleModal').modal('show')
                                             }
-                                            else {
 
-                                                console.log("ajax start...");
-                                                var formData = new FormData();
-                                                var inputFile = $("input[name='uploadFile']");
-                                                var title = $("input[name='title']").val();
-                                                var contents = $("textarea[name='contents']").val();
+                                            document.getElementById('noticewriteform').submit()
 
-                                                var files = inputFile[0].files;
-
-                                                console.log(files);
-                                                console.log(title + contents)
-
-                                                for (var i = 0; i < files.length; i++) {
-                                                    formData.append("uploadFile", files[i]);
-                                                }
-                                                formData.append("title", title[0]);
-                                                formData.append("contents",contents[0]);
-
-
-                                                $.ajax({
-                                                    url: "file-upload.do",
-                                                    processData: false,
-                                                    contentType: false,
-                                                    data: formData,
-                                                    type: "POST",
-                                                    success: function () {
-                                                        alert("Uploaded");
-                                                        location.reload();
-                                                    },
-                                                    error: function (request,error){
-                                                        alert("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);
-                                                    }
-                                                })
-                                            }
                                         }
                                     </script>
                                     <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -179,9 +144,3 @@
 
 <!-- Custom scripts for all pages-->
 <script src="<c:url value="/resources/js/sb-admin-2.min.js"/>"></script>
-
-<script type="text/javascript">
-    function goSubmit() {
-        var form = document.getElementById('tableswriteform').submit();
-    }
-</script>

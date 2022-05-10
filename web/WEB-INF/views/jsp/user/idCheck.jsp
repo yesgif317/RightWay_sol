@@ -56,7 +56,7 @@
         ${cus_id}는 사용가능한 아이디입니다.
         <div class="form-label-group">
             <input class="btn btn-lg btn-secondary btn-block text-lowercase"
-                   type="button" value="use this ID" onclick="idok()">
+                   type="button" value="아이디 사용하기" onclick="idok()">
         </div>
     </c:if>
 

@@ -7,6 +7,9 @@ import java.util.List;
 public interface CompanyService {
     //목록 조회
     List<CompanyVO> selectCompany();
+
+    //회사 조회
+    List<CompanyVO> checkCompany(String com_name) throws Exception;
     //등록
     String insertCompany(CompanyVO companyVO);
     //글 수정(Update)
