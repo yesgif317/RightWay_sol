@@ -20,9 +20,9 @@
 
     <!-- cate 별 전체 리스트-->
     <select id="selectAll" parameterType="int" resultType="NormalVO">
-        SELECT *
-        FROM normal
-        WHERE cate = ${cate}
+        SELECT n.post_num,n.cate,n.nor_tit,n.cus_num,n.nor_reg,n.nor_cnt,n.prj_num,c.cus_name,p.prj_name,c.cus_num,p.prj_num
+        FROM normal n,customer c,project p
+        WHERE cate = ${cate} and n.prj_num=p.prj_num and n.cus_num=c.cus_num
         ORDER BY post_num DESC
     </select>
 
@@ -38,10 +38,25 @@
         FROM normal
         where cate = 13
     </select>
+    <!-- 게시물 조회 -->
     <select id="viewPost" resultType="NormalVO">
-        SELECT *
-        FROM normal
+        SELECT n.post_num,
+               n.cate,
+               n.nor_tit,
+               n.cus_num,
+               n.nor_reg,
+               n.nor_cnt,
+               n.prj_num,
+               c.cus_name,
+               p.prj_name,
+               c.cus_num,
+               p.prj_num
+        FROM normal n,
+             customer c,
+             project p
         where post_num = #{post_num}
+          and n.prj_num = p.prj_num
+          and n.cus_num = c.cus_num
     </select>
     <!-- 게시물 삭제 -->
     <delete id="deletePost"> delete

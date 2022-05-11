@@ -1,11 +1,5 @@
 package Controller;
 
-import javax.inject.Inject;
-import javax.servlet.http.*;
-import java.io.*;
-import java.util.*;
-import java.util.List;
-
 import Board.Dto.BoardVO;
 import Board.Service.BoardService;
 import Commons.Excel.Dto.ExcelVO;
@@ -15,9 +9,9 @@ import Company.Service.CompanyService;
 import Customer.Dto.CustomerVO;
 import Customer.Dto.LoginDTO;
 import Customer.Service.CustomerService;
-
 import Event.Dto.EventVO;
 import Event.Service.EventService;
+import File.Service.FileService;
 import Post.Dto.NormalVO;
 import Post.Service.NormalService;
 import Project.Dto.ProjectVO;
@@ -27,25 +21,30 @@ import Risk.Service.RiskService;
 import Team.Dto.TeamVO;
 import Team.Dto.TeammemberVO;
 import Team.Service.TeamService;
-import com.sun.org.apache.regexp.internal.RE;
-import com.sun.org.apache.xpath.internal.operations.Mod;
 import org.apache.poi.ss.usermodel.*;
 import org.apache.poi.ss.util.CellRangeAddress;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
-import File.Service.FileService;
 import org.mindrot.jbcrypt.BCrypt;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import org.springframework.web.util.WebUtils;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
+
+import javax.inject.Inject;
+import javax.servlet.http.Cookie;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.Iterator;
+import java.util.List;
 
 
 @Controller
@@ -725,9 +724,9 @@ public class MainController {
     //팀관리 게시글 작성 페이지
     @RequestMapping(value = "/team_write.do", method = RequestMethod.GET)
     public String team_write(@RequestParam("team_num") int no, Model model) {
-        List<CustomerVO> customerVoList = customerService.selectAll();
+        List<CustomerVO> customerVoList = customerService.selectAllCustomer();
         List<TeammemberVO> teammemberVOList = teamService.viewTeammember(no);
-        List<CustomerVO> cusmodalVoList=customerService.selectAll();
+        List<CustomerVO> cusmodalVoList=customerService.selectAllCustomer();
         List<CustomerVO> testList= new ArrayList<>();
         TeamVO teamVoList = teamService.viewTeam(no);
         for (TeammemberVO teammemberVO : teammemberVOList) {
@@ -764,7 +763,7 @@ public class MainController {
         model.addAttribute("TeamList", teamVoList);
         List<TeammemberVO> Result = teamService.viewTeammember(no);
         model.addAttribute("TeammemberList", Result);
-        List<CustomerVO> customerVoList = customerService.selectAll();
+        List<CustomerVO> customerVoList = customerService.selectAllCustomer();
         model.addAttribute("CustomerList", customerVoList);
         return "team/team_content";
     }

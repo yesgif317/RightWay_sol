@@ -33,9 +33,7 @@
                                         <div class="col-3"></div>
                                         <div class="col-4 ">
                                             <small class="help-block form-text">작성자</small>
-                                            <input style="border:0 solid whitesmoke;" type="text" id="writer"
-                                                   name="writer" value="${PostList.cus_name}" readonly="readonly"
-                                                   disabled/>
+                                            ${PostList.cus_num}
                                         </div>
                                         <div class="col-4">
                                             <small class="help-block form-text">작성일</small>
