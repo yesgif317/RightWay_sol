@@ -7,7 +7,7 @@ import java.util.*;
 @Data
 public class ExcelVO {
 
-    private String cus_num;
+    private int cus_num;
     private String cus_id;
     private String cus_pwd;
     private String cus_name;
@@ -18,12 +18,14 @@ public class ExcelVO {
     private String cus_state;
     private String com_num;
 
+    private String com_name;
+
     public ExcelVO(){
 
     }
 
 
-    public ExcelVO(String cus_num, String cus_id, String cus_pwd, String cus_name, String cus_email, String cus_phone, String cus_dep, String cus_position, String cus_state, String cus_sess_key , String cus_sess_lim , String com_num){
+    public ExcelVO(int cus_num, String cus_id, String cus_pwd, String cus_name, String cus_email, String cus_phone, String cus_dep, String cus_position, String cus_state, String com_num) {
         this.cus_num = cus_num;
         this.cus_id = cus_id;
         this.cus_pwd = cus_pwd;

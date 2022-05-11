@@ -30,32 +30,32 @@
                                     <div class="row form-group">
                                         <div class="col col-md-3 text-right"><label
                                                 class="form-control-label fa-solid text-gray-800 m-2">ID</label></div>
-                                        <div class="col-12 col-md-7 text-gray-900 fa-solid m-2">${login.get(1).cus_id}</div>
+                                        <div class="col-12 col-md-7 text-gray-900 fa-solid m-2">${login.cus_id}</div>
                                     </div>
                                     <div class="row form-group">
                                         <div class="col col-md-3 text-right"><label
                                                 class="form-control-label fa-solid text-gray-800 m-2">이름</label></div>
-                                        <div class="col-12 col-md-7 text-gray-900 fa-solid m-2">${login.get(1).cus_name}</div>
+                                        <div class="col-12 col-md-7 text-gray-900 fa-solid m-2">${login.cus_name}</div>
                                     </div>
                                     <div class="row form-group">
                                         <div class="col col-md-3 text-right"><label
                                                 class="form-control-label fa-solid text-gray-800 m-2">이메일</label></div>
-                                        <div class="col-12 col-md-7 text-gray-900">${login.get(1).cus_email}</div>
+                                        <div class="col-12 col-md-7 text-gray-900">${login.cus_email}</div>
                                     </div>
                                     <div class="row form-group">
                                         <div class="col col-md-3 text-right"><label
                                                 class="form-control-label fa-solid text-gray-800 m-2">연락처</label></div>
-                                        <div class="col-12 col-md-7 text-gray-900">${login.get(1).cus_phone}</div>
+                                        <div class="col-12 col-md-7 text-gray-900">${login.cus_phone}</div>
                                     </div>
                                     <div class="row form-group">
                                         <div class="col col-md-3 text-right"><label
                                                 class="form-control-label fa-solid text-gray-800 m-2">부서</label></div>
-                                        <div class="col-12 col-md-7 text-gray-900">${login.get(1).cus_dep}</div>
+                                        <div class="col-12 col-md-7 text-gray-900">${login.cus_dep}</div>
                                     </div>
                                     <div class="row form-group">
                                         <div class="col col-md-3 text-right"><label
                                                 class="form-control-label fa-solid text-gray-800 m-2">직책</label></div>
-                                        <div class="col-12 col-md-7 text-gray-900">${login.get(1).cus_position}</div>
+                                        <div class="col-12 col-md-7 text-gray-900">${login.cus_position}</div>
                                     </div>
 
 

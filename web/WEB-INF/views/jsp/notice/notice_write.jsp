@@ -54,7 +54,7 @@
                                             <div class="col col-md-3 text-right"><label for="contents" class=" form-control-label fa-solid text-gray-800 mt-2">첨부파일</label></div>
                                             <div class="col-12 col-md-9"><input type="file" name="uploadFile" multiple></div>
                                         </div>
-                                        <input type="hidden" name="cus_num" value="${login.get(1).cus_num}">
+                                        <input type="hidden" name="cus_num" value="${login.get(0).cus_num}">
                                         <%--                                    <input type="hidden" name = "prj_num" value="${login.prj_num}">--%>
                                     </form>
 

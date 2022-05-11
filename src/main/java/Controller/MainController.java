@@ -8,6 +8,7 @@ import java.util.List;
 
 import Board.Dto.BoardVO;
 import Board.Service.BoardService;
+import Commons.Excel.Dto.ExcelVO;
 import Commons.Excel.Service.ExcelService;
 import Company.Dto.CompanyVO;
 import Company.Service.CompanyService;
@@ -26,19 +27,21 @@ import Risk.Service.RiskService;
 import Team.Dto.TeamVO;
 import Team.Dto.TeammemberVO;
 import Team.Service.TeamService;
+import com.sun.org.apache.regexp.internal.RE;
 import com.sun.org.apache.xpath.internal.operations.Mod;
-import org.apache.poi.ss.usermodel.Cell;
-import org.apache.poi.ss.usermodel.Row;
-import org.apache.poi.ss.usermodel.Sheet;
-import org.apache.poi.ss.usermodel.Workbook;
+import org.apache.poi.ss.usermodel.*;
+import org.apache.poi.ss.util.CellRangeAddress;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 import File.Service.FileService;
 import org.mindrot.jbcrypt.BCrypt;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.multipart.MultipartHttpServletRequest;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import org.springframework.web.util.WebUtils;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -82,6 +85,11 @@ public class MainController {
     // 메인 페이지 이동 및 차트 데이터 가져오기
     @RequestMapping(value = "/index.do", method = RequestMethod.GET)
     public String main(Model model) {
+        List<NormalVO> normalVOList = normalService.selectNotice();
+        System.out.println(normalVOList);
+
+        // .jsp 파일로 DB 결과값 전달하기
+        model.addAttribute("NormalList", normalVOList);
         return "index";
     }
 
@@ -94,13 +102,10 @@ public class MainController {
     @RequestMapping(value = "/loginPost.do", method = RequestMethod.POST)
     public void loginPOST(LoginDTO loginDTO, HttpSession httpSession, Model model) throws Exception {
 
-        System.out.println(loginDTO.getCus_id()); //웹상에 입력한 아이디값
-        List<CustomerVO> customerVO = customerService.login(loginDTO);
-        System.out.println(customerVO + "--------------------------");
-        System.out.println();
+        CustomerVO customerVO = customerService.login(loginDTO);
 
         System.out.println("객체 확인");
-        if (customerVO == null || !BCrypt.checkpw(loginDTO.getCus_pwd(), customerVO.get(1).getCus_pwd())) {
+        if (customerVO == null || !BCrypt.checkpw(loginDTO.getCus_pwd(), customerVO.getCus_pwd())) {
             return;
         }
         model.addAttribute("customerVO", customerVO);
@@ -109,7 +114,7 @@ public class MainController {
         if (loginDTO.isUseCookie()) {
             int amount = 60 * 60 * 4;  // 4시간
             Date sessionLimit = new Date(System.currentTimeMillis() + (1000 * amount)); // 로그인 유지기간 설정
-            customerService.keepLogin(customerVO.get(0).getCus_id(), httpSession.getId(), sessionLimit);
+            customerService.keepLogin(customerVO.getCus_id(), httpSession.getId(), sessionLimit);
         }
     }
 
@@ -175,8 +180,9 @@ public class MainController {
     public String logout(HttpServletRequest request,
                          HttpServletResponse response,
                          HttpSession httpSession) throws Exception {
-
+        System.out.println(httpSession.getAttribute("login"));
         Object object = httpSession.getAttribute("login");
+        System.out.println(object);
 
         if (object != null) {
             CustomerVO customerVO = (CustomerVO) object;
@@ -216,14 +222,15 @@ public class MainController {
         model.addAttribute("PostList", postVoList);
         return "/outputs/outputs";
     }
+
     //산출물 게시글 작성 페이지
     @RequestMapping(value = "/outputs_write.do", method = RequestMethod.GET)
     public String outputs_write(@RequestParam("post_num") int no, Model model) {
-        if(no>0) {
+        if (no > 0) {
             NormalVO Result = normalService.viewPost(no);
             model.addAttribute("PostList", Result);
+        } else {
         }
-        else{}
         return "/outputs/outputs_write";
     }
 
@@ -235,12 +242,14 @@ public class MainController {
 
         return "/outputs/outputs_content";
     }
+
     //산출물 작성글 삭제
     @RequestMapping(value = "/outputs_delete.do", method = RequestMethod.GET)
     public String outputs_delete(@RequestParam("post_num") int no) {
         normalService.deletePost(no);
         return "redirect:/outputs.do";
     }
+
     //산출물 작성글 수정 기능
     @RequestMapping(value = "/outputs_update.do", method = RequestMethod.POST)
     public String outputs_update(Model model, NormalVO postVO) {
@@ -249,6 +258,7 @@ public class MainController {
         model.addAttribute("PostList", Result);
         return "redirect:/outputs.do";
     }
+
     // 산출물 게시글 작성 기능
     @RequestMapping(value = "/outputs_insert.do", method = RequestMethod.POST)
     public String outputs_insert(Model model, NormalVO postVO) {
@@ -271,14 +281,16 @@ public class MainController {
         model.addAttribute("NormalList", normalVOList);
         return "/notice/notice";
     }
+
     @RequestMapping(value = "/notice_write.do", method = RequestMethod.GET)
-    public String notice_write(Model model){
+    public String notice_write(Model model) {
 
         return "/notice/notice_write";
     }
+
     //작성한 공지사항 DB저장
-    @RequestMapping(value = "/notice_insert.do" , method = RequestMethod.POST)
-    public String notice_insert(HttpServletRequest request){
+    @RequestMapping(value = "/notice_insert.do", method = RequestMethod.POST)
+    public String notice_insert(HttpServletRequest request) {
         String title = request.getParameter("title");
         System.out.println(title);
 
@@ -291,16 +303,11 @@ public class MainController {
         //int prj_num = Integer.parseInt(request.getParameter("prj_num"));
 
 
+        NormalVO normal = new NormalVO(12, 2, title, contents, Integer.parseInt(cus_num));
 
-        NormalVO normal = new  NormalVO(12,2,title,contents,Integer.parseInt(cus_num));
-
-        System.out.println("삽입 전");
-        System.out.println(normal);
 
         normalService.insertPost(normal);
 
-        System.out.println("삽입 후");
-        System.out.println(normal);
         return "redirect:/notice.do";
     }
 
@@ -389,28 +396,33 @@ public class MainController {
         model.addAttribute("PostList", PostVoList);
         return "meetingrecord/meetingrecord";
     }
+
     //회의록 게시글 작성 페이지
     @RequestMapping(value = "/meetingrecord_write.do", method = RequestMethod.GET)
-    public String meetingrecord_write(@RequestParam("post_num") int no,Model model) {
-        if(no>0) {
+    public String meetingrecord_write(@RequestParam("post_num") int no, Model model) {
+        if (no > 0) {
             NormalVO Result = normalService.viewPost(no);
             model.addAttribute("PostList", Result);
+        } else {
         }
-        else{}
         return "/meetingrecord/meetingrecord_write";
     }
+
     //회의록 작성글 보기
     @RequestMapping(value = "/meetingrecord_content.do", method = RequestMethod.GET)
     public String meetingrecord_content(@RequestParam("post_num") int no, Model model) {
         NormalVO Result = normalService.viewPost(no);
         model.addAttribute("PostList", Result);
-        return "/meetingrecord/meetingrecord_content"; }
+        return "/meetingrecord/meetingrecord_content";
+    }
+
     //회의록 작성글 삭제
     @RequestMapping(value = "/meetingrecord_delete.do", method = RequestMethod.GET)
     public String meetingrecord_delete(@RequestParam("post_num") int no) {
         normalService.deletePost(no);
         return "redirect:/meetingrecord.do";
     }
+
     //회의록 작성글 수정 기능
     @RequestMapping(value = "/meetingrecord_update.do", method = RequestMethod.POST)
     public String meetingrecord_update(Model model, NormalVO postVO) {
@@ -419,6 +431,7 @@ public class MainController {
         model.addAttribute("PostList", Result);
         return "redirect:/meetingrecord.do";
     }
+
     // 회의록 게시글 작성 기능
     @RequestMapping(value = "/meetingrecord_insert.do", method = RequestMethod.POST)
     public String meetingrecord_insert(Model model, NormalVO postVO) {
@@ -436,28 +449,33 @@ public class MainController {
         model.addAttribute("PostList", PostVoList);
         return "regularreport/regularreport";
     }
+
     //정기보고 게시글 작성 페이지
     @RequestMapping(value = "/regularreport_write.do", method = RequestMethod.GET)
-    public String regularreport_write(@RequestParam("post_num") int no,Model model) {
-        if(no>0) {
+    public String regularreport_write(@RequestParam("post_num") int no, Model model) {
+        if (no > 0) {
             NormalVO Result = normalService.viewPost(no);
             model.addAttribute("PostList", Result);
+        } else {
         }
-        else{}
         return "/regularreport/regularreport_write";
     }
+
     //정기보고 작성글 보기
     @RequestMapping(value = "/regularreport_content.do", method = RequestMethod.GET)
-    public String regularreport_content(@RequestParam("post_num") int no, Model model)  {
+    public String regularreport_content(@RequestParam("post_num") int no, Model model) {
         NormalVO Result = normalService.viewPost(no);
         model.addAttribute("PostList", Result);
-        return "/regularreport/regularreport_content"; }
+        return "/regularreport/regularreport_content";
+    }
+
     //정기보고 작성글 삭제
     @RequestMapping(value = "/regularreport_delete.do", method = RequestMethod.GET)
     public String regularreport_delete(@RequestParam("post_num") int no) {
         normalService.deletePost(no);
         return "redirect:/regularreport.do";
     }
+
     //정기보고 작성글 수정 기능
     @RequestMapping(value = "/regularreport_update.do", method = RequestMethod.POST)
     public String regularreport_update(Model model, NormalVO postVO) {
@@ -466,6 +484,7 @@ public class MainController {
         model.addAttribute("PostList", Result);
         return "redirect:/regularreport.do";
     }
+
     // 정기보고 게시글 작성 기능
     @RequestMapping(value = "/regularreport_insert.do", method = RequestMethod.POST)
     public String regularreport_insert(Model model, NormalVO postVO) {
@@ -897,32 +916,61 @@ public class MainController {
 
     @RequestMapping(value = "/excelform_download.do", method = RequestMethod.GET)
     public void excelDownload(HttpServletResponse response) throws IOException {
-        System.out.println("로그1");
-        Workbook wb = new XSSFWorkbook();
-        Sheet sheet = wb.createSheet("첫번째 시트");
-        Row row = null;
+        System.out.println("엑셀폼 다운로드");
+        XSSFWorkbook wb = new XSSFWorkbook();
+        Sheet sheet = wb.createSheet();
+        sheet.setColumnWidth((short) 0, (short) 6000);
+        sheet.setColumnWidth((short) 1, (short) 4000);
+        sheet.setColumnWidth((short) 2, (short) 3000);
+        sheet.setColumnWidth((short) 3, (short) 8000);
+        sheet.setColumnWidth((short) 4, (short) 5000);
+        sheet.setColumnWidth((short) 5, (short) 3000);
+        sheet.setColumnWidth((short) 6, (short) 3000);
+        sheet.setColumnWidth((short) 7, (short) 3000);
+        sheet.setColumnWidth((short) 8, (short) 5000);
+
+        Row row = sheet.createRow(0);
         Cell cell = null;
-        int rowNum = 0;
+        CellStyle cs = wb.createCellStyle();
+        Font font = wb.createFont();
+        cell = row.createCell(0);
+        cell.setCellValue("투입인력 관리");
+        sheet.addMergedRegion(new CellRangeAddress(row.getRowNum(), row.getRowNum(), 0, 9));
+        int rowNum = 1;
 
         // Header
         row = sheet.createRow(rowNum++);
+
         cell = row.createCell(0);
         cell.setCellValue("아이디");
+
         cell = row.createCell(1);
         cell.setCellValue("비밀번호");
+
         cell = row.createCell(2);
         cell.setCellValue("이름");
+
         cell = row.createCell(3);
         cell.setCellValue("이메일");
+
         cell = row.createCell(4);
         cell.setCellValue("전화번호");
+
         cell = row.createCell(5);
-        cell.setCellValue("부서명");
+        cell.setCellValue("팀명");
+
         cell = row.createCell(6);
-        cell.setCellValue("직책명");
+        cell.setCellValue("직급");
+
+        cell = row.createCell(7);
+        cell.setCellValue("계정상태");
+
+        cell = row.createCell(8);
+        cell.setCellValue("회사명");
+
 
         // Body
-        for (int i = 0; i < 7; i++) {
+        for (int i = 0; i < 9; i++) {
             row = sheet.createRow(rowNum++);
             cell = row.createCell(0);
             cell.setCellValue(i + "_ID");
@@ -931,13 +979,17 @@ public class MainController {
             cell = row.createCell(2);
             cell.setCellValue(i + "_NAME");
             cell = row.createCell(3);
-            cell.setCellValue(i + "_Email");
+            cell.setCellValue(i + "_EMAIL");
             cell = row.createCell(4);
-            cell.setCellValue(i + "_Phone");
+            cell.setCellValue(i + "_PHONE");
             cell = row.createCell(5);
-            cell.setCellValue(i + "_Dep");
+            cell.setCellValue(i + "_DEP");
             cell = row.createCell(6);
-            cell.setCellValue(i + "_Position");
+            cell.setCellValue(i + "_POSITION");
+            cell = row.createCell(7);
+            cell.setCellValue(0);
+            cell = row.createCell(8);
+            cell.setCellValue(i + "_COMNAME");
         }
 
         // 컨텐츠 타입과 파일명 지정
@@ -948,6 +1000,27 @@ public class MainController {
         // Excel File Output
         wb.write(response.getOutputStream());
         wb.close();
+    }
+
+    @ResponseBody
+    @RequestMapping(value = "/ExcelUpload.do", method = RequestMethod.POST)
+    public ResponseEntity<ExcelVO> memberExcelUp(MultipartHttpServletRequest request, HttpServletResponse response) {
+        System.out.println("컨트롤러 넘어옴");
+        ExcelVO excelVO = new ExcelVO();
+        response.setCharacterEncoding("UTF-8");
+        try {
+            MultipartFile file = null;
+            Iterator<String> iterator = request.getFileNames();
+            if (iterator.hasNext()) {
+                file = request.getFile(iterator.next());
+                System.out.println(file);
+            }
+            System.out.println("서비스 실행전");
+            excelService.memberExcelUp(file);
+            return new ResponseEntity<>(excelVO, HttpStatus.OK);
+        } catch (Exception e) {
+            return new ResponseEntity<>(excelVO, HttpStatus.OK);
+        }
     }
 
     @RequestMapping(value = "/ExcelDownload.do", method = RequestMethod.GET)

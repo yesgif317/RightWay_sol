@@ -36,7 +36,7 @@ public class ExcelServiceImpl implements ExcelService {
         XSSFWorkbook wb = new XSSFWorkbook();
         Sheet sheet = wb.createSheet();
         sheet.setColumnWidth((short) 0, (short) 2000);
-        sheet.setColumnWidth((short) 1, (short) 8000);
+        sheet.setColumnWidth((short) 1, (short) 7000);
         sheet.setColumnWidth((short) 2, (short) 3000);
         sheet.setColumnWidth((short) 3, (short) 3000);
         sheet.setColumnWidth((short) 4, (short) 8000);
@@ -44,7 +44,7 @@ public class ExcelServiceImpl implements ExcelService {
         sheet.setColumnWidth((short) 6, (short) 3000);
         sheet.setColumnWidth((short) 7, (short) 3000);
         sheet.setColumnWidth((short) 8, (short) 3000);
-        sheet.setColumnWidth((short) 9, (short) 3000);
+        sheet.setColumnWidth((short) 9, (short) 6000);
 
 
         Row row = sheet.createRow(0);
@@ -89,7 +89,7 @@ public class ExcelServiceImpl implements ExcelService {
         cell.setCellValue("계정상태");
 
         cell = row.createCell(9);
-        cell.setCellValue("회사번호");
+        cell.setCellValue("회사명");
 
         int i = 2;
         int ii = list.size();
@@ -129,7 +129,9 @@ public class ExcelServiceImpl implements ExcelService {
             cell.setCellValue(vo.getCus_state());
 
             cell = row.createCell(9);
-            cell.setCellValue(vo.getCom_num());
+            int com_num = Integer.parseInt(vo.getCom_num());
+            String com_name = dao.checkcomname(com_num);
+            cell.setCellValue(com_name);
 
 
             i++;
@@ -146,114 +148,94 @@ public class ExcelServiceImpl implements ExcelService {
         ExcelVO excelVO = new ExcelVO();
         try {
             OPCPackage opcPackage = OPCPackage.open(file.getInputStream()); // 파일 읽어옴
-            XSSFWorkbook workbook =  new XSSFWorkbook(opcPackage);
-
+            XSSFWorkbook workbook = new XSSFWorkbook(opcPackage);
             XSSFSheet sheet = workbook.getSheetAt(0);
-            int resultCnt = 0; // DB에 반영된 결과 수 체크용
 
             // 입력된 행의 수만큼 반복
-            for(int i=1;i<=sheet.getLastRowNum();i++) {
+            for (int i = 2; i <= sheet.getLastRowNum(); i++) {
 
                 XSSFRow row = sheet.getRow(i); // i번째 행 가져옴
                 XSSFCell cell = null;
 
-                if(row == null) continue;
+                if (row == null) continue;
 
                 // 0번째 열
                 cell = row.getCell(0);
                 // Cell 값이 null 일 수도 있으므로 체크
-                if(cell != null)
-                {
+                // 아이디 중복체크하기
+                if (cell != null) {
                     cell.setCellType(CellType.STRING); // 숫자만 입력받는 경우를 대비해 STRING 처리
-                    excelVO.setCus_id(cell.getStringCellValue().replace(" ", "")); // 공백처리
+                    String cus_id = String.valueOf(row.getCell(0));
+
+                    int idcount = dao.idcount(cus_id);
+                    if (idcount != 1) {
+                        excelVO.setCus_id(cell.getStringCellValue().replace(" ", "")); // 공백처리
+                    } else {
+                        Exception e = new Exception("회원정보 삽입불가, 사유 : 회원아이디 중복");
+                        throw e;
+                    }
+
                 }
 
                 // 열의 수만큼 반복
                 // 1번째 열
                 cell = row.getCell(1);
-                if(cell != null)
-                {
+                if (cell != null) {
                     cell.setCellType(CellType.STRING); // 숫자만 입력받는 경우를 대비해 STRING 처리
                     String hashedPw = BCrypt.hashpw(String.valueOf(cell), BCrypt.gensalt());
                     excelVO.setCus_pwd(hashedPw);
-//                    excelVO.setCus_pwd(cell.getStringCellValue().replace(" ", ""));
                 }
 
 
                 cell = row.getCell(2);
-                if(cell != null)
-                {
+                if (cell != null) {
                     cell.setCellType(CellType.STRING); // 숫자만 입력받는 경우를 대비해 STRING 처리
                     excelVO.setCus_name(cell.getStringCellValue().replace(" ", ""));
                 }
 
                 cell = row.getCell(3);
-                if(cell != null)
-                {
+                if (cell != null) {
                     cell.setCellType(CellType.STRING); // 숫자만 입력받는 경우를 대비해 STRING 처리
                     excelVO.setCus_email(cell.getStringCellValue().replace(" ", ""));
                 }
 
                 cell = row.getCell(4);
-                if(cell != null)
-                {
+                if (cell != null) {
                     cell.setCellType(CellType.STRING); // 숫자만 입력받는 경우를 대비해 STRING 처리
                     excelVO.setCus_phone(cell.getStringCellValue().replace(" ", ""));
                 }
 
                 cell = row.getCell(5);
-                if(cell != null)
-                {
+                if (cell != null) {
                     cell.setCellType(CellType.STRING); // 숫자만 입력받는 경우를 대비해 STRING 처리
                     excelVO.setCus_dep(cell.getStringCellValue().replace(" ", ""));
                 }
 
                 cell = row.getCell(6);
-                if(cell != null)
-                {
+                if (cell != null) {
                     cell.setCellType(CellType.STRING); // 숫자만 입력받는 경우를 대비해 STRING 처리
                     excelVO.setCus_position(cell.getStringCellValue().replace(" ", ""));
                 }
 
                 cell = row.getCell(7);
-                if(cell != null)
-                {
+                if (cell != null) {
                     cell.setCellType(CellType.STRING);  // 숫자만 입력받는 경우를 대비해 STRING 처리
                     excelVO.setCus_state(cell.getStringCellValue().replace(" ", ""));
                 }
 
                 cell = row.getCell(8);
-                if(cell != null)
-                {
-                    cell.setCellType(CellType.STRING); // 숫자만 입력받는 경우를 대비해 STRING 처리
-                    excelVO.setCom_num(cell.getStringCellValue().replace(" ", ""));
+                if (cell != null) {
+                    cell.setCellType(CellType.STRING);// 숫자만 입력받는 경우를 대비해 STRING 처리
+                    String com_name = String.valueOf(row.getCell(8));
+                    excelVO.setCom_num(dao.checkcomnum(com_name));
                 }
-
-                System.out.println(excelVO);
-                dao.postUserExcel(excelVO);
-//                int result = Namespace.postUserExcel(paramsMap); // DB에 반영
-
-                // 반영되었는지 체크
-//                if (result > 0) {
-//                    resultCnt++;
-//                }
-//                else {
-//                    throw new Exception();
-//                }
-
             }
-//
-//            // 모든 Row가 반영되었는지 체크
-//            if(resultCnt == sheet.getLastRowNum()) {
-//                customerVO.setResultCode(C.SUCCESS);
-//                customerVO.setResultMsg(C.SUCCESS_MSG);
-//                customerVO.setQueryResult(result);
-//            }
+            System.out.println(excelVO);
+            dao.postUserExcel(excelVO);
+        } catch (Exception e) {
+            System.out.println("에러메시지" + e.getMessage());
+        }
 
-        }
-        catch (Exception e) {
-            throw e;
-        }
     }
 }
 

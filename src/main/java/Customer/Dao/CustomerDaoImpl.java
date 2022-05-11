@@ -41,12 +41,9 @@ public class CustomerDaoImpl implements CustomerDao {
 
     // 로그인 처리
     @Override
-    public List<CustomerVO> login(LoginDTO loginDTO) throws Exception {
+    public CustomerVO login(LoginDTO loginDTO) throws Exception {
 
-        System.out.println(loginDTO.getCus_id()+"-------------------");
-        System.out.println(loginDTO.getCus_pwd()+"-------------------");
-        System.out.println(loginDTO);
-        return sqlSession.selectList(Namespace + ".login", loginDTO);
+        return sqlSession.selectOne(Namespace + ".login", loginDTO);
     }
 
     // 로그인 유지 처리
