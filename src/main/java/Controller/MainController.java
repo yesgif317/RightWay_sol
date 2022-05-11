@@ -701,20 +701,34 @@ public class MainController {
         return "redirect:/project.do";
     }
 
+
+
     //팀관리 게시글 작성 페이지
     @RequestMapping(value = "/team_write.do", method = RequestMethod.GET)
     public String team_write(@RequestParam("team_num") int no, Model model) {
-        if (no > 0) {
-            List<TeammemberVO> Result = teamService.viewTeammember(no);
-            model.addAttribute("TeamList", Result);
-        } else {
+        List<CustomerVO> customerVoList = customerService.selectAll();
+        List<TeammemberVO> teammemberVOList = teamService.viewTeammember(no);
+        List<CustomerVO> cusmodalVoList=customerService.selectAll();
+        List<CustomerVO> testList= new ArrayList<>();
+        TeamVO teamVoList = teamService.viewTeam(no);
+        for (TeammemberVO teammemberVO : teammemberVOList) {
+            for (CustomerVO customerVO : customerVoList) {
+                if(Integer.parseInt(String.valueOf(customerVO.getCus_num()))==Integer.parseInt(String.valueOf(teammemberVO.getCus_num()))){
+                    testList.add(customerVO);
+                }
+            }
         }
-        List<CustomerVO> Result1 = customerService.selectAll();
-        model.addAttribute("CustomerList", Result1);
+        for (int i=0;i<testList.size();i++){
+            cusmodalVoList.remove(testList.get(i));
+        }
+
+        model.addAttribute("CusmodalList", cusmodalVoList);
+        model.addAttribute("CustomerList", customerVoList);
+        model.addAttribute("TeamList", teamVoList);
+        model.addAttribute("TeammemberList", teammemberVOList);
         return "/team/team_write";
     }
-
-    //팀관리 page
+    //팀관리 목록
     @RequestMapping(value = "/team.do", method = RequestMethod.GET)
     public String team(Model model) {
         List<TeamVO> teamVoList = teamService.selectTeam();
@@ -731,15 +745,44 @@ public class MainController {
         model.addAttribute("TeamList", teamVoList);
         List<TeammemberVO> Result = teamService.viewTeammember(no);
         model.addAttribute("TeammemberList", Result);
+        List<CustomerVO> customerVoList = customerService.selectAll();
+        model.addAttribute("CustomerList", customerVoList);
         return "team/team_content";
     }
-
     //팀관리 작성글 삭제
     @RequestMapping(value = "/team_delete.do", method = RequestMethod.GET)
     public String team_delete(@RequestParam("team_num") int no) {
-        teamService.deleteTeammember(no);
+        teamService.deletemember(no);
         teamService.deleteTeam(no);
         return "redirect:/team.do";
+    }
+    //팀관리 작성글 수정 기능
+    @RequestMapping(value = "/team_update.do", method = RequestMethod.POST)
+    public String team_update(Model model, TeamVO teamVO) {
+        String Result = teamService.updateTeam(teamVO);
+        model.addAttribute("TeamList", Result);
+        return "redirect:/team.do";
+    }
+    // 팀관리 팀 등록 기능
+    @RequestMapping(value = "/team_insert.do", method = RequestMethod.POST)
+    public String team_insert(Model model, TeamVO teamVO) {
+        String Result = teamService.insertTeam(teamVO);
+        model.addAttribute("TeamList", Result);
+        return "redirect:/team.do";
+    }
+    //팀관리 팀원 삭제
+    @RequestMapping(value = "/teammember_delete.do", method = RequestMethod.DELETE)
+    public String teammember_delete(@RequestParam("team_num") int team_num,Model model,TeammemberVO teammemberVO) {
+        teamService.deleteTeammember(teammemberVO);
+        return "redirect:/team_write.do?team_num="+team_num+"&update=1";
+    }
+    // 팀관리 팀원 등록 기능
+    @RequestMapping(value = "/teammember_insert.do", method = RequestMethod.POST)
+    public String teammember_insert(@RequestParam("team_num") int team_num,Model model, TeammemberVO teammemberVO) {
+        String Result = teamService.insertTeammember(teammemberVO);
+        model.addAttribute("TeammemberList", Result);
+
+        return "redirect:/team_write.do?team_num="+team_num+"&update=1";
     }
 
     //테이블 페이지 이동

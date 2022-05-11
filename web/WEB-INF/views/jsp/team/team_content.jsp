@@ -53,7 +53,7 @@
                                         <div class="col-3"></div>
                                         <div class="col-4 ">
                                             <small class="help-block form-text">팀장</small>
-                                            <input style="border:0 solid whitesmoke;" value="${TeamList.cus_num}"type="text" id="team_leader" name="team_name"  readonly="readonly" disabled/>
+                                            <input style="border:0 solid whitesmoke;" value="${TeamList.cus_num}"type="text" id="cus_num" name="cus_num"  readonly="readonly" disabled/>
                                         </div>
                                         <div class="col-4" >
                                             <small class="help-block form-text">회사</small>
@@ -89,21 +89,26 @@
                                                                 <table class="table table-bordered" id="dataTable">
                                                                     <thead>
                                                                     <tr>
-                                                                        <th>번호</th>
-                                                                        <th>회사명</th>
-                                                                        <th>직급</th>
                                                                         <th>이름</th>
+                                                                        <th>직책</th>
+                                                                        <th>연락처</th>
+                                                                        <th>이메일</th>
+
                                                                     </tr>
                                                                     </thead>
-
                                                                     <tbody>
-                                                                    <c:forEach items="${TeammemberList}" var="teammember">
-                                                                        <tr>
-                                                                            <td>${teammember.cus_num}</td>
-                                                                            <td>${teammember.team_num}</td>
-                                                                            <td>추가예정</td>
-                                                                            <td>추가예정</td>
+                                                                    <c:forEach items="${TeammemberList}" var="teammember"  >
+
+                                                                    <c:forEach items="${CustomerList}" var="customer"  >
+                                                                        <c:if test="${teammember.cus_num eq customer.cus_num}">
+                                                                        <tr >
+                                                                            <td >${customer.cus_name}</td>
+                                                                            <td>${customer.cus_position}</td>
+                                                                            <td>${customer.cus_phone}</td>
+                                                                            <td>${customer.cus_email}</td>
                                                                         </tr>
+                                                                        </c:if>
+                                                                    </c:forEach>
                                                                     </c:forEach>
                                                                     </tbody>
                                                                 </table>
@@ -120,11 +125,12 @@
 
                         <!-- 수정/삭제/목록 버튼 -->
                         <div class="text-center d-block card-header py-3">
-                            <a href="team_update.do?team_num=${TeamList.team_num}" class="btn btn-info">
+
+                            <a href="team_write.do?team_num=${TeamList.team_num}&update=1" class="btn btn-info">
                                               <span class="icon text-white-50">
                                               <i class="fas fa-pen"></i>
                                               </span>
-                                <span class="text"> 수정</span>
+                                <span class="text"> 정보 수정 및 팀원 추가 </span>
                             </a>
 
                             <a  class="btn btn-danger" data-toggle="modal" data-target="#exampleModal">

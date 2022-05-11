@@ -16,7 +16,7 @@
         <typeAlias type="File.Dto.FileVO" alias="FileVO"/>
         <typeAlias type="Commons.Excel.Dto.ExcelVO" alias="ExcelVO"/>
         <typeAlias type="Team.Dto.TeamVO" alias="TeamVO"/>
-        <typeAlias type="Team.Dto.TeamVO" alias="TeammemberVO"/>
+        <typeAlias type="Team.Dto.TeammemberVO" alias="TeammemberVO"/>
     </typeAliases>
 
     <typeHandlers> <!-- java.sql.Timestamp 를 java.util.Date 형으로 반환 -->

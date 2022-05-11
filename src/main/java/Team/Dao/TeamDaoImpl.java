@@ -6,6 +6,7 @@ import org.apache.ibatis.session.SqlSession;
 import org.springframework.stereotype.Repository;
 
 import javax.inject.Inject;
+import java.util.HashMap;
 import java.util.List;
 
 @Repository
@@ -29,6 +30,10 @@ public class TeamDaoImpl implements TeamDao {
         return sqlSession.insert(Namespace+".insertTeam",teamVO)+"";
     }
     @Override
+    public String insertTeammember(TeammemberVO teammemberVO) {
+        return sqlSession.insert(Namespace+".insertTeammember",teammemberVO)+"";
+    }
+    @Override
     public String updateTeam(TeamVO teamVO) {
         //Ibatis Update 사용법
         return sqlSession.update(Namespace+".updateTeam", teamVO)+"";
@@ -48,9 +53,13 @@ public class TeamDaoImpl implements TeamDao {
         //Ibatis Update 사용법
         return sqlSession.delete(Namespace+".deleteTeam",no);
     }
-    public int deleteTeammember(int no) {
+    public int deletemember(int no) {
         //Ibatis Update 사용법
-        return sqlSession.delete(Namespace+".deleteTeammember",no);
+        return sqlSession.delete(Namespace+".deletemember",no);
+    }
+    public int deleteTeammember(TeammemberVO teammemberVO) {
+        //Ibatis Update 사용법
+        return sqlSession.delete(Namespace+".deleteTeammember",teammemberVO);
     }
 
 

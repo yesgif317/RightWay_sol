@@ -1,15 +1,88 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
+<jsp:include page="../../include/header.jsp" flush="true"/>
+<jsp:include page="../../include/sidebar.jsp" flush="true"/>
+<%
+    int test = Integer.parseInt(request.getParameter("update"));
+    pageContext.setAttribute("test", test);
+%>
 
-<jsp:include page="../../include/header.jsp" flush="true" />
-<jsp:include page="../../include/sidebar.jsp" flush="true" />
 
+<script>
+    function chk_form() {
+        if (document.getElementById("team_desc").value == '' || document.getElementById("team_name").value == '') {
+            $('#exampleModal').modal('show')
+        } else {
+            <c:choose>
+            <c:when test="${test eq '1'}">
+            document.getElementById('teamupdateform').submit();
+            </c:when>
+            <c:otherwise>
+            document.getElementById('teamwriteform').submit();
+            </c:otherwise>
+            </c:choose>
+        }
+    }
+
+    function update_form() {
+        document.getElementById('teamupdateform').submit();
+    }
+
+    function memberselect(cell) {
+        var location = document.getElementById('result');
+        var select_cus = document.getElementById(cell).value
+        /*location.textContent +=select_cus + ", ";*/
+        /*const newinput = document.createElement('input');
+        const newText = document.createTextNode(select_cus);*/
+
+        var input1 = document.createElement('input');
+        input1.setAttribute("type", "text");
+        input1.setAttribute("value", select_cus);
+        input1.setAttribute("readonly", "readonly");
+        input1.setAttribute("style", "border:none");
+        input1.setAttribute("id", "cus_num");
+        input1.setAttribute("name", "cus_num");
+        location.appendChild(document.createElement('br'));
+        location.appendChild(input1);
+        document.getElementById('teammemberwriteform').submit();
+    }
+    function delete_form() {
+            document.getElementById('teammemberdeleteform').submit();
+
+    }
+
+
+
+    $(document).ready(function() {
+        $('#dataTable1').DataTable(
+            {
+                "order": [[ 0, "desc" ]],
+                dom: '<frt<"col-12"<"row"<"col-6"il><"col-6 float-right"p>>>>',
+                language: {
+                    emptyTable: "데이터가 없습니다.",
+                    lengthMenu: "_MENU_ 개씩 보기",
+                    info: "_START_ - _END_ / _TOTAL_건",
+                    infoEmpty: "데이터가 없습니다.",
+                    infoFiltered: "( _MAX_건의 데이터에서 필터링됨 )",
+                    search: "검색:",
+                    zeroRecords: "일치하는 데이터가 없습니다.",
+                    loadingRecords: "로딩중.",
+                    processing: "잠시만 기다려 주세요.",
+                    paginate: {
+                        next: "다음",
+                        previous: "이전"}
+                }
+            });
+    })
+
+</script>
 <!-- Content Wrapper -->
-<div id="content-wrapper" class="d-flex flex-column" >
+<div id="content-wrapper" class="d-flex flex-column">
 
     <!-- Main Content -->
     <div id="content">
-        <jsp:include page="../../include/topbar.jsp" flush="true" />
+        <jsp:include page="../../include/topbar.jsp" flush="true"/>
         <!-- Begin Page Content -->
         <div class="container-fluid">
 
@@ -20,136 +93,253 @@
                     <div class="card shadow mb-4">
                         <!-- Card Header - Accordion -->
                         <a class="d-block card-header py-3">
-                            <h6 class="m-0 font-weight-bold text-primary text-center">팀등록</h6>
+
+                            <c:choose>
+                                <c:when test="${test eq '1'}">
+                                    <h5 class="m-0 font-weight-bold text-primary text-center">팀정보 수정</h5>
+                                </c:when>
+                                <c:otherwise>
+                                    <h5 class="m-0 font-weight-bold text-primary text-center">팀 등록</h5>
+                                </c:otherwise>
+                            </c:choose>
                         </a>
                         <!-- Card Content - Collapse -->
                         <div class="collapse show" id="collapseCardExample">
                             <div class="card-body">
-                                <form method="post" action="update.do" id="updateform" enctype="application/x-www-form-urlencoded" class="form-horizontal">
-                                    <div class="row form-group">
-                                        <div class="col col-md-3 text-right"><label for="title-input" class=" form-control-label fa-solid text-gray-800 m-2"><sup class="text-danger small">*</sup>팀명</label></div>
-                                        <div class="col-12 col-md-7"><input type="text" id="title-input" name="text-input" placeholder="팀명을 입력해주세요." class="form-control" value="${team.team_name}"></div>
-                                    </div>
-                                    <div class="row form-group">
-                                        <div class="col col-md-3 text-right"><label for="reader-input" class=" form-control-label fa-solid text-gray-800 m-2"><sup class="text-danger small">*</sup>팀장</label></div>
-                                        <div class="col-12 col-md-7 col-sm-4"><input type="text" id="reader-input" name="number-input" placeholder="팀장명을 입력해주세요." class="form-control" value="${login.cus_name}" readonly="readonly" disabled/></div>
-                                    </div>
-                                    <div class="row form-group">
-                                        <div class="col col-md-3 text-right"><label for="detail" class=" form-control-label fa-solid text-gray-800 m-2">팀설명</label></div>
-                                        <div class="col-12 col-md-7"><textarea name="detail" id="detail" rows="5" placeholder="팀설명을 입력해주세요." class="form-control">${team.team_desc}</textarea></div>
-                                    </div>
+                                <c:choose>
+                                <c:when test="${test eq '1'}">
+                                <form method="post" action="team_update.do?post_num=${TeamList.team_num}"
+                                      id="teamupdateform" enctype="application/x-www-form-urlencoded"
+                                      class="form-horizontal">
+                                    </c:when>
+                                    <c:otherwise>
+                                    <form method="post" action="team_insert.do" id="teamwriteform"
+                                          enctype="application/x-www-form-urlencoded" class="form-horizontal">
+                                        </c:otherwise>
+                                        </c:choose>
+
+                                        <!-- 프로젝트 넘버 임의지정 -->
+                                            <input type="hidden" value="${TeamList.team_num}" name="team_num"
+                                                   value=1 />
+                                            <input type="hidden" name="prj_num"
+                                                   value=1 />
+                                        <div class="row form-group">
+                                            <div class="col-3"></div>
+                                            <div class="col-4 ">
+                                                <small class="help-block form-text">팀명</small>
+                                                <input style="solid: whitesmoke" value="${TeamList.team_name}"
+                                                       placeholder="입력해주세요" type="text" id="team_name"
+                                                       name="team_name"/>
+                                            </div>
+                                            <div class="col-4">
+                                                <small class="help-block form-text">등록일(수정 불가)</small>
+                                                <input style="border:none" id="team_date" name="team_date"
+                                                       readonly="readonly" disabled/>
+                                            </div>
+                                        </div>
+
+                                        <div class="row form-group">
+                                            <div class="col-3"></div>
+                                            <div class="col-4 ">
+                                                <small class="help-block form-text">팀장</small>
+                                                <c:choose>
+                                                    <c:when test="${test eq '1'}">
+                                                        <input style="border:none" value="${TeamList.cus_num}" type="text"
+                                                               id="cus_num" name="cus_num" readonly="readonly"/>
+                                                    </c:when>
+                                                    <c:otherwise>
+                                                        <input style="border:none" value="${login.cus_num}" type="text"
+                                                               id="cus_num" name="cus_num" readonly="readonly"/>
+                                                    </c:otherwise>
+                                                </c:choose>
+                                            </div>
+                                            <div class="col-4">
+                                                <small class="help-block form-text">회사</small>
+                                                <input style="border:none" value=""
+                                                         readonly="readonly"/>
+                                            </div>
+                                        </div>
+
+                                        <div class="row form-group">
+                                            <div class="col-3"></div>
+                                            <div class="col-5">
+                                                <small class="help-block form-text">팀설명</small>
+                                                <textarea style=" solid: whitesmoke; width: 100%;  resize: both"
+                                                          placeholder="입력해주세요" id="team_desc"
+                                                          name="team_desc">${TeamList.team_desc}</textarea>
+                                            </div>
+                                        </div>
+                                    </form>
+                                        <c:if test="${test eq 1}">
                                     <div class="row form-group">
                                         <div class="col col-md-3 text-right">
-                                            <a  class="btn btn-secondary ml-3" data-toggle="modal" data-target="#exampleModal1">
-                                                <span class="text" style="color:white">  팀원추가</span>
-
+                                            <a class="btn ml-3 btn-warning" data-toggle="modal"
+                                               data-target="#exampleModal1">
+                                                <span class="text " style="color:white">  팀원추가</span>
+                                            </a>
                                                 <!-- Modal -->
-                                                <div class="modal fade" id="exampleModal1" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel1" aria-hidden="true">
+
+                                                    <div class="modal fade" id="exampleModal1"  role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
                                                     <div class="modal-dialog" role="document">
                                                         <div class="modal-content">
-                                                            <div class="modal-header">
-                                                                <h5 class="modal-title" id="exampleModalLabel1">팀원선택</h5>
-                                                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                            <div class="modal-header" style="text-align: center">
+                                                                    팀원선택
+                                                                <button type="button" class="close" data-dismiss="modal"
+                                                                        aria-label="Close">
                                                                     <span aria-hidden="true">&times;</span>
                                                                 </button>
                                                             </div>
-                                                            <div class="modal-body">
+                                                            <div class="modal-body" style="text-align: center">
                                                                 팀원을 선택하세요
-                                                            </div>
-                                                            <div class="modal-footer">
-                                                                <table class="table table-bordered table-hover row-border" id="dataTable" width="100%" cellspacing="0">
-                                                                    <script>
-                                                                        function memberselect() {
-                                                                            const element = document.getElementById('result');
-                                                                            const select_cus =document.getElementById("selection").value
-                                                                            /*element.textContent +=select_cus + ", ";*/
-                                                                            /*const newinput = document.createElement('input');
-                                                                            const newText = document.createTextNode(select_cus);*/
-                                                                            input = "<input type='text'> <input type='button' value='삭제' onclick='remove(this)'>";
-                                                                            $('result').append('<input type="text" class="form-control" value='+select_cus+' readonly="readonly" disabled/>');
+                                                                <table class="dataTable table-bordered table-hover" id="dataTable">
 
-                                                                            // text node를 new div에 추가
-                                                                            /*newinput.appendChild(newText);
-                                                                            element.appendChild(newinput);*/
-                                                                            };
-
-
-                                                                    </script>
                                                                     <tbody>
-                                                                    <tr >
-                                                                        <th width="40%">아이디</th>
-                                                                        <th width="30%">직책</th>
+                                                                    <tr>
+                                                                        <th width="15%"></th>
+                                                                        <th width="35%">아이디</th>
+                                                                        <th width="20%">직책</th>
                                                                         <th>이메일</th>
 
                                                                     </tr>
-                                                                <c:forEach items="${CustomerList}" var="customer" >
-                                                                        <tr onclick="return memberselect()">
-                                                                            <td ><input id="selection" value=${customer.cus_name} readonly="readonly" disabled/></td>
-
-                                                                            <td>${customer.cus_position}</td>
-
-                                                                            <td>${customer.cus_email}</td>
+                                                                    <c:forEach items="${CusmodalList}" var="cusmodal">
+                                                                        <c:set var="i" value="${i+1}"/>
+                                                                        <input type="hidden" id='${i}'
+                                                                               value='${cusmodal.cus_num}'>
+                                                                        <tr onclick="return memberselect('${i}')">
+                                                                            <td></td>
+                                                                            <td>${cusmodal.cus_name}</td>
+                                                                            <td>${cusmodal.cus_position}</td>
+                                                                            <td>${cusmodal.cus_email}</td>
                                                                         </tr>
-                                                                </c:forEach>
+                                                                    </c:forEach>
                                                                     </tbody>
                                                                 </table>
+                                                            </div>
+                                                            <div class="modal-footer">
 
                                                             </div>
                                                         </div>
                                                     </div>
                                                 </div>
-                                            </a>
                                         </div>
-                                        <div class="col-12 col-md-7 text-gray-900 fa-solid m-2" id='result'>
-                                          <%--  <input type="text" id="member-input" name="member-input" placeholder="팀원을 선택해주세요." class="form-control" value="" readonly="readonly" disabled/>--%>
-                                        </div>
+
                                     </div>
 
-                                </form>
 
+                                    <div class="row form-group">
+                                        <div class="col-2"></div>
+                                        <div class="col-4 ">
+                                            <small class="help-block form-text">팀원목록</small>
+                                        </div>
+                                    </div>
+                                    <div class="row form-group">
+                                        <input type="hidden" id="team_num" name="team_num"
+                                               value='${TeamList.team_num}'/>
+                                        <div class="col-2"></div>
+                                        <div class="col-8"
+                                             style="border-top:  2px solid #ff7f00;border-bottom: 2px solid #ff7f00;">
+                                            <div class="card mb-4">
+
+                                                <div class="card-body">
+                                                    <div class="table-responsive">
+                                                        <table class="table table-bordered" id="dataTable1">
+                                                            <thead>
+                                                            <tr>
+                                                                <th>이름</th>
+                                                                <th>직책</th>
+                                                                <th>연락처</th>
+                                                                <th>이메일</th>
+                                                                <th width="5%"></th>
+                                                            </tr>
+                                                            </thead>
+
+                                                            <tbody>
+                                                            <c:forEach items="${TeammemberList}" var="teammember">
+
+                                                                <c:forEach items="${CustomerList}" var="customer">
+                                                                    <c:if test="${teammember.cus_num eq customer.cus_num}">
+                                                                        <tr>
+                                                                            <td>${customer.cus_name}</td>
+                                                                            <td>${customer.cus_position}</td>
+                                                                            <td>${customer.cus_phone}</td>
+                                                                            <td>${customer.cus_email}</td>
+                                                                            <td onclick="return delete_form()">
+                                                                                <form method="post" action="/teammember_delete.do" id="teammemberdeleteform"
+                                                                                      enctype="application/x-www-form-urlencoded" class="form-horizontal">
+                                                                                    <input type="hidden" name="_method" value="delete">
+                                                                                    <input type="hidden"  name="team_num"
+                                                                                           value='${teammember.team_num}'/>
+                                                                                    <input type="hidden"  name="cus_num"
+                                                                                           value='${teammember.cus_num}'/>
+                                                                                </form>
+                                                                                <a class="btn ml-2 btn-warning "> <i
+                                                                                        class="fa-regular fa-circle-xmark "></i></a>
+
+                                                                            </td>
+                                                                        </tr>
+                                                                    </c:if>
+                                                                </c:forEach>
+                                                            </c:forEach>
+                                                            </tbody>
+                                                        </table>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <form method="post"
+                                                  action="teammember_insert.do?team_num=${TeamList.team_num}&update=1"
+                                                  id="teammemberwriteform" enctype="application/x-www-form-urlencoded"
+                                                  class="form-horizontal">
+                                                <div class="col-12 col-md-7 text-gray-900 fa-solid m-2" id='result'>
+                                                    <%--<input type="text" id="cus_num" name="cus_num"  value=4 />--%>
+                                                </div>
+                                            </form>
+                                        </div>
+                                    </div>
+                                        </c:if>
                             </div>
-
                             <div class="text-center d-block card-header py-3">
-                                <%--<button type="submit" style="border:none;">--%>
-                                <a <%--href="javascript:goSubmit();"--%>  onclick="return chk_form()" class="btn btn-info">
+                                <a onclick="return chk_form()" class="btn btn-info">
                                                 <span class="icon text-white-50">
                                                        <i class="fas fa-pen"></i>
                                                 </span>
-                                    <span class="text" style="color:white">등록</span>
-                                    <script>
-                                        function chk_form() {
-                                            if( document.getElementById("title-input").value==''||document.getElementById("reader-input").value==''){
-                                                $('#exampleModal').modal('show')
-                                            }
-                                            else {
-                                                document.getElementById('outputswriteform').submit();
-                                            }
-                                        }
-                                    </script>
-                                    <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                                        <div class="modal-dialog" role="document">
-                                            <div class="modal-content">
-                                                <div class="modal-header">
-                                                    <h5 class="modal-title" id="exampleModalLabel">작성글 확인</h5>
-                                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                                        <span aria-hidden="true">&times;</span>
-                                                    </button>
-                                                </div>
-                                                <div class="modal-body">
-                                                    팀명 또는 팀장이 작성되지 않았습니다.
-                                                </div>
-                                                <div class="modal-footer">
-                                                    <button class="btn btn-secondary" type="button" data-dismiss="modal">확인</button>
-                                                </div>
+                                    <span class="text" style="color:white">
+                                        <c:choose>
+                                            <c:when test="${test eq '1'}">
+                                                <span class="text" style="color:white">수정</span>
+                                            </c:when>
+                                            <c:otherwise>
+                                                <span class="text" style="color:white">등록</span>
+                                            </c:otherwise>
+                                        </c:choose>
+                                    </span>
+                                </a>
+
+                                <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog"
+                                     aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                    <div class="modal-dialog" role="document">
+                                        <div class="modal-content">
+                                            <div class="modal-header">
+                                                <h5 class="modal-title" id="exampleModalLabel">작성글 확인</h5>
+                                                <button type="button" class="close" data-dismiss="modal"
+                                                        aria-label="Close">
+                                                    <span aria-hidden="true">&times;</span>
+                                                </button>
+                                            </div>
+                                            <div class="modal-body">
+                                                팀명 또는 팀장이 작성되지 않았습니다.
+                                            </div>
+                                            <div class="modal-footer">
+                                                <button class="btn btn-secondary" type="button" data-dismiss="modal">
+                                                    확인
+                                                </button>
                                             </div>
                                         </div>
                                     </div>
+                                </div>
 
-                                </a>
-                                </button>
                                 <a href="team.do" class="btn btn-secondary">
                                                 <span class="icon text-white-50">
-                                                       <i class="fas fa-list"></i>
+                                                       <i class="fas fa-pen"></i>
                                                 </span>
                                     <span class="text">취소</span>
 
@@ -170,31 +360,9 @@
     <!-- End of Main Content -->
 
 
+    <jsp:include page="../../include/footer.jsp" flush="true"/>
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-    <jsp:include page="../../include/footer.jsp" flush="true" />
-
-    <jsp:include page="../../include/logoutModal.jsp" flush="true" />
+    <jsp:include page="../../include/logoutModal.jsp" flush="true"/>
 
     <!-- Bootstrap core JavaScript-->
     <script src="<c:url value="/resources/vendor/jquery/jquery.min.js"/>"></script>
