@@ -25,7 +25,7 @@
                         <!-- Card Content - Collapse -->
                         <div class="collapse show" id="collapseCardExample">
                             <div class="card-body">
-                                <form method="post" action="mypage_update.do?cus_num=${CustomerList.cus_num}" id="updateform" enctype="application/x-www-form-urlencoded" class="form-horizontal">
+                                <form method="post" action="usermanagement_update.do?cus_num=${CustomerList.cus_num}" id="updateform" enctype="application/x-www-form-urlencoded" class="form-horizontal">
                                     <div class="row form-group">
                                         <div class="col col-md-3 text-right"><label class="form-control-label fa-solid m-2">ID</label></div>
                                         <div class="col-12 col-md-7 text-gray-900 text-lg">${CustomerList.cus_id}</div>

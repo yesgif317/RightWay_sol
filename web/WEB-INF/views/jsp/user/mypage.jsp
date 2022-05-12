@@ -25,41 +25,41 @@
                         <!-- Card Content - Collapse -->
                         <div class="collapse show" id="collapseCardExample">
                             <div class="card-body">
-                                <form method="post" action="mypage_update.do?cus_num=${login.get(1).cus_num}" id="updateform" enctype="application/x-www-form-urlencoded" class="form-horizontal">
+                                <form method="post" action="mypage_update.do?cus_num=${login.cus_num}" id="updateform" enctype="application/x-www-form-urlencoded" class="form-horizontal">
                                     <div class="row form-group">
                                         <div class="col col-md-3 text-right"><label class="form-control-label fa-solid m-2">ID</label></div>
-                                        <div class="col-12 col-md-7 text-gray-900 text-lg">${login.get(1).cus_id} <a class="btn btn-sm btn-secondary ml-3 text-gray-100">비밀번호변경</a></div>
+                                        <div class="col-12 col-md-7 text-gray-900 text-lg">${login.cus_id} <a class="btn btn-sm btn-secondary ml-3 text-gray-100">비밀번호변경</a></div>
                                     </div>
                                     <div class="row form-group">
                                         <div class="col col-md-3 text-right"><label class="form-control-label fa-solid m-2">이름</label></div>
-                                        <div class="col-12 col-md-7 text-gray-900 text-lg">${login.get(1).cus_name}</div>
+                                        <div class="col-12 col-md-7 text-gray-900 text-lg">${login.cus_name}</div>
                                     </div>
                                     <div class="row form-group">
                                         <div class="col col-md-3 text-right"><label class="form-control-label fa-solid m-2">회사</label></div>
-                                        <div class="col-12 col-md-7 text-gray-900 text-lg">${login.get(1).com_name}</div>
+                                        <div class="col-12 col-md-7 text-gray-900 text-lg">${login.com_name}</div>
                                     </div>
                                     <div class="row form-group">
                                         <div class="col col-md-3 text-right"><label class="form-control-label fa-solid m-2">이메일</label></div>
                                         <div class="col-12 col-md-7 text-gray-900">
-                                            <input type="email" id="cus_email" name="cus_email" placeholder="이메일주소를 입력해주세요." class="form-control" value="${login.get(1).cus_email}">
+                                            <input type="email" id="cus_email" name="cus_email" placeholder="이메일주소를 입력해주세요." class="form-control" value="${login.cus_email}">
                                         </div>
                                     </div>
                                     <div class="row form-group">
                                         <div class="col col-md-3 text-right"><label class="form-control-label fa-solid m-2">연락처</label></div>
                                         <div class="col-12 col-md-7 text-gray-900">
-                                            <input type="text" id="cus_phone" name="cus_phone" placeholder="연락처를 입력해주세요.( - 포함 입력)" class="form-control" value="${login.get(1).cus_phone}">
+                                            <input type="text" id="cus_phone" name="cus_phone" placeholder="연락처를 입력해주세요.( - 포함 입력)" class="form-control" value="${login.cus_phone}">
                                         </div>
                                     </div>
                                     <div class="row form-group">
                                         <div class="col col-md-3 text-right"><label class="form-control-label fa-solid m-2">부서</label></div>
                                         <div class="col-12 col-md-7 text-gray-900">
-                                            <input type="text" id="cus_dep" name="cus_dep" placeholder="소속부서를 입력해주세요." class="form-control" value="${login.get(1).cus_dep}">
+                                            <input type="text" id="cus_dep" name="cus_dep" placeholder="소속부서를 입력해주세요." class="form-control" value="${login.cus_dep}">
                                         </div>
                                     </div>
                                     <div class="row form-group">
                                         <div class="col col-md-3 text-right"><label class="form-control-label fa-solid m-2">직책</label></div>
                                         <div class="col-12 col-md-7 text-gray-900">
-                                            <input type="text" id="cus_position" name="cus_position" placeholder="직책을 입력해주세요." class="form-control" value="${login.get(1).cus_position}">
+                                            <input type="text" id="cus_position" name="cus_position" placeholder="직책을 입력해주세요." class="form-control" value="${login.cus_position}">
                                         </div>
                                     </div>
                                 </form>
