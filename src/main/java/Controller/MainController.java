@@ -322,13 +322,58 @@ public class MainController {
         return "/notice/notice_content";
     }
 
-    @RequestMapping(value = "/request.do", method = RequestMethod.GET)//요청사항 게시판 글목록 보기
+    //요청사항 게시판 글목록 보기 cate=15
+    @RequestMapping(value = "/request.do", method = RequestMethod.GET)
     public String request(Model model) {
         //service 클래스에서 Dao 로 접근하여 쿼리 결과값 가져오기
-        List<BoardVO> boardVoList = service.selectAll();
+        List<NormalVO> postVoList = normalService.selectAll(15);
         // .jsp 파일로 DB 결과값 전달하기
-        model.addAttribute("BoardList", boardVoList);
+        model.addAttribute("PostList", postVoList);
         return "/request/request";
+    }
+
+    //요청사항 게시글 작성 페이지
+    @RequestMapping(value = "/request_write.do", method = RequestMethod.GET)
+    public String request_write(@RequestParam("post_num") int no, Model model) {
+        if (no > 0) {
+            NormalVO Result = normalService.viewPost(no);
+            model.addAttribute("PostList", Result);
+        } else {
+        }
+        return "/request/request_write";
+    }
+
+    //요청사항 작성글 보기
+    @RequestMapping(value = "/request_content.do", method = RequestMethod.GET)
+    public String request_content(@RequestParam("post_num") int no, Model model) {
+        NormalVO Result = normalService.viewPost(no);
+        model.addAttribute("PostList", Result);
+
+        return "/request/request_content";
+    }
+
+    //요청사항 작성글 삭제
+    @RequestMapping(value = "/request_delete.do", method = RequestMethod.GET)
+    public String request_delete(@RequestParam("post_num") int no) {
+        normalService.deletePost(no);
+        return "redirect:/request.do";
+    }
+
+    //요청사항 작성글 수정 기능
+    @RequestMapping(value = "/request_update.do", method = RequestMethod.POST)
+    public String request_update(Model model, NormalVO postVO) {
+
+        String Result = normalService.updatePost(postVO);
+        model.addAttribute("PostList", Result);
+        return "redirect:/request.do";
+    }
+
+    // 요청사항 게시글 작성 기능
+    @RequestMapping(value = "/request_insert.do", method = RequestMethod.POST)
+    public String request_insert(Model model, NormalVO postVO) {
+        String Result = normalService.insertPost(postVO);
+        model.addAttribute("PostList", Result);
+        return "redirect:/request.do";
     }
 
     //issue page
