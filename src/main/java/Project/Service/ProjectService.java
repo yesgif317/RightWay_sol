@@ -11,6 +11,9 @@ public interface ProjectService {
     //프로젝트 추가(Insert)
     String insertProject(ProjectVO projectVO);
 
+    //사용자의 해당 프로젝트 리스트 불러오기
+    List<ProjectVO> projectVOList(Object object);
+
     //글 수정(Update)
     String updateProject(ProjectVO projectVO);
 

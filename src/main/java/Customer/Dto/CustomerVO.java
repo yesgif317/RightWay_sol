@@ -59,8 +59,6 @@ public class CustomerVO {
                 ", cus_position='" + cus_position + '\'' +
                 ", com_num='" + com_num + '\'' +
                 ", com_name='" + com_name + '\'' +
-                ", prj_num='" + prj_num + '\'' +
-                ", prj_name='" + prj_name + '\'' +
                 '}';
     }
 

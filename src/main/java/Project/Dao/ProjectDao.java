@@ -11,6 +11,8 @@ public interface ProjectDao {
     //프로젝트 추가
     String insertProject(ProjectVO projectVo);
 
+    //사용자의 해당 프로젝트 리스트 불러오기
+    List<ProjectVO> projectVOList(Object object);
     //글 수정 Update
     String updateProject(ProjectVO projectVo);
 

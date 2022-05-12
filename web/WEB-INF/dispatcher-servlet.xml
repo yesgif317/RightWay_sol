@@ -33,6 +33,15 @@
         </mvc:interceptor>
         <mvc:interceptor>
             <mvc:mapping path="/index.do"/>
+            <mvc:mapping path="/usermanagement.do"/>
+            <mvc:mapping path="/mypage.do"/>
+            <mvc:mapping path="/index.do"/>
+            <mvc:mapping path="/notice.do"/>
+            <mvc:mapping path="/outputs.do"/>
+            <mvc:mapping path="/project.do"/>
+            <mvc:mapping path="/regularreport.do"/>
+            <mvc:mapping path="/request.do"/>
+            <mvc:mapping path="/team.do"/>
             <ref bean="authInterceptor"/>
         </mvc:interceptor>
         <mvc:interceptor>

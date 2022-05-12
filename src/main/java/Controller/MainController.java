@@ -34,9 +34,11 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
+import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import org.springframework.web.util.WebUtils;
 
@@ -117,14 +119,24 @@ public class MainController {
     // 메서드 종료
 
 
+    private int projectNum;
 
     // 메인 페이지 이동 및 차트 데이터 가져오기
     @RequestMapping(value = "/index.do", method = RequestMethod.GET)
-    public String main(Model model) {
+    public String main(Model model, HttpServletRequest request,
+                       HttpServletResponse response,
+                       HttpSession httpSession, ModelAndView modelAndView) {
+
+        //세션 조회
+        System.out.println("세션조회");
+        Object object = httpSession.getAttribute("login");
+        System.out.println(object);
+        List<ProjectVO> projectVOList = projectService.projectVOList(object);
+        System.out.println(projectVOList);
         List<NormalVO> normalVOList = normalService.selectNotice();
-        System.out.println(normalVOList);
 
         // .jsp 파일로 DB 결과값 전달하기
+        model.addAttribute("ProjectList", projectVOList);
         model.addAttribute("NormalList", normalVOList);
         return "index";
     }
@@ -338,7 +350,7 @@ public class MainController {
     }
 
     //작성한 공지사항 DB저장
-    @RequestMapping(value = "/notice_insert.do",method = RequestMethod.POST)
+    @RequestMapping(value = "/notice_insert.do", method = RequestMethod.POST)
     public String notice_insert(MultipartFile[] uploadFile, @RequestParam(value = "title") String title
             , @RequestParam(value = "contents") String contents, @RequestParam(value = "cus_num") String cus_num) {
 
@@ -350,7 +362,7 @@ public class MainController {
         NormalVO normal = new NormalVO(12, 2, title, contents, Integer.parseInt(cus_num));
         normalService.insertPost(normal);
         //첨부파일저장
-        fileService.insertFile(uploadFile,2,12);
+        fileService.insertFile(uploadFile, 2, 12);
 
         return "redirect:/notice.do";
     }
@@ -442,10 +454,10 @@ public class MainController {
     @RequestMapping(value = "/issue_write.do", method = RequestMethod.GET)
     public String issue_write(@RequestParam("post_num") int post_num, Model model) {
         List<CustomerVO> customerVOList = customerService.selectAllCustomer();
-        model.addAttribute("CustomerList",customerVOList);
-        if(post_num>0){
+        model.addAttribute("CustomerList", customerVOList);
+        if (post_num > 0) {
             RiskVO Result = riskService.viewRisk(post_num);
-            model.addAttribute("RiskList",Result);
+            model.addAttribute("RiskList", Result);
         }
         return "issue/issue_write";
     }
@@ -455,7 +467,7 @@ public class MainController {
     public String issue_content(@RequestParam("post_num") int post_num, Model model,
                                 HttpServletRequest request) {
         RiskVO Result = riskService.viewRisk(post_num);
-        model.addAttribute("RiskList",Result);
+        model.addAttribute("RiskList", Result);
 
         // comment 추가 위한 2줄
         AddCmt addcmt = new Addd();
@@ -625,10 +637,10 @@ public class MainController {
     @RequestMapping(value = "/danger_write.do", method = RequestMethod.GET)
     public String danger_write(@RequestParam("post_num") int post_num, Model model) {
         List<CustomerVO> customerVOList = customerService.selectAllCustomer();
-        model.addAttribute("CustomerList",customerVOList);
-        if(post_num>0){
+        model.addAttribute("CustomerList", customerVOList);
+        if (post_num > 0) {
             RiskVO Result = riskService.viewRisk(post_num);
-            model.addAttribute("RiskList",Result);
+            model.addAttribute("RiskList", Result);
         }
         return "danger/danger_write";
     }
@@ -637,7 +649,7 @@ public class MainController {
     @RequestMapping(value = "/danger_content.do", method = RequestMethod.GET)
     public String danger_content(@RequestParam("post_num") int post_num, Model model, HttpServletRequest request) {
         RiskVO Result = riskService.viewRisk(post_num);
-        model.addAttribute("RiskList",Result);
+        model.addAttribute("RiskList", Result);
 
         // comment 추가 위한 2줄
         AddCmt addcmt = new Addd();
@@ -851,23 +863,22 @@ public class MainController {
     }
 
 
-
     //팀관리 게시글 작성 페이지
     @RequestMapping(value = "/team_write.do", method = RequestMethod.GET)
     public String team_write(@RequestParam("team_num") int no, Model model) {
         List<CustomerVO> customerVoList = customerService.selectAllCustomer();
         List<TeammemberVO> teammemberVOList = teamService.viewTeammember(no);
-        List<CustomerVO> cusmodalVoList=customerService.selectAllCustomer();
-        List<CustomerVO> testList= new ArrayList<>();
+        List<CustomerVO> cusmodalVoList = customerService.selectAllCustomer();
+        List<CustomerVO> testList = new ArrayList<>();
         TeamVO teamVoList = teamService.viewTeam(no);
         for (TeammemberVO teammemberVO : teammemberVOList) {
             for (CustomerVO customerVO : customerVoList) {
-                if(Integer.parseInt(String.valueOf(customerVO.getCus_num()))==Integer.parseInt(String.valueOf(teammemberVO.getCus_num()))){
+                if (Integer.parseInt(String.valueOf(customerVO.getCus_num())) == Integer.parseInt(String.valueOf(teammemberVO.getCus_num()))) {
                     testList.add(customerVO);
                 }
             }
         }
-        for (int i=0;i<testList.size();i++){
+        for (int i = 0; i < testList.size(); i++) {
             cusmodalVoList.remove(testList.get(i));
         }
 
@@ -877,6 +888,7 @@ public class MainController {
         model.addAttribute("TeammemberList", teammemberVOList);
         return "/team/team_write";
     }
+
     //팀관리 목록
     @RequestMapping(value = "/team.do", method = RequestMethod.GET)
     public String team(Model model) {
@@ -898,6 +910,7 @@ public class MainController {
         model.addAttribute("CustomerList", customerVoList);
         return "team/team_content";
     }
+
     //팀관리 작성글 삭제
     @RequestMapping(value = "/team_delete.do", method = RequestMethod.GET)
     public String team_delete(@RequestParam("team_num") int no) {
@@ -905,6 +918,7 @@ public class MainController {
         teamService.deleteTeam(no);
         return "redirect:/team.do";
     }
+
     //팀관리 작성글 수정 기능
     @RequestMapping(value = "/team_update.do", method = RequestMethod.POST)
     public String team_update(Model model, TeamVO teamVO) {
@@ -912,6 +926,7 @@ public class MainController {
         model.addAttribute("TeamList", Result);
         return "redirect:/team.do";
     }
+
     // 팀관리 팀 등록 기능
     @RequestMapping(value = "/team_insert.do", method = RequestMethod.POST)
     public String team_insert(Model model, TeamVO teamVO) {
@@ -919,19 +934,21 @@ public class MainController {
         model.addAttribute("TeamList", Result);
         return "redirect:/team.do";
     }
+
     //팀관리 팀원 삭제
     @RequestMapping(value = "/teammember_delete.do", method = RequestMethod.DELETE)
-    public String teammember_delete(@RequestParam("team_num") int team_num,Model model,TeammemberVO teammemberVO) {
+    public String teammember_delete(@RequestParam("team_num") int team_num, Model model, TeammemberVO teammemberVO) {
         teamService.deleteTeammember(teammemberVO);
-        return "redirect:/team_write.do?team_num="+team_num+"&update=1";
+        return "redirect:/team_write.do?team_num=" + team_num + "&update=1";
     }
+
     // 팀관리 팀원 등록 기능
     @RequestMapping(value = "/teammember_insert.do", method = RequestMethod.POST)
-    public String teammember_insert(@RequestParam("team_num") int team_num,Model model, TeammemberVO teammemberVO) {
+    public String teammember_insert(@RequestParam("team_num") int team_num, Model model, TeammemberVO teammemberVO) {
         String Result = teamService.insertTeammember(teammemberVO);
         model.addAttribute("TeammemberList", Result);
 
-        return "redirect:/team_write.do?team_num="+team_num+"&update=1";
+        return "redirect:/team_write.do?team_num=" + team_num + "&update=1";
     }
 
     //투입인력관리 page
@@ -1190,7 +1207,7 @@ public class MainController {
     @RequestMapping(value = "/datacenter_write.do", method = RequestMethod.GET)
     public String datacenter_writer() {
         return "/datacenter/datacenter_write";
-   }
+    }
 
     //파일 업로드
 //    @GetMapping("/file-upload.do")

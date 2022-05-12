@@ -26,6 +26,11 @@ public class ProjectDaoImpl implements ProjectDao{
     }
 
     @Override
+    public List<ProjectVO> projectVOList(Object object) {
+        return sqlSession.selectList(Namespace +".projectVOList", object);
+    }
+
+    @Override
     public String updateProject(ProjectVO projectVo) {
 
         //Ibatis Update 사용법
