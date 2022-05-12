@@ -14,6 +14,7 @@ jsp:include page="../../include/footer.jsp" flush="true" />
 -->
 
 
+
 <c:choose>
     <c:when test = "${not empty RiskList.cate}">
         <c:set var="cate" value="${RiskList.cate}" />
@@ -101,8 +102,12 @@ jsp:include page="../../include/footer.jsp" flush="true" />
                 <br>
 
 
+                <%! int dis_id1 = 1; %>
+                <%! int dis_id2 = 2; %>
+
+
                 <c:forEach items="${CommentList}" var="comment">
-                    <c:if test="${comment.post_num eq post_num && comment.cate eq cate}"> <!--문자열이 아닐 경우-->
+                    <c:if test="${comment.post_num eq post_num && comment.cate eq cate}">
 
 
                 <!-- section 시작 = 댓글영역 시작 -->
@@ -130,20 +135,67 @@ jsp:include page="../../include/footer.jsp" flush="true" />
                                 </span>
                             </span>
 
+                                <script type="text/javascript">
+                                    function b<%=dis_id2%>(){
+                                        if($('#b<%=dis_id2%>').css('display') == 'none'){
+                                            $('#b<%=dis_id2%>').show();
+                                        }else{
+                                            $('#b<%=dis_id2%>').hide();
+                                        }
+                                    }
+                                    function a<%=dis_id1%>(){
+                                        if($('#a<%=dis_id1%>').css('display') == 'none'){
+                                            $('#a<%=dis_id1%>').show();
+                                        }else{
+                                            $('#a<%=dis_id1%>').hide();
+                                        }
+                                    }
+
+                                    function d<%=dis_id2%>(){
+                                        if($('#d<%=dis_id2%>').css('display') == 'none'){
+                                            $('#d<%=dis_id2%>').show();
+                                        }else{
+                                            $('#d<%=dis_id2%>').hide();
+                                        }
+                                    }
+                                    function c<%=dis_id1%>(){
+                                        if($('#c<%=dis_id1%>').css('display') == 'none'){
+                                            $('#c<%=dis_id1%>').show();
+                                        }else{
+                                            $('#c<%=dis_id1%>').hide();
+                                        }
+                                    }
+                                </script>
+
                                 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 
-                                <details>
-                                    <summary>[수정]</summary>
-                                <form method="post" action="/comments_update.do">
-                                    <!-- 링크용 uri 정보 -->
-                                    <input type="hidden" id="uri_cmt_update" name="uri_cmt_update" value="${uri}"/>
-                                    <!-- 댓글수정 -->
-                                    <input type="hidden" id="cmt_num_inform_update" name="cmt_num_inform_update" value="${comment.cmt_num}"/>
-                                    <input type="text" id="cmt_update" name="cmt_update" class="form-control" style="width:93%;float:left" placeholder="${comment.cmt_cnt}"/>
-                                    <input type="submit" class="btn btn-comment_update" value="수정"  style="float:right"/>
-                                </form>
-                                </details>
+                                <div id="b<%=dis_id2%>" style="display: none;">
+                                    <form method="post" action="/comments_update.do">
+                                        <!-- 링크용 uri 정보 -->
+                                        <input type="hidden" id="uri_cmt_update" name="uri_cmt_update" value="${uri}"/>
+                                        <!-- 댓글수정 -->
+                                        <input type="hidden" id="cmt_num_inform_update" name="cmt_num_inform_update" value="${comment.cmt_num}"/>
+                                        <input type="text" id="cmt_update" name="cmt_update" class="form-control" style="width:93%;float:left" placeholder="${comment.cmt_cnt}"/>
+                                        <input type="submit" class="btn btn-comment_update" value="수정"  style="float:right"/>
+                                    </form>
 
+                                    <form method="get" action="javascript:a<%=dis_id1%>();b<%=dis_id2%>();">
+                                        <input type="submit" class="btn btn-comment_delete" value="취소"  style="float:right"/>
+                                    </form>
+                                </div>
+
+
+
+
+                                <div id="a<%=dis_id1%>" style="display: contents;">
+
+                                    <form method="get" action="javascript:a<%=dis_id1%>();b<%=dis_id2%>();">
+                                        <input type="submit" class="btn btn-comment_delete" value="수정"  style="float:right"/>
+                                    </form>
+
+                                    <!-- 댓글 본문 부분 시작 -->
+
+                                        ${comment.cmt_cnt}
 
                                 <form method="get" action="/comments_delete.do">
                                     <!-- 링크용 uri 정보 -->
@@ -153,13 +205,11 @@ jsp:include page="../../include/footer.jsp" flush="true" />
                                     <input type="submit" class="btn btn-comment_delete" value="삭제"  style="float:right"/>
                                 </form>
 
-                            </div>  <!-- 상단영역=삭제 링크 까지 종료 -->
 
 
-                            <!-- 댓글 본문 부분 시작 -->
-                            <div class="media-content" id="dis" style="display: contents;">
-                                ${comment.cmt_cnt}
+
                             </div>
+                            </div>  <!-- 상단영역=삭제 링크 까지 종료 -->
                         </div>
                     </div><!-- 첫 댓글 종료 -->
 
@@ -213,8 +263,8 @@ jsp:include page="../../include/footer.jsp" flush="true" />
                             </span>
                                  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 
-                                <details>
-                                    <summary>[수정]</summary>
+
+                                <div id="d<%=dis_id2%>" style="display: none;">
                                     <form method="post" action="/re_comments_update.do">
                                         <!-- 링크용 uri 정보 -->
                                         <input type="hidden" id="uri_rcmt_update" name="uri_rcmt_update" value="${uri}"/>
@@ -223,22 +273,37 @@ jsp:include page="../../include/footer.jsp" flush="true" />
                                         <input type="text" id="rcmt_update" name="rcmt_update" class="form-control" style="width:93%;float:left" placeholder="${recomment.rcmt_cnt}"/>
                                         <input type="submit" class="btn btn-comment_update" value="수정"  style="float:right"/>
                                     </form>
-                                </details>
 
-                                <form method="get" action="/re_comments_delete.do">
-                                    <!-- 링크용 uri 정보 -->
-                                    <input type="hidden" id="uri_rcmt_delete" name="uri_rcmt_delete" value="${uri}"/>
-                                    <!-- 대댓글삭제 -->
-                                    <input type="hidden" id="rcmt_num_inform_delete" name="rcmt_num_inform_delete" value="${recomment.rcmt_num}"/>
-                                    <input type="submit" class="btn btn-rcmt-delete" value="삭제"  style="float:right"/>
-                                </form>
+                                    <form method="get" action="javascript:c<%=dis_id1%>();d<%=dis_id2%>();">
+                                        <input type="submit" class="btn btn-comment_delete" value="취소"  style="float:right"/>
+                                    </form>
+                                </div>
+
+
+
+                                <div id="c<%=dis_id1%>" style="display: contents;">
+
+                                    <form method="get" action="javascript:c<%=dis_id1%>();d<%=dis_id2%>();">
+                                        <input type="submit" class="btn btn-comment_delete" value="수정"  style="float:right"/>
+                                    </form>
+
+                                    <!-- 댓글 본문 작성 부분 시작 -->
+                                    <div class="media-content-r">
+                                            ${recomment.rcmt_cnt}
+                                    </div>
+
+                                    <form method="get" action="/re_comments_delete.do">
+                                        <!-- 링크용 uri 정보 -->
+                                        <input type="hidden" id="uri_rcmt_delete" name="uri_rcmt_delete" value="${uri}"/>
+                                        <!-- 대댓글삭제 -->
+                                        <input type="hidden" id="rcmt_num_inform_delete" name="rcmt_num_inform_delete" value="${recomment.rcmt_num}"/>
+                                        <input type="submit" class="btn btn-rcmt-delete" value="삭제"  style="float:right"/>
+                                    </form>
+                                </div>
                             </div>  <!-- 상단영역=삭제 링크 까지 종료 -->
 
 
-                            <!-- 댓글 본문 작성 부분 시작 -->
-                            <div class="media-content-r">
-                                ${recomment.rcmt_cnt}
-                            </div>
+
                         </div>
                     </div>  <!-- 대댓글 종료 -->
 
@@ -249,6 +314,9 @@ jsp:include page="../../include/footer.jsp" flush="true" />
                     <hr>
                     <!-- 댓글 나누는 선 -->
 
+                                <%dis_id1++;%>
+                                <%dis_id2++;%>
+
 
                             </c:if>
                         </c:forEach>
@@ -256,11 +324,6 @@ jsp:include page="../../include/footer.jsp" flush="true" />
                 </c:forEach>
 
             </details>  <!-- end of, 댓글 펴기/접기 -->
-
-
-
-
-
 
 
         </div>
