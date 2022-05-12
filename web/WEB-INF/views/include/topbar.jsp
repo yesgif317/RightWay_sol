@@ -21,12 +21,12 @@
         <div class="dropdown no-arrow mb-4">
             <button class="btn btn-dark.disabled dropdown-toggle" type="button" id="dropdownMenuButton"
                     data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                <i class="fa-solid fa-align-justify"></i>
+                <i class="fa-solid fa-align-justify"> 프로젝트를 선택해주세요.</i>
             </button>
             <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                <%--                <c:forEach items="${login}" var="log">--%>
-                <%--                    <a class="dropdown-item text-gray-600" href="#">${log.prj_name}</a>--%>
-                <%--                </c:forEach>--%>
+                <c:forEach items="${ProjectList}" var="pro">
+                    <a class="dropdown-item text-gray-600" href="#">${pro.prj_name}</a>
+                </c:forEach>
             </div>
         </div>
     </form>
@@ -41,9 +41,9 @@
                 <i class="fa-solid fa-angles-down"></i>
             </button>
             <div class="dropdown-menu" aria-labelledby="dropdownMenuButton2">
-                <%--                <c:forEach items="${login}" var="log">--%>
-                <%--                    <a class="dropdown-item text-gray-600" href="#">${log.prj_name}</a>--%>
-                <%--                </c:forEach>--%>
+                <c:forEach items="${ProjectList}" var="pro">
+                    <a class="dropdown-item text-gray-600" href="#">${pro.prj_name}</a>
+                </c:forEach>
             </div>
             </a>
         </li>
@@ -56,8 +56,8 @@
             <a href="#" class="nav-link dropdown-toggle" role="button"
                data-toggle="dropdown"
                aria-haspopup="true" aria-expanded="false">
-                    <i class="fa-solid fa-user text-gray-700"> ${login.com_name} / ${login.cus_dep}
-                        / ${login.cus_position} / ${login.cus_name}</i>
+                <i class="fa-solid fa-user text-gray-700"> ${login.com_name} / ${login.cus_dep}
+                    / ${login.cus_position} / ${login.cus_name}</i>
             </a>
             <!-- Dropdown - User Information -->
             <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in"

@@ -1,5 +1,8 @@
 package Project.Dto;
 
+import lombok.Data;
+
+@Data
 public class ProjectVO {
 
     int prj_num;
@@ -65,4 +68,22 @@ public class ProjectVO {
     public void setPrj_upd(String prj_upd) {
         this.prj_upd = prj_upd;
     }
+
+    public ProjectVO(){
+
+    }
+
+    @Override
+    public String toString() {
+        return "ProjectVO{" +
+                "prj_num='" + prj_num + '\'' +
+                ", prj_name='" + prj_name + '\'' +
+                ", cus_num='" + cus_num + '\'' +
+                ", prj_start='" + prj_start + '\'' +
+                ", prj_end='" + prj_end + '\'' +
+                ", prj_reg='" + prj_reg + '\'' +
+                ", prj_upd='" + prj_upd + '\'' +
+                '}';
+    }
+
 }

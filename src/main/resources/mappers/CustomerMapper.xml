@@ -57,7 +57,7 @@
 
     <select id="checkUserWithSessionKey" resultMap="customerVOResultMap">
         select *
-        from customer
+        from customer natural join company
         where cus_sess_key = #{value}
     </select>
 

@@ -9,6 +9,12 @@
         SELECT prj_num,prj_name, cus_num ,to_char(prj_start,'YYYY-MM-DD') AS prj_start ,to_char(prj_end,'YYYY-MM-DD') AS prj_end, prj_reg ,prj_upd FROM project
     </select>
 
+    <!-- 사용자의 해당 프로젝트 리스트 불러오기 -->
+    <select id="projectVOList" resultType="ProjectVO">
+        select *
+        from project natural join customer
+        where cus_num = #{cus_num}
+    </select>
     <!-- 프로젝트 추가(Insert) -->
     <insert id="insertProject" parameterType="ProjectVO" >
         insert into project(prj_num,prj_name,cus_num,prj_start,prj_end,prj_reg)
