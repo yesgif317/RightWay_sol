@@ -8,7 +8,7 @@
     <!--Customer-->
     <!-- Select 문 -->
     <select id="selectRe_CommentAll" resultType="Re_CommentVO">
-        SELECT * FROM re_comments
+        SELECT * FROM re_comments ORDER BY cmt_num
     </select>
 
     <!-- 프로젝트 추가(Insert) -->

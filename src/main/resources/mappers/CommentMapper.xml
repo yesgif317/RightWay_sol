@@ -7,7 +7,7 @@
 
     <!-- Select 문 -->
     <select id="selectCommentAll" resultType="CommentVO">
-        SELECT * FROM comments
+        SELECT * FROM comments ORDER BY cmt_num
     </select>
 
 
