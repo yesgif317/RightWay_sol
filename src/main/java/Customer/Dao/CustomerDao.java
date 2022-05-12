@@ -8,9 +8,8 @@ import java.util.*;
 public interface CustomerDao {
     List<CustomerVO> selectAll();
     List<CustomerVO> selectAllCustomer();
-
-
-
+    CustomerVO viewCustomer(int cus_num);
+    String updateCustomer(CustomerVO customerVO);
 
     //로그인
     List<CustomerVO> login(LoginDTO loginDTO) throws Exception;

@@ -7,7 +7,6 @@ import org.mindrot.jbcrypt.BCrypt;
 import org.springframework.stereotype.Service;
 
 import javax.inject.Inject;
-import java.lang.reflect.Array;
 import java.util.*;
 
 @Service
@@ -26,6 +25,10 @@ public class CustomerServiceimpl implements CustomerService {
     @Override
     public List<CustomerVO> selectAll() {
         return dao.selectAll();
+    }
+    @Override
+    public CustomerVO viewCustomer(int cus_num) {
+        return dao.viewCustomer(cus_num);
     }
 
     //전체 회원
@@ -96,6 +99,9 @@ public class CustomerServiceimpl implements CustomerService {
     public String selectNumToName(int cus_num) {
         return dao.selectNumToName(cus_num);
     }
-
+    @Override
+    public String updateCustomer(CustomerVO customerVO){
+        return dao.updateCustomer(customerVO);
+    }
 
 }

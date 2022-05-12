@@ -1,15 +1,5 @@
-<%--
-  Created by IntelliJ IDEA.
-  User: hate5
-  Date: 2020-09-06
-  Time: 오후 9:25
-  To change this template use File | Settings | File Templates.
---%>
-
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
-<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
-
+<%@ page contentType="text/html;charset=UTF-8" language="java" %>
 
 <jsp:include page="../../include/header.jsp" flush="true" />
 <jsp:include page="../../include/sidebar.jsp" flush="true" />
@@ -19,15 +9,9 @@
 
     <!-- Main Content -->
     <div id="content">
-
         <jsp:include page="../../include/topbar.jsp" flush="true" />
         <!-- Begin Page Content -->
         <div class="container-fluid">
-            <h1 class="h4 mb-2 text-gray-800 ">정기보고서</h1>
-            <p class="mb-4">
-                사업내용 등을 기재한 사업•반기•분기보고서
-            </p>
-
 
             <div class="row">
                 <div class="col-lg-12">
@@ -35,80 +19,86 @@
                     <!-- Collapsable Card Example -->
                     <div class="card shadow mb-4">
                         <!-- Card Header - Accordion -->
-                        <a href="#collapseCardExample" class="d-block card-header py-3" data-toggle="collapse" role="button" aria-expanded="true" aria-controls="collapseCardExample">
-                            <h6 class="m-0 font-weight-bold text-primary">이슈 조회</h6>
-
+                        <a class="d-block card-header py-3">
+                            <h5 class="m-0 font-weight-bold text-primary text-center">회원상세</h5>
                         </a>
                         <!-- Card Content - Collapse -->
                         <div class="collapse show" id="collapseCardExample">
                             <div class="card-body">
-                                <form autocomplete="off" method="post" role="form">
+                                <form method="post" action="mypage_update.do?cus_num=${CustomerList.cus_num}" id="updateform" enctype="application/x-www-form-urlencoded" class="form-horizontal">
                                     <div class="row form-group">
-                                        <div class="col-3"></div>
-                                        <div class="col-4 ">
-                                            <small class="help-block form-text">작성자</small>
-                                            <input style="border:0 solid whitesmoke;" type="text" id="writer" name="writer" value="${BoardList.writer}" readonly="readonly" disabled/>
-                                        </div>
-                                        <div class="col-4" >
-                                            <small class="help-block form-text">작성일</small>
-                                            <input style="border:0 solid whitesmoke;"  id="date" name="date" value="${BoardList.refdate}" readonly="readonly" disabled/>
-
+                                        <div class="col col-md-3 text-right"><label class="form-control-label fa-solid m-2">ID</label></div>
+                                        <div class="col-12 col-md-7 text-gray-900 text-lg">${CustomerList.cus_id}</div>
+                                    </div>
+                                    <div class="row form-group">
+                                        <div class="col col-md-3 text-right"><label class="form-control-label fa-solid m-2">이름</label></div>
+                                        <div class="col-12 col-md-7 text-gray-900 text-lg">${CustomerList.cus_name}</div>
+                                    </div>
+                                    <div class="row form-group">
+                                        <div class="col col-md-3 text-right"><label class="form-control-label fa-solid m-2">회사</label></div>
+                                        <div class="col-12 col-md-7 text-gray-900 text-lg">${CustomerList.com_name}</div>
+                                    </div>
+                                    <div class="row form-group">
+                                        <div class="col col-md-3 text-right"><label class="form-control-label fa-solid m-2">이메일</label></div>
+                                        <div class="col-12 col-md-7 text-gray-900">
+                                            <input type="email" id="cus_email" name="cus_email" placeholder="이메일주소를 입력해주세요." class="form-control" value="${CustomerList.cus_email}">
                                         </div>
                                     </div>
                                     <div class="row form-group">
-                                        <div class="col-2"></div>
-                                        <div class="col-8" style="border-top:  2px solid #808080;border-bottom: 2px solid #808080;">
-                                            <textarea style="border:0 solid whitesmoke;" name="contents" id="contents" rows="5" class="form-control mt-3 mb-3" readonly="readonly" disabled>${BoardList.contents}</textarea>
+                                        <div class="col col-md-3 text-right"><label class="form-control-label fa-solid m-2">연락처</label></div>
+                                        <div class="col-12 col-md-7 text-gray-900">
+                                            <input type="text" id="cus_phone" name="cus_phone" placeholder="연락처를 입력해주세요.( - 포함 입력)" class="form-control" value="${CustomerList.cus_phone}">
+                                        </div>
+                                    </div>
+                                    <div class="row form-group">
+                                        <div class="col col-md-3 text-right"><label class="form-control-label fa-solid m-2">부서</label></div>
+                                        <div class="col-12 col-md-7 text-gray-900">
+                                            <input type="text" id="cus_dep" name="cus_dep" placeholder="소속부서를 입력해주세요." class="form-control" value="${CustomerList.cus_dep}">
+                                        </div>
+                                    </div>
+                                    <div class="row form-group">
+                                        <div class="col col-md-3 text-right"><label class="form-control-label fa-solid m-2">직책</label></div>
+                                        <div class="col-12 col-md-7 text-gray-900">
+                                            <input type="text" id="cus_position" name="cus_position" placeholder="직책을 입력해주세요." class="form-control" value="${CustomerList.cus_position}">
                                         </div>
                                     </div>
                                 </form>
                             </div>
-                        </div>
-
-                        <!-- 수정/삭제/목록 버튼 -->
-                        <div class="text-center d-block card-header py-3">
-                            <a href="outputs_update.do?no=${BoardList.no}" class="btn btn-info">
-                                              <span class="icon text-white-50">
-                                              <i class="fas fa-pen"></i>
-                                              </span>
-                                <span class="text"> 수정</span>
-                            </a>
-
-                            <a  class="btn btn-danger" data-toggle="modal" data-target="#exampleModal">
+                            <div class="text-center d-block card-header py-3">
+                                <a  class="btn btn-info" data-toggle="modal" data-target="#exampleModal">
                                                  <span class="icon text-white-50">
-                                                   <i class="fa-regular fa-trash-can"></i>
+                                                   <i class="fas fa-pen"></i>
                                                  </span>
-                                <span class="text" style="color:white">  삭제</span>
-
-                                <!-- Modal -->
-                                <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                                    <div class="modal-dialog" role="document">
-                                        <div class="modal-content">
-                                            <div class="modal-header">
-                                                <h5 class="modal-title" id="exampleModalLabel">게시물 삭제</h5>
-                                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                                    <span aria-hidden="true">&times;</span>
-                                                </button>
-                                            </div>
-                                            <div class="modal-body">
-                                                게시물을 정말 삭제하시겠습니까?
-                                            </div>
-                                            <div class="modal-footer">
-                                                <button href="outputs_delete.do?no=${BoardList.no}" type="button" class="btn btn-primary">삭제하기</button>
-                                                <button type="button" class="btn btn-secondary" data-dismiss="modal">취소하기</button>
+                                    <span class="text" style="color:white">저장</span>
+                                </a>
+                                    <!-- Modal -->
+                                    <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                        <div class="modal-dialog" role="document">
+                                            <div class="modal-content">
+                                                <div class="modal-header">
+                                                    <h5 class="modal-title" id="exampleModalLabel">회원정보수정</h5>
+                                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                        <span aria-hidden="true">&times;</span>
+                                                    </button>
+                                                </div>
+                                                <div class="modal-body">
+                                                  수정하시겠습니까?
+                                                </div>
+                                                <div class="modal-footer">
+                                                    <button onclick= "document.getElementById('updateform').submit()" type="button" class="btn btn-info">확인</button>
+                                                    <button type="button" class="btn btn-secondary" data-dismiss="modal">취소</button>
+                                                </div>
                                             </div>
                                         </div>
                                     </div>
-                                </div>
-                            </a>
-
-                            <a href="http://localhost:8089/outputs.do" class="btn btn-secondary">
-                                             <span class="icon text-white-50">
-                                              <i class="fas fa-list"></i>
-                                             </span>
-                                <span class="text">목록</span>
-                            </a>
-                        </div>  <!-- end of button list -->
+                                <a href="usermanagement.do" class="btn btn-secondary">
+                                                <span class="icon text-white-50">
+                                                    <i class="fas fa-list"></i>
+                                                </span>
+                                    <span class="text">취소</span>
+                                </a>
+                            </div>
+                        </div>
                     </div>
 
                 </div>
@@ -121,39 +111,54 @@
     </div>
     <!-- End of Main Content -->
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
     <jsp:include page="../../include/footer.jsp" flush="true" />
 
-</div>
-<!-- End of Page Wrapper -->
-<!-- Scroll to Top Button-->
-<a class="scroll-to-top rounded" href="#page-top">
-    <i class="fas fa-angle-up"></i>
-</a>
+    <jsp:include page="../../include/logoutModal.jsp" flush="true" />
 
-<jsp:include page="../../include/logoutModal.jsp" flush="true" />
-<!-- Bootstrap core JavaScript-->
-<script src="<c:url value="/resources/vendor/jquery/jquery.min.js"/>"></script>
-<script src="<c:url value="/resources/vendor/bootstrap/js/bootstrap.bundle.min.js"/>"></script>
+    <!-- Bootstrap core JavaScript-->
+    <script src="<c:url value="/resources/vendor/jquery/jquery.min.js"/>"></script>
+    <script src="<c:url value="/resources/vendor/bootstrap/js/bootstrap.bundle.min.js"/>"></script>
 
-<!-- Core plugin JavaScript-->
-<script src="<c:url value="/resources/vendor/jquery-easing/jquery.easing.min.js"/>"></script>
+    <!-- Core plugin JavaScript-->
+    <script src="<c:url value="/resources/vendor/jquery-easing/jquery.easing.min.js"/>"></script>
 
-<!-- Custom scripts for all pages-->
-<script src="<c:url value="/resources/js/sb-admin-2.min.js"/>"></script>
+    <!-- Custom scripts for all pages-->
+    <script src="<c:url value="/resources/js/sb-admin-2.min.js"/>"></script>
 
-<script src="<c:url value="/resources/vendor/datatables/dataTable.js"/>"></script>
-<!-- Page level plugins -->
-<script src="<c:url value="/resources/vendor/chart.js/Chart.min.js"/>"></script>
+    <!-- Page level plugins -->
+    <script src="<c:url value="/resources/vendor/datatables/jquery.dataTables.min.js"/>"></script>
+    <script src="<c:url value="/resources/vendor/datatables/dataTables.bootstrap4.min.js"/>"></script>
 
-<!-- Page level custom scripts -->
-<script src="<c:url value="/resources/js/demo/chart-bar-demo.js"/>"></script>
-<script src="<c:url value="/resources/js/demo/chart-pie-demo.js"/>"></script>
-<script type="text/javascript">
-    function goSubmit() {
-        var form = document.getElementById('tableswriteform').submit();
-    }
-</script>
+    <!-- Page level custom scripts -->
+    <script src="<c:url value="/resources/js/demo/datatables-demo.js"/>"></script>
 
-</body>
+    <!-- Page level plugins -->
+    <script src="<c:url value="/resources/vendor/chart.js/Chart.min.js"/>"></script>
 
-</html>
+    <!-- Page level custom scripts -->
+    <script src="<c:url value="/resources/js/demo/chart-bar-demo.js"/>"></script>
+    <script src="<c:url value="/resources/js/demo/chart-pie-demo.js"/>"></script>
+    <script src="<c:url value="/resources/js/demo/chart-pie-demo.js"/>"></script>

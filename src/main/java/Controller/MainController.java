@@ -207,6 +207,14 @@ public class MainController {
         return "user/mypage";
     }
 
+    //투입인력관리 update
+    @RequestMapping(value = "/mypage_update.do", method = RequestMethod.POST)
+    public String mypage_update(Model model, CustomerVO customerVO) {
+        String Result = customerService.updateCustomer(customerVO);
+        model.addAttribute("CustomerList", Result);
+        return "index";
+    }
+
     //산출물 게시판 글목록 보기 cate=1
     @RequestMapping(value = "/outputs.do", method = RequestMethod.GET)
     public String outputs(Model model) {
@@ -742,6 +750,31 @@ public class MainController {
         return "redirect:/team.do";
     }
 
+    //투입인력관리 page
+    @RequestMapping(value = "/usermanagement.do", method = RequestMethod.GET)
+    public String usermanagement(Model model) {
+        //service 클래스에서 Dao 로 접근하여 쿼리 결과값 가져오기
+        List<CustomerVO> customerVOList = customerService.selectAllCustomer();
+        // .jsp 파일로 DB 결과값 전달하기
+        model.addAttribute("CustomerList", customerVOList);
+
+        return "usermanagement/usermanagement";
+    }
+    //투입인력관리 상세 페이지 이동
+    @RequestMapping(value = "/usermanagement_content.do", method = RequestMethod.GET)
+    public String usermanagement_content(@RequestParam("cus_num") int cus_num, Model model){
+        CustomerVO customerVO = customerService.viewCustomer(cus_num);
+        model.addAttribute("CustomerList", customerVO);
+        return "usermanagement/usermanagement_content";
+    }
+    //투입인력관리 update
+    @RequestMapping(value = "/usermanagement_update.do", method = RequestMethod.POST)
+    public String usermanagement_update(Model model, CustomerVO customerVO) {
+        String Result = customerService.updateCustomer(customerVO);
+        model.addAttribute("CustomerList", Result);
+        return "redirect:/usermanagement.do";
+    }
+
     //테이블 페이지 이동
     @RequestMapping(value = "/tables.do", method = RequestMethod.GET)
     public String tables(Model model) {
@@ -846,9 +879,9 @@ public class MainController {
         return "index";
     }
 
-    @RequestMapping(value = "/usermanagement.do", method = RequestMethod.GET)
-    public String usermanagement() {
-        return "/usermanagement/usermanagement";
+    @RequestMapping(value = "/userreport.do", method = RequestMethod.GET)
+    public String userreport() {
+        return "/userreport/userreport";
     }
 
 

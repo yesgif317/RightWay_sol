@@ -45,10 +45,34 @@
                             <c:forEach items="${RiskList}" var="risk">
                                 <tr>
                                     <td>${risk.post_num}</td>
-                                    <td><a href ="danger_content.do?post_num=${risk.post_num}">${risk.risk_tit}</a></td>
-                                    <td>${risk.risk_imp}</td>
+                                    <td><a href ="issue_content.do?post_num=${risk.post_num}">${risk.risk_tit}</a></td>
+                                    <td>
+                                        <c:choose>
+                                            <c:when test="${risk.risk_imp eq 'High'}">
+                                                <div class="bg-danger text-gray-100 text-center">${risk.risk_imp}</div>
+                                            </c:when>
+                                            <c:when test="${risk.risk_imp eq 'Medium'}">
+                                                <div class="bg-warning text-gray-100 text-center">${risk.risk_imp}</div>
+                                            </c:when>
+                                            <c:when test="${risk.risk_imp eq 'Low'}">
+                                                <div class="bg-success text-gray-100 text-center">${risk.risk_imp}</div>
+                                            </c:when>
+                                        </c:choose>
+                                    </td>
                                     <td>${risk.mng_name}/${risk.mng_position}</td>
-                                    <td>${risk.risk_pgs}</td>
+                                    <td>
+                                        <c:choose>
+                                            <c:when test="${risk.risk_pgs eq '대기'}">
+                                                <div class="bg-secondary text-gray-100 text-center">${risk.risk_pgs}</div>
+                                            </c:when>
+                                            <c:when test="${risk.risk_pgs eq '진행 중'}">
+                                                <div class="bg-warning text-gray-100 text-center">${risk.risk_pgs}</div>
+                                            </c:when>
+                                            <c:when test="${risk.risk_pgs eq '종료'}">
+                                                <div class="bg-success text-gray-100 text-center">${risk.risk_pgs}</div>
+                                            </c:when>
+                                        </c:choose>
+                                    </td>
                                     <td>${risk.cus_name}/${risk.cus_position}</td>
                                     <td>${risk.risk_start} ~ ${risk.risk_end}</td>
                                     <td>${risk.risk_reg}</td>

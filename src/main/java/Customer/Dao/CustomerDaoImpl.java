@@ -6,8 +6,6 @@ import org.apache.ibatis.session.SqlSession;
 import org.springframework.stereotype.Repository;
 
 import javax.inject.Inject;
-import javax.naming.Name;
-import java.sql.SQLOutput;
 import java.util.*;
 
 @Repository
@@ -27,7 +25,12 @@ public class CustomerDaoImpl implements CustomerDao {
         System.out.println("--> sqlsellection idCheck() 기능처리 ");
         return sqlSession.selectOne(Namespace + ".idCheck", cus_id);
     }
+    @Override
+    public String updateCustomer(CustomerVO customerVO) {
 
+        //Ibatis Update 사용법
+        return sqlSession.update(Namespace+".updateCustomer", customerVO)+"";
+    }
     @Override
     public List<CustomerVO> selectAll() {
         return sqlSession.selectList(Namespace + ".selectCustomer");
@@ -36,6 +39,10 @@ public class CustomerDaoImpl implements CustomerDao {
     @Override
     public List<CustomerVO> selectAllCustomer() {
         return sqlSession.selectList(Namespace + ".selectAllCustomer");
+    }
+
+    public CustomerVO viewCustomer(int cus_num) {
+        return sqlSession.selectOne(Namespace + ".viewCustomer",cus_num);
     }
 
 

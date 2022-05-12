@@ -57,7 +57,7 @@
 
     <!-- Select 문 -->
     <select id="selectCustomer" resultType="CustomerVO">
-        select cus_id , prj_num, prj_name
+        select cus_id , prj_num, prj_name,cus_num
         from customer natural join project
         where cus_id = #{cus_id}
     </select>
@@ -65,7 +65,14 @@
     <!-- Select All -->
     <select id="selectAllCustomer" resultType="CustomerVO">
         select *
-        from customer
+        from customer , company
+        where company.com_num = customer.com_num
+    </select>
+
+    <select id="viewCustomer" resultType="CustomerVO">
+        select *
+        from customer , company
+        where company.com_num = customer.com_num and customer.cus_num = #{cus_num}
     </select>
 
     <!-- 회원가입(Insert) -->
@@ -76,23 +83,25 @@
                 #{cus_position}, #{cus_state}, #{com_num})
     </insert>
 
-
     <!-- excel로 회원 업로딩 및 다운로드 , 임시로 c_num으로 내림차순 정렬해둠( 나중에 수정) -->
     <select id="getUserExcel" parameterType="CustomerVO" resultType="CustomerVO">
         SELECT *
         FROM customer
         Order by cus_num asc
     </select>
+
     <select id="select_nonPermissionCus" parameterType="CustomerVO" resultType="CustomerVo">
         SELECT *
         FROM customer
         WHERE cus_state = 0
     </select>
+
     <select id="selectCusToNum" resultType="CustomerVO" parameterType="int">
         SELECT *
         FROM customer
         where cus_num = #{cus_num}
     </select>
+
     <update id="PermissionCustomer" parameterType="CustomerVO">
         UPDATE customer
         SET cus_state = 1
@@ -111,6 +120,12 @@
         FROM customer
         WHERE cus_num = ${cus_num}
     </select>
+
+    <update id="updateCustomer" parameterType="CustomerVO" >
+        update customer
+        set cus_email=#{cus_email}, cus_phone=#{cus_phone},cus_dep=#{cus_dep},cus_position=#{cus_position}
+        where cus_num = #{cus_num}
+    </update>
 
 
 </mapper>
