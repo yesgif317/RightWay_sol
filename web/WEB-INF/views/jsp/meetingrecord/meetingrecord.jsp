@@ -62,16 +62,16 @@
                             </c:forEach>
                             </tbody>
                         </table>
-                        <div style="text-align: center">
-                            <a href="/meetingrecord_write.do?update=0&post_num=0"
-                               class="btn btn-primary btn-icon-split">
+
+                    </div>
+                </div>
+                <div style="text-align: center" class="text-center d-block card-header py-3">
+                    <a href="/meetingrecord_write.do?update=0&post_num=0" class="btn btn-info">
                           <span class="icon text-white-50">
                             <i class="fas fa-pen"></i>
                           </span>
-                                <span class="text">글 작성</span>
-                            </a>
-                        </div>
-                    </div>
+                        <span class="text">글 작성</span>
+                    </a>
                 </div>
             </div>
         </div>

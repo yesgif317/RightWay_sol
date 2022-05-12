@@ -22,7 +22,6 @@ public class CustomerDaoImpl implements CustomerDao {
     //아이디 체크
     @Override
     public CustomerVO idCheck(String cus_id) throws Exception {
-        System.out.println("--> sqlsellection idCheck() 기능처리 ");
         return sqlSession.selectOne(Namespace + ".idCheck", cus_id);
     }
     @Override
@@ -48,12 +47,9 @@ public class CustomerDaoImpl implements CustomerDao {
 
     // 로그인 처리
     @Override
-    public List<CustomerVO> login(LoginDTO loginDTO) throws Exception {
+    public CustomerVO login(LoginDTO loginDTO) throws Exception {
 
-        System.out.println(loginDTO.getCus_id()+"-------------------");
-        System.out.println(loginDTO.getCus_pwd()+"-------------------");
-        System.out.println(loginDTO);
-        return sqlSession.selectList(Namespace + ".login", loginDTO);
+        return sqlSession.selectOne(Namespace + ".login", loginDTO);
     }
 
     // 로그인 유지 처리
@@ -83,7 +79,7 @@ public class CustomerDaoImpl implements CustomerDao {
     public void PermissionCustomer(CustomerVO customerVO) {
         System.out.println("PermissionCustomer....");
 
-        sqlSession.update(Namespace + ".PermissionCustomer",customerVO);
+        sqlSession.update(Namespace + ".PermissionCustomer", customerVO);
     }
 
     //사용자 ID로 VO객체 반환
@@ -94,7 +90,7 @@ public class CustomerDaoImpl implements CustomerDao {
 
     @Override
     public String selectNumToName(int cus_num) {
-        return sqlSession.selectOne(Namespace + ".selectNumToName",cus_num);
+        return sqlSession.selectOne(Namespace + ".selectNumToName", cus_num);
     }
 
     //회원가입 Insert

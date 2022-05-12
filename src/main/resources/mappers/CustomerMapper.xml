@@ -34,10 +34,16 @@
         where cus_id = #{cus_id}
     </select>
 
+    <select id="idcount" parameterType="String" resultType="int">
+        select count(cus_id)
+        from customer
+        where cus_id = #{cus_id}
+    </select>
+
     <!-- 로그인시 아이디와 비밀번호 확인 -->
     <select id="login" resultMap="customerVOResultMap">
         select *
-        from customer natural join company natural join project
+        from customer natural join company
         where cus_id = #{cus_id}
     </select>
 
@@ -118,7 +124,19 @@
     <select id="selectNumToName" parameterType="int" resultType="String">
         SELECT cus_name
         FROM customer
-        WHERE cus_num = ${cus_num}
+        WHERE cus_num = #{cus_num}
+    </select>
+
+    <select id="comnamecheck" parameterType="int" resultType="String">
+        select com_name
+        from company
+        where com_num = #{com_num}
+    </select>
+
+    <select id="comnumcheck" parameterType="String" resultType="String">
+        SELECT com_num
+        FROM company
+        where com_name = #{com_name}
     </select>
 
     <update id="updateCustomer" parameterType="CustomerVO" >

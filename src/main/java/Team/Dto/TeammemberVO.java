@@ -1,5 +1,6 @@
 package Team.Dto;
-
+import lombok.Data;
+@Data
 public class TeammemberVO {
 
 

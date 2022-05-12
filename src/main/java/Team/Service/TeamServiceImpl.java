@@ -39,7 +39,6 @@ public class TeamServiceImpl implements TeamService {
     public List<TeammemberVO> viewTeammember(int no){
         return dao.viewTeammember(no);
     }
-
     @Override
     public TeamVO viewTeam(int no){
         return dao.viewTeam(no);
@@ -48,8 +47,13 @@ public class TeamServiceImpl implements TeamService {
     @Override
     public int deleteTeam(int no) { return dao.deleteTeam(no);}
     @Override
-    public int deleteTeammember(int no) { return dao.deleteTeammember(no);}
+    public int deletemember(int no) { return dao.deletemember(no);}
+    @Override
+    public int deleteTeammember(TeammemberVO teammemberVO) { return dao.deleteTeammember(teammemberVO);}
 
-
+    @Override
+    public String insertTeammember(TeammemberVO teammemberVO) {
+        return dao.insertTeammember(teammemberVO);
+    }
 
 }

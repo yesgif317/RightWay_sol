@@ -6,7 +6,7 @@
 <mapper namespace="com.mark.mappers.TeamMapper">
     <!-- 팀원 수 조회(Select) -->
     <select id="countmember" resultType="TeammemberVO">
-        SELECT count(*) cus_num ,team_num  FROM Teammember group by team_num ORDER BY team_num ASC
+        SELECT count(*) cus_num,team_num FROM Teammember group by team_num ORDER BY team_num ASC
     </select>
     <!-- 팀 목록 조회(Select) -->
     <select id="selectTeam" resultType="TeamVO">
@@ -15,14 +15,21 @@
 
     <!-- 팀 작성(Insert) -->
     <insert id="insertTeam" parameterType="TeamVO" >
-        insert into Team(team_num,team_name,team_desc,c_num,prj_num)
-        values (team_num.nextval,#{team_name},#{team_desc},#{c_num},#{prj_num})
+        insert into Team(team_num,team_name,team_desc,cus_num,prj_num)
+        values (team_seq.nextval,#{team_name},#{team_desc},#{cus_num},#{prj_num})
+    </insert>
+
+    <insert id="insertTeammember" parameterType="TeamVO" >
+        insert into Teammember(team_num,cus_num)
+        values (#{team_num},#{cus_num})
     </insert>
 
     <!-- 팀 삭제(Delete) -->
     <delete id="deleteTeam"> delete from Team where team_num=#{team_num} </delete>
     <!-- 팀원 삭제(Delete) -->
-    <delete id="deleteTeammember"> delete from Teammember where team_num=#{team_num} </delete>
+    <delete id="deletemember"> delete from Teammember where team_num=#{team_num}  </delete>
+    <!-- 팀원 삭제(Delete) -->
+    <delete id="deleteTeammember" > delete from Teammember where team_num=#{team_num} AND cus_num=#{cus_num} </delete>
     <!-- 팀 한개 정보 조회(Select) -->
     <select id="viewTeam" resultType="TeamVO">
         SELECT * FROM Team where team_num=#{team_num}
@@ -36,7 +43,7 @@
     <!-- 팀 수정(Update) -->
     <update id="updateTeam" parameterType="TeamVO" >
         update Team
-        set team_num = #{team_num}, team_name =#{team_name}, team_desc =#{team_desc}
+        set  team_name =#{team_name}, team_desc =#{team_desc}
         where team_num =#{team_num}
     </update>
 

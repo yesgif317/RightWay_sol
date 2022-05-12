@@ -26,30 +26,37 @@
                 </div>
                 <div class="card-body">
                     <div class="table-responsive">
-                        <table class="table table-bordered" id="dataTable">
+                        <table class="table table-bordered table-hover" id="dataTable">
                             <thead>
                             <tr>
-                                <th>NO</th>
-                                <th>팀명</th>
-                                <th>팀설명</th>
-                                <th>팀장</th>
+                                <th width="10%">NO</th>
+                                <th width="15%">팀명</th>
+                                <th width="50%"> 팀설명</th>
+                                <th width="15%">팀장</th>
                                 <th>인원수</th>
                             </tr>
                             </thead>
 
                             <tbody>
                             <c:forEach items="${TeamList}" var="team" varStatus="status" >
-                            <c:forEach items="${TeammemberList}" var="teammember" >
-                                <c:if test="${teammember.team_num eq team.team_num }">
-                                <tr>
-                                    <td>${team.team_num}</td>
-                                    <td><a href ="team_content.do?team_num=${teammember.team_num}">${team.team_name}</a></td>
-                                    <td>${team.team_desc}</td>
-                                    <td>${team.cus_num}</td>
-                                    <td>${teammember.cus_num}</td>
-                                </tr>
-                                </c:if>
-                            </c:forEach>
+                                        <tr>
+                                            <td>${team.team_num}</td>
+                                            <td><a href ="team_content.do?team_num=${team.team_num}">${team.team_name}</a></td>
+                                            <td>${team.team_desc}</td>
+                                            <td>${team.cus_num}</td>
+                                            <td>
+                                                <c:set var="count" value="1" />
+
+                                <c:forEach items="${TeammemberList}" var="teammember"  >
+                                    <c:choose>
+                                        <c:when test="${team.team_num eq teammember.team_num}" >
+                                            <c:set var="count" value="${teammember.cus_num+1}" />
+                                        </c:when>
+                                    </c:choose>
+                                </c:forEach>
+                                                <c:out value="${count}" />
+                                            </td>
+                                        </tr>
                             </c:forEach>
                             </tbody>
                         </table>

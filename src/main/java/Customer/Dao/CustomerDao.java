@@ -12,7 +12,7 @@ public interface CustomerDao {
     String updateCustomer(CustomerVO customerVO);
 
     //로그인
-    List<CustomerVO> login(LoginDTO loginDTO) throws Exception;
+    CustomerVO login(LoginDTO loginDTO) throws Exception;
 
     //아이디 체크
     CustomerVO idCheck(String cus_id) throws Exception;

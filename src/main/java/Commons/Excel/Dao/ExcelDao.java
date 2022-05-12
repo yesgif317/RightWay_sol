@@ -11,6 +11,10 @@ public interface ExcelDao {
 
     void postUserExcel(ExcelVO excelVO) throws Exception;
 
+    String checkcomname(int com_num) throws Exception;
 
+    String checkcomnum(String com_name) throws Exception;
+
+    int idcount(String cus_id) throws Exception;
 
 }
