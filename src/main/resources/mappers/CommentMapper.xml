@@ -5,16 +5,42 @@
 
 <mapper namespace="com.mark.mappers.CommentMapper">
 
-    <!--Customer-->
     <!-- Select 문 -->
     <select id="selectCommentAll" resultType="CommentVO">
-        SELECT * FROM comment
+        SELECT * FROM comments
     </select>
 
-    <!-- 회원가입(Insert) -->
+
     <insert id="insertComment" parameterType="CommentVO" >
-        insert into comment(comm_num,c_num,p_num,comment,comm_date)
-        values (#{comm_num}, #{c_num}, #{p_num},#{comment},#{comm_date})
+        insert into comments(cmt_num, post_num, cate, cus_num, cmt_cnt, cmt_date)
+        values (cmt_seq.nextval, #{post_num, jdbcType=VARCHAR}, #{cate, jdbcType=VARCHAR}, #{cus_num, jdbcType=VARCHAR}, #{cmt_cnt, jdbcType=VARCHAR}, to_char(sysdate,'YYYY-MM-DD'))
     </insert>
+
+
+    <!-- 댓글 수정 -->
+    <update id="updateComment" parameterType="CommentVO">
+        update comments
+        set cmt_cnt = #{cmt_cnt, jdbcType=VARCHAR}
+        where cmt_num = #{cmt_num, jdbcType=VARCHAR}
+    </update>
+
+
+    <!-- 댓글 삭제 -->
+    <delete id="deleteComment">
+        delete from comments where cmt_num = #{cmt_num, jdbcType=VARCHAR}
+    </delete>
+
+
+
+    <!-- 댓글 Count 1단계-->
+<!--
+    <select id="countComment" resultType="int">
+        select count(*) from comments
+    </select>
+    -->
+    <!-- 댓글 Count 2단계 -->
+    <select id="countComment" resultType="int" parameterType="int">
+        select count(*) from comments where post_num >#{post_num}
+    </select>
 
 </mapper>

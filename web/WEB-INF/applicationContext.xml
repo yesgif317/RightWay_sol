@@ -43,6 +43,10 @@
     <context:component-scan base-package="Board.Service"/>
     <context:component-scan base-package="Customer.Dao"/>
     <context:component-scan base-package="Customer.Service"/>
+    <context:component-scan base-package="Comment.Dao"/>
+    <context:component-scan base-package="Comment.Service"/>
+    <context:component-scan base-package="Re_Comment.Dao"/>
+    <context:component-scan base-package="Re_Comment.Service"/>
     <context:component-scan base-package="Company.Dao"/>
     <context:component-scan base-package="Company.Service"/>
     <context:component-scan base-package="Event.Dao"/>

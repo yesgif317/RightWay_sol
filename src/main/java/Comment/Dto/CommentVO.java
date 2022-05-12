@@ -1,26 +1,78 @@
 package Comment.Dto;
 
+import lombok.Data;
+
 import java.util.Date;
 
+@Data
 public class CommentVO {
-    int comm_num;
-    int c_num;
-    int p_num;
-    String comment;
-    Date comm_date;
+    private int cmt_num;        //자동생성
+    private int cus_num;
+    private int post_num;
+    private int cate;           //정해진 숫자 넣어서 보낼거
+    private String cmt_cnt;
+    private Date cmt_date;      //sysdate\
 
-    public int getComm_num(){return comm_num;}
-    public void setComm_num(int comm_num){this.comm_num = comm_num;}
 
-    public int getC_num(){return c_num;}
-    public void setC_num(int c_num){this.c_num = c_num;}
+    public CommentVO(int cmt_num, int post_num, int cate, int cus_num, String cmt_cnt){
+    //public CommentVO(String cmt_cnt){
+        this.cmt_num = cmt_num;
+        this.cus_num = cus_num;
+        this.post_num = post_num;
+        this.cate = cate;
+        this.cmt_cnt = cmt_cnt;
+        //this.cmt_date = cmt_date;
+    }
+    public CommentVO(){}        // default 있어야 에러 안나는거였다고 함
 
-    public int getP_num(){return p_num;}
-    public void setP_num(int p_num){this.p_num = p_num;}
 
-    public String getComment(){return comment;}
-    public void setComment(String comment){this.comment = comment;}
+/*
+    public int getCmt_num() {
+        return cmt_num;
+    }
 
-    public Date getComm_date(){return comm_date;}
-    public void setComm_date(Date comm_date){this.comm_date = comm_date;}
+    public void setCmt_num(int cmt_num) {
+        this.cmt_num = cmt_num;
+    }
+
+    public int getCus_num() {
+        return cus_num;
+    }
+
+    public void setCus_num(int cus_num) {
+        this.cus_num = cus_num;
+    }
+
+    public int getPost_num() {
+        return post_num;
+    }
+
+    public void setPost_num(int post_num) {
+        this.post_num = post_num;
+    }
+
+    public int getCate() {
+        return cate;
+    }
+
+    public void setCate(int cate) {
+        this.cate = cate;
+    }
+
+    public String getCmt_cnt() {
+        return cmt_cnt;
+    }
+
+    public void setCmt_cnt(String cmt_cnt) {
+        this.cmt_cnt = cmt_cnt;
+    }
+
+    public Date getCmt_date() {
+        return cmt_date;
+    }
+
+    public void setCmt_date(Date cmt_date) {
+        this.cmt_date = cmt_date;
+    }
+*/
 }

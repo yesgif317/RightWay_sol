@@ -1,25 +1,60 @@
 package Re_Comment.Dto;
 
+import lombok.Data;
+
 import java.util.Date;
 
+@Data
 public class Re_CommentVO {
-    int comm_num;
-    int c_num;
-    String recomment;
-    Date recomment_date;
+    private int rcmt_num;
+    private int cmt_num;
+    private int cus_num;
+    private String rcmt_cnt;
+    private Date rcmt_date;
 
-    public int getC_num() {return c_num;}
-    public void setC_num(int c_num) {this.c_num = c_num;}
+    //public Re_CommentVO(int cmt_num, int cus_num, String rcmt_cnt, Date rcmt_date){
+    public Re_CommentVO(int rcmt_num, int cmt_num, int cus_num, String rcmt_cnt){
+        this.rcmt_num = rcmt_num;
+        this.cmt_num = cmt_num;
+        this.cus_num = cus_num;
+        this.rcmt_cnt = rcmt_cnt;
+        //this.rcmt_date = rcmt_date;
+    }
+    public Re_CommentVO(){}
 
-    public int getComm_num() {return comm_num;}
+/*
+    public int getCmt_num() {
+        return cmt_num;
+    }
 
-    public void setComm_num(int comm_num) {this.comm_num = comm_num;}
+    public void setCmt_num(int cmt_num) {
+        this.cmt_num = cmt_num;
+    }
 
-    public Date getRecomm_date() {return recomment_date;}
+    public int getCus_num() {
+        return cus_num;
+    }
 
-    public void setRecomm_date(Date recomment_date) {this.recomment_date = recomment_date;}
+    public void setCus_num(int cus_num) {
+        this.cus_num = cus_num;
+    }
 
-    public String getRecomment() {return recomment;}
+    public String getRcmt_cnt() {
+        return rcmt_cnt;
+    }
 
-    public void setRecomment(String recomment) {this.recomment = recomment;}
+    public void setRcmt_cnt(String rcmt_cnt) {
+        this.rcmt_cnt = rcmt_cnt;
+    }
+
+    public Date getRcmt_date() {
+        return rcmt_date;
+    }
+
+    public void setRcmt_date(Date rcmt_date) {
+        this.rcmt_date = rcmt_date;
+    }
+
+*/
+
 }

@@ -5,8 +5,16 @@ import Comment.Dto.CommentVO;
 import java.util.List;
 
 public interface CommentDao {
-    List<CommentVO> selectAll();
+    List<CommentVO> selectCommentAll();
 
     //댓글 추가
-    String insertComment(CommentVO commentVO);
+    void insertComment(CommentVO commentVO);
+    //String insertComment(CommentVO commentVO);
+
+    String updateComment(CommentVO commentVO);
+
+    int deleteComment(int no);
+
+    int countComment(int post_num);
+    //CommentVO countComment(int post_num);
 }

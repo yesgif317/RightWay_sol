@@ -7,13 +7,34 @@
 
     <!--Customer-->
     <!-- Select 문 -->
-    <select id="selectAll" resultType="Re_CommentVO">
-        SELECT * FROM re_comment
+    <select id="selectRe_CommentAll" resultType="Re_CommentVO">
+        SELECT * FROM re_comments
     </select>
 
     <!-- 프로젝트 추가(Insert) -->
     <insert id="insertRe_Comment" parameterType="Re_CommentVO" >
-        insert into re_comment(comm_num, c_num, recomment, recomment_date)
-        values (#{comm_num}, #{c_num}, #{recomment}, #{recomment_date})
+        insert into re_comments(rcmt_num, cmt_num, cus_num, rcmt_cnt, rcmt_date)
+        values (rcmt_seq.nextval, #{cmt_num, jdbcType=VARCHAR}, #{cus_num, jdbcType=VARCHAR}, #{rcmt_cnt, jdbcType=VARCHAR}, to_char(sysdate,'YYYY-MM-DD'))
     </insert>
+
+    <!-- 대댓글 수정 -->
+    <update id="updateRe_Comment" parameterType="Re_CommentVO">
+        update re_comments
+        set rcmt_cnt = #{rcmt_cnt, jdbcType=VARCHAR}
+        where rcmt_num = #{rcmt_num, jdbcType=VARCHAR}
+    </update>
+
+    <!-- 대댓글 삭제 -->
+    <delete id="deleteRe_Comment">
+        delete from re_comments where rcmt_num = #{rcmt_num, jdbcType=VARCHAR}
+    </delete>
+
 </mapper>
+
+
+
+
+
+
+
+

@@ -7,14 +7,33 @@ import javax.inject.Inject;
 import java.util.List;
 
 @Service
-public class CommentServiceImpl implements CommentService{
+public class CommentServiceImpl implements CommentService {
 
     @Inject
     private CommentDao dao;
 
     @Override
-    public List<CommentVO> selectAll() {return dao.selectAll();}
+    public List<CommentVO> selectCommentAll() { return dao.selectCommentAll(); }
 
     @Override
-    public String insertComment(CommentVO commentVO) { return dao.insertComment(commentVO);    }
+    public void insertComment(CommentVO commentVO) { dao.insertComment(commentVO); }
+    //public String insertComment(CommentVO commentVO) { return dao.insertComment(commentVO); }
+
+    @Override
+    public String updateComment(CommentVO commentVO) { return dao.updateComment(commentVO); }
+
+    @Override
+    public int deleteComment(int no) { return
+        dao.deleteComment(no);
+    }
+
+    @Override
+    public int countComment(int post_num) { return dao.countComment(post_num); }
+
+    /*
+    @Override
+    public CommentVO countComment(int post_num) { return dao.countComment(post_num); }
+    */
+
 }
+

@@ -2,6 +2,8 @@ package Controller;
 
 import Board.Dto.BoardVO;
 import Board.Service.BoardService;
+import Comment.Dto.CommentVO;
+import Comment.Service.CommentService;
 import Commons.Excel.Dto.ExcelVO;
 import Commons.Excel.Service.ExcelService;
 import Company.Dto.CompanyVO;
@@ -17,6 +19,8 @@ import Post.Dto.NormalVO;
 import Post.Service.NormalService;
 import Project.Dto.ProjectVO;
 import Project.Service.ProjectService;
+import Re_Comment.Dto.Re_CommentVO;
+import Re_Comment.Service.Re_CommentService;
 import Risk.Dto.RiskVO;
 import Risk.Service.RiskService;
 import Team.Dto.TeamVO;
@@ -80,6 +84,38 @@ public class MainController {
 
     @Inject
     private RiskService riskService;
+
+    @Inject
+    private CommentService commentService;
+    @Inject
+    private Re_CommentService re_commentService;
+
+
+    // 각 게시판별, comment 값 받아오기 위한 메서드 작성
+    public class AddCmt {
+        public void comment(int post_num, Model model, HttpServletRequest request) {
+            List<CommentVO> commentVoList = commentService.selectCommentAll();
+            // .jsp 파일로 DB 결과값 전달하기
+            model.addAttribute("CommentList", commentVoList);
+
+            //Re_comment
+            List<Re_CommentVO> Re_commentVOList = re_commentService.selectRe_CommentAll();
+            model.addAttribute("Re_CommentList", Re_commentVOList);
+
+            int countComment = commentService.countComment(post_num);
+            model.addAttribute("countComment", countComment);
+
+            String uri = request.getRequestURI();
+            String post_num_str = Integer.toString(post_num);
+            uri += "?post_num=" + post_num_str;
+            System.out.println("uri: " + uri);
+            // uri값 jsp로 보내기
+            model.addAttribute("uri", uri);
+        }
+    }
+    public class Addd extends AddCmt {}
+    // 메서드 종료
+
 
 
     // 메인 페이지 이동 및 차트 데이터 가져오기
@@ -244,9 +280,14 @@ public class MainController {
 
     //산출물 작성글 보기
     @RequestMapping(value = "/outputs_content.do", method = RequestMethod.GET)
-    public String outputs_content(@RequestParam("post_num") int no, Model model) {
+    public String outputs_content(@RequestParam("post_num") int no, Model model, HttpServletRequest request) {
         NormalVO Result = normalService.viewPost(no);
         model.addAttribute("PostList", Result);
+
+        // comment 추가 위한 2줄
+        AddCmt addcmt = new Addd();
+        addcmt.comment(no, model, request);
+        // comment 종료
 
         return "/outputs/outputs_content";
     }
@@ -315,9 +356,14 @@ public class MainController {
     }
 
     @RequestMapping(value = "/notice_content.do", method = RequestMethod.GET)
-    public String notice_content(@RequestParam("post_num") int no, Model model) {
+    public String notice_content(@RequestParam("post_num") int no, Model model, HttpServletRequest request) {
         NormalVO Result = normalService.viewPost(no);
         model.addAttribute("PostList", Result);
+
+        // comment 추가 위한 2줄
+        AddCmt addcmt = new Addd();
+        addcmt.comment(no, model, request);
+        // comment 종료
 
         return "/notice/notice_content";
     }
@@ -345,9 +391,14 @@ public class MainController {
 
     //요청사항 작성글 보기
     @RequestMapping(value = "/request_content.do", method = RequestMethod.GET)
-    public String request_content(@RequestParam("post_num") int no, Model model) {
+    public String request_content(@RequestParam("post_num") int no, Model model, HttpServletRequest request) {
         NormalVO Result = normalService.viewPost(no);
         model.addAttribute("PostList", Result);
+
+        // comment 추가 위한 2줄
+        AddCmt addcmt = new Addd();
+        addcmt.comment(no, model, request);
+        // comment 종료
 
         return "/request/request_content";
     }
@@ -401,9 +452,16 @@ public class MainController {
 
     //issue 상세 페이지 이동
     @RequestMapping(value = "/issue_content.do", method = RequestMethod.GET)
-    public String issue_content(@RequestParam("post_num") int post_num, Model model) {
+    public String issue_content(@RequestParam("post_num") int post_num, Model model,
+                                HttpServletRequest request) {
         RiskVO Result = riskService.viewRisk(post_num);
         model.addAttribute("RiskList",Result);
+
+        // comment 추가 위한 2줄
+        AddCmt addcmt = new Addd();
+        addcmt.comment(post_num, model, request);
+        // comment 종료
+
         return "issue/issue_content";
     }
 
@@ -458,9 +516,15 @@ public class MainController {
 
     //회의록 작성글 보기
     @RequestMapping(value = "/meetingrecord_content.do", method = RequestMethod.GET)
-    public String meetingrecord_content(@RequestParam("post_num") int no, Model model) {
+    public String meetingrecord_content(@RequestParam("post_num") int no, Model model, HttpServletRequest request) {
         NormalVO Result = normalService.viewPost(no);
         model.addAttribute("PostList", Result);
+
+        // comment 추가 위한 2줄
+        AddCmt addcmt = new Addd();
+        addcmt.comment(no, model, request);
+        // comment 종료
+
         return "/meetingrecord/meetingrecord_content";
     }
 
@@ -511,9 +575,15 @@ public class MainController {
 
     //정기보고 작성글 보기
     @RequestMapping(value = "/regularreport_content.do", method = RequestMethod.GET)
-    public String regularreport_content(@RequestParam("post_num") int no, Model model) {
+    public String regularreport_content(@RequestParam("post_num") int no, Model model, HttpServletRequest request) {
         NormalVO Result = normalService.viewPost(no);
         model.addAttribute("PostList", Result);
+
+        // comment 추가 위한 2줄
+        AddCmt addcmt = new Addd();
+        addcmt.comment(no, model, request);
+        // comment 종료
+
         return "/regularreport/regularreport_content";
     }
 
@@ -565,9 +635,15 @@ public class MainController {
 
     //danger 상세 페이지 이동
     @RequestMapping(value = "/danger_content.do", method = RequestMethod.GET)
-    public String danger_content(@RequestParam("post_num") int post_num, Model model) {
+    public String danger_content(@RequestParam("post_num") int post_num, Model model, HttpServletRequest request) {
         RiskVO Result = riskService.viewRisk(post_num);
         model.addAttribute("RiskList",Result);
+
+        // comment 추가 위한 2줄
+        AddCmt addcmt = new Addd();
+        addcmt.comment(post_num, model, request);
+        // comment 종료
+
         return "danger/danger_content";
     }
 
@@ -631,9 +707,15 @@ public class MainController {
 
     //행사관리 상세 페이지 이동
     @RequestMapping(value = "/event_content.do", method = RequestMethod.GET)
-    public String event_content(@RequestParam("post_num") int post_num, Model model) {
+    public String event_content(@RequestParam("post_num") int post_num, Model model, HttpServletRequest request) {
         EventVO Result = eventService.viewEvent(post_num);
         model.addAttribute("EventList", Result);
+
+        // comment 추가 위한 2줄
+        AddCmt addcmt = new Addd();
+        addcmt.comment(post_num, model, request);
+        // comment 종료
+
         return "event/event_content";
     }
 
@@ -944,11 +1026,156 @@ public class MainController {
         return "blank";
     }
 
+
+    //comments 전체 목록 management
+    @RequestMapping(value = "/comments.do", method = RequestMethod.GET)
+    public String comments(Model model, CommentVO commentVO, Re_CommentVO re_commentVO) {
+
+        //Comment
+        //service 클래스에서 Dao 로 접근하여 쿼리 결과값 가져오기
+        List<CommentVO> commentVoList = commentService.selectCommentAll();
+        // .jsp 파일로 DB 결과값 전달하기
+        model.addAttribute("CommentList", commentVoList);
+
+        //Re_comment
+        List<Re_CommentVO> Re_commentVOList = re_commentService.selectRe_CommentAll();
+        model.addAttribute("Re_CommentList", Re_commentVOList);
+
+
+        int post_num=0;
+        // 댓글수 count
+
+        int countComment = commentService.countComment(post_num);
+        model.addAttribute("countComment", countComment);
+
+
+        return "comments";
+    }
+
+    @RequestMapping(value = "/comments_insert.do", method = RequestMethod.POST)
+    public String comments_insert(Model model, CustomerVO customerVO,
+                                  @RequestParam("cmt_cnt") String cmt_cnt,
+                                  @RequestParam("post_num_cmt_insert") int post_num,
+                                  @RequestParam("cate_cmt_insert") int cate,
+                                  @RequestParam("uri_cmt_insert") String URI) {
+        // @RequestParam으로 받아온 "" 값을 String cmt_cnt에 넣는다.
+        //customer inform
+        List<CustomerVO> customerVOList = customerService.selectAllCustomer();
+        model.addAttribute("CustomerList", customerVOList);
+
+        System.out.println(customerVOList.toString());
+
+        int cus_num = Integer.parseInt(customerVOList.get(0).getCus_num());
+        System.out.println(cus_num);
+
+
+        String cnt=cmt_cnt;
+        CommentVO commentVO = new CommentVO(0,post_num,cate,cus_num,cnt);
+
+        commentService.insertComment(commentVO);
+        System.out.println("Complete...");
+        System.out.println(commentVO.toString());  //제대로 값 던져주는지 확인하기
+
+        //return "redirect:/comments.do"; //요청 처리 후 comments.do 다시 연결
+
+        return "redirect:" + URI;
+    }
+
+
+    //re_comments insert
+    @RequestMapping(value = "/re_comments_insert.do", method = RequestMethod.POST)
+    public String re_comments_insert(Model model, CustomerVO customerVO,
+                                     @RequestParam("rcmt_cnt") String rcmt_cnt,
+                                     @RequestParam("cmt_num_inform") int cmt_num_inform,
+                                     @RequestParam("uri_rcmt_insert") String URI) {
+
+        //customer inform
+        List<CustomerVO> customerVOList = customerService.selectAllCustomer();
+        model.addAttribute("CustomerList", customerVOList);
+
+        System.out.println(customerVOList.toString());
+
+        int cus_num = Integer.parseInt(customerVOList.get(0).getCus_num());
+        System.out.println(cus_num);
+
+        String rcnt=rcmt_cnt;
+        int cmt_num_inf = cmt_num_inform;
+        System.out.println(cmt_num_inf);
+        //cmt_num_inform = 댓글 번호->대댓글을 댓글 밑에 달기 위해
+        Re_CommentVO re_commentVO = new Re_CommentVO(0, cmt_num_inf, cus_num,rcnt);
+
+        re_commentService.insertRe_Comment(re_commentVO);
+        System.out.println("Complete...");
+        System.out.println(re_commentVO.toString());  //제대로 값 던져주는지 확인하기
+        return "redirect:" + URI; //요청 처리 후 comments.do 다시 연결
+    }
+
+    // comments delete
+    @RequestMapping(value = "/comments_delete.do", method = RequestMethod.GET)
+    public String comments_delete(@RequestParam("cmt_num_inform_delete") int cmt_num_inform_delete,
+                                  @RequestParam("uri_cmt_delete") String URI) {
+        int cmt_delete_num = cmt_num_inform_delete;
+        commentService.deleteComment(cmt_delete_num);
+        return "redirect:" + URI;
+    }
+
+    // re_comments delete
+    @RequestMapping(value = "/re_comments_delete.do", method = RequestMethod.GET)
+    public String re_comments_delete(@RequestParam("rcmt_num_inform_delete") int rcmt_num_inform_delete,
+                                     @RequestParam("uri_rcmt_delete") String URI) {
+        int rcmt_delete_num = rcmt_num_inform_delete;
+        re_commentService.deleteRe_Comment(rcmt_delete_num);
+        return "redirect:" + URI;
+    }
+
+    //comment update
+    @RequestMapping(value = "/comments_update.do", method = RequestMethod.POST)
+    public String comments_update(Model model,
+                                  @RequestParam("cmt_update") String cmt_update,
+                                  @RequestParam("cmt_num_inform_update") int cmt_num_inform_update,
+                                  @RequestParam("uri_cmt_update") String URI) {
+        int cmt_num = cmt_num_inform_update;
+
+        String cmt_cnt=cmt_update;
+        CommentVO commentVO = new CommentVO(cmt_num, 0, 0,0, cmt_cnt);
+
+        commentService.updateComment(commentVO);
+        System.out.println("Complete...");
+        System.out.println(commentVO.toString());  //제대로 값 던져주는지 확인하기
+        //return "redirect:/comments.do";
+        return "redirect:" + URI;
+    }
+
+    //re_comment update
+    @RequestMapping(value = "/re_comments_update.do", method = RequestMethod.POST)
+    public String re_comments_update(Model model,
+                                     @RequestParam("rcmt_update") String rcmt_update,
+                                     @RequestParam("rcmt_num_inform_update") int rcmt_num_inform_update,
+                                     @RequestParam("uri_rcmt_update") String URI) {
+        int rcmt_num = rcmt_num_inform_update;
+
+        String rcmt_cnt=rcmt_update;
+        Re_CommentVO re_commentVO = new Re_CommentVO(rcmt_num, 0, 0, rcmt_cnt);
+
+        re_commentService.updateRe_Comment(re_commentVO);
+        System.out.println("Complete...");
+        System.out.println(re_commentVO.toString());  //제대로 값 던져주는지 확인하기
+        //return "redirect:/comments.do"; //요청 처리 후 comments.do 다시 연결
+        return "redirect:" + URI;
+    }
+
+
     //자료실
     @RequestMapping(value = "/datacenter_content.do", method = RequestMethod.GET)
-    public String datacenter_content(@RequestParam("post_num") int no, Model model) {
+    public String datacenter_content(@RequestParam("post_num") int no, Model model, HttpServletRequest request) {
         NormalVO Result = normalService.viewPost(no);
         model.addAttribute("PostList", Result);
+
+        // comment 추가 위한 2줄
+        AddCmt addcmt = new Addd();
+        addcmt.comment(no, model, request);
+        // comment 종료
+
         return "/datacenter/datacenter_content";
     }
 
