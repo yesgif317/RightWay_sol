@@ -24,7 +24,6 @@ public class CustomerDaoImpl implements CustomerDao {
     //아이디 체크
     @Override
     public CustomerVO idCheck(String cus_id) throws Exception {
-        System.out.println("--> sqlsellection idCheck() 기능처리 ");
         return sqlSession.selectOne(Namespace + ".idCheck", cus_id);
     }
 
@@ -73,7 +72,7 @@ public class CustomerDaoImpl implements CustomerDao {
     public void PermissionCustomer(CustomerVO customerVO) {
         System.out.println("PermissionCustomer....");
 
-        sqlSession.update(Namespace + ".PermissionCustomer",customerVO);
+        sqlSession.update(Namespace + ".PermissionCustomer", customerVO);
     }
 
     //사용자 ID로 VO객체 반환
@@ -84,7 +83,7 @@ public class CustomerDaoImpl implements CustomerDao {
 
     @Override
     public String selectNumToName(int cus_num) {
-        return sqlSession.selectOne(Namespace + ".selectNumToName",cus_num);
+        return sqlSession.selectOne(Namespace + ".selectNumToName", cus_num);
     }
 
     //회원가입 Insert

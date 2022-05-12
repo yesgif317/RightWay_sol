@@ -12,6 +12,7 @@ import Customer.Service.CustomerService;
 import Event.Dto.EventVO;
 import Event.Service.EventService;
 import File.Service.FileService;
+import File.Dto.FileVO;
 import Post.Dto.NormalVO;
 import Post.Service.NormalService;
 import Project.Dto.ProjectVO;
@@ -288,24 +289,19 @@ public class MainController {
     }
 
     //작성한 공지사항 DB저장
-    @RequestMapping(value = "/notice_insert.do", method = RequestMethod.POST)
-    public String notice_insert(HttpServletRequest request) {
-        String title = request.getParameter("title");
-        System.out.println(title);
+    @RequestMapping(value = "/notice_insert.do",method = RequestMethod.POST)
+    public String notice_insert(MultipartFile[] uploadFile, @RequestParam(value = "title") String title
+            , @RequestParam(value = "contents") String contents, @RequestParam(value = "cus_num") String cus_num) {
 
-        String contents = request.getParameter("contents");
-        System.out.println(contents);
-
-        String cus_num = request.getParameter("cus_num");
-        System.out.println(cus_num);
+//        MultipartHttpServletRequest mult_req = (MultipartHttpServletRequest)request;
+        System.out.println("//Title : " + title + "//Contents : " + contents + "//requestFile : " + uploadFile + cus_num);
 
         //int prj_num = Integer.parseInt(request.getParameter("prj_num"));
-
-
+        //게시글 저장
         NormalVO normal = new NormalVO(12, 2, title, contents, Integer.parseInt(cus_num));
-
-
         normalService.insertPost(normal);
+        //첨부파일저장
+        fileService.insertFile(uploadFile,2,12);
 
         return "redirect:/notice.do";
     }

@@ -36,10 +36,10 @@
                             <div class="card-body">
                                 <c:choose>
                                 <c:when test="${test eq '1'}">
-                                <form method="post" action="notice_update.do" id="noticeupdateform" enctype="application/x-www-form-urlencoded" class="form-horizontal">
+                                <form method="post" action="notice_update.do" id="noticeupdateform" enctype="multipart/form-data" class="form-horizontal">
                                     </c:when>
                                     <c:otherwise>
-                                    <form method="post" action="notice_insert.do" id="noticewriteform" enctype="application/x-www-form-urlencoded" class="form-horizontal">
+                                    <form method="post" action="notice_insert.do" id="noticewriteform" enctype="multipart/form-data" class="form-horizontal">
                                         </c:otherwise>
                                         </c:choose>
                                         <div class="row form-group">
@@ -54,8 +54,8 @@
                                             <div class="col col-md-3 text-right"><label for="contents" class=" form-control-label fa-solid text-gray-800 mt-2">첨부파일</label></div>
                                             <div class="col-12 col-md-9"><input type="file" name="uploadFile" multiple></div>
                                         </div>
-                                        <input type="hidden" name="cus_num" value="${login.get(0).cus_num}">
-                                        <%--                                    <input type="hidden" name = "prj_num" value="${login.prj_num}">--%>
+                                        <input type="hidden" name="cus_num" value="${login.cus_num}">
+<%--                                                                            <input type="hidden" name = "prj_num" value="${login.prj_num}">--%>
                                     </form>
 
                             </div>
@@ -71,7 +71,7 @@
                                                 <span  class="text" style="color:white">수정</span>
                                             </c:when>
                                             <c:otherwise>
-                                                <span  class="text" style="color:white" id="uploadBtn" onclick="file_upload()">등록</span>
+                                                <span  class="text" style="color:white" id="uploadBtn" onclick="chk_form()">등록</span>
                                             </c:otherwise>
                                         </c:choose>
                                     </span>
@@ -84,7 +84,31 @@
                                                 $('#exampleModal').modal('show')
                                             }
 
-                                            document.getElementById('noticewriteform').submit()
+                                            var formData = new FormData();
+                                            var inputFile = $("input[name='uploadFile']");
+                                            var title = $("input[name='title']").val();
+                                            var writer = $("input[name='cus_num']").val();
+                                            var contents = $("textarea[name='contents']").val();
+
+                                            var files = inputFile[0].files;
+
+                                            console.log(files);
+                                            console.log(title + "/" + writer + "/" + contents)
+
+                                            for (var i = 0; i < files.length; i++) {
+                                                formData.append("uploadFile", files[i]);
+                                            }
+                                            formData.append("title", title);
+                                            formData.append("writer",writer);
+                                            formData.append("contents",contents);
+
+                                            // fetch('/notice_insert.do',{
+                                            //     method: 'POST',
+                                            //     headers: 'application/x-www-form-urlencoded',
+                                            //     body : formData
+                                            // })
+
+                                            document.getElementById('noticewriteform').submit();
 
                                         }
                                     </script>
