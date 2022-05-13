@@ -160,18 +160,10 @@
 <script src="<c:url value="/resources/js/sb-admin-2.min.js"/>"></script>
 
 <script src="<c:url value="/resources/vendor/datatables/dataTable.js"/>"></script>
-<!-- Page level plugins -->
-<script src="<c:url value="/resources/vendor/chart.js/Chart.min.js"/>"></script>
 
-<!-- Page level custom scripts -->
-<script src="<c:url value="/resources/js/demo/chart-bar-demo.js"/>"></script>
-<script src="<c:url value="/resources/js/demo/chart-pie-demo.js"/>"></script>
 <script type="text/javascript">
     function goSubmit() {
         var form = document.getElementById('tableswriteform').submit();
     }
 </script>
 
-</body>
-
-</html>

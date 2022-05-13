@@ -106,6 +106,3 @@
 <script src="<c:url value="/resources/js/demo/datatables-demo.js"/>"></script>
 <script src="https://kit.fontawesome.com/55082abfe9.js" crossorigin="anonymous"></script>
 
-</body>
-
-</html>

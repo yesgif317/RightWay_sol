@@ -45,7 +45,7 @@
                             <c:forEach items="${RiskList}" var="risk">
                                 <tr>
                                     <td>${risk.post_num}</td>
-                                    <td><a href ="issue_content.do?post_num=${risk.post_num}">${risk.risk_tit}</a></td>
+                                    <td><a href ="danger_content.do?post_num=${risk.post_num}">${risk.risk_tit}</a></td>
                                     <td>
                                         <c:choose>
                                             <c:when test="${risk.risk_imp eq 'High'}">

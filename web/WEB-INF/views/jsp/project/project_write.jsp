@@ -38,7 +38,7 @@
                             <div class="card-body">
                                 <c:choose>
                                 <c:when test="${test eq '1'}">
-                                <form method="post" action="project_update.do?prj_num=${ProjectList.prj_num}" id="projectupdateform" enctype="application/x-www-form-urlencoded" class="form-horizontal">
+                                <form method="post" action="project_update.do?prj_num=${ProjectList1.prj_num}" id="projectupdateform" enctype="application/x-www-form-urlencoded" class="form-horizontal">
                                     </c:when>
                                     <c:otherwise>
                                     <form method="post" action="project_insert.do" id="projectwriteform" enctype="application/x-www-form-urlencoded" class="form-horizontal">
@@ -46,33 +46,203 @@
                                         </c:choose>
                                     <div class="row form-group">
                                         <div class="col col-md-3 text-right"><label for="prj_name" class=" form-control-label fa-solid text-gray-800 m-2"><sup class="text-danger small">*</sup>프로젝트명</label></div>
-                                        <div class="col-12 col-md-7"><input type="text" id="prj_name" name="prj_name" placeholder="프로젝트명을 입력해주세요." class="form-control" value="${ProjectList.prj_name}"></div>
+                                        <div class="col-12 col-md-7"><input type="text" id="prj_name" name="prj_name" placeholder="프로젝트명을 입력해주세요." class="form-control" value="${ProjectList1.prj_name}"></div>
                                     </div>
                                     <div class="row form-group">
                                         <div class="col col-md-3 text-right"><label for="cus_num" class=" form-control-label fa-solid text-gray-800 m-2"><sup class="text-danger small">*</sup>PL</label></div>
-                                        <div class="col-12 col-md-7 col-sm-4"><input type="text" id="cus_num" name="cus_num" placeholder="PL을 선택해주세요." class="form-control" value="${ProjectList.cus_num}"></div>
+                                        <div class="col-12 col-md-7 col-sm-4">
+                                            <a  class="btn btn-secondary" data-toggle="modal" data-target="#PLModal">
+                                                <span class="text" style="color:white">PL선택</span>
+                                            </a>
+                                            <!-- Modal -->
+                                            <div class="modal fade" id="PLModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel1" aria-hidden="true" >
+                                                <div class="modal-dialog" role="document">
+                                                    <div class="modal-content">
+                                                        <div class="modal-header">
+                                                            <h5 class="modal-title" id="exampleModalLabel1">PL선택</h5>
+                                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                                <span aria-hidden="true">×</span>
+                                                            </button>
+                                                        </div>
+
+                                                        <div class="modal-body">
+                                                            <div class="card-body">
+                                                                <div class="table-responsive">
+                                                                    <table class="table table-sm table-bordered table-hover" id="dataTable_pl">
+                                                                        <thead>
+                                                                        <tr>
+                                                                            <th width="30%">이름</th>
+                                                                            <th width="20%">직책</th>
+                                                                            <th>이메일</th>
+                                                                            <th></th>
+                                                                        </tr>
+                                                                        </thead>
+                                                                        <tbody>
+                                                                        <c:forEach items="${CustomerList}" var="customer"  >
+                                                                            <tr >
+                                                                                <td>${customer.cus_name}</td>
+                                                                                <td>${customer.cus_position}</td>
+                                                                                <td>${customer.cus_email}</td>
+                                                                                <td onclick="return plselect('${customer.cus_num}','${customer.cus_name}','${customer.cus_position}')">
+                                                                                    <a class="btn btn-secondary text-gray-100" data-dismiss="modal">선택</a>
+                                                                                </td>
+                                                                            </tr>
+                                                                        </c:forEach>
+                                                                        </tbody>
+                                                                    </table>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+
+                                                        <div class="modal-footer">
+                                                            <button class="btn btn-secondary" type="button" data-dismiss="modal">취소</button>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <input id="cus_name" class="ml-2"
+                                                   style="border:0 solid whitesmoke;" value="${ProjectList1.cus_name}/${ProjectList1.cus_position}" placeholder="PL을 선택해주세요."
+                                                   readonly>
+                                            <input type="hidden" id="cus_num" name="cus_num" placeholder="PL을 선택해주세요." class="form-control" value="${ProjectList1.cus_num}">
+                                        </div>
                                     </div>
                                             <div class="row form-group">
                                                 <div class="col col-md-3 text-right"><label for="prj_start" class=" form-control-label fa-solid text-gray-800 mt-2">프로젝트기간</label></div>
-                                                <div class="col-12 col-md-2"><input type="date" name="prj_start" id="prj_start" class="form-control" value="${ProjectList.prj_start}"></div>
+                                                <div class="col-12 col-md-2"><input type="date" name="prj_start" id="prj_start" class="form-control" value="${ProjectList1.prj_start}"></div>
                                                 <div class="text-center fa-solid text-gray-800 mt-2">~</div>
-                                                <div class="col-12 col-md-2"><input type="date" name="prj_end" id="prj_end" class="form-control" value="${ProjectList.prj_end}"></div>
+                                                <div class="col-12 col-md-2"><input type="date" name="prj_end" id="prj_end" class="form-control" value="${ProjectList1.prj_end}"></div>
                                             </div>
-
-                                    <div class="row form-group">
-                                        <div class="col col-md-3 text-right"><button class="btn btn-secondary ml-3" type="button" id="member" >
-                                            프로젝트원추가
-                                        </button>
-                                        </div>
-                                        <div class="col-12 col-md-7 text-gray-900 fa-solid m-2">${title}박현수</div>
-                                    </div>
-
                                 </form>
+                                        <c:if test="${test eq 1}">
+                                        <div class="row form-group">
+                                            <div class="col col-md-3 text-right">
+                                                <a class="btn btn-sm ml-3 btn-info" data-toggle="modal"
+                                                   data-target="#exampleModal1">
+                                                    <span class="text " style="color:white">프로젝트원 추가</span>
+                                                </a>
+                                                <!-- Modal -->
 
+                                                <div class="modal fade" id="exampleModal1"  role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                                    <div class="modal-dialog" role="document">
+                                                        <div class="modal-content">
+                                                            <div class="modal-header">
+                                                                프로젝트원선택
+                                                                <button type="button" class="close" data-dismiss="modal"
+                                                                        aria-label="Close">
+                                                                    <span aria-hidden="true">&times;</span>
+                                                                </button>
+                                                            </div>
+
+                                                            <div class="modal-body">
+                                                                <div class="card-body">
+                                                                    <div class="table-responsive">
+                                                                        <table class="table table-sm table-bordered table-hover" id="dataTable">
+
+                                                                    <thead>
+                                                                    <tr>
+                                                                        <th>이름</th>
+                                                                        <th>직책</th>
+                                                                        <th>연락처</th>
+                                                                        <th>이메일</th>
+                                                                    </tr>
+                                                                    </thead>
+                                                                            <tbody>
+                                                                    <c:forEach items="${CusmodalList}" var="cusmodal">
+                                                                        <c:set var="i" value="${i+1}"/>
+
+                                                                        <tr>
+                                                                            <td>${cusmodal.cus_name}</td>
+                                                                            <td>${cusmodal.cus_position}</td>
+                                                                            <td>${cusmodal.cus_email}</td>
+                                                                            <td>
+                                                                                <input type="hidden" id='${i}'
+                                                                                       value='${cusmodal.cus_num}'>
+                                                                                <a class="btn btn-secondary text-gray-100" data-dismiss="modal"
+                                                                                   onclick="return memberselect('${i}')">선택</a>
+                                                                            </td>
+                                                                        </tr>
+                                                                    </c:forEach>
+                                                                            </tbody>
+                                                                </table>
+                                                            </div>
+                                                            <div class="modal-footer">
+                                                                <button class="btn btn-secondary" type="button" data-dismiss="modal">취소</button>
+                                                            </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <small class="mt-2">*프로젝트원 추가시 현재 입력값이 자동으로 저장됩니다.</small>
+                                        </div>
+
+
+                                        <div class="row form-group">
+                                            <div class="col-2"></div>
+                                        </div>
+                                        <div class="row form-group">
+                                            <input type="hidden" id="prj_num" name="prj_num"
+                                                   value='${ProjectList1.prj_num}'/>
+                                            <div class="col-2"></div>
+                                            <div class="col-8"
+                                                 style="border-top:  2px solid #2c9faf;border-bottom: 2px solid #2c9faf;">
+                                                <div class="card mb-4">
+
+                                                    <div class="card-body">
+                                                        <div class="table-responsive">
+                                                            <table class="table table-bordered" id="dataTable1">
+                                                                <thead>
+                                                                <tr>
+                                                                    <th>이름</th>
+                                                                    <th>직책</th>
+                                                                    <th>연락처</th>
+                                                                    <th>이메일</th>
+                                                                    <th width="5%"></th>
+                                                                </tr>
+                                                                </thead>
+                                                                <tbody>
+                                                                <c:forEach items="${Project_detailList}" var="project_detail">
+                                                                            <tr>
+                                                                                <td>${project_detail.cus_name}</td>
+                                                                                <td>${project_detail.cus_position}</td>
+                                                                                <td>${project_detail.cus_phone}</td>
+                                                                                <td>${project_detail.cus_email}</td>
+                                                                                <td onclick="return delete_form(${project_detail.cus_num})">
+                                                                                    <a class="btn ml-2 btn-danger text-gray-100">
+                                                                                        <i class="fa-regular fa-circle-xmark"></i>
+                                                                                    </a>
+                                                                                </td>
+                                                                            </tr>
+                                                                </c:forEach>
+                                                                </tbody>
+                                                            </table>
+                                                        </div>
+                                                    </div>
+                                                </div>
+
+                                                <form method="post" action="project_detail_delete.do" id="project_detaildeleteform"
+                                                      enctype="application/x-www-form-urlencoded" class="form-horizontal">
+                                                    <input type="hidden" name="_method" value="delete">
+                                                    <input type="hidden"  name="prj_num"
+                                                           value='${ProjectList1.prj_num}'/>
+                                                    <input type="hidden" id="delete_cus_num" name="cus_num"/>
+                                                </form>
+
+                                                <form method="post"
+                                                      action="project_detail_insert.do?prj_num=${ProjectList1.prj_num}&update=1"
+                                                      id="project_detailwriteform" enctype="application/x-www-form-urlencoded"
+                                                      class="form-horizontal">
+                                                    <div class="col-12 col-md-7 text-gray-900 fa-solid m-2" id='result'>
+
+                                                    </div>
+                                                </form>
+                                            </div>
+                                        </div>
+                                        </c:if>
                             </div>
 
                             <div class="text-center d-block card-header py-3">
-                                <%--<button type="submit" style="border:none;">--%>
                                 <a <%--href="javascript:goSubmit();"--%>  onclick="return chk_form()" class="btn btn-info">
                                                 <span class="icon text-white-50">
                                                        <i class="fas fa-pen"></i>
@@ -87,7 +257,7 @@
                                     </c:choose>
                                     <script>
                                         function chk_form() {
-                                            if( document.getElementById("prj_name").value===''){
+                                            if( document.getElementById("prj_name").value===''||document.getElementById("cus_num").value===''){
                                                 $('#exampleModal').modal('show')
                                             }
                                             else {
@@ -101,6 +271,36 @@
                                                 </c:choose>
                                             }
                                         }
+                                        function plselect(num,name,position) {
+                                            document.getElementById('cus_name').setAttribute("value", name +'/'+position);
+                                            document.getElementById('cus_num').setAttribute("value", num);
+                                        }
+                                        function memberselect(cell) {
+                                            var location = document.getElementById('result');
+                                            var select_cus = document.getElementById(cell).value
+                                            var input1 = document.createElement('input');
+                                            input1.setAttribute("type", "hidden");
+                                            input1.setAttribute("value", select_cus);
+                                            input1.setAttribute("readonly", "readonly");
+                                            input1.setAttribute("style", "border:none");
+                                            input1.setAttribute("id", "cus_num");
+                                            input1.setAttribute("name", "cus_num");
+                                            var input2 = document.createElement('input');
+                                            input2.setAttribute("type", "hidden");
+                                            input2.setAttribute("value", 0);
+                                            input2.setAttribute("id", "auth");
+                                            input2.setAttribute("name", "auth");
+
+                                            location.appendChild(document.createElement('br'));
+                                            location.appendChild(input1);
+                                            location.appendChild(input2);
+                                            document.getElementById('project_detailwriteform').submit();
+                                        }
+                                        function delete_form(cus_num) {
+                                            document.getElementById('delete_cus_num').setAttribute("value",cus_num);
+                                            document.getElementById('project_detaildeleteform').submit();
+                                        }
+
                                     </script>
                                     <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
                                         <div class="modal-dialog" role="document">

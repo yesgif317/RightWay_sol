@@ -10,6 +10,7 @@
         <typeAlias type="Event.Dto.EventVO" alias="EventVO"/>
         <typeAlias type="Risk.Dto.RiskVO" alias="RiskVO"/>
         <typeAlias type="Project.Dto.ProjectVO" alias="ProjectVO"/>
+        <typeAlias type="Project.Dto.ProjectDetailVO" alias="ProjectDetailVO"/>
         <typeAlias type="Comment.Dto.CommentVO" alias="CommentVO"/>
         <typeAlias type="Re_Comment.Dto.Re_CommentVO" alias="Re_CommentVO"/>
         <typeAlias type="Post.Dto.NormalVO" alias="NormalVO"/>

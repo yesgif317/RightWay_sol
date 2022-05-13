@@ -32,12 +32,12 @@
                                         <div class="col-3"></div>
                                         <div class="col-4 ">
                                             <small class="help-block form-text">프로젝트 명</small>
-                                            <input style="border:0 solid whitesmoke;" type="text" value="${ProjectList.prj_name}" readonly="readonly" disabled/>
+                                            <input style="border:0 solid whitesmoke;width:100%; width: 100%" type="text" value="${ProjectList1.prj_name}" readonly="readonly" disabled/>
                                         </div>
 
                                         <div class="col-4" >
                                             <small class="help-block form-text">PL</small>
-                                            <input style="border:0 solid whitesmoke; width:100%;" type="text" value="${ProjectList.cus_num}" readonly="readonly" disabled/>
+                                            <input style="border:0 solid whitesmoke;width:100%; width:100%;" type="text" value="${ProjectList1.cus_name}/${ProjectList1.cus_position}" readonly="readonly" disabled/>
 
                                         </div>
                                     </div>
@@ -46,35 +46,29 @@
                                         <div class="col-3"></div>
                                         <div class="col-4 ">
                                             <small class="help-block form-text">프로젝트기간</small>
-                                            <input style="border:0 solid whitesmoke;" type="text" value="${ProjectList.prj_start}~${ProjectList.prj_end}" readonly="readonly" disabled/>
+                                            <input style="border:0 solid whitesmoke;width:100%;" type="text" value="${ProjectList1.prj_start}~${ProjectList1.prj_end}" readonly="readonly" disabled/>
                                         </div>
                                     </div>
                                     <div class="row form-group">
                                         <div class="col-3"></div>
                                         <div class="col-4 ">
                                             <small class="help-block form-text">등록일</small>
-                                            <input style="border:0 solid whitesmoke;" type="text" value="${ProjectList.prj_reg}" readonly="readonly" disabled/>
+                                            <input style="border:0 solid whitesmoke;width:100%;" type="text" value="${ProjectList1.prj_reg}" readonly="readonly" disabled/>
                                         </div>
 
                                         <div class="col-4" >
                                             <small class="help-block form-text">수정일</small>
-                                            <input style="border:0 solid whitesmoke; width:100%;" type="text" value="${ProjectList.prj_upd}" readonly="readonly" disabled/>
+                                            <input style="border:0 solid whitesmoke;width:100%; width:100%;" type="text" value="${ProjectList1.prj_upd}" readonly="readonly" disabled/>
 
                                         </div>
                                     </div>
 
-                                    <div class="row form-group">
-                                        <div class="col-2"></div>
-                                        <div class="col-4 ">
-                                            <small class="help-block form-text">프로젝트원 목록</small>
-                                        </div>
-                                    </div>
                                     <div class="row form-group">
                                         <div class="col-2"></div>
                                         <div class="col-8" style="border-top:  2px solid #808080;border-bottom: 2px solid #808080;">
                                             <div class="row form-group">
                                                 <div class="col col-md-1 text-right"><label class="form-control-label fa-solid m-2"></label></div>
-                                                <div class="col-12 col-md-12 text-gray-900 fa-solid m-2">
+                                                <div class="col-12 col-md-12 text-gray-900 m-2">
                                                     <!-- DataTales Example -->
                                                     <div class="card mb-4">
                                                         <div class="card-body">
@@ -82,15 +76,22 @@
                                                                 <table class="table table-bordered" id="dataTable">
                                                                     <thead>
                                                                     <tr>
-                                                                        <th>번호</th>
-                                                                        <th>회사명</th>
-                                                                        <th>직급</th>
                                                                         <th>이름</th>
+                                                                        <th>직책</th>
+                                                                        <th>번호</th>
+                                                                        <th>이메일</th>
                                                                     </tr>
                                                                     </thead>
-
                                                                     <tbody>
-
+                                                                    <c:forEach items="${Project_detailList}" var="project_detail">
+                                                                        <tr>
+                                                                            <td>${project_detail.cus_name}</td>
+                                                                            <td>${project_detail.cus_position}</td>
+                                                                            <td>${project_detail.cus_phone}</td>
+                                                                            <td>${project_detail.cus_email}</td>
+                                                                            </td>
+                                                                        </tr>
+                                                                    </c:forEach>
                                                                     </tbody>
                                                                 </table>
                                                             </div>
@@ -106,7 +107,7 @@
 
                         <!-- 수정/삭제/목록 버튼 -->
                         <div class="text-center d-block card-header py-3">
-                            <a href="project_write.do?prj_num=${ProjectList.prj_num}&update=1" class="btn btn-info">
+                            <a href="project_write.do?prj_num=${ProjectList1.prj_num}&update=1" class="btn btn-info">
                                               <span class="icon text-white-50">
                                               <i class="fas fa-pen"></i>
                                               </span>
@@ -133,7 +134,7 @@
                                                 게시물을 정말 삭제하시겠습니까?
                                             </div>
                                             <div class="modal-footer">
-                                                <button onclick = "location.href = 'project_delete.do?prj_num=${ProjectList.prj_num}'" type="button" class="btn btn-danger">삭제하기</button>
+                                                <button onclick = "location.href = 'project_delete.do?prj_num=${ProjectList1.prj_num}'" type="button" class="btn btn-danger">삭제하기</button>
                                                 <button type="button" class="btn btn-secondary" data-dismiss="modal">취소하기</button>
                                             </div>
                                         </div>
@@ -141,7 +142,7 @@
                                 </div>
                             </a>
 
-                            <a href="http://localhost:8089/outputs.do" class="btn btn-secondary">
+                            <a href="project.do" class="btn btn-secondary">
                                              <span class="icon text-white-50">
                                               <i class="fas fa-list"></i>
                                              </span>
@@ -203,11 +204,3 @@
 
     <!-- Page level custom scripts -->
     <script src="<c:url value="/resources/js/demo/datatables-demo.js"/>"></script>
-
-    <!-- Page level plugins -->
-    <script src="<c:url value="/resources/vendor/chart.js/Chart.min.js"/>"></script>
-
-    <!-- Page level custom scripts -->
-    <script src="<c:url value="/resources/js/demo/chart-bar-demo.js"/>"></script>
-    <script src="<c:url value="/resources/js/demo/chart-pie-demo.js"/>"></script>
-    <script src="<c:url value="/resources/js/demo/chart-pie-demo.js"/>"></script>

@@ -28,7 +28,7 @@
                 </div>
                 <div class="card-body">
                     <div class="table-responsive">
-                        <table class="table table-bordered table-hover row-border" id="dataTable" width="100%"cellspacing="0">
+                        <table class="table table-bordered table-hover row-border" id="dataTable" width="100%" cellspacing="0">
                             <thead>
                             <tr>
                                 <th width="10%">번호</th>
@@ -95,6 +95,3 @@
 <script src="<c:url value="/resources/js/demo/datatables-demo.js"/>"></script>
 <script src="https://kit.fontawesome.com/55082abfe9.js" crossorigin="anonymous"></script>
 
-</body>
-
-</html>

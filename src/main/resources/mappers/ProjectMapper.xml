@@ -6,7 +6,15 @@
 <mapper namespace="com.mark.mappers.ProjectMapper">
     <!-- Select 문 -->
     <select id="selectProject" resultType="ProjectVO">
-        SELECT prj_num,prj_name, cus_num ,to_char(prj_start,'YYYY-MM-DD') AS prj_start ,to_char(prj_end,'YYYY-MM-DD') AS prj_end, prj_reg ,prj_upd FROM project
+        SELECT prj_num,prj_name, project.cus_num ,to_char(prj_start,'YYYY-MM-DD') AS prj_start ,to_char(prj_end,'YYYY-MM-DD') AS prj_end, prj_reg ,prj_upd ,cus_name,cus_position,cus_email
+        FROM project ,customer
+        WHERE project.cus_num = customer.cus_num
+    </select>
+
+    <select id="selectProject_detail" resultType="ProjectDetailVO">
+        SELECT project_detail.cus_num , cus_name ,cus_email ,cus_phone,cus_position,prj_num,auth
+        FROM project_detail ,customer
+        WHERE project_detail.cus_num = customer.cus_num and prj_num=${prj_num}
     </select>
 
     <!-- 사용자의 해당 프로젝트 리스트 불러오기 -->
@@ -21,6 +29,11 @@
         values (prj_seq.nextval, #{prj_name}, #{cus_num},to_date(#{prj_start},'YYYY-MM-DD'), to_date(#{prj_end},'YYYY-MM-DD'), sysdate)
     </insert>
 
+    <insert id="insertProject_detail" parameterType="ProjectDetailVO" >
+        insert into Project_detail(prj_num,cus_num,auth)
+        values (#{prj_num},#{cus_num},#{auth})
+    </insert>
+
     <update id="updateProject" parameterType="ProjectVO" >
         update Project
         set prj_name = #{prj_name}, cus_num =#{cus_num} ,prj_start = to_date(#{prj_start},'YYYY-MM-DD'), prj_end= to_date(#{prj_end},'YYYY-MM-DD'),prj_upd=sysdate
@@ -28,10 +41,20 @@
     </update>
 
     <select id="viewProject" resultType="ProjectVO">
-        SELECT prj_num,prj_name, cus_num ,to_char(prj_start,'YYYY-MM-DD') AS prj_start ,to_char(prj_end,'YYYY-MM-DD') AS prj_end, prj_reg ,prj_upd FROM Project where prj_num=#{prj_num}
+        SELECT prj_num,prj_name, project.cus_num ,to_char(prj_start,'YYYY-MM-DD') AS prj_start ,to_char(prj_end,'YYYY-MM-DD') AS prj_end, prj_reg ,prj_upd ,cus_name,cus_position
+        FROM Project,customer
+        where prj_num=#{prj_num} and project.cus_num = customer.cus_num
     </select>
 
     <delete id="delete">
         delete from Project where prj_num=#{prj_num}
+    </delete>
+
+    <delete id="deleteAllProject_detail">
+        delete from project_detail where prj_num=#{prj_num}
+    </delete>
+
+    <delete id="deleteProject_detail">
+        delete from project_detail where prj_num=#{prj_num} and cus_num=#{cus_num}
     </delete>
 </mapper>

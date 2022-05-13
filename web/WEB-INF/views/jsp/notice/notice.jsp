@@ -62,7 +62,7 @@
                             </tbody>
                         </table>
                         <div style="text-align: center">
-                            <a href="/notice_write.do?update=0&post_num=0" class="btn btn-primary btn-icon-split">
+                            <a href="/notice_write.do?update=0&post_num=0" class="btn btn-info">
                           <span class="icon text-white-50">
                             <i class="fas fa-pen"></i>
                           </span>
@@ -106,7 +106,3 @@
 
 <script src="<c:url value="/resources/js/demo/datatables-demo.js"/>"></script>
 <script src="https://kit.fontawesome.com/55082abfe9.js" crossorigin="anonymous"></script>
-
-</body>
-
-</html>
