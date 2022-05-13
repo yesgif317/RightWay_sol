@@ -34,4 +34,8 @@ public class Re_CommentServiceImpl implements Re_CommentService{
     @Override
     public int re_countComment(int post_num) { return dao.re_countComment(post_num); }
  */
+    @Override
+    public int deleteRe_CommentAll(int no) {
+    return dao.deleteRe_CommentAll(no);
+}
 }

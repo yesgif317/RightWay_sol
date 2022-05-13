@@ -14,5 +14,7 @@ public interface Re_CommentDao {
 
     int deleteRe_Comment(int no);
 
+    int deleteRe_CommentAll(int no);
+
 //    int re_countComment(int post_num);
 }

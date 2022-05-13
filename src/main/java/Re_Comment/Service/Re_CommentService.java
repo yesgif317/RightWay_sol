@@ -12,4 +12,5 @@ public interface Re_CommentService {
     // 대댓글 삭제
     int deleteRe_Comment(int no);
 //    int re_countComment(int post_num);
+    int deleteRe_CommentAll(int no);
 }

@@ -29,6 +29,10 @@
         delete from re_comments where rcmt_num = #{rcmt_num, jdbcType=VARCHAR}
     </delete>
 
+    <delete id="deleteRe_CommentAll">
+        delete from re_comments where cmt_num = #{cmt_num, jdbcType=VARCHAR}
+    </delete>
+
 </mapper>
 
 

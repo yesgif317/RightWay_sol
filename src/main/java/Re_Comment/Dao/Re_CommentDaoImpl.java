@@ -33,6 +33,10 @@ public class Re_CommentDaoImpl implements Re_CommentDao {
         //Ibatis Update 사용법
         return sqlSession.delete(Namespace+".deleteRe_Comment",no);
     }
+    public int deleteRe_CommentAll(int no) {
+        //Ibatis Update 사용법
+        return sqlSession.delete(Namespace+".deleteRe_CommentAll",no);
+    }
 /*
     public int re_countComment(int post_num) {
         int count=0;

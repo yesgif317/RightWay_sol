@@ -1163,6 +1163,7 @@ public class MainController {
     public String comments_delete(@RequestParam("cmt_num_inform_delete") int cmt_num_inform_delete,
                                   @RequestParam("uri_cmt_delete") String URI) {
         int cmt_delete_num = cmt_num_inform_delete;
+        re_commentService.deleteRe_CommentAll(cmt_delete_num);
         commentService.deleteComment(cmt_delete_num);
         return "redirect:" + URI;
     }
