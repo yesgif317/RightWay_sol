@@ -104,6 +104,8 @@ jsp:include page="../../include/footer.jsp" flush="true" />
 
                 <%! int dis_id1 = 1; %>
                 <%! int dis_id2 = 2; %>
+                <%! int dis_id3 = 1; %>
+                <%! int dis_id4 = 2; %>
 
 
                 <c:forEach items="${CommentList}" var="comment">
@@ -150,21 +152,6 @@ jsp:include page="../../include/footer.jsp" flush="true" />
                                             $('#a<%=dis_id1%>').hide();
                                         }
                                     }
-
-                                    function d<%=dis_id2%>(){
-                                        if($('#d<%=dis_id2%>').css('display') == 'none'){
-                                            $('#d<%=dis_id2%>').show();
-                                        }else{
-                                            $('#d<%=dis_id2%>').hide();
-                                        }
-                                    }
-                                    function c<%=dis_id1%>(){
-                                        if($('#c<%=dis_id1%>').css('display') == 'none'){
-                                            $('#c<%=dis_id1%>').show();
-                                        }else{
-                                            $('#c<%=dis_id1%>').hide();
-                                        }
-                                    }
                                 </script>
 
                                 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
@@ -197,7 +184,6 @@ jsp:include page="../../include/footer.jsp" flush="true" />
 
                                         ${comment.cmt_cnt}
 
-                                <c:if test="${comment.cmt_num eq recomment.rcmt_num && empty recomment.rcmt_num}">
                                 <form method="get" action="/comments_delete.do">
                                     <!-- 링크용 uri 정보 -->
                                     <input type="hidden" id="uri_cmt_delete" name="uri_cmt_delete" value="${uri}"/>
@@ -205,11 +191,6 @@ jsp:include page="../../include/footer.jsp" flush="true" />
                                     <input type="hidden" id="cmt_num_inform_delete" name="cmt_num_inform_delete" value="${comment.cmt_num}"/>
                                     <input type="submit" class="btn btn-comment_delete" value="삭제"  style="float:right"/>
                                 </form>
-                                </c:if>
-
-                                <c:if test="${comment.cmt_num eq recomment.rcmt_num && not empty recomment.rcmt_num}">
-                                    <!-- 대댓글 달려있으면 댓글 삭제 못하게 함 -->
-                                </c:if>
 
 
 
@@ -243,6 +224,23 @@ jsp:include page="../../include/footer.jsp" flush="true" />
 
                         <c:forEach items="${Re_CommentList}" var="recomment">
                             <c:if test="${recomment.cmt_num == comment.cmt_num}">
+
+                                <script type="text/javascript">
+                                    function d<%=dis_id4%>(){
+                                        if($('#d<%=dis_id4%>').css('display') == 'none'){
+                                            $('#d<%=dis_id4%>').show();
+                                        }else{
+                                            $('#d<%=dis_id4%>').hide();
+                                        }
+                                    }
+                                    function c<%=dis_id3%>(){
+                                        if($('#c<%=dis_id3%>').css('display') == 'none'){
+                                            $('#c<%=dis_id3%>').show();
+                                        }else{
+                                            $('#c<%=dis_id3%>').hide();
+                                        }
+                                    }
+                                </script>
                     <!-- 대댓글 시작부분 -->
                     <div class="media" id="c2_12584096" style="margin-left:64px;">
                         <div class="photo pull-left">
@@ -269,7 +267,7 @@ jsp:include page="../../include/footer.jsp" flush="true" />
                                  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 
 
-                                <div id="d<%=dis_id2%>" style="display: none;">
+                                <div id="d<%=dis_id4%>" style="display: none;">
                                     <form method="post" action="/re_comments_update.do">
                                         <!-- 링크용 uri 정보 -->
                                         <input type="hidden" id="uri_rcmt_update" name="uri_rcmt_update" value="${uri}"/>
@@ -279,16 +277,16 @@ jsp:include page="../../include/footer.jsp" flush="true" />
                                         <input type="submit" class="btn btn-comment_update" value="수정"  style="float:right"/>
                                     </form>
 
-                                    <form method="get" action="javascript:c<%=dis_id1%>();d<%=dis_id2%>();">
+                                    <form method="get" action="javascript:c<%=dis_id3%>();d<%=dis_id4%>();">
                                         <input type="submit" class="btn btn-comment_delete" value="취소"  style="float:right"/>
                                     </form>
                                 </div>
 
 
 
-                                <div id="c<%=dis_id1%>" style="display: contents;">
+                                <div id="c<%=dis_id3%>" style="display: contents;">
 
-                                    <form method="get" action="javascript:c<%=dis_id1%>();d<%=dis_id2%>();">
+                                    <form method="get" action="javascript:c<%=dis_id3%>();d<%=dis_id4%>();">
                                         <input type="submit" class="btn btn-comment_delete" value="수정"  style="float:right"/>
                                     </form>
 
@@ -319,12 +317,16 @@ jsp:include page="../../include/footer.jsp" flush="true" />
                     <hr>
                     <!-- 댓글 나누는 선 -->
 
-                                <%dis_id1++;%>
-                                <%dis_id2++;%>
+                                <%dis_id3++;%>
+                                <%dis_id4++;%>
 
 
                             </c:if>
                         </c:forEach>
+
+                        <%dis_id1++;%>
+                        <%dis_id2++;%>
+
                     </c:if>
                 </c:forEach>
 
