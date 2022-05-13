@@ -12,6 +12,8 @@ public class ProjectVO {
     String prj_end;
     String prj_reg;
     String prj_upd;
+    String cus_name;
+    String cus_position;
 
     public int getPrj_num() {
         return prj_num;
@@ -69,6 +71,22 @@ public class ProjectVO {
         this.prj_upd = prj_upd;
     }
 
+    public String getCus_name() {
+        return cus_name;
+    }
+
+    public void setCus_name(String cus_name) {
+        this.cus_name = cus_name;
+    }
+
+    public String getCus_position() {
+        return cus_position;
+    }
+
+    public void setCus_position(String cus_position) {
+        this.cus_position = cus_position;
+    }
+
     public ProjectVO(){
 
     }
@@ -83,6 +101,8 @@ public class ProjectVO {
                 ", prj_end='" + prj_end + '\'' +
                 ", prj_reg='" + prj_reg + '\'' +
                 ", prj_upd='" + prj_upd + '\'' +
+                ", cus_name='" + cus_name + '\'' +
+                ", cus_position='" + cus_position + '\'' +
                 '}';
     }
 

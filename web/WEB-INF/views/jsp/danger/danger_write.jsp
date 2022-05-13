@@ -47,7 +47,7 @@
                                           enctype="application/x-www-form-urlencoded" class="form-horizontal">
                                         </c:otherwise>
                                         </c:choose>
-                                            <input type="hidden" name="cus_num" value="${login.get(0).cus_num}">
+                                            <input type="hidden" name="cus_num" value="${login.cus_num}">
                                             <input type="hidden" name="cate" value="11">
                                             <div class="row form-group">
                                             <div class="col col-md-3 text-right"><label for="risk_tit"

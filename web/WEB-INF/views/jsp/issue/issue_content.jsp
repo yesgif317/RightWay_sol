@@ -54,10 +54,10 @@
                                                     <div class="col-4 bg-warning text-gray-100 text-center">${RiskList.risk_imp}</div>
                                                 </c:when>
                                                 <c:when test="${RiskList.risk_imp eq 'Medium'}">
-                                                    <div class="col-4 bg-secondary text-gray-100 text-center">${RiskList.risk_imp}</div>
+                                                    <div class="col-4 bg-success text-gray-100 text-center">${RiskList.risk_imp}</div>
                                                 </c:when>
                                                 <c:when test="${RiskList.risk_imp eq 'Low'}">
-                                                    <div class="col-4 bg-secondary text-gray-100 text-center">${RiskList.risk_imp}</div>
+                                                    <div class="col-4 bg-info text-gray-100 text-center">${RiskList.risk_imp}</div>
                                                 </c:when>
                                             </c:choose>
                                         </div>

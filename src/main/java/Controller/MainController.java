@@ -17,6 +17,7 @@ import File.Service.FileService;
 import File.Dto.FileVO;
 import Post.Dto.NormalVO;
 import Post.Service.NormalService;
+import Project.Dto.ProjectDetailVO;
 import Project.Dto.ProjectVO;
 import Project.Service.ProjectService;
 import Re_Comment.Dto.Re_CommentVO;
@@ -52,6 +53,8 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.Iterator;
 import java.util.List;
+
+import static java.lang.Integer.parseInt;
 
 
 @Controller
@@ -359,7 +362,7 @@ public class MainController {
 
         //int prj_num = Integer.parseInt(request.getParameter("prj_num"));
         //게시글 저장
-        NormalVO normal = new NormalVO(12, 2, title, contents, Integer.parseInt(cus_num));
+        NormalVO normal = new NormalVO(12, 2, title, contents, parseInt(cus_num));
         normalService.insertPost(normal);
         //첨부파일저장
         fileService.insertFile(uploadFile, 2, 12);
@@ -806,36 +809,52 @@ public class MainController {
         return "redirect:/company.do";
     }
 
+
     //project page
     @RequestMapping(value = "/project.do", method = RequestMethod.GET)
     public String project(Model model) {
-        System.out.println("controller");
-        //service 클래스에서 Dao 로 접근하여 쿼리 결과값 가져오기
-
         List<ProjectVO> projectVOList = projectService.selectProject();
-
-        System.out.println(projectVOList);
-        // .jsp 파일로 DB 결과값 전달하기
-        model.addAttribute("ProjectList", projectVOList);
-
+        model.addAttribute("ProjectList1", projectVOList);
         return "project/project";
     }
 
     //project 글쓰기 페이지 이동
     @RequestMapping(value = "/project_write.do", method = RequestMethod.GET)
     public String project_write(@RequestParam("prj_num") int prj_num, Model model) {
-        if (prj_num > 0) {
-            ProjectVO Result = projectService.viewProject(prj_num);
-            model.addAttribute("ProjectList", Result);
+
+        List<CustomerVO> customerVoList = customerService.selectAllCustomer();
+        List<ProjectDetailVO> projectDetailVOList = projectService.selectProject_detail(prj_num);
+        List<CustomerVO> cusmodalVoList= new ArrayList<>();
+
+        for (CustomerVO customerVO : customerVoList){
+            int i=0;
+            for(ProjectDetailVO projectDetailVO : projectDetailVOList){
+                if(parseInt(customerVO.getCus_num()) == projectDetailVO.getCus_num()){
+                    i+=1;
+                }
+            }
+            if(i==0){cusmodalVoList.add(customerVO);
+            }
         }
+
+        model.addAttribute("CusmodalList", cusmodalVoList);
+        model.addAttribute("CustomerList", customerVoList);
+        model.addAttribute("Project_detailList", projectDetailVOList);
+
+        ProjectVO Result = projectService.viewProject(prj_num);
+        model.addAttribute("ProjectList1", Result);
         return "project/project_write";
     }
 
     //project 상세 페이지 이동
     @RequestMapping(value = "/project_content.do", method = RequestMethod.GET)
     public String project_content(@RequestParam("prj_num") int prj_num, Model model) {
+        List<ProjectDetailVO> projectDetailVOList = projectService.selectProject_detail(prj_num);
+        System.out.println(projectDetailVOList);
+        model.addAttribute("Project_detailList", projectDetailVOList);
         ProjectVO Result = projectService.viewProject(prj_num);
-        model.addAttribute("ProjectList", Result);
+        System.out.println(Result);
+        model.addAttribute("ProjectList1", Result);
         return "project/project_content";
     }
 
@@ -843,7 +862,7 @@ public class MainController {
     @RequestMapping(value = "/project_insert.do", method = RequestMethod.POST)
     public String project_insert(Model model, ProjectVO projectVO) {
         String Result = projectService.insertProject(projectVO);
-        model.addAttribute("ProjectList", Result);
+        model.addAttribute("ProjectList1", Result);
         return "redirect:/project.do";
     }
 
@@ -858,8 +877,23 @@ public class MainController {
     @RequestMapping(value = "/project_update.do", method = RequestMethod.POST)
     public String project_update(Model model, ProjectVO projectVO) {
         String Result = projectService.updateProject(projectVO);
-        model.addAttribute("ProjectList", Result);
+        model.addAttribute("ProjectList1", Result);
         return "redirect:/project.do";
+    }
+
+    // project 프로젝트원 삭제
+    @RequestMapping(value = "/project_detail_delete.do", method = RequestMethod.DELETE)
+    public String project_detail_delete(@RequestParam("prj_num") int prj_num, ProjectDetailVO projectDetailVO) {
+        projectService.deleteProject_detail(projectDetailVO);
+        return "redirect:/project_write.do?prj_num="+prj_num+"&update=1";
+
+    }
+    // project 프로젝트원 등록 기능
+    @RequestMapping(value = "/project_detail_insert.do", method = RequestMethod.POST)
+    public String project_detail_insert(@RequestParam("prj_num") int prj_num,Model model, ProjectDetailVO projectDetailVO) {
+        String Result = projectService.insertProject_detail(projectDetailVO);
+        model.addAttribute("Project_detailList", Result);
+        return "redirect:/project_write.do?prj_num="+prj_num+"&update=1";
     }
 
 
@@ -873,7 +907,7 @@ public class MainController {
         TeamVO teamVoList = teamService.viewTeam(no);
         for (TeammemberVO teammemberVO : teammemberVOList) {
             for (CustomerVO customerVO : customerVoList) {
-                if (Integer.parseInt(String.valueOf(customerVO.getCus_num())) == Integer.parseInt(String.valueOf(teammemberVO.getCus_num()))) {
+                if (parseInt(String.valueOf(customerVO.getCus_num())) == parseInt(String.valueOf(teammemberVO.getCus_num()))) {
                     testList.add(customerVO);
                 }
             }
@@ -1082,7 +1116,7 @@ public class MainController {
 
         System.out.println(customerVOList.toString());
 
-        int cus_num = Integer.parseInt(customerVOList.get(0).getCus_num());
+        int cus_num = parseInt(customerVOList.get(0).getCus_num());
         System.out.println(cus_num);
 
 
@@ -1112,7 +1146,7 @@ public class MainController {
 
         System.out.println(customerVOList.toString());
 
-        int cus_num = Integer.parseInt(customerVOList.get(0).getCus_num());
+        int cus_num = parseInt(customerVOList.get(0).getCus_num());
         System.out.println(cus_num);
 
         String rcnt=rcmt_cnt;
@@ -1355,7 +1389,7 @@ public class MainController {
         System.out.println("permission ajax post.................");
         int[] num = new int[c_num.length];
         for (int j = 0; j < c_num.length; j++) {
-            num[j] = Integer.parseInt(c_num[j]);
+            num[j] = parseInt(c_num[j]);
         }
 
         List<CustomerVO> list = customerService.select_PermissionCustomer(num);

@@ -1,5 +1,6 @@
 package Project.Dao;
 
+import Project.Dto.ProjectDetailVO;
 import Project.Dto.ProjectVO;
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.stereotype.Repository;
@@ -21,8 +22,18 @@ public class ProjectDaoImpl implements ProjectDao{
     }
 
     @Override
+    public List<ProjectDetailVO> selectProject_detail(int prj_num) {
+        return sqlSession.selectList(Namespace + ".selectProject_detail",prj_num);
+    }
+
+    @Override
     public String insertProject(ProjectVO projectVo) {
         return sqlSession.insert(Namespace + ".insertProject",projectVo)+"";
+    }
+
+    @Override
+    public String insertProject_detail(ProjectDetailVO projectDetailVO) {
+        return sqlSession.insert(Namespace + ".insertProject_detail",projectDetailVO)+"";
     }
 
     @Override
@@ -48,5 +59,15 @@ public class ProjectDaoImpl implements ProjectDao{
 
         //Ibatis Update 사용법
         return sqlSession.delete(Namespace+".delete",prj_num);
+    }
+
+    @Override
+    public int deleteAllProject_detail(int prj_num) {
+        return sqlSession.delete(Namespace+".deleteAllProject_detail",prj_num);
+    }
+
+    @Override
+    public int deleteProject_detail(ProjectDetailVO projectVO) {
+        return sqlSession.delete(Namespace+".deleteProject_detail",projectVO);
     }
 }

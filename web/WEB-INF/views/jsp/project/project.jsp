@@ -38,11 +38,11 @@
                             </thead>
 
                             <tbody>
-                            <c:forEach items="${ProjectList}" var="project">
+                            <c:forEach items="${ProjectList1}" var="project">
                                 <tr>
                                     <td>${project.prj_num}</td>
                                     <td><a href ="project_content.do?prj_num=${project.prj_num}">${project.prj_name}</a></td>
-                                    <td>${project.cus_num}</td>
+                                    <td>${project.cus_name}/${project.cus_position}</td>
                                     <td>${project.prj_start}~${project.prj_end}</td>
                                     <c:choose>
                                         <c:when test="${project.prj_upd eq null}">
@@ -114,10 +114,3 @@
 
     <!-- Page level custom scripts -->
     <script src="<c:url value="/resources/js/demo/datatables-demo.js"/>"></script>
-
-    <!-- Page level plugins -->
-    <script src="<c:url value="/resources/vendor/chart.js/Chart.min.js"/>"></script>
-
-    <!-- Page level custom scripts -->
-    <script src="<c:url value="/resources/js/demo/chart-bar-demo.js"/>"></script>
-    <script src="<c:url value="/resources/js/demo/chart-pie-demo.js"/>"></script>
