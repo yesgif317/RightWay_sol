@@ -10,7 +10,10 @@
     </select>
     <!-- 팀 목록 조회(Select) -->
     <select id="selectTeam" resultType="TeamVO">
-        SELECT * FROM Team ORDER BY team_num ASC
+        SELECT t.TEAM_NUM, t.TEAM_NAME, t.TEAM_DESC, t.CUS_NUM, t.PRJ_NUM, c.cus_name
+        FROM Team t, customer c
+        where  t.cus_num=c.cus_num
+        ORDER BY team_num ASC
     </select>
 
     <!-- 팀 작성(Insert) -->
@@ -18,7 +21,7 @@
         insert into Team(team_num,team_name,team_desc,cus_num,prj_num)
         values (team_seq.nextval,#{team_name},#{team_desc},#{cus_num},#{prj_num})
     </insert>
-
+    <!-- 팀 멤버 등록 -->
     <insert id="insertTeammember" parameterType="TeamVO" >
         insert into Teammember(team_num,cus_num)
         values (#{team_num},#{cus_num})
@@ -26,13 +29,15 @@
 
     <!-- 팀 삭제(Delete) -->
     <delete id="deleteTeam"> delete from Team where team_num=#{team_num} </delete>
-    <!-- 팀원 삭제(Delete) -->
+    <!-- 팀 삭제시 팀원 삭제(Delete) -->
     <delete id="deletemember"> delete from Teammember where team_num=#{team_num}  </delete>
-    <!-- 팀원 삭제(Delete) -->
+    <!-- 팀원 한명씩 삭제(Delete) -->
     <delete id="deleteTeammember" > delete from Teammember where team_num=#{team_num} AND cus_num=#{cus_num} </delete>
-    <!-- 팀 한개 정보 조회(Select) -->
+    <!-- 팀 정보 조회(Select) -->
     <select id="viewTeam" resultType="TeamVO">
-        SELECT * FROM Team where team_num=#{team_num}
+        SELECT t.TEAM_NUM, t.TEAM_NAME, t.TEAM_DESC, t.CUS_NUM, t.PRJ_NUM, c.cus_name
+        FROM Team t, customer c
+        where team_num=#{team_num} and t.cus_num=c.cus_num
     </select>
 
     <!-- 팀원 조회(View) -->
@@ -47,14 +52,9 @@
         where team_num =#{team_num}
     </update>
 
-
-
     <!-- 유저 목록 조회(View) -->
     <select id="selectCustomer" resultType="CustomerVO" >
         SELECT * FROM Customer
     </select>
-
-
-
 
 </mapper>

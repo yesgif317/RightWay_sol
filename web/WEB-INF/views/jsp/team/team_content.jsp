@@ -38,31 +38,31 @@
                             <div class="card-body">
                                 <form autocomplete="off" method="post" role="form">
                                     <div class="row form-group">
-                                        <div class="col-3"></div>
+                                        <div class="col-2"></div>
                                         <div class="col-4 ">
                                             <small class="help-block form-text">팀명</small>
-                                            <input style="border:0 solid whitesmoke;" value="${TeamList.team_name}" type="text" id="team_name" name="team_name"  readonly="readonly" disabled/>
+                                            <input style="background-color:white;border:none" value="${TeamList.team_name}" type="text" id="team_name" name="team_name" class="form-control" readonly="readonly" disabled/>
                                         </div>
                                         <div class="col-4" >
-                                            <small class="help-block form-text">등록일</small>
-                                            <input style="border:0 solid whitesmoke;"  id="team_date" name="team_date"  readonly="readonly" disabled/>
+                                            <%--<small class="help-block form-text">등록일</small>
+                                            <input style="solid: whitesmoke;border:none"  id="team_date" name="team_date"  readonly="readonly" class="form-control" disabled/>--%>
                                         </div>
                                     </div>
 
                                     <div class="row form-group">
-                                        <div class="col-3"></div>
+                                        <div class="col-2"></div>
                                         <div class="col-4 ">
                                             <small class="help-block form-text">팀장</small>
-                                            <input style="border:0 solid whitesmoke;" value="${TeamList.cus_num}"type="text" id="cus_num" name="cus_num"  readonly="readonly" disabled/>
+                                            <input style="background-color:white;border:none" value="${TeamList.cus_name}" type="text" id="cus_num" name="cus_num" class="form-control" readonly="readonly" disabled/>
                                         </div>
                                         <div class="col-4" >
                                             <small class="help-block form-text">회사</small>
-                                            <input style="border:0 solid whitesmoke;" value="${TeamList.team_name}"  id="team_company" name="team_company"  readonly="readonly" disabled/>
+                                            <input style="background-color:white;border:none" value="${TeamList.team_name}" type="text"  id="team_company" name="team_company" class="form-control" readonly="readonly" disabled/>
                                         </div>
                                     </div>
 
                                     <div class="row form-group">
-                                        <div class="col-3"></div>
+                                        <div class="col-2"></div>
                                         <div class="col-5">
                                             <small class="help-block form-text">팀설명</small>
                                             <textarea style="border:0; solid: whitesmoke; width: 100%; border: none; resize: both">${TeamList.team_desc}</textarea>
@@ -221,3 +221,13 @@
     <script src="<c:url value="/resources/vendor/datatables/jquery.dataTables.min.js"/>"></script>
     <script src="<c:url value="/resources/vendor/datatables/dataTables.bootstrap4.min.js"/>"></script>
 
+    <!-- Page level custom scripts -->
+    <%--<script src="<c:url value="/resources/js/demo/datatables-demo.js"/>"></script>--%>
+
+    <!-- Page level plugins -->
+    <script src="<c:url value="/resources/vendor/chart.js/Chart.min.js"/>"></script>
+
+    <!-- Page level custom scripts -->
+    <script src="<c:url value="/resources/js/demo/chart-bar-demo.js"/>"></script>
+    <script src="<c:url value="/resources/js/demo/chart-pie-demo.js"/>"></script>
+    <script src="<c:url value="/resources/js/demo/chart-pie-demo.js"/>"></script>

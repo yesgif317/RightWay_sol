@@ -43,7 +43,7 @@
                                             <td>${team.team_num}</td>
                                             <td><a href ="team_content.do?team_num=${team.team_num}">${team.team_name}</a></td>
                                             <td>${team.team_desc}</td>
-                                            <td>${team.cus_num}</td>
+                                            <td>${team.cus_name}</td>
                                             <td>
                                                 <c:set var="count" value="1" />
 
@@ -118,3 +118,10 @@
 
     <!-- Page level custom scripts -->
     <script src="<c:url value="/resources/js/demo/datatables-demo.js"/>"></script>
+
+    <!-- Page level plugins -->
+    <script src="<c:url value="/resources/vendor/chart.js/Chart.min.js"/>"></script>
+
+    <!-- Page level custom scripts -->
+    <script src="<c:url value="/resources/js/demo/chart-bar-demo.js"/>"></script>
+    <script src="<c:url value="/resources/js/demo/chart-pie-demo.js"/>"></script>

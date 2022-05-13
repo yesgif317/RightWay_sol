@@ -9,6 +9,8 @@ public class TeamVO {
     String team_desc;
     int cus_num;
     int prj_num;
+    String cus_name;
+    String prj_name;
 
     public int getTeam_num(){return team_num;}
     public void setTeam_num(int team_num){this.team_num = team_num;}
@@ -24,5 +26,11 @@ public class TeamVO {
 
     public int getPrj_num(){return prj_num;}
     public void setPrj_num(int prj_num){this.prj_num = prj_num;}
+
+    public String getCus_name(){return cus_name;}
+    public void setCus_name(String cus_name){this.cus_name = cus_name;}
+
+    public String getPrj_name(){return prj_name;}
+    public void setPrj_name(String prj_name){this.prj_name = prj_name;}
 
 }

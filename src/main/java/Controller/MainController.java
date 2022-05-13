@@ -902,20 +902,17 @@ public class MainController {
     public String team_write(@RequestParam("team_num") int no, Model model) {
         List<CustomerVO> customerVoList = customerService.selectAllCustomer();
         List<TeammemberVO> teammemberVOList = teamService.viewTeammember(no);
-        List<CustomerVO> cusmodalVoList = customerService.selectAllCustomer();
-        List<CustomerVO> testList = new ArrayList<>();
+        List<CustomerVO> cusmodalVoList= new ArrayList<>();
         TeamVO teamVoList = teamService.viewTeam(no);
-        for (TeammemberVO teammemberVO : teammemberVOList) {
-            for (CustomerVO customerVO : customerVoList) {
-                if (parseInt(String.valueOf(customerVO.getCus_num())) == parseInt(String.valueOf(teammemberVO.getCus_num()))) {
-                    testList.add(customerVO);
+        for (CustomerVO customerVO : customerVoList) {
+            int i=0;
+            for (TeammemberVO teammemberVO : teammemberVOList) {
+                if(parseInt(String.valueOf(customerVO.getCus_num()))==parseInt(String.valueOf(teammemberVO.getCus_num()))){
+                    i+=1;
                 }
             }
+            if(i==0){cusmodalVoList.add(customerVO);}
         }
-        for (int i = 0; i < testList.size(); i++) {
-            cusmodalVoList.remove(testList.get(i));
-        }
-
         model.addAttribute("CusmodalList", cusmodalVoList);
         model.addAttribute("CustomerList", customerVoList);
         model.addAttribute("TeamList", teamVoList);

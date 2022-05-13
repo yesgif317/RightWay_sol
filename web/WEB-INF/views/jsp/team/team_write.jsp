@@ -47,34 +47,13 @@
         location.appendChild(input1);
         document.getElementById('teammemberwriteform').submit();
     }
-    function delete_form() {
-            document.getElementById('teammemberdeleteform').submit();
-
+    function delete_form(cus_num) {
+        document.getElementById('delete_cus_num').setAttribute("value",cus_num);
+        document.getElementById('teammemberdeleteform').submit();
     }
 
 
 
-    $(document).ready(function() {
-        $('#dataTable1').DataTable(
-            {
-                "order": [[ 0, "desc" ]],
-                dom: '<frt<"col-12"<"row"<"col-6"il><"col-6 float-right"p>>>>',
-                language: {
-                    emptyTable: "데이터가 없습니다.",
-                    lengthMenu: "_MENU_ 개씩 보기",
-                    info: "_START_ - _END_ / _TOTAL_건",
-                    infoEmpty: "데이터가 없습니다.",
-                    infoFiltered: "( _MAX_건의 데이터에서 필터링됨 )",
-                    search: "검색:",
-                    zeroRecords: "일치하는 데이터가 없습니다.",
-                    loadingRecords: "로딩중.",
-                    processing: "잠시만 기다려 주세요.",
-                    paginate: {
-                        next: "다음",
-                        previous: "이전"}
-                }
-            });
-    })
 
 </script>
 <!-- Content Wrapper -->
@@ -119,81 +98,89 @@
                                         </c:choose>
 
                                         <!-- 프로젝트 넘버 임의지정 -->
-                                            <input type="hidden" value="${TeamList.team_num}" name="team_num"
-                                                   value=1 />
+
                                             <input type="hidden" name="prj_num"
                                                    value=1 />
                                         <div class="row form-group">
-                                            <div class="col-3"></div>
+                                            <div class="col-2"></div>
                                             <div class="col-4 ">
                                                 <small class="help-block form-text">팀명</small>
                                                 <input style="solid: whitesmoke" value="${TeamList.team_name}"
                                                        placeholder="입력해주세요" type="text" id="team_name"
-                                                       name="team_name"/>
+                                                       name="team_name" class="form-control"/>
                                             </div>
-                                            <div class="col-4">
-                                                <small class="help-block form-text">등록일(수정 불가)</small>
+                                            <%--<div class="col-4">
+                                                <small class="help-block form-text">등록일</small>
                                                 <input style="border:none" id="team_date" name="team_date"
-                                                       readonly="readonly" disabled/>
-                                            </div>
+                                                       readonly="readonly" class="form-control" disabled/>
+                                            </div>--%>
                                         </div>
 
                                         <div class="row form-group">
-                                            <div class="col-3"></div>
+                                            <div class="col-2"></div>
                                             <div class="col-4 ">
                                                 <small class="help-block form-text">팀장</small>
                                                 <c:choose>
                                                     <c:when test="${test eq '1'}">
-                                                        <input style="border:none" value="${TeamList.cus_num}" type="text"
-                                                               id="cus_num" name="cus_num" readonly="readonly"/>
+                                                        <input style="background-color:white;border:none" value="${TeamList.cus_name}"
+                                                                readonly="readonly" class="form-control"/>
                                                     </c:when>
                                                     <c:otherwise>
-                                                        <input style="border:none" value="${login.cus_num}" type="text"
-                                                               id="cus_num" name="cus_num" readonly="readonly"/>
+                                                        <input style="background-color:white;border:none" value="${login.cus_name}" type="text"
+                                                               id="cus_name" name="cus_name" readonly="readonly" class="form-control"/>
+                                                        <input style="background-color:white;border:none" value="${login.cus_num}" type="hidden"
+                                                               id="cus_num" name="cus_num" readonly="readonly" class="form-control"/>
                                                     </c:otherwise>
                                                 </c:choose>
                                             </div>
                                             <div class="col-4">
                                                 <small class="help-block form-text">회사</small>
-                                                <input style="border:none" value=""
-                                                         readonly="readonly"/>
+                                                <input style="background-color:white;border:none" value=""
+                                                       class="form-control" readonly="readonly"/>
                                             </div>
                                         </div>
 
                                         <div class="row form-group">
-                                            <div class="col-3"></div>
+                                            <div class="col-2"></div>
                                             <div class="col-5">
                                                 <small class="help-block form-text">팀설명</small>
                                                 <textarea style=" solid: whitesmoke; width: 100%;  resize: both"
                                                           placeholder="입력해주세요" id="team_desc"
-                                                          name="team_desc">${TeamList.team_desc}</textarea>
+                                                          name="team_desc" class="form-control">${TeamList.team_desc}</textarea>
                                             </div>
                                         </div>
                                     </form>
                                         <c:if test="${test eq 1}">
                                     <div class="row form-group">
-                                        <div class="col col-md-3 text-right">
-                                            <a class="btn ml-3 btn-warning" data-toggle="modal"
+                                        <div class="col-2"></div>
+
+                                        <div class="col col-md-3 text-left">
+
+                                            <a class="btn btn-sm ml-3 btn-info" data-toggle="modal"
                                                data-target="#exampleModal1">
-                                                <span class="text " style="color:white">  팀원추가</span>
+                                                <span class="text " style="color:white">팀원추가</span>
                                             </a>
                                                 <!-- Modal -->
+                                            <div class="modal fade" id="exampleModal1"  role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                                <div class="modal-dialog" role="document">
+                                                    <div class="modal-content">
 
-                                                    <div class="modal fade" id="exampleModal1"  role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                                                    <div class="modal-dialog" role="document">
-                                                        <div class="modal-content">
-                                                            <div class="modal-header" style="text-align: center">
-                                                                    팀원선택
-                                                                <button type="button" class="close" data-dismiss="modal"
-                                                                        aria-label="Close">
-                                                                    <span aria-hidden="true">&times;</span>
-                                                                </button>
-                                                            </div>
-                                                            <div class="modal-body" style="text-align: center">
-                                                                팀원을 선택하세요
-                                                                <table class="dataTable table-bordered table-hover" id="dataTable">
 
-                                                                    <tbody>
+                                                        <div class="modal-header">
+                                                            프로젝트원선택
+                                                            <button type="button" class="close" data-dismiss="modal"
+                                                                    aria-label="Close">
+                                                                <span aria-hidden="true">&times;</span>
+                                                            </button>
+                                                        </div>
+
+                                                        <div class="modal-body">
+                                                            <div class="card-body">
+                                                                <div class="table-responsive">
+                                                                    <table class="table table-sm table-bordered table-hover" id="dataTable">
+
+
+                                                                    <thead>
                                                                     <tr>
                                                                         <th width="15%"></th>
                                                                         <th width="35%">아이디</th>
@@ -201,12 +188,15 @@
                                                                         <th>이메일</th>
 
                                                                     </tr>
+                                                                    </thead>
+                                                                    <tbody>
                                                                     <c:forEach items="${CusmodalList}" var="cusmodal">
                                                                         <c:set var="i" value="${i+1}"/>
-                                                                        <input type="hidden" id='${i}'
-                                                                               value='${cusmodal.cus_num}'>
-                                                                        <tr onclick="return memberselect('${i}')">
-                                                                            <td></td>
+                                                                            <td><input type="hidden" id='${i}'
+                                                                                       value='${cusmodal.cus_num}'>
+                                                                                <a class="btn btn-secondary text-gray-100" data-dismiss="modal"
+                                                                                   onclick="return memberselect('${i}')">선택</a>
+                                                                            </td>
                                                                             <td>${cusmodal.cus_name}</td>
                                                                             <td>${cusmodal.cus_position}</td>
                                                                             <td>${cusmodal.cus_email}</td>
@@ -216,11 +206,20 @@
                                                                 </table>
                                                             </div>
                                                             <div class="modal-footer">
-
+                                                                <button class="btn btn-secondary" type="button" data-dismiss="modal">취소</button>
                                                             </div>
                                                         </div>
                                                     </div>
-                                                </div>
+
+
+                                                    </div>
+                                        </div>
+                                    </div>
+
+
+
+
+
                                         </div>
 
                                     </div>
@@ -263,15 +262,7 @@
                                                                             <td>${customer.cus_position}</td>
                                                                             <td>${customer.cus_phone}</td>
                                                                             <td>${customer.cus_email}</td>
-                                                                            <td onclick="return delete_form()">
-                                                                                <form method="post" action="/teammember_delete.do" id="teammemberdeleteform"
-                                                                                      enctype="application/x-www-form-urlencoded" class="form-horizontal">
-                                                                                    <input type="hidden" name="_method" value="delete">
-                                                                                    <input type="hidden"  name="team_num"
-                                                                                           value='${teammember.team_num}'/>
-                                                                                    <input type="hidden"  name="cus_num"
-                                                                                           value='${teammember.cus_num}'/>
-                                                                                </form>
+                                                                            <td onclick="return delete_form(${teammember.cus_num})">
                                                                                 <a class="btn ml-2 btn-warning "> <i
                                                                                         class="fa-regular fa-circle-xmark "></i></a>
 
@@ -285,6 +276,13 @@
                                                     </div>
                                                 </div>
                                             </div>
+                                            <form method="post" action="/teammember_delete.do" id="teammemberdeleteform"
+                                                  enctype="application/x-www-form-urlencoded" class="form-horizontal">
+                                                <input type="hidden" name="_method" value="delete">
+                                                <input type="hidden"  name="team_num"
+                                                       value='${TeamList.team_num}'/>
+                                                <input type="hidden" id="delete_cus_num" name="cus_num"/>
+                                            </form>
                                             <form method="post"
                                                   action="teammember_insert.do?team_num=${TeamList.team_num}&update=1"
                                                   id="teammemberwriteform" enctype="application/x-www-form-urlencoded"
