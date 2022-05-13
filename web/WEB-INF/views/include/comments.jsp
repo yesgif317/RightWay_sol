@@ -197,6 +197,7 @@ jsp:include page="../../include/footer.jsp" flush="true" />
 
                                         ${comment.cmt_cnt}
 
+                                <c:if test="${comment.cmt_num eq recomment.rcmt_num && empty recomment.rcmt_num}">
                                 <form method="get" action="/comments_delete.do">
                                     <!-- 링크용 uri 정보 -->
                                     <input type="hidden" id="uri_cmt_delete" name="uri_cmt_delete" value="${uri}"/>
@@ -204,7 +205,11 @@ jsp:include page="../../include/footer.jsp" flush="true" />
                                     <input type="hidden" id="cmt_num_inform_delete" name="cmt_num_inform_delete" value="${comment.cmt_num}"/>
                                     <input type="submit" class="btn btn-comment_delete" value="삭제"  style="float:right"/>
                                 </form>
+                                </c:if>
 
+                                <c:if test="${comment.cmt_num eq recomment.rcmt_num && not empty recomment.rcmt_num}">
+                                    <!-- 대댓글 달려있으면 댓글 삭제 못하게 함 -->
+                                </c:if>
 
 
 
