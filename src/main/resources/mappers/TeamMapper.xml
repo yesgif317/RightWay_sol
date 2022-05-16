@@ -10,7 +10,7 @@
     </select>
     <!-- 팀 목록 조회(Select) -->
     <select id="selectTeam" resultType="TeamVO">
-        SELECT t.TEAM_NUM, t.TEAM_NAME, t.TEAM_DESC, t.CUS_NUM, t.PRJ_NUM, c.cus_name
+        SELECT t.TEAM_NUM, t.TEAM_NAME, t.TEAM_DESC, t.CUS_NUM, t.PRJ_NUM, c.cus_name ,c.cus_position
         FROM Team t, customer c
         where  t.cus_num=c.cus_num
         ORDER BY team_num ASC
@@ -35,9 +35,9 @@
     <delete id="deleteTeammember" > delete from Teammember where team_num=#{team_num} AND cus_num=#{cus_num} </delete>
     <!-- 팀 정보 조회(Select) -->
     <select id="viewTeam" resultType="TeamVO">
-        SELECT t.TEAM_NUM, t.TEAM_NAME, t.TEAM_DESC, t.CUS_NUM, t.PRJ_NUM, c.cus_name
-        FROM Team t, customer c
-        where team_num=#{team_num} and t.cus_num=c.cus_num
+        SELECT t.TEAM_NUM, t.TEAM_NAME, t.TEAM_DESC, t.CUS_NUM, t.PRJ_NUM, c.cus_name, p.prj_name, c.cus_email, c.cus_position
+        FROM Team t, customer c, project p
+        where team_num=#{team_num} and t.cus_num=c.cus_num and t.prj_num=p.prj_num
     </select>
 
     <!-- 팀원 조회(View) -->
