@@ -89,7 +89,7 @@
                                             </div>
                                             <div class="modal-footer">
                                                 <button onclick="location.href = 'regularreport_delete.do?post_num=${PostList.post_num}' "
-                                                        type="button" class="btn btn-primary">삭제하기
+                                                        type="button" class="btn btn-danger">삭제하기
                                                 </button>
                                                 <button type="button" class="btn btn-secondary" data-dismiss="modal">
                                                     취소하기
@@ -100,7 +100,7 @@
                                 </div>
                             </a>
 
-                            <a href="http://localhost:8089/regularreport.do" class="btn btn-secondary">
+                            <a href="/regularreport.do" class="btn btn-secondary">
                                              <span class="icon text-white-50">
                                               <i class="fas fa-list"></i>
                                              </span>
@@ -108,7 +108,7 @@
                             </a>
 
                             <c:if test="${dto.prevNum ne 0 }">
-                                <a href="http://localhost:8089/regularreport.do" class="btn btn-secondary">
+                                <a href="/regularreport.do" class="btn btn-secondary">
                                              <span class="icon text-white-50">
                                               <i class="fas fa-list"></i>
                                              </span>
@@ -116,7 +116,7 @@
                                 </a>
                             </c:if>
                             <c:if test="${dto.nextNum ne 0 }">
-                                <a href="http://localhost:8089/regularreport.do" class="btn btn-secondary">
+                                <a href="/regularreport.do" class="btn btn-secondary">
                                              <span class="icon text-white-50">
                                               <i class="fas fa-list"></i>
                                              </span>

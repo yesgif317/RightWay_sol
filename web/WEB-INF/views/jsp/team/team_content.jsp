@@ -44,8 +44,8 @@
                                             <input style="background-color:white;border:none" value="${TeamList.team_name}" type="text" id="team_name" name="team_name" class="form-control" readonly="readonly" disabled/>
                                         </div>
                                         <div class="col-4" >
-                                            <%--<small class="help-block form-text">등록일</small>
-                                            <input style="solid: whitesmoke;border:none"  id="team_date" name="team_date"  readonly="readonly" class="form-control" disabled/>--%>
+                                            <small class="help-block form-text">프로젝트</small>
+                                            <input style="background-color:white;border:none" value="${TeamList.prj_name}" type="text"  id="team_company" name="team_company" class="form-control" readonly="readonly" disabled/>
                                         </div>
                                     </div>
 
@@ -53,11 +53,11 @@
                                         <div class="col-2"></div>
                                         <div class="col-4 ">
                                             <small class="help-block form-text">팀장</small>
-                                            <input style="background-color:white;border:none" value="${TeamList.cus_name}" type="text" id="cus_num" name="cus_num" class="form-control" readonly="readonly" disabled/>
+                                            <input style="background-color:white;border:none" value="${TeamList.cus_position} ${TeamList.cus_name}" type="text" id="cus_num" name="cus_num" class="form-control" readonly="readonly" disabled/>
                                         </div>
                                         <div class="col-4" >
-                                            <small class="help-block form-text">회사</small>
-                                            <input style="background-color:white;border:none" value="${TeamList.team_name}" type="text"  id="team_company" name="team_company" class="form-control" readonly="readonly" disabled/>
+                                            <small class="help-block form-text">팀장 이메일 </small>
+                                            <input style="background-color:white;border:none" value="${TeamList.cus_email}" type="text"   name="team_company" class="form-control" readonly="readonly" disabled/>
                                         </div>
                                     </div>
 
@@ -65,7 +65,7 @@
                                         <div class="col-2"></div>
                                         <div class="col-5">
                                             <small class="help-block form-text">팀설명</small>
-                                            <textarea style="border:0; solid: whitesmoke; width: 100%; border: none; resize: both">${TeamList.team_desc}</textarea>
+                                            <textarea class="form-control" style="border:0; background-color:white; width: 100%; border: none; resize: none;" readonly="readonly">${TeamList.team_desc}</textarea>
                                         </div>
                                     </div>
 
@@ -93,7 +93,8 @@
                                                                         <th>직책</th>
                                                                         <th>연락처</th>
                                                                         <th>이메일</th>
-
+                                                                        <th >부서</th>
+                                                                        <th >상태</th>
                                                                     </tr>
                                                                     </thead>
                                                                     <tbody>
@@ -106,6 +107,8 @@
                                                                             <td>${customer.cus_position}</td>
                                                                             <td>${customer.cus_phone}</td>
                                                                             <td>${customer.cus_email}</td>
+                                                                            <td>${customer.cus_dep}</td>
+                                                                            <td>${customer.cus_state}</td>
                                                                         </tr>
                                                                         </c:if>
                                                                     </c:forEach>
@@ -153,7 +156,7 @@
                                                 팀을 정말 해체하시겠습니까?
                                             </div>
                                             <div class="modal-footer">
-                                                <button onclick = "location.href = 'team_delete.do?team_num=${TeamList.team_num}'" type="button" class="btn btn-primary">해체하기</button>
+                                                <button onclick = "location.href = 'team_delete.do?team_num=${TeamList.team_num}'" type="button" class="btn btn-danger">해체하기</button>
                                                 <button type="button" class="btn btn-secondary" data-dismiss="modal">취소하기</button>
                                             </div>
                                         </div>
@@ -161,7 +164,7 @@
                                 </div>
                             </a>
 
-                            <a href="http://localhost:8089/team.do" class="btn btn-secondary">
+                            <a href="team.do" class="btn btn-secondary">
                                              <span class="icon text-white-50">
                                               <i class="fas fa-list"></i>
                                              </span>

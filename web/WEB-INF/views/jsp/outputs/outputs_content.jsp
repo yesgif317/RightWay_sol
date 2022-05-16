@@ -33,7 +33,7 @@
                                         <div class="col-3"></div>
                                         <div class="col-4 ">
                                             <small class="help-block form-text">작성자</small>
-                                            ${PostList.cus_num}
+                                            ${PostList.cus_name}
                                         </div>
                                         <div class="col-4">
                                             <small class="help-block form-text">작성일</small>
@@ -86,7 +86,7 @@
                                             </div>
                                             <div class="modal-footer">
                                                 <button onclick="location.href = 'outputs_delete.do?post_num=${PostList.post_num}' "
-                                                        type="button" class="btn btn-primary">삭제하기
+                                                        type="button" class="btn btn-danger">삭제하기
                                                 </button>
                                                 <button type="button" class="btn btn-secondary" data-dismiss="modal">
                                                     취소하기
@@ -97,7 +97,7 @@
                                 </div>
                             </a>
 
-                            <a href="http://localhost:8089/outputs.do" class="btn btn-secondary">
+                            <a href="/outputs.do" class="btn btn-secondary">
                                              <span class="icon text-white-50">
                                               <i class="fas fa-list"></i>
                                              </span>
@@ -105,7 +105,7 @@
                             </a>
 
                             <c:if test="${dto.prevNum ne 0 }">
-                                <a href="http://localhost:8089/outputs.do" class="btn btn-secondary">
+                                <a href="/outputs.do" class="btn btn-secondary">
                                              <span class="icon text-white-50">
                                               <i class="fas fa-list"></i>
                                              </span>
@@ -113,7 +113,7 @@
                                 </a>
                             </c:if>
                             <c:if test="${dto.nextNum ne 0 }">
-                                <a href="http://localhost:8089/outputs.do" class="btn btn-secondary">
+                                <a href="/outputs.do" class="btn btn-secondary">
                                              <span class="icon text-white-50">
                                               <i class="fas fa-list"></i>
                                              </span>

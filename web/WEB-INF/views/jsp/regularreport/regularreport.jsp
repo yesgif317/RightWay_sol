@@ -54,9 +54,9 @@
                                         <td>
                                             <a href="regularreport_content.do?post_num=${post.post_num}">${post.nor_tit}</a>
                                         </td>
-                                        <td>${post.cus_num}</td>
+                                        <td>${post.cus_name}</td>
                                         <td><fmt:formatDate value="${post.nor_reg}" pattern="yyyy-MM-dd"/></td>
-                                        <td>${post.prj_num}</td>
+                                        <td>${post.prj_name}</td>
                                     </tr>
                                 <%--</c:if>--%>
                             </c:forEach>
