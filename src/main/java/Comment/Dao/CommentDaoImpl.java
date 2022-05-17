@@ -22,7 +22,7 @@ public class CommentDaoImpl implements CommentDao{
     //댓글추가
     @Override
     public void insertComment(CommentVO commentVO) {
-    //public String insertComment(CommentVO commentVO) {
+        //public String insertComment(CommentVO commentVO) {
         sqlSession.insert(Namespace+".insertComment",commentVO);
 
         //return sqlSession.insert(Namespace+".insertComment", commentVO)+"";

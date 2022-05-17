@@ -13,8 +13,18 @@
 
     <!-- 게시물 작성(Insert) -->
     <insert id="insertFile" parameterType="FileVO" >
-        insert into files(post_num , division_num, file_name)
-        values (#{post_num}, #{division_num}, #{file_name})
+        insert into files(post_num , cate, file_name)
+        values (#{post_num}, #{cate}, #{file_name})
     </insert>
+    <select id="viewFiles" parameterType="int" resultType="FileVO">
+        SELECT *
+        FROM files
+        WHERE post_num = ${n}
+    </select>
+    <select id="selectSeq" resultType="int">
+        SELECT last_number
+        FROM USER_SEQUENCES
+        WHERE SEQUENCE_NAME = 'NOR_SEQ'
+    </select>
 
 </mapper>

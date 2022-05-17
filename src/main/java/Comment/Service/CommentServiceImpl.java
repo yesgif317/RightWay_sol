@@ -24,7 +24,7 @@ public class CommentServiceImpl implements CommentService {
 
     @Override
     public int deleteComment(int no) { return
-        dao.deleteComment(no);
+            dao.deleteComment(no);
     }
 
     @Override

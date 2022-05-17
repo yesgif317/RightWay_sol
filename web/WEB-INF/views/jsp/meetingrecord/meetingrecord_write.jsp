@@ -38,40 +38,42 @@
                             <div class="card-body">
                                 <c:choose>
                                 <c:when test="${test eq '1'}">
-                                <form method="post" action="meetingrecord_update.do?post_num=${PostList.post_num}" id="meetingrecordupdateform"
+                                <form method="post" action="meetingrecord_update.do?post_num=${PostList.post_num}"
+                                      id="meetingrecordupdateform"
                                       enctype="application/x-www-form-urlencoded" class="form-horizontal">
                                     </c:when>
                                     <c:otherwise>
                                     <form method="post" action="meetingrecord_insert.do" id="meetingrecordwriteform"
-                                          enctype="application/x-www-form-urlencoded" class="form-horizontal">
+                                          enctype="multipart/form-data" class="form-horizontal">
                                         </c:otherwise>
                                         </c:choose>
-                                            <input type="hidden" id="cus_num" name="cus_num" value=${login.cus_num}>
+                                        <input type="hidden" id="cus_num" name="cus_num" value=${login.cus_num}>
                                         <div class="row form-group">
-                                            <div class="col col-md-3 text-right"><label for="nor_tit"
-                                                                                        class=" form-control-label fa-solid text-gray-800 mt-2"><sup
-                                                    class="text-danger small">*</sup>제목</label></div>
+                                            <div class="col col-md-3 text-right"><label for="nor_tit" class=" form-control-label fa-solid text-gray-800 mt-2">
+                                                <sup class="text-danger small">*</sup>제목</label></div>
                                             <div class="col-12 col-md-7">
-                                                <input type="text" id="nor_tit" name="nor_tit" placeholder="제목을 입력해주세요."
+                                                <input type="text" id="nor_tit" name="title" placeholder="제목을 입력해주세요."
                                                        class="form-control" value=${PostList.nor_tit}>
                                             </div>
                                         </div>
                                         <div class="row form-group">
-                                            <div class="col col-md-3 text-right"><label for="nor_cnt"
-                                                                                        class=" form-control-label fa-solid text-gray-800 mt-2"><sup
-                                                    class="text-danger small">*</sup>내용</label></div>
+                                            <div class="col col-md-3 text-right">
+                                                <label for="nor_cnt" class=" form-control-label fa-solid text-gray-800 mt-2">
+                                                    <sup class="text-danger small">*</sup>내용</label>
+                                            </div>
                                             <div class="col-12 col-md-7">
-                                                <textarea name="nor_cnt" id="nor_cnt" rows="9"
+                                                <textarea name="contents" id="nor_cnt" rows="9"
                                                           placeholder="회의록 내용을 입력해주세요."
                                                           class="form-control">${PostList.nor_cnt}</textarea>
                                             </div>
                                         </div>
                                         <div class="row form-group">
-                                            <div class="col col-md-3 text-right"><label for="file_link"
-                                                                                        class=" form-control-label fa-solid text-gray-800 mt-2">첨부파일</label>
+                                            <div class="col col-md-3 text-right">
+                                                <label for="file_link" class=" form-control-label fa-solid text-gray-800 mt-2">첨부파일</label>
                                             </div>
-                                            <div class="col-12 col-md-9"><input type="file" id="file_link"
-                                                                                name="file_link" multiple></div>
+                                            <div class="col-12 col-md-9">
+                                                <input type="file" id="file_link" name="uploadFile" multiple>
+                                            </div>
                                         </div>
                                         <input type="hidden" id="cate" name="cate" placeholder="제목을 입력해주세요."
                                                class="form-control" value="2">

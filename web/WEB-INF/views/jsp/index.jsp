@@ -180,7 +180,7 @@
                             <div class="row no-gutters align-items-center">
                                 <div class="col mr-2">
                                     <c:forEach items="${NormalList}" var="post" step="1" begin="0" end="4">
-                                        <a class="dropdown-item-text h5 mb-0 font-weight-bold text-gray-800" href="#">- ${post.nor_tit}</a>
+                                        <a class="dropdown-item-text h5 mb-0 font-weight-bold text-gray-800" href="#">${post.nor_tit}</a>
                                     </c:forEach>
                                 </div>
                             </div>

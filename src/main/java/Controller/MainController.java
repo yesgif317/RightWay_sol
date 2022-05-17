@@ -48,7 +48,10 @@ import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import java.io.File;
+import java.io.FileInputStream;
 import java.io.IOException;
+import java.io.OutputStream;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.Iterator;
@@ -288,7 +291,6 @@ public class MainController {
         if (no > 0) {
             NormalVO Result = normalService.viewPost(no);
             model.addAttribute("PostList", Result);
-        } else {
         }
         return "/outputs/outputs_write";
     }
@@ -298,11 +300,17 @@ public class MainController {
     public String outputs_content(@RequestParam("post_num") int no, Model model, HttpServletRequest request) {
         NormalVO Result = normalService.viewPost(no);
         model.addAttribute("PostList", Result);
-
         // comment 추가 위한 2줄
         AddCmt addcmt = new Addd();
         addcmt.comment(no, model, request);
         // comment 종료
+
+        List<FileVO> files = fileService.viewFiles(no);
+        System.out.println(files);
+        for(int i = 0; i<files.size();i++){
+            files.get(i).setFile_link("/upload/" + files.get(i).getFile_name());
+        }
+        model.addAttribute("FileList",files);
 
         return "/outputs/outputs_content";
     }
@@ -325,9 +333,17 @@ public class MainController {
 
     // 산출물 게시글 작성 기능
     @RequestMapping(value = "/outputs_insert.do", method = RequestMethod.POST)
-    public String outputs_insert(Model model, NormalVO postVO) {
-        String Result = normalService.insertPost(postVO);
-        model.addAttribute("PostList", Result);
+    public String outputs_insert(MultipartFile[] uploadFile, @RequestParam(value = "title") String title
+            , @RequestParam(value = "contents") String contents, @RequestParam(value = "cus_num") String cus_num) {
+        System.out.println("//Title : " + title + "//Contents : " + contents + "//requestFile : " + uploadFile + cus_num);
+
+        //int prj_num = Integer.parseInt(request.getParameter("prj_num"));
+        //게시글 저장
+        NormalVO normal = new NormalVO(1, 2, title, contents, parseInt(cus_num));
+        normalService.insertPost(normal);
+        //첨부파일저장
+        fileService.insertFile(uploadFile, 2, 1);
+
         return "redirect:/outputs.do";
     }
 
@@ -374,14 +390,68 @@ public class MainController {
     public String notice_content(@RequestParam("post_num") int no, Model model, HttpServletRequest request) {
         NormalVO Result = normalService.viewPost(no);
         model.addAttribute("PostList", Result);
-
         // comment 추가 위한 2줄
         AddCmt addcmt = new Addd();
         addcmt.comment(no, model, request);
         // comment 종료
 
+        List<FileVO> files = fileService.viewFiles(no);
+        System.out.println(files);
+        for(int i = 0; i<files.size();i++){
+            files.get(i).setFile_link("/upload/" + files.get(i).getFile_name());
+        }
+        model.addAttribute("FileList",files);
+
         return "/notice/notice_content";
     }
+
+    @RequestMapping(value = "/download.do", method = RequestMethod.GET)
+    public void download(HttpServletResponse response,HttpServletRequest request,@RequestParam("file_name") String filename)
+    {
+
+        System.out.println("download..." + filename);
+
+        String saveFileName = "C:\\upload\\" + filename;
+
+        System.out.println(saveFileName);
+
+        String contentType = filename.substring(filename.lastIndexOf(".")+1);
+
+        System.out.println(contentType);
+
+        File file = new File(saveFileName);
+        System.out.println(file.length());
+        long fileLength = file.length();
+        //파일의 크기와 같지 않을 경우 프로그램이 멈추지 않고 계속 실행되거나, 잘못된 정보가 다운로드 될 수 있다.
+
+        response.setHeader("Content-Disposition", "attachment; filename=\"" + filename + "\";");
+        response.setHeader("Content-Transfer-Encoding", "binary");
+        response.setHeader("Content-Length", "" + fileLength);
+        response.setHeader("Content-Type", contentType); //hwp , ppt 얘네가 타입을 정해놓지 않았던가 무언가 먼제가 있따. 엑셀됨 이미지 됨 => do or zip파일로 나옴
+        response.setHeader("Pragma", "no-cache;");
+        response.setHeader("Expires", "-1;");
+
+
+        try(
+                FileInputStream fis = new FileInputStream(saveFileName);
+                OutputStream out = response.getOutputStream();
+        ){
+            System.out.println("Try!");
+            int readCount = 0;
+            byte[] buffer = new byte[1024];
+            while((readCount = fis.read(buffer)) != -1){
+                out.write(buffer,0,readCount);
+            }
+            System.out.println(out);
+
+            out.close();
+            fis.close();
+
+        }catch(Exception ex){
+            throw new RuntimeException("file Save Error");
+        }
+    }
+
 
     //요청사항 게시판 글목록 보기 cate=15
     @RequestMapping(value = "/request.do", method = RequestMethod.GET)
@@ -524,8 +594,10 @@ public class MainController {
         if (no > 0) {
             NormalVO Result = normalService.viewPost(no);
             model.addAttribute("PostList", Result);
-        } else {
         }
+
+
+
         return "/meetingrecord/meetingrecord_write";
     }
 
@@ -534,11 +606,17 @@ public class MainController {
     public String meetingrecord_content(@RequestParam("post_num") int no, Model model, HttpServletRequest request) {
         NormalVO Result = normalService.viewPost(no);
         model.addAttribute("PostList", Result);
-
         // comment 추가 위한 2줄
         AddCmt addcmt = new Addd();
         addcmt.comment(no, model, request);
         // comment 종료
+
+        List<FileVO> files = fileService.viewFiles(no);
+        System.out.println(files);
+        for(int i = 0; i<files.size();i++){
+            files.get(i).setFile_link("/upload/" + files.get(i).getFile_name());
+        }
+        model.addAttribute("FileList",files);
 
         return "/meetingrecord/meetingrecord_content";
     }
@@ -561,9 +639,18 @@ public class MainController {
 
     // 회의록 게시글 작성 기능
     @RequestMapping(value = "/meetingrecord_insert.do", method = RequestMethod.POST)
-    public String meetingrecord_insert(Model model, NormalVO postVO) {
-        String Result = normalService.insertPost(postVO);
-        model.addAttribute("PostList", Result);
+    public String meetingrecord_insert(MultipartFile[] uploadFile, @RequestParam(value = "title") String title
+            , @RequestParam(value = "contents") String contents, @RequestParam(value = "cus_num") String cus_num) {
+
+        System.out.println("//Title : " + title + "//Contents : " + contents + "//requestFile : " + uploadFile + cus_num);
+
+        //int prj_num = Integer.parseInt(request.getParameter("prj_num"));
+        //게시글 저장
+        NormalVO normal = new NormalVO(2, 2, title, contents, parseInt(cus_num));
+        normalService.insertPost(normal);
+        //첨부파일저장
+        fileService.insertFile(uploadFile, 2, 2);
+
         return "redirect:/meetingrecord.do";
     }
 
@@ -1253,6 +1340,7 @@ public class MainController {
             , @RequestParam(value = "contents") String contents) {
         System.out.println("update ajax post.................");
         System.out.println(title + contents);
+//        NormalVO normalVO = new NormalVO(13,1,title,contents,cus_num);
         fileService.insertFile(uploadFile, 1, 13);
         return "index";
     }

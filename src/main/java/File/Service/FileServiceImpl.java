@@ -7,6 +7,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import javax.inject.Inject;
 import java.io.File;
+import java.util.List;
 
 @Service
 public class FileServiceImpl implements FileService{
@@ -28,7 +29,7 @@ public class FileServiceImpl implements FileService{
             System.out.println("Upload File Size : " + multipartFile.getSize());
 
             String uploadFileName = multipartFile.getOriginalFilename();
-            FileVO fileVO = new FileVO(pro_num,cate,uploadFileName);
+            FileVO fileVO = new FileVO(dao.selectSeq()-1,cate,uploadFileName);
 
             //IE has file path
             uploadFileName = uploadFileName.substring(uploadFileName.lastIndexOf("\\") + 1);
@@ -45,5 +46,10 @@ public class FileServiceImpl implements FileService{
                 System.out.println(e.getMessage());
             }//end catch
         }//end for
+    }
+
+    @Override
+    public List<FileVO> viewFiles(int n) {
+        return dao.viewFiles(n);
     }
 }

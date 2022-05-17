@@ -15,7 +15,7 @@ public class CommentVO {
 
 
     public CommentVO(int cmt_num, int post_num, int cate, int cus_num, String cmt_cnt){
-    //public CommentVO(String cmt_cnt){
+        //public CommentVO(String cmt_cnt){
         this.cmt_num = cmt_num;
         this.cus_num = cus_num;
         this.post_num = post_num;

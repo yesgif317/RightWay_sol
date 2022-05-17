@@ -9,6 +9,7 @@ public class FileVO {
     //분류 번호
     int cate;
     String file_name;
+    String file_link;
 
     public FileVO(int post_num, int cate, String file_name){
         this.post_num = post_num;

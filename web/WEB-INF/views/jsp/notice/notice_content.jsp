@@ -1,3 +1,4 @@
+<%@ page import="java.io.*" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
@@ -5,7 +6,6 @@
 
 <jsp:include page="../../include/header.jsp" flush="true" />
 <jsp:include page="../../include/sidebar.jsp" flush="true" />
-
 <!-- Content Wrapper -->
 <div id="content-wrapper" class="d-flex flex-column" >
 
@@ -22,7 +22,7 @@
                     <div class="card shadow mb-4">
                         <!-- Card Header - Accordion -->
                         <a class="d-block card-header py-3"  style="text-align: center">
-                            <h6 class="m-0 font-weight-bold text-primary"> ${BoardList.title}
+                            <h6 class="m-0 font-weight-bold text-primary"> ${PostList.nor_tit}
                             </h6>
                         </a>
                         <!-- Card Content - Collapse -->
@@ -33,27 +33,34 @@
                                         <div class="col-3"></div>
                                         <div class="col-4 ">
                                             <small class="help-block form-text">작성자</small>
-                                            <input style="border:0 solid whitesmoke;" type="text" id="writer" name="writer" value="${BoardList.writer}" readonly="readonly" disabled/>
+                                            <input style="border:0 solid whitesmoke;" type="text" id="cus_num" name="cus_num" value="${PostList.cus_num}" readonly="readonly" disabled/>
                                         </div>
                                         <div class="col-4" >
                                             <small class="help-block form-text">작성일</small>
-                                            <input style="border:0 solid whitesmoke; width:100%;"  id="date" name="date" value="${BoardList.refdate}" readonly="readonly" disabled/>
+                                            <fmt:formatDate value="${PostList.nor_reg}" pattern="yyyy-MM-dd"/>
 
                                         </div>
                                     </div>
                                     <div class="row form-group">
                                         <div class="col-2"></div>
                                         <div class="col-8" style="border-top:  2px solid #808080;border-bottom: 2px solid #808080;">
-                                            <textarea style="border:0 solid whitesmoke;" name="contents" id="contents" rows="5" class="form-control mt-3 mb-3" readonly="readonly" disabled>${BoardList.contents}</textarea>
+                                            <textarea style="border:0 solid whitesmoke;" name="nor_cnt" id="nor_cnt" rows="5" class="form-control mt-3 mb-3" readonly="readonly" disabled>${PostList.nor_cnt}</textarea>
                                         </div>
                                     </div>
                                 </form>
                             </div>
+                            <c:forEach items="${FileList}" var="file">
+
+                                <div>
+                                    <a href="/download.do?file_name=${file.file_name}" id = "${file.file_name}">${file.file_name}</a>
+                                </div>
+
+                            </c:forEach>
                         </div>
 
                         <!-- 수정/삭제/목록 버튼 -->
                         <div class="text-center d-block card-header py-3">
-                            <a href="outputs_update.do?no=${BoardList.no}" class="btn btn-info">
+                            <a href="notice_write.do?post_num=${PostList.post_num}&update=1" class="btn btn-info">
                                               <span class="icon text-white-50">
                                               <i class="fas fa-pen"></i>
                                               </span>
@@ -80,7 +87,7 @@
                                                 게시물을 정말 삭제하시겠습니까?
                                             </div>
                                             <div class="modal-footer">
-                                                <button href="outputs_delete.do?no=${BoardList.no}" type="button" class="btn btn-primary">삭제하기</button>
+                                                <button href="notice_delete.do?no=${BoardList.no}" type="button" class="btn btn-primary">삭제하기</button>
                                                 <button type="button" class="btn btn-secondary" data-dismiss="modal">취소하기</button>
                                             </div>
                                         </div>
@@ -88,7 +95,7 @@
                                 </div>
                             </a>
 
-                            <a href="http://localhost:8089/outputs.do" class="btn btn-secondary">
+                            <a href="/notice.do" class="btn btn-secondary">
                                              <span class="icon text-white-50">
                                               <i class="fas fa-list"></i>
                                              </span>
@@ -127,13 +134,9 @@
 <!-- Custom scripts for all pages-->
 <script src="<c:url value="/resources/js/sb-admin-2.min.js"/>"></script>
 
-<script src="<c:url value="/resources/vendor/datatables/dataTable.js"/>"></script>
+<!-- Page level plugins -->
 
-<script type="text/javascript">
-    function goSubmit() {
-        var form = document.getElementById('tableswriteform').submit();
-    }
-</script>
+
 
 </body>
 

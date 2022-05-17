@@ -102,12 +102,6 @@
                                             formData.append("writer",writer);
                                             formData.append("contents",contents);
 
-                                            // fetch('/notice_insert.do',{
-                                            //     method: 'POST',
-                                            //     headers: 'application/x-www-form-urlencoded',
-                                            //     body : formData
-                                            // })
-
                                             document.getElementById('noticewriteform').submit();
 
                                         }
