@@ -97,7 +97,7 @@
                                                                                 <td>${customer.cus_name}</td>
                                                                                 <td>${customer.cus_position}</td>
                                                                                 <td>${customer.cus_email}</td>
-                                                                                <td onclick="return memberselect('${customer.cus_num}','${customer.cus_name}')">
+                                                                                <td onclick="return memberselect('${customer.cus_num}','${customer.cus_name}','${customer.cus_position}')">
                                                                                     <a class="btn btn-secondary text-gray-100" data-dismiss="modal">선택</a>
                                                                                 </td>
                                                                             </tr>
@@ -116,7 +116,7 @@
                                                     </div>
 
                                                 <input id="mng_name" class="ml-2"
-                                                       style="border:0 solid whitesmoke;" value="${RiskList.mng_name}" placeholder="담당자를 선택해주세요."
+                                                       style="border:0 solid whitesmoke;" value="${RiskList.mng_name}/${RiskList.mng_position}" placeholder="담당자를 선택해주세요."
                                                        readonly>
                                                 <input type="hidden" name="risk_mng" id="risk_mng" value="${RiskList.risk_mng}">
                                             </div>
@@ -290,8 +290,8 @@
                                     }
                                 }
 
-                                function memberselect(num,name) {
-                                    document.getElementById('mng_name').setAttribute("value", name);
+                                function memberselect(num,name,position) {
+                                    document.getElementById('mng_name').setAttribute("value", name + "/" + position);
                                     document.getElementById('risk_mng').setAttribute("value", num);
                                 }
 

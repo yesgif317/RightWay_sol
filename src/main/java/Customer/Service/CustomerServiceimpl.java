@@ -72,6 +72,13 @@ public class CustomerServiceimpl implements CustomerService {
     }
 
     @Override
+    public void updatePassword(CustomerVO customerVO) throws Exception{
+        String hashedPw = BCrypt.hashpw(customerVO.getCus_pwd(), BCrypt.gensalt());
+        customerVO.setCus_pwd(hashedPw);
+        dao.updatePassword(customerVO);
+    }
+
+    @Override
     public List<CustomerVO> select_nonPermissionCus() {
         return dao.select_nonPermissionCus();
     }

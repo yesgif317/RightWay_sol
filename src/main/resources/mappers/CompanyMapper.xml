@@ -13,7 +13,7 @@
 
     <!-- 회사이름 select 문-->
     <select id="checkCompany" resultType="CompanyVO" parameterType="String">
-        select com_num, com_name
+        select *
         from company
         where com_name = #{com_name}
     </select>

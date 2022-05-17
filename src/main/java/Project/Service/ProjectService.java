@@ -10,6 +10,9 @@ public interface ProjectService {
     List<ProjectVO> selectProject();
     List<ProjectDetailVO> selectProject_detail(int prj_num);
 
+    //프로젝트 번호 가져오기
+    ProjectVO selectProjectNum(String prj_name);
+
     //프로젝트 추가(Insert)
     String insertProject(ProjectVO projectVO);
     String insertProject_detail(ProjectDetailVO projectVO);

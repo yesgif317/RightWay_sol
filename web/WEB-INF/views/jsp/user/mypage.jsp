@@ -25,18 +25,19 @@
                         <!-- Card Content - Collapse -->
                         <div class="collapse show" id="collapseCardExample">
                             <div class="card-body">
-                                <form method="post" action="mypage_update.do?cus_num=${login.cus_num}" id="updateform" enctype="application/x-www-form-urlencoded" class="form-horizontal">
+                                <form method="post" action="mypage_update.do?cus_num=${login.cus_num}" id="updateform" name="updateform" enctype="application/x-www-form-urlencoded" class="form-horizontal">
                                     <div class="row form-group">
                                         <div class="col col-md-3 text-right"><label class="form-control-label fa-solid m-2">ID</label></div>
-                                        <div class="col-12 col-md-7 text-gray-900 text-lg">${login.cus_id} <a class="btn btn-sm btn-secondary ml-3 text-gray-100">비밀번호변경</a></div>
+                                        <div class="col-12 col-md-7 text-gray-900 text-lg mt-1">${login.cus_id} <a class="btn btn-sm btn-secondary ml-3 text-gray-100" data-toggle="modal" data-target="#passwordModal">비밀번호변경</a></div>
+                                        <input type="hidden" name="login.cus_id" value="">
                                     </div>
                                     <div class="row form-group">
                                         <div class="col col-md-3 text-right"><label class="form-control-label fa-solid m-2">이름</label></div>
-                                        <div class="col-12 col-md-7 text-gray-900 text-lg">${login.cus_name}</div>
+                                        <div class="col-12 col-md-7 text-gray-900 text-lg mt-1">${login.cus_name}</div>
                                     </div>
                                     <div class="row form-group">
                                         <div class="col col-md-3 text-right"><label class="form-control-label fa-solid m-2">회사</label></div>
-                                        <div class="col-12 col-md-7 text-gray-900 text-lg">${login.com_name}</div>
+                                        <div class="col-12 col-md-7 text-gray-900 text-lg mt-1">${login.com_name}</div>
                                     </div>
                                     <div class="row form-group">
                                         <div class="col col-md-3 text-right"><label class="form-control-label fa-solid m-2">이메일</label></div>
@@ -91,6 +92,45 @@
                                         </div>
                                     </div>
                                 </div>
+                                <div class="modal fade" id="passwordModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel1" aria-hidden="true" >
+                                    <div class="modal-dialog" role="document">
+                                        <div class="modal-content">
+                                            <div class="modal-header">
+                                                <h5 class="modal-title" id="exampleModalLabel1">비밀번호변경</h5>
+                                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                    <span aria-hidden="true">×</span>
+                                                </button>
+                                            </div>
+                                            <form method="post" action="updatePassword.do?check_pwd=${login.cus_pwd}" id="passwordform" name="passwordform" enctype="application/x-www-form-urlencoded" class="form-horizontal">
+                                            <div class="modal-body">
+                                                <div class="form-group">
+                                                    <input type="password" class="form-control form-control-user" name="old_pwd"
+                                                           id="old_pwd"
+                                                           placeholder="기존비밀번호">
+                                                </div>
+                                                <div class="form-group text-left">
+                                                    <input type="password" class="form-control form-control-user" name="cus_pwd"
+                                                           id="cus_pwd"
+                                                           placeholder="변경비밀번호">
+                                                    <small>&nbsp; 8자 이상의 영문자,숫자,특수문자 조합으로 입력되어야 합니다.</small>
+                                                </div>
+                                                <div class="form-group">
+                                                    <input type="password" class="form-control form-control-user" name="new_pwd"
+                                                           id="new_pwd"
+                                                           placeholder="변경비밀번호확인">
+                                                </div>
+                                            </div>
+                                                <input  type="hidden" name="cus_num" value="${login.cus_num}">
+                                                <input  type="hidden" name="cus_id" value="${login.cus_id}">
+                                        </form>
+                                            <div class="modal-footer">
+                                                <button class="btn btn-info" type="button" onclick="chk_form()">변경</button>
+                                                <button class="btn btn-secondary" type="button" data-dismiss="modal">취소</button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
                                 <a href="index.do" class="btn btn-secondary">
                                                 <span class="icon text-white-50">
                                                     <i class="fas fa-list"></i>
@@ -111,7 +151,51 @@
     </div>
     <!-- End of Main Content -->
 
+<script>
+    function chk_form() {
+        var pwdtext = /^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*#?&])[A-Za-z\d@$!%*#?&]{8,}$/;
 
+        if (document.getElementById("old_pwd").value === '') {
+            alert("기존비밀번호를 입력해주세요.");
+            document.getElementById("old_pwd").focus();
+            exit();
+        } else if (document.getElementById("cus_pwd").value === '') {
+            alert("변경비밀번호를 입력해주세요.");
+            document.getElementById("cus_pwd").focus();
+            exit();
+        }  else if (document.getElementById("new_pwd").value === '') {
+            alert("변경비밀번호확인을 입력해주세요.");
+            document.getElementById("new_pwd").focus();
+            exit();
+        }
+        if (document.getElementById("cus_pwd").value === document.getElementById("old_pwd").value){
+            alert("기존 비밀번호와 동일한 비밀번호로 변경할 수 없습니다.");
+            document.getElementById("cus_pwd").focus();
+            exit();
+        }
+        if (pwdtext.test(document.getElementById("cus_pwd").value) === false) {
+            alert("비밀번호 형식이 올바르지 않습니다. 8자 이상의 영문자,숫자,특수문자 조합으로 이루어져야 합니다.");
+            document.getElementById("cus_pwd").focus();
+            exit();
+        }
+        if (document.getElementById("cus_pwd").value !== document.getElementById("new_pwd").value) {
+            //비밀번호와 비밀번호 확인의 값이 다를경우
+            alert("변경비밀번호와 비밀번호확인이 일치하지 않습니다.");
+            document.getElementById("cus_pwd").focus();
+            exit();
+        }
+        document.passwordform.submit();
+    }
+
+    var msg = "${msg}";
+    if (msg === "fail") {
+        alert("기존비밀번호가 일치하지 않습니다." +
+            "비밀번호 확인 후 다시 시도해주세요.");
+    } else if (msg === "update") {
+        alert("비밀번호가 변경되었습니다.");
+    }
+
+</script>
 
 
 

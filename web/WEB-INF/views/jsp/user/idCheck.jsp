@@ -4,7 +4,7 @@
 <html>
 <head>
     <meta charset="UTF-8">
-    <title>ID check</title>
+    <title>아이디 중복확인</title>
 
     <link href="/resources/vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
     <link href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i"
@@ -33,14 +33,16 @@
 
 </script>
 
-<form method="post" class="form-signin" action="/idCheck.do" name="joinform">
-    <div class="form-label-group">
-        <input type="text" id="cus_id" name="cus_id" class="form-control" value="${cus_id}"/>
+<form method="post" class="form-signin mt-5" action="/idCheck.do" name="joinform">
+    <div class="row form-label-group m-3">
+        <div class="col-3"></div>
+        <div class="col-6"><input type="text" id="cus_id" name="cus_id" class="form-control" value="${cus_id}"/></div>
     </div>
 
-    <div class="form-label-group">
-        <input class="btn btn-lg btn-secondary btn-block text-lowercase"
-               type="submit" value="중복확인">
+    <div class="row form-label-group m-3">
+            <div class="col-3"></div>
+        <div class="col-6"><input class="btn btn-lg btn-secondary btn-block text-lowercase"
+                                  type="submit" value="중복확인"></div>
     </div>
 
     <!-- 아이디가 존재할 때 -->
@@ -48,15 +50,22 @@
         <script>
             opener.document.joinform.cus_id.value = "";
         </script>
-        ${cus_id}는 사용중인 아이디입니다.
+    <div class="row form-label-group m-3">
+        <div class="col-3"></div>
+        <div class="col-6"> ${cus_id}는 사용중인 아이디입니다.
+        </div></div>
     </c:if>
 
     <!-- 아이디가 존재하지 않을 때 -->
     <c:if test="${check == 0 }">
-        ${cus_id}는 사용가능한 아이디입니다.
-        <div class="form-label-group">
-            <input class="btn btn-lg btn-secondary btn-block text-lowercase"
+
+        <div class="row form-label-group m-3">
+            <div class="col-3"></div>
+            <div class="col-6">
+                    ${cus_id}는 사용가능한 아이디입니다.
+            <input class="btn btn-lg btn-secondary btn-block text-lowercase mt-2"
                    type="button" value="아이디 사용하기" onclick="idok()">
+            </div>
         </div>
     </c:if>
 

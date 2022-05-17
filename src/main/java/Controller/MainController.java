@@ -271,12 +271,31 @@ public class MainController {
         return "user/mypage";
     }
 
-    //투입인력관리 update
+    //mypage update
     @RequestMapping(value = "/mypage_update.do", method = RequestMethod.POST)
-    public String mypage_update(Model model, CustomerVO customerVO) {
+    public String mypage_update(HttpServletRequest request,Model model, CustomerVO customerVO) {
         String Result = customerService.updateCustomer(customerVO);
         model.addAttribute("CustomerList", Result);
-        return "index";
+        HttpSession httpSession = request.getSession();
+        CustomerVO customerview = customerService.viewCustomer(parseInt(customerVO.getCus_num()));
+        httpSession.setAttribute("login", customerview);
+        return "user/mypage";
+    }
+
+    @RequestMapping(value = "/updatePassword.do",method = RequestMethod.POST)
+    public String updatePassword(@RequestParam("check_pwd") String check_pwd, CustomerVO customerVO, RedirectAttributes redirectAttributes,HttpServletRequest request) throws Exception {
+        String old_pwd = request.getParameter("old_pwd");
+        System.out.println(old_pwd);
+        if (!BCrypt.checkpw(old_pwd,check_pwd)) {
+            redirectAttributes.addFlashAttribute("msg", "fail");
+            return "redirect:/mypage.do";
+        }
+        customerService.updatePassword(customerVO);
+        redirectAttributes.addFlashAttribute("msg", "update");
+        HttpSession httpSession = request.getSession();
+        CustomerVO customerview = customerService.viewCustomer(parseInt(customerVO.getCus_num()));
+        httpSession.setAttribute("login", customerview);
+        return "redirect:/mypage.do";
     }
 
     //산출물 게시판 글목록 보기 cate=1
@@ -941,10 +960,8 @@ public class MainController {
     @RequestMapping(value = "/project_content.do", method = RequestMethod.GET)
     public String project_content(@RequestParam("prj_num") int prj_num, Model model) {
         List<ProjectDetailVO> projectDetailVOList = projectService.selectProject_detail(prj_num);
-        System.out.println(projectDetailVOList);
         model.addAttribute("Project_detailList", projectDetailVOList);
         ProjectVO Result = projectService.viewProject(prj_num);
-        System.out.println(Result);
         model.addAttribute("ProjectList1", Result);
         return "project/project_content";
     }
@@ -953,13 +970,24 @@ public class MainController {
     @RequestMapping(value = "/project_insert.do", method = RequestMethod.POST)
     public String project_insert(Model model, ProjectVO projectVO) {
         String Result = projectService.insertProject(projectVO);
+
+        ProjectDetailVO projectDetailVO = new ProjectDetailVO();
+        projectDetailVO.setAuth("1");
+        projectDetailVO.setCus_num(projectVO.getCus_num());
+        projectDetailVO.setPrj_num(projectService.selectProjectNum(projectVO.getPrj_name()).getPrj_num());
+        System.out.println(projectDetailVO);
+        String Result2 = projectService.insertProject_detail(projectDetailVO);
+
         model.addAttribute("ProjectList1", Result);
+        model.addAttribute("Project_detailList", Result2);
+
         return "redirect:/project.do";
     }
 
     //project delete
     @RequestMapping(value = "/project_delete.do", method = RequestMethod.GET)
     public String project_delete(@RequestParam("prj_num") int prj_num) {
+        projectService.deleteAllProject_detail(prj_num);
         projectService.delete(prj_num);
         return "redirect:/project.do";
     }

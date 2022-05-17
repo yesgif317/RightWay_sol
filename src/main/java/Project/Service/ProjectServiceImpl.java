@@ -25,6 +25,9 @@ public class ProjectServiceImpl implements ProjectService {
     public String insertProject(ProjectVO projectVO){return dao.insertProject(projectVO);}
 
     @Override
+    public ProjectVO selectProjectNum(String prj_name){return  dao.selectProjectNum(prj_name);}
+
+    @Override
     public String insertProject_detail(ProjectDetailVO projectVO) {
         return dao.insertProject_detail(projectVO);
     }

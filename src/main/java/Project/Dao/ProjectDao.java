@@ -10,6 +10,8 @@ public interface ProjectDao {
     List<ProjectVO> selectProject();
     List<ProjectDetailVO> selectProject_detail(int prj_no);
 
+    ProjectVO selectProjectNum(String prj_name);
+
     //프로젝트 추가
     String insertProject(ProjectVO projectVo);
     String insertProject_detail(ProjectDetailVO projectDetailVO);

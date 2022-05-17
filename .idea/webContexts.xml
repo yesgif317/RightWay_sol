@@ -6,6 +6,7 @@
         <entry key="file://$PROJECT_DIR$/web/WEB-INF/views/index.jsp" value="file://$PROJECT_DIR$/web/WEB-INF/views" />
         <entry key="file://$PROJECT_DIR$/web/WEB-INF/views/jsp/outputs/outputs_write.jsp" value="file://$PROJECT_DIR$/web/WEB-INF/views/jsp/outputs" />
         <entry key="file://$PROJECT_DIR$/web/WEB-INF/views/jsp/user/comCheck.jsp" value="file://$PROJECT_DIR$/web/WEB-INF/views/jsp/user" />
+        <entry key="file://$PROJECT_DIR$/web/WEB-INF/views/jsp/user/mypage.jsp" value="file://$PROJECT_DIR$/web/WEB-INF/views/jsp/user" />
         <entry key="file://$PROJECT_DIR$/web/WEB-INF/views/jsp/usermanagement/usermanagement.jsp" value="file://$PROJECT_DIR$/web/WEB-INF/views/jsp/usermanagement" />
         <entry key="file://$PROJECT_DIR$/web/WEB-INF/views/update.jsp" value="file://$PROJECT_DIR$/web/WEB-INF/views" />
       </map>

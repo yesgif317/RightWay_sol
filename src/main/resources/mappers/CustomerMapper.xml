@@ -55,6 +55,13 @@
         where cus_id = #{cus_id}
     </update>
 
+    <!-- 비밀번호 변경-->
+    <update id="updatePassword" parameterType="CustomerVO">
+        UPDATE customer
+        set cus_pwd = #{cus_pwd}
+        where cus_id = #{cus_id}
+    </update>
+
     <select id="checkUserWithSessionKey" resultMap="customerVOResultMap">
         select *
         from customer natural join company

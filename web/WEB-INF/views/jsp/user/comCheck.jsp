@@ -34,28 +34,59 @@
 <body>
 
 
-<form method="post" class="form-signin" action="/comCheck.do" name="joinform">
-    <div class="form-label-group">
+<form method="post" class="form-signin mt-5" action="/comCheck.do" name="joinform">
+    <div class="row form-label-group">
+        <div class="col-3"></div>
+        <div class="col-6">
         <input type="text" id="com_name" name="com_name" class="form-control" value="${com_name}"/>
+        </div>
     </div>
 
-    <div class="form-label-group">
+    <div class="row form-label-group mt-3">
+        <div class="col-3"></div>
+        <div class="col-6">
         <input class="btn btn-lg btn-secondary btn-block text-lowercase"
                type="submit" value="회사 검색">
+        </div>
     </div>
 
-    <c:forEach items="${companyList}" var="com">
-        <tr>
-            <span style = "font-style : normal; font-size: 1.5em;">회사명 :     </span>
-        </tr>
-        <tr>
-            <span style = "font-style : normal; font-size: 1.5em;">${com.com_name}</span>
-        </tr>
-        <div class="form-label-group">
-            <input class = "btn btn-lg btn-secondary btn-block text-lowercase"
-                   type="button" value="회사선택" onclick="comok('${com.com_name}','${com.com_num}')">
+
+    <div class="row form-label-group mt-5">
+        <div class="col-1"></div>
+        <div class="col-10">
+
+            <div class="card mb-4">
+
+                <div class="card-body">
+                    <div class="table-responsive">
+                        <table class="table table-bordered table-hover" id="dataTable1">
+                            <thead>
+                            <tr>
+                                <th>회사명</th>
+                                <th>주요사업</th>
+                                <th>전화번호</th>
+                                <th></th>
+                            </tr>
+                            </thead>
+
+                            <tbody>
+                           <c:forEach items="${companyList}" var="com">
+                                        <tr>
+                                            <td>${com.com_name}</td>
+                                            <td>${com.com_business}</td>
+                                            <td>${com.com_tel}</td>
+                                            <td class="text-center">
+                                                <a class="btn btn-secondary text-gray-100" onclick="comok('${com.com_name}','${com.com_num}')"> 선택</a>
+                                            </td>
+                                        </tr>
+                                </c:forEach>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
         </div>
-    </c:forEach>
+    </div>
 </form>
 
 </body>

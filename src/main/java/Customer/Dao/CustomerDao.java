@@ -20,6 +20,8 @@ public interface CustomerDao {
     //회원가입 Insert
     void insertCustomer(CustomerVO customerVO) throws Exception;
 
+    void updatePassword(CustomerVO customerVO) throws Exception;
+
     // 로그인 유지 처리
     void keepLogin(String cus_id, String cus_sess_key, Date cus_sess_lim) throws Exception;
 

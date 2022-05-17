@@ -98,4 +98,9 @@ public class CustomerDaoImpl implements CustomerDao {
     public void insertCustomer(CustomerVO customerVO) {
         sqlSession.insert(Namespace + ".insertCustomer", customerVO);
     }
+
+    @Override
+    public void updatePassword(CustomerVO customerVO) {
+        sqlSession.update(Namespace + ".updatePassword", customerVO);
+    }
 }

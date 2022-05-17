@@ -57,4 +57,12 @@
     <delete id="deleteProject_detail">
         delete from project_detail where prj_num=#{prj_num} and cus_num=#{cus_num}
     </delete>
+
+    <select id="selectProjectNum" resultType="ProjectVO">
+        SELECT *
+        FROM Project
+        where prj_name=#{prj_name} and rownum=1
+        order by prj_num desc
+    </select>
+
 </mapper>

@@ -11,7 +11,7 @@
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>Register</title>
+    <title>회원가입</title>
 
     <!-- Custom fonts for this template-->
     <link href="/resources/vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
@@ -46,6 +46,7 @@
                                         <input type="text" name="cus_id" id="cus_id" class="form-control text-lowercase"
                                                placeholder="아이디" required autofocus value="${cus_id}">
                                         <input type="hidden" name="reid" id="reid">
+                                        <small>&nbsp 4~12자 이내로 입력</small>
                                     </div>
                                 </div>
                                 <div class="form-label-group col-sm-3">
@@ -54,13 +55,13 @@
                                             type="button" onclick="idcheck()">중복 확인
                                     </button>
                                 </div>
-
                             </div>
 
                             <div class="form-group">
                                 <input type="password" class="form-control form-control-user" name="cus_pwd"
                                        id="cus_pwd"
-                                       placeholder="최소 8자, 하나의 이상의 대소문자 및 하나의 숫자, 하나의 특수문자">
+                                       placeholder="비밀번호">
+                                <small>&nbsp 8자 이상의 영문자,숫자,특수문자 조합으로 입력되어야 합니다.</small>
                             </div>
                             <div class="form-group">
                                 <input type="password" class="form-control form-control-user" name="cus_pwdcheck"
@@ -74,21 +75,21 @@
                             <div class="form-group">
                                 <input type="email" class="form-control form-control-user" name="cus_email"
                                        id="cus_email"
-                                       placeholder="test@co.kr">
+                                       placeholder="example@example.com">
+                                <small>&nbsp 비밀번호 분실시 이메일을 통하여 발급됩니다.</small>
                             </div>
                             <div class="form-group">
                                 <input type="text" class="form-control form-control-user" name="cus_phone"
                                        id="cus_phone"
-                                       placeholder="연락처 (-제외 숫자만 입력)">
+                                       placeholder="연락처 (010-0000-0000)">
+                                <small>&nbsp - 를 포함하여 형식에 맞게 입력해주세요.</small>
                             </div>
 
 
                             <div class="form-group row">
                                 <div class="col-sm-6 mb-3 mb-sm-0">
-                                    <input type="text" class="form-control text" name="com_name" id="com_name"
-                                           placeholder="회사명" value="${com_name}" disabled>
-                                    <input type="hidden" class="form-control text" name="com_num" id="com_num"
-                                           value="${com_num}">
+                                    <input type="text" class="form-control text" name="com_name" id="com_name" placeholder="회사명" value="${com_name}" disabled>
+                                    <input type="hidden" class="form-control text" name="com_num" id="com_num" value="${com_num}">
                                 </div>
                                 <div class="form-label-group col-sm-3">
                                     <button
@@ -108,7 +109,6 @@
                                        id="cus_position"
                                        placeholder="직책">
                             </div>
-
 
                             <input type="hidden" name="cus_state" value="0"> <!-- 회원가입 확인하려고 만든 임시변수 -->
                             <div class="form-group">
@@ -236,13 +236,13 @@
             exit;
         }
         if (pwdtext.test(document.joinform.cus_pwd.value) == false) {
-            alert("비밀번호 형식이 올바르지 않습니다. 최소 8자, 하나의 이상의 대소문자 및 하나의 숫자, 하나의 특수문자");
+            alert("비밀번호 형식이 올바르지 않습니다. 8자 이상의 영문자,숫자,특수문자 조합으로 이루어져야 합니다.");
             document.joinform.cus_pwd.focus();
             exit;
         }
 
         if (phonetext.test(document.joinform.cus_phone.value) == false) {
-            alert("전화번호 형식이 올바르지 않습니다.");
+            alert("전화번호 형식이 올바르지 않습니다. ex)010-0000-0000");
             document.joinform.cus_phone.focus();
             exit;
         }
@@ -250,7 +250,7 @@
         if (exptext.test(document.joinform.cus_email.value) == false) {
             //이메일 형식이 알파벳+숫자@알파벳+숫자.알파벳+숫자 형식이 아닐경우
 
-            alert("이메일형식이 올바르지 않습니다.");
+            alert("이메일형식이 올바르지 않습니다. ex)example@example.com");
             document.joinform.cus_email.focus();
             exit;
         }

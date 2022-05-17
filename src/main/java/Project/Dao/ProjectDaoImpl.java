@@ -27,6 +27,11 @@ public class ProjectDaoImpl implements ProjectDao{
     }
 
     @Override
+    public ProjectVO selectProjectNum(String prj_name){
+        return sqlSession.selectOne(Namespace+".selectProjectNum",prj_name);
+    }
+
+    @Override
     public String insertProject(ProjectVO projectVo) {
         return sqlSession.insert(Namespace + ".insertProject",projectVo)+"";
     }
