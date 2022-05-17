@@ -56,7 +56,7 @@
                                                 <span class="text">글쓰기</span>
                                             </a>
                                             <%--</button>--%>
-                                            <a href="outputs.do" class="btn btn-secondary">
+                                            <a href="datacenter.do" class="btn btn-secondary">
                                                 <span class="icon text-white-50">
                                                        <i class="fas fa-list"></i>
                                                 </span>

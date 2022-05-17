@@ -95,6 +95,8 @@
                                             <div class="text-center fa-solid text-gray-800 mt-2">~</div>
                                             <div class="col-12 col-md-2"><input type="date" name="evt_acptend" id="evt_acptend" class="form-control" value="${EventList.evt_acptend}"></div>
                                         </div>
+                                            <input type="hidden" value="${prj_list.prj_num}" name="prj_num">
+                                                <input type="hidden" name="cus_num" value="${login.cus_num}">
                                     </form>
                                 </div>
                                 <div class="text-center d-block card-header py-3">
@@ -205,10 +207,3 @@
 
 <!-- Custom scripts for all pages-->
 <script src="<c:url value="/resources/js/sb-admin-2.min.js"/>"></script>
-
-<!-- Page level plugins -->
-<script src="<c:url value="/resources/vendor/datatables/jquery.dataTables.min.js"/>"></script>
-<script src="<c:url value="/resources/vendor/datatables/dataTables.bootstrap4.min.js"/>"></script>
-
-<!-- Page level custom scripts -->
-<script src="<c:url value="/resources/js/demo/datatables-demo.js"/>"></script>

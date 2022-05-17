@@ -14,7 +14,7 @@
     <!-- 행사등록(Insert) -->
     <insert id="insertEvent" parameterType="EventVO" >
         insert into Event(post_num ,cate, evt_tit, cus_num,evt_sbj,evt_host,evt_supervise,evt_loc,evt_url,evt_cnt,evt_pri,evt_limit,evt_start,evt_end,evt_acptstart,evt_acptend,prj_num,evt_reg)
-        values (evt_seq.NEXTVAL,5, #{evt_tit},11,#{evt_sbj},#{evt_host},#{evt_supervise},#{evt_loc},#{evt_url},#{evt_cnt},#{evt_pri},#{evt_limit},to_date(#{evt_start},'YYYY-MM-DD'),to_date(#{evt_end},'YYYY-MM-DD'),to_date(#{evt_acptstart},'YYYY-MM-DD'),to_date(#{evt_acptend},'YYYY-MM-DD'),2,sysdate)
+        values (evt_seq.NEXTVAL,5, #{evt_tit},#{cus_num},#{evt_sbj},#{evt_host},#{evt_supervise},#{evt_loc},#{evt_url},#{evt_cnt},#{evt_pri},#{evt_limit},to_date(#{evt_start},'YYYY-MM-DD'),to_date(#{evt_end},'YYYY-MM-DD'),to_date(#{evt_acptstart},'YYYY-MM-DD'),to_date(#{evt_acptend},'YYYY-MM-DD'),#{prj_num},sysdate)
     </insert>
 
     <update id="updateEvent" parameterType="EventVO" >

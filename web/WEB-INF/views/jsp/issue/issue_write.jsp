@@ -49,6 +49,7 @@
                                         </c:choose>
                                             <input type="hidden" name="cus_num" value="${login.cus_num}">
                                             <input type="hidden" name="cate" value="10">
+                                            <input type="hidden" value="${prj_list.prj_num}" name="prj_num">
                                         <div class="row form-group">
                                             <div class="col col-md-3 text-right"><label for="risk_tit"
                                                                                         class=" form-control-label fa-solid text-gray-800 mt-2"><sup
@@ -114,24 +115,65 @@
                                                             </div>
                                                         </div>
                                                     </div>
-
-                                                <input id="mng_name" class="ml-2"
-                                                       style="border:0 solid whitesmoke;" value="${RiskList.mng_name}/${RiskList.mng_position}" placeholder="담당자를 선택해주세요."
-                                                       readonly>
+                                                <c:choose>
+                                                    <c:when test="${RiskList.mng_name eq null}">
+                                                        <input id="mng_name" class="ml-2"
+                                                               style="border:0 solid whitesmoke;" value="" placeholder="담당자를 선택해주세요."
+                                                               readonly>
+                                                    </c:when>
+                                                    <c:otherwise>
+                                                        <input id="mng_name" class="ml-2"
+                                                               style="border:0 solid whitesmoke;" value="${RiskList.mng_name}/${RiskList.mng_position}"
+                                                               readonly>
+                                                    </c:otherwise>
+                                                </c:choose>
                                                 <input type="hidden" name="risk_mng" id="risk_mng" value="${RiskList.risk_mng}">
                                             </div>
                                         </div>
 
                                         <div class="row form-group">
-                                            <div class="col col-md-3 text-right"><label for="impMenuButton"
-                                                                                        class=" form-control-label fa-solid text-gray-800 mt-2"><sup
-                                                    class="text-danger small">*</sup>중요도</label></div>
+                                            <div class="col col-md-3 text-right">
+                                                <label for="impMenuButton" class=" form-control-label fa-solid text-gray-800 mt-2">
+                                                    <sup class="text-danger small">*</sup>중요도</label></div>
                                             <div class="dropdown col-md-7">
-                                                <button class="btn btn-secondary dropdown-toggle" type="button"
-                                                        id="impMenuButton" data-toggle="dropdown" aria-haspopup="true"
-                                                        aria-expanded="false">
-                                                    중요도선택
-                                                </button>
+                                                    <c:choose>
+                                                        <c:when test="${RiskList.risk_imp eq 'Emergency'}">
+                                                        <button class="btn btn-danger dropdown-toggle" type="button"
+                                                                id="impMenuButton" data-toggle="dropdown" aria-haspopup="true"
+                                                                aria-expanded="false">
+                                                            ${RiskList.risk_imp}
+                                                        </button>
+                                                        </c:when>
+                                                        <c:when test="${RiskList.risk_imp eq 'High'}">
+                                                            <button class="btn btn-warning dropdown-toggle" type="button"
+                                                                    id="impMenuButton" data-toggle="dropdown" aria-haspopup="true"
+                                                                    aria-expanded="false">
+                                                                    ${RiskList.risk_imp}
+                                                            </button>
+                                                        </c:when>
+                                                        <c:when test="${RiskList.risk_imp eq 'Medium'}">
+                                                            <button class="btn btn-success dropdown-toggle" type="button"
+                                                                    id="impMenuButton" data-toggle="dropdown" aria-haspopup="true"
+                                                                    aria-expanded="false">
+                                                                    ${RiskList.risk_imp}
+                                                            </button>
+                                                        </c:when>
+                                                        <c:when test="${RiskList.risk_imp eq 'Low'}">
+                                                            <button class="btn btn-info dropdown-toggle" type="button"
+                                                                    id="impMenuButton" data-toggle="dropdown" aria-haspopup="true"
+                                                                    aria-expanded="false">
+                                                                    ${RiskList.risk_imp}
+                                                            </button>
+                                                        </c:when>
+                                                        <c:otherwise>
+                                                            <button class="btn btn-secondary dropdown-toggle" type="button"
+                                                                    id="impMenuButton" data-toggle="dropdown" aria-haspopup="true"
+                                                                    aria-expanded="false">
+                                                                    중요도선택
+                                                            </button>
+                                                        </c:otherwise>
+                                                    </c:choose>
+
                                                 <div class="dropdown-menu animated--fade-in"
                                                      aria-labelledby="impMenuButton">
                                                     <a class="dropdown-item text-danger"
@@ -146,9 +188,8 @@
                                                     <a class="dropdown-item text-info"
                                                        onclick="return select_important(4)"><h6>Low</h6></a>
                                                 </div>
-                                                <input name="risk_imp" id="risk_imp" class="ml-2"
-                                                       style="border:0 solid whitesmoke;" placeholder="중요도를 선택해주세요."
-                                                       value="${RiskList.risk_imp}" readonly>
+                                                <input type="hidden" name="risk_imp" id="risk_imp" class="ml-2"
+                                                       style="border:0 solid whitesmoke;" value="${RiskList.risk_imp}">
                                             </div>
                                         </div>
 
@@ -186,22 +227,48 @@
                                                     class=" form-control-label fa-solid text-gray-800 mt-2">진행상태</label>
                                             </div>
                                             <div class="dropdown col-md-5">
-                                                <button class="btn btn-secondary dropdown-toggle" type="button"
-                                                        id="progressbtn" data-toggle="dropdown" aria-haspopup="true"
-                                                        aria-expanded="false">
-                                                    진행상태
-                                                </button>
+                                                <c:choose>
+                                                    <c:when test="${RiskList.risk_pgs eq '대기'}">
+                                                        <button class="btn btn-secondary dropdown-toggle" type="button"
+                                                                id="progressbtn" data-toggle="dropdown" aria-haspopup="true"
+                                                                aria-expanded="false">
+                                                                ${RiskList.risk_pgs}
+                                                        </button>
+                                                    </c:when>
+                                                    <c:when test="${RiskList.risk_pgs eq '진행 중'}">
+                                                        <button class="btn btn-warning dropdown-toggle" type="button"
+                                                                id="progressbtn" data-toggle="dropdown" aria-haspopup="true"
+                                                                aria-expanded="false">
+                                                                ${RiskList.risk_pgs}
+                                                        </button>
+                                                    </c:when>
+                                                    <c:when test="${RiskList.risk_pgs eq '종료'}">
+                                                        <button class="btn btn-success dropdown-toggle" type="button"
+                                                                id="progressbtn" data-toggle="dropdown" aria-haspopup="true"
+                                                                aria-expanded="false">
+                                                                ${RiskList.risk_pgs}
+                                                        </button>
+                                                    </c:when>
+                                                    <c:otherwise>
+                                                        <button class="btn btn-secondary dropdown-toggle" type="button"
+                                                                id="progressbtn" data-toggle="dropdown" aria-haspopup="true"
+                                                                aria-expanded="false">
+                                                            진행상태
+                                                        </button>
+                                                    </c:otherwise>
+                                                </c:choose>
+
                                                 <div class="dropdown-menu animated--fade-in"
                                                      aria-labelledby="dropdownMenuButton">
                                                     <a class="dropdown-item" onclick="return select_progress(1)"><h6>대기</h6></a>
                                                     <div class="dropdown-divider"></div>
-                                                    <a class="dropdown-item" onclick="return select_progress(2)"><h6>진행
+                                                    <a class="dropdown-item text-warning" onclick="return select_progress(2)"><h6>진행
                                                         중</h6></a>
                                                     <div class="dropdown-divider"></div>
-                                                        <a class="dropdown-item" onclick="return select_progress(3)"><h6>종료</h6></a>
+                                                        <a class="dropdown-item text-success" onclick="return select_progress(3)"><h6>종료</h6></a>
                                                 </div>
-                                                <input name="risk_pgs" id="risk_pgs" class="ml-2"
-                                                       style="border:0 solid whitesmoke;" placeholder="진행상태를 선택해주세요."
+                                                <input type="hidden" name="risk_pgs" id="risk_pgs" class="ml-2"
+                                                       style="border:0 solid whitesmoke;"
                                                        value="${RiskList.risk_pgs}" readonly>
                                             </div>
                                         </div>
@@ -255,20 +322,32 @@
                             </div>
                             <script>
                                 function select_important(no) {
+                                    const btn = $('#impMenuButton');
                                     const risk = $('#risk_imp');
                                     switch (no) {
                                         case 1 :
+                                            btn.html('Emergency');
                                             risk.val('Emergency');
-                                            document.getElementById("risk_imp").style.color = "#e74a3b";
+                                            document.getElementById("impMenuButton").style.backgroundColor = "#e74a3b";
+                                            document.getElementById("impMenuButton").style.borderColor = "#e74a3b";
                                             break;
                                         case 2 :
-                                            risk.val('High');document.getElementById("risk_imp").style.color = "#f6c23e";
+                                            btn.html('High');
+                                            risk.val('High');
+                                            document.getElementById("impMenuButton").style.backgroundColor = "#f6c23e";
+                                            document.getElementById("impMenuButton").style.borderColor = "#f6c23e";
                                             break;
                                         case 3 :
-                                            risk.val('Medium');document.getElementById("risk_imp").style.color = "#1cc88a";
+                                            btn.html('Medium');
+                                            risk.val('Medium');
+                                            document.getElementById("impMenuButton").style.backgroundColor = "#1cc88a";
+                                            document.getElementById("impMenuButton").style.borderColor = "#1cc88a";
                                             break;
                                         case 4 :
-                                            risk.val('Low');document.getElementById("risk_imp").style.color = "#36b9cc";
+                                            btn.html('Low');
+                                            risk.val('Low');
+                                            document.getElementById("impMenuButton").style.backgroundColor = "#36b9cc";
+                                            document.getElementById("impMenuButton").style.borderColor = "#36b9cc";
                                             break;
                                         default :
                                     }
@@ -276,15 +355,25 @@
 
                                 function select_progress(no) {
                                     const risk_pgs = $('#risk_pgs');
+                                    const btn = $('#progressbtn');
                                     switch (no) {
                                         case 1 :
+                                            btn.html('대기');
                                             risk_pgs.val('대기');
+                                            document.getElementById("progressbtn").style.backgroundColor = "#858796";
+                                            document.getElementById("progressbtn").style.borderColor = "#858796";
                                             break;
                                         case 2 :
+                                            btn.html('진행 중');
                                             risk_pgs.val('진행 중');
+                                            document.getElementById("progressbtn").style.backgroundColor = "#f6c23e";
+                                            document.getElementById("progressbtn").style.borderColor = "#f6c23e";
                                             break;
                                         case 3 :
+                                            btn.html('종료');
                                             risk_pgs.val('종료');
+                                            document.getElementById("progressbtn").style.backgroundColor = "#1cc88a";
+                                            document.getElementById("progressbtn").style.borderColor = "#1cc88a";
                                             break;
                                         default :
                                     }

@@ -51,9 +51,9 @@
                             <tbody>
                             <c:forEach items="${NormalList}" var="post" varStatus="status">
                                 <c:if test="${post.cate eq 12}">
-                                <tr>
+                                    <tr onClick="location.href='notice_content.do?post_num=${post.post_num}'">
                                     <td>${status.count}</td>
-                                    <td><a href ="notice_content.do?post_num=${post.post_num}">${post.nor_tit}</a></td>
+                                    <td>${post.nor_tit}</td>
                                     <td>${post.cus_name}</td>
                                     <td><fmt:formatDate value="${post.nor_reg}" pattern="yyyy-MM-dd" /></td>
                                 </tr>

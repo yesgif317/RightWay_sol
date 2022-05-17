@@ -39,9 +39,9 @@
 
                             <tbody>
                             <c:forEach items="${EventList}" var="event">
-                                <tr>
+                                <tr onClick="location.href='event_content.do?post_num=${event.post_num}'">
                                     <td>${event.post_num}</td>
-                                    <td><a href ="event_content.do?post_num=${event.post_num}">${event.evt_tit}</a></td>
+                                    <td>${event.evt_tit}</td>
                                     <td>${event.evt_start}~${event.evt_end}</td>
                                     <td>${event.evt_loc}</td>
                                     <td>${event.evt_limit}</td>
@@ -54,7 +54,7 @@
                     </div>
                 </div>
                 <div class="text-center d-block card-header py-3">
-                    <a href="/event_write.do?post_num=0&update=0" class="btn btn-info">
+                    <a href="event_write.do?post_num=0&update=0" class="btn btn-info">
                           <span class="icon text-white-50">
                             <i class="fas fa-pen"></i>
                           </span>

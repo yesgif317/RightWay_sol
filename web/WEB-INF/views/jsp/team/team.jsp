@@ -39,9 +39,9 @@
 
                             <tbody>
                             <c:forEach items="${TeamList}" var="team" varStatus="status" >
-                                        <tr>
+                                <tr onClick="location.href='team_content.do?team_num=${team.team_num}'">
                                             <td>${team.team_num}</td>
-                                            <td><a href ="team_content.do?team_num=${team.team_num}">${team.team_name}</a></td>
+                                            <td>${team.team_name}</td>
                                             <td>${team.team_desc}</td>
                                             <td>${team.cus_name}</td>
                                             <td>

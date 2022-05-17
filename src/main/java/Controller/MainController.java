@@ -1003,11 +1003,9 @@ public class MainController {
         projectDetailVO.setAuth("1");
         projectDetailVO.setCus_num(projectVO.getCus_num());
         projectDetailVO.setPrj_num(projectService.selectProjectNum(projectVO.getPrj_name()).getPrj_num());
-        System.out.println(projectDetailVO);
-        String Result2 = projectService.insertProject_detail(projectDetailVO);
+        projectService.insertProject_detail(projectDetailVO);
 
         model.addAttribute("ProjectList1", Result);
-        model.addAttribute("Project_detailList", Result2);
 
         return "redirect:/project.do";
     }
