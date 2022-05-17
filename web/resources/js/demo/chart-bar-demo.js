@@ -2,6 +2,9 @@
 Chart.defaults.global.defaultFontFamily = 'Nunito', '-apple-system,system-ui,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif';
 Chart.defaults.global.defaultFontColor = '#858796';
 
+
+
+
 function number_format(number, decimals, dec_point, thousands_sep) {
   // *     example: number_format(1234.56, 2, ',', ' ');
   // *     return: '1 234,56'
@@ -29,17 +32,23 @@ function number_format(number, decimals, dec_point, thousands_sep) {
 
 // Bar Chart Example
 var ctx = document.getElementById("myBarChart");
-var myBarChart = new Chart(ctx, {
+
+
+var config =    {
   type: 'bar',
   data: {
-    labels: ["04-08", "04-09", "04-10", "04-11", "04-12", "04-13","04-14"],
+    labels:week_days
+    ,
     datasets: [{
       label: "",
       backgroundColor: "#36b9cc",
       hoverBackgroundColor: "#2C98A8FF",
       borderColor: "#36b9cc",
-      data: [10, 52, 41, 71, 45, 84,120],
-    }],
+      data: get_barresult(week_days,bardata_issue),
+    },
+
+    ]
+
   },
   options: {
     maintainAspectRatio: false,
@@ -68,7 +77,7 @@ var myBarChart = new Chart(ctx, {
       yAxes: [{
         ticks: {
           min: 0,
-          max: 150,
+          max: 30,
           maxTicksLimit: 5,
           padding: 10,
           // Include a dollar sign in the ticks
@@ -108,4 +117,5 @@ var myBarChart = new Chart(ctx, {
       }
     },
   }
-});
+};
+var myBarChart = new Chart(ctx,config);

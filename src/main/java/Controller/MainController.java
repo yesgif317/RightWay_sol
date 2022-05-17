@@ -140,10 +140,14 @@ public class MainController {
         List<ProjectVO> projectVOList = projectService.projectVOList(object);
         System.out.println(projectVOList);
         List<NormalVO> normalVOList = normalService.selectNotice();
+        List<RiskVO> riskVOList = riskService.selectDanger();
+        List<RiskVO> issueVOList = riskService.selectIssue();
 
         // .jsp 파일로 DB 결과값 전달하기
         model.addAttribute("ProjectList", projectVOList);
         model.addAttribute("NormalList", normalVOList);
+        model.addAttribute("RiskList", riskVOList);
+        model.addAttribute("IssueList", issueVOList);
         return "index";
     }
 

@@ -4,12 +4,14 @@ Chart.defaults.global.defaultFontColor = '#858796';
 
 // Pie Chart Example
 var ctx = document.getElementById("myPieChart");
-var myPieChart = new Chart(ctx, {
+
+
+ config2=   {
   type: 'doughnut',
   data: {
-    labels: ["wait","in progress","resolve"],
+    labels: ['ready','progress','finish'],
     datasets: [{
-      data: [5, 20, 120],
+      data: get_pieresult(piedata_issue),
       backgroundColor: ['#858796', '#f6c23e', '#1cc88a'],
       hoverBackgroundColor: ['#5a5c69', '#eeaa00', '#17a673'],
       hoverBorderColor: "rgba(234, 236, 244, 1)",
@@ -32,4 +34,5 @@ var myPieChart = new Chart(ctx, {
     },
     cutoutPercentage: 80,
   },
-});
+};
+var myPieChart = new Chart(ctx, config2);
