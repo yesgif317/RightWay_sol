@@ -13,8 +13,26 @@ public class CommentVO {
     private String cmt_cnt;
     private Date cmt_date;      //sysdate\
 
+    // join (Customer)
+    //private String cus_num;
+    private String cus_id;
+    private String cus_pwd;
+    private String cus_name;
+    private String cus_email;
+    private String cus_phone;
+    private String cus_dep;
+    private String cus_position;
+    private String cus_state;
+    private String cus_sess_key;
+    private String cus_sess_lim;
+    private String com_num;
+    private String com_name;
+    private String prj_name;
+    private String prj_num;
 
-    public CommentVO(int cmt_num, int post_num, int cate, int cus_num, String cmt_cnt){
+
+    public CommentVO(int cmt_num, int post_num, int cate, int cus_num, String cmt_cnt,
+                     String com_name, String cus_name, String cus_dep, String cus_position){
         //public CommentVO(String cmt_cnt){
         this.cmt_num = cmt_num;
         this.cus_num = cus_num;
@@ -22,6 +40,11 @@ public class CommentVO {
         this.cate = cate;
         this.cmt_cnt = cmt_cnt;
         //this.cmt_date = cmt_date;
+
+        this.com_name = com_name;
+        this.cus_name = cus_name;
+        this.cus_dep = cus_dep;
+        this.cus_position = cus_position;
     }
     public CommentVO(){}        // default 있어야 에러 안나는거였다고 함
 

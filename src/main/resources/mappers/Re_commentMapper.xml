@@ -8,13 +8,24 @@
     <!--Customer-->
     <!-- Select 문 -->
     <select id="selectRe_CommentAll" resultType="Re_CommentVO">
-        SELECT * FROM re_comments ORDER BY rcmt_num
+        SELECT *
+        from customer cus, re_comments rcmt, company com
+        where cus.cus_num = rcmt.cus_num AND com.com_num = cus.com_num
+        ORDER BY rcmt_num
     </select>
 
     <!-- 프로젝트 추가(Insert) -->
     <insert id="insertRe_Comment" parameterType="Re_CommentVO" >
         insert into re_comments(rcmt_num, cmt_num, cus_num, rcmt_cnt, rcmt_date)
-        values (rcmt_seq.nextval, #{cmt_num, jdbcType=VARCHAR}, #{cus_num, jdbcType=VARCHAR}, #{rcmt_cnt, jdbcType=VARCHAR}, to_char(sysdate,'YYYY-MM-DD'))
+        values (rcmt_seq.nextval, #{cmt_num, jdbcType=VARCHAR},
+                (select DISTINCT cus.cus_num
+                 from customer cus, company com
+                 where com.com_num = cus.com_num
+                   AND com.com_name=#{com_name}
+                   and cus.cus_name=#{cus_name}
+                   and cus.cus_dep=#{cus_dep}
+                   and cus.cus_position=#{cus_position}),
+                #{rcmt_cnt, jdbcType=VARCHAR}, to_char(sysdate,'YYYY-MM-DD HH:MI:SS'))
     </insert>
 
     <!-- 대댓글 수정 -->

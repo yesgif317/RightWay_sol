@@ -5,15 +5,31 @@
 
 <mapper namespace="com.mark.mappers.CommentMapper">
 
+    <!-- Select 문 (Original) -->
+    <!--    <select id="selectCommentAll" resultType="CommentVO">
+            SELECT * FROM comments ORDER BY cmt_num
+        </select>-->
+
     <!-- Select 문 -->
     <select id="selectCommentAll" resultType="CommentVO">
-        SELECT * FROM comments ORDER BY cmt_num
+        select * from comments cmt, customer cus, company com
+        where cmt.cus_num = cus.cus_num AND com.com_num = cus.com_num
+        ORDER BY cmt_num
     </select>
 
 
     <insert id="insertComment" parameterType="CommentVO" >
         insert into comments(cmt_num, post_num, cate, cus_num, cmt_cnt, cmt_date)
-        values (cmt_seq.nextval, #{post_num, jdbcType=VARCHAR}, #{cate, jdbcType=VARCHAR}, #{cus_num, jdbcType=VARCHAR}, #{cmt_cnt, jdbcType=VARCHAR}, to_char(sysdate,'YYYY-MM-DD'))
+        values (cmt_seq.nextval, #{post_num, jdbcType=VARCHAR}, #{cate, jdbcType=VARCHAR},
+                (select DISTINCT cus.cus_num
+                 from customer cus, company com
+                 where com.com_num = cus.com_num
+                   AND com.com_name=#{com_name}
+                   and cus.cus_name=#{cus_name}
+                   and cus.cus_dep=#{cus_dep}
+                   and cus.cus_position=#{cus_position}),
+
+                #{cmt_cnt, jdbcType=VARCHAR}, to_char(sysdate, 'YYYY-MM-DD HH:MI:SS'))
     </insert>
 
 
@@ -31,16 +47,23 @@
     </delete>
 
 
-
     <!-- 댓글 Count 1단계-->
-<!--
-    <select id="countComment" resultType="int">
-        select count(*) from comments
-    </select>
-    -->
+    <!--
+        <select id="countComment" resultType="int">
+            select count(*) from comments
+        </select>
+        -->
     <!-- 댓글 Count 2단계 -->
     <select id="countComment" resultType="int" parameterType="int">
         select count(*) from comments where post_num >#{post_num}
+    </select>
+
+
+    <select id="selectCommentCus_num" resultType="int" parameterType="int">
+        select cus_num
+        from comments cmt, customer cus, company com
+        where cmt.cus_num = cus.cus_num AND com.com_num = cus.com_num
+          AND com.com_name=${com_name} and cus.cus_name=${cus_name} and cus.cus_dep=${cus_dep} and cus.cus_position=${cus_position}
     </select>
 
 </mapper>

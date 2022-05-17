@@ -1257,6 +1257,12 @@ public class MainController {
                                   @RequestParam("cmt_cnt") String cmt_cnt,
                                   @RequestParam("post_num_cmt_insert") int post_num,
                                   @RequestParam("cate_cmt_insert") int cate,
+
+                                  @RequestParam("com_name_insert") String com_name_insert,
+                                  @RequestParam("cus_name_insert") String cus_name_insert,
+                                  @RequestParam("cus_dep_insert") String cus_dep_insert,
+                                  @RequestParam("cus_position_insert") String cus_position_insert,
+
                                   @RequestParam("uri_cmt_insert") String URI) {
         // @RequestParam으로 받아온 "" 값을 String cmt_cnt에 넣는다.
         //customer inform
@@ -1265,12 +1271,13 @@ public class MainController {
 
         System.out.println(customerVOList.toString());
 
-        int cus_num = parseInt(customerVOList.get(0).getCus_num());
-        System.out.println(cus_num);
-
-
         String cnt = cmt_cnt;
-        CommentVO commentVO = new CommentVO(0, post_num, cate, cus_num, cnt);
+        String com_name = com_name_insert;
+        String cus_name = cus_name_insert;
+        String cus_dep = cus_dep_insert;
+        String cus_position = cus_position_insert;
+
+        CommentVO commentVO = new CommentVO(0,post_num,cate,0,cnt,com_name,cus_name,cus_dep,cus_position);
 
         commentService.insertComment(commentVO);
         System.out.println("Complete...");
@@ -1287,6 +1294,12 @@ public class MainController {
     public String re_comments_insert(Model model, CustomerVO customerVO,
                                      @RequestParam("rcmt_cnt") String rcmt_cnt,
                                      @RequestParam("cmt_num_inform") int cmt_num_inform,
+
+                                     @RequestParam("com_name_insert_r") String com_name_insert_r,
+                                     @RequestParam("cus_name_insert_r") String cus_name_insert_r,
+                                     @RequestParam("cus_dep_insert_r") String cus_dep_insert_r,
+                                     @RequestParam("cus_position_insert_r") String cus_position_insert_r,
+
                                      @RequestParam("uri_rcmt_insert") String URI) {
 
         //customer inform
@@ -1295,14 +1308,16 @@ public class MainController {
 
         System.out.println(customerVOList.toString());
 
-        int cus_num = parseInt(customerVOList.get(0).getCus_num());
-        System.out.println(cus_num);
-
         String rcnt = rcmt_cnt;
+        String com_name_r = com_name_insert_r;
+        String cus_name_r = cus_name_insert_r;
+        String cus_dep_r = cus_dep_insert_r;
+        String cus_position_r = cus_position_insert_r;
+
         int cmt_num_inf = cmt_num_inform;
         System.out.println(cmt_num_inf);
         //cmt_num_inform = 댓글 번호->대댓글을 댓글 밑에 달기 위해
-        Re_CommentVO re_commentVO = new Re_CommentVO(0, cmt_num_inf, cus_num, rcnt);
+        Re_CommentVO re_commentVO = new Re_CommentVO(0, cmt_num_inf, 0, rcnt, com_name_r,cus_name_r,cus_dep_r,cus_position_r);
 
         re_commentService.insertRe_Comment(re_commentVO);
         System.out.println("Complete...");
@@ -1338,7 +1353,7 @@ public class MainController {
         int cmt_num = cmt_num_inform_update;
 
         String cmt_cnt = cmt_update;
-        CommentVO commentVO = new CommentVO(cmt_num, 0, 0, 0, cmt_cnt);
+        CommentVO commentVO = new CommentVO(cmt_num, 0, 0, 0, cmt_cnt,"","","","");
 
         commentService.updateComment(commentVO);
         System.out.println("Complete...");
@@ -1356,7 +1371,7 @@ public class MainController {
         int rcmt_num = rcmt_num_inform_update;
 
         String rcmt_cnt = rcmt_update;
-        Re_CommentVO re_commentVO = new Re_CommentVO(rcmt_num, 0, 0, rcmt_cnt);
+        Re_CommentVO re_commentVO = new Re_CommentVO(rcmt_num, 0, 0, rcmt_cnt,"","","","");
 
         re_commentService.updateRe_Comment(re_commentVO);
         System.out.println("Complete...");
