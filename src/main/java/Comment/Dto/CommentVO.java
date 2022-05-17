@@ -11,7 +11,8 @@ public class CommentVO {
     private int post_num;
     private int cate;           //정해진 숫자 넣어서 보낼거
     private String cmt_cnt;
-    private Date cmt_date;      //sysdate\
+    //private Date cmt_date;      //sysdate\
+    private String cmt_date;
 
     // join (Customer)
     //private String cus_num;
