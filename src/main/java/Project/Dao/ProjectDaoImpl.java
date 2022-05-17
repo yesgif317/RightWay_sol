@@ -11,6 +11,7 @@ import java.util.List;
 @Repository
 public class ProjectDaoImpl implements ProjectDao{
 
+
     @Inject
     private SqlSession sqlSession;
 
@@ -51,6 +52,11 @@ public class ProjectDaoImpl implements ProjectDao{
 
         //Ibatis Update 사용법
         return sqlSession.update(Namespace+".updateProject",projectVo)+"";
+    }
+
+    @Override
+    public ProjectVO selectproject_list(String prj_name) {
+        return sqlSession.selectOne(Namespace+".selectproject_list",prj_name);
     }
 
     @Override

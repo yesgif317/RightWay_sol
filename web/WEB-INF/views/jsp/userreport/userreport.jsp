@@ -65,6 +65,7 @@
             fnUploadExcelRegChk();
         });
 
+        var count = null;
         // 엑셀업로드 체크
         function fnUploadExcelRegChk() {
             console.log("엑셀 업로드 화긴");
@@ -85,6 +86,7 @@
                         if (rowdata[i].id == null)
                             msg += 'id 값이 존재하지 않습니다.';
                         console.log(msg);
+                        count = i;
                         return false;
                     }
 
@@ -129,12 +131,11 @@
                 dataType: "json",
                 processData: false,
                 contentType: false,
-                success: function (result) {
-                    if (result.resultCode == "SUCCESS") {
-                        alert("업로드 성공");
-                    } else {
-                        alert("업로드 실패");
-                    }
+                success: function () {
+                    alert(count + "명의 사용자가 추가되었습니다.")
+                },
+                error: function (request, error) {
+                    alert("code:" + request.status + "\n" + "message: 사용자가 추가되지 않았습니다.");
                 }
             });
         }

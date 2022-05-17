@@ -12,9 +12,9 @@ public class RiskServiceImpl implements RiskService {
     private RiskDao dao;
 
     @Override
-    public List<RiskVO> selectIssue() {return dao.selectIssue();}
+    public List<RiskVO> selectIssue(Object object) {return dao.selectIssue(object);}
     @Override
-    public List<RiskVO> selectDanger() {return dao.selectDanger();}
+    public List<RiskVO> selectDanger(Object object) {return dao.selectDanger(object);}
 
     @Override
     public String insertRisk(RiskVO riskVO) { return dao.insertRisk(riskVO);}

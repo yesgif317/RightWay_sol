@@ -38,6 +38,11 @@ public class ProjectServiceImpl implements ProjectService {
     }
 
     @Override
+    public ProjectVO selectproject_list(String prj_name) {
+        return dao.selectProjectNum(prj_name);
+    }
+
+    @Override
     public String updateProject(ProjectVO projectVO){
         return dao.updateProject(projectVO);
     }

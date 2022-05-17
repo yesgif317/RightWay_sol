@@ -7,20 +7,20 @@
     <!--보드-->
     <!-- Select 문 -->
     <select id="selectIssue" resultType="RiskVO">
-        SELECT post_num,cate,risk_tit, c.cus_num,risk_imp,risk_pgs,risk_con,to_char(risk_start,'YYYY-MM-DD') AS risk_start,to_char(risk_end,'YYYY-MM-DD') AS risk_end,to_char(risk_reg,'YYYY-MM-DD') AS risk_reg,risk_upd,prj_num,c.cus_name,c.cus_position,c2.cus_name as mng_name,c2.cus_position as mng_position,risk_mng
+        SELECT post_num,cate,risk_tit, c.cus_num,risk_imp,risk_pgs,risk_con,to_char(risk_start,'YYYY-MM-DD') AS risk_start,to_char(risk_end,'YYYY-MM-DD') AS risk_end, to_char(risk_reg,'YYYY-MM-DD') AS risk_reg ,risk_upd,prj_num,c.cus_name,c.cus_position,c2.cus_name as mng_name,c2.cus_position as mng_position,risk_mng
         FROM Risk r, customer c ,customer c2
-        WHERE r.cus_num = c.cus_num and r.risk_mng = c2.cus_num and cate = 10
+        WHERE r.cus_num = c.cus_num and r.risk_mng = c2.cus_num and cate = 10 and r.prj_num = #{prj_num}
     </select>
     <select id="selectDanger" resultType="RiskVO">
         SELECT post_num,cate,risk_tit, c.cus_num,risk_imp,risk_pgs,risk_con,to_char(risk_start,'YYYY-MM-DD') AS risk_start,to_char(risk_end,'YYYY-MM-DD') AS risk_end,to_char(risk_reg,'YYYY-MM-DD') AS risk_reg,risk_upd,prj_num,c.cus_name,c.cus_position,c2.cus_name as mng_name,c2.cus_position as mng_position,risk_mng
         FROM Risk r, customer c ,customer c2
-        WHERE r.cus_num = c.cus_num and r.risk_mng = c2.cus_num and cate = 11
+        WHERE r.cus_num = c.cus_num and r.risk_mng = c2.cus_num and cate = 11 and r.prj_num = #{prj_num}
     </select>
 
     <!-- 등록(Insert) -->
     <insert id="insertRisk" parameterType="RiskVO" >
         insert into Risk(post_num,cate,risk_tit, cus_num,risk_imp,risk_pgs,risk_con,risk_start,risk_end,prj_num,risk_reg,risk_mng)
-        values (risk_seq.NEXTVAL,#{cate}, #{risk_tit},#{cus_num},#{risk_imp},#{risk_pgs},#{risk_con},to_date(#{risk_start},'YYYY-MM-DD'),to_date(#{risk_end},'YYYY-MM-DD'),2,sysdate,#{risk_mng})
+        values (risk_seq.NEXTVAL,#{cate}, #{risk_tit},#{cus_num},#{risk_imp},#{risk_pgs},#{risk_con},to_date(#{risk_start},'YYYY-MM-DD'),to_date(#{risk_end},'YYYY-MM-DD'),#{prj_num},sysdate,#{risk_mng})
     </insert>
 
     <update id="updateRisk" parameterType="RiskVO" >

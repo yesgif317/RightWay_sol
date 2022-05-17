@@ -21,7 +21,7 @@ public interface NormalDao {
     List<NormalVO> selectDCList();
 
     //공지사항
-    List<NormalVO> selectNotice();
+    List<NormalVO> selectNotice(Object object);
 
     //구분번호 별 전체 리스트
     List<NormalVO> selectAll(int cate);

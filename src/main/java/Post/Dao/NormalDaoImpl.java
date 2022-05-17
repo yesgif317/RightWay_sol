@@ -57,8 +57,8 @@ public class NormalDaoImpl implements NormalDao {
     }
 
     @Override
-    public List<NormalVO> selectNotice() {
-        return sqlSession.selectList(Namespace + ".selectNoticeList");
+    public List<NormalVO> selectNotice(Object object) {
+        return sqlSession.selectList(Namespace + ".selectNoticeList",object);
     }
 
     @Override

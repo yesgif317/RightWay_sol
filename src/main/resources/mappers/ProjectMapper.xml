@@ -19,9 +19,10 @@
 
     <!-- 사용자의 해당 프로젝트 리스트 불러오기 -->
     <select id="projectVOList" resultType="ProjectVO">
-        select *
-        from project natural join customer
-        where cus_num = #{cus_num}
+        select distinct prj_name , p.prj_num as prj_num
+        from project p , project_detail pd
+        where pd.cus_num = #{cus_num} and p.PRJ_NUM = pd.PRJ_NUM
+        order by p.prj_num asc
     </select>
     <!-- 프로젝트 추가(Insert) -->
     <insert id="insertProject" parameterType="ProjectVO" >
@@ -65,4 +66,10 @@
         order by prj_num desc
     </select>
 
+
+    <select id="selectproject_list" resultType="ProjectVO">
+        select prj_num, prj_name
+        from project
+        where prj_name = #{pro_name}
+    </select>
 </mapper>

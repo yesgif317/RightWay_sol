@@ -27,6 +27,7 @@ import Risk.Service.RiskService;
 import Team.Dto.TeamVO;
 import Team.Dto.TeammemberVO;
 import Team.Service.TeamService;
+import com.sun.org.apache.xpath.internal.operations.Mod;
 import org.apache.poi.ss.usermodel.*;
 import org.apache.poi.ss.util.CellRangeAddress;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
@@ -121,11 +122,30 @@ public class MainController {
             model.addAttribute("uri", uri);
         }
     }
-    public class Addd extends AddCmt {}
+
+    public class Addd extends AddCmt {
+    }
     // 메서드 종료
 
 
     private int projectNum;
+
+    public class Selcus {
+        public void selectcus(Model model, HttpSession httpSession) {
+            System.out.println("세션조회");
+            //login시 만든 회원정보 세션 불러오기
+            Object object = httpSession.getAttribute("login");
+            //cus_num 으로 프로젝트 조회
+            List<ProjectVO> projectVOList = projectService.projectVOList(object);
+
+            httpSession.setAttribute("ProjectList", projectVOList);
+
+
+        }
+    }
+
+    public class Scus extends Selcus {
+    }
 
     // 메인 페이지 이동 및 차트 데이터 가져오기
     @RequestMapping(value = "/index.do", method = RequestMethod.GET)
@@ -133,23 +153,29 @@ public class MainController {
                        HttpServletResponse response,
                        HttpSession httpSession, ModelAndView modelAndView) {
 
-        //세션 조회
-        System.out.println("세션조회");
-        Object object = httpSession.getAttribute("login");
-        System.out.println(object);
-        List<ProjectVO> projectVOList = projectService.projectVOList(object);
-        System.out.println(projectVOList);
-        List<NormalVO> normalVOList = normalService.selectNotice();
-        List<RiskVO> riskVOList = riskService.selectDanger();
-        List<RiskVO> issueVOList = riskService.selectIssue();
+        Selcus selcus = new Scus();
+        selcus.selectcus(model, httpSession);
 
-        // .jsp 파일로 DB 결과값 전달하기
-        model.addAttribute("ProjectList", projectVOList);
-        model.addAttribute("NormalList", normalVOList);
-        model.addAttribute("RiskList", riskVOList);
-        model.addAttribute("IssueList", issueVOList);
         return "index";
     }
+
+    @ResponseBody
+    @PostMapping("Select_project.do")
+    public String select_prj(@RequestParam("pro_name") String prj_name, HttpSession httpSession, Model model) {
+        ProjectVO selectproject_list = projectService.selectproject_list(prj_name);
+        httpSession.setAttribute("prj_list", selectproject_list);
+
+        Object object = httpSession.getAttribute("prj_list");
+        List<NormalVO> normalVOList = normalService.selectNotice(object);
+        List<RiskVO> RiskVOList = riskService.selectDanger(object);
+        List<RiskVO> IssueVOList = riskService.selectIssue(object);
+
+        httpSession.setAttribute("RVList", RiskVOList);
+        httpSession.setAttribute("IVList", IssueVOList);
+        httpSession.setAttribute("NormalList", normalVOList);
+        return "forward:/index.do";
+    }
+
 
     //로그인 GET,POST
     @RequestMapping(value = "/login.do", method = RequestMethod.GET)
@@ -330,10 +356,10 @@ public class MainController {
 
         List<FileVO> files = fileService.viewFiles(no);
         System.out.println(files);
-        for(int i = 0; i<files.size();i++){
+        for (int i = 0; i < files.size(); i++) {
             files.get(i).setFile_link("/upload/" + files.get(i).getFile_name());
         }
-        model.addAttribute("FileList",files);
+        model.addAttribute("FileList", files);
 
         return "/outputs/outputs_content";
     }
@@ -372,9 +398,10 @@ public class MainController {
 
 
     @RequestMapping(value = "/notice.do", method = RequestMethod.GET)//공지사항 게시판 글목록 보기
-    public String notice(Model model) {
+    public String notice(Model model, HttpSession httpSession) {
         //service 클래스에서 Dao 로 접근하여 쿼리 결과값 가져오기
-        List<NormalVO> normalVOList = normalService.selectNotice();
+        Object object = httpSession.getAttribute("prj_list");
+        List<NormalVO> normalVOList = normalService.selectNotice(object);
         System.out.println(normalVOList);
 
 //        for(int i = 0; i<normalVOList.size();i++){
@@ -393,18 +420,18 @@ public class MainController {
 
     //작성한 공지사항 DB저장
     @RequestMapping(value = "/notice_insert.do", method = RequestMethod.POST)
-    public String notice_insert(MultipartFile[] uploadFile, @RequestParam(value = "title") String title
-            , @RequestParam(value = "contents") String contents, @RequestParam(value = "cus_num") String cus_num) {
+    public String notice_insert(MultipartFile[] uploadFile, HttpSession httpSession, @RequestParam(value = "title") String title
+            , @RequestParam(value = "contents") String contents, @RequestParam(value = "cus_num") String cus_num, @RequestParam(value = "prj_num") int prj_num) {
 
 //        MultipartHttpServletRequest mult_req = (MultipartHttpServletRequest)request;
         System.out.println("//Title : " + title + "//Contents : " + contents + "//requestFile : " + uploadFile + cus_num);
 
         //int prj_num = Integer.parseInt(request.getParameter("prj_num"));
         //게시글 저장
-        NormalVO normal = new NormalVO(12, 2, title, contents, parseInt(cus_num));
+        NormalVO normal = new NormalVO(12, prj_num, title, contents, Integer.parseInt(cus_num));
         normalService.insertPost(normal);
         //첨부파일저장
-        fileService.insertFile(uploadFile, 2, 12);
+        fileService.insertFile(uploadFile, prj_num, 12);
 
         return "redirect:/notice.do";
     }
@@ -420,17 +447,16 @@ public class MainController {
 
         List<FileVO> files = fileService.viewFiles(no);
         System.out.println(files);
-        for(int i = 0; i<files.size();i++){
+        for (int i = 0; i < files.size(); i++) {
             files.get(i).setFile_link("/upload/" + files.get(i).getFile_name());
         }
-        model.addAttribute("FileList",files);
+        model.addAttribute("FileList", files);
 
         return "/notice/notice_content";
     }
 
     @RequestMapping(value = "/download.do", method = RequestMethod.GET)
-    public void download(HttpServletResponse response,HttpServletRequest request,@RequestParam("file_name") String filename)
-    {
+    public void download(HttpServletResponse response, HttpServletRequest request, @RequestParam("file_name") String filename) {
 
         System.out.println("download..." + filename);
 
@@ -438,7 +464,7 @@ public class MainController {
 
         System.out.println(saveFileName);
 
-        String contentType = filename.substring(filename.lastIndexOf(".")+1);
+        String contentType = filename.substring(filename.lastIndexOf(".") + 1);
 
         System.out.println(contentType);
 
@@ -455,22 +481,22 @@ public class MainController {
         response.setHeader("Expires", "-1;");
 
 
-        try(
+        try (
                 FileInputStream fis = new FileInputStream(saveFileName);
                 OutputStream out = response.getOutputStream();
-        ){
+        ) {
             System.out.println("Try!");
             int readCount = 0;
             byte[] buffer = new byte[1024];
-            while((readCount = fis.read(buffer)) != -1){
-                out.write(buffer,0,readCount);
+            while ((readCount = fis.read(buffer)) != -1) {
+                out.write(buffer, 0, readCount);
             }
             System.out.println(out);
 
             out.close();
             fis.close();
 
-        }catch(Exception ex){
+        } catch (Exception ex) {
             throw new RuntimeException("file Save Error");
         }
     }
@@ -537,9 +563,10 @@ public class MainController {
 
     //issue page
     @RequestMapping(value = "/issue.do", method = RequestMethod.GET)
-    public String issue(Model model) {
+    public String issue(Model model, HttpSession httpSession) {
         //service 클래스에서 Dao 로 접근하여 쿼리 결과값 가져오기
-        List<RiskVO> riskVOList = riskService.selectIssue();
+        Object object = httpSession.getAttribute("prj_list");
+        List<RiskVO> riskVOList = riskService.selectIssue(object);
         // .jsp 파일로 DB 결과값 전달하기
         model.addAttribute("RiskList", riskVOList);
 
@@ -620,7 +647,6 @@ public class MainController {
         }
 
 
-
         return "/meetingrecord/meetingrecord_write";
     }
 
@@ -636,10 +662,10 @@ public class MainController {
 
         List<FileVO> files = fileService.viewFiles(no);
         System.out.println(files);
-        for(int i = 0; i<files.size();i++){
+        for (int i = 0; i < files.size(); i++) {
             files.get(i).setFile_link("/upload/" + files.get(i).getFile_name());
         }
-        model.addAttribute("FileList",files);
+        model.addAttribute("FileList", files);
 
         return "/meetingrecord/meetingrecord_content";
     }
@@ -737,9 +763,10 @@ public class MainController {
 
     //danger page
     @RequestMapping(value = "/danger.do", method = RequestMethod.GET)
-    public String danger(Model model) {
+    public String danger(Model model, HttpSession httpSession) {
         //service 클래스에서 Dao 로 접근하여 쿼리 결과값 가져오기
-        List<RiskVO> riskVOList = riskService.selectDanger();
+        Object object = httpSession.getAttribute("prj_list");
+        List<RiskVO> riskVOList = riskService.selectDanger(object);
         // .jsp 파일로 DB 결과값 전달하기
         model.addAttribute("RiskList", riskVOList);
 
@@ -934,16 +961,17 @@ public class MainController {
 
         List<CustomerVO> customerVoList = customerService.selectAllCustomer();
         List<ProjectDetailVO> projectDetailVOList = projectService.selectProject_detail(prj_num);
-        List<CustomerVO> cusmodalVoList= new ArrayList<>();
+        List<CustomerVO> cusmodalVoList = new ArrayList<>();
 
-        for (CustomerVO customerVO : customerVoList){
-            int i=0;
-            for(ProjectDetailVO projectDetailVO : projectDetailVOList){
-                if(parseInt(customerVO.getCus_num()) == projectDetailVO.getCus_num()){
-                    i+=1;
+        for (CustomerVO customerVO : customerVoList) {
+            int i = 0;
+            for (ProjectDetailVO projectDetailVO : projectDetailVOList) {
+                if (parseInt(customerVO.getCus_num()) == projectDetailVO.getCus_num()) {
+                    i += 1;
                 }
             }
-            if(i==0){cusmodalVoList.add(customerVO);
+            if (i == 0) {
+                cusmodalVoList.add(customerVO);
             }
         }
 
@@ -1004,15 +1032,16 @@ public class MainController {
     @RequestMapping(value = "/project_detail_delete.do", method = RequestMethod.DELETE)
     public String project_detail_delete(@RequestParam("prj_num") int prj_num, ProjectDetailVO projectDetailVO) {
         projectService.deleteProject_detail(projectDetailVO);
-        return "redirect:/project_write.do?prj_num="+prj_num+"&update=1";
+        return "redirect:/project_write.do?prj_num=" + prj_num + "&update=1";
 
     }
+
     // project 프로젝트원 등록 기능
     @RequestMapping(value = "/project_detail_insert.do", method = RequestMethod.POST)
-    public String project_detail_insert(@RequestParam("prj_num") int prj_num,Model model, ProjectDetailVO projectDetailVO) {
+    public String project_detail_insert(@RequestParam("prj_num") int prj_num, Model model, ProjectDetailVO projectDetailVO) {
         String Result = projectService.insertProject_detail(projectDetailVO);
         model.addAttribute("Project_detailList", Result);
-        return "redirect:/project_write.do?prj_num="+prj_num+"&update=1";
+        return "redirect:/project_write.do?prj_num=" + prj_num + "&update=1";
     }
 
 
@@ -1021,16 +1050,18 @@ public class MainController {
     public String team_write(@RequestParam("team_num") int no, Model model) {
         List<CustomerVO> customerVoList = customerService.selectAllCustomer();
         List<TeammemberVO> teammemberVOList = teamService.viewTeammember(no);
-        List<CustomerVO> cusmodalVoList= new ArrayList<>();
+        List<CustomerVO> cusmodalVoList = new ArrayList<>();
         TeamVO teamVoList = teamService.viewTeam(no);
         for (CustomerVO customerVO : customerVoList) {
-            int i=0;
+            int i = 0;
             for (TeammemberVO teammemberVO : teammemberVOList) {
-                if(parseInt(String.valueOf(customerVO.getCus_num()))==parseInt(String.valueOf(teammemberVO.getCus_num()))){
-                    i+=1;
+                if (parseInt(String.valueOf(customerVO.getCus_num())) == parseInt(String.valueOf(teammemberVO.getCus_num()))) {
+                    i += 1;
                 }
             }
-            if(i==0){cusmodalVoList.add(customerVO);}
+            if (i == 0) {
+                cusmodalVoList.add(customerVO);
+            }
         }
         model.addAttribute("CusmodalList", cusmodalVoList);
         model.addAttribute("CustomerList", customerVoList);
@@ -1111,13 +1142,15 @@ public class MainController {
 
         return "usermanagement/usermanagement";
     }
+
     //투입인력관리 상세 페이지 이동
     @RequestMapping(value = "/usermanagement_content.do", method = RequestMethod.GET)
-    public String usermanagement_content(@RequestParam("cus_num") int cus_num, Model model){
+    public String usermanagement_content(@RequestParam("cus_num") int cus_num, Model model) {
         CustomerVO customerVO = customerService.viewCustomer(cus_num);
         model.addAttribute("CustomerList", customerVO);
         return "usermanagement/usermanagement_content";
     }
+
     //투입인력관리 update
     @RequestMapping(value = "/usermanagement_update.do", method = RequestMethod.POST)
     public String usermanagement_update(Model model, CustomerVO customerVO) {
@@ -1209,7 +1242,7 @@ public class MainController {
         model.addAttribute("Re_CommentList", Re_commentVOList);
 
 
-        int post_num=0;
+        int post_num = 0;
         // 댓글수 count
 
         int countComment = commentService.countComment(post_num);
@@ -1236,8 +1269,8 @@ public class MainController {
         System.out.println(cus_num);
 
 
-        String cnt=cmt_cnt;
-        CommentVO commentVO = new CommentVO(0,post_num,cate,cus_num,cnt);
+        String cnt = cmt_cnt;
+        CommentVO commentVO = new CommentVO(0, post_num, cate, cus_num, cnt);
 
         commentService.insertComment(commentVO);
         System.out.println("Complete...");
@@ -1265,11 +1298,11 @@ public class MainController {
         int cus_num = parseInt(customerVOList.get(0).getCus_num());
         System.out.println(cus_num);
 
-        String rcnt=rcmt_cnt;
+        String rcnt = rcmt_cnt;
         int cmt_num_inf = cmt_num_inform;
         System.out.println(cmt_num_inf);
         //cmt_num_inform = 댓글 번호->대댓글을 댓글 밑에 달기 위해
-        Re_CommentVO re_commentVO = new Re_CommentVO(0, cmt_num_inf, cus_num,rcnt);
+        Re_CommentVO re_commentVO = new Re_CommentVO(0, cmt_num_inf, cus_num, rcnt);
 
         re_commentService.insertRe_Comment(re_commentVO);
         System.out.println("Complete...");
@@ -1304,8 +1337,8 @@ public class MainController {
                                   @RequestParam("uri_cmt_update") String URI) {
         int cmt_num = cmt_num_inform_update;
 
-        String cmt_cnt=cmt_update;
-        CommentVO commentVO = new CommentVO(cmt_num, 0, 0,0, cmt_cnt);
+        String cmt_cnt = cmt_update;
+        CommentVO commentVO = new CommentVO(cmt_num, 0, 0, 0, cmt_cnt);
 
         commentService.updateComment(commentVO);
         System.out.println("Complete...");
@@ -1322,7 +1355,7 @@ public class MainController {
                                      @RequestParam("uri_rcmt_update") String URI) {
         int rcmt_num = rcmt_num_inform_update;
 
-        String rcmt_cnt=rcmt_update;
+        String rcmt_cnt = rcmt_update;
         Re_CommentVO re_commentVO = new Re_CommentVO(rcmt_num, 0, 0, rcmt_cnt);
 
         re_commentService.updateRe_Comment(re_commentVO);
@@ -1472,7 +1505,7 @@ public class MainController {
     }
 
     @ResponseBody
-    @RequestMapping(value = "/ExcelUpload.do", method = RequestMethod.POST)
+    @RequestMapping(value = "/ExcelUpload.do")
     public ResponseEntity<ExcelVO> memberExcelUp(MultipartHttpServletRequest request, HttpServletResponse response) {
         System.out.println("컨트롤러 넘어옴");
         ExcelVO excelVO = new ExcelVO();
@@ -1486,7 +1519,9 @@ public class MainController {
             }
             System.out.println("서비스 실행전");
             excelService.memberExcelUp(file);
+            System.out.println(HttpStatus.OK);
             return new ResponseEntity<>(excelVO, HttpStatus.OK);
+
         } catch (Exception e) {
             return new ResponseEntity<>(excelVO, HttpStatus.OK);
         }

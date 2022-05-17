@@ -21,6 +21,8 @@ public interface ProjectDao {
     //글 수정 Update
     String updateProject(ProjectVO projectVo);
 
+    ProjectVO selectproject_list(String prj_name);
+
     //글 조회 Update
     ProjectVO viewProject(int prj_num);
 

@@ -15,7 +15,7 @@
     <select id="checkCompany" resultType="CompanyVO" parameterType="String">
         select *
         from company
-        where com_name = #{com_name}
+        where com_name like '%'||#{com_name}||'%'
     </select>
 
     <!-- 업체등록(Insert) -->

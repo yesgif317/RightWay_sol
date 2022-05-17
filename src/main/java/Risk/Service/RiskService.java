@@ -6,8 +6,8 @@ import java.util.List;
 
 public interface RiskService {
     //목록 조회
-    List<RiskVO> selectIssue();
-    List<RiskVO> selectDanger();
+    List<RiskVO> selectIssue(Object object);
+    List<RiskVO> selectDanger(Object object);
     //등록
     String insertRisk(RiskVO riskVO);
     //글 수정(Update)

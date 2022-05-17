@@ -25,7 +25,7 @@ public interface NormalService {
     List<NormalVO> selectDCList();
 
     //공지사항
-    List<NormalVO> selectNotice();
+    List<NormalVO> selectNotice(Object object);
 
     List<NormalVO> selectAll(int cate);
 }

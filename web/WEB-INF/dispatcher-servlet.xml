@@ -42,6 +42,7 @@
             <mvc:mapping path="/regularreport.do"/>
             <mvc:mapping path="/request.do"/>
             <mvc:mapping path="/team.do"/>
+            <mvc:mapping path="/Select_project.do"/>
             <ref bean="authInterceptor"/>
         </mvc:interceptor>
         <mvc:interceptor>

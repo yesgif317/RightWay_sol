@@ -48,6 +48,7 @@
                                         </c:otherwise>
                                         </c:choose>
                                             <input type="hidden" name="cus_num" value="${login.cus_num}">
+                                            <input type="hidden" name="prj_num" value="${prj_list.prj_num}">
                                             <input type="hidden" name="cate" value="11">
                                             <div class="row form-group">
                                             <div class="col col-md-3 text-right"><label for="risk_tit"

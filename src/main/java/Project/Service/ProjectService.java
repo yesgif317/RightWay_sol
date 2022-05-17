@@ -2,6 +2,7 @@ package Project.Service;
 
 import Project.Dto.ProjectDetailVO;
 import Project.Dto.ProjectVO;
+import javafx.beans.binding.ObjectExpression;
 
 import java.util.List;
 
@@ -19,6 +20,9 @@ public interface ProjectService {
 
     //사용자의 해당 프로젝트 리스트 불러오기
     List<ProjectVO> projectVOList(Object object);
+
+    //프로젝트 번호 가져오기
+    ProjectVO selectproject_list(String prj_name);
 
     //글 수정(Update)
     String updateProject(ProjectVO projectVO);

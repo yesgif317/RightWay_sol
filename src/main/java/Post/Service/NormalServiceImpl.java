@@ -44,8 +44,8 @@ public class NormalServiceImpl implements NormalService {
     }
 
     @Override
-    public List<NormalVO> selectNotice() {
-        return dao.selectNotice();
+    public List<NormalVO> selectNotice(Object object) {
+        return dao.selectNotice(object);
     }
 
     @Override
