@@ -39,20 +39,22 @@
                                 <c:choose>
                                 <c:when test="${test eq '1'}">
                                 <form method="post" action="issue_update.do?post_num=${RiskList.post_num}"
-                                      id="issueupdateform" enctype="application/x-www-form-urlencoded"
+                                      id="issueupdateform" enctype="multipart/form-data"
                                       class="form-horizontal">
                                     </c:when>
                                     <c:otherwise>
                                     <form method="post" action="issue_insert.do" id="issuewriteform"
-                                          enctype="application/x-www-form-urlencoded" class="form-horizontal">
+                                          enctype="multipart/form-data" class="form-horizontal">
                                         </c:otherwise>
                                         </c:choose>
                                             <input type="hidden" name="cus_num" value="${login.cus_num}">
                                             <input type="hidden" name="cate" value="10">
                                         <div class="row form-group">
-                                            <div class="col col-md-3 text-right"><label for="risk_tit"
-                                                                                        class=" form-control-label fa-solid text-gray-800 mt-2"><sup
-                                                    class="text-danger small">*</sup>제목</label></div>
+                                            <div class="col col-md-3 text-right">
+                                                <label for="risk_tit" class=" form-control-label fa-solid text-gray-800 mt-2">
+                                                <sup class="text-danger small">*</sup>제목
+                                                </label>
+                                            </div>
                                             <div class="col-12 col-md-7"><input type="text" id="risk_tit"
                                                                                 name="risk_tit"
                                                                                 placeholder="제목을 입력해주세요."

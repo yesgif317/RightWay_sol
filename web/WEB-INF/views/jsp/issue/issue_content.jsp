@@ -120,7 +120,13 @@
                                 </form>
                             </div>
                         </div>
+                        <c:forEach items="${FileList}" var="file">
 
+                            <div>
+                                <a href="/download.do?file_name=${file.file_name}" id = "${file.file_name}">${file.file_name}</a>
+                            </div>
+
+                        </c:forEach>
                         <!-- 수정/삭제/목록 버튼 -->
                         <div class="text-center d-block card-header py-3">
                             <a href="issue_write.do?post_num=${RiskList.post_num}&update=1" class="btn btn-info">
@@ -165,6 +171,7 @@
                                 <span class="text">목록</span>
                             </a>
                         </div>  <!-- end of button list -->
+
 
 
                         <jsp:include page="../../include/comments.jsp" flush="true" />

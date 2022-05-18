@@ -39,12 +39,12 @@
                                 <c:choose>
                                 <c:when test="${test eq '1'}">
                                 <form method="post" action="danger_update.do?post_num=${RiskList.post_num}"
-                                      id="dangerupdateform" enctype="application/x-www-form-urlencoded"
+                                      id="dangerupdateform" enctype="multipart/form-data"
                                       class="form-horizontal">
                                     </c:when>
                                     <c:otherwise>
                                     <form method="post" action="danger_insert.do" id="dangerwriteform"
-                                          enctype="application/x-www-form-urlencoded" class="form-horizontal">
+                                          enctype="multipart/form-data" class="form-horizontal">
                                         </c:otherwise>
                                         </c:choose>
                                             <input type="hidden" name="cus_num" value="${login.cus_num}">

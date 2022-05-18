@@ -29,7 +29,14 @@ public class FileServiceImpl implements FileService{
             System.out.println("Upload File Size : " + multipartFile.getSize());
 
             String uploadFileName = multipartFile.getOriginalFilename();
-            FileVO fileVO = new FileVO(dao.selectSeq()-1,cate,uploadFileName);
+            FileVO fileVO = null;
+            if(cate == 9 || cate == 10){
+                fileVO = new FileVO(dao.selectRiskSeq()-1,cate,uploadFileName);
+            }
+            else {
+                fileVO = new FileVO(dao.selectSeq()-1,cate,uploadFileName);
+            }
+
 
             //IE has file path
             uploadFileName = uploadFileName.substring(uploadFileName.lastIndexOf("\\") + 1);

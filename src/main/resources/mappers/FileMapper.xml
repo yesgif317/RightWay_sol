@@ -26,5 +26,10 @@
         FROM USER_SEQUENCES
         WHERE SEQUENCE_NAME = 'NOR_SEQ'
     </select>
+    <select id="selectRiskSeq" resultType="int">
+        SELECT last_number
+        FROM USER_SEQUENCES
+        WHERE SEQUENCE_NAME = 'RISK_SEQ'
+    </select>
 
 </mapper>

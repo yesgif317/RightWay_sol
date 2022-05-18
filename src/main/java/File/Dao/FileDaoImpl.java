@@ -28,4 +28,9 @@ public class FileDaoImpl implements FileDao{
     public int selectSeq() {
         return sqlSession.selectOne(Namespace + ".selectSeq");
     }
+
+    @Override
+    public int selectRiskSeq() {
+        return sqlSession.selectOne(Namespace + ".selectRiskSeq");
+    }
 }

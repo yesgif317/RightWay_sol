@@ -22,7 +22,7 @@
                             <!-- Card Content - Collapse -->
                             <div class="collapse show" id="collapseCardExample">
                                 <div class="card-body">
-                                    <form method="post" id="file-upload-form" enctype="application/x-www-form-urlencoded" class="form-horizontal">
+                                    <form method="post" id="file-upload-form" enctype="multipart/form-data" class="form-horizontal" action="/datacenter_insert.do">
                                         <div class="row form-group">
                                             <div class="col col-md-3 text-right"><label class=" form-control-label fa-solid text-gray-800 mt-2"><sup class="text-danger small">*</sup>제목</label></div>
                                             <div class="col-12 col-md-7"><input type="text" id="title" name="title" placeholder="제목을 입력해주세요" class="form-control"></div>
@@ -40,16 +40,10 @@
                                             <div class="col col-md-3 text-right"><label class=" form-control-label fa-solid text-gray-800 mt-2">업로드 파일</label></div>
                                             <div class="col-12 col-md-7"><input type="file" name="uploadFile" multiple></div>
                                         </div>
-
-
-
-
-
-
-
+                                        <input type="text" name="cus_num" value="${login.cus_num}" hidden>
 
                                         <div class="text-center d-block card-header py-3">
-                                            <a href="javascript:goSubmit();" class="btn btn-primary btn-icon-split" id="uploadBtn">
+                                            <a href="javascript:chk_form();" class="btn btn-primary btn-icon-split" id="uploadBtn">
                           <span class="icon text-white-50">
                             <i class="fas fa-pen"></i>
                           </span>
@@ -80,46 +74,6 @@
             integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
             crossorigin="anonymous"></script>
 
-    <script>
-        $(document).ready(function () {
-            $("#uploadBtn").on("click", function () {
-                var formData = new FormData();
-                var inputFile = $("input[name='uploadFile']");
-                var title = $("input[name='title']").val();
-                var writer = $("input[name='writer']").val();
-                var contents = $("textarea[name='contents']").val();
-
-                var files = inputFile[0].files;
-
-                console.log(files);
-                console.log(title + writer + contents)
-
-                for (var i = 0; i < files.length; i++) {
-                    formData.append("uploadFile", files[i]);
-                }
-                formData.append("title", title[0]);
-                formData.append("writer",writer[0]);
-                formData.append("contents",contents[0]);
-
-
-                $.ajax({
-                    url: "file-upload.do",
-                    processData: false,
-                    contentType: false,
-                    data: formData,
-                    type: "POST",
-                    success: function () {
-                        alert("Uploaded");
-                        location.href = "datacenter.do";
-                    },
-                    error: function (request,error){
-                        alert("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);
-                    }
-                });
-            });
-        });
-    </script>
-
 </div>
 
 
@@ -129,7 +83,7 @@
             $('#exampleModal').modal('show')
         }
         else {
-            document.getElementById('datacenterwriteform').submit();
+            document.getElementById('file-upload-form').submit();
         }
     }
 </script>
