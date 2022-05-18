@@ -1,5 +1,6 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<%@ page contentType="text/html;charset=UTF-8" language="java" %><!DOCTYPE html>
+<%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<!DOCTYPE html>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 
 <!--
@@ -88,8 +89,13 @@ jsp:include page="../../include/footer.jsp" flush="true" />
              댓글갯수-->
 
             <!-- 댓글 펴기/접기 부분 -->
+            <p></p>
             <details>
-                <summary><%=count_sum%> Comments [...]</summary>
+                <summary>
+                    <i class="fa fa-comments fa-fw"></i>
+                    <span style="color: red"><%=count_sum%></span> <b>Comments</b></summary>
+                <p></p>
+
                 <% count = 0; %>
                 <% re_count = 0; %>
                 <form name="insert_cmt_cnt" method="post" action="/comments_insert.do"
@@ -106,14 +112,14 @@ jsp:include page="../../include/footer.jsp" flush="true" />
                         <input type="hidden" id="cus_dep_insert" name="cus_dep_insert" value="${login.cus_dep}"/>
                         <input type="hidden" id="cus_position_insert" name="cus_position_insert" value="${login.cus_position}"/>
 
-                        <input type="text" id="cmt_cnt" name="cmt_cnt" class="form-control" style="width:93%;float:left"
+                        <input type="text" id="cmt_cnt" name="cmt_cnt" class="form-control" style="width:90%;float:left"
                                placeholder="댓글 입력"/>
                         <input type="submit" class="btn btn-add-comment" value="등록" style="float:right"/>
                     </td>
                 </form>
 
-                <br>
-                <br>
+                <p><br></p><br>
+                <hr>
 
 
                 <%! int dis_id1 = 1; %>
@@ -139,7 +145,7 @@ jsp:include page="../../include/footer.jsp" flush="true" />
                                 <div class="media-heading">
                                     <b>
                                 <span class="member">
-                                    ${comment.com_name}/${comment.cus_name}/${comment.cus_dep}/${comment.cus_position} / ${comment.cmt_num}/${comment.cus_num}
+                                    ${comment.com_name}/${comment.cus_name}/${comment.cus_dep}/${comment.cus_position}
 
                                 </span>
                                     </b>
@@ -284,11 +290,12 @@ jsp:include page="../../include/footer.jsp" flush="true" />
                                         <input type="hidden" id="cmt_num_inform" name="cmt_num_inform"
                                                value="${comment.cmt_num}"/>
                                         <input type="text" id="rcmt_cnt" name="rcmt_cnt" class="form-control"
-                                               style="width:93%;float:left" placeholder="댓글 입력"/>
+                                               style="width:90%;float:left" placeholder="댓글 입력"/>
 
 
                                         <input type="submit" class="btn btn-cmt-delete" value="등록" style="float:right"/>
                                     </td>
+                                    <p><br></p>
                                 </form>
                             </div>
                         </details>
@@ -341,7 +348,7 @@ jsp:include page="../../include/footer.jsp" flush="true" />
                                         <div class="media-heading">
                                             <b>
                                 <span class="member">
-                                    ${recomment.com_name}/${recomment.cus_name}/${recomment.cus_dep}/${recomment.cus_position} / ${recomment.cmt_num}/${recomment.cus_num}
+                                    ${recomment.com_name}/${recomment.cus_name}/${recomment.cus_dep}/${recomment.cus_position}
                                 </span>
                                             </b>
                                             <span class="font-11 text-muted">
@@ -434,7 +441,6 @@ jsp:include page="../../include/footer.jsp" flush="true" />
 
                                 </section> <!-- section 종료 = 댓글영역 끝 -->
 
-                                <br>
                                 <hr>
                                 <!-- 댓글 나누는 선 -->
 
