@@ -45,7 +45,7 @@
                                     <td>${com.com_tel}</td>
                                     <td>${com.com_addr}</td>
                                     <td>${com.com_business}</td>
-                                    <td>일단보류</td>
+                                    <td>${com.com_count}</td>
                                 </tr>
                             </c:forEach>
                             </tbody>

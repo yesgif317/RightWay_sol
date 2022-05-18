@@ -386,19 +386,24 @@
                                     document.getElementById('risk_mng').setAttribute("value", num);
                                 }
 
-                                    function chk_form() {
-                                    if (document.getElementById("risk_tit").value == ''||document.getElementById("risk_imp").value == ''||document.getElementById("risk_con").value == ''||document.getElementById("risk_mng").value == '') {
-                                    $('#exampleModal').modal('show')
-                                } else {
-                                    <c:choose>
-                                    <c:when test="${test eq '1'}">
-                                    document.getElementById('issueupdateform').submit();
-                                    </c:when>
-                                    <c:otherwise>
-                                    document.getElementById('issuewriteform').submit();
-                                    </c:otherwise>
-                                    </c:choose>
-                                }
+                                function chk_form() {
+                                    let startdate = new Date(document.getElementById("risk_start").value);
+                                    let enddate = new Date(document.getElementById("risk_end").value)
+                                    if (document.getElementById("risk_tit").value == '' || document.getElementById("risk_imp").value == '' || document.getElementById("risk_con").value == '' || document.getElementById("risk_mng").value == '') {
+                                        $('#exampleModal').modal('show')
+                                    } else if(Number(startdate) > Number(enddate)){
+                                        $('#dateModal').modal('show')
+                                    }
+                                    else {
+                                        <c:choose>
+                                        <c:when test="${test eq '1'}">
+                                        document.getElementById('issueupdateform').submit();
+                                        </c:when>
+                                        <c:otherwise>
+                                        document.getElementById('issuewriteform').submit();
+                                        </c:otherwise>
+                                        </c:choose>
+                                    }
                                 }
                             </script>
                             <div class="text-center d-block card-header py-3">
@@ -439,6 +444,28 @@
                                             </div>
                                         </div>
                                     </div>
+                                <div class="modal fade" id="dateModal" tabindex="-1" role="dialog"
+                                     aria-labelledby="dateModalLabel" aria-hidden="true">
+                                    <div class="modal-dialog" role="document">
+                                        <div class="modal-content">
+                                            <div class="modal-header">
+                                                <h5 class="modal-title" id="dateModalLabel">날짜확인</h5>
+                                                <button type="button" class="close" data-dismiss="modal"
+                                                        aria-label="Close">
+                                                    <span aria-hidden="true">&times;</span>
+                                                </button>
+                                            </div>
+                                            <div class="modal-body">
+                                                발생일이 해결일보다 늦을 수 없습니다.
+                                            </div>
+                                            <div class="modal-footer">
+                                                <button class="btn btn-secondary" type="button"
+                                                        data-dismiss="modal">확인
+                                                </button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
                                 <%--</button>--%>
                                 <a href="issue.do" class="btn btn-secondary">
                                                 <span class="icon text-white-50">

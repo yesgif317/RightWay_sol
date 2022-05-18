@@ -79,7 +79,7 @@
                                         </div>
                                         <div class="row form-group">
                                             <div class="col col-md-3 text-right"><label for="evt_cnt" class=" form-control-label fa-solid text-gray-800 mt-2">행사내용</label></div>
-                                            <div class="col-12 col-md-7"><textarea name="evt_cnt" id="evt_cnt" rows="5" placeholder="행사내용을 입력해주세요." class="form-control">${EventList.evt_cnt}</textarea></div>
+                                            <div class="col-12 col-md-7"><textarea name="evt_cnt" id="evt_cnt" rows="10" placeholder="행사내용을 입력해주세요." class="form-control">${EventList.evt_cnt}</textarea></div>
                                         </div>
                                         <div class="row form-group">
                                             <div class="col col-md-3 text-right"><label for="evt_pri" class=" form-control-label fa-solid text-gray-800 mt-2"><sup class="text-danger small">*</sup>참가비용</label></div>
@@ -113,23 +113,7 @@
                                                 <span OnClick="location.href='javascript:goSubmit();'" class="text" style="color:white">등록</span>
                                             </c:otherwise>
                                         </c:choose>
-                                        <script>
-                                            function chk_form() {
-                                                if( document.getElementById("evt_tit").value===''){
-                                                    $('#exampleModal').modal('show')
-                                                }
-                                                else {
-                                                    <c:choose>
-                                                    <c:when test="${test eq '1'}">
-                                                    document.getElementById('eventupdateform').submit();
-                                                    </c:when>
-                                                    <c:otherwise>
-                                                    document.getElementById('eventwriteform').submit();
-                                                    </c:otherwise>
-                                                    </c:choose>
-                                                }
-                                            }
-                                        </script>
+                                    </a>
                                         <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
                                             <div class="modal-dialog" role="document">
                                                 <div class="modal-content">
@@ -149,7 +133,51 @@
                                             </div>
                                         </div>
 
-                                    </a>
+                                        <div class="modal fade" id="dateModal2" tabindex="-1" role="dialog"
+                                             aria-labelledby="dateModalLabel2" aria-hidden="true">
+                                            <div class="modal-dialog" role="document">
+                                                <div class="modal-content">
+                                                    <div class="modal-header">
+                                                        <h5 class="modal-title" id="dateModalLabel2">날짜확인</h5>
+                                                        <button type="button" class="close" data-dismiss="modal"
+                                                                aria-label="Close">
+                                                            <span aria-hidden="true">&times;</span>
+                                                        </button>
+                                                    </div>
+                                                    <div class="modal-body">
+                                                        접수기간이 행사기간보다 늦을 수 없습니다.
+                                                    </div>
+                                                    <div class="modal-footer">
+                                                        <button class="btn btn-secondary" type="button"
+                                                                data-dismiss="modal">확인
+                                                        </button>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div class="modal fade" id="dateModal" tabindex="-1" role="dialog"
+                                             aria-labelledby="dateModalLabel" aria-hidden="true">
+                                            <div class="modal-dialog" role="document">
+                                                <div class="modal-content">
+                                                    <div class="modal-header">
+                                                        <h5 class="modal-title" id="dateModalLabel">날짜확인</h5>
+                                                        <button type="button" class="close" data-dismiss="modal"
+                                                                aria-label="Close">
+                                                            <span aria-hidden="true">&times;</span>
+                                                        </button>
+                                                    </div>
+                                                    <div class="modal-body">
+                                                        시작일이 종료일보다 늦을 수 없습니다.
+                                                    </div>
+                                                    <div class="modal-footer">
+                                                        <button class="btn btn-secondary" type="button"
+                                                                data-dismiss="modal">확인
+                                                        </button>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
                                     <%--</button>--%>
                                     <a href="event.do" class="btn btn-secondary">
                                                 <span class="icon text-white-50">
@@ -172,7 +200,32 @@
         <!-- End of Main Content -->
 
 
+    <script>
+        function chk_form() {
+            let startdate = new Date(document.getElementById("evt_start").value);
+            let enddate = new Date(document.getElementById("evt_end").value);
+            let startacpdate = new Date(document.getElementById("evt_acptstart").value);
+            let endacpdate = new Date(document.getElementById("evt_acptend").value);
 
+            if( document.getElementById("evt_tit").value===''){
+                $('#exampleModal').modal('show')
+            } else if(Number(startdate) > Number(enddate) || Number(startacpdate) > Number(endacpdate)){
+                $('#dateModal').modal('show')
+            } else if(Number(startacpdate) > Number(startdate)){
+                $('#dateModal2').modal('show')
+            }
+            else {
+                <c:choose>
+                <c:when test="${test eq '1'}">
+                document.getElementById('eventupdateform').submit();
+                </c:when>
+                <c:otherwise>
+                document.getElementById('eventwriteform').submit();
+                </c:otherwise>
+                </c:choose>
+            }
+        }
+    </script>
 
 
 

@@ -47,7 +47,7 @@
                                     <td>${event.evt_loc}</td>
                                     <td>${event.evt_limit}</td>
                                     <td>${event.evt_acptstart}~${event.evt_acptend}</td>
-                                    <td>${event.cus_num}</td>
+                                    <td>${event.cus_name}/${event.cus_position}</td>
                                 </tr>
                             </c:forEach>
                             </tbody>

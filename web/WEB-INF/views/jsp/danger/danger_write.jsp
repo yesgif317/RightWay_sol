@@ -47,11 +47,11 @@
                                           enctype="multipart/form-data" class="form-horizontal">
                                         </c:otherwise>
                                         </c:choose>
-                                            <input type="hidden" name="cus_num" value="${login.cus_num}">
-                                            <input type="hidden" name="prj_num" value="${prj_list.prj_num}">
-                                            <input type="hidden" name="cate" value="9">
-                                            <input type="hidden" value="${prj_list.prj_num}" name="prj_num">
-                                            <div class="row form-group">
+                                        <input type="hidden" name="cus_num" value="${login.cus_num}">
+                                        <input type="hidden" name="prj_num" value="${prj_list.prj_num}">
+                                        <input type="hidden" name="cate" value="9">
+                                        <input type="hidden" value="${prj_list.prj_num}" name="prj_num">
+                                        <div class="row form-group">
                                             <div class="col col-md-3 text-right"><label for="risk_tit"
                                                                                         class=" form-control-label fa-solid text-gray-800 mt-2"><sup
                                                     class="text-danger small">*</sup>제목</label></div>
@@ -61,76 +61,88 @@
                                                                                 class="form-control"
                                                                                 value="${RiskList.risk_tit}"></div>
                                         </div>
-                                            <div class="row form-group">
-                                                <div class="col col-md-3 text-right"><label
-                                                        class=" form-control-label fa-solid text-gray-800 mt-2"><sup
-                                                        class="text-danger small">*</sup>담당자</label>
-                                                </div>
-                                                <div id="result" class="dropdown col-md-5">
-                                                    <a  class="btn btn-secondary" data-toggle="modal" data-target="#exampleModal1">
-                                                        <span class="text" style="color:white">담당자선택</span>
-                                                    </a>
-                                                    <!-- Modal -->
-                                                    <div class="modal fade" id="exampleModal1" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel1" aria-hidden="true" >
-                                                        <div class="modal-dialog" role="document">
-                                                            <div class="modal-content">
-                                                                <div class="modal-header">
-                                                                    <h5 class="modal-title" id="exampleModalLabel1">담당자선택</h5>
-                                                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                                                        <span aria-hidden="true">×</span>
-                                                                    </button>
-                                                                </div>
+                                        <div class="row form-group">
+                                            <div class="col col-md-3 text-right"><label
+                                                    class=" form-control-label fa-solid text-gray-800 mt-2"><sup
+                                                    class="text-danger small">*</sup>담당자</label>
+                                            </div>
+                                            <div id="result" class="dropdown col-md-5">
+                                                <a class="btn btn-secondary" data-toggle="modal"
+                                                   data-target="#exampleModal1">
+                                                    <span class="text" style="color:white">담당자선택</span>
+                                                </a>
+                                                <!-- Modal -->
+                                                <div class="modal fade" id="exampleModal1" tabindex="-1" role="dialog"
+                                                     aria-labelledby="exampleModalLabel1" aria-hidden="true">
+                                                    <div class="modal-dialog" role="document">
+                                                        <div class="modal-content">
+                                                            <div class="modal-header">
+                                                                <h5 class="modal-title" id="exampleModalLabel1">
+                                                                    담당자선택</h5>
+                                                                <button type="button" class="close" data-dismiss="modal"
+                                                                        aria-label="Close">
+                                                                    <span aria-hidden="true">×</span>
+                                                                </button>
+                                                            </div>
 
-                                                                <div class="modal-body">
-                                                                    <div class="card-body">
-                                                                        <div class="table-responsive">
-                                                                            <table class="table table-sm table-bordered table-hover" id="dataTable">
-                                                                                <thead>
+                                                            <div class="modal-body">
+                                                                <div class="card-body">
+                                                                    <div class="table-responsive">
+                                                                        <table class="table table-sm table-bordered table-hover"
+                                                                               id="dataTable">
+                                                                            <thead>
+                                                                            <tr>
+                                                                                <th width="30%">이름</th>
+                                                                                <th width="20%">직책</th>
+                                                                                <th>이메일</th>
+                                                                                <th></th>
+                                                                            </tr>
+                                                                            </thead>
+                                                                            <tbody>
+                                                                            <c:forEach items="${CustomerList}"
+                                                                                       var="customer">
                                                                                 <tr>
-                                                                                    <th width="30%">이름</th>
-                                                                                    <th width="20%">직책</th>
-                                                                                    <th>이메일</th>
-                                                                                    <th></th>
+                                                                                    <td>${customer.cus_name}</td>
+                                                                                    <td>${customer.cus_position}</td>
+                                                                                    <td>${customer.cus_email}</td>
+                                                                                    <td onclick="return memberselect('${customer.cus_num}','${customer.cus_name}','${customer.cus_position}')">
+                                                                                        <a class="btn btn-secondary text-gray-100"
+                                                                                           data-dismiss="modal">선택</a>
+                                                                                    </td>
                                                                                 </tr>
-                                                                                </thead>
-                                                                                <tbody>
-                                                                                <c:forEach items="${CustomerList}" var="customer"  >
-                                                                                    <tr >
-                                                                                        <td>${customer.cus_name}</td>
-                                                                                        <td>${customer.cus_position}</td>
-                                                                                        <td>${customer.cus_email}</td>
-                                                                                        <td onclick="return memberselect('${customer.cus_num}','${customer.cus_name}','${customer.cus_position}')">
-                                                                                            <a class="btn btn-secondary text-gray-100" data-dismiss="modal">선택</a>
-                                                                                        </td>
-                                                                                    </tr>
-                                                                                </c:forEach>
-                                                                                </tbody>
-                                                                            </table>
-                                                                        </div>
+                                                                            </c:forEach>
+                                                                            </tbody>
+                                                                        </table>
                                                                     </div>
                                                                 </div>
+                                                            </div>
 
-                                                                <div class="modal-footer">
-                                                                    <button class="btn btn-secondary" type="button" data-dismiss="modal">취소</button>
-                                                                </div>
+                                                            <div class="modal-footer">
+                                                                <button class="btn btn-secondary" type="button"
+                                                                        data-dismiss="modal">취소
+                                                                </button>
                                                             </div>
                                                         </div>
                                                     </div>
-                                                    <c:choose>
-                                                        <c:when test="${RiskList.mng_name eq null}">
-                                                            <input id="mng_name" class="ml-2"
-                                                                   style="border:0 solid whitesmoke;" value="" placeholder="담당자를 선택해주세요."
-                                                                   readonly>
-                                                        </c:when>
-                                                        <c:otherwise>
-                                                            <input id="mng_name" class="ml-2"
-                                                                   style="border:0 solid whitesmoke;" value="${RiskList.mng_name}/${RiskList.mng_position}"
-                                                                   readonly>
-                                                        </c:otherwise>
-                                                    </c:choose>
-                                                    <input type="hidden" name="risk_mng" id="risk_mng" value="${RiskList.risk_mng}">
                                                 </div>
+                                                <c:choose>
+                                                    <c:when test="${RiskList.mng_name eq null}">
+                                                        <input id="mng_name" class="ml-2"
+                                                               style="border:0 solid whitesmoke;" value=""
+                                                               placeholder="담당자를 선택해주세요."
+                                                               readonly>
+                                                    </c:when>
+                                                    <c:otherwise>
+                                                        <input id="mng_name" class="ml-2"
+                                                               style="border:0 solid whitesmoke;"
+                                                               value="${RiskList.mng_name}/${RiskList.mng_position}"
+                                                               readonly>
+                                                    </c:otherwise>
+                                                </c:choose>
+                                                <input type="hidden" name="risk_mng" id="risk_mng"
+                                                       value="${RiskList.risk_mng}">
                                             </div>
+                                        </div>
 
                                         <div class="row form-group">
                                             <div class="col col-md-3 text-right"><label for="impMenuButton"
@@ -140,28 +152,32 @@
                                                 <c:choose>
                                                     <c:when test="${RiskList.risk_imp eq 'High'}">
                                                         <button class="btn btn-danger dropdown-toggle" type="button"
-                                                                id="impMenuButton" data-toggle="dropdown" aria-haspopup="true"
+                                                                id="impMenuButton" data-toggle="dropdown"
+                                                                aria-haspopup="true"
                                                                 aria-expanded="false">
                                                                 ${RiskList.risk_imp}
                                                         </button>
                                                     </c:when>
                                                     <c:when test="${RiskList.risk_imp eq 'Medium'}">
                                                         <button class="btn btn-warning dropdown-toggle" type="button"
-                                                                id="impMenuButton" data-toggle="dropdown" aria-haspopup="true"
+                                                                id="impMenuButton" data-toggle="dropdown"
+                                                                aria-haspopup="true"
                                                                 aria-expanded="false">
                                                                 ${RiskList.risk_imp}
                                                         </button>
                                                     </c:when>
                                                     <c:when test="${RiskList.risk_imp eq 'Low'}">
                                                         <button class="btn btn-success dropdown-toggle" type="button"
-                                                                id="impMenuButton" data-toggle="dropdown" aria-haspopup="true"
+                                                                id="impMenuButton" data-toggle="dropdown"
+                                                                aria-haspopup="true"
                                                                 aria-expanded="false">
                                                                 ${RiskList.risk_imp}
                                                         </button>
                                                     </c:when>
                                                     <c:otherwise>
                                                         <button class="btn btn-secondary dropdown-toggle" type="button"
-                                                                id="impMenuButton" data-toggle="dropdown" aria-haspopup="true"
+                                                                id="impMenuButton" data-toggle="dropdown"
+                                                                aria-haspopup="true"
                                                                 aria-expanded="false">
                                                             중요도선택
                                                         </button>
@@ -220,28 +236,32 @@
                                                 <c:choose>
                                                     <c:when test="${RiskList.risk_pgs eq '대기'}">
                                                         <button class="btn btn-secondary dropdown-toggle" type="button"
-                                                                id="progressbtn" data-toggle="dropdown" aria-haspopup="true"
+                                                                id="progressbtn" data-toggle="dropdown"
+                                                                aria-haspopup="true"
                                                                 aria-expanded="false">
                                                                 ${RiskList.risk_pgs}
                                                         </button>
                                                     </c:when>
                                                     <c:when test="${RiskList.risk_pgs eq '진행 중'}">
                                                         <button class="btn btn-warning dropdown-toggle" type="button"
-                                                                id="progressbtn" data-toggle="dropdown" aria-haspopup="true"
+                                                                id="progressbtn" data-toggle="dropdown"
+                                                                aria-haspopup="true"
                                                                 aria-expanded="false">
                                                                 ${RiskList.risk_pgs}
                                                         </button>
                                                     </c:when>
                                                     <c:when test="${RiskList.risk_pgs eq '종료'}">
                                                         <button class="btn btn-success dropdown-toggle" type="button"
-                                                                id="progressbtn" data-toggle="dropdown" aria-haspopup="true"
+                                                                id="progressbtn" data-toggle="dropdown"
+                                                                aria-haspopup="true"
                                                                 aria-expanded="false">
                                                                 ${RiskList.risk_pgs}
                                                         </button>
                                                     </c:when>
                                                     <c:otherwise>
                                                         <button class="btn btn-secondary dropdown-toggle" type="button"
-                                                                id="progressbtn" data-toggle="dropdown" aria-haspopup="true"
+                                                                id="progressbtn" data-toggle="dropdown"
+                                                                aria-haspopup="true"
                                                                 aria-expanded="false">
                                                             진행상태
                                                         </button>
@@ -249,12 +269,15 @@
                                                 </c:choose>
                                                 <div class="dropdown-menu animated--fade-in"
                                                      aria-labelledby="dropdownMenuButton">
-                                                    <a class="dropdown-item" onclick="return select_progress(1)"><h6>대기</h6></a>
+                                                    <a class="dropdown-item" onclick="return select_progress(1)"><h6>
+                                                        대기</h6></a>
                                                     <div class="dropdown-divider"></div>
-                                                    <a class="dropdown-item text-warning" onclick="return select_progress(2)"><h6>진행
+                                                    <a class="dropdown-item text-warning"
+                                                       onclick="return select_progress(2)"><h6>진행
                                                         중</h6></a>
                                                     <div class="dropdown-divider"></div>
-                                                    <a class="dropdown-item text-success" onclick="return select_progress(3)"><h6>종료</h6></a>
+                                                    <a class="dropdown-item text-success"
+                                                       onclick="return select_progress(3)"><h6>종료</h6></a>
                                                 </div>
                                                 <input name="risk_pgs" id="risk_pgs" class="ml-2" type="hidden"
                                                        style="border:0 solid whitesmoke;" placeholder="진행상태를 선택해주세요."
@@ -361,15 +384,20 @@
                                     }
                                 }
 
-                                function memberselect(num,name,position) {
+                                function memberselect(num, name, position) {
                                     document.getElementById('mng_name').setAttribute("value", name + "/" + position);
                                     document.getElementById('risk_mng').setAttribute("value", num);
                                 }
 
                                 function chk_form() {
-                                    if (document.getElementById("risk_tit").value == ''||document.getElementById("risk_imp").value == ''||document.getElementById("risk_con").value == ''||document.getElementById("risk_mng").value == '') {
+                                    let startdate = new Date(document.getElementById("risk_start").value);
+                                    let enddate = new Date(document.getElementById("risk_end").value);
+                                    if (document.getElementById("risk_tit").value == '' || document.getElementById("risk_imp").value == '' || document.getElementById("risk_con").value == '' || document.getElementById("risk_mng").value == '') {
                                         $('#exampleModal').modal('show')
-                                    } else {
+                                    } else if(Number(startdate) > Number(enddate)){
+                                        $('#dateModal').modal('show')
+                                    }
+                                    else {
                                         <c:choose>
                                         <c:when test="${test eq '1'}">
                                         document.getElementById('dangerupdateform').submit();
@@ -397,28 +425,51 @@
                                         </c:otherwise>
                                     </c:choose>
                                 </a>
-                                    <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog"
-                                         aria-labelledby="exampleModalLabel" aria-hidden="true">
-                                        <div class="modal-dialog" role="document">
-                                            <div class="modal-content">
-                                                <div class="modal-header">
-                                                    <h5 class="modal-title" id="exampleModalLabel">작성글 확인</h5>
-                                                    <button type="button" class="close" data-dismiss="modal"
-                                                            aria-label="Close">
-                                                        <span aria-hidden="true">&times;</span>
-                                                    </button>
-                                                </div>
-                                                <div class="modal-body">
-                                                    필수값이 입력되지 않았습니다.
-                                                </div>
-                                                <div class="modal-footer">
-                                                    <button class="btn btn-secondary" type="button"
-                                                            data-dismiss="modal">확인
-                                                    </button>
-                                                </div>
+                                <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog"
+                                     aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                    <div class="modal-dialog" role="document">
+                                        <div class="modal-content">
+                                            <div class="modal-header">
+                                                <h5 class="modal-title" id="exampleModalLabel">작성글 확인</h5>
+                                                <button type="button" class="close" data-dismiss="modal"
+                                                        aria-label="Close">
+                                                    <span aria-hidden="true">&times;</span>
+                                                </button>
+                                            </div>
+                                            <div class="modal-body">
+                                                필수값이 입력되지 않았습니다.
+                                            </div>
+                                            <div class="modal-footer">
+                                                <button class="btn btn-secondary" type="button"
+                                                        data-dismiss="modal">확인
+                                                </button>
                                             </div>
                                         </div>
                                     </div>
+                                </div>
+
+                                <div class="modal fade" id="dateModal" tabindex="-1" role="dialog"
+                                     aria-labelledby="dateModalLabel" aria-hidden="true">
+                                    <div class="modal-dialog" role="document">
+                                        <div class="modal-content">
+                                            <div class="modal-header">
+                                                <h5 class="modal-title" id="dateModalLabel">날짜확인</h5>
+                                                <button type="button" class="close" data-dismiss="modal"
+                                                        aria-label="Close">
+                                                    <span aria-hidden="true">&times;</span>
+                                                </button>
+                                            </div>
+                                            <div class="modal-body">
+                                                발생일이 해결일보다 늦을 수 없습니다.
+                                            </div>
+                                            <div class="modal-footer">
+                                                <button class="btn btn-secondary" type="button"
+                                                        data-dismiss="modal">확인
+                                                </button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
                                 <%--</button>--%>
                                 <a href="danger.do" class="btn btn-secondary">
                                                 <span class="icon text-white-50">

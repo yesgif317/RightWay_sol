@@ -7,8 +7,8 @@
     <!--보드-->
     <!-- Select 문 -->
     <select id="selectCompany" resultType="CompanyVO">
-        SELECT *
-        FROM company
+        SELECT com_num,com_name,com_tel,com_addr,com_scale,com_business,com_contract, (select count(*) from customer c where c.com_num = com.com_num) as com_count
+        FROM company com
     </select>
 
     <!-- 회사이름 select 문-->
@@ -53,5 +53,4 @@
         from company
         where com_num = #{com_num}
     </delete>
-
 </mapper>

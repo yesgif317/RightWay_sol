@@ -255,53 +255,7 @@
                                             <span OnClick="location.href='javascript:chk_form();'" class="text" style="color:white">등록</span>
                                         </c:otherwise>
                                     </c:choose>
-                                    <script>
-                                        function chk_form() {
-                                            if( document.getElementById("prj_name").value===''||document.getElementById("cus_num").value===''){
-                                                $('#exampleModal').modal('show')
-                                            }
-                                            else {
-                                                <c:choose>
-                                                <c:when test="${test eq '1'}">
-                                                document.getElementById('projectupdateform').submit();
-                                                </c:when>
-                                                <c:otherwise>
-                                                document.getElementById('projectwriteform').submit();
-                                                </c:otherwise>
-                                                </c:choose>
-                                            }
-                                        }
-                                        function plselect(num,name,position) {
-                                            document.getElementById('cus_name').setAttribute("value", name +'/'+position);
-                                            document.getElementById('cus_num').setAttribute("value", num);
-                                        }
-                                        function memberselect(cell) {
-                                            var location = document.getElementById('result');
-                                            var select_cus = document.getElementById(cell).value
-                                            var input1 = document.createElement('input');
-                                            input1.setAttribute("type", "hidden");
-                                            input1.setAttribute("value", select_cus);
-                                            input1.setAttribute("readonly", "readonly");
-                                            input1.setAttribute("style", "border:none");
-                                            input1.setAttribute("id", "cus_num");
-                                            input1.setAttribute("name", "cus_num");
-                                            var input2 = document.createElement('input');
-                                            input2.setAttribute("type", "hidden");
-                                            input2.setAttribute("value", 0);
-                                            input2.setAttribute("id", "auth");
-                                            input2.setAttribute("name", "auth");
-
-                                            location.appendChild(document.createElement('br'));
-                                            location.appendChild(input1);
-                                            location.appendChild(input2);
-                                            document.getElementById('project_detailwriteform').submit();
-                                        }
-                                        function delete_form(cus_num) {
-                                            document.getElementById('delete_cus_num').setAttribute("value",cus_num);
-                                            document.getElementById('project_detaildeleteform').submit();
-                                        }
-
-                                    </script>
+                                </a>
                                     <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
                                         <div class="modal-dialog" role="document">
                                             <div class="modal-content">
@@ -320,8 +274,28 @@
                                             </div>
                                         </div>
                                     </div>
-
-                                </a>
+                                <div class="modal fade" id="dateModal" tabindex="-1" role="dialog"
+                                     aria-labelledby="dateModalLabel" aria-hidden="true">
+                                    <div class="modal-dialog" role="document">
+                                        <div class="modal-content">
+                                            <div class="modal-header">
+                                                <h5 class="modal-title" id="dateModalLabel">날짜확인</h5>
+                                                <button type="button" class="close" data-dismiss="modal"
+                                                        aria-label="Close">
+                                                    <span aria-hidden="true">&times;</span>
+                                                </button>
+                                            </div>
+                                            <div class="modal-body">
+                                                시작일이 종료일보다 늦을 수 없습니다.
+                                            </div>
+                                            <div class="modal-footer">
+                                                <button class="btn btn-secondary" type="button"
+                                                        data-dismiss="modal">확인
+                                                </button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
                                 <%--</button>--%>
                                 <a href="project.do" class="btn btn-secondary">
                                                 <span class="icon text-white-50">
@@ -344,7 +318,56 @@
 
     </div>
     <!-- End of Main Content -->
+    <script>
+        function chk_form() {
+            let startdate = new Date(document.getElementById("prj_start").value);
+            let enddate = new Date(document.getElementById("prj_end").value)
+            if( document.getElementById("prj_name").value===''||document.getElementById("cus_num").value===''){
+                $('#exampleModal').modal('show')
+            } else if(Number(startdate) > Number(enddate)){
+                $('#dateModal').modal('show')
+            } else {
+                <c:choose>
+                <c:when test="${test eq '1'}">
+                document.getElementById('projectupdateform').submit();
+                </c:when>
+                <c:otherwise>
+                document.getElementById('projectwriteform').submit();
+                </c:otherwise>
+                </c:choose>
+            }
+        }
+        function plselect(num,name,position) {
+            document.getElementById('cus_name').setAttribute("value", name +'/'+position);
+            document.getElementById('cus_num').setAttribute("value", num);
+        }
+        function memberselect(cell) {
+            var location = document.getElementById('result');
+            var select_cus = document.getElementById(cell).value
+            var input1 = document.createElement('input');
+            input1.setAttribute("type", "hidden");
+            input1.setAttribute("value", select_cus);
+            input1.setAttribute("readonly", "readonly");
+            input1.setAttribute("style", "border:none");
+            input1.setAttribute("id", "cus_num");
+            input1.setAttribute("name", "cus_num");
+            var input2 = document.createElement('input');
+            input2.setAttribute("type", "hidden");
+            input2.setAttribute("value", 0);
+            input2.setAttribute("id", "auth");
+            input2.setAttribute("name", "auth");
 
+            location.appendChild(document.createElement('br'));
+            location.appendChild(input1);
+            location.appendChild(input2);
+            document.getElementById('project_detailwriteform').submit();
+        }
+        function delete_form(cus_num) {
+            document.getElementById('delete_cus_num').setAttribute("value",cus_num);
+            document.getElementById('project_detaildeleteform').submit();
+        }
+
+    </script>
 
 
 

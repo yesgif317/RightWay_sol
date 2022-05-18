@@ -11,6 +11,7 @@ public class CompanyVO {
     public String com_scale;
     public String com_business;
     public String com_contract;
+    public String com_count;
 
     public int getCom_num() {
         return com_num;
@@ -66,5 +67,13 @@ public class CompanyVO {
 
     public void setCom_contract(String com_contract) {
         this.com_contract = com_contract;
+    }
+
+    public String getCom_count() {
+        return com_count;
+    }
+
+    public void setCom_count(String com_count) {
+        this.com_count = com_count;
     }
 }

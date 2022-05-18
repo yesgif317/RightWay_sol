@@ -101,13 +101,13 @@
                                         <div class="col-3"></div>
                                         <div class="col-4 ">
                                             <small class="help-block form-text">작성자</small>
-                                            <input style="border:0 solid whitesmoke;width:100%" type="text" name="event_limit" value="${EventList.cus_num}" readonly="readonly" disabled/>
+                                            <input style="border:0 solid whitesmoke;width:100%" type="text" name="event_limit" value="${EventList.cus_name}/${EventList.cus_position}" readonly="readonly" disabled/>
                                         </div>
                                     </div>
                                     <div class="row form-group">
                                         <div class="col-2"></div>
                                         <div class="col-8" style="border-top:  2px solid #808080;border-bottom: 2px solid #808080;">
-                                            <textarea style="border:0 solid whitesmoke;width:100%" name="event_contents" id="event_contents" rows="5" class="form-control mt-3 mb-3" readonly="readonly" disabled>${EventList.evt_cnt}
+                                            <textarea style="border:0 solid whitesmoke;width:100%" name="event_contents" id="event_contents" rows="15" class="form-control mt-3 mb-3" readonly="readonly" disabled>${EventList.evt_cnt}
                                             </textarea>
                                         </div>
                                     </div>

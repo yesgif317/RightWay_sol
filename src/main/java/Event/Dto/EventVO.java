@@ -20,6 +20,8 @@ public class EventVO {
     public int prj_num;
     public String evt_reg;
     public String evt_upd;
+    public String cus_name;
+    public String cus_position;
 
     public int getPost_num() {
         return post_num;
@@ -173,4 +175,19 @@ public class EventVO {
         this.evt_upd = evt_upd;
     }
 
+    public String getCus_name() {
+        return cus_name;
+    }
+
+    public void setCus_name(String cus_name) {
+        this.cus_name = cus_name;
+    }
+
+    public String getCus_position() {
+        return cus_position;
+    }
+
+    public void setCus_position(String cus_position) {
+        this.cus_position = cus_position;
+    }
 }
