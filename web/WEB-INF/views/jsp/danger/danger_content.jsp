@@ -62,13 +62,13 @@
                                             <small class="help-block form-text">진행상태</small>
                                             <c:choose>
                                                 <c:when test="${RiskList.risk_pgs eq '대기'}">
-                                                    <div class="col-3 bg-secondary text-gray-100 text-center">${RiskList.risk_pgs}</div>
+                                                    <div class="col-4 bg-secondary text-gray-100 text-center">${RiskList.risk_pgs}</div>
                                                 </c:when>
                                                 <c:when test="${RiskList.risk_pgs eq '진행 중'}">
-                                                    <div class="col-3 bg-warning text-gray-100 text-center">${RiskList.risk_pgs}</div>
+                                                    <div class="col-4 bg-warning text-gray-100 text-center">${RiskList.risk_pgs}</div>
                                                 </c:when>
                                                 <c:when test="${RiskList.risk_pgs eq '종료'}">
-                                                    <div class="col-3 bg-success text-gray-100 text-center">${RiskList.risk_pgs}</div>
+                                                    <div class="col-4 bg-success text-gray-100 text-center">${RiskList.risk_pgs}</div>
                                                 </c:when>
                                             </c:choose>
                                         </div>
@@ -185,8 +185,6 @@
 
         <jsp:include page="../../include/footer.jsp" flush="true" />
 
-    </div>
-</div>
 <!-- End of Page Wrapper -->
 
 <jsp:include page="../../include/logoutModal.jsp" flush="true" />

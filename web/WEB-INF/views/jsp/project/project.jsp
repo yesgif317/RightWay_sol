@@ -39,9 +39,9 @@
 
                             <tbody>
                             <c:forEach items="${ProjectList1}" var="project">
-                                <tr>
+                                <tr onClick="location.href='project_content.do?prj_num=${project.prj_num}'">
                                     <td>${project.prj_num}</td>
-                                    <td><a href ="project_content.do?prj_num=${project.prj_num}">${project.prj_name}</a></td>
+                                    <td>${project.prj_name}</td>
                                     <td>${project.cus_name}/${project.cus_position}</td>
                                     <td>${project.prj_start}~${project.prj_end}</td>
                                     <c:choose>

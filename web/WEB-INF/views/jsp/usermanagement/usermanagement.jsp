@@ -39,9 +39,9 @@
 
                             <tbody>
                             <c:forEach items="${CustomerList}" var="cust">
-                                <tr>
-                                    <td><a href ="usermanagement_content.do?cus_num=${cust.cus_num}">${cust.cus_id}</a></td>
-                                    <td><a href ="usermanagement_content.do?cus_num=${cust.cus_num}">${cust.cus_name}</a></td>
+                                <tr onClick="location.href='usermanagement_content.do?cus_num=${cust.cus_num}'">
+                                    <td>${cust.cus_id}</td>
+                                    <td>${cust.cus_name}</td>
                                     <td>${cust.cus_position}</td>
                                     <td>${cust.com_name}</td>
                                     <td>${cust.cus_email}</td>

@@ -43,9 +43,9 @@
                             </tfoot>
                             <tbody>
                             <c:forEach items="${RiskList}" var="risk">
-                                <tr>
+                                <tr onClick="location.href='issue_content.do?post_num=${risk.post_num}'">
                                     <td>${risk.post_num}</td>
-                                    <td><a href ="issue_content.do?post_num=${risk.post_num}">${risk.risk_tit}</a></td>
+                                    <td>${risk.risk_tit}</td>
                                     <td>
                                         <c:choose>
                                             <c:when test="${risk.risk_imp eq 'Emergency'}">
