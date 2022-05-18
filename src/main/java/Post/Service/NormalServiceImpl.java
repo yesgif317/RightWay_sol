@@ -54,6 +54,11 @@ public class NormalServiceImpl implements NormalService {
     }
 
     @Override
+    public String selectFirstProjectName() {
+        return null;
+    }
+
+    @Override
     public int deletePost(int no) { return
             dao.deletePost(no);
     }

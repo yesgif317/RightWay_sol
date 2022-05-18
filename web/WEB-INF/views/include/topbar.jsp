@@ -23,7 +23,7 @@
         function pro_check(prj_name) {
             console.log("함수 실행후");
             var form = new FormData();
-            form.append("pro_name", prj_name);
+            form.append("prj_name", prj_name);
             $.ajax({
                 url: "Select_project.do",
                 type: "POST",

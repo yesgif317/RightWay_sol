@@ -6,7 +6,7 @@
     <ul class="navbar-nav bg-gradient-dark sidebar sidebar-dark accordion" id="accordionSidebar">
 
         <!-- Sidebar - Brand -->
-        <a class="sidebar-brand d-flex align-items-center justify-content-center" href="/index.do">
+        <a class="sidebar-brand d-flex align-items-center justify-content-center" href="/index.do?prj_name=${prj_list.prj_name}">
             <div class="sidebar-brand-icon rotate-n-0">
                 <i class="fa-solid fa-computer"></i>
             </div>

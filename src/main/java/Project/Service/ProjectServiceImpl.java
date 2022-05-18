@@ -53,6 +53,11 @@ public class ProjectServiceImpl implements ProjectService {
     }
 
     @Override
+    public String selectFirstProjectName() {
+        return dao.selectFirstProjectName();
+    }
+
+    @Override
     public int delete(int prj_num) { return
             dao.delete(prj_num);
     }

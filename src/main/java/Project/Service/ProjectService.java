@@ -34,4 +34,6 @@ public interface ProjectService {
 
     //글 조회(View)
     ProjectVO viewProject(int prj_num);
+
+    String selectFirstProjectName();
 }

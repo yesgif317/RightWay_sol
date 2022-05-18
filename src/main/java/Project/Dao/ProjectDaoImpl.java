@@ -6,6 +6,7 @@ import org.apache.ibatis.session.SqlSession;
 import org.springframework.stereotype.Repository;
 
 import javax.inject.Inject;
+import javax.naming.Name;
 import java.util.List;
 
 @Repository
@@ -80,5 +81,10 @@ public class ProjectDaoImpl implements ProjectDao{
     @Override
     public int deleteProject_detail(ProjectDetailVO projectVO) {
         return sqlSession.delete(Namespace+".deleteProject_detail",projectVO);
+    }
+
+    @Override
+    public String selectFirstProjectName() {
+        return sqlSession.selectOne(Namespace + ".selectFirstProjectName");
     }
 }

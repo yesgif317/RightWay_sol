@@ -28,4 +28,6 @@ public interface NormalService {
     List<NormalVO> selectNotice(Object object);
 
     List<NormalVO> selectAll(int cate);
+
+    String selectFirstProjectName();
 }

@@ -25,4 +25,5 @@ public interface NormalDao {
 
     //구분번호 별 전체 리스트
     List<NormalVO> selectAll(int cate);
+
 }

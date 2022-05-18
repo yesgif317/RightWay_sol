@@ -128,7 +128,7 @@ public class MainController {
     // 메서드 종료
 
     public class Selcus {
-        public void selectcus(Model model, HttpSession httpSession) {
+        public List<ProjectVO> selectcus(Model model, HttpSession httpSession) {
             System.out.println("세션조회");
             //login시 만든 회원정보 세션 불러오기
             Object object = httpSession.getAttribute("login");
@@ -137,6 +137,7 @@ public class MainController {
 
             httpSession.setAttribute("ProjectList", projectVOList);
 
+            return projectVOList;
 
         }
     }
@@ -148,25 +149,54 @@ public class MainController {
     @RequestMapping(value = "/index.do", method = RequestMethod.GET)
     public String main(Model model, HttpServletRequest request,
                        HttpServletResponse response,
-                       HttpSession httpSession, ModelAndView modelAndView) {
+                       HttpSession httpSession, ModelAndView modelAndView,
+                       @RequestParam(value = "prj_name", required=false) String prj_name) {
 
-        Selcus selcus = new Scus();
-        selcus.selectcus(model, httpSession);
+
+        //프로젝트 이름이 선택되어있는 경우
+        if(prj_name != null){
+            ProjectVO selectproject_list = projectService.selectproject_list(prj_name);
+            httpSession.setAttribute("prj_list", selectproject_list);
+        }
+        //프로젝트 이름이 선택되지 않은 경우
+        else{
+            Selcus selcus = new Scus();
+            List<ProjectVO> projectVOList = selcus.selectcus(model, httpSession);
+            //프로젝트가 존재하는지 여부
+            if(projectVOList.size() != 0)
+            {
+                ProjectVO selectproject_list = projectService.selectproject_list(projectVOList.get(0).getPrj_name());
+                httpSession.setAttribute("prj_list", selectproject_list);
+            }
+            else{
+                System.out.println("do not have project");
+                return "redirect:/project_write.do?prj_num=0&update=0";
+            }
+        }
+
+
+        Object object = httpSession.getAttribute("prj_list");
+        List<NormalVO> normalVOList = normalService.selectNotice(object);
+        List<RiskVO> RiskVOList = riskService.selectDanger(object);
+        List<RiskVO> IssueVOList = riskService.selectIssue(object);
+
+        httpSession.setAttribute("RVList", RiskVOList);
+        httpSession.setAttribute("IVList", IssueVOList);
+        httpSession.setAttribute("NormalList", normalVOList);
 
         return "index";
     }
 
     @ResponseBody
     @PostMapping("Select_project.do")
-    public String select_prj(@RequestParam(value = "pro_name", required=false) String prj_name, HttpSession httpSession, Model model) {
+    public String select_prj(@RequestParam(value = "prj_name", required=false) String prj_name, HttpSession httpSession, Model model) {
 
         if(prj_name != null) {
             ProjectVO selectproject_list = projectService.selectproject_list(prj_name);
             httpSession.setAttribute("prj_list", selectproject_list);
         }
         else{
-            ProjectVO selectproject_list = projectService.selectproject_list(prj_name);
-            httpSession.setAttribute("prj_list", selectproject_list);
+            return "index";
         }
 
         Object object = httpSession.getAttribute("prj_list");
@@ -179,7 +209,6 @@ public class MainController {
         httpSession.setAttribute("NormalList", normalVOList);
         return "forward:/index.do";
     }
-
 
     //로그인 GET,POST
     @RequestMapping(value = "/login.do", method = RequestMethod.GET)
@@ -870,6 +899,9 @@ public class MainController {
     //adminpermission page (관리자 승인)
     @RequestMapping(value = "/adminpermission.do", method = RequestMethod.GET)
     public String adminpermission(Model model) {
+
+
+
         //service 클래스에서 Dao 로 접근하여 쿼리 결과값 가져오기
         List<CustomerVO> customerVOList = customerService.select_nonPermissionCus();
 
@@ -994,15 +1026,25 @@ public class MainController {
 
     //project page
     @RequestMapping(value = "/project.do", method = RequestMethod.GET)
-    public String project(Model model) {
+    public String project(Model model,HttpSession httpSession) {
+        //프로젝트 조회
         List<ProjectVO> projectVOList = projectService.selectProject();
         model.addAttribute("ProjectList1", projectVOList);
+
+        //prj_list를 설정
+        Selcus selcus = new Selcus();
+        List<ProjectVO> prj_list = selcus.selectcus(model,httpSession);
+        ProjectVO selectproject_list = projectService.selectproject_list(projectVOList.get(0).getPrj_name());
+        httpSession.setAttribute("prj_list", selectproject_list);
+
+        httpSession.setAttribute("ProjectList",prj_list);
+
         return "project/project";
     }
 
     //project 글쓰기 페이지 이동
     @RequestMapping(value = "/project_write.do", method = RequestMethod.GET)
-    public String project_write(@RequestParam("prj_num") int prj_num, Model model) {
+    public String project_write(@RequestParam(value = "prj_num") int prj_num, Model model) {
 
         List<CustomerVO> customerVoList = customerService.selectAllCustomer();
         List<ProjectDetailVO> projectDetailVOList = projectService.selectProject_detail(prj_num);
@@ -1044,13 +1086,14 @@ public class MainController {
     public String project_insert(Model model, ProjectVO projectVO) {
         String Result = projectService.insertProject(projectVO);
 
+        System.out.println(projectVO);
+
+        //프로젝트 등록자를 detail 테이블에도 추가하는 코드
         ProjectDetailVO projectDetailVO = new ProjectDetailVO();
         projectDetailVO.setAuth("1");
         projectDetailVO.setCus_num(projectVO.getCus_num());
         projectDetailVO.setPrj_num(projectService.selectProjectNum(projectVO.getPrj_name()).getPrj_num());
         projectService.insertProject_detail(projectDetailVO);
-
-        model.addAttribute("ProjectList1", Result);
 
         return "redirect:/project.do";
     }

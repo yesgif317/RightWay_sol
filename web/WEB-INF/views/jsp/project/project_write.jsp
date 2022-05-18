@@ -249,10 +249,10 @@
                                                 </span>
                                     <c:choose>
                                         <c:when test="${test eq '1'}">
-                                            <span OnClick="location.href='javascript:goSubmit();'" class="text" style="color:white">수정</span>
+                                            <span OnClick="location.href='javascript:chk_form();'" class="text" style="color:white">수정</span>
                                         </c:when>
                                         <c:otherwise>
-                                            <span OnClick="location.href='javascript:goSubmit();'" class="text" style="color:white">등록</span>
+                                            <span OnClick="location.href='javascript:chk_form();'" class="text" style="color:white">등록</span>
                                         </c:otherwise>
                                     </c:choose>
                                     <script>

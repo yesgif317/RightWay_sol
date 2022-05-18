@@ -29,4 +29,6 @@ public interface ProjectDao {
     int delete(int prj_num);
     int deleteAllProject_detail(int prj_num);
     int deleteProject_detail(ProjectDetailVO projectVO);
+
+    String selectFirstProjectName();
 }

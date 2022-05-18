@@ -72,4 +72,8 @@
         from project
         where prj_name = #{pro_name}
     </select>
+
+    <select id="selectFirstProjectName" resultType="String">
+
+    </select>
 </mapper>

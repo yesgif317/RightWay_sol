@@ -51,7 +51,7 @@
         </mvc:interceptor>
         <mvc:interceptor>
             <mvc:mapping path="/login.do"/>
-            <mvc:mapping path="/register.do"/>
+            <mvc:mapping path="/forgot_password.do"/>
             <ref bean="loginAfterInterceptor"/>
         </mvc:interceptor>
     </mvc:interceptors>
