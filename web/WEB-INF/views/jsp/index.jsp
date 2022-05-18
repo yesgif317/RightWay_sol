@@ -28,13 +28,13 @@
         return d;
     }
 
-    //일년 전 날짜 구하는 함수
+    /*//일년 전 날짜 구하는 함수
     function lastyear() {
         var d = new Date();
         var yearOfYear = d.getFullYear();
         d.setFullYear(yearOfYear - 1);
         return d;
-    }
+    }*/
 
     //두 날짜 사이의 모든 날짜 배열 만들기 함수.param1은 시작일, param2는 종료일.
     function getDateRangeData(param1, param2) {
@@ -56,7 +56,7 @@
     let today = new Date();
     week_days = getDateRangeData(lastWeek(), today)
     month_days = getDateRangeData(lastMonth(), today)
-    year_days = getDateRangeData(lastyear(), today)
+    /*year_days = getDateRangeData(lastyear(), today)*/
     //위험,이슈 값 배열로 가져오기
     var bardata_risk = [];
     var piedata_risk = [];
@@ -167,15 +167,7 @@
         subs.innerText = '월간'
     }
 
-    //바차트 연간 조회
-    function bar_year() {
-        button1 = year_days
-        button2 = get_barresult(year_days, data)
-        get_barchart(button1, button2)
-        myBarChart.update()
-        const subs = document.getElementById('bar_dropdown1');
-        subs.innerText = '연간'
-    }
+
 
 
 </script>
@@ -294,12 +286,6 @@
                                     <div class="dropdown-divider"></div>
                                     <a class="dropdown-header" id="bar_month" name="bar_risk" onclick="bar_month();">
                                         &nbsp월간</a>
-                                    <div class="dropdown-menu dropdown-menu-right shadow animated--fade-in"
-                                         aria-labelledby="dropdownMenuLink">
-                                    </div>
-                                    <div class="dropdown-divider"></div>
-                                    <a class="dropdown-header" id="bar_year" name="bar_risk" onclick="bar_year();">
-                                        &nbsp연간</a>
                                     <div class="dropdown-menu dropdown-menu-right shadow animated--fade-in"
                                          aria-labelledby="dropdownMenuLink">
                                     </div>

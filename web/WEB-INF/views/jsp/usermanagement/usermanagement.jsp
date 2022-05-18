@@ -39,7 +39,8 @@
 
                             <tbody>
                             <c:forEach items="${CustomerList}" var="cust">
-                                <tr onClick="location.href='usermanagement_content.do?cus_num=${cust.cus_num}'">
+                                <tr onClick="location.href='usermanagement_content.do?cus_num=${cust.cus_num}'"
+                                    onmouseover="this.style.fontSize='18 ';this.style.color='black'"  onmouseout="this.style.fontSize='16';this.style.color='#858796'">
                                     <td>${cust.cus_id}</td>
                                     <td>${cust.cus_name}</td>
                                     <td>${cust.cus_position}</td>

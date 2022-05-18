@@ -39,7 +39,8 @@
 
                             <tbody>
                             <c:forEach items="${ProjectList1}" var="project">
-                                <tr onClick="location.href='project_content.do?prj_num=${project.prj_num}'">
+                                <tr onClick="location.href='project_content.do?prj_num=${project.prj_num}'"
+                                    onmouseover="this.style.fontSize='18 ';this.style.color='black'"  onmouseout="this.style.fontSize='16';this.style.color='#858796'">
                                     <td>${project.prj_num}</td>
                                     <td>${project.prj_name}</td>
                                     <td>${project.cus_name}/${project.cus_position}</td>

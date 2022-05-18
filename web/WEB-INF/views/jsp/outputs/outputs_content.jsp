@@ -63,6 +63,7 @@
 
                         <!-- 수정/삭제/목록 버튼 -->
                         <div class="text-center d-block card-header py-3">
+                            <c:if test="${login.cus_num eq PostList.cus_num}">
                             <a href="outputs_write.do?post_num=${PostList.post_num}&update=1" class="btn btn-info">
                                               <span class="icon text-white-50">
                                               <i class="fas fa-pen"></i>
@@ -103,7 +104,7 @@
                                     </div>
                                 </div>
                             </a>
-
+                            </c:if>
                             <a href="/outputs.do" class="btn btn-secondary">
                                              <span class="icon text-white-50">
                                               <i class="fas fa-list"></i>
@@ -111,22 +112,7 @@
                                 <span class="text">목록</span>
                             </a>
 
-                            <c:if test="${dto.prevNum ne 0 }">
-                                <a href="/outputs.do" class="btn btn-secondary">
-                                             <span class="icon text-white-50">
-                                              <i class="fas fa-list"></i>
-                                             </span>
-                                    <span class="text">이전글</span>
-                                </a>
-                            </c:if>
-                            <c:if test="${dto.nextNum ne 0 }">
-                                <a href="/outputs.do" class="btn btn-secondary">
-                                             <span class="icon text-white-50">
-                                              <i class="fas fa-list"></i>
-                                             </span>
-                                    <span class="text">다음글</span>
-                                </a>
-                            </c:if>
+
                         </div>  <!-- end of button list -->
 
                         <jsp:include page="../../include/comments.jsp" flush="true" />

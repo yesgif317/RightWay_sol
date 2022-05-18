@@ -43,9 +43,10 @@
                             </tfoot>
                             <tbody>
                             <c:forEach items="${RiskList}" var="risk">
-                                <tr>
+                                    <tr onClick="location.href='danger_content.do?post_num=${risk.post_num}'"
+                                    onmouseover="this.style.fontSize='18 ';this.style.color='black'"  onmouseout="this.style.fontSize='16';this.style.color='#858796'">
                                     <td>${risk.post_num}</td>
-                                    <td><a href ="danger_content.do?post_num=${risk.post_num}">${risk.risk_tit}</a></td>
+                                    <td>${risk.risk_tit}</td>
                                     <td>
                                         <c:choose>
                                             <c:when test="${risk.risk_imp eq 'High'}">

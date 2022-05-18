@@ -38,7 +38,8 @@
 
                             <tbody>
                             <c:forEach items="${CompanyList}" var="com">
-                                <tr onClick="location.href='company_content.do?com_num=${com.com_num}'">
+                                <tr onClick="location.href='company_content.do?com_num=${com.com_num}'"
+                                    onmouseover="this.style.fontSize='18 ';this.style.color='black'"  onmouseout="this.style.fontSize='16';this.style.color='#858796'">
                                     <td>${com.com_num}</td>
                                     <td>${com.com_name}</td>
                                     <td>${com.com_tel}</td>

@@ -52,9 +52,9 @@
                             <tbody>
                             <c:forEach items="${PostList}" var="post">
                                 <c:if test="${post.cate eq 13}">
-                                <tr>
+                                <tr onClick="location.href='datacenter_content.do?post_num=${post.post_num}'" >
                                     <td>${post.post_num}</td>
-                                    <td><a href ="datacenter_content.do?post_num=${post.post_num}">${post.nor_tit}</a></td>
+                                    <td>${post.nor_tit}</td>
                                     <td>${post.cus_num}</td>
                                     <td><fmt:formatDate value="${post.nor_reg}" pattern="yyyy-MM-dd" /></td>
                                     <td>${post.prj_num}</td>
