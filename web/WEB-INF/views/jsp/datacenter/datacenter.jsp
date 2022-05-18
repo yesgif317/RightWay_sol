@@ -52,7 +52,8 @@
                             <tbody>
                             <c:forEach items="${PostList}" var="post">
                                 <c:if test="${post.cate eq 13}">
-                                <tr onClick="location.href='datacenter_content.do?post_num=${post.post_num}'" >
+                                <tr onClick="location.href='datacenter_content.do?post_num=${post.post_num}'"
+                                    onmouseover="this.style.fontSize='18 ';this.style.color='black'"  onmouseout="this.style.fontSize='16';this.style.color='#858796'">
                                     <td>${post.post_num}</td>
                                     <td>${post.nor_tit}</td>
                                     <td>${post.cus_num}</td>

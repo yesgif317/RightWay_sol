@@ -76,7 +76,7 @@
                                         <input type="hidden" id="cate" name="cate" placeholder="제목을 입력해주세요."
                                                class="form-control" value="1">
                                         <input type="hidden" id="prj_num" name="prj_num" placeholder="제목을 입력해주세요."
-                                               class="form-control" value="1">
+                                               class="form-control" value="${prj_list.prj_num}">
                                     </form>
 
                             </div>

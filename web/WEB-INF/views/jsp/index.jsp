@@ -410,7 +410,7 @@
 
                 <!-- Earnings (Monthly) Card Example -->
                 <div class="col-xl-4 col-md-6 mb-4">
-                    <div class="text-xs font-weight-bold text-info text-uppercase mb-1">다가오는 일정</div>
+                    <div class="text-xs font-weight-bold text-info text-uppercase mb-1">일주일 이내 예정된 행사 </div>
                     <div class="card border-left-info">
                         <div class="card-body">
                             <div class="row no-gutters align-items-center">

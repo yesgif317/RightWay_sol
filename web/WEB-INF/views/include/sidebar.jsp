@@ -1,12 +1,29 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<STYLE>
+    #accordionSidebar * {
+        -webkit-transition: 0.3s ease-in-out;
+        -moz-transition: 0.3s ease-in-out;
+        -ms-transition: 0.3s ease-in-out;
+        transition: all 0.3s ease-in-out;
+    }
+    @media (min-width: 768px) {
+        .sidebar {
+            width: 14rem !important;
+            transition-duration: 1s;
+        }
+    }
 
+
+
+
+</STYLE>
 
     <!-- Sidebar -->
     <ul class="navbar-nav bg-gradient-dark sidebar sidebar-dark accordion" id="accordionSidebar">
 
         <!-- Sidebar - Brand -->
-        <a class="sidebar-brand d-flex align-items-center justify-content-center" href="/index.do?prj_name=${prj_list.prj_name}">
+        <a class="sidebar-brand d-flex align-items-center justify-content-center" href="/index.do">
             <div class="sidebar-brand-icon rotate-n-0">
                 <i class="fa-solid fa-computer"></i>
             </div>
