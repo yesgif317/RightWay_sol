@@ -10,12 +10,12 @@
 
 
 <script>
-    function tlselect(num,name) {
-        document.getElementById('cus_name').setAttribute("value", name );
+    function tlselect(num,name,position) {
+        document.getElementById('cus_name').setAttribute("value", name +"/"+position);
         document.getElementById('cus_num').setAttribute("value", num);
     }
     function chk_form() {
-        if (document.getElementById("team_desc").value == '' || document.getElementById("team_name").value == '') {
+        if (document.getElementById("team_desc").value == '' || document.getElementById("team_name").value == '' || document.getElementById("team_desc").value == '') {
             $('#exampleModal').modal('show')
         } else {
             <c:choose>
@@ -104,26 +104,26 @@
                                         <!-- 프로젝트 넘버 임의지정 -->
 
                                             <input type="hidden" name="prj_num"
-                                                   value=1 />
+                                                   value= "${prj_list.prj_num}"/>
                                         <div class="row form-group">
                                             <div class="col-2"></div>
                                             <div class="col-4 ">
-                                                <small class="help-block form-text">팀명</small>
+                                                <div><sup class="text-danger small">*</sup>팀명</div>
                                                 <input style="solid: whitesmoke" value="${TeamList.team_name}"
                                                        placeholder="입력해주세요" type="text" id="team_name"
                                                        name="team_name" class="form-control"/>
                                             </div>
                                             <div class="col-4" >
-                                                <small class="help-block form-text">프로젝트</small>
-                                                <input style="background-color:white;border:none" value="${TeamList.prj_name}" type="text"  id="team_company" name="team_company" class="form-control" readonly="readonly" disabled/>
-                                                <input style="background-color:white;border:none" value="${TeamList.prj_num}" type="hidden"  id="team_prj_num" name="team_prj_num" class="form-control" readonly="readonly"/>
+                                                <div>프로젝트</div>
+                                                <input style="background-color:white;border:none" value="${prj_list.prj_name}" type="text"  id="team_company" name="team_company" class="form-control" readonly="readonly" disabled/>
+                                                <input style="background-color:white;border:none" value="${prj_list.prj_num}" type="hidden"  id="team_prj_num" name="team_prj_num" class="form-control" readonly="readonly"/>
                                             </div>
                                         </div>
 
                                         <div class="row form-group">
                                             <div class="col-2"></div>
                                             <div class="col-4 ">
-                                                <small class="help-block form-text">팀장</small>
+                                                <div><sup class="text-danger small">*</sup>팀장</div>
                                                 <a  class="btn btn-secondary" data-toggle="modal" data-target="#PLModal">
                                                     <span class="text" style="color:white">PL선택</span>
                                                 </a>
@@ -156,7 +156,7 @@
                                                                                     <td>${customer.cus_name}</td>
                                                                                     <td>${customer.cus_position}</td>
                                                                                     <td>${customer.cus_email}</td>
-                                                                                    <td onclick="return tlselect('${customer.cus_num}','${customer.cus_name}')">
+                                                                                    <td onclick="return tlselect('${customer.cus_num}','${customer.cus_name}','${customer.cus_position}')">
                                                                                         <a class="btn btn-secondary text-gray-100" data-dismiss="modal">선택</a>
                                                                                     </td>
                                                                                 </tr>
@@ -190,17 +190,18 @@
                                                        readonly>
                                                 <input type="hidden" id="cus_num" name="cus_num" placeholder="선택해주세요." class="form-control" value="${TeamList.cus_num}">
                                             </div>
-
+                                            <c:if test="${test eq 1}">
                                             <div class="col-4" >
-                                                <small class="help-block form-text">팀장 이메일 </small>
+                                                팀장 이메일
                                                 <input style="background-color:white;border:none" value="${TeamList.cus_email}" type="text"   name="team_company" class="form-control" readonly="readonly" disabled/>
                                             </div>
+                                            </c:if>
                                         </div>
 
                                         <div class="row form-group">
                                             <div class="col-2"></div>
                                             <div class="col-5">
-                                                <small class="help-block form-text">팀설명</small>
+                                                <div><sup class="text-danger small">*</sup>팀설명</div>
                                                 <textarea style=" solid: whitesmoke; width: 100%;  resize: both"
                                                           placeholder="입력해주세요" id="team_desc"
                                                           name="team_desc" class="form-control">${TeamList.team_desc}</textarea>
@@ -283,7 +284,7 @@
                                     <div class="row form-group">
                                         <div class="col-2"></div>
                                         <div class="col-4 ">
-                                            <small class="help-block form-text">팀원목록</small>
+                                            <small class="help-block form-text">*팀원 추가시 현재 입력값이 자동으로 저장됩니다.</small>
                                         </div>
                                     </div>
                                     <div class="row form-group">
@@ -291,7 +292,7 @@
                                                value='${TeamList.team_num}'/>
                                         <div class="col-2"></div>
                                         <div class="col-8"
-                                             style="border-top:  2px solid #ff7f00;border-bottom: 2px solid #ff7f00;">
+                                             style="border-top:  2px solid #2c9faf;border-bottom: 2px solid #2c9faf;">
                                             <div class="card mb-4">
 
                                                 <div class="card-body">
@@ -322,7 +323,7 @@
                                                                             <td>${cusmodal.cus_dep}</td>
                                                                             <td>${cusmodal.cus_state}</td>
                                                                             <td onclick="return delete_form(${teammember.cus_num})">
-                                                                                <a class="btn ml-2 btn-warning "> <i
+                                                                                <a class="btn ml-2 btn-danger text-gray-100 "> <i
                                                                                         class="fa-regular fa-circle-xmark "></i></a>
 
                                                                             </td>
@@ -383,7 +384,7 @@
                                                 </button>
                                             </div>
                                             <div class="modal-body">
-                                                팀명 또는 팀장이 작성되지 않았습니다.
+                                                필수값이 입력되지 않았습니다.
                                             </div>
                                             <div class="modal-footer">
                                                 <button class="btn btn-secondary" type="button" data-dismiss="modal">

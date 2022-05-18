@@ -10,9 +10,9 @@
     </select>
     <!-- 팀 목록 조회(Select) -->
     <select id="selectTeam" resultType="TeamVO">
-        SELECT t.TEAM_NUM, t.TEAM_NAME, t.TEAM_DESC, t.CUS_NUM, t.PRJ_NUM, c.cus_name ,c.cus_position
+        SELECT t.TEAM_NUM, t.TEAM_NAME, t.TEAM_DESC, t.CUS_NUM, t.PRJ_NUM, c.cus_name ,c.cus_position ,t.prj_num
         FROM Team t, customer c
-        where  t.cus_num=c.cus_num
+        where  t.cus_num=c.cus_num and prj_num = #{prj_num}
         ORDER BY team_num ASC
     </select>
 

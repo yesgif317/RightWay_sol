@@ -203,7 +203,7 @@
                                                             <div><strong class="text-warning">Medium </strong> - 프로젝트에서
                                                                 처리가 가능하나 종결까지 10일 초과가 예상되는 문제
                                                             </div>
-                                                            <div><strong class="text-info">Low </strong> - 프로젝트에서 10일
+                                                            <div><strong class="text-success">Low </strong> - 프로젝트에서 10일
                                                                 이내에 처리할수 있는 문제
                                                             </div>
                                                         </div>

@@ -881,9 +881,10 @@ public class MainController {
 
     //event page
     @RequestMapping(value = "/event.do", method = RequestMethod.GET)
-    public String event(Model model) {
+    public String event(Model model, HttpSession httpSession) {
         //service 클래스에서 Dao 로 접근하여 쿼리 결과값 가져오기
-        List<EventVO> eventVOList = eventService.selectEvent();
+        Object object = httpSession.getAttribute("prj_list");
+        List<EventVO> eventVOList = eventService.selectEvent(object);
         System.out.println(eventVOList);
         // .jsp 파일로 DB 결과값 전달하기
         model.addAttribute("EventList", eventVOList);
@@ -1114,8 +1115,9 @@ public class MainController {
 
     //팀관리 목록
     @RequestMapping(value = "/team.do", method = RequestMethod.GET)
-    public String team(Model model) {
-        List<TeamVO> teamVoList = teamService.selectTeam();
+    public String team(Model model,HttpSession httpSession) {
+        Object object = httpSession.getAttribute("prj_list");
+        List<TeamVO> teamVoList = teamService.selectTeam(object);
         model.addAttribute("TeamList", teamVoList);
         List<TeammemberVO> teammemberVoList = teamService.countmember();
         model.addAttribute("TeammemberList", teammemberVoList);

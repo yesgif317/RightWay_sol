@@ -7,7 +7,7 @@ import java.util.List;
 
 public interface TeamDao {
     //글 목록
-    List<TeamVO> selectTeam();
+    List<TeamVO> selectTeam(Object object);
     //글 입력
     String insertTeam(TeamVO teamVO);
     //글 수정 Update

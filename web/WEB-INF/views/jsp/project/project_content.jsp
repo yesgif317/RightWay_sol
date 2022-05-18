@@ -111,7 +111,7 @@
                                               <span class="icon text-white-50">
                                               <i class="fas fa-pen"></i>
                                               </span>
-                                <span class="text"> 수정</span>
+                                <span class="text"> 수정 및 프로젝트원 추가</span>
                             </a>
 
                             <a  class="btn btn-danger" data-toggle="modal" data-target="#exampleModal">

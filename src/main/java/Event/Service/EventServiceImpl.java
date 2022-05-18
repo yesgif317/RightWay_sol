@@ -12,7 +12,7 @@ public class EventServiceImpl implements EventService {
     private EventDao dao;
 
     @Override
-    public List<EventVO> selectEvent() {return dao.selectEvent();}
+    public List<EventVO> selectEvent(Object object) {return dao.selectEvent(object);}
 
     @Override
     public String insertEvent(EventVO eventVO) { return dao.insertEvent(eventVO);}

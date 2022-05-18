@@ -16,8 +16,8 @@ public class TeamServiceImpl implements TeamService {
 
 
     @Override
-    public List<TeamVO> selectTeam() {
-        return dao.selectTeam();
+    public List<TeamVO> selectTeam(Object object) {
+        return dao.selectTeam(object);
     }
 
     @Override

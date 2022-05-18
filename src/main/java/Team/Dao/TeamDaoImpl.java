@@ -16,8 +16,8 @@ public class TeamDaoImpl implements TeamDao {
     private static final String Namespace = "com.mark.mappers.TeamMapper";
     //전체 게시글
     @Override
-    public List<TeamVO> selectTeam() {
-        return sqlSession.selectList(Namespace+".selectTeam");
+    public List<TeamVO> selectTeam(Object object) {
+        return sqlSession.selectList(Namespace+".selectTeam",object);
     }
     //전체 게시글
     @Override

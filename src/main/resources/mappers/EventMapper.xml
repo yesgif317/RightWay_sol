@@ -9,6 +9,7 @@
     <select id="selectEvent" resultType="EventVO">
         SELECT post_num,cate,evt_tit,cus_num,evt_sbj,evt_host,evt_supervise,evt_loc,evt_url,evt_cnt,evt_pri,evt_limit,to_char(evt_start,'YYYY-MM-DD') AS evt_start,to_char(evt_end,'YYYY-MM-DD') AS evt_end,to_char(evt_acptstart,'YYYY-MM-DD') AS evt_acptstart,to_char(evt_acptend,'YYYY-MM-DD') AS evt_acptend,evt_reg,evt_upd,prj_num
         FROM Event
+where prj_num = #{prj_num}
     </select>
 
     <!-- 행사등록(Insert) -->

@@ -17,9 +17,9 @@ public class EventDaoImpl implements EventDao {
 
     // 게시판 전체 글 조회
     @Override
-    public List<EventVO> selectEvent() {
+    public List<EventVO> selectEvent(Object object) {
         //Ibatis Select 사용법
-        return sqlSession.selectList(Namespace+".selectEvent");
+        return sqlSession.selectList(Namespace+".selectEvent",object);
     }
 
     // 게시판 글 작성
