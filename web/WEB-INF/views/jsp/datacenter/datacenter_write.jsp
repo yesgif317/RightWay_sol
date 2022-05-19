@@ -25,7 +25,7 @@
                                     <form method="post" id="file-upload-form" enctype="multipart/form-data" class="form-horizontal" action="/datacenter_insert.do">
                                         <div class="row form-group">
                                             <div class="col col-md-3 text-right"><label class=" form-control-label fa-solid text-gray-800 mt-2"><sup class="text-danger small">*</sup>제목</label></div>
-                                            <div class="col-12 col-md-7"><input type="text" id="title" name="title" placeholder="제목을 입력해주세요" class="form-control"></div>
+                                            <div class="col-12 col-md-7"><input type="text" id="title" name="title" maxlength="40" placeholder="제목을 입력해주세요" class="form-control"></div>
                                         </div>
                                         <div class="row form-group">
                                             <div class="col col-md-3 text-right"><label class=" form-control-label fa-solid text-gray-800 mt-2">작성자</label></div>
@@ -33,7 +33,7 @@
                                         </div>
                                         <div class="row form-group">
                                             <div class="col col-md-3 text-right"><label class=" form-control-label fa-solid text-gray-800 mt-2"><sup class="text-danger small">*</sup>내용 작성</label></div>
-                                            <div class="col-12 col-md-7"><textarea name="contents" id="contents" rows="9" placeholder="내용을 입력해주세요" class="form-control"></textarea></div>
+                                            <div class="col-12 col-md-7"><textarea name="contents" id="contents" rows="9" maxlength="1000" placeholder="내용을 입력해주세요" class="form-control"></textarea></div>
                                         </div>
 
                                         <div class="row form-group">

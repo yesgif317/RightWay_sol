@@ -53,7 +53,7 @@
                                                                                         class=" form-control-label fa-solid text-gray-800 mt-2"><sup
                                                     class="text-danger small">*</sup>제목</label></div>
                                             <div class="col-12 col-md-7">
-                                                <input type="text" id="nor_tit" name="nor_tit" placeholder="제목을 입력해주세요."
+                                                <input type="text" id="nor_tit" name="nor_tit" maxlength="40" placeholder="제목을 입력해주세요."
                                                        class="form-control" value=${PostList.nor_tit}>
                                             </div>
                                         </div>
@@ -62,7 +62,7 @@
                                                                                         class=" form-control-label fa-solid text-gray-800 mt-2"><sup
                                                     class="text-danger small">*</sup>내용</label></div>
                                             <div class="col-12 col-md-7">
-                                                <textarea name="nor_cnt" id="nor_cnt" rows="9"
+                                                <textarea name="nor_cnt" id="nor_cnt" rows="9" maxlength="1000"
                                                           placeholder="요청사항 내용을 입력해주세요."
                                                           class="form-control">${PostList.nor_cnt}</textarea>
                                             </div>

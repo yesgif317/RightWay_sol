@@ -44,7 +44,7 @@
                                     <div class="row form-group">
                                         <div class="col-2"></div>
                                         <div class="col-8" style="border-top:  2px solid #808080;border-bottom: 2px solid #808080;">
-                                            <textarea style="border:0 solid whitesmoke;" name="contents" id="contents" rows="5" class="form-control mt-3 mb-3" readonly="readonly" disabled>${PostList.nor_cnt}</textarea>
+                                            <textarea style="border:0 solid whitesmoke;" name="contents" id="contents" rows="15" class="form-control mt-3 mb-3" readonly="readonly" disabled>${PostList.nor_cnt}</textarea>
                                         </div>
                                     </div>
                                 </form>

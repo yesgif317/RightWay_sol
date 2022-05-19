@@ -50,6 +50,7 @@
                             </tfoot>
                             <tbody>
                             <c:forEach items="${NormalList}" var="post" varStatus="status">
+                                <c:if test="${post.prj_num eq prj_list.prj_num}">
                                 <c:if test="${post.cate eq 12}">
                                     <tr onClick="location.href='notice_content.do?post_num=${post.post_num}'"
                                         onmouseover="this.style.fontSize='18 ';this.style.color='black'"  onmouseout="this.style.fontSize='16';this.style.color='#858796'">
@@ -58,6 +59,7 @@
                                     <td>${post.cus_name}</td>
                                     <td><fmt:formatDate value="${post.nor_reg}" pattern="yyyy-MM-dd" /></td>
                                 </tr>
+                                </c:if>
                                 </c:if>
                             </c:forEach>
                             </tbody>

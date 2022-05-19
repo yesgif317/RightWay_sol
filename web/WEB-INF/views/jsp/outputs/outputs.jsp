@@ -42,7 +42,7 @@
                             </tfoot>
                             <tbody>
                             <c:forEach items="${PostList}" var="post" varStatus="status">
-                                <%--<c:if test="${post.cate eq 1}">--%>
+                                <c:if test="${post.prj_num eq prj_list.prj_num}">
                                 <tr onClick="location.href='outputs_content.do?post_num=${post.post_num}'"
                                     onmouseover="this.style.fontSize='18 ';this.style.color='black'"  onmouseout="this.style.fontSize='16';this.style.color='#858796'">
                                         <td>${status.count}</td>
@@ -51,7 +51,7 @@
                                         <td><fmt:formatDate value="${post.nor_reg}" pattern="yyyy-MM-dd"/></td>
                                         <td>${post.prj_name}</td>
                                     </tr>
-                                <%--</c:if>--%>
+                                </c:if>
                             </c:forEach>
                             </tbody>
                         </table>

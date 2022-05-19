@@ -51,6 +51,7 @@
                             </tfoot>
                             <tbody>
                             <c:forEach items="${PostList}" var="post" varStatus="status">
+                                <c:if test="${post.prj_num eq prj_list.prj_num}">
                                 <c:if test="${post.cate eq 13}">
                                 <tr onClick="location.href='datacenter_content.do?post_num=${post.post_num}'"
                                     onmouseover="this.style.fontSize='18 ';this.style.color='black'"  onmouseout="this.style.fontSize='16';this.style.color='#858796'">
@@ -60,6 +61,7 @@
                                     <td><fmt:formatDate value="${post.nor_reg}" pattern="yyyy-MM-dd" /></td>
                                     <td>${post.prj_num}</td>
                                 </tr>
+                                </c:if>
                                 </c:if>
                             </c:forEach>
                             </tbody>
