@@ -41,7 +41,7 @@
                             <c:forEach items="${TeamList}" var="team" varStatus="status" >
                                 <tr onClick="location.href='team_content.do?team_num=${team.team_num}'"
                                     onmouseover="this.style.fontSize='18 ';this.style.color='black'"  onmouseout="this.style.fontSize='16';this.style.color='#858796'">
-                                            <td>${team.team_num}</td>
+                                            <td>${status.count}</td>
                                             <td>${team.team_name}</td>
                                             <td>${team.team_desc}</td>
                                             <td>${team.cus_name}</td>

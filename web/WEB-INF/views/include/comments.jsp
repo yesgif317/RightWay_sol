@@ -112,7 +112,7 @@ jsp:include page="../../include/footer.jsp" flush="true" />
                         <input type="hidden" id="cus_dep_insert" name="cus_dep_insert" value="${login.cus_dep}"/>
                         <input type="hidden" id="cus_position_insert" name="cus_position_insert" value="${login.cus_position}"/>
 
-                        <input type="text" id="cmt_cnt" name="cmt_cnt" class="form-control" style="width:90%;float:left"
+                        <input type="text" maxlength='333' id="cmt_cnt" name="cmt_cnt" class="form-control" style="width:90%;float:left"
                                placeholder="댓글 입력"/>
                         <input type="submit" class="btn btn-add-comment" value="등록" style="float:right"/>
                     </td>
@@ -196,7 +196,7 @@ jsp:include page="../../include/footer.jsp" flush="true" />
                                             <!-- 댓글수정 -->
                                             <input type="hidden" id="cmt_num_inform_update" name="cmt_num_inform_update"
                                                    value="${comment.cmt_num}"/>
-                                            <input type="text" id="cmt_update" name="cmt_update" class="form-control"
+                                            <input type="text" maxlength='333' id="cmt_update" name="cmt_update" class="form-control"
                                                    style="width:93%;float:left" placeholder="${comment.cmt_cnt}"/>
                                             <input type="submit" class="btn btn-comment_update" value="수정"
                                                    style="float:right"/>
@@ -289,7 +289,7 @@ jsp:include page="../../include/footer.jsp" flush="true" />
 
                                         <input type="hidden" id="cmt_num_inform" name="cmt_num_inform"
                                                value="${comment.cmt_num}"/>
-                                        <input type="text" id="rcmt_cnt" name="rcmt_cnt" class="form-control"
+                                        <input type="text" maxlength='333' id="rcmt_cnt" name="rcmt_cnt" class="form-control"
                                                style="width:90%;float:left" placeholder="댓글 입력"/>
 
 
@@ -372,7 +372,7 @@ jsp:include page="../../include/footer.jsp" flush="true" />
                                                     <!-- 대댓글수정 -->
                                                     <input type="hidden" id="rcmt_num_inform_update"
                                                            name="rcmt_num_inform_update" value="${recomment.rcmt_num}"/>
-                                                    <input type="text" id="rcmt_update" name="rcmt_update"
+                                                    <input type="text" maxlength='333' id="rcmt_update" name="rcmt_update"
                                                            class="form-control" style="width:93%;float:left"
                                                            placeholder="${recomment.rcmt_cnt}"/>
                                                     <input type="submit" class="btn btn-comment_update" value="수정"

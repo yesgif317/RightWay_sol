@@ -157,6 +157,8 @@ public class MainController {
         if(prj_name != null){
             ProjectVO selectproject_list = projectService.selectproject_list(prj_name);
             httpSession.setAttribute("prj_list", selectproject_list);
+            System.out.println(selectproject_list);
+
         }
         //프로젝트 이름이 선택되지 않은 경우
         else{
@@ -167,6 +169,7 @@ public class MainController {
             {
                 ProjectVO selectproject_list = projectService.selectproject_list(projectVOList.get(0).getPrj_name());
                 httpSession.setAttribute("prj_list", selectproject_list);
+                System.out.println(selectproject_list);
             }
             else{
                 System.out.println("do not have project");
@@ -179,10 +182,12 @@ public class MainController {
         List<NormalVO> normalVOList = normalService.selectNotice(object);
         List<RiskVO> RiskVOList = riskService.selectDanger(object);
         List<RiskVO> IssueVOList = riskService.selectIssue(object);
+        List<EventVO> EventVOList = eventService.selectEvent(object);
 
         httpSession.setAttribute("RVList", RiskVOList);
         httpSession.setAttribute("IVList", IssueVOList);
         httpSession.setAttribute("NormalList", normalVOList);
+        httpSession.setAttribute("EventList", EventVOList);
 
         return "index";
     }
@@ -417,15 +422,15 @@ public class MainController {
     // 산출물 게시글 작성 기능
     @RequestMapping(value = "/outputs_insert.do", method = RequestMethod.POST)
     public String outputs_insert(MultipartFile[] uploadFile, @RequestParam(value = "title") String title
-            , @RequestParam(value = "contents") String contents, @RequestParam(value = "cus_num") String cus_num) {
+            , @RequestParam(value = "contents") String contents, @RequestParam(value = "cus_num") String cus_num,@RequestParam(value = "prj_num") String prj_num) {
         System.out.println("//Title : " + title + "//Contents : " + contents + "//requestFile : " + uploadFile + cus_num);
 
         //int prj_num = Integer.parseInt(request.getParameter("prj_num"));
         //게시글 저장
-        NormalVO normal = new NormalVO(1, 2, title, contents, parseInt(cus_num));
+        NormalVO normal = new NormalVO(1, Integer.parseInt(prj_num), title, contents, Integer.parseInt(cus_num));
         normalService.insertPost(normal);
         //첨부파일저장
-        fileService.insertFile(uploadFile, 2, 1);
+        fileService.insertFile(uploadFile, Integer.parseInt(prj_num), 1);
 
         return "redirect:/outputs.do";
     }
@@ -702,6 +707,7 @@ public class MainController {
         // comment 추가 위한 2줄
         AddCmt addcmt = new Addd();
         addcmt.comment(no, model, request);
+
         // comment 종료
 
         List<FileVO> files = fileService.viewFiles(no);
@@ -733,16 +739,16 @@ public class MainController {
     // 회의록 게시글 작성 기능
     @RequestMapping(value = "/meetingrecord_insert.do", method = RequestMethod.POST)
     public String meetingrecord_insert(MultipartFile[] uploadFile, @RequestParam(value = "title") String title
-            , @RequestParam(value = "contents") String contents, @RequestParam(value = "cus_num") String cus_num) {
+            , @RequestParam(value = "contents") String contents, @RequestParam(value = "cus_num") String cus_num,@RequestParam(value = "prj_num") String prj_num) {
 
         System.out.println("//Title : " + title + "//Contents : " + contents + "//requestFile : " + uploadFile + cus_num);
 
         //int prj_num = Integer.parseInt(request.getParameter("prj_num"));
         //게시글 저장
-        NormalVO normal = new NormalVO(2, 2, title, contents, parseInt(cus_num));
+        NormalVO normal = new NormalVO(2, Integer.parseInt(prj_num), title, contents, Integer.parseInt(cus_num));
         normalService.insertPost(normal);
         //첨부파일저장
-        fileService.insertFile(uploadFile, 2, 2);
+        fileService.insertFile(uploadFile, Integer.parseInt(prj_num), 2);
 
         return "redirect:/meetingrecord.do";
     }
@@ -807,16 +813,16 @@ public class MainController {
     // 정기보고 게시글 작성 기능
     @RequestMapping(value = "/regularreport_insert.do", method = RequestMethod.POST)
     public String regularreport_insert(MultipartFile[] uploadFile, @RequestParam(value = "title") String title
-            , @RequestParam(value = "contents") String contents, @RequestParam(value = "cus_num") String cus_num) {
+            , @RequestParam(value = "contents") String contents, @RequestParam(value = "cus_num") String cus_num, @RequestParam(value = "prj_num") String prj_num) {
 
         System.out.println("//Title : " + title + "//Contents : " + contents + "//requestFile : " + uploadFile + cus_num);
 
         //게시글 저장
-        NormalVO normal = new NormalVO(3, 2, title, contents, parseInt(cus_num));
+        NormalVO normal = new NormalVO(3, Integer.parseInt(prj_num), title, contents, Integer.parseInt(cus_num));
         normalService.insertPost(normal);
         //첨부파일저장
         if(uploadFile != null){
-            fileService.insertFile(uploadFile, 2, 12);
+            fileService.insertFile(uploadFile, Integer.parseInt(prj_num), 12);
         }
 
         return "redirect:/regularreport.do";
@@ -1224,6 +1230,7 @@ public class MainController {
     public String usermanagement(Model model) {
         //service 클래스에서 Dao 로 접근하여 쿼리 결과값 가져오기
         List<CustomerVO> customerVOList = customerService.selectAllCustomer();
+       //List<CustomerVO> customerVOList = customerService.selectCustomerT();
         // .jsp 파일로 DB 결과값 전달하기
         model.addAttribute("CustomerList", customerVOList);
 
@@ -1506,14 +1513,14 @@ public class MainController {
     //자료실 파일 업로드
     @RequestMapping(value = "/datacenter_insert.do",method = RequestMethod.POST)
     public String uploadAjaxPost(MultipartFile[] uploadFile, @RequestParam(value = "title") String title
-            , @RequestParam(value = "contents") String contents,@RequestParam(value = "cus_num") String cus_num) {
+            , @RequestParam(value = "contents") String contents,@RequestParam(value = "cus_num") String cus_num,@RequestParam(value = "prj_num") String prj_num) {
         System.out.println("update ajax post.................");
         System.out.println(title + contents);
-        NormalVO normalVO = new NormalVO(13,2,title,contents,Integer.parseInt(cus_num));
+        NormalVO normalVO = new NormalVO(13,Integer.parseInt(prj_num),title,contents,Integer.parseInt(cus_num));
 
         normalService.insertPost(normalVO);
         if(uploadFile != null) {
-            fileService.insertFile(uploadFile, 2, 13);
+            fileService.insertFile(uploadFile, Integer.parseInt(prj_num), 13);
         }
         return "redirect:/datacenter.do";
     }

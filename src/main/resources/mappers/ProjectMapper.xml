@@ -70,7 +70,7 @@
     <select id="selectproject_list" resultType="ProjectVO">
         select prj_num, prj_name
         from project
-        where prj_name = #{pro_name}
+        where prj_name = #{prj_name}
     </select>
 
     <select id="selectFirstProjectName" resultType="String">

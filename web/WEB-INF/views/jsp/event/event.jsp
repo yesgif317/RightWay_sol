@@ -38,10 +38,10 @@
                             </thead>
 
                             <tbody>
-                            <c:forEach items="${EventList}" var="event">
+                            <c:forEach items="${EventList}" var="event" varStatus="status">
                                 <tr onClick="location.href='event_content.do?post_num=${event.post_num}'"
                                     onmouseover="this.style.fontSize='18 ';this.style.color='black'"  onmouseout="this.style.fontSize='16';this.style.color='#858796'">
-                                    <td>${event.post_num}</td>
+                                    <td>${status.count}</td>
                                     <td>${event.evt_tit}</td>
                                     <td>${event.evt_start}~${event.evt_end}</td>
                                     <td>${event.evt_loc}</td>

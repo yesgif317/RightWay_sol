@@ -93,8 +93,7 @@
                                                                         <th>직책</th>
                                                                         <th>연락처</th>
                                                                         <th>이메일</th>
-                                                                        <th >부서</th>
-                                                                        <th >상태</th>
+                                                                        <th>부서</th>
                                                                     </tr>
                                                                     </thead>
                                                                     <tbody>
@@ -108,7 +107,6 @@
                                                                             <td>${customer.cus_phone}</td>
                                                                             <td>${customer.cus_email}</td>
                                                                             <td>${customer.cus_dep}</td>
-                                                                            <td>${customer.cus_state}</td>
                                                                         </tr>
                                                                         </c:if>
                                                                     </c:forEach>

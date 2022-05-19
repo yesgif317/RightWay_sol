@@ -115,7 +115,7 @@
 
                         </div>  <!-- end of button list -->
 
-                        <jsp:include page="../../include/comments.jsp" flush="true" />
+<%--                        <jsp:include page="../../include/comments.jsp" flush="true" />--%>
 
                     </div>
 

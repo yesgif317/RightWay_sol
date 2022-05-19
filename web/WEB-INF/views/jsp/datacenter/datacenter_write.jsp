@@ -41,6 +41,7 @@
                                             <div class="col-12 col-md-7"><input type="file" name="uploadFile" multiple></div>
                                         </div>
                                         <input type="text" name="cus_num" value="${login.cus_num}" hidden>
+                                        <input type="text" name="prj_num" value="${prj_list.prj_num}" hidden>
 
                                         <div class="text-center d-block card-header py-3">
                                             <a href="javascript:chk_form();" class="btn btn-primary btn-icon-split" id="uploadBtn">

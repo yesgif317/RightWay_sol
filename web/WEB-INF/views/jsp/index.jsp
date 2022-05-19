@@ -167,9 +167,46 @@
         subs.innerText = '월간'
     }
 
+</script>
+<script>//risk 정보 갯수 세서 보내주는 스크립트
 
 
+function get_pgsresult(array,benchmark) {
+    var count = 0;
+    for (let i = 0; i < array.length; i++) {
+        if (array[i] === benchmark) {
+            count += 1;
+        }
+    }
+    return count
+}
 
+var pgsdata_risk = [];
+var pgsdata_issue = [];
+var impdata_risk = [];
+var impdata_issue = [];
+<c:forEach items="${RVList}" var="risk">
+<c:if test="${risk.risk_mng eq login.cus_num}">
+
+pgsdata_risk.push('${risk.risk_pgs}');
+impdata_risk.push('${risk.risk_imp}');
+</c:if>
+</c:forEach>
+<c:forEach items="${IVList}" var="issue">
+<c:if test="${issue.risk_mng eq login.cus_num}">
+pgsdata_issue.push('${issue.risk_pgs}');
+impdata_issue.push('${issue.risk_imp}');
+</c:if>
+</c:forEach>
+
+window.onload=function(){
+    var pgs= get_pgsresult(pgsdata_risk,"진행 중")+get_pgsresult(pgsdata_issue,"진행 중")
+    var pgs_div_location = document.getElementById('pgs_div');
+    pgs_div_location.innerHTML=pgs+'건';
+    var imp= get_pgsresult(impdata_risk,"High")+get_pgsresult(impdata_issue,"Emergency")
+    var imp_div_location = document.getElementById('imp_div');
+    imp_div_location.innerHTML=imp+'건';
+}
 </script>
 
 <!-- Content Wrapper -->
@@ -193,12 +230,11 @@
                                 <div class="col mr-2">
                                     <div class="text-xs font-weight-bold text-info text-uppercase mb-1">프로젝트 참여인원 수
                                     </div>
-                                    <div class="h5 mb-0 font-weight-bold text-gray-800">5명</div>
+                                    <div class="h5 mb-0 font-weight-bold text-gray-800"></div>
                                 </div>
                                 <div class="col-auto">
                                     <i class="fa-solid fa-bell text-gray-300"></i>
-                                </div>
-                            </div>
+                                </div></div>
                         </div>
                     </div>
                 </div>
@@ -208,9 +244,9 @@
                         <div class="card-body">
                             <div class="row no-gutters align-items-center">
                                 <div class="col mr-2">
-                                    <div class="text-xs font-weight-bold text-success text-uppercase mb-1">프로젝트 D-day
+                                    <div class="text-xs font-weight-bold text-success text-uppercase mb-1">프로젝트 종료일
                                     </div>
-                                    <div class="h5 mb-0 font-weight-bold text-gray-800">D-20</div>
+                                    <div class="h5 mb-0 font-weight-bold text-gray-800">${prj_list.prj_end}</div>
                                 </div>
                                 <div class="col-auto">
                                     <i class="fa-solid fa-calendar text-gray-300"></i>
@@ -228,8 +264,7 @@
                                     <div  class="text-xs font-weight-bold text-warning text-uppercase mb-1">내게 할당된 진행중
                                         이슈/위험
                                     </div>
-
-                                    <div class="h5 mb-0 font-weight-bold text-gray-800">10건</div>
+                                    <div class="h5 mb-0 font-weight-bold text-gray-800" id="pgs_div"></div>
                                 </div>
                                 <div class="col-auto">
                                     <i class="fa-solid fa-bug text-gray-300"></i>
@@ -247,7 +282,9 @@
                                     <div class="text-xs font-weight-bold text-danger text-uppercase mb-1">긴급 이슈/위험</div>
                                     <div class="row no-gutters align-items-center">
                                         <div class="col-auto">
-                                            <div class="h5 mb-0 mr-3 font-weight-bold text-gray-800">1건</div>
+                                            <div class="h5 mb-0 mr-3 font-weight-bold text-gray-800">
+                                                <div id = "imp_div"></div>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
@@ -377,7 +414,7 @@
                                         <c:when test="${NormalList != null}">
                                             <c:forEach items="${NormalList}" var="post" step="1" begin="0" end="4">
                                                 <a class="dropdown-item-text h5 mb-0 font-weight-bold text-gray-800"
-                                                   href="#">- ${post.nor_tit}</a>
+                                                   href="/notice_content.do?post_num=${post.post_num}">- ${post.nor_tit}</a>
                                             </c:forEach>
                                         </c:when>
                                         <c:otherwise>
@@ -397,11 +434,7 @@
                         <div class="card-body">
                             <div class="row no-gutters align-items-center">
                                 <div class="col mr-2">
-                                    <div class="h5 mb-0 font-weight-bold text-gray-800">-</div>
-                                    <div class="h5 mb-0 font-weight-bold text-gray-800">-</div>
-                                    <div class="h5 mb-0 font-weight-bold text-gray-800">-</div>
-                                    <div class="h5 mb-0 font-weight-bold text-gray-800">-</div>
-                                    <div class="h5 mb-0 font-weight-bold text-gray-800">-</div>
+
                                 </div>
                             </div>
                         </div>
@@ -415,11 +448,17 @@
                         <div class="card-body">
                             <div class="row no-gutters align-items-center">
                                 <div class="col mr-2">
-                                    <div class="h5 mb-0 font-weight-bold text-gray-800">-</div>
-                                    <div class="h5 mb-0 font-weight-bold text-gray-800">-</div>
-                                    <div class="h5 mb-0 font-weight-bold text-gray-800">-</div>
-                                    <div class="h5 mb-0 font-weight-bold text-gray-800">-</div>
-                                    <div class="h5 mb-0 font-weight-bold text-gray-800">-</div>
+                                    <c:choose>
+                                        <c:when test="${EventList != null}">
+                                            <c:forEach items="${EventList}" var="post" step="1" begin="0" end="4">
+                                                <a class="dropdown-item-text h5 mb-0 font-weight-bold text-gray-800"
+                                                   href="/event_content.do?post_num=${post.post_num}">- ${post.evt_tit}</a>
+                                            </c:forEach>
+                                        </c:when>
+                                        <c:otherwise>
+
+                                        </c:otherwise>
+                                    </c:choose>
                                 </div>
                             </div>
                         </div>
