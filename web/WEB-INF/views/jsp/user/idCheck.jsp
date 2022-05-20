@@ -36,12 +36,12 @@
 <form method="post" class="form-signin mt-5" action="/idCheck.do" name="joinform">
     <div class="row form-label-group m-3">
         <div class="col-3"></div>
-        <div class="col-6"><input type="text" id="cus_id" name="cus_id" class="form-control" value="${cus_id}"/></div>
+        <div class="col-6"><input type="text" id="cus_id" name="cus_id" class="form-control" value="${cus_id}"></div>
     </div>
 
     <div class="row form-label-group m-3">
             <div class="col-3"></div>
-        <div class="col-6"><input class="btn btn-lg btn-secondary btn-block text-lowercase"
+        <div class="col-6"><input class="btn btn-lg btn-secondary btn-block"
                                   type="submit" value="중복확인"></div>
     </div>
 
@@ -59,7 +59,7 @@
     <!-- 아이디가 존재하지 않을 때 -->
     <c:if test="${check == 0 }">
 
-        <div class="row form-label-group m-3">
+        <div class="row form-label-group m-3 ">
             <div class="col-3"></div>
             <div class="col-6">
                     ${cus_id}는 사용가능한 아이디입니다.

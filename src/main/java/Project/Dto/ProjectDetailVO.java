@@ -1,4 +1,5 @@
 package Project.Dto;
+
 import lombok.Data;
 
 @Data
@@ -11,6 +12,7 @@ public class ProjectDetailVO {
     String cus_email;
     int prj_num;
     String auth;
+    int count_cus;
 
     public int getCus_num() {
         return cus_num;
@@ -67,4 +69,19 @@ public class ProjectDetailVO {
     public void setCus_email(String cus_email) {
         this.cus_email = cus_email;
     }
+
+    public ProjectDetailVO(){
+
+    }
+    @Override
+    public String toString() {
+        return "ProjectDetailVO{" +
+                "prj_num='" + prj_num + '\'' +
+                ", cus_num='" + cus_num + '\'' +
+                ", auth='" + auth + '\'' +
+                ", count_cus='" + count_cus + '\''+
+                '}';
+    }
+
+
 }

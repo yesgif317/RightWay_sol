@@ -43,6 +43,11 @@ public class ProjectServiceImpl implements ProjectService {
     }
 
     @Override
+    public ProjectVO selectproject_list2(Object object) {
+        return dao.selectproject_list2(object);
+    }
+
+    @Override
     public String updateProject(ProjectVO projectVO){
         return dao.updateProject(projectVO);
     }
@@ -55,6 +60,11 @@ public class ProjectServiceImpl implements ProjectService {
     @Override
     public String selectFirstProjectName() {
         return dao.selectFirstProjectName();
+    }
+
+    @Override
+    public List<ProjectDetailVO> countcus(Object object) {
+        return dao.countcus(object);
     }
 
     @Override

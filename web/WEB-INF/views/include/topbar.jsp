@@ -34,7 +34,7 @@
                     alert("프로젝트가 변경되었습니다.")
                     window.location.reload();
                 },
-                error: function (request, error) {
+                error: function (request) {
                     alert("code:" + request.status + "\n" + "message: 프로젝트를 다시 선택해주세요.");
                 }
             });

@@ -29,7 +29,7 @@
                                         </div>
                                         <div class="row form-group">
                                             <div class="col col-md-3 text-right"><label class=" form-control-label fa-solid text-gray-800 mt-2">작성자</label></div>
-                                            <div class="col-12 col-md-7"><input type="email" id="writer" name="writer" placeholder="작성자를 입력해주세요" class="form-control"></div>
+                                            <div class="col-12 col-md-7"><input type="email" id="writer" name="writer" placeholder="${login.cus_name}" readonly class="form-control"></div>
                                         </div>
                                         <div class="row form-group">
                                             <div class="col col-md-3 text-right"><label class=" form-control-label fa-solid text-gray-800 mt-2"><sup class="text-danger small">*</sup>내용 작성</label></div>

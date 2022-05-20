@@ -1,15 +1,15 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 
-<jsp:include page="../../include/header.jsp" flush="true" />
-<jsp:include page="../../include/sidebar.jsp" flush="true" />
+<jsp:include page="../../include/header.jsp" flush="true"/>
+<jsp:include page="../../include/sidebar.jsp" flush="true"/>
 
 <!-- Content Wrapper -->
-<div id="content-wrapper" class="d-flex flex-column" >
+<div id="content-wrapper" class="d-flex flex-column">
 
     <!-- Main Content -->
     <div id="content">
-        <jsp:include page="../../include/topbar.jsp" flush="true" />
+        <jsp:include page="../../include/topbar.jsp" flush="true"/>
         <!-- Begin Page Content -->
         <div class="container-fluid">
 
@@ -20,7 +20,11 @@
             <!-- DataTales Example -->
             <div class="card shadow mb-4">
                 <div class="card-header py-3">
-                    <h6 class="m-0 font-weight-bold text-primary">회원 목록</h6>
+                    <form action="/excelform_download.do" method="get">
+                        <button type="submit" class="btn btn-secondary">인원관리 양식 다운로드</button>
+                    </form>
+
+
                 </div>
                 <div class="card-body">
                     <div class="table-responsive">
@@ -36,11 +40,11 @@
                                 <th>승인여부</th>
                             </tr>
                             </thead>
-
                             <tbody>
                             <c:forEach items="${CustomerList}" var="cust" varStatus="status">
                                 <tr onClick="location.href='usermanagement_content.do?cus_num=${cust.cus_num}'"
-                                    onmouseover="this.style.fontSize='18 ';this.style.color='black'"  onmouseout="this.style.fontSize='16';this.style.color='#858796'">
+                                    onmouseover="this.style.fontSize='18 ';this.style.color='black'"
+                                    onmouseout="this.style.fontSize='16';this.style.color='#858796'">
                                     <td>${status.count}</td>
                                     <td>${cust.cus_name}</td>
                                     <td>${cust.cus_position}</td>
@@ -63,37 +67,29 @@
                         </table>
                     </div>
                 </div>
+                <div class="table-responsive">
+                    <div>
+                        <form id="frmAttachedFiles" class="form-horizontal" enctype="multipart/form-data">
+                            <div class="btn btn-secondary btn-file">
+                                엑셀업로드
+                                <input type="file" id="btnUploadExcel" name="btnUploadExcel">
+                            </div>
+                        </form>
+                        <form action="/ExcelDownload.do" id="frmExcelDown" method="GET">
+                            <button type=submit" class="btn btn-secondary">전체 인원 목록 다운로드
+                            </button>
+                        </form>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
     <!-- End of Main Content -->
 
 
+    <jsp:include page="../../include/footer.jsp" flush="true"/>
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-    <jsp:include page="../../include/footer.jsp" flush="true" />
-
-    <jsp:include page="../../include/logoutModal.jsp" flush="true" />
+    <jsp:include page="../../include/logoutModal.jsp" flush="true"/>
 
     <!-- Bootstrap core JavaScript-->
     <script src="<c:url value="/resources/vendor/jquery/jquery.min.js"/>"></script>

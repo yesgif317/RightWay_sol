@@ -149,29 +149,31 @@ public class MainController {
     @RequestMapping(value = "/index.do", method = RequestMethod.GET)
     public String main(Model model, HttpServletRequest request,
                        HttpServletResponse response,
-                       HttpSession httpSession, ModelAndView modelAndView,
-                       @RequestParam(value = "prj_name", required=false) String prj_name) {
+                       HttpSession httpSession, ModelAndView modelAndView) {
 
 
         //프로젝트 이름이 선택되어있는 경우
-        if(prj_name != null){
-            ProjectVO selectproject_list = projectService.selectproject_list(prj_name);
+        if (httpSession.getAttribute("prj_list") != null) {
+            System.out.println("selectone인데 두개잡히는지");
+
+            Object object = httpSession.getAttribute("prj_list");
+            ProjectVO selectproject_list = projectService.selectproject_list2(object);
             httpSession.setAttribute("prj_list", selectproject_list);
-            System.out.println(selectproject_list);
+
+            System.out.println(selectproject_list + "선택되어있는경우");
 
         }
         //프로젝트 이름이 선택되지 않은 경우
-        else{
+        else {
             Selcus selcus = new Scus();
             List<ProjectVO> projectVOList = selcus.selectcus(model, httpSession);
             //프로젝트가 존재하는지 여부
-            if(projectVOList.size() != 0)
-            {
+            if (projectVOList.size() != 0) {
                 ProjectVO selectproject_list = projectService.selectproject_list(projectVOList.get(0).getPrj_name());
                 httpSession.setAttribute("prj_list", selectproject_list);
-                System.out.println(selectproject_list);
-            }
-            else{
+
+                System.out.println(selectproject_list + "선택되어있지않은경우");
+            } else {
                 System.out.println("do not have project");
                 return "redirect:/project_write.do?prj_num=0&update=0";
             }
@@ -194,14 +196,13 @@ public class MainController {
 
     @ResponseBody
     @PostMapping("Select_project.do")
-    public String select_prj(@RequestParam(value = "prj_name", required=false) String prj_name, HttpSession httpSession, Model model) {
+    public String select_prj(@RequestParam(value = "prj_name", required = false) String prj_name, HttpSession httpSession, Model model) {
 
-        if(prj_name != null) {
+        if (prj_name != null) {
             ProjectVO selectproject_list = projectService.selectproject_list(prj_name);
             httpSession.setAttribute("prj_list", selectproject_list);
-        }
-        else{
-            return "index";
+        } else {
+            return "forward:/index.do";
         }
 
         Object object = httpSession.getAttribute("prj_list");
@@ -222,14 +223,19 @@ public class MainController {
     }
 
     @RequestMapping(value = "/loginPost.do", method = RequestMethod.POST)
-    public void loginPOST(LoginDTO loginDTO, HttpSession httpSession, Model model) throws Exception {
+    public String loginPOST(LoginDTO loginDTO, HttpSession httpSession, Model model) throws Exception {
 
         CustomerVO customerVO = customerService.login(loginDTO);
 
         System.out.println("객체 확인");
+
         if (customerVO == null || !BCrypt.checkpw(loginDTO.getCus_pwd(), customerVO.getCus_pwd())) {
-            return;
+            return "/loginPost";
         }
+        if (customerVO.getCus_state() == 0) {
+            return "user/loginerror";
+        }
+
         model.addAttribute("customerVO", customerVO);
 
         // 로그인 유지를 선택할 경우
@@ -238,6 +244,7 @@ public class MainController {
             Date sessionLimit = new Date(System.currentTimeMillis() + (1000 * amount)); // 로그인 유지기간 설정
             customerService.keepLogin(customerVO.getCus_id(), httpSession.getId(), sessionLimit);
         }
+        return "/loginPost";
     }
 
     //아이디 중복체크 GET, POST
@@ -337,7 +344,7 @@ public class MainController {
 
     //mypage update
     @RequestMapping(value = "/mypage_update.do", method = RequestMethod.POST)
-    public String mypage_update(HttpServletRequest request,Model model, CustomerVO customerVO) {
+    public String mypage_update(HttpServletRequest request, Model model, CustomerVO customerVO) {
         String Result = customerService.updateCustomer(customerVO);
         model.addAttribute("CustomerList", Result);
         HttpSession httpSession = request.getSession();
@@ -346,11 +353,11 @@ public class MainController {
         return "user/mypage";
     }
 
-    @RequestMapping(value = "/updatePassword.do",method = RequestMethod.POST)
-    public String updatePassword(@RequestParam("check_pwd") String check_pwd, CustomerVO customerVO, RedirectAttributes redirectAttributes,HttpServletRequest request) throws Exception {
+    @RequestMapping(value = "/updatePassword.do", method = RequestMethod.POST)
+    public String updatePassword(@RequestParam("check_pwd") String check_pwd, CustomerVO customerVO, RedirectAttributes redirectAttributes, HttpServletRequest request) throws Exception {
         String old_pwd = request.getParameter("old_pwd");
         System.out.println(old_pwd);
-        if (!BCrypt.checkpw(old_pwd,check_pwd)) {
+        if (!BCrypt.checkpw(old_pwd, check_pwd)) {
             redirectAttributes.addFlashAttribute("msg", "fail");
             return "redirect:/mypage.do";
         }
@@ -422,7 +429,7 @@ public class MainController {
     // 산출물 게시글 작성 기능
     @RequestMapping(value = "/outputs_insert.do", method = RequestMethod.POST)
     public String outputs_insert(MultipartFile[] uploadFile, @RequestParam(value = "title") String title
-            , @RequestParam(value = "contents") String contents, @RequestParam(value = "cus_num") String cus_num,@RequestParam(value = "prj_num") String prj_num) {
+            , @RequestParam(value = "contents") String contents, @RequestParam(value = "cus_num") String cus_num, @RequestParam(value = "prj_num") String prj_num) {
         System.out.println("//Title : " + title + "//Contents : " + contents + "//requestFile : " + uploadFile + cus_num);
 
         //int prj_num = Integer.parseInt(request.getParameter("prj_num"));
@@ -466,7 +473,7 @@ public class MainController {
         NormalVO normal = new NormalVO(12, prj_num, title, contents, Integer.parseInt(cus_num));
         normalService.insertPost(normal);
         //첨부파일저장
-        if(uploadFile != null) {
+        if (uploadFile != null) {
             fileService.insertFile(uploadFile, prj_num, 12);
         }
         return "redirect:/notice.do";
@@ -637,22 +644,22 @@ public class MainController {
         //첨부파일 불러오기
         List<FileVO> files = fileService.viewFiles(post_num);
         System.out.println(files);
-        for(int i = 0; i<files.size();i++){
+        for (int i = 0; i < files.size(); i++) {
             files.get(i).setFile_link("/upload/" + files.get(i).getFile_name());
         }
-        model.addAttribute("FileList",files);
+        model.addAttribute("FileList", files);
 
         return "issue/issue_content";
     }
 
     //issue insert
     @RequestMapping(value = "/issue_insert.do", method = RequestMethod.POST)
-    public String issue_insert(Model model, RiskVO riskVO,MultipartFile[] uploadFile) {
+    public String issue_insert(Model model, RiskVO riskVO, MultipartFile[] uploadFile) {
         System.out.println(riskVO.getRisk_imp());
         String Result = riskService.insertRisk(riskVO);
 
         //첨부파일저장
-        if(uploadFile != null) {
+        if (uploadFile != null) {
             fileService.insertFile(uploadFile, 2, 10);
         }
         return "redirect:/issue.do";
@@ -739,7 +746,7 @@ public class MainController {
     // 회의록 게시글 작성 기능
     @RequestMapping(value = "/meetingrecord_insert.do", method = RequestMethod.POST)
     public String meetingrecord_insert(MultipartFile[] uploadFile, @RequestParam(value = "title") String title
-            , @RequestParam(value = "contents") String contents, @RequestParam(value = "cus_num") String cus_num,@RequestParam(value = "prj_num") String prj_num) {
+            , @RequestParam(value = "contents") String contents, @RequestParam(value = "cus_num") String cus_num, @RequestParam(value = "prj_num") String prj_num) {
 
         System.out.println("//Title : " + title + "//Contents : " + contents + "//requestFile : " + uploadFile + cus_num);
 
@@ -785,10 +792,10 @@ public class MainController {
 
         List<FileVO> files = fileService.viewFiles(no);
         System.out.println(files);
-        for(int i = 0; i<files.size();i++){
+        for (int i = 0; i < files.size(); i++) {
             files.get(i).setFile_link("/upload/" + files.get(i).getFile_name());
         }
-        model.addAttribute("FileList",files);
+        model.addAttribute("FileList", files);
 
 
         return "/regularreport/regularreport_content";
@@ -821,7 +828,7 @@ public class MainController {
         NormalVO normal = new NormalVO(3, Integer.parseInt(prj_num), title, contents, Integer.parseInt(cus_num));
         normalService.insertPost(normal);
         //첨부파일저장
-        if(uploadFile != null){
+        if (uploadFile != null) {
             fileService.insertFile(uploadFile, Integer.parseInt(prj_num), 12);
         }
 
@@ -866,21 +873,21 @@ public class MainController {
         //첨부파일 불러오기
         List<FileVO> files = fileService.viewFiles(post_num);
         System.out.println(files);
-        for(int i = 0; i<files.size();i++){
+        for (int i = 0; i < files.size(); i++) {
             files.get(i).setFile_link("/upload/" + files.get(i).getFile_name());
         }
-        model.addAttribute("FileList",files);
+        model.addAttribute("FileList", files);
 
         return "danger/danger_content";
     }
 
     //danger insert
     @RequestMapping(value = "/danger_insert.do", method = RequestMethod.POST)
-    public String danger_insert(Model model, RiskVO riskVO,MultipartFile[] uploadFile) {
+    public String danger_insert(Model model, RiskVO riskVO, MultipartFile[] uploadFile) {
         String Result = riskService.insertRisk(riskVO);
         model.addAttribute("RiskList", Result);
         //첨부파일저장
-        if(uploadFile != null) {
+        if (uploadFile != null) {
             fileService.insertFile(uploadFile, 2, 9);
         }
         return "redirect:/danger.do";
@@ -905,7 +912,6 @@ public class MainController {
     //adminpermission page (관리자 승인)
     @RequestMapping(value = "/adminpermission.do", method = RequestMethod.GET)
     public String adminpermission(Model model) {
-
 
 
         //service 클래스에서 Dao 로 접근하여 쿼리 결과값 가져오기
@@ -1032,18 +1038,33 @@ public class MainController {
 
     //project page
     @RequestMapping(value = "/project.do", method = RequestMethod.GET)
-    public String project(Model model,HttpSession httpSession) {
+    public String project(Model model, HttpSession httpSession) {
         //프로젝트 조회
         List<ProjectVO> projectVOList = projectService.selectProject();
         model.addAttribute("ProjectList1", projectVOList);
 
-        //prj_list를 설정
         Selcus selcus = new Selcus();
-        List<ProjectVO> prj_list = selcus.selectcus(model,httpSession);
-        ProjectVO selectproject_list = projectService.selectproject_list(projectVOList.get(0).getPrj_name());
-        httpSession.setAttribute("prj_list", selectproject_list);
+        List<ProjectVO> prj_list = selcus.selectcus(model, httpSession);
+        httpSession.setAttribute("ProjectList", prj_list);
 
-        httpSession.setAttribute("ProjectList",prj_list);
+        if (httpSession.getAttribute("prj_list") != null) {
+            System.out.println("selectone인데 두개잡히는지");
+            Object object = httpSession.getAttribute("prj_list");
+            ProjectVO selectproject_list = projectService.selectproject_list2(object);
+            httpSession.setAttribute("prj_list", selectproject_list);
+            System.out.println(selectproject_list + "선택되어있는경우");
+
+        }
+        //프로젝트 이름이 선택되지 않은 경우
+        else {
+            //프로젝트가 존재하는지 여부
+            if (prj_list.size() != 0) {
+                ProjectVO selectproject_list = projectService.selectproject_list(prj_list.get(0).getPrj_name());
+                httpSession.setAttribute("prj_list", selectproject_list);
+                System.out.println(selectproject_list + "선택되어있지않은경우");
+            }
+        }
+
 
         return "project/project";
     }
@@ -1164,7 +1185,7 @@ public class MainController {
 
     //팀관리 목록
     @RequestMapping(value = "/team.do", method = RequestMethod.GET)
-    public String team(Model model,HttpSession httpSession) {
+    public String team(Model model, HttpSession httpSession) {
         Object object = httpSession.getAttribute("prj_list");
         List<TeamVO> teamVoList = teamService.selectTeam(object);
         model.addAttribute("TeamList", teamVoList);
@@ -1230,7 +1251,7 @@ public class MainController {
     public String usermanagement(Model model) {
         //service 클래스에서 Dao 로 접근하여 쿼리 결과값 가져오기
         List<CustomerVO> customerVOList = customerService.selectAllCustomer();
-       //List<CustomerVO> customerVOList = customerService.selectCustomerT();
+        //List<CustomerVO> customerVOList = customerService.selectCustomerT();
         // .jsp 파일로 DB 결과값 전달하기
         model.addAttribute("CustomerList", customerVOList);
 
@@ -1371,7 +1392,7 @@ public class MainController {
         String cus_dep = cus_dep_insert;
         String cus_position = cus_position_insert;
 
-        CommentVO commentVO = new CommentVO(0,post_num,cate,0,cnt,com_name,cus_name,cus_dep,cus_position);
+        CommentVO commentVO = new CommentVO(0, post_num, cate, 0, cnt, com_name, cus_name, cus_dep, cus_position);
 
         commentService.insertComment(commentVO);
         System.out.println("Complete...");
@@ -1411,7 +1432,7 @@ public class MainController {
         int cmt_num_inf = cmt_num_inform;
         System.out.println(cmt_num_inf);
         //cmt_num_inform = 댓글 번호->대댓글을 댓글 밑에 달기 위해
-        Re_CommentVO re_commentVO = new Re_CommentVO(0, cmt_num_inf, 0, rcnt, com_name_r,cus_name_r,cus_dep_r,cus_position_r);
+        Re_CommentVO re_commentVO = new Re_CommentVO(0, cmt_num_inf, 0, rcnt, com_name_r, cus_name_r, cus_dep_r, cus_position_r);
 
         re_commentService.insertRe_Comment(re_commentVO);
         System.out.println("Complete...");
@@ -1447,7 +1468,7 @@ public class MainController {
         int cmt_num = cmt_num_inform_update;
 
         String cmt_cnt = cmt_update;
-        CommentVO commentVO = new CommentVO(cmt_num, 0, 0, 0, cmt_cnt,"","","","");
+        CommentVO commentVO = new CommentVO(cmt_num, 0, 0, 0, cmt_cnt, "", "", "", "");
 
         commentService.updateComment(commentVO);
         System.out.println("Complete...");
@@ -1465,7 +1486,7 @@ public class MainController {
         int rcmt_num = rcmt_num_inform_update;
 
         String rcmt_cnt = rcmt_update;
-        Re_CommentVO re_commentVO = new Re_CommentVO(rcmt_num, 0, 0, rcmt_cnt,"","","","");
+        Re_CommentVO re_commentVO = new Re_CommentVO(rcmt_num, 0, 0, rcmt_cnt, "", "", "", "");
 
         re_commentService.updateRe_Comment(re_commentVO);
         System.out.println("Complete...");
@@ -1489,10 +1510,10 @@ public class MainController {
         //첨부파일
         List<FileVO> files = fileService.viewFiles(no);
         System.out.println(files);
-        for(int i = 0; i<files.size();i++){
+        for (int i = 0; i < files.size(); i++) {
             files.get(i).setFile_link("/upload/" + files.get(i).getFile_name());
         }
-        model.addAttribute("FileList",files);
+        model.addAttribute("FileList", files);
 
         return "datacenter/datacenter_content";
     }
@@ -1511,15 +1532,15 @@ public class MainController {
     }
 
     //자료실 파일 업로드
-    @RequestMapping(value = "/datacenter_insert.do",method = RequestMethod.POST)
+    @RequestMapping(value = "/datacenter_insert.do", method = RequestMethod.POST)
     public String uploadAjaxPost(MultipartFile[] uploadFile, @RequestParam(value = "title") String title
-            , @RequestParam(value = "contents") String contents,@RequestParam(value = "cus_num") String cus_num,@RequestParam(value = "prj_num") String prj_num) {
+            , @RequestParam(value = "contents") String contents, @RequestParam(value = "cus_num") String cus_num, @RequestParam(value = "prj_num") String prj_num) {
         System.out.println("update ajax post.................");
         System.out.println(title + contents);
-        NormalVO normalVO = new NormalVO(13,Integer.parseInt(prj_num),title,contents,Integer.parseInt(cus_num));
+        NormalVO normalVO = new NormalVO(13, Integer.parseInt(prj_num), title, contents, Integer.parseInt(cus_num));
 
         normalService.insertPost(normalVO);
-        if(uploadFile != null) {
+        if (uploadFile != null) {
             fileService.insertFile(uploadFile, Integer.parseInt(prj_num), 13);
         }
         return "redirect:/datacenter.do";
@@ -1552,7 +1573,7 @@ public class MainController {
         Font font = wb.createFont();
         cell = row.createCell(0);
         cell.setCellValue("투입인력 관리");
-        sheet.addMergedRegion(new CellRangeAddress(row.getRowNum(), row.getRowNum(), 0, 9));
+        sheet.addMergedRegion(new CellRangeAddress(row.getRowNum(), row.getRowNum(), 0, 8));
         int rowNum = 1;
 
         // Header
@@ -1623,9 +1644,10 @@ public class MainController {
     @RequestMapping(value = "/ExcelUpload.do")
     public ResponseEntity<ExcelVO> memberExcelUp(MultipartHttpServletRequest request, HttpServletResponse response) {
         System.out.println("컨트롤러 넘어옴");
-        ExcelVO excelVO = new ExcelVO();
+
         response.setCharacterEncoding("UTF-8");
         try {
+            ExcelVO excelVO = new ExcelVO();
             MultipartFile file = null;
             Iterator<String> iterator = request.getFileNames();
             if (iterator.hasNext()) {
@@ -1634,11 +1656,13 @@ public class MainController {
             }
             System.out.println("서비스 실행전");
             excelService.memberExcelUp(file);
+
             System.out.println(HttpStatus.OK);
             return new ResponseEntity<>(excelVO, HttpStatus.OK);
 
         } catch (Exception e) {
-            return new ResponseEntity<>(excelVO, HttpStatus.OK);
+            ExcelVO excelVO = new ExcelVO();
+            return new ResponseEntity<>(excelVO, HttpStatus.BAD_REQUEST);
         }
     }
 

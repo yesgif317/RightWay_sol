@@ -59,7 +59,7 @@
                                     <td>${post.nor_tit}</td>
                                     <td>${post.cus_name}</td>
                                     <td><fmt:formatDate value="${post.nor_reg}" pattern="yyyy-MM-dd" /></td>
-                                    <td>${post.prj_num}</td>
+                                    <td>${post.prj_name}</td>
                                 </tr>
                                 </c:if>
                                 </c:if>

@@ -62,7 +62,7 @@
     <select id="selectProjectNum" resultType="ProjectVO">
         SELECT *
         FROM Project
-        where prj_name=#{prj_name} and rownum=1
+        where prj_name= #{prj_name} and rownum=1
         order by prj_num desc
     </select>
 
@@ -73,7 +73,19 @@
         where prj_name = #{prj_name}
     </select>
 
+    <select id="selectproject_list2" resultType="ProjectVO">
+        select prj_num, prj_name
+        from project
+        where prj_name = #{prj_name}
+    </select>
+
     <select id="selectFirstProjectName" resultType="String">
 
+    </select>
+
+    <select id="count_cus" resultType="ProjectDetailVO">
+        select count(CUS_NUM) as count_cus
+        from project_detail
+        where prj_num = #{prj_num}
     </select>
 </mapper>

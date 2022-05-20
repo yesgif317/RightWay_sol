@@ -61,6 +61,11 @@ public class ProjectDaoImpl implements ProjectDao{
     }
 
     @Override
+    public ProjectVO selectproject_list2(Object object) {
+        return sqlSession.selectOne(Namespace+".selectproject_list2",object);
+    }
+
+    @Override
     public ProjectVO viewProject(int prj_num) {
 
         //Ibatis Update 사용법
@@ -86,5 +91,10 @@ public class ProjectDaoImpl implements ProjectDao{
     @Override
     public String selectFirstProjectName() {
         return sqlSession.selectOne(Namespace + ".selectFirstProjectName");
+    }
+
+    @Override
+    public List<ProjectDetailVO> countcus(Object object) {
+        return sqlSession.selectOne(Namespace+".count_cus",object);
     }
 }

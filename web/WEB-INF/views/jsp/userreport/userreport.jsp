@@ -20,8 +20,6 @@
                 <div class="panel">
                     <div class="panel-body">
                         <div class="table-responsive">
-                            <p> TEST 페이지</p>
-
                             <div>
                                 <form action="/excelform_download.do" method="get">
                                     <button type="submit">인원관리 양식 다운로드</button>
@@ -35,15 +33,11 @@
                                         <input type="file" id="btnUploadExcel" name="btnUploadExcel">
                                     </div>
                                 </form>
-                            </div>
-
-                            <div>
                                 <form action="/ExcelDownload.do" id="frmExcelDown" method="GET">
-                                    <button type=submit">엑셀다운로드
+                                    <button type=submit">전체 인원 목록 다운로드
                                     </button>
                                 </form>
                             </div>
-
                         </div>
                     </div>
                 </div>
@@ -66,6 +60,7 @@
         });
 
         var count = null;
+
         // 엑셀업로드 체크
         function fnUploadExcelRegChk() {
             console.log("엑셀 업로드 화긴");
@@ -86,7 +81,7 @@
                         if (rowdata[i].id == null)
                             msg += 'id 값이 존재하지 않습니다.';
                         console.log(msg);
-                        count = i;
+                        count = rowdata.length;
                         return false;
                     }
 
@@ -132,10 +127,12 @@
                 processData: false,
                 contentType: false,
                 success: function () {
-                    alert(count + "명의 사용자가 추가되었습니다.")
+                    alert("인원 등록 성공" + "\n" + (count - 1) + "명의 사용자가 추가되었습니다.")
+                    window.location.reload();
                 },
-                error: function (request, error) {
-                    alert("code:" + request.status + "\n" + "message: 사용자가 추가되지 않았습니다.");
+                error: function (request) {
+                    alert("code:" + request.status + "\n" + "message: 사용자가 추가되지 않았습니다." + "\n");
+                    window.location.reload();
                 }
             });
         }

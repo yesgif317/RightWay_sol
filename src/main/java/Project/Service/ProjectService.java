@@ -24,6 +24,8 @@ public interface ProjectService {
     //프로젝트 번호 가져오기
     ProjectVO selectproject_list(String prj_name);
 
+    ProjectVO selectproject_list2(Object object);
+
     //글 수정(Update)
     String updateProject(ProjectVO projectVO);
 
@@ -34,6 +36,8 @@ public interface ProjectService {
 
     //글 조회(View)
     ProjectVO viewProject(int prj_num);
+
+    List<ProjectDetailVO> countcus(Object object);
 
     String selectFirstProjectName();
 }

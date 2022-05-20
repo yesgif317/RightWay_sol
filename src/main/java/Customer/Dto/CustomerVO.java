@@ -15,19 +15,19 @@ public class CustomerVO {
     private String cus_phone;
     private String cus_dep;
     private String cus_position;
-    private String cus_state;
+    private int cus_state;
     private String cus_sess_key;
     private String cus_sess_lim;
     private String com_num;
     private String com_name;
     private String prj_name;
-    private String prj_num;
+    private int prj_num;
 
     public CustomerVO() {
 
     }
 
-    public CustomerVO(String cus_num, String cus_id, String cus_pwd, String cus_name, String cus_email, String cus_phone, String cus_dep, String cus_position, String cus_state, String cus_sess_key, String cus_sess_lim, String com_num, String com_name, String prj_name, String prj_num) {
+    public CustomerVO(String cus_num, String cus_id, String cus_pwd, String cus_name, String cus_email, String cus_phone, String cus_dep, String cus_position, int cus_state, String cus_sess_key, String cus_sess_lim, String com_num, String com_name, String prj_name, int prj_num) {
         this.cus_num = cus_num;
         this.cus_id = cus_id;
         this.cus_pwd = cus_pwd;

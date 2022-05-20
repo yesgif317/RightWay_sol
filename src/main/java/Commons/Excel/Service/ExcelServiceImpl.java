@@ -145,7 +145,7 @@ public class ExcelServiceImpl implements ExcelService {
 
     public void memberExcelUp(MultipartFile file) throws Exception {
         System.out.println("서비스단 실행");
-        ExcelVO excelVO = new ExcelVO();
+
         try {
             OPCPackage opcPackage = OPCPackage.open(file.getInputStream()); // 파일 읽어옴
             XSSFWorkbook workbook = new XSSFWorkbook(opcPackage);
@@ -154,10 +154,14 @@ public class ExcelServiceImpl implements ExcelService {
             // 입력된 행의 수만큼 반복
             for (int i = 2; i <= sheet.getLastRowNum(); i++) {
 
+                System.out.println(sheet.getLastRowNum());
                 XSSFRow row = sheet.getRow(i); // i번째 행 가져옴
                 XSSFCell cell = null;
 
+                ExcelVO excelVO = new ExcelVO();
+
                 if (row == null) continue;
+
 
                 // 0번째 열
                 cell = row.getCell(0);
@@ -168,11 +172,11 @@ public class ExcelServiceImpl implements ExcelService {
                     String cus_id = String.valueOf(row.getCell(0));
 
                     int idcount = dao.idcount(cus_id);
-                    if (idcount != 1) {
-                        excelVO.setCus_id(cell.getStringCellValue().replace(" ", "")); // 공백처리
-                    } else {
+                    if (idcount >= 1) {
                         Exception e = new Exception("회원정보 삽입불가, 사유 : 회원아이디 중복");
                         throw e;
+                    } else {
+                        excelVO.setCus_id(cell.getStringCellValue().replace(" ", "")); // 공백처리
                     }
 
                 }
@@ -229,11 +233,13 @@ public class ExcelServiceImpl implements ExcelService {
                     String com_name = String.valueOf(row.getCell(8));
                     excelVO.setCom_num(dao.checkcomnum(com_name));
                 }
+                System.out.println(excelVO);
+                dao.postUserExcel(excelVO);
             }
-            System.out.println(excelVO);
-            dao.postUserExcel(excelVO);
+
         } catch (Exception e) {
-            System.out.println("에러메시지" + e.getMessage());
+            System.out.println("에러메시지 : " + e.getMessage());
+            throw new Exception();
         }
 
     }

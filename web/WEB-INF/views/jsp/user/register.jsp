@@ -43,10 +43,10 @@
                             <div class="form-group row">
                                 <div class="col-sm-6 mb-3 mb-sm-0">
                                     <div class="form-label-group">
-                                        <input type="text" name="cus_id" id="cus_id" class="form-control text-lowercase"
+                                        <input type="text" name="cus_id" id="cus_id" class="form-control"
                                                placeholder="아이디" required autofocus value="${cus_id}">
                                         <input type="hidden" name="reid" id="reid">
-                                        <small>&nbsp 4~12자 이내로 입력</small>
+                                        <small>&nbsp 아이디는 영문 소문자와 숫자 4~12자리로 입력되어야 합니다.</small>
                                     </div>
                                 </div>
                                 <div class="form-label-group col-sm-3">
@@ -88,8 +88,10 @@
 
                             <div class="form-group row">
                                 <div class="col-sm-6 mb-3 mb-sm-0">
-                                    <input type="text" class="form-control text" name="com_name" id="com_name" placeholder="회사명" value="${com_name}" disabled>
-                                    <input type="hidden" class="form-control text" name="com_num" id="com_num" value="${com_num}">
+                                    <input type="text" class="form-control text" name="com_name" id="com_name"
+                                           placeholder="회사명" value="${com_name}" disabled>
+                                    <input type="hidden" class="form-control text" name="com_num" id="com_num"
+                                           value="${com_num}">
                                 </div>
                                 <div class="form-label-group col-sm-3">
                                     <button
@@ -168,6 +170,9 @@
         //id 길이 확인용 변수 선언
         var id = document.joinform.cus_id.value;
 
+        //최소 4자 최대 12자, 영문 소문자 와 숫자로 이루어진 아이디
+        var idtext = /^[a-z0-9]{4,12}$/
+
         //최소 8자, 하나의 이상의 대소문자 및 하나의 숫자, 하나의 특수문자
         var pwdtext = /^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*#?&])[A-Za-z\d@$!%*#?&]{8,}$/;
 
@@ -179,6 +184,10 @@
 
         if (document.getElementById("cus_id").value == '') {
             alert("아이디를 입력해주세요.");
+            document.joinform.cus_id.focus();
+            exit;
+        } else if (idtext.test(document.joinform.cus_id.value) == false) {
+            alert("아이디는 영문 소문자와 숫자로만 이루어져야 합니다 \n아이디의 길이가 4~12자 이내인지 확인해주세요.")
             document.joinform.cus_id.focus();
             exit;
         } else if (id.length < 4 || id.length > 13) {

@@ -86,7 +86,7 @@
                 <div class="bg-white py-2 collapse-inner rounded">
                     <h6 class="collapse-header">투입인력</h6>
                     <a class="collapse-item font-weight-bold text-gray-600" href="usermanagement.do">투입인력관리</a>
-                    <a class="collapse-item font-weight-bold text-gray-600" href="userreport.do">투입인력보고</a>
+<%--                    <a class="collapse-item font-weight-bold text-gray-600" href="userreport.do">투입인력보고</a>--%>
                 </div>
             </div>
         </li>

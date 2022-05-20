@@ -23,6 +23,8 @@ public interface ProjectDao {
 
     ProjectVO selectproject_list(String prj_name);
 
+    ProjectVO selectproject_list2(Object object);
+
     //글 조회 Update
     ProjectVO viewProject(int prj_num);
 
@@ -31,4 +33,6 @@ public interface ProjectDao {
     int deleteProject_detail(ProjectDetailVO projectVO);
 
     String selectFirstProjectName();
+
+    List<ProjectDetailVO> countcus(Object object);
 }
