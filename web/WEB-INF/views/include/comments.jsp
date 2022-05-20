@@ -20,6 +20,36 @@ jsp:include page="../../include/footer.jsp" flush="true" />
             alert("댓글에 값을 입력하여 주십시오.");
             return false;
         }
+        else {
+            str = cmt_cnt.value;
+            let s_point=0;
+
+            for (i = 0; i < str.length; i++) {
+                a = str.substr(i, 1)    // i는 시작값, 1은 길이
+
+                if (a != " ") {
+                    s_point++;
+                }
+                else if (a == " ") {
+
+                }
+            }
+            if (s_point != 0) {
+                return true;
+            } else if (s_point == 0) {
+                alert("공백을 허용안합니다")
+                cmt_cnt.focus()
+                return false;
+            }
+        }
+    }
+</script>
+<script>
+    function zoomIn(event) {
+        event.target.style.color='#851196';
+    }
+    function zoomOut(event) {
+        event.target.style.color='#858796';
     }
 </script>
 
@@ -114,7 +144,8 @@ jsp:include page="../../include/footer.jsp" flush="true" />
 
                         <input type="text" maxlength='333' id="cmt_cnt" name="cmt_cnt" class="form-control" style="width:90%;float:left"
                                placeholder="댓글 입력"/>
-                        <input type="submit" class="btn btn-add-comment" value="등록" style="float:right"/>
+                        <input type="submit" class="btn btn-add-comment" value="등록" style="float:right"
+                               onmouseenter="zoomIn(event)" onmouseleave="zoomOut(event)"/>
                     </td>
                 </form>
 
@@ -180,6 +211,28 @@ jsp:include page="../../include/footer.jsp" flush="true" />
                                                 alert("댓글에 값을 입력하여 주십시오.");
                                                 return false;
                                             }
+                                            else {
+                                                str = update_cmt_cnt<%=dis_id2%>.cmt_update.value;
+                                                let s_point=0;
+
+                                                for (i = 0; i < str.length; i++) {
+                                                    a = str.substr(i, 1)    // i는 시작값, 1은 길이
+
+                                                    if (a != " ") {
+                                                        s_point++;
+                                                    }
+                                                    else if (a == " ") {
+
+                                                    }
+                                                }
+                                                if (s_point != 0) {
+                                                    return true;
+                                                } else if (s_point == 0) {
+                                                    alert("공백을 허용안합니다")
+                                                    update_cmt_cnt<%=dis_id2%>.cmt_update.focus()
+                                                    return false;
+                                                }
+                                            }
                                         }
                                     </script>
 
@@ -199,12 +252,14 @@ jsp:include page="../../include/footer.jsp" flush="true" />
                                             <input type="text" maxlength='333' id="cmt_update" name="cmt_update" class="form-control"
                                                    style="width:93%;float:left" placeholder="${comment.cmt_cnt}"/>
                                             <input type="submit" class="btn btn-comment_update" value="수정"
-                                                   style="float:right"/>
+                                                   style="float:right"
+                                                   onmouseenter="zoomIn(event)" onmouseleave="zoomOut(event)"/>
                                         </form>
 
                                         <form method="get" action="javascript:a<%=dis_id1%>();b<%=dis_id2%>();">
                                             <input type="submit" class="btn btn-comment_delete" value="취소"
-                                                   style="float:right"/>
+                                                   style="float:right"
+                                                   onmouseenter="zoomIn(event)" onmouseleave="zoomOut(event)"/>
                                         </form>
                                     </div>
 
@@ -216,7 +271,8 @@ jsp:include page="../../include/footer.jsp" flush="true" />
                                             <c:when test="${login.com_name eq comment.com_name && login.cus_name eq comment.cus_name && login.cus_dep eq comment.cus_dep && login.cus_position eq comment.cus_position}">
                                                 <form method="get" action="javascript:a<%=dis_id1%>();b<%=dis_id2%>();">
                                                     <input type="submit" class="btn btn-comment_delete" value="수정"
-                                                           style="float:right"/>
+                                                           style="float:right"
+                                                           onmouseenter="zoomIn(event)" onmouseleave="zoomOut(event)"/>
                                                 </form>
                                             </c:when>
                                             <c:otherwise>
@@ -241,7 +297,8 @@ jsp:include page="../../include/footer.jsp" flush="true" />
                                                    value="${comment.cmt_num}"/>
 
                                             <input type="submit" class="btn btn-comment_delete" value="삭제"
-                                                   style="float:right"/>
+                                                   style="float:right"
+                                                   onmouseenter="zoomIn(event)" onmouseleave="zoomOut(event)"/>
                                             </c:when>
                                             <c:otherwise>
                                                 <input type="submit" class="btn btn-comment_delete" value=""
@@ -265,6 +322,28 @@ jsp:include page="../../include/footer.jsp" flush="true" />
                                 if (insert_rcmt_cnt<%=dis_id1%>.rcmt_cnt.value == "") {
                                     alert("댓글에 값을 입력하여 주십시오.");
                                     return false;
+                                }
+                                else {
+                                    str = insert_rcmt_cnt<%=dis_id1%>.rcmt_cnt.value;
+                                    let s_point=0;
+
+                                    for (i = 0; i < str.length; i++) {
+                                        a = str.substr(i, 1)    // i는 시작값, 1은 길이
+
+                                        if (a != " ") {
+                                            s_point++;
+                                        }
+                                        else if (a == " ") {
+
+                                        }
+                                    }
+                                    if (s_point != 0) {
+                                        return true;
+                                    } else if (s_point == 0) {
+                                        alert("공백을 허용안합니다")
+                                        insert_rcmt_cnt<%=dis_id1%>.rcmt_cnt.focus()
+                                        return false;
+                                    }
                                 }
                             }
                         </script>
@@ -293,7 +372,8 @@ jsp:include page="../../include/footer.jsp" flush="true" />
                                                style="width:90%;float:left" placeholder="댓글 입력"/>
 
 
-                                        <input type="submit" class="btn btn-cmt-delete" value="등록" style="float:right"/>
+                                        <input type="submit" class="btn btn-cmt-delete" value="등록" style="float:right"
+                                               onmouseenter="zoomIn(event)" onmouseleave="zoomOut(event)"/>
                                     </td>
                                     <p><br></p>
                                 </form>
@@ -331,6 +411,28 @@ jsp:include page="../../include/footer.jsp" flush="true" />
                                         if (update_rcmt_cnt<%=dis_id4%>.rcmt_update.value == "") {
                                             alert("댓글에 값을 입력하여 주십시오.");
                                             return false;
+                                        }
+                                        else {
+                                            str = update_rcmt_cnt<%=dis_id4%>.rcmt_update.value;
+                                            let s_point=0;
+
+                                            for (i = 0; i < str.length; i++) {
+                                                a = str.substr(i, 1)    // i는 시작값, 1은 길이
+
+                                                if (a != " ") {
+                                                    s_point++;
+                                                }
+                                                else if (a == " ") {
+
+                                                }
+                                            }
+                                            if (s_point != 0) {
+                                                return true;
+                                            } else if (s_point == 0) {
+                                                alert("공백을 허용안합니다")
+                                                update_rcmt_cnt<%=dis_id4%>.rcmt_update.focus()
+                                                return false;
+                                            }
                                         }
                                     }
                                 </script>
@@ -376,12 +478,14 @@ jsp:include page="../../include/footer.jsp" flush="true" />
                                                            class="form-control" style="width:93%;float:left"
                                                            placeholder="${recomment.rcmt_cnt}"/>
                                                     <input type="submit" class="btn btn-comment_update" value="수정"
-                                                           style="float:right"/>
+                                                           style="float:right"
+                                                           onmouseenter="zoomIn(event)" onmouseleave="zoomOut(event)"/>
                                                 </form>
 
                                                 <form method="get" action="javascript:c<%=dis_id3%>();d<%=dis_id4%>();">
                                                     <input type="submit" class="btn btn-comment_delete" value="취소"
-                                                           style="float:right"/>
+                                                           style="float:right"
+                                                           onmouseenter="zoomIn(event)" onmouseleave="zoomOut(event)"/>
                                                 </form>
                                             </div>
 
@@ -393,7 +497,8 @@ jsp:include page="../../include/footer.jsp" flush="true" />
                                                     <c:when test="${login.com_name eq recomment.com_name && login.cus_name eq recomment.cus_name && login.cus_dep eq recomment.cus_dep && login.cus_position eq recomment.cus_position}">
                                                         <form method="get" action="javascript:c<%=dis_id3%>();d<%=dis_id4%>();">
                                                             <input type="submit" class="btn btn-comment_delete" value="수정"
-                                                                   style="float:right"/>
+                                                                   style="float:right"
+                                                                   onmouseenter="zoomIn(event)" onmouseleave="zoomOut(event)"/>
                                                         </form>
                                                     </c:when>
                                                     <c:otherwise>
@@ -421,7 +526,8 @@ jsp:include page="../../include/footer.jsp" flush="true" />
 
 
                                                     <input type="submit" class="btn btn-rcmt-delete" value="삭제"
-                                                           style="float:right"/>
+                                                           style="float:right"
+                                                           onmouseenter="zoomIn(event)" onmouseleave="zoomOut(event)"/>
                                                     </c:when>
                                                     <c:otherwise>
                                                         <input type="submit" class="btn btn-rcmt-delete" value=""
