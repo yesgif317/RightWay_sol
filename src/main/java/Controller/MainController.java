@@ -189,7 +189,7 @@ public class MainController {
         httpSession.setAttribute("RVList", RiskVOList);
         httpSession.setAttribute("IVList", IssueVOList);
         httpSession.setAttribute("NormalList", normalVOList);
-        httpSession.setAttribute("EventList", EventVOList);
+        httpSession.setAttribute("EvtList", EventVOList);
 
         return "index";
     }

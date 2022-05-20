@@ -3,9 +3,18 @@
 
 <jsp:include page="../../include/header.jsp" flush="true" />
 <jsp:include page="../../include/sidebar.jsp" flush="true" />
-
+<script>
+    window.onload = function onload(){
+        var evt = ${EventList.post_num}
+        if(evt == null)
+        {
+            alter("삭제된 게시글 입니다.")
+            location.href="/event.do"
+        }
+    }
+</script>
 <!-- Content Wrapper -->
-<div id="content-wrapper" class="d-flex flex-column" >
+<div id="content-wrapper" class="d-flex flex-column">
 
     <!-- Main Content -->
     <div id="content">
@@ -161,7 +170,7 @@
                             </a>
                         </div>  <!-- end of button list -->
 
-<%--                        <jsp:include page="../../include/comments.jsp" flush="true" />--%>
+                        <jsp:include page="../../include/comments.jsp" flush="true" />
 
                     </div>
 

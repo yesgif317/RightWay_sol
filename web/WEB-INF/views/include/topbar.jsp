@@ -5,11 +5,6 @@
 
 <!-- Topbar -->
 <nav class="navbar navbar-expand navbar-light bg-white topbar mb-4 static-top shadow">
-
-    <%--    <div class="navbar-custom-menu">--%>
-    <%--        <ul class="nav navbar-nav">--%>
-
-
     <!-- Sidebar Toggle (Topbar) -->
     <button id="sidebarToggleTop" class="btn btn-link d-md-none rounded-circle mr-3">
         <i class="fa fa-bars text-gray-600"></i>
@@ -134,47 +129,6 @@
     </ul>
 
 
-    <%--    <c:if test="${empty login}">--%>
 
-    <%--        <form class="d-none d-sm-inline-block form-inline mr-auto ml-md-3 my-2 my-md-0 mw-100 navbar-search">--%>
-    <%--            <div class="d-sm-flex align-items-center justify-content-between mb-4"></div>--%>
-    <%--            <div class="dropdown no-arrow mb-4">--%>
-    <%--                <button class="btn btn-dark.disabled dropdown-toggle" type="button"--%>
-    <%--                        data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">--%>
-    <%--                    <i class="fa-solid fa-align-justify"> 해당 프로젝트가 없습니다.</i>--%>
-    <%--                </button>--%>
-    <%--                <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">--%>
-    <%--                </div>--%>
-    <%--            </div>--%>
-    <%--        </form>--%>
-
-
-    <%--        <!-- Topbar Navbar -->--%>
-    <%--        <ul class="navbar-nav ml-auto">--%>
-    <%--            <!-- Nav Item - Search Dropdown (Visible Only XS) -->--%>
-    <%--            <li class="nav-item dropdown no-arrow d-sm-none">--%>
-    <%--                <button class="btn btn-dark.disabled dropdown-toggle" type="button"--%>
-    <%--                        data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">--%>
-    <%--                    <i class="fa-solid fa-angles-down"></i>--%>
-    <%--                </button>--%>
-    <%--                <div class="dropdown-menu" aria-labelledby="dropdownMenuButton2">--%>
-    <%--                </div>--%>
-    <%--                </a>--%>
-    <%--            </li>--%>
-
-
-    <%--            <li class="nav-item dropdown no-arrow">--%>
-    <%--                <a href="/login.do" class="nav-link dropdown-toggle text-right" role="button"--%>
-    <%--                   data-toggle="dropdown"--%>
-    <%--                   aria-haspopup="true" aria-expanded="false">--%>
-    <%--                    <span class="hidden-xs"> 회원가입 또는 로그인 </span>--%>
-    <%--                </a>--%>
-    <%--                <!-- Dropdown - User Information -->--%>
-    <%--            </li>--%>
-    <%--        </ul>--%>
-    <%--    </c:if>--%>
-
-    <%--    </ul>--%>
-    <%--    </div>--%>
 </nav>
 <!-- End of Topbar -->
