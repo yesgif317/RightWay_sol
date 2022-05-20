@@ -103,7 +103,7 @@
                 data: formdata,
                 type: "POST",
                 success: function (result) {
-                    alert("Uploaded" + result);
+                    alert("승인되었습니다.");
                     window.location.reload();
                 },
                 error: function (request,error){
