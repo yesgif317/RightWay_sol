@@ -3,36 +3,51 @@ Chart.defaults.global.defaultFontFamily = 'Nunito', '-apple-system,system-ui,Bli
 Chart.defaults.global.defaultFontColor = '#858796';
 
 // Pie Chart Example
-var ctx = document.getElementById("myPieChart");
 
 
- config2=   {
-  type: 'doughnut',
-  data: {
-    labels: ['ready','progress','finish'],
-    datasets: [{
-      data: get_pieresult(piedata_issue),
-      backgroundColor: ['#858796', '#f6c23e', '#1cc88a'],
-      hoverBackgroundColor: ['#5a5c69', '#eeaa00', '#17a673'],
-      hoverBorderColor: "rgba(234, 236, 244, 1)",
-    }],
-  },
-  options: {
-    maintainAspectRatio: false,
-    tooltips: {
-      backgroundColor: "rgb(255,255,255)",
-      bodyFontColor: "#858796",
-      borderColor: '#dddfeb',
-      borderWidth: 1,
-      xPadding: 15,
-      yPadding: 15,
-      displayColors: false,
-      caretPadding: 10,
+
+config2=   {
+    type: 'doughnut',
+    data: {
+
+        labels: ['ready','progress','finish'],
+        datasets: [{
+            data: get_pieresult(piedata_issue),
+            backgroundColor: ['#858796', '#f6c23e', '#1cc88a'],
+            hoverBackgroundColor: ['#5a5c69', '#eeaa00', '#17a673'],
+            hoverBorderColor: "rgba(234, 236, 244, 1)",
+        }],
     },
-    legend: {
-      display: false
+    options: {
+        plugins: {
+            datalabels: {
+                formatter: (value, ctx) => {
+                    let sum = 0;
+                    let dataArr = ctx.chart.data.datasets[0].data;
+                    dataArr.map(data => {
+                        sum += data;
+                    });
+                    let percentage = (value*100 / sum).toFixed(2)+"%";
+                    return percentage;
+                },
+                color: '#fff',
+            }
+        },
+        maintainAspectRatio: false,
+        tooltips: {
+            backgroundColor: "rgb(255,255,255)",
+            bodyFontColor: "#858796",
+            borderColor: '#dddfeb',
+            borderWidth: 1,
+            xPadding: 15,
+            yPadding: 15,
+            displayColors: false,
+            caretPadding: 10,
+        },
+        legend: {
+            display: false
+        },
+        cutoutPercentage: 60,
     },
-    cutoutPercentage: 80,
-  },
 };
-var myPieChart = new Chart(ctx, config2);
+

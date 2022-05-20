@@ -1,6 +1,7 @@
 // Set new default font family and font color to mimic Bootstrap's default styling
 Chart.defaults.global.defaultFontFamily = 'Nunito', '-apple-system,system-ui,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif';
 Chart.defaults.global.defaultFontColor = '#858796';
+Chart.defaults.global.defaultFontSize =14
 
 
 
@@ -31,10 +32,10 @@ function number_format(number, decimals, dec_point, thousands_sep) {
 }
 
 // Bar Chart Example
-var ctx = document.getElementById("myBarChart");
 
 
-var config =    {
+config =    {
+
   type: 'bar',
   data: {
     labels:week_days
@@ -51,7 +52,16 @@ var config =    {
 
   },
   options: {
-    maintainAspectRatio: false,
+    plugins: {
+      datalabels: {
+        anchor: 'end',
+        align: 'top',
+        font: {
+          weight: 'bold',
+          size: 18,
+        }
+      }},
+  maintainAspectRatio: false,
     layout: {
       padding: {
         left: 10,
@@ -119,4 +129,3 @@ var config =    {
   }
   ,
 };
-var myBarChart = new Chart(ctx,config);

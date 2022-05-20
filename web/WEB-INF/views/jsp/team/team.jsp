@@ -51,7 +51,7 @@
                                 <c:forEach items="${TeammemberList}" var="teammember"  >
                                     <c:choose>
                                         <c:when test="${team.team_num eq teammember.team_num}" >
-                                            <c:set var="count" value="${teammember.cus_num+1}" />
+                                            <c:set var="count" value="${teammember.cus_num}" />
                                         </c:when>
                                     </c:choose>
                                 </c:forEach>

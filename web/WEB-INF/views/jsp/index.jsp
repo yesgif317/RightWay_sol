@@ -499,5 +499,13 @@ window.onload=function(){
 <script src="<c:url value="/resources/vendor/chart.js/Chart.min.js"/>"></script>
 
 <!-- Page level custom scripts -->
+<script src="<c:url value="/resources/vendor/chart.js/chartjs-plugin-datalabels.min.js"/>"></script>
 <script src="<c:url value="/resources/js/demo/chart-pie-demo.js"/>"></script>
 <script src="<c:url value="/resources/js/demo/chart-bar-demo.js"/>"></script>
+<script>
+    Chart.plugins.register(ChartDataLabels);
+
+    var myPieChart = new Chart(document.getElementById("myPieChart"), config2);
+    var myBarChart = new Chart(document.getElementById("myBarChart"), config);
+
+</script>

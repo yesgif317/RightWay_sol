@@ -1224,8 +1224,22 @@ public class MainController {
 
     // 팀관리 팀 등록 기능
     @RequestMapping(value = "/team_insert.do", method = RequestMethod.POST)
-    public String team_insert(Model model, TeamVO teamVO) {
+    public String team_insert(Model model, TeamVO teamVO,HttpSession httpSession) {
         String Result = teamService.insertTeam(teamVO);
+        Object object = httpSession.getAttribute("prj_list");
+        TeammemberVO insertVO= new TeammemberVO();
+        List<TeamVO> teamVoList = teamService.selectTeam(object);
+        for(int i = 0; i< teamVoList.size(); i++){
+            System.out.println(teamVO.getTeam_name());
+            System.out.println(teamVoList.get(i).getTeam_name());
+            if(teamVoList.get(i).getTeam_name().equals(teamVO.getTeam_name())){
+                teamVoList.get(i).getTeam_num();
+                insertVO.setTeam_num(teamVoList.get(i).getTeam_num());
+                insertVO.setCus_num(teamVO.getCus_num());
+                System.out.println("123");
+            }
+        }
+        teamService.insertTeammember(insertVO);
         model.addAttribute("TeamList", Result);
         return "redirect:/team.do";
     }
