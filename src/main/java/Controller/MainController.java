@@ -1248,9 +1248,10 @@ public class MainController {
 
     //투입인력관리 page
     @RequestMapping(value = "/usermanagement.do", method = RequestMethod.GET)
-    public String usermanagement(Model model) {
-        //service 클래스에서 Dao 로 접근하여 쿼리 결과값 가져오기
-        List<CustomerVO> customerVOList = customerService.selectAllCustomer();
+    public String usermanagement(HttpSession httpSession, Model model) {
+        Object object = httpSession.getAttribute("prj_list");
+        System.out.println(object);
+        List<CustomerVO> customerVOList = customerService.selectCustomerManagement(object);
         //List<CustomerVO> customerVOList = customerService.selectCustomerT();
         // .jsp 파일로 DB 결과값 전달하기
         model.addAttribute("CustomerList", customerVOList);

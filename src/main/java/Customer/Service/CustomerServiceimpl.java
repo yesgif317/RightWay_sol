@@ -111,4 +111,7 @@ public class CustomerServiceimpl implements CustomerService {
         return dao.updateCustomer(customerVO);
     }
 
+    @Override
+    public List<CustomerVO> selectCustomerManagement(Object object){return dao.selectCustomerManagement(object);}
+
 }

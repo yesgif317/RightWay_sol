@@ -20,11 +20,9 @@
             <!-- DataTales Example -->
             <div class="card shadow mb-4">
                 <div class="card-header py-3">
-                    <form action="/excelform_download.do" method="get">
-                        <button type="submit" class="btn btn-secondary">인원관리 양식 다운로드</button>
+                    <form action="/excelform_download.do" method="get" style="width: auto; height: auto;margin: 0">
+                        <button type="submit" class="btn btn-secondary mt-1">인원관리 양식 다운로드</button>
                     </form>
-
-
                 </div>
                 <div class="card-body">
                     <div class="table-responsive">
@@ -70,13 +68,13 @@
                 <div class="table-responsive">
                     <div>
                         <form id="frmAttachedFiles" class="form-horizontal" enctype="multipart/form-data">
-                            <div class="btn btn-secondary btn-file">
+                            <div class="btn btn-secondary btn-file ml-3">
                                 엑셀업로드
                                 <input type="file" id="btnUploadExcel" name="btnUploadExcel">
                             </div>
                         </form>
                         <form action="/ExcelDownload.do" id="frmExcelDown" method="GET">
-                            <button type=submit" class="btn btn-secondary">전체 인원 목록 다운로드
+                            <button type=submit" class="btn btn-secondary ml-3">전체 인원 목록 다운로드
                             </button>
                         </form>
                     </div>
@@ -87,7 +85,29 @@
     <!-- End of Main Content -->
 
 
-    <jsp:include page="../../include/footer.jsp" flush="true"/>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    <jsp:include page="../../include/footer.jsp" flush="true" />
 
     <jsp:include page="../../include/logoutModal.jsp" flush="true"/>
 

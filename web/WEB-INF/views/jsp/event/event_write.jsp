@@ -83,11 +83,11 @@
                                         </div>
                                         <div class="row form-group">
                                             <div class="col col-md-3 text-right"><label for="evt_pri" class=" form-control-label fa-solid text-gray-800 mt-2"><sup class="text-danger small">*</sup>참가비용</label></div>
-                                            <div class="col-12 col-md-7"><input type="number" id="evt_pri" name="evt_pri" placeholder="참가비용을 입력해주세요." class="form-control" value="${EventList.evt_pri}"></div>
+                                            <div class="col-12 col-md-2"><input type="number" min="0" step="100" id="evt_pri" name="evt_pri" class="form-control" value="${EventList.evt_pri}"></div>
                                         </div>
                                         <div class="row form-group">
                                             <div class="col col-md-3 text-right"><label for="evt_limit" class=" form-control-label fa-solid text-gray-800 mt-2"><sup class="text-danger small">*</sup>정원</label></div>
-                                            <div class="col-12 col-md-7"><input type="number" id="evt_limit" name="evt_limit" placeholder="정원을 입력해주세요." class="form-control" value="${EventList.evt_limit}"></div>
+                                            <div class="col-12 col-md-2"><input type="number" min="0" id="evt_limit" name="evt_limit" class="form-control" value="${EventList.evt_limit}"></div>
                                         </div>
                                         <div class="row form-group">
                                             <div class="col col-md-3 text-right"><label for="evt_acptstart" class=" form-control-label fa-solid text-gray-800 mt-2">접수기간</label></div>
@@ -100,8 +100,7 @@
                                     </form>
                                 </div>
                                 <div class="text-center d-block card-header py-3">
-                                    <%--<button type="submit" style="border:none;">--%>
-                                    <a <%--href="javascript:goSubmit();"--%>  onclick="return chk_form()" class="btn btn-info">
+                                    <a onclick="return chk_form()" class="btn btn-info">
                                                 <span class="icon text-white-50">
                                                        <i class="fas fa-pen"></i>
                                                 </span>
@@ -178,6 +177,29 @@
                                                 </div>
                                             </div>
                                         </div>
+
+                                    <div class="modal fade" id="numberModal" tabindex="-1" role="dialog"
+                                         aria-labelledby="numberModalLabel" aria-hidden="true">
+                                        <div class="modal-dialog" role="document">
+                                            <div class="modal-content">
+                                                <div class="modal-header">
+                                                    <h5 class="modal-title" id="numberModalLabel">입력값확인</h5>
+                                                    <button type="button" class="close" data-dismiss="modal"
+                                                            aria-label="Close">
+                                                        <span aria-hidden="true">&times;</span>
+                                                    </button>
+                                                </div>
+                                                <div class="modal-body">
+                                                    음수값은 입력할 수 없습니다.
+                                                </div>
+                                                <div class="modal-footer">
+                                                    <button class="btn btn-secondary" type="button"
+                                                            data-dismiss="modal">확인
+                                                    </button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
                                     <%--</button>--%>
                                     <a href="event.do" class="btn btn-secondary">
                                                 <span class="icon text-white-50">
@@ -213,6 +235,8 @@
                 $('#dateModal').modal('show')
             } else if(Number(startacpdate) > Number(startdate)){
                 $('#dateModal2').modal('show')
+            } else if(Number(document.getElementById('evt_pri').value) < 0 || Number(document.getElementById('evt_limit').value) < 0){
+                $('#numberModal').modal('show')
             }
             else {
                 <c:choose>
@@ -225,6 +249,8 @@
                 </c:choose>
             }
         }
+
+
     </script>
 
 

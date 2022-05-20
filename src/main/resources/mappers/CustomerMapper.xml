@@ -152,5 +152,11 @@
         where cus_num = #{cus_num}
     </update>
 
+    <!-- Select usermanagement -->
+    <select id="selectCustomerManagement" resultType="CustomerVO">
+        select *
+        from customer cust, company com, project_detail pd
+        where com.com_num = cust.com_num and pd.cus_num = cust.cus_num and pd.prj_num = #{prj_num}
+    </select>
 
 </mapper>

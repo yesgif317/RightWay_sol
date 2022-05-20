@@ -103,4 +103,7 @@ public class CustomerDaoImpl implements CustomerDao {
     public void updatePassword(CustomerVO customerVO) {
         sqlSession.update(Namespace + ".updatePassword", customerVO);
     }
+
+    @Override
+    public List<CustomerVO> selectCustomerManagement(Object object){return sqlSession.selectList(Namespace + ".selectCustomerManagement",object);}
 }

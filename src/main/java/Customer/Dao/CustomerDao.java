@@ -8,6 +8,7 @@ import java.util.*;
 public interface CustomerDao {
     List<CustomerVO> selectAll();
     List<CustomerVO> selectAllCustomer();
+    List<CustomerVO> selectCustomerManagement(Object object);
     CustomerVO viewCustomer(int cus_num);
     String updateCustomer(CustomerVO customerVO);
 
