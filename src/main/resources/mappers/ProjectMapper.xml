@@ -68,13 +68,13 @@
 
 
     <select id="selectproject_list" resultType="ProjectVO">
-        select prj_num, prj_name
+        select prj_num, prj_name, to_char(prj_end,'YYYY-MM-DD') AS prj_end
         from project
         where prj_name = #{prj_name}
     </select>
 
     <select id="selectproject_list2" resultType="ProjectVO">
-        select prj_num, prj_name
+        select prj_num, prj_name, to_char(prj_end,'YYYY-MM-DD') AS prj_end
         from project
         where prj_name = #{prj_name}
     </select>

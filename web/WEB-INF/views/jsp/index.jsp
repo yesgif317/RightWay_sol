@@ -222,31 +222,20 @@ window.onload=function(){
             <!-- Content Row -->
 
             <div class="row">
-                <!-- Earnings (Monthly) Card Example 1-->
-                <div class="col-xl-3 col-md-6 mb-4">
-                    <div class="card border-bottom-info shadow h-100 py-2">
-                        <div class="card-body">
-                            <div class="row no-gutters align-items-center">
-                                <div class="col mr-2">
-                                    <div class="text-xs font-weight-bold text-info text-uppercase mb-1">프로젝트 참여인원 수
-                                    </div>
-                                    <div class="h5 mb-0 font-weight-bold text-gray-800"></div>
-                                </div>
-                                <div class="col-auto">
-                                    <i class="fa-solid fa-bell text-gray-300"></i>
-                                </div></div>
-                        </div>
-                    </div>
-                </div>
                 <!-- Pending Requests Card Example 2-->
-                <div class="col-xl-3 col-md-6 mb-4">
+                <div class="col-xl-4 col-md-6 mb-4">
                     <div class="card border-bottom-success shadow h-100 py-2">
                         <div class="card-body">
                             <div class="row no-gutters align-items-center">
                                 <div class="col mr-2">
                                     <div class="text-xs font-weight-bold text-success text-uppercase mb-1">프로젝트 종료일
                                     </div>
-                                    <div class="h5 mb-0 font-weight-bold text-gray-800">${prj_list.prj_end}</div>
+                                    <div class="h5 mb-0 font-weight-bold text-gray-800">
+                                        <c:if test = "${prj_list.prj_end eq null}">
+                                            미정
+                                        </c:if>
+                                        ${prj_list.prj_end}
+                                    </div>
                                 </div>
                                 <div class="col-auto">
                                     <i class="fa-solid fa-calendar text-gray-300"></i>
@@ -256,7 +245,7 @@ window.onload=function(){
                     </div>
                 </div>
                 <!-- Earnings (Monthly) Card Example 3-->
-                <div class="col-xl-3 col-md-6 mb-4">
+                <div class="col-xl-4 col-md-6 mb-4">
                     <div class="card border-bottom-warning shadow h-100 py-2">
                         <div class="card-body">
                             <div class="row no-gutters align-items-center">
@@ -274,7 +263,7 @@ window.onload=function(){
                     </div>
                 </div>
                 <!-- Earnings (Monthly) Card Example4 -->
-                <div class="col-xl-3 col-md-6 mb-4">
+                <div class="col-xl-4 col-md-6 mb-4">
                     <div class="card border-bottom-danger shadow h-100 py-2">
                         <div class="card-body">
                             <div class="row no-gutters align-items-center">
@@ -449,8 +438,8 @@ window.onload=function(){
                             <div class="row no-gutters align-items-center">
                                 <div class="col mr-2">
                                     <c:choose>
-                                        <c:when test="${EventList != null}">
-                                            <c:forEach items="${EventList}" var="post" step="1" begin="0" end="4">
+                                        <c:when test="${EvtList != null}">
+                                            <c:forEach items="${EvtList}" var="post" step="1" begin="0" end="4">
                                                 <a class="dropdown-item-text h5 mb-0 font-weight-bold text-gray-800"
                                                    href="/event_content.do?post_num=${post.post_num}">- ${post.evt_tit}</a>
                                             </c:forEach>

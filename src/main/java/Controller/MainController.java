@@ -6,6 +6,7 @@ import Comment.Dto.CommentVO;
 import Comment.Service.CommentService;
 import Commons.Excel.Dto.ExcelVO;
 import Commons.Excel.Service.ExcelService;
+import Commons.ScriptUtil.ScriptUtil;
 import Company.Dto.CompanyVO;
 import Company.Service.CompanyService;
 import Customer.Dto.CustomerVO;
@@ -49,10 +50,7 @@ import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.IOException;
-import java.io.OutputStream;
+import java.io.*;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.Iterator;
@@ -145,6 +143,8 @@ public class MainController {
     public class Scus extends Selcus {
     }
 
+
+
     // 메인 페이지 이동 및 차트 데이터 가져오기
     @RequestMapping(value = "/index.do", method = RequestMethod.GET)
     public String main(Model model, HttpServletRequest request,
@@ -175,6 +175,7 @@ public class MainController {
                 System.out.println(selectproject_list + "선택되어있지않은경우");
             } else {
                 System.out.println("do not have project");
+                httpSession.setAttribute("prj_list", null);
                 return "redirect:/project_write.do?prj_num=0&update=0";
             }
         }
@@ -391,8 +392,16 @@ public class MainController {
 
     //산출물 작성글 보기
     @RequestMapping(value = "/outputs_content.do", method = RequestMethod.GET)
-    public String outputs_content(@RequestParam("post_num") int no, Model model, HttpServletRequest request) {
+    public String outputs_content(@RequestParam("post_num") int no, Model model, HttpServletRequest request,HttpServletResponse response) {
         NormalVO Result = normalService.viewPost(no);
+        if(Result == null){
+            try {
+                ScriptUtil.alertAndMovePage(response, "존재하지 않는 게시글 입니다.", "/outputs.do");
+            }
+            catch (IOException ex){
+                System.out.println(ex);
+            }
+        }
         model.addAttribute("PostList", Result);
         // comment 추가 위한 2줄
         AddCmt addcmt = new Addd();
@@ -480,8 +489,17 @@ public class MainController {
     }
 
     @RequestMapping(value = "/notice_content.do", method = RequestMethod.GET)
-    public String notice_content(@RequestParam("post_num") int no, Model model, HttpServletRequest request) {
+    public String notice_content(@RequestParam("post_num") int no, Model model, HttpServletRequest request,HttpServletResponse response) {
         NormalVO Result = normalService.viewPost(no);
+        if(Result == null){
+            try {
+                ScriptUtil.alertAndMovePage(response, "존재하지 않는 게시글 입니다.", "/notice.do");
+            }
+            catch (IOException ex){
+                System.out.println(ex);
+            }
+        }
+
         model.addAttribute("PostList", Result);
         // comment 추가 위한 2줄
         AddCmt addcmt = new Addd();
@@ -569,8 +587,18 @@ public class MainController {
 
     //요청사항 작성글 보기
     @RequestMapping(value = "/request_content.do", method = RequestMethod.GET)
-    public String request_content(@RequestParam("post_num") int no, Model model, HttpServletRequest request) {
+    public String request_content(@RequestParam("post_num") int no, Model model, HttpServletRequest request
+            ,HttpServletResponse response) {
         NormalVO Result = normalService.viewPost(no);
+        if(Result == null){
+            try {
+                ScriptUtil.alertAndMovePage(response, "존재하지 않는 게시글 입니다.", "/outputs.do");
+            }
+            catch (IOException ex){
+                System.out.println(ex);
+            }
+        }
+
         model.addAttribute("PostList", Result);
 
         // comment 추가 위한 2줄
@@ -632,8 +660,17 @@ public class MainController {
     //issue 상세 페이지 이동
     @RequestMapping(value = "/issue_content.do", method = RequestMethod.GET)
     public String issue_content(@RequestParam("post_num") int post_num, Model model,
-                                HttpServletRequest request) {
+                                HttpServletRequest request, HttpServletResponse response) {
         RiskVO Result = riskService.viewRisk(post_num);
+        if(Result == null){
+            try {
+                ScriptUtil.alertAndMovePage(response, "존재하지 않는 게시글 입니다.", "/issue.do");
+            }
+            catch (IOException ex){
+                System.out.println(ex);
+            }
+        }
+
         model.addAttribute("RiskList", Result);
 
         // comment 추가 위한 2줄
@@ -708,8 +745,18 @@ public class MainController {
 
     //회의록 작성글 보기
     @RequestMapping(value = "/meetingrecord_content.do", method = RequestMethod.GET)
-    public String meetingrecord_content(@RequestParam("post_num") int no, Model model, HttpServletRequest request) {
+    public String meetingrecord_content(@RequestParam("post_num") int no, Model model, HttpServletRequest request, HttpServletResponse response) {
         NormalVO Result = normalService.viewPost(no);
+        if(Result == null){
+            try {
+                ScriptUtil.alertAndMovePage(response, "존재하지 않는 게시글 입니다.", "/meetingrecord.do");
+            }
+            catch (IOException ex){
+                System.out.println(ex);
+            }
+        }
+
+
         model.addAttribute("PostList", Result);
         // comment 추가 위한 2줄
         AddCmt addcmt = new Addd();
@@ -782,8 +829,17 @@ public class MainController {
 
     //정기보고 작성글 보기
     @RequestMapping(value = "/regularreport_content.do", method = RequestMethod.GET)
-    public String regularreport_content(@RequestParam("post_num") int no, Model model, HttpServletRequest request) {
+    public String regularreport_content(@RequestParam("post_num") int no, Model model, HttpServletRequest request,HttpServletResponse response) {
         NormalVO Result = normalService.viewPost(no);
+        if(Result == null){
+            try {
+                ScriptUtil.alertAndMovePage(response, "존재하지 않는 게시글 입니다.", "/regularreport.do");
+            }
+            catch (IOException ex){
+                System.out.println(ex);
+            }
+        }
+
         model.addAttribute("PostList", Result);
         // comment 추가 위한 2줄
         AddCmt addcmt = new Addd();
@@ -861,8 +917,17 @@ public class MainController {
 
     //danger 상세 페이지 이동
     @RequestMapping(value = "/danger_content.do", method = RequestMethod.GET)
-    public String danger_content(@RequestParam("post_num") int post_num, Model model, HttpServletRequest request) {
+    public String danger_content(@RequestParam("post_num") int post_num, Model model, HttpServletRequest request,HttpServletResponse response) {
         RiskVO Result = riskService.viewRisk(post_num);
+        if(Result == null){
+            try {
+                ScriptUtil.alertAndMovePage(response, "존재하지 않는 게시글 입니다.", "/danger.do");
+            }
+            catch (IOException ex){
+                System.out.println(ex);
+            }
+        }
+
         model.addAttribute("RiskList", Result);
 
         // comment 추가 위한 2줄
@@ -948,8 +1013,17 @@ public class MainController {
 
     //행사관리 상세 페이지 이동
     @RequestMapping(value = "/event_content.do", method = RequestMethod.GET)
-    public String event_content(@RequestParam("post_num") int post_num, Model model, HttpServletRequest request) {
+    public String event_content(@RequestParam("post_num") int post_num, Model model, HttpServletRequest request,HttpServletResponse response) {
         EventVO Result = eventService.viewEvent(post_num);
+        if(Result == null){
+            try {
+                ScriptUtil.alertAndMovePage(response, "존재하지 않는 게시글 입니다.", "/event.do");
+            }
+            catch (IOException ex){
+                System.out.println(ex);
+            }
+        }
+
         model.addAttribute("EventList", Result);
 
         // comment 추가 위한 2줄
@@ -1006,8 +1080,18 @@ public class MainController {
 
     //company 상세 페이지 이동
     @RequestMapping(value = "/company_content.do", method = RequestMethod.GET)
-    public String company_content(@RequestParam("com_num") int com_num, Model model) {
+    public String company_content(@RequestParam("com_num") int com_num, Model model,HttpServletResponse response) {
         CompanyVO Result = companyService.viewCompany(com_num);
+        if(Result == null){
+            try {
+                ScriptUtil.alertAndMovePage(response, "존재하지 않는 게시글 입니다.", "/company.do");
+            }
+            catch (IOException ex){
+                System.out.println(ex);
+            }
+        }
+
+
         model.addAttribute("CompanyList", Result);
         return "company/company_content";
     }
@@ -1100,8 +1184,17 @@ public class MainController {
 
     //project 상세 페이지 이동
     @RequestMapping(value = "/project_content.do", method = RequestMethod.GET)
-    public String project_content(@RequestParam("prj_num") int prj_num, Model model) {
+    public String project_content(@RequestParam("prj_num") int prj_num, Model model,HttpServletResponse response) {
         List<ProjectDetailVO> projectDetailVOList = projectService.selectProject_detail(prj_num);
+        if(projectDetailVOList == null){
+            try {
+                ScriptUtil.alertAndMovePage(response, "프로젝트 구성원이 존재하지 않습니다.", "/project.do");
+            }
+            catch (IOException ex){
+                System.out.println(ex);
+            }
+        }
+
         model.addAttribute("Project_detailList", projectDetailVOList);
         ProjectVO Result = projectService.viewProject(prj_num);
         model.addAttribute("ProjectList1", Result);
@@ -1196,8 +1289,17 @@ public class MainController {
 
     //팀관리 작성글 보기
     @RequestMapping(value = "/team_content.do", method = RequestMethod.GET)
-    public String team_content(@RequestParam("team_num") int no, Model model) {
+    public String team_content(@RequestParam("team_num") int no, Model model,HttpServletResponse response) {
         TeamVO teamVoList = teamService.viewTeam(no);
+        if(teamVoList == null){
+            try {
+                ScriptUtil.alertAndMovePage(response, "팀원이 존재하지 않습니다.", "/team.do");
+            }
+            catch (IOException ex){
+                System.out.println(ex);
+            }
+        }
+
         model.addAttribute("TeamList", teamVoList);
         List<TeammemberVO> Result = teamService.viewTeammember(no);
         model.addAttribute("TeammemberList", Result);
@@ -1275,8 +1377,9 @@ public class MainController {
 
     //투입인력관리 상세 페이지 이동
     @RequestMapping(value = "/usermanagement_content.do", method = RequestMethod.GET)
-    public String usermanagement_content(@RequestParam("cus_num") int cus_num, Model model) {
+    public String usermanagement_content(@RequestParam("cus_num") int cus_num, Model model,HttpServletResponse response) {
         CustomerVO customerVO = customerService.viewCustomer(cus_num);
+
         model.addAttribute("CustomerList", customerVO);
         return "usermanagement/usermanagement_content";
     }
@@ -1288,74 +1391,6 @@ public class MainController {
         model.addAttribute("CustomerList", Result);
         return "redirect:/usermanagement.do";
     }
-
-    //테이블 페이지 이동
-    @RequestMapping(value = "/tables.do", method = RequestMethod.GET)
-    public String tables(Model model) {
-
-        //service 클래스에서 Dao 로 접근하여 쿼리 결과값 가져오기
-        List<BoardVO> boardVoList = service.selectAll();
-
-        // .jsp 파일로 DB 결과값 전달하기
-        model.addAttribute("BoardList", boardVoList);
-
-        return "redirect:/outputs.do";
-    }
-
-    //테이블 글쓰기 페이지 이동
-    @RequestMapping(value = "/move_tableswrite.do", method = RequestMethod.GET)
-    public String tableswrite() {
-        return "tableswrite";
-    }
-
-    //글 작성 버튼 작동
-    @RequestMapping(value = "/tableswrite.do", method = RequestMethod.POST)
-    public String tableswrite(Model model, BoardVO boardVO) {
-        //
-        String Result = service.insertBoard(boardVO);
-
-        //service 클래스에서 Dao 로 접근하여 쿼리 결과값 가져오기
-        List<BoardVO> boardVoList = service.selectAll();
-
-        // .jsp 파일로 DB 결과값 전달하기
-        model.addAttribute("BoardList", Result);
-
-        return "tables";
-    }
-
-    // 글 수정 페이지 이동
-    @RequestMapping(value = "/move_update.do", method = RequestMethod.GET)
-    public String update(Model model, HttpServletRequest request) {
-        String id = request.getParameter("id");
-        //BoardVO result = service.selectboard();
-        //model.addAttribute("BoardList", boardVoList);
-        return "" +
-                "update";
-    }
-
-    //글 수정 버튼 작동
-    @RequestMapping(value = "/update.do", method = RequestMethod.POST)
-    public String update(Model model, BoardVO boardVO) {
-
-
-        //
-        String Result = service.updateBoard(boardVO);
-
-        //service 클래스에서 Dao 로 접근하여 쿼리 결과값 가져오기
-        List<BoardVO> boardVoList = service.selectAll();
-
-        // .jsp 파일로 DB 결과값 전달하기
-        model.addAttribute("BoardList", boardVoList);
-
-        return "tables";
-    }
-
-    // blank page
-    @RequestMapping(value = "/blank.do", method = RequestMethod.GET)
-    public String blank() {
-        return "blank";
-    }
-
 
     //comments 전체 목록 management
     @RequestMapping(value = "/comments.do", method = RequestMethod.GET)
@@ -1513,8 +1548,17 @@ public class MainController {
 
     //자료실
     @RequestMapping(value = "/datacenter_content.do", method = RequestMethod.GET)
-    public String datacenter_content(@RequestParam("post_num") int no, Model model, HttpServletRequest request) {
+    public String datacenter_content(@RequestParam("post_num") int no, Model model, HttpServletRequest request,HttpServletResponse response) {
         NormalVO Result = normalService.viewPost(no);
+        if(Result == null){
+            try {
+                ScriptUtil.alertAndMovePage(response, "존재하지 않는 게시글 입니다.", "/datacenter.do");
+            }
+            catch (IOException ex){
+                System.out.println(ex);
+            }
+        }
+
         model.addAttribute("PostList", Result);
 
         // comment 추가 위한 2줄
