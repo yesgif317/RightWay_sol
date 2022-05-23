@@ -47,7 +47,7 @@ config2=   {
         legend: {
             display: false
         },
-        cutoutPercentage: 60,
+        cutoutPercentage: 50,
     },
 };
 

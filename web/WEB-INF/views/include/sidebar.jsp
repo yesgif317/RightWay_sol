@@ -13,6 +13,10 @@
             transition-duration: 1s;
         }
     }
+    span {
+        /*color:darkgray;*/
+        font-weight: 400;
+    }
 
 
 
@@ -53,11 +57,8 @@
                 <a class="collapse-item font-weight-bold text-gray-600" href="outputs.do">산출물</a>
                 <a class="collapse-item font-weight-bold text-gray-600" href="meetingrecord.do">회의록</a>
                 <a class="collapse-item font-weight-bold text-gray-600" href="regularreport.do">정기보고</a>
-                <a class="collapse-item font-weight-bold text-gray-600" href="team.do">팀관리</a>
                 <a class="collapse-item font-weight-bold text-gray-600" href="event.do">행사관리</a>
-                <a class="collapse-item font-weight-bold text-gray-600" href="company.do">업체관리</a>
                 <a class="collapse-item font-weight-bold text-gray-600" href="project.do">프로젝트관리</a>
-                <a class="collapse-item font-weight-bold text-gray-600" href="adminpermission.do">관리자승인</a>
             </div>
         </div>
     </li>
@@ -85,7 +86,10 @@
             <div id="collapse3" class="collapse" aria-labelledby="headingUtilities" data-parent="#accordionSidebar">
                 <div class="bg-white py-2 collapse-inner rounded">
                     <h6 class="collapse-header">투입인력</h6>
-                    <a class="collapse-item font-weight-bold text-gray-600" href="usermanagement.do">투입인력관리</a>
+                    <a class="collapse-item font-weight-bold text-gray-600" href="usermanagement.do">인원관리</a>
+                    <a class="collapse-item font-weight-bold text-gray-600" href="team.do">팀관리</a>
+                    <a class="collapse-item font-weight-bold text-gray-600" href="company.do">업체관리</a>
+                    <a class="collapse-item font-weight-bold text-gray-600" href="adminpermission.do">관리자승인</a>
 <%--                    <a class="collapse-item font-weight-bold text-gray-600" href="userreport.do">투입인력보고</a>--%>
                 </div>
             </div>
