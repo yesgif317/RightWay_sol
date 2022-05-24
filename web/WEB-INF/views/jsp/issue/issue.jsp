@@ -44,7 +44,7 @@
                             <tbody>
                             <c:forEach items="${RiskList}" var="risk" varStatus="status">
                                 <tr onClick="location.href='issue_content.do?post_num=${risk.post_num}'"
-                                    onmouseover="this.style.fontSize='18 ';this.style.color='black'"  onmouseout="this.style.fontSize='16';this.style.color='#858796'">
+                                    onmouseover="this.style.fontWeight='bold';this.style.color='black'"  onmouseout=" this.style.fontWeight='';this.style.color='#858796'">
                                     <td>${status.count}</td>
                                     <td>${risk.risk_tit}</td>
                                     <td>

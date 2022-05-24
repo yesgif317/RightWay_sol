@@ -12,6 +12,7 @@
 <jsp:include page="../include/sidebar.jsp" flush="true"/>
 
 <script>
+
     //일주일 전 날짜 구하는 함수
     function lastWeek() {
         var d = new Date();
@@ -84,7 +85,7 @@
     mydata_issue.push('${issue.risk_tit}');
     </c:if>
     <c:if test="${issue.risk_imp eq 'Emergency'}">
-    emergencydata_issue.push('${risk.risk_tit}');
+    emergencydata_issue.push('${issue.risk_tit}');
     </c:if>
     </c:forEach>
     // 바차트에 쓸 결과값 만들어주는 함수
@@ -203,23 +204,21 @@ function get_pgsresult(array,benchmark) {
 
 
 var mydata=mydata_risk.concat(mydata_issue);
-var emergencydata=emergencydata_risk.concat(emergencydata_issue);
 window.onload=function(){
     var pgs_div_location = document.getElementById('pgs_div');
-    if(mydata.length>0){
+    if(mydata.length!=0){
         pgs_div_location.innerHTML=mydata[0]+' 외 총 '+ mydata.length+'건';
     }
     else{
         pgs_div_location.innerHTML=mydata.length+'건';
     }
-    pgs_div_location.innerHTML=mydata[0]+' 외 총 '+ mydata.length+'건';
 
     var imp_div_location = document.getElementById('imp_div');
-    if(emergencydata.length>0){
-        imp_div_location.innerHTML=emergencydata[0]+' 외 총 '+ emergencydata.length+'건';
+    if(emergencydata_issue.length!=0){
+        imp_div_location.innerHTML=emergencydata_issue[0]+' 외 총 '+ emergencydata_issue.length+'건';
     }
     else{
-        imp_div_location.innerHTML=emergencydata.length+'건';
+        imp_div_location.innerHTML=emergencydata_issue.length+'건';
     }
 }
 </script>
@@ -245,11 +244,12 @@ window.onload=function(){
                                 <div class="col mr-2">
                                     <div class="text-xs font-weight-bold text-success text-uppercase mb-1">프로젝트 종료일
                                     </div>
-                                    <div class="h5 mb-0 font-weight-bold text-gray-800">
+                                    <div class="h5 mb-0 font-weight-bold text-gray-800" >
                                         <c:if test = "${prj_list.prj_end eq null}">
                                             미정
                                         </c:if>
                                         ${prj_list.prj_end}
+                                        <div id="div_prjend"> </div>
                                     </div>
                                 </div>
                                 <div class="col-auto">
@@ -260,9 +260,9 @@ window.onload=function(){
                     </div>
                 </div>
                 <!-- Earnings (Monthly) Card Example 3-->
-                <div class="col-xl-4 col-md-6 mb-4">
+                <div class="col-xl-4 col-md-6 mb-4" OnClick="location.href ='/danger.do'" style="cursor:pointer;">
                     <div class="card border-bottom-warning shadow h-100 py-2">
-                        <div class="card-body">
+                        <div class="card-body"  >
                             <div class="row no-gutters align-items-center">
                                 <div class="col mr-2">
                                     <div  class="text-xs font-weight-bold text-warning text-uppercase mb-1">내게 할당된 진행중
@@ -278,7 +278,7 @@ window.onload=function(){
                     </div>
                 </div>
                 <!-- Earnings (Monthly) Card Example4 -->
-                <div class="col-xl-4 col-md-6 mb-4">
+                <div class="col-xl-4 col-md-6 mb-4" OnClick="location.href ='issue.do'" style="cursor:pointer;">
                     <div class="card border-bottom-danger shadow h-100 py-2">
                         <div class="card-body">
                             <div class="row no-gutters align-items-center">

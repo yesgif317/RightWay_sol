@@ -49,7 +49,7 @@
 
                             <tbody>
                             <c:forEach items="${CustomerList}" var="customer" varStatus="status">
-                                <tr onmouseover="this.style.fontSize='18 ';this.style.color='black'"  onmouseout="this.style.fontSize='16';this.style.color='#858796'">
+                                <tr onmouseover="this.style.fontWeight='bold';this.style.color='black'"  onmouseout=" this.style.fontWeight='';this.style.color='#858796'">
                                     <td>
                                         <input type="checkbox" name="checkbox" id="checkbox${status.count}">
                                     </td>

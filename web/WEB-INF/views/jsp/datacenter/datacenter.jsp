@@ -54,7 +54,7 @@
                                 <c:if test="${post.prj_num eq prj_list.prj_num}">
                                 <c:if test="${post.cate eq 13}">
                                 <tr onClick="location.href='datacenter_content.do?post_num=${post.post_num}'"
-                                    onmouseover="this.style.fontSize='18 ';this.style.color='black'"  onmouseout="this.style.fontSize='16';this.style.color='#858796'">
+                                    onmouseover="this.style.fontWeight='bold';this.style.color='black'"  onmouseout=" this.style.fontWeight='';this.style.color='#858796'">
                                     <td>${status.count}</td>
                                     <td>${post.nor_tit}</td>
                                     <td>${post.cus_name}</td>

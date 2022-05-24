@@ -4,6 +4,9 @@
 <jsp:include page="../../include/header.jsp" flush="true" />
 <jsp:include page="../../include/sidebar.jsp" flush="true" />
 <script>
+    function delete_form () {
+        document.getElementById('deleteform').submit();
+    }
     window.onload = function onload(){
         var evt = ${EventList.post_num}
         if(evt == null)
@@ -24,7 +27,10 @@
 
             <div class="row">
                 <div class="col-lg-12">
-
+                    <form method="post" action="/event_delete.do" id="deleteform">
+                        <input type="hidden" name="_method" value="delete" />
+                        <input type="hidden" name="post_num" value="${EventList.post_num}" />
+                        <input type="hidden" name="cate" value=5 />
                     <!-- Collapsable Card Example -->
                     <div class="card shadow mb-4">
                         <!-- Card Header - Accordion -->
@@ -154,7 +160,7 @@
                                                 게시물을 정말 삭제하시겠습니까?
                                             </div>
                                             <div class="modal-footer">
-                                                <button onclick = "location.href = 'event_delete.do?post_num=${EventList.post_num}'" type="button" class="btn btn-danger">삭제하기</button>
+                                                <button onclick="return delete_form()" type="button" class="btn btn-danger">삭제하기</button>
                                                 <button type="button" class="btn btn-secondary" data-dismiss="modal">취소하기</button>
                                             </div>
                                         </div>
@@ -173,7 +179,7 @@
                         <jsp:include page="../../include/comments.jsp" flush="true" />
 
                     </div>
-
+                    </form>
                 </div>
 
             </div>

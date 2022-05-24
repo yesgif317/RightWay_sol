@@ -722,11 +722,26 @@ public class MainController {
         return "redirect:/issue.do";
     }
 
-    //issue delete
-    @RequestMapping(value = "/issue_delete.do", method = RequestMethod.GET)
-    public String issue_delete(@RequestParam("post_num") int post_num) {
-        riskService.delete(post_num);
-        return "redirect:/issue.do";
+    //위험/이슈 작성글 삭제
+    @RequestMapping(value = "/issue_delete.do", method = RequestMethod.DELETE)
+    public String issue_delete(@RequestParam("post_num") int no,@RequestParam("cate") int cate) {
+        List<CommentVO> commentallVO=commentService.selectCommentAll();
+        for(int i=0;i<commentallVO.size();i++){
+            if(commentallVO.get(i).getCate()==cate){
+                if(commentallVO.get(i).getPost_num()==no){
+                    re_commentService.deleteRe_CommentAll(commentallVO.get(i).getCmt_num());
+                    commentService.deleteComment(commentallVO.get(i).getCmt_num());
+                }
+            }
+        }
+        riskService.delete(no);
+        switch (cate) {
+            case 10:
+                return "redirect:/issue.do";
+            case 9:
+                return "redirect:/danger.do";
+        }
+        return "redirect:/index.do";
     }
 
     //issue update
@@ -968,12 +983,7 @@ public class MainController {
         return "redirect:/danger.do";
     }
 
-    //danger delete
-    @RequestMapping(value = "/danger_delete.do", method = RequestMethod.GET)
-    public String danger_delete(@RequestParam("post_num") int post_num) {
-        riskService.delete(post_num);
-        return "redirect:/danger.do";
-    }
+
 
     //danger update
     @RequestMapping(value = "/danger_update.do", method = RequestMethod.POST)
@@ -1065,9 +1075,18 @@ public class MainController {
     }
 
     //행사관리 delete
-    @RequestMapping(value = "/event_delete.do", method = RequestMethod.GET)
-    public String event_delete(@RequestParam("post_num") int post_num) {
-        eventService.delete(post_num);
+    @RequestMapping(value = "/event_delete.do", method = RequestMethod.DELETE)
+    public String event_delete(@RequestParam("post_num") int no) {
+        List<CommentVO> commentallVO=commentService.selectCommentAll();
+        for(int i=0;i<commentallVO.size();i++){
+            if(commentallVO.get(i).getCate()==5){
+                if(commentallVO.get(i).getPost_num()==no){
+                    re_commentService.deleteRe_CommentAll(commentallVO.get(i).getCmt_num());
+                    commentService.deleteComment(commentallVO.get(i).getCmt_num());
+                }
+            }
+        }
+        eventService.delete(no);
         return "redirect:/event.do";
     }
 
@@ -1249,11 +1268,12 @@ public class MainController {
         projectService.deleteAllProject_detail(prj_num);
         projectService.delete(prj_num);
         //PL 권한부여
-        List<ProjectVO> pl_num = projectService.selectPL();
+        /*List<ProjectVO> pl_num = projectService.selectPL();
         customerService.resetPLState();
         for (int i=0; i < pl_num.size();i++){
             customerService.updatePLState(pl_num.get(i).getCus_num());
-        }
+        }*/
+
         return "redirect:/project.do";
     }
 
