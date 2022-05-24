@@ -5,7 +5,11 @@
 
 <jsp:include page="../../include/header.jsp" flush="true"/>
 <jsp:include page="../../include/sidebar.jsp" flush="true"/>
-
+<script>
+    function delete_form () {
+        document.getElementById('deleteform').submit();
+    }
+</script>
 <!-- Content Wrapper -->
 <div id="content-wrapper" class="d-flex flex-column">
 
@@ -17,7 +21,10 @@
         <div class="container-fluid">
             <div class="row">
                 <div class="col-lg-12">
-
+                    <form method="post" action="/post_delete.do" id="deleteform">
+                        <input type="hidden" name="_method" value="delete" />
+                        <input type="hidden" name="post_num" value="${PostList.post_num}" />
+                        <input type="hidden" name="cate" value=1 />
                     <!-- Collapsable Card Example -->
                     <div class="card shadow mb-4">
                         <!-- Card Header - Accordion -->
@@ -93,7 +100,7 @@
                                                 게시물을 정말 삭제하시겠습니까?
                                             </div>
                                             <div class="modal-footer">
-                                                <button onclick="location.href = 'outputs_delete.do?post_num=${PostList.post_num}' "
+                                                <button onclick="return delete_form()"
                                                         type="button" class="btn btn-danger">삭제하기
                                                 </button>
                                                 <button type="button" class="btn btn-secondary" data-dismiss="modal">
@@ -118,7 +125,7 @@
                         <jsp:include page="../../include/comments.jsp" flush="true" />
 
                     </div>
-
+                    </form>
                 </div>
 
             </div>

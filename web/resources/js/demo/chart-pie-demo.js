@@ -27,7 +27,10 @@ config2=   {
                     dataArr.map(data => {
                         sum += data;
                     });
-                    let percentage = (value*100 / sum).toFixed(2)+"%";
+                    percentage = null;
+                    if(value>>0){
+                        percentage = (value*100 / sum).toFixed(2)+"%";
+                    }
                     return percentage;
                 },
                 color: '#fff',

@@ -60,15 +60,32 @@
     //위험,이슈 값 배열로 가져오기
     var bardata_risk = [];
     var piedata_risk = [];
+    var mydata_risk = [];
+    var emergencydata_risk = [];
     var bardata_issue = [];
     var piedata_issue = [];
+    var mydata_issue = [];
+    var emergencydata_issue = [];
     <c:forEach items="${RVList}" var="risk">
     bardata_risk.push('${risk.risk_reg}');
     piedata_risk.push('${risk.risk_pgs}');
+    <c:if test="${risk.risk_mng eq login.cus_num}">
+    mydata_risk.push('${risk.risk_tit}');
+    </c:if>
+    <c:if test="${risk.risk_imp eq 'Emergency'}">
+    emergencydata_risk.push('${risk.risk_tit}');
+    </c:if>
     </c:forEach>
+
     <c:forEach items="${IVList}" var="issue">
     bardata_issue.push('${issue.risk_reg}');
-    piedata_issue.push('${issue.risk_pgs}');
+    piedata_issue.push('${issue.risk_pgs}')
+    <c:if test="${issue.risk_mng eq login.cus_num}">
+    mydata_issue.push('${issue.risk_tit}');
+    </c:if>
+    <c:if test="${issue.risk_imp eq 'Emergency'}">
+    emergencydata_issue.push('${risk.risk_tit}');
+    </c:if>
     </c:forEach>
     // 바차트에 쓸 결과값 만들어주는 함수
     function get_barresult(term, data) {
@@ -79,6 +96,9 @@
                 if (term[i] == data[j]) {
                     count[i] += 1;
                 }
+            }
+            if(count[i]==0){
+                count[i]=null;
             }
         }
         return count
@@ -181,31 +201,26 @@ function get_pgsresult(array,benchmark) {
     return count
 }
 
-var pgsdata_risk = [];
-var pgsdata_issue = [];
-var impdata_risk = [];
-var impdata_issue = [];
-<c:forEach items="${RVList}" var="risk">
-<c:if test="${risk.risk_mng eq login.cus_num}">
 
-pgsdata_risk.push('${risk.risk_pgs}');
-impdata_risk.push('${risk.risk_imp}');
-</c:if>
-</c:forEach>
-<c:forEach items="${IVList}" var="issue">
-<c:if test="${issue.risk_mng eq login.cus_num}">
-pgsdata_issue.push('${issue.risk_pgs}');
-impdata_issue.push('${issue.risk_imp}');
-</c:if>
-</c:forEach>
-
+var mydata=mydata_risk.concat(mydata_issue);
+var emergencydata=emergencydata_risk.concat(emergencydata_issue);
 window.onload=function(){
-    var pgs= get_pgsresult(pgsdata_risk,"진행 중")+get_pgsresult(pgsdata_issue,"진행 중")
     var pgs_div_location = document.getElementById('pgs_div');
-    pgs_div_location.innerHTML=pgs+'건';
-    var imp= get_pgsresult(impdata_risk,"High")+get_pgsresult(impdata_issue,"Emergency")
+    if(mydata.length>0){
+        pgs_div_location.innerHTML=mydata[0]+' 외 총 '+ mydata.length+'건';
+    }
+    else{
+        pgs_div_location.innerHTML=mydata.length+'건';
+    }
+    pgs_div_location.innerHTML=mydata[0]+' 외 총 '+ mydata.length+'건';
+
     var imp_div_location = document.getElementById('imp_div');
-    imp_div_location.innerHTML=imp+'건';
+    if(emergencydata.length>0){
+        imp_div_location.innerHTML=emergencydata[0]+' 외 총 '+ emergencydata.length+'건';
+    }
+    else{
+        imp_div_location.innerHTML=emergencydata.length+'건';
+    }
 }
 </script>
 

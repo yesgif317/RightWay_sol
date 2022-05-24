@@ -16,7 +16,10 @@
         where cmt.cus_num = cus.cus_num AND com.com_num = cus.com_num
         ORDER BY cmt_num
     </select>
-
+    <select id="selectCommentbyPost" resultType="CommentVO">
+        select * from comments
+        where post_num = #{post_num}
+    </select>
 
     <insert id="insertComment" parameterType="CommentVO" >
         insert into comments(cmt_num, post_num, cate, cus_num, cmt_cnt, cmt_date)
@@ -45,7 +48,9 @@
     <delete id="deleteComment">
         delete from comments where cmt_num = #{cmt_num, jdbcType=VARCHAR}
     </delete>
-
+    <delete id="deleteCommentbyPost">
+        delete from comments where post_num = #{post_num}
+    </delete>
 
     <!-- 댓글 Count 1단계-->
     <!--

@@ -371,7 +371,31 @@ public class MainController {
         httpSession.setAttribute("login", customerview);
         return "redirect:/mypage.do";
     }
-
+    //게시판 작성글 삭제 (산출물, 정기보고, 회의록, 공지사항, 자료실, 요청사항)
+    @RequestMapping(value = "/post_delete.do", method = RequestMethod.DELETE)
+    public String post_delete(@RequestParam("post_num") int no,@RequestParam("cate") int cate) {
+        normalService.deletePost(no);
+        List<CommentVO> commentList = commentService.selectCommentbyPost(no);
+        for(int i=0;i< commentList.size();i++){
+            re_commentService.deleteRe_CommentAll(commentList.get(i).getCmt_num());
+        }
+        commentService.deleteCommentbyPost(no);
+        switch (cate) {
+            case 1:
+                return "redirect:/outputs.do";
+            case 2:
+                return "redirect:/meetingrecord.do";
+            case 3:
+                return "redirect:/regularreport.do";
+            case 12:
+                return "redirect:/notice.do";
+            case 13:
+                return "redirect:/datacenter.do";
+            case 15:
+                return "redirect:/request.do";
+        }
+        return "redirect:/request.do";
+    }
     //산출물 게시판 글목록 보기 cate=1
     @RequestMapping(value = "/outputs.do", method = RequestMethod.GET)
     public String outputs(Model model) {
@@ -421,12 +445,6 @@ public class MainController {
         return "/outputs/outputs_content";
     }
 
-    //산출물 작성글 삭제
-    @RequestMapping(value = "/outputs_delete.do", method = RequestMethod.GET)
-    public String outputs_delete(@RequestParam("post_num") int no) {
-        normalService.deletePost(no);
-        return "redirect:/outputs.do";
-    }
 
     //산출물 작성글 수정 기능
     @RequestMapping(value = "/outputs_update.do", method = RequestMethod.POST)
@@ -611,12 +629,6 @@ public class MainController {
         return "/request/request_content";
     }
 
-    //요청사항 작성글 삭제
-    @RequestMapping(value = "/request_delete.do", method = RequestMethod.GET)
-    public String request_delete(@RequestParam("post_num") int no) {
-        normalService.deletePost(no);
-        return "redirect:/request.do";
-    }
 
     //요청사항 작성글 수정 기능
     @RequestMapping(value = "/request_update.do", method = RequestMethod.POST)
@@ -776,12 +788,7 @@ public class MainController {
         return "/meetingrecord/meetingrecord_content";
     }
 
-    //회의록 작성글 삭제
-    @RequestMapping(value = "/meetingrecord_delete.do", method = RequestMethod.GET)
-    public String meetingrecord_delete(@RequestParam("post_num") int no) {
-        normalService.deletePost(no);
-        return "redirect:/meetingrecord.do";
-    }
+
 
     //회의록 작성글 수정 기능
     @RequestMapping(value = "/meetingrecord_update.do", method = RequestMethod.POST)
@@ -859,12 +866,7 @@ public class MainController {
         return "/regularreport/regularreport_content";
     }
 
-    //정기보고 작성글 삭제
-    @RequestMapping(value = "/regularreport_delete.do", method = RequestMethod.GET)
-    public String regularreport_delete(@RequestParam("post_num") int no) {
-        normalService.deletePost(no);
-        return "redirect:/regularreport.do";
-    }
+
 
     //정기보고 작성글 수정 기능
     @RequestMapping(value = "/regularreport_update.do", method = RequestMethod.POST)

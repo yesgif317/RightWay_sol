@@ -7,6 +7,7 @@ import java.util.List;
 public interface CommentService {
     //댓글 전체 글 가져오기
     List<CommentVO> selectCommentAll();
+    List<CommentVO> selectCommentbyPost(int no);
 
     // 댓글 작성
     void insertComment(CommentVO commentVO);
@@ -17,7 +18,7 @@ public interface CommentService {
 
     // 댓글 삭제
     int deleteComment(int no);
-
+    int deleteCommentbyPost(int no);
     int countComment(int post_num);
     //CommentVO countComment(int post_num);
 

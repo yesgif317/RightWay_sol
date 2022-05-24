@@ -14,7 +14,8 @@ public class CommentServiceImpl implements CommentService {
 
     @Override
     public List<CommentVO> selectCommentAll() { return dao.selectCommentAll(); }
-
+    @Override
+    public List<CommentVO> selectCommentbyPost(int no) { return dao.selectCommentbyPost(no); }
     @Override
     public void insertComment(CommentVO commentVO) { dao.insertComment(commentVO); }
     //public String insertComment(CommentVO commentVO) { return dao.insertComment(commentVO); }
@@ -26,7 +27,10 @@ public class CommentServiceImpl implements CommentService {
     public int deleteComment(int no) { return
             dao.deleteComment(no);
     }
-
+    @Override
+    public int deleteCommentbyPost(int no) { return
+            dao.deleteCommentbyPost(no);
+    }
     @Override
     public int countComment(int post_num) { return dao.countComment(post_num); }
 

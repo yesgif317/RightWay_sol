@@ -18,7 +18,10 @@ public class CommentDaoImpl implements CommentDao{
     public List<CommentVO> selectCommentAll() {
         return sqlSession.selectList(Namespace +".selectCommentAll");
     }
-
+    @Override
+    public List<CommentVO> selectCommentbyPost(int no) {
+        return sqlSession.selectList(Namespace +".selectCommentbyPost",no);
+    }
     //댓글추가
     @Override
     public void insertComment(CommentVO commentVO) {
@@ -38,7 +41,10 @@ public class CommentDaoImpl implements CommentDao{
         //Ibatis Update 사용법
         return sqlSession.delete(Namespace+".deleteComment",no);
     }
-
+    public int deleteCommentbyPost(int no) {
+        //Ibatis Update 사용법
+        return sqlSession.delete(Namespace+".deleteCommentbyPost",no);
+    }
     public int countComment(int post_num) {
         return sqlSession.selectOne(Namespace+".countComment", post_num);
     }
