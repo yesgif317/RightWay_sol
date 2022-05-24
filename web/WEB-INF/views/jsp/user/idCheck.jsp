@@ -63,7 +63,7 @@
             <div class="col-3"></div>
             <div class="col-6">
                     ${cus_id}는 사용가능한 아이디입니다.
-            <input class="btn btn-lg btn-secondary btn-block text-lowercase mt-2"
+            <input class="btn btn-lg btn-info btn-block text-lowercase mt-2"
                    type="button" value="아이디 사용하기" onclick="idok()">
             </div>
         </div>

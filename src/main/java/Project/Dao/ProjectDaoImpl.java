@@ -97,4 +97,7 @@ public class ProjectDaoImpl implements ProjectDao{
     public List<ProjectDetailVO> countcus(Object object) {
         return sqlSession.selectOne(Namespace+".count_cus",object);
     }
+
+    @Override
+    public List<ProjectVO> selectPL(){return sqlSession.selectList(Namespace+".selectPL");}
 }

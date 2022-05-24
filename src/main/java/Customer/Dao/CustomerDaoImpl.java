@@ -74,6 +74,11 @@ public class CustomerDaoImpl implements CustomerDao {
         return sqlSession.selectList(Namespace + ".select_nonPermissionCus");
     }
 
+    @Override
+    public List<CustomerVO> select_nonPermissionCusPL(int com_num) {
+        return sqlSession.selectList(Namespace + ".select_nonPermissionCusPL",com_num);
+    }
+
     //사용자 State 변경
     @Override
     public void PermissionCustomer(CustomerVO customerVO) {
@@ -106,4 +111,10 @@ public class CustomerDaoImpl implements CustomerDao {
 
     @Override
     public List<CustomerVO> selectCustomerManagement(Object object){return sqlSession.selectList(Namespace + ".selectCustomerManagement",object);}
+
+    @Override
+    public void resetPLState(){sqlSession.update(Namespace+".resetPLState");}
+
+    @Override
+    public void updatePLState(int cus_num){sqlSession.update(Namespace+".updatePLState",cus_num);}
 }

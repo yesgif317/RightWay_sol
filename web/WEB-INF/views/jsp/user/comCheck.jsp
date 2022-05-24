@@ -28,7 +28,6 @@
             opener.document.joinform.com_num.value = com_num;
             self.close();
         }
-
     </script>
 </head>
 <body>
@@ -76,7 +75,7 @@
                                             <td>${com.com_business}</td>
                                             <td>${com.com_tel}</td>
                                             <td class="text-center">
-                                                <a class="btn btn-secondary text-gray-100" onclick="comok('${com.com_name}','${com.com_num}')"> 선택</a>
+                                                <a class="btn btn-info text-gray-100" onclick="comok('${com.com_name}','${com.com_num}')"> 선택</a>
                                             </td>
                                         </tr>
                                 </c:forEach>

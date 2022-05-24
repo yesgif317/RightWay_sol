@@ -81,4 +81,7 @@ public class ProjectServiceImpl implements ProjectService {
     public int deleteProject_detail(ProjectDetailVO projectVO) {
         return dao.deleteProject_detail(projectVO);
     }
+
+    @Override
+    public List<ProjectVO> selectPL(){return dao.selectPL();}
 }

@@ -9,6 +9,7 @@
         SELECT prj_num,prj_name, project.cus_num ,to_char(prj_start,'YYYY-MM-DD') AS prj_start ,to_char(prj_end,'YYYY-MM-DD') AS prj_end, prj_reg ,prj_upd ,cus_name,cus_position,cus_email
         FROM project ,customer
         WHERE project.cus_num = customer.cus_num
+        order by project.prj_num desc
     </select>
 
     <select id="selectProject_detail" resultType="ProjectDetailVO">
@@ -22,7 +23,7 @@
         select distinct prj_name , p.prj_num as prj_num
         from project p , project_detail pd
         where pd.cus_num = #{cus_num} and p.PRJ_NUM = pd.PRJ_NUM
-        order by p.prj_num asc
+        order by p.prj_num desc
     </select>
     <!-- 프로젝트 추가(Insert) -->
     <insert id="insertProject" parameterType="ProjectVO" >
@@ -68,15 +69,17 @@
 
 
     <select id="selectproject_list" resultType="ProjectVO">
-        select prj_num, prj_name, to_char(prj_end,'YYYY-MM-DD') AS prj_end
+        select prj_num, prj_name, to_char(prj_end,'YYYY-MM-DD') AS prj_end, cus_num
         from project
         where prj_name = #{prj_name}
+        order by prj_num desc
     </select>
 
     <select id="selectproject_list2" resultType="ProjectVO">
-        select prj_num, prj_name, to_char(prj_end,'YYYY-MM-DD') AS prj_end
+        select prj_num, prj_name, to_char(prj_end,'YYYY-MM-DD') AS prj_end, cus_num
         from project
         where prj_name = #{prj_name}
+        order by prj_num desc
     </select>
 
     <select id="selectFirstProjectName" resultType="String">
@@ -88,4 +91,10 @@
         from project_detail
         where prj_num = #{prj_num}
     </select>
+
+    <select id="selectPL" resultType="ProjectVO">
+        select distinct cus_num , prj_num,prj_name
+        from project
+    </select>
+
 </mapper>

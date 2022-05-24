@@ -105,12 +105,9 @@
     </div>
         <!-- End of Page Wrapper -->
 
-<!-- Scroll to Top Button-->
-<a class="scroll-to-top rounded" href="#page-top">
-    <i class="fas fa-angle-up"></i>
-</a>
 
-        <jsp:include page="../include/logoutModal.jsp" flush="true" />
+
+<jsp:include page="../include/logoutModal.jsp" flush="true" />
 <!-- Bootstrap core JavaScript-->
 <script src="<c:url value="/resources/vendor/jquery/jquery.min.js"/>"></script>
 <script src="<c:url value="/resources/vendor/bootstrap/js/bootstrap.bundle.min.js"/>"></script>

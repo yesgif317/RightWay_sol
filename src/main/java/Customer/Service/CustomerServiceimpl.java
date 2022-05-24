@@ -84,6 +84,11 @@ public class CustomerServiceimpl implements CustomerService {
     }
 
     @Override
+    public List<CustomerVO> select_nonPermissionCusPL(int com_num) {
+        return dao.select_nonPermissionCusPL(com_num);
+    }
+
+    @Override
     public List<CustomerVO> select_PermissionCustomer(int[] num) {
         List<CustomerVO> list = new ArrayList<>();
         for(int i=0;i<num.length; i++){
@@ -113,5 +118,11 @@ public class CustomerServiceimpl implements CustomerService {
 
     @Override
     public List<CustomerVO> selectCustomerManagement(Object object){return dao.selectCustomerManagement(object);}
+
+    @Override
+    public void resetPLState(){dao.resetPLState();}
+
+    @Override
+    public void updatePLState(int cus_num){dao.updatePLState(cus_num);}
 
 }

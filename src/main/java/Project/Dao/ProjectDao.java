@@ -35,4 +35,6 @@ public interface ProjectDao {
     String selectFirstProjectName();
 
     List<ProjectDetailVO> countcus(Object object);
+
+    List<ProjectVO> selectPL();
 }

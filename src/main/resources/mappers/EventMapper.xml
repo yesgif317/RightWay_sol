@@ -10,6 +10,7 @@
         SELECT post_num,cate,evt_tit,e.cus_num,evt_sbj,evt_host,evt_supervise,evt_loc,evt_url,evt_cnt,evt_pri,evt_limit,to_char(evt_start,'YYYY-MM-DD') AS evt_start,to_char(evt_end,'YYYY-MM-DD') AS evt_end,to_char(evt_acptstart,'YYYY-MM-DD') AS evt_acptstart,to_char(evt_acptend,'YYYY-MM-DD') AS evt_acptend,evt_reg,evt_upd,prj_num,c.cus_name,c.cus_position
         FROM Event e, customer c
         where prj_num = #{prj_num} and e.cus_num = c.cus_num
+        order by post_num desc
     </select>
 
     <!-- 행사등록(Insert) -->

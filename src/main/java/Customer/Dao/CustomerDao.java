@@ -34,10 +34,13 @@ public interface CustomerDao {
 
     //승인 받지 않은 회원
     List<CustomerVO> select_nonPermissionCus();
+    List<CustomerVO> select_nonPermissionCusPL(int com_num);
     void PermissionCustomer(CustomerVO customerVO);
     //한명 찾기
     CustomerVO selectCusToNum(int i);
 
     String selectNumToName(int cus_num);
 
+    void resetPLState();
+    void updatePLState(int cus_num);
 }

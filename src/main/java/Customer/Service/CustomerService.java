@@ -34,10 +34,14 @@ public interface CustomerService {
 
     //승인 받지 않은 회원
     List<CustomerVO> select_nonPermissionCus();
+    List<CustomerVO> select_nonPermissionCusPL(int num);
 
     List<CustomerVO> select_PermissionCustomer(int[] num);
     void PermissionCustomer(List<CustomerVO> customerVOList);
 
     //select one
     String selectNumToName(int cus_num);
+
+    void resetPLState();
+    void updatePLState(int cus_num);
 }

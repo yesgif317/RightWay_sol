@@ -22,8 +22,8 @@
                 <div class="card-header py-3">
                     <div class="col-sm-12">
                         <div>
-                            <a href="" class="btn btn-info btn-user" >일괄승인</a>
-                            <a href="" class="btn btn-danger btn-user" >일괄반려</a>
+<%--                            <a href="" class="btn btn-info btn-user" >일괄승인</a>--%>
+<%--                            <a href="" class="btn btn-danger btn-user" >일괄반려</a>--%>
                             <button class="btn btn-info btn-user" style="float: right;" id="select_permission" onclick="permission()" >선택승인</button>
                         </div>
                     </div>
@@ -33,17 +33,17 @@
                         <table class="table table-bordered table-hover" id="dataTable">
                             <thead>
                             <tr>
-                                <th>
+                                <th width="5%">
                                     <label>
                                         <input type="checkbox" name="selectall" onclick="selectAll(this)">
                                     </label>
                                 </th>
-                                <th>Index</th>
-                                <th>회원번호</th>
-                                <th>아이디</th>
-                                <th>이름</th>
-                                <th>이메일</th>
-                                <th>전화번호</th>
+                                <th width="5%">번호</th>
+                                <th width="20%">아이디</th>
+                                <th width="10%">이름</th>
+                                <th width="20%">이메일</th>
+                                <th width="15%">전화번호</th>
+                                <th hidden></th>
                             </tr>
                             </thead>
 
@@ -54,11 +54,11 @@
                                         <input type="checkbox" name="checkbox" id="checkbox${status.count}">
                                     </td>
                                     <td>${status.count}</td>
-                                    <td id="${status.count}">${customer.cus_num}</td>
                                     <td>${customer.cus_id}</td>
                                     <td>${customer.cus_name}</td>
                                     <td>${customer.cus_email}</td>
                                     <td>${customer.cus_phone}</td>
+                                    <td id="${status.count}" hidden>${customer.cus_num}</td>
                                 </tr>
 
                             </c:forEach>
@@ -94,6 +94,9 @@
                     formdata.append("c_num",c_num[i]);
                 }
             }
+            if (c_num.length === 0){
+                alert("선택된 회원이 없습니다.")
+                exit();}
 
             console.log(c_num[1]);
             $.ajax({

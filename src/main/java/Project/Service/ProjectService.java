@@ -40,4 +40,6 @@ public interface ProjectService {
     List<ProjectDetailVO> countcus(Object object);
 
     String selectFirstProjectName();
+
+    List<ProjectVO> selectPL();
 }

@@ -398,9 +398,15 @@ public class MainController {
     }
     //산출물 게시판 글목록 보기 cate=1
     @RequestMapping(value = "/outputs.do", method = RequestMethod.GET)
-    public String outputs(Model model) {
+    public String outputs(Model model,HttpSession httpSession) {
         //service 클래스에서 Dao 로 접근하여 쿼리 결과값 가져오기
-        List<NormalVO> postVoList = normalService.selectAll(1);
+        ProjectVO object = (ProjectVO) httpSession.getAttribute("prj_list");
+        List<NormalVO> allpostVoList = normalService.selectAll(1);
+        List<NormalVO> postVoList = new ArrayList<>();
+        for(int i=0; i < allpostVoList.size();i++)
+        if(allpostVoList.get(i).getPrj_num() == object.getPrj_num()){
+            postVoList.add(allpostVoList.get(i));
+        }
         // .jsp 파일로 DB 결과값 전달하기
         model.addAttribute("PostList", postVoList);
         return "/outputs/outputs";
@@ -980,16 +986,28 @@ public class MainController {
 
     //adminpermission page (관리자 승인)
     @RequestMapping(value = "/adminpermission.do", method = RequestMethod.GET)
-    public String adminpermission(Model model) {
-
-
-        //service 클래스에서 Dao 로 접근하여 쿼리 결과값 가져오기
-        List<CustomerVO> customerVOList = customerService.select_nonPermissionCus();
-
-        // .jsp 파일로 DB 결과값 전달하기
-        model.addAttribute("CustomerList", customerVOList);
-
-        return "/adminpermission/adminpermission";
+    public String adminpermission(Model model, HttpSession httpSession) {
+        CustomerVO cust = (CustomerVO) httpSession.getAttribute("login");
+        ProjectVO prj = (ProjectVO) httpSession.getAttribute("prj_list");
+        int cus_num = Integer.parseInt(cust.getCus_num());
+        int cus_state = cust.getCus_state();
+        int pl = prj.getCus_num();
+        //관리자로 접속하는 경우
+        if(cus_state == 3) {
+            List<CustomerVO> customerVOList = customerService.select_nonPermissionCus();
+            // .jsp 파일로 DB 결과값 전달하기
+            model.addAttribute("CustomerList", customerVOList);
+            return "/adminpermission/adminpermission";
+        //PL계정으로 접속하는 경우
+        }else if(cus_state == 2 && cus_num == pl) {
+            List<CustomerVO> customerVOList = customerService.select_nonPermissionCusPL(Integer.parseInt(cust.getCom_num()));
+            // .jsp 파일로 DB 결과값 전달하기
+            model.addAttribute("CustomerList", customerVOList);
+            return "/adminpermission/adminpermission";
+        }
+        model.addAttribute("msg", "접근권한이 없습니다.");
+        model.addAttribute("url", "index.do");
+        return "alert";
     }
 
     //event page
@@ -1208,17 +1226,20 @@ public class MainController {
     //project insert
     @RequestMapping(value = "/project_insert.do", method = RequestMethod.POST)
     public String project_insert(Model model, ProjectVO projectVO) {
-        String Result = projectService.insertProject(projectVO);
-
-        System.out.println(projectVO);
-
+        projectService.insertProject(projectVO);
         //프로젝트 등록자를 detail 테이블에도 추가하는 코드
         ProjectDetailVO projectDetailVO = new ProjectDetailVO();
-        projectDetailVO.setAuth("1");
         projectDetailVO.setCus_num(projectVO.getCus_num());
+        projectDetailVO.setAuth("1");
         projectDetailVO.setPrj_num(projectService.selectProjectNum(projectVO.getPrj_name()).getPrj_num());
         projectService.insertProject_detail(projectDetailVO);
 
+        //PL 권한부여
+        List<ProjectVO> pl_num = projectService.selectPL();
+        customerService.resetPLState();
+        for (int i=0; i < pl_num.size();i++){
+            customerService.updatePLState(pl_num.get(i).getCus_num());
+        }
         return "redirect:/project.do";
     }
 
@@ -1227,14 +1248,25 @@ public class MainController {
     public String project_delete(@RequestParam("prj_num") int prj_num) {
         projectService.deleteAllProject_detail(prj_num);
         projectService.delete(prj_num);
+        //PL 권한부여
+        List<ProjectVO> pl_num = projectService.selectPL();
+        customerService.resetPLState();
+        for (int i=0; i < pl_num.size();i++){
+            customerService.updatePLState(pl_num.get(i).getCus_num());
+        }
         return "redirect:/project.do";
     }
 
     //project update
     @RequestMapping(value = "/project_update.do", method = RequestMethod.POST)
     public String project_update(Model model, ProjectVO projectVO) {
-        String Result = projectService.updateProject(projectVO);
-        model.addAttribute("ProjectList1", Result);
+        projectService.updateProject(projectVO);
+        //PL 권한부여
+        List<ProjectVO> pl_num = projectService.selectPL();
+        customerService.resetPLState();
+        for (int i=0; i < pl_num.size();i++){
+            customerService.updatePLState(pl_num.get(i).getCus_num());
+        }
         return "redirect:/project.do";
     }
 
@@ -1370,13 +1402,27 @@ public class MainController {
     @RequestMapping(value = "/usermanagement.do", method = RequestMethod.GET)
     public String usermanagement(HttpSession httpSession, Model model) {
         Object object = httpSession.getAttribute("prj_list");
-        System.out.println(object);
-        List<CustomerVO> customerVOList = customerService.selectCustomerManagement(object);
-        //List<CustomerVO> customerVOList = customerService.selectCustomerT();
-        // .jsp 파일로 DB 결과값 전달하기
-        model.addAttribute("CustomerList", customerVOList);
-
-        return "usermanagement/usermanagement";
+        CustomerVO cust = (CustomerVO) httpSession.getAttribute("login");
+        ProjectVO prj = (ProjectVO) object;
+        int cus_num = Integer.parseInt(cust.getCus_num());
+        int cus_state = cust.getCus_state();
+        int pl = prj.getCus_num();
+        //관리자로 접속하는 경우
+        if(cus_state == 3) {
+            List<CustomerVO> customerVOList = customerService.selectCustomerManagement(object);
+            // .jsp 파일로 DB 결과값 전달하기
+            model.addAttribute("CustomerList", customerVOList);
+            return "/usermanagement/usermanagement";
+            //PL계정으로 접속하는 경우
+        }else if(cus_state == 2 && cus_num == pl) {
+            List<CustomerVO> customerVOList = customerService.selectCustomerManagement(object);
+            // .jsp 파일로 DB 결과값 전달하기
+            model.addAttribute("CustomerList", customerVOList);
+            return "usermanagement/usermanagement";
+        }
+        model.addAttribute("msg", "접근권한이 없습니다.");
+        model.addAttribute("url", "index.do");
+        return "alert";
     }
 
     //투입인력관리 상세 페이지 이동

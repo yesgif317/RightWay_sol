@@ -15,6 +15,12 @@ public class CustomerVO {
     private String cus_phone;
     private String cus_dep;
     private String cus_position;
+    /* cus_state
+    0 - 미승인
+    1 - 승인회원
+    2 - PL
+    3 - ADMIN
+    * */
     private int cus_state;
     private String cus_sess_key;
     private String cus_sess_lim;

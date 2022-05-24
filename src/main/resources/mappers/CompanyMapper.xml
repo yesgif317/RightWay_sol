@@ -9,6 +9,7 @@
     <select id="selectCompany" resultType="CompanyVO">
         SELECT com_num,com_name,com_tel,com_addr,com_scale,com_business,com_contract, (select count(*) from customer c where c.com_num = com.com_num) as com_count
         FROM company com
+        order by com_num desc
     </select>
 
     <!-- 회사이름 select 문-->
@@ -16,6 +17,7 @@
         select *
         from company
         where com_name like '%'||#{com_name}||'%'
+        order by com_num desc
     </select>
 
     <!-- 업체등록(Insert) -->

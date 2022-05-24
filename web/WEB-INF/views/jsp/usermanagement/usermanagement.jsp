@@ -68,10 +68,10 @@
                 <div class="table-responsive">
                     <div>
                         <form id="frmAttachedFiles" class="form-horizontal" enctype="multipart/form-data">
-                            <div class="btn btn-secondary btn-file ml-3">
+                            <label class="btn btn-info btn-file ml-3" for="btnUploadExcel">
                                 엑셀업로드
-                                <input type="file" id="btnUploadExcel" name="btnUploadExcel">
-                            </div>
+                                <input type="file" id="btnUploadExcel" name="btnUploadExcel" style="display: none">
+                            </label>
                         </form>
                         <form action="/ExcelDownload.do" id="frmExcelDown" method="GET">
                             <button type=submit" class="btn btn-secondary ml-3">전체 인원 목록 다운로드

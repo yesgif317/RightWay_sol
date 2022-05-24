@@ -55,7 +55,7 @@
                                             </label>
                                         </div>
                                     </div>
-                                    <button type="submit" class="btn btn-dark btn-user btn-block">Login</button>
+                                    <button type="submit" class="btn btn-info btn-user btn-block pt-2 pb-2">Login</button>
                                 </form>
                                 <hr>
                                 <div class="text-center">
