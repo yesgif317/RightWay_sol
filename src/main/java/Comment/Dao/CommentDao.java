@@ -17,4 +17,6 @@ public interface CommentDao {
 
     int countComment(int post_num);
     //CommentVO countComment(int post_num);
+
+    List<CommentVO> selectComment_fromNew(Object object);
 }

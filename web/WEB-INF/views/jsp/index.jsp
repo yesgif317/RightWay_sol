@@ -418,12 +418,60 @@ window.onload=function(){
 
                 <!-- Earnings (Monthly) Card Example -->
                 <div class="col-xl-4 col-md-6 mb-4">
-                    <div class="text-xs font-weight-bold text-success text-uppercase mb-1">내 게시물에 달린 댓글</div>
+                    <div class="text-xs font-weight-bold text-success text-uppercase mb-1">내 최신 게시물에 달린 댓글</div>
                     <div class="card border-left-success">
                         <div class="card-body">
                             <div class="row no-gutters align-items-center">
                                 <div class="col mr-2">
-
+                                    <c:choose>
+                                        <c:when test="${CommentList != null}">
+                                            <c:forEach items="${CommentList}" var="comments" step="1" begin="0" end="4">
+                                                <c:if test="${comments.cate eq 1}">
+                                                    <a style="display:inline-block; width:300px; overflow:hidden; text-overflow:ellipsis; white-space:nowrap" class="dropdown-item-text h5 mb-0 font-weight-bold text-gray-800"
+                                                       href="/outputs_content.do?post_num=${comments.post_num}">- ${comments.cmt_cnt}</a>
+                                                    <span style="float: right">${comments.cmt_date}</span> <br>
+                                                </c:if>
+                                                <c:if test="${comments.cate eq 2}">
+                                                    <a style="display:inline-block; width:300px; overflow:hidden; text-overflow:ellipsis; white-space:nowrap" class="dropdown-item-text h5 mb-0 font-weight-bold text-gray-800"
+                                                       href="/meetingrecord_content.do?post_num=${comments.post_num}">- ${comments.cmt_cnt}</a>
+                                                    <span style="float: right">${comments.cmt_date}</span> <br>
+                                                </c:if>
+                                                <c:if test="${comments.cate eq 3}">
+                                                    <a style="display:inline-block; width:300px; overflow:hidden; text-overflow:ellipsis; white-space:nowrap" class="dropdown-item-text h5 mb-0 font-weight-bold text-gray-800"
+                                                       href="/regularreport_content.do?post_num=${comments.post_num}">- ${comments.cmt_cnt}</a>
+                                                    <span style="float: right">${comments.cmt_date}</span> <br>
+                                                </c:if>
+                                                <c:if test="${comments.cate eq 5}">
+                                                    <a style="display:inline-block; width:300px; overflow:hidden; text-overflow:ellipsis; white-space:nowrap" class="dropdown-item-text h5 mb-0 font-weight-bold text-gray-800"
+                                                       href="/event_content.do?post_num=${comments.post_num}">- ${comments.cmt_cnt}</a>
+                                                    <span style="float: right">${comments.cmt_date}</span> <br>
+                                                </c:if>
+                                                <c:if test="${comments.cate eq 9}">
+                                                    <a style="display:inline-block; width:300px; overflow:hidden; text-overflow:ellipsis; white-space:nowrap" class="dropdown-item-text h5 mb-0 font-weight-bold text-gray-800"
+                                                       href="/danger_content.do?post_num=${comments.post_num}">- ${comments.cmt_cnt}</a>
+                                                    <span style="float: right">${comments.cmt_date}</span> <br>
+                                                </c:if>
+                                                <c:if test="${comments.cate eq 10}">
+                                                    <a style="display:inline-block; width:300px; overflow:hidden; text-overflow:ellipsis; white-space:nowrap" class="dropdown-item-text h5 mb-0 font-weight-bold text-gray-800"
+                                                       href="/issue_content.do?post_num=${comments.post_num}">- ${comments.cmt_cnt}</a>
+                                                    <span style="float: right">${comments.cmt_date}</span> <br>
+                                                </c:if>
+                                                <c:if test="${comments.cate eq 12}">
+                                                    <a style="display:inline-block; width:300px; overflow:hidden; text-overflow:ellipsis; white-space:nowrap" class="dropdown-item-text h5 mb-0 font-weight-bold text-gray-800"
+                                                       href="/notice_content.do?post_num=${comments.post_num}">- ${comments.cmt_cnt}</a>
+                                                    <span style="float: right">${comments.cmt_date}</span> <br>
+                                                </c:if>
+                                                <c:if test="${comments.cate eq 15}">
+                                                    <a style="display:inline-block; width:300px; overflow:hidden; text-overflow:ellipsis; white-space:nowrap" class="dropdown-item-text h5 mb-0 font-weight-bold text-gray-800"
+                                                       href="/request_content.do?post_num=${comments.post_num}">- ${comments.cmt_cnt}</a>
+                                                    <span style="float: right">${comments.cmt_date}</span> <br>
+                                                </c:if>
+                                            </c:forEach>
+                                        </c:when>
+                                        <c:otherwise>
+                                            작성된 댓글이 없습니다.
+                                        </c:otherwise>
+                                    </c:choose>
                                 </div>
                             </div>
                         </div>

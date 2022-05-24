@@ -103,6 +103,9 @@
                                 <span class="text">목록</span>
                             </a>
                         </div>  <!-- end of button list -->
+
+                        <jsp:include page="../../include/comments.jsp" flush="true" />
+
                     </div>
 
                 </div>

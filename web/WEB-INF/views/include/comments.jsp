@@ -62,9 +62,10 @@ jsp:include page="../../include/footer.jsp" flush="true" />
         <c:set var="cate" value="${PostList.cate}"/>
     </c:when>
     <c:when test="${not empty EventList.cate}">
-        <c:set var="cate" value="${EventList.cate}"/>
+        <c:set var="cate" value="5"/>
     </c:when>
     <c:otherwise>
+        <!-- 위에서 EventList가 cate=5 값을 제대로 못받아와서 수동으로 5 처리해줌 -->
         <c:set var="cate" value="0"/>
     </c:otherwise>
 </c:choose>

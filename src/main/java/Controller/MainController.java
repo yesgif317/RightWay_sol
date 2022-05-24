@@ -180,17 +180,19 @@ public class MainController {
             }
         }
 
-
+        Object object_cus = httpSession.getAttribute("login");
         Object object = httpSession.getAttribute("prj_list");
         List<NormalVO> normalVOList = normalService.selectNotice(object);
         List<RiskVO> RiskVOList = riskService.selectDanger(object);
         List<RiskVO> IssueVOList = riskService.selectIssue(object);
         List<EventVO> EventVOList = eventService.selectEvent(object);
+        List<CommentVO> CommentVOList = commentService.selectComment_fromNew(object_cus);
 
         httpSession.setAttribute("RVList", RiskVOList);
         httpSession.setAttribute("IVList", IssueVOList);
         httpSession.setAttribute("NormalList", normalVOList);
         httpSession.setAttribute("EvtList", EventVOList);
+        httpSession.setAttribute("CommentList", CommentVOList);
 
         return "index";
     }
