@@ -119,19 +119,20 @@
                                                    <i class="fa-regular fa-trash-can"></i>
                                                  </span>
                                 <span class="text" style="color:white">  삭제</span>
-
+                            </a>
                                 <!-- Modal -->
                                 <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
                                     <div class="modal-dialog" role="document">
                                         <div class="modal-content">
                                             <div class="modal-header">
-                                                <h5 class="modal-title" id="exampleModalLabel">게시물 삭제</h5>
+                                                <h5 class="modal-title" id="exampleModalLabel">프로젝트 삭제</h5>
                                                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                                     <span aria-hidden="true">&times;</span>
                                                 </button>
                                             </div>
                                             <div class="modal-body">
-                                                게시물을 정말 삭제하시겠습니까?
+                                                프로젝트를 삭제 하시겠습니까?<br>
+                                                <p class="text-danger">프로젝트의 모든 게시물이 함께 삭제되며 복구가 불가능합니다.</p>
                                             </div>
                                             <div class="modal-footer">
                                                 <button onclick = "location.href = 'project_delete.do?prj_num=${ProjectList1.prj_num}'" type="button" class="btn btn-danger">삭제하기</button>
@@ -140,7 +141,7 @@
                                         </div>
                                     </div>
                                 </div>
-                            </a>
+
 
                             <a href="project.do" class="btn btn-secondary">
                                              <span class="icon text-white-50">

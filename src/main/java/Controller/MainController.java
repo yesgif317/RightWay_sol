@@ -1245,6 +1245,7 @@ public class MainController {
     //project insert
     @RequestMapping(value = "/project_insert.do", method = RequestMethod.POST)
     public String project_insert(Model model, ProjectVO projectVO) {
+        if(projectService.selectproject_list(projectVO.getPrj_name()) == null){
         projectService.insertProject(projectVO);
         //프로젝트 등록자를 detail 테이블에도 추가하는 코드
         ProjectDetailVO projectDetailVO = new ProjectDetailVO();
@@ -1252,7 +1253,6 @@ public class MainController {
         projectDetailVO.setAuth("1");
         projectDetailVO.setPrj_num(projectService.selectProjectNum(projectVO.getPrj_name()).getPrj_num());
         projectService.insertProject_detail(projectDetailVO);
-
         //PL 권한부여
         List<ProjectVO> pl_num = projectService.selectPL();
         customerService.resetPLState();
@@ -1260,34 +1260,73 @@ public class MainController {
             customerService.updatePLState(pl_num.get(i).getCus_num());
         }
         return "redirect:/project.do";
+        }
+        model.addAttribute("msg", "중복된 프로젝트명 입니다.");
+        model.addAttribute("url", "project_write.do?prj_num=0&update=0");
+        return "alert";
     }
 
     //project delete
     @RequestMapping(value = "/project_delete.do", method = RequestMethod.GET)
-    public String project_delete(@RequestParam("prj_num") int prj_num) {
-        projectService.deleteAllProject_detail(prj_num);
-        projectService.delete(prj_num);
-        //PL 권한부여
-        /*List<ProjectVO> pl_num = projectService.selectPL();
-        customerService.resetPLState();
-        for (int i=0; i < pl_num.size();i++){
-            customerService.updatePLState(pl_num.get(i).getCus_num());
-        }*/
-
-        return "redirect:/project.do";
+    public String project_delete(@RequestParam("prj_num") int prj_num,Model model, HttpSession httpSession) {
+        CustomerVO cust = (CustomerVO) httpSession.getAttribute("login");
+        ProjectVO prj = (ProjectVO) httpSession.getAttribute("prj_list");
+        int cus_num = Integer.parseInt(cust.getCus_num());
+        int cus_state = cust.getCus_state();
+        int pl = prj.getCus_num();
+        //관리자로 접속하는 경우
+        if(cus_state == 3) {
+            projectService.deleteAllProject_detail(prj_num);
+            projectService.delete(prj_num);
+            //PL 권한부여
+            List<ProjectVO> pl_num = projectService.selectPL();
+            customerService.resetPLState();
+            for (int i=0; i < pl_num.size();i++){
+                customerService.updatePLState(pl_num.get(i).getCus_num());
+            }
+            return "redirect:/project.do";
+            //PL계정으로 접속하는 경우
+        }else if(cus_state == 2 && cus_num == pl) {
+            projectService.deleteAllProject_detail(prj_num);
+            projectService.delete(prj_num);
+            //PL 권한부여
+            List<ProjectVO> pl_num = projectService.selectPL();
+            customerService.resetPLState();
+            for (int i=0; i < pl_num.size();i++){
+                customerService.updatePLState(pl_num.get(i).getCus_num());
+            }
+            return "redirect:/project.do";
+        }
+        model.addAttribute("msg", "접근권한이 없습니다.");
+        model.addAttribute("url", "project.do");
+        return "alert";
     }
-
     //project update
     @RequestMapping(value = "/project_update.do", method = RequestMethod.POST)
     public String project_update(Model model, ProjectVO projectVO) {
-        projectService.updateProject(projectVO);
-        //PL 권한부여
-        List<ProjectVO> pl_num = projectService.selectPL();
-        customerService.resetPLState();
-        for (int i=0; i < pl_num.size();i++){
-            customerService.updatePLState(pl_num.get(i).getCus_num());
+        ProjectVO namechk = projectService.selectproject_list(projectVO.getPrj_name());
+        if(namechk == null){
+            projectService.updateProject(projectVO);
+            //PL 권한부여
+            List<ProjectVO> pl_num = projectService.selectPL();
+            customerService.resetPLState();
+            for (int i=0; i < pl_num.size();i++){
+                customerService.updatePLState(pl_num.get(i).getCus_num());
+            }
+            return "redirect:/project.do";
+        }else if (namechk.getPrj_num() == projectVO.getPrj_num() && namechk.getPrj_name().equals(projectVO.getPrj_name())){
+            projectService.updateProject(projectVO);
+            //PL 권한부여
+            List<ProjectVO> pl_num = projectService.selectPL();
+            customerService.resetPLState();
+            for (int i=0; i < pl_num.size();i++){
+                customerService.updatePLState(pl_num.get(i).getCus_num());
+            }
+            return "redirect:/project.do";
         }
-        return "redirect:/project.do";
+        model.addAttribute("msg", "중복된 프로젝트명 입니다.");
+        model.addAttribute("url", "project_write.do?prj_num="+projectVO.getPrj_num()+"&update=1");
+        return "alert";
     }
 
     // project 프로젝트원 삭제
@@ -1295,7 +1334,6 @@ public class MainController {
     public String project_detail_delete(@RequestParam("prj_num") int prj_num, ProjectDetailVO projectDetailVO) {
         projectService.deleteProject_detail(projectDetailVO);
         return "redirect:/project_write.do?prj_num=" + prj_num + "&update=1";
-
     }
 
     // project 프로젝트원 등록 기능
