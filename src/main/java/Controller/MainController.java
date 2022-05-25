@@ -270,20 +270,19 @@ public class MainController {
 
     //회사선택 GET, POST
     @RequestMapping(value = "/comCheck.do", method = RequestMethod.GET)
-    public String comCheckGET() {
+    public String comCheckGET(Model model) throws Exception {
+        System.out.println("allselect");
+        List<CompanyVO> companyList = companyService.checkCompany("");
+        model.addAttribute("companyList", companyList);
         return "user/comCheck";
     }
 
     @RequestMapping(value = "/comCheck.do", method = RequestMethod.POST)
     public String comCheckPOST(HttpServletRequest request, Model model) throws Exception {
+        System.out.println("textselect");
         String com_name = request.getParameter("com_name");
-
         List<CompanyVO> companyList = companyService.checkCompany(com_name);
-
-
         model.addAttribute("companyList", companyList);
-        System.out.println(companyList);
-
         return "user/comCheck";
     }
 

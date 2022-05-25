@@ -31,9 +31,7 @@
     </script>
 </head>
 <body>
-
-
-<form method="post" class="form-signin mt-5" action="/comCheck.do" name="joinform">
+<form method="post" class="form-signin mt-5" action="/comCheck.do" name="joinform" id="joinform">
     <div class="row form-label-group">
         <div class="col-3"></div>
         <div class="col-6">
@@ -45,7 +43,7 @@
         <div class="col-3"></div>
         <div class="col-6">
         <input class="btn btn-lg btn-secondary btn-block text-lowercase"
-               type="submit" value="회사 검색">
+               type="submit" value="회사 검색" id="comCheckbtn">
         </div>
     </div>
 

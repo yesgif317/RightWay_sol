@@ -10803,21 +10803,18 @@ a:focus {
 }
 
 .bg-login-image {
-  background: url("/resources/img/login_logo.png");
+  background: url("/resources/img/logo_login.png");
   background-position: center;
-  background-size: cover;
 }
 
 .bg-register-image {
-  background: url("/resources/img/login_logo.png");
+  background: url("/resources/img/logo_register.png");
   background-position: center;
-  background-size: cover;
 }
 
 .bg-password-image {
-  background: url("/resources/img/login_logo.png");
+  background: url("/resources/img/logo_password.png");
   background-position: center;
-  background-size: cover;
 }
 
 form.user .custom-checkbox.small label {
