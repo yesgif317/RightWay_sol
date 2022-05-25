@@ -21,6 +21,11 @@ public class TeamServiceImpl implements TeamService {
     }
 
     @Override
+    public List<TeamVO> selectTeamall() {
+        return dao.selectTeamall();
+    }
+
+    @Override
     public List<TeammemberVO> countmember() {
         return dao.countmember();
     }

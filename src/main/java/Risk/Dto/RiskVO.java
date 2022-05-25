@@ -1,5 +1,10 @@
+
 package Risk.Dto;
 
+
+import lombok.Data;
+
+@Data
 public class RiskVO {
     public int post_num;
     public int cate;

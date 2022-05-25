@@ -6,7 +6,6 @@ import org.apache.ibatis.session.SqlSession;
 import org.springframework.stereotype.Repository;
 
 import javax.inject.Inject;
-import java.util.HashMap;
 import java.util.List;
 
 @Repository
@@ -18,6 +17,11 @@ public class TeamDaoImpl implements TeamDao {
     @Override
     public List<TeamVO> selectTeam(Object object) {
         return sqlSession.selectList(Namespace+".selectTeam",object);
+    }
+
+    @Override
+    public List<TeamVO> selectTeamall() {
+        return sqlSession.selectList(Namespace+".selectTeamall");
     }
     //전체 게시글
     @Override

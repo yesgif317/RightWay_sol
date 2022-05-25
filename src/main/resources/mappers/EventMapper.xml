@@ -12,7 +12,11 @@
         where prj_num = #{prj_num} and e.cus_num = c.cus_num
         order by post_num desc
     </select>
-
+    <select id="selectallevent" resultType="EventVO">
+        SELECT *
+        FROM Event
+        order by post_num desc
+    </select>
     <!-- 행사등록(Insert) -->
     <insert id="insertEvent" parameterType="EventVO" >
         insert into Event(post_num ,cate, evt_tit, cus_num,evt_sbj,evt_host,evt_supervise,evt_loc,evt_url,evt_cnt,evt_pri,evt_limit,evt_start,evt_end,evt_acptstart,evt_acptend,prj_num,evt_reg)

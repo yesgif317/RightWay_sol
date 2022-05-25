@@ -27,7 +27,11 @@ public class RiskDaoImpl implements RiskDao {
         //Ibatis Select 사용법
         return sqlSession.selectList(Namespace + ".selectDanger", object);
     }
-
+    @Override
+    public List<RiskVO> selectallrisk() {
+        //Ibatis Select 사용법
+        return sqlSession.selectList(Namespace + ".selectallrisk");
+    }
     // 게시판 글 작성
     @Override
     public String insertRisk(RiskVO RiskVO) {

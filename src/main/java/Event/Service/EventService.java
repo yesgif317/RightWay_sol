@@ -7,6 +7,8 @@ import java.util.List;
 public interface EventService {
     //목록 조회
     List<EventVO> selectEvent(Object object);
+
+    List<EventVO> selectallevent();
     //등록
     String insertEvent(EventVO eventVO);
     //글 수정(Update)

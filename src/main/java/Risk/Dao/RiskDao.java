@@ -7,7 +7,7 @@ import java.util.List;
 public interface RiskDao {
     List<RiskVO> selectIssue(Object object);
     List<RiskVO> selectDanger(Object object);
-
+    List<RiskVO> selectallrisk();
     //글 작성 Insert
     String insertRisk(RiskVO RiskVO);
 

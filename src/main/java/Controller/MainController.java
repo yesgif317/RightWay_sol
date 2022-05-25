@@ -1,6 +1,5 @@
 package Controller;
 
-import Board.Dto.BoardVO;
 import Board.Service.BoardService;
 import Comment.Dto.CommentVO;
 import Comment.Service.CommentService;
@@ -28,7 +27,6 @@ import Risk.Service.RiskService;
 import Team.Dto.TeamVO;
 import Team.Dto.TeammemberVO;
 import Team.Service.TeamService;
-import com.sun.org.apache.xpath.internal.operations.Mod;
 import org.apache.poi.ss.usermodel.*;
 import org.apache.poi.ss.util.CellRangeAddress;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
@@ -37,7 +35,6 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
@@ -374,12 +371,13 @@ public class MainController {
     //게시판 작성글 삭제 (산출물, 정기보고, 회의록, 공지사항, 자료실, 요청사항)
     @RequestMapping(value = "/post_delete.do", method = RequestMethod.DELETE)
     public String post_delete(@RequestParam("post_num") int no,@RequestParam("cate") int cate) {
-        normalService.deletePost(no);
+
         List<CommentVO> commentList = commentService.selectCommentbyPost(no);
         for(int i=0;i< commentList.size();i++){
             re_commentService.deleteRe_CommentAll(commentList.get(i).getCmt_num());
         }
         commentService.deleteCommentbyPost(no);
+        normalService.deletePost(no);
         switch (cate) {
             case 1:
                 return "redirect:/outputs.do";
@@ -1266,16 +1264,59 @@ public class MainController {
         return "alert";
     }
 
+    // 프로젝트 삭제 기능을 실행할 때 사용하는 함수
+    void project_delete_etc(int prj_num) {
+        //팀삭제
+        List<TeamVO> team_list = teamService.selectTeamall();
+        for (int i=0; i < team_list.size();i++){
+            if(team_list.get(i).getPrj_num()==prj_num){
+                teamService.deletemember((team_list.get(i).getTeam_num()));
+                teamService.deleteTeam((team_list.get(i).getTeam_num()));
+            }
+        }
+        //게시글과 댓글 삭제
+        List<NormalVO> post_list = normalService.selectPost();
+        for (int i=0; i < post_list.size();i++){
+            if(post_list.get(i).getPrj_num()==prj_num){
+                int no=post_list.get(i).getPost_num();
+                List<CommentVO> comment_List = commentService.selectCommentbyPost(no);
+                for(int j=0;j< comment_List.size();j++){
+                    re_commentService.deleteRe_CommentAll(comment_List.get(j).getCmt_num());
+                }
+                commentService.deleteCommentbyPost(no);
+                normalService.deletePost(no);
+            }
+        }
+        //위험이슈삭제
+        List<RiskVO> risk_list = riskService.selectallrisk();
+        for (int i=0; i < risk_list.size();i++){
+            if(risk_list.get(i).getPrj_num()==prj_num){
+                riskService.delete(risk_list.get(i).getPost_num());
+            }
+        }
+        //행사삭제
+        List<EventVO> event_list = eventService.selectallevent();
+        for (int i=0; i < event_list.size();i++){
+            if(event_list.get(i).getPrj_num()==prj_num){
+                eventService.delete(event_list.get(i).getPost_num());
+            }
+        }
+    }
+
+
     //project delete
-    @RequestMapping(value = "/project_delete.do", method = RequestMethod.GET)
+    @RequestMapping(value = "/project_delete.do", method = RequestMethod.DELETE)
     public String project_delete(@RequestParam("prj_num") int prj_num,Model model, HttpSession httpSession) {
         CustomerVO cust = (CustomerVO) httpSession.getAttribute("login");
         ProjectVO prj = (ProjectVO) httpSession.getAttribute("prj_list");
         int cus_num = Integer.parseInt(cust.getCus_num());
         int cus_state = cust.getCus_state();
         int pl = prj.getCus_num();
+
+
         //관리자로 접속하는 경우
         if(cus_state == 3) {
+            project_delete_etc(prj_num);
             projectService.deleteAllProject_detail(prj_num);
             projectService.delete(prj_num);
             //PL 권한부여
@@ -1287,6 +1328,7 @@ public class MainController {
             return "redirect:/project.do";
             //PL계정으로 접속하는 경우
         }else if(cus_state == 2 && cus_num == pl) {
+            project_delete_etc(prj_num);
             projectService.deleteAllProject_detail(prj_num);
             projectService.delete(prj_num);
             //PL 권한부여

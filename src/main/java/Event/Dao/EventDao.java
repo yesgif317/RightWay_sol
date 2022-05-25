@@ -6,7 +6,7 @@ import java.util.List;
 
 public interface EventDao {
     List<EventVO> selectEvent(Object object);
-
+    List<EventVO> selectallevent();
     //글 작성 Insert
     String insertEvent(EventVO EventVO);
 

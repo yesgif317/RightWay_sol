@@ -18,7 +18,11 @@
         WHERE r.cus_num = c.cus_num and r.risk_mng = c2.cus_num and cate = 9 and r.prj_num = #{prj_num}
         order by post_num desc
     </select>
-
+    <select id="selectallrisk" resultType="RiskVO">
+        SELECT *
+        FROM Risk
+        order by post_num desc
+    </select>
     <!-- 등록(Insert) -->
     <insert id="insertRisk" parameterType="RiskVO" >
         insert into Risk(post_num,cate,risk_tit, cus_num,risk_imp,risk_pgs,risk_con,risk_start,risk_end,prj_num,risk_reg,risk_mng)

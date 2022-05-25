@@ -7,6 +7,8 @@ import java.util.List;
 
 public interface TeamService {
     //팀 목록 보기
+    List<TeamVO> selectTeamall();
+
     List<TeamVO> selectTeam(Object object);
     //팀원 수 세기
     List<TeammemberVO> countmember();

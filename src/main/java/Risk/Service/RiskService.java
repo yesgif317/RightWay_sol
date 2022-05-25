@@ -8,6 +8,7 @@ public interface RiskService {
     //목록 조회
     List<RiskVO> selectIssue(Object object);
     List<RiskVO> selectDanger(Object object);
+    List<RiskVO> selectallrisk();
     //등록
     String insertRisk(RiskVO riskVO);
     //글 수정(Update)

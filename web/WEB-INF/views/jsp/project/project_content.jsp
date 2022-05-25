@@ -3,7 +3,15 @@
 
 <jsp:include page="../../include/header.jsp" flush="true" />
 <jsp:include page="../../include/sidebar.jsp" flush="true" />
-
+<script>
+    function delete_form () {
+        document.getElementById('deleteform').submit();
+    }
+</script>
+<form   method="post" action="/project_delete.do" id="deleteform">
+    <input type="hidden" name="_method" value="delete" />
+    <input style="border:0 solid whitesmoke;width:100%;" name="prj_num" type="hidden" value="${ProjectList1.prj_num}" \/>
+</form>
 <!-- Content Wrapper -->
 <div id="content-wrapper" class="d-flex flex-column" >
 
@@ -135,7 +143,7 @@
                                                 <p class="text-danger">프로젝트의 모든 게시물이 함께 삭제되며 복구가 불가능합니다.</p>
                                             </div>
                                             <div class="modal-footer">
-                                                <button onclick = "location.href = 'project_delete.do?prj_num=${ProjectList1.prj_num}'" type="button" class="btn btn-danger">삭제하기</button>
+                                                <button onclick="return delete_form()" type="button" class="btn btn-danger">삭제하기</button>
                                                 <button type="button" class="btn btn-secondary" data-dismiss="modal">취소하기</button>
                                             </div>
                                         </div>

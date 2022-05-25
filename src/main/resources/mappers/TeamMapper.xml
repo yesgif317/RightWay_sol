@@ -15,7 +15,11 @@
         where  t.cus_num=c.cus_num and prj_num = #{prj_num}
         ORDER BY team_num ASC
     </select>
-
+    <select id="selectTeamall" resultType="TeamVO">
+        SELECT *
+        FROM Team
+        ORDER BY team_num ASC
+    </select>
     <!-- 팀 작성(Insert) -->
     <insert id="insertTeam" parameterType="TeamVO" >
         insert into Team(team_num,team_name,team_desc,cus_num,prj_num)

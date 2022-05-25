@@ -15,7 +15,8 @@ public class RiskServiceImpl implements RiskService {
     public List<RiskVO> selectIssue(Object object) {return dao.selectIssue(object);}
     @Override
     public List<RiskVO> selectDanger(Object object) {return dao.selectDanger(object);}
-
+    @Override
+    public List<RiskVO> selectallrisk() {return dao.selectallrisk();}
     @Override
     public String insertRisk(RiskVO riskVO) { return dao.insertRisk(riskVO);}
 
