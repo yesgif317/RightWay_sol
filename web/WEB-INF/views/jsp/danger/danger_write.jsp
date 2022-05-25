@@ -106,7 +106,7 @@
                                                                                     <td>${customer.cus_position}</td>
                                                                                     <td>${customer.cus_email}</td>
                                                                                     <td onclick="return memberselect('${customer.cus_num}','${customer.cus_name}','${customer.cus_position}')">
-                                                                                        <a class="btn btn-secondary text-gray-100"
+                                                                                        <a class="btn btn-info text-gray-100"
                                                                                            data-dismiss="modal">선택</a>
                                                                                     </td>
                                                                                 </tr>

@@ -7,13 +7,13 @@
     <!--보드-->
     <!-- Select 문 -->
     <select id="selectIssue" resultType="RiskVO">
-        SELECT post_num,cate,risk_tit, c.cus_num,risk_imp,risk_pgs,risk_con,to_char(risk_start,'YYYY-MM-DD') AS risk_start,to_char(risk_end,'YYYY-MM-DD') AS risk_end,to_char(risk_reg,'YYYY-MM-DD') AS risk_reg,risk_upd,prj_num,c.cus_name,c.cus_position,c2.cus_name as mng_name,c2.cus_position as mng_position,risk_mng
+        SELECT post_num,cate,risk_tit, c.cus_num,risk_imp,risk_pgs,risk_con,to_char(risk_start,'YYYY-MM-DD') AS risk_start,to_char(risk_end,'YYYY-MM-DD') AS risk_end,to_char(risk_reg,'YYYY-MM-DD') AS risk_reg, to_char(risk_upd,'YYYY-MM-DD') AS risk_upd,prj_num,c.cus_name,c.cus_position,c2.cus_name as mng_name,c2.cus_position as mng_position,risk_mng
         FROM Risk r, customer c ,customer c2
         WHERE r.cus_num = c.cus_num and r.risk_mng = c2.cus_num and cate = 10 and r.prj_num = #{prj_num}
         order by post_num desc
     </select>
     <select id="selectDanger" resultType="RiskVO">
-        SELECT post_num,cate,risk_tit, c.cus_num,risk_imp,risk_pgs,risk_con,to_char(risk_start,'YYYY-MM-DD') AS risk_start,to_char(risk_end,'YYYY-MM-DD') AS risk_end,to_char(risk_reg,'YYYY-MM-DD') AS risk_reg,risk_upd,prj_num,c.cus_name,c.cus_position,c2.cus_name as mng_name,c2.cus_position as mng_position,risk_mng
+        SELECT post_num,cate,risk_tit, c.cus_num,risk_imp,risk_pgs,risk_con,to_char(risk_start,'YYYY-MM-DD') AS risk_start,to_char(risk_end,'YYYY-MM-DD') AS risk_end,to_char(risk_reg,'YYYY-MM-DD') AS risk_reg, to_char(risk_upd,'YYYY-MM-DD') AS risk_upd,prj_num,c.cus_name,c.cus_position,c2.cus_name as mng_name,c2.cus_position as mng_position,risk_mng
         FROM Risk r, customer c ,customer c2
         WHERE r.cus_num = c.cus_num and r.risk_mng = c2.cus_num and cate = 9 and r.prj_num = #{prj_num}
         order by post_num desc

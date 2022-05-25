@@ -664,8 +664,8 @@ public class MainController {
 
     //issue 글쓰기 페이지 이동
     @RequestMapping(value = "/issue_write.do", method = RequestMethod.GET)
-    public String issue_write(@RequestParam("post_num") int post_num, Model model) {
-        List<CustomerVO> customerVOList = customerService.selectAllCustomer();
+    public String issue_write(@RequestParam("post_num") int post_num, Model model,HttpSession httpSession) {
+        List<CustomerVO> customerVOList = customerService.selectCustomerManagement(httpSession.getAttribute("prj_list"));
         model.addAttribute("CustomerList", customerVOList);
         if (post_num > 0) {
             RiskVO Result = riskService.viewRisk(post_num);
@@ -927,8 +927,8 @@ public class MainController {
 
     //danger 글쓰기 페이지 이동
     @RequestMapping(value = "/danger_write.do", method = RequestMethod.GET)
-    public String danger_write(@RequestParam("post_num") int post_num, Model model) {
-        List<CustomerVO> customerVOList = customerService.selectAllCustomer();
+    public String danger_write(@RequestParam("post_num") int post_num, Model model,HttpSession httpSession) {
+        List<CustomerVO> customerVOList = customerService.selectCustomerManagement(httpSession.getAttribute("prj_list"));
         model.addAttribute("CustomerList", customerVOList);
         if (post_num > 0) {
             RiskVO Result = riskService.viewRisk(post_num);
@@ -1002,6 +1002,7 @@ public class MainController {
         //관리자로 접속하는 경우
         if(cus_state == 3) {
             List<CustomerVO> customerVOList = customerService.select_nonPermissionCus();
+            System.out.println(customerVOList);
             // .jsp 파일로 DB 결과값 전달하기
             model.addAttribute("CustomerList", customerVOList);
             return "/adminpermission/adminpermission";
@@ -1244,7 +1245,7 @@ public class MainController {
     public String project_insert(Model model, ProjectVO projectVO) {
         if(projectService.selectproject_list(projectVO.getPrj_name()) == null){
         projectService.insertProject(projectVO);
-        //프로젝트 등록자를 detail 테이블에도 추가하는 코드
+        //프로젝트 PL을 detail 테이블에도 추가하는 코드
         ProjectDetailVO projectDetailVO = new ProjectDetailVO();
         projectDetailVO.setCus_num(projectVO.getCus_num());
         projectDetailVO.setAuth("1");
@@ -1345,9 +1346,18 @@ public class MainController {
     //project update
     @RequestMapping(value = "/project_update.do", method = RequestMethod.POST)
     public String project_update(Model model, ProjectVO projectVO) {
+        ProjectDetailVO projectDetailVO = new ProjectDetailVO();
         ProjectVO namechk = projectService.selectproject_list(projectVO.getPrj_name());
         if(namechk == null){
+
+            //프로젝트 업데이트
             projectService.updateProject(projectVO);
+            //프로젝트 PL을 detail 테이블에도 추가하는 코드
+            projectDetailVO.setCus_num(projectVO.getCus_num());
+            projectDetailVO.setAuth("1");
+            projectDetailVO.setPrj_num(projectService.selectProjectNum(projectVO.getPrj_name()).getPrj_num());
+            projectService.insertProject_detail(projectDetailVO);
+
             //PL 권한부여
             List<ProjectVO> pl_num = projectService.selectPL();
             customerService.resetPLState();
@@ -1356,7 +1366,15 @@ public class MainController {
             }
             return "redirect:/project.do";
         }else if (namechk.getPrj_num() == projectVO.getPrj_num() && namechk.getPrj_name().equals(projectVO.getPrj_name())){
+            //프로젝트 업데이트
             projectService.updateProject(projectVO);
+
+            //프로젝트 PL을 detail 테이블에도 추가하는 코드
+            projectDetailVO.setCus_num(projectVO.getCus_num());
+            projectDetailVO.setAuth("1");
+            projectDetailVO.setPrj_num(projectService.selectProjectNum(projectVO.getPrj_name()).getPrj_num());
+            projectService.insertProject_detail(projectDetailVO);
+
             //PL 권한부여
             List<ProjectVO> pl_num = projectService.selectPL();
             customerService.resetPLState();

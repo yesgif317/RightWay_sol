@@ -175,6 +175,6 @@
     </update>
 
     <update id="updatePLState" parameterType="int">
-        update customer set cus_state = 2 where cus_num =#{cos_num}
+        update customer set cus_state = 2 where cus_num =#{cos_num} and cus_state != 3
     </update>
 </mapper>

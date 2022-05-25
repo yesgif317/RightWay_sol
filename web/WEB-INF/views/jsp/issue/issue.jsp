@@ -31,7 +31,7 @@
                             <tr >
                                 <th>번호</th>
                                 <th width="25%">제목</th>
-                                <th>중요도</th>
+                                <th>중요도&nbsp;&nbsp;&nbsp;&nbsp;</th>
                                 <th>담당자</th>
                                 <th>진행상태</th>
                                 <th>보고자</th>
@@ -79,7 +79,17 @@
                                     </td>
                                     <td>${risk.cus_name}/${risk.cus_position}</td>
                                     <td>${risk.risk_start} ~ ${risk.risk_end}</td>
-                                    <td>${risk.risk_reg}</td>
+                                    <td>
+                                        <c:choose>
+                                            <c:when test="${risk.risk_upd eq null}">
+                                                등록일 : ${risk.risk_reg}
+                                            </c:when>
+                                            <c:otherwise>
+                                                수정일 : ${risk.risk_upd}
+                                            </c:otherwise>
+                                        </c:choose>
+                                    </td>
+
                                 </tr>
                             </c:forEach>
                             </tbody>

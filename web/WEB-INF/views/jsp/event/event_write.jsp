@@ -84,10 +84,12 @@
                                         <div class="row form-group">
                                             <div class="col col-md-3 text-right"><label for="evt_pri" class=" form-control-label fa-solid text-gray-800 mt-2"><sup class="text-danger small">*</sup>참가비용</label></div>
                                             <div class="col-12 col-md-2"><input type="number" min="0" step="100" id="evt_pri" name="evt_pri" class="form-control" value="${EventList.evt_pri}"></div>
+                                            <div class="mt-2">원</div>
                                         </div>
                                         <div class="row form-group">
                                             <div class="col col-md-3 text-right"><label for="evt_limit" class=" form-control-label fa-solid text-gray-800 mt-2"><sup class="text-danger small">*</sup>정원</label></div>
                                             <div class="col-12 col-md-2"><input type="number" min="0" id="evt_limit" name="evt_limit" class="form-control" value="${EventList.evt_limit}"></div>
+                                            <div class="mt-2">명</div>
                                         </div>
                                         <div class="row form-group">
                                             <div class="col col-md-3 text-right"><label for="evt_acptstart" class=" form-control-label fa-solid text-gray-800 mt-2">접수기간</label></div>

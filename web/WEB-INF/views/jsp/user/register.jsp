@@ -243,20 +243,10 @@
             alert("전화번호를 입력해주세요.");
             document.joinform.cus_phone.focus();
             exit;
-        }
-            // else if (document.getElementById("com_name").value == '') {
-            //     alert("회사를 선택해주세요.");
-            //     document.joinform.com_name.focus();
-            //     exit;
-        // }
-        else if (document.getElementById("cus_dep").value == '') {
-            alert("부서를 입력해주세요.");
-            document.joinform.cus_dep.focus();
-            exit;
-        } else if (document.getElementById("cus_position").value == '') {
-            alert("직급을 선택해주세요");
-            document.joinform.cus_position.focus();
-            exit;
+        } else if (document.getElementById("com_name").value == '') {
+                alert("회사를 선택해주세요.");
+                document.joinform.com_name.focus();
+                exit;
         }
 
         if (document.joinform.cus_pwd.value != document.joinform.cus_pwdcheck.value) {
