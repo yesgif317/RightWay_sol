@@ -177,11 +177,11 @@ jsp:include page="../../include/footer.jsp" flush="true" />
                             <div class="media-heading">
                                 <b>
                                 <span class="member">
-                                    ${comment.com_name}/${comment.cus_name}/${comment.cus_dep}/${comment.cus_position}
+                                    <b>${comment.com_name}/${comment.cus_name}/${comment.cus_dep}/${comment.cus_position}</b>
 
                                 </span>
                                 </b>
-                                <span class="clock-info">
+                                <span style="float: right" class="clock-info">
                                     <i class="fa fa-clock-o">
                                     </i>
                                             ${comment.cmt_date}
@@ -451,10 +451,10 @@ jsp:include page="../../include/footer.jsp" flush="true" />
                                     <div class="media-heading">
                                         <b>
                                 <span class="member">
-                                    ${recomment.com_name}/${recomment.cus_name}/${recomment.cus_dep}/${recomment.cus_position}
+                                    <b>${recomment.com_name}/${recomment.cus_name}/${recomment.cus_dep}/${recomment.cus_position}</b>
                                 </span>
                                         </b>
-                                        <span class="font-11 text-muted">
+                                        <span style="float: right" class="font-11 text-muted">
                                 <span class="clock-info">
                                     <i class="fa fa-clock-o">
                                     </i>
