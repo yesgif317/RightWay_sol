@@ -141,7 +141,6 @@ public class MainController {
     }
 
 
-
     // 메인 페이지 이동 및 차트 데이터 가져오기
     @RequestMapping(value = "/index.do", method = RequestMethod.GET)
     public String main(Model model, HttpServletRequest request,
@@ -379,12 +378,13 @@ public class MainController {
         httpSession.setAttribute("login", customerview);
         return "redirect:/mypage.do";
     }
+
     //게시판 작성글 삭제 (산출물, 정기보고, 회의록, 공지사항, 자료실, 요청사항)
     @RequestMapping(value = "/post_delete.do", method = RequestMethod.DELETE)
-    public String post_delete(@RequestParam("post_num") int no,@RequestParam("cate") int cate) {
+    public String post_delete(@RequestParam("post_num") int no, @RequestParam("cate") int cate) {
 
         List<CommentVO> commentList = commentService.selectCommentbyPost(no);
-        for(int i=0;i< commentList.size();i++){
+        for (int i = 0; i < commentList.size(); i++) {
             re_commentService.deleteRe_CommentAll(commentList.get(i).getCmt_num());
         }
         commentService.deleteCommentbyPost(no);
@@ -405,17 +405,18 @@ public class MainController {
         }
         return "redirect:/request.do";
     }
+
     //산출물 게시판 글목록 보기 cate=1
     @RequestMapping(value = "/outputs.do", method = RequestMethod.GET)
-    public String outputs(Model model,HttpSession httpSession) {
+    public String outputs(Model model, HttpSession httpSession) {
         //service 클래스에서 Dao 로 접근하여 쿼리 결과값 가져오기
         ProjectVO object = (ProjectVO) httpSession.getAttribute("prj_list");
         List<NormalVO> allpostVoList = normalService.selectAll(1);
         List<NormalVO> postVoList = new ArrayList<>();
-        for(int i=0; i < allpostVoList.size();i++)
-        if(allpostVoList.get(i).getPrj_num() == object.getPrj_num()){
-            postVoList.add(allpostVoList.get(i));
-        }
+        for (int i = 0; i < allpostVoList.size(); i++)
+            if (allpostVoList.get(i).getPrj_num() == object.getPrj_num()) {
+                postVoList.add(allpostVoList.get(i));
+            }
         // .jsp 파일로 DB 결과값 전달하기
         model.addAttribute("PostList", postVoList);
         return "/outputs/outputs";
@@ -433,13 +434,12 @@ public class MainController {
 
     //산출물 작성글 보기
     @RequestMapping(value = "/outputs_content.do", method = RequestMethod.GET)
-    public String outputs_content(@RequestParam("post_num") int no, Model model, HttpServletRequest request,HttpServletResponse response) {
+    public String outputs_content(@RequestParam("post_num") int no, Model model, HttpServletRequest request, HttpServletResponse response) {
         NormalVO Result = normalService.viewPost(no);
-        if(Result == null){
+        if (Result == null) {
             try {
                 ScriptUtil.alertAndMovePage(response, "존재하지 않는 게시글 입니다.", "/outputs.do");
-            }
-            catch (IOException ex){
+            } catch (IOException ex) {
                 System.out.println(ex);
             }
         }
@@ -524,13 +524,12 @@ public class MainController {
     }
 
     @RequestMapping(value = "/notice_content.do", method = RequestMethod.GET)
-    public String notice_content(@RequestParam("post_num") int no, Model model, HttpServletRequest request,HttpServletResponse response) {
+    public String notice_content(@RequestParam("post_num") int no, Model model, HttpServletRequest request, HttpServletResponse response) {
         NormalVO Result = normalService.viewPost(no);
-        if(Result == null){
+        if (Result == null) {
             try {
                 ScriptUtil.alertAndMovePage(response, "존재하지 않는 게시글 입니다.", "/notice.do");
-            }
-            catch (IOException ex){
+            } catch (IOException ex) {
                 System.out.println(ex);
             }
         }
@@ -623,13 +622,12 @@ public class MainController {
     //요청사항 작성글 보기
     @RequestMapping(value = "/request_content.do", method = RequestMethod.GET)
     public String request_content(@RequestParam("post_num") int no, Model model, HttpServletRequest request
-            ,HttpServletResponse response) {
+            , HttpServletResponse response) {
         NormalVO Result = normalService.viewPost(no);
-        if(Result == null){
+        if (Result == null) {
             try {
                 ScriptUtil.alertAndMovePage(response, "존재하지 않는 게시글 입니다.", "/outputs.do");
-            }
-            catch (IOException ex){
+            } catch (IOException ex) {
                 System.out.println(ex);
             }
         }
@@ -676,7 +674,7 @@ public class MainController {
 
     //issue 글쓰기 페이지 이동
     @RequestMapping(value = "/issue_write.do", method = RequestMethod.GET)
-    public String issue_write(@RequestParam("post_num") int post_num, Model model,HttpSession httpSession) {
+    public String issue_write(@RequestParam("post_num") int post_num, Model model, HttpSession httpSession) {
         List<CustomerVO> customerVOList = customerService.selectCustomerManagement(httpSession.getAttribute("prj_list"));
         model.addAttribute("CustomerList", customerVOList);
         if (post_num > 0) {
@@ -691,11 +689,10 @@ public class MainController {
     public String issue_content(@RequestParam("post_num") int post_num, Model model,
                                 HttpServletRequest request, HttpServletResponse response) {
         RiskVO Result = riskService.viewRisk(post_num);
-        if(Result == null){
+        if (Result == null) {
             try {
                 ScriptUtil.alertAndMovePage(response, "존재하지 않는 게시글 입니다.", "/issue.do");
-            }
-            catch (IOException ex){
+            } catch (IOException ex) {
                 System.out.println(ex);
             }
         }
@@ -733,11 +730,11 @@ public class MainController {
 
     //위험/이슈 작성글 삭제
     @RequestMapping(value = "/issue_delete.do", method = RequestMethod.DELETE)
-    public String issue_delete(@RequestParam("post_num") int no,@RequestParam("cate") int cate) {
-        List<CommentVO> commentallVO=commentService.selectCommentAll();
-        for(int i=0;i<commentallVO.size();i++){
-            if(commentallVO.get(i).getCate()==cate){
-                if(commentallVO.get(i).getPost_num()==no){
+    public String issue_delete(@RequestParam("post_num") int no, @RequestParam("cate") int cate) {
+        List<CommentVO> commentallVO = commentService.selectCommentAll();
+        for (int i = 0; i < commentallVO.size(); i++) {
+            if (commentallVO.get(i).getCate() == cate) {
+                if (commentallVO.get(i).getPost_num() == no) {
                     re_commentService.deleteRe_CommentAll(commentallVO.get(i).getCmt_num());
                     commentService.deleteComment(commentallVO.get(i).getCmt_num());
                 }
@@ -791,11 +788,10 @@ public class MainController {
     @RequestMapping(value = "/meetingrecord_content.do", method = RequestMethod.GET)
     public String meetingrecord_content(@RequestParam("post_num") int no, Model model, HttpServletRequest request, HttpServletResponse response) {
         NormalVO Result = normalService.viewPost(no);
-        if(Result == null){
+        if (Result == null) {
             try {
                 ScriptUtil.alertAndMovePage(response, "존재하지 않는 게시글 입니다.", "/meetingrecord.do");
-            }
-            catch (IOException ex){
+            } catch (IOException ex) {
                 System.out.println(ex);
             }
         }
@@ -817,7 +813,6 @@ public class MainController {
 
         return "/meetingrecord/meetingrecord_content";
     }
-
 
 
     //회의록 작성글 수정 기능
@@ -868,13 +863,12 @@ public class MainController {
 
     //정기보고 작성글 보기
     @RequestMapping(value = "/regularreport_content.do", method = RequestMethod.GET)
-    public String regularreport_content(@RequestParam("post_num") int no, Model model, HttpServletRequest request,HttpServletResponse response) {
+    public String regularreport_content(@RequestParam("post_num") int no, Model model, HttpServletRequest request, HttpServletResponse response) {
         NormalVO Result = normalService.viewPost(no);
-        if(Result == null){
+        if (Result == null) {
             try {
                 ScriptUtil.alertAndMovePage(response, "존재하지 않는 게시글 입니다.", "/regularreport.do");
-            }
-            catch (IOException ex){
+            } catch (IOException ex) {
                 System.out.println(ex);
             }
         }
@@ -895,7 +889,6 @@ public class MainController {
 
         return "/regularreport/regularreport_content";
     }
-
 
 
     //정기보고 작성글 수정 기능
@@ -939,7 +932,7 @@ public class MainController {
 
     //danger 글쓰기 페이지 이동
     @RequestMapping(value = "/danger_write.do", method = RequestMethod.GET)
-    public String danger_write(@RequestParam("post_num") int post_num, Model model,HttpSession httpSession) {
+    public String danger_write(@RequestParam("post_num") int post_num, Model model, HttpSession httpSession) {
         List<CustomerVO> customerVOList = customerService.selectCustomerManagement(httpSession.getAttribute("prj_list"));
         model.addAttribute("CustomerList", customerVOList);
         if (post_num > 0) {
@@ -951,13 +944,12 @@ public class MainController {
 
     //danger 상세 페이지 이동
     @RequestMapping(value = "/danger_content.do", method = RequestMethod.GET)
-    public String danger_content(@RequestParam("post_num") int post_num, Model model, HttpServletRequest request,HttpServletResponse response) {
+    public String danger_content(@RequestParam("post_num") int post_num, Model model, HttpServletRequest request, HttpServletResponse response) {
         RiskVO Result = riskService.viewRisk(post_num);
-        if(Result == null){
+        if (Result == null) {
             try {
                 ScriptUtil.alertAndMovePage(response, "존재하지 않는 게시글 입니다.", "/danger.do");
-            }
-            catch (IOException ex){
+            } catch (IOException ex) {
                 System.out.println(ex);
             }
         }
@@ -993,7 +985,6 @@ public class MainController {
     }
 
 
-
     //danger update
     @RequestMapping(value = "/danger_update.do", method = RequestMethod.POST)
     public String danger_update(Model model, RiskVO riskVO) {
@@ -1012,14 +1003,14 @@ public class MainController {
         int cus_state = cust.getCus_state();
         int pl = prj.getCus_num();
         //관리자로 접속하는 경우
-        if(cus_state == 3) {
+        if (cus_state == 3) {
             List<CustomerVO> customerVOList = customerService.select_nonPermissionCus();
             System.out.println(customerVOList);
             // .jsp 파일로 DB 결과값 전달하기
             model.addAttribute("CustomerList", customerVOList);
             return "/adminpermission/adminpermission";
-        //PL계정으로 접속하는 경우
-        }else if(cus_state == 2 && cus_num == pl) {
+            //PL계정으로 접속하는 경우
+        } else if (cus_state == 2 && cus_num == pl) {
             List<CustomerVO> customerVOList = customerService.select_nonPermissionCusPL(Integer.parseInt(cust.getCom_num()));
             // .jsp 파일로 DB 결과값 전달하기
             model.addAttribute("CustomerList", customerVOList);
@@ -1055,13 +1046,12 @@ public class MainController {
 
     //행사관리 상세 페이지 이동
     @RequestMapping(value = "/event_content.do", method = RequestMethod.GET)
-    public String event_content(@RequestParam("post_num") int post_num, Model model, HttpServletRequest request,HttpServletResponse response) {
+    public String event_content(@RequestParam("post_num") int post_num, Model model, HttpServletRequest request, HttpServletResponse response) {
         EventVO Result = eventService.viewEvent(post_num);
-        if(Result == null){
+        if (Result == null) {
             try {
                 ScriptUtil.alertAndMovePage(response, "존재하지 않는 게시글 입니다.", "/event.do");
-            }
-            catch (IOException ex){
+            } catch (IOException ex) {
                 System.out.println(ex);
             }
         }
@@ -1087,10 +1077,10 @@ public class MainController {
     //행사관리 delete
     @RequestMapping(value = "/event_delete.do", method = RequestMethod.DELETE)
     public String event_delete(@RequestParam("post_num") int no) {
-        List<CommentVO> commentallVO=commentService.selectCommentAll();
-        for(int i=0;i<commentallVO.size();i++){
-            if(commentallVO.get(i).getCate()==5){
-                if(commentallVO.get(i).getPost_num()==no){
+        List<CommentVO> commentallVO = commentService.selectCommentAll();
+        for (int i = 0; i < commentallVO.size(); i++) {
+            if (commentallVO.get(i).getCate() == 5) {
+                if (commentallVO.get(i).getPost_num() == no) {
                     re_commentService.deleteRe_CommentAll(commentallVO.get(i).getCmt_num());
                     commentService.deleteComment(commentallVO.get(i).getCmt_num());
                 }
@@ -1131,13 +1121,12 @@ public class MainController {
 
     //company 상세 페이지 이동
     @RequestMapping(value = "/company_content.do", method = RequestMethod.GET)
-    public String company_content(@RequestParam("com_num") int com_num, Model model,HttpServletResponse response) {
+    public String company_content(@RequestParam("com_num") int com_num, Model model, HttpServletResponse response) {
         CompanyVO Result = companyService.viewCompany(com_num);
-        if(Result == null){
+        if (Result == null) {
             try {
                 ScriptUtil.alertAndMovePage(response, "존재하지 않는 게시글 입니다.", "/company.do");
-            }
-            catch (IOException ex){
+            } catch (IOException ex) {
                 System.out.println(ex);
             }
         }
@@ -1235,13 +1224,12 @@ public class MainController {
 
     //project 상세 페이지 이동
     @RequestMapping(value = "/project_content.do", method = RequestMethod.GET)
-    public String project_content(@RequestParam("prj_num") int prj_num, Model model,HttpServletResponse response) {
+    public String project_content(@RequestParam("prj_num") int prj_num, Model model, HttpServletResponse response) {
         List<ProjectDetailVO> projectDetailVOList = projectService.selectProject_detail(prj_num);
-        if(projectDetailVOList == null){
+        if (projectDetailVOList == null) {
             try {
                 ScriptUtil.alertAndMovePage(response, "프로젝트 구성원이 존재하지 않습니다.", "/project.do");
-            }
-            catch (IOException ex){
+            } catch (IOException ex) {
                 System.out.println(ex);
             }
         }
@@ -1254,22 +1242,25 @@ public class MainController {
 
     //project insert
     @RequestMapping(value = "/project_insert.do", method = RequestMethod.POST)
-    public String project_insert(Model model, ProjectVO projectVO) {
-        if(projectService.selectproject_list(projectVO.getPrj_name()) == null){
-        projectService.insertProject(projectVO);
-        //프로젝트 PL을 detail 테이블에도 추가하는 코드
-        ProjectDetailVO projectDetailVO = new ProjectDetailVO();
-        projectDetailVO.setCus_num(projectVO.getCus_num());
-        projectDetailVO.setAuth("1");
-        projectDetailVO.setPrj_num(projectService.selectProjectNum(projectVO.getPrj_name()).getPrj_num());
-        projectService.insertProject_detail(projectDetailVO);
-        //PL 권한부여
-        List<ProjectVO> pl_num = projectService.selectPL();
-        customerService.resetPLState();
-        for (int i=0; i < pl_num.size();i++){
-            customerService.updatePLState(pl_num.get(i).getCus_num());
-        }
-        return "redirect:/project.do";
+    public String project_insert(Model model, ProjectVO projectVO,HttpSession httpSession) {
+        CustomerVO logininfo = (CustomerVO)httpSession.getAttribute("login");
+        if (projectService.selectproject_list(projectVO.getPrj_name()) == null) {
+            projectService.insertProject(projectVO);
+            //프로젝트 PL을 detail 테이블에도 추가하는 코드
+            ProjectDetailVO projectDetailVO = new ProjectDetailVO();
+            projectDetailVO.setCus_num(projectVO.getCus_num());
+            projectDetailVO.setAuth("1");
+            projectDetailVO.setPrj_num(projectService.selectProjectNum(projectVO.getPrj_name()).getPrj_num());
+            projectService.insertProject_detail(projectDetailVO);
+            //PL 권한부여
+            List<ProjectVO> pl_num = projectService.selectPL();
+            customerService.resetPLState();
+            for (int i = 0; i < pl_num.size(); i++) {
+                customerService.updatePLState(pl_num.get(i).getCus_num());
+            }
+            CustomerVO customerview = customerService.viewCustomer(parseInt(logininfo.getCus_num()));
+            httpSession.setAttribute("login", customerview);
+            return "redirect:/project.do";
         }
         model.addAttribute("msg", "중복된 프로젝트명 입니다.");
         model.addAttribute("url", "project_write.do?prj_num=0&update=0");
@@ -1280,19 +1271,19 @@ public class MainController {
     void project_delete_etc(int prj_num) {
         //팀삭제
         List<TeamVO> team_list = teamService.selectTeamall();
-        for (int i=0; i < team_list.size();i++){
-            if(team_list.get(i).getPrj_num()==prj_num){
+        for (int i = 0; i < team_list.size(); i++) {
+            if (team_list.get(i).getPrj_num() == prj_num) {
                 teamService.deletemember((team_list.get(i).getTeam_num()));
                 teamService.deleteTeam((team_list.get(i).getTeam_num()));
             }
         }
         //게시글과 댓글 삭제
         List<NormalVO> post_list = normalService.selectPost();
-        for (int i=0; i < post_list.size();i++){
-            if(post_list.get(i).getPrj_num()==prj_num){
-                int no=post_list.get(i).getPost_num();
+        for (int i = 0; i < post_list.size(); i++) {
+            if (post_list.get(i).getPrj_num() == prj_num) {
+                int no = post_list.get(i).getPost_num();
                 List<CommentVO> comment_List = commentService.selectCommentbyPost(no);
-                for(int j=0;j< comment_List.size();j++){
+                for (int j = 0; j < comment_List.size(); j++) {
                     re_commentService.deleteRe_CommentAll(comment_List.get(j).getCmt_num());
                 }
                 commentService.deleteCommentbyPost(no);
@@ -1301,15 +1292,15 @@ public class MainController {
         }
         //위험이슈삭제
         List<RiskVO> risk_list = riskService.selectallrisk();
-        for (int i=0; i < risk_list.size();i++){
-            if(risk_list.get(i).getPrj_num()==prj_num){
+        for (int i = 0; i < risk_list.size(); i++) {
+            if (risk_list.get(i).getPrj_num() == prj_num) {
                 riskService.delete(risk_list.get(i).getPost_num());
             }
         }
         //행사삭제
         List<EventVO> event_list = eventService.selectallevent();
-        for (int i=0; i < event_list.size();i++){
-            if(event_list.get(i).getPrj_num()==prj_num){
+        for (int i = 0; i < event_list.size(); i++) {
+            if (event_list.get(i).getPrj_num() == prj_num) {
                 eventService.delete(event_list.get(i).getPost_num());
             }
         }
@@ -1318,7 +1309,7 @@ public class MainController {
 
     //project delete
     @RequestMapping(value = "/project_delete.do", method = RequestMethod.DELETE)
-    public String project_delete(@RequestParam("prj_num") int prj_num,Model model, HttpSession httpSession) {
+    public String project_delete(@RequestParam("prj_num") int prj_num, Model model, HttpSession httpSession) {
         CustomerVO cust = (CustomerVO) httpSession.getAttribute("login");
         ProjectVO prj = (ProjectVO) httpSession.getAttribute("prj_list");
         int cus_num = Integer.parseInt(cust.getCus_num());
@@ -1327,26 +1318,26 @@ public class MainController {
 
 
         //관리자로 접속하는 경우
-        if(cus_state == 3) {
+        if (cus_state == 3) {
             project_delete_etc(prj_num);
             projectService.deleteAllProject_detail(prj_num);
             projectService.delete(prj_num);
             //PL 권한부여
             List<ProjectVO> pl_num = projectService.selectPL();
             customerService.resetPLState();
-            for (int i=0; i < pl_num.size();i++){
+            for (int i = 0; i < pl_num.size(); i++) {
                 customerService.updatePLState(pl_num.get(i).getCus_num());
             }
             return "redirect:/project.do";
             //PL계정으로 접속하는 경우
-        }else if(cus_state == 2 && cus_num == pl) {
+        } else if (cus_state == 2 && cus_num == pl) {
             project_delete_etc(prj_num);
             projectService.deleteAllProject_detail(prj_num);
             projectService.delete(prj_num);
             //PL 권한부여
             List<ProjectVO> pl_num = projectService.selectPL();
             customerService.resetPLState();
-            for (int i=0; i < pl_num.size();i++){
+            for (int i = 0; i < pl_num.size(); i++) {
                 customerService.updatePLState(pl_num.get(i).getCus_num());
             }
             return "redirect:/project.do";
@@ -1355,13 +1346,14 @@ public class MainController {
         model.addAttribute("url", "project.do");
         return "alert";
     }
+
     //project update
     @RequestMapping(value = "/project_update.do", method = RequestMethod.POST)
-    public String project_update(Model model, ProjectVO projectVO) {
+    public String project_update(Model model, ProjectVO projectVO,HttpSession httpSession) {
+        CustomerVO logininfo = (CustomerVO)httpSession.getAttribute("login");
         ProjectDetailVO projectDetailVO = new ProjectDetailVO();
         ProjectVO namechk = projectService.selectproject_list(projectVO.getPrj_name());
-        if(namechk == null){
-
+        if (namechk == null) {
             //프로젝트 업데이트
             projectService.updateProject(projectVO);
             //프로젝트 PL을 detail 테이블에도 추가하는 코드
@@ -1373,11 +1365,13 @@ public class MainController {
             //PL 권한부여
             List<ProjectVO> pl_num = projectService.selectPL();
             customerService.resetPLState();
-            for (int i=0; i < pl_num.size();i++){
+            for (int i = 0; i < pl_num.size(); i++) {
                 customerService.updatePLState(pl_num.get(i).getCus_num());
             }
+            CustomerVO customerview = customerService.viewCustomer(parseInt(logininfo.getCus_num()));
+            httpSession.setAttribute("login", customerview);
             return "redirect:/project.do";
-        }else if (namechk.getPrj_num() == projectVO.getPrj_num() && namechk.getPrj_name().equals(projectVO.getPrj_name())){
+        } else if (namechk.getPrj_num() == projectVO.getPrj_num() && namechk.getPrj_name().equals(projectVO.getPrj_name())) {
             //프로젝트 업데이트
             projectService.updateProject(projectVO);
 
@@ -1390,13 +1384,15 @@ public class MainController {
             //PL 권한부여
             List<ProjectVO> pl_num = projectService.selectPL();
             customerService.resetPLState();
-            for (int i=0; i < pl_num.size();i++){
+            for (int i = 0; i < pl_num.size(); i++) {
                 customerService.updatePLState(pl_num.get(i).getCus_num());
             }
+            CustomerVO customerview = customerService.viewCustomer(parseInt(logininfo.getCus_num()));
+            httpSession.setAttribute("login", customerview);
             return "redirect:/project.do";
         }
         model.addAttribute("msg", "중복된 프로젝트명 입니다.");
-        model.addAttribute("url", "project_write.do?prj_num="+projectVO.getPrj_num()+"&update=1");
+        model.addAttribute("url", "project_write.do?prj_num=" + projectVO.getPrj_num() + "&update=1");
         return "alert";
     }
 
@@ -1454,13 +1450,12 @@ public class MainController {
 
     //팀관리 작성글 보기
     @RequestMapping(value = "/team_content.do", method = RequestMethod.GET)
-    public String team_content(@RequestParam("team_num") int no, Model model,HttpServletResponse response) {
+    public String team_content(@RequestParam("team_num") int no, Model model, HttpServletResponse response) {
         TeamVO teamVoList = teamService.viewTeam(no);
-        if(teamVoList == null){
+        if (teamVoList == null) {
             try {
                 ScriptUtil.alertAndMovePage(response, "팀원이 존재하지 않습니다.", "/team.do");
-            }
-            catch (IOException ex){
+            } catch (IOException ex) {
                 System.out.println(ex);
             }
         }
@@ -1491,15 +1486,15 @@ public class MainController {
 
     // 팀관리 팀 등록 기능
     @RequestMapping(value = "/team_insert.do", method = RequestMethod.POST)
-    public String team_insert(Model model, TeamVO teamVO,HttpSession httpSession) {
+    public String team_insert(Model model, TeamVO teamVO, HttpSession httpSession) {
         String Result = teamService.insertTeam(teamVO);
         Object object = httpSession.getAttribute("prj_list");
-        TeammemberVO insertVO= new TeammemberVO();
+        TeammemberVO insertVO = new TeammemberVO();
         List<TeamVO> teamVoList = teamService.selectTeam(object);
-        for(int i = 0; i< teamVoList.size(); i++){
+        for (int i = 0; i < teamVoList.size(); i++) {
             System.out.println(teamVO.getTeam_name());
             System.out.println(teamVoList.get(i).getTeam_name());
-            if(teamVoList.get(i).getTeam_name().equals(teamVO.getTeam_name())){
+            if (teamVoList.get(i).getTeam_name().equals(teamVO.getTeam_name())) {
                 teamVoList.get(i).getTeam_num();
                 insertVO.setTeam_num(teamVoList.get(i).getTeam_num());
                 insertVO.setCus_num(teamVO.getCus_num());
@@ -1537,13 +1532,13 @@ public class MainController {
         int cus_state = cust.getCus_state();
         int pl = prj.getCus_num();
         //관리자로 접속하는 경우
-        if(cus_state == 3) {
+        if (cus_state == 3) {
             List<CustomerVO> customerVOList = customerService.selectCustomerManagement(object);
             // .jsp 파일로 DB 결과값 전달하기
             model.addAttribute("CustomerList", customerVOList);
             return "/usermanagement/usermanagement";
             //PL계정으로 접속하는 경우
-        }else if(cus_state == 2 && cus_num == pl) {
+        } else if (cus_state == 2 && cus_num == pl) {
             List<CustomerVO> customerVOList = customerService.selectCustomerManagement(object);
             // .jsp 파일로 DB 결과값 전달하기
             model.addAttribute("CustomerList", customerVOList);
@@ -1556,7 +1551,7 @@ public class MainController {
 
     //투입인력관리 상세 페이지 이동
     @RequestMapping(value = "/usermanagement_content.do", method = RequestMethod.GET)
-    public String usermanagement_content(@RequestParam("cus_num") int cus_num, Model model,HttpServletResponse response) {
+    public String usermanagement_content(@RequestParam("cus_num") int cus_num, Model model, HttpServletResponse response) {
         CustomerVO customerVO = customerService.viewCustomer(cus_num);
 
         model.addAttribute("CustomerList", customerVO);
@@ -1727,13 +1722,12 @@ public class MainController {
 
     //자료실
     @RequestMapping(value = "/datacenter_content.do", method = RequestMethod.GET)
-    public String datacenter_content(@RequestParam("post_num") int no, Model model, HttpServletRequest request,HttpServletResponse response) {
+    public String datacenter_content(@RequestParam("post_num") int no, Model model, HttpServletRequest request, HttpServletResponse response) {
         NormalVO Result = normalService.viewPost(no);
-        if(Result == null){
+        if (Result == null) {
             try {
                 ScriptUtil.alertAndMovePage(response, "존재하지 않는 게시글 입니다.", "/datacenter.do");
-            }
-            catch (IOException ex){
+            } catch (IOException ex) {
                 System.out.println(ex);
             }
         }
@@ -1930,7 +1924,6 @@ public class MainController {
         System.out.println("Permission complete!");
         return "index";
     }
-
 }
 
 

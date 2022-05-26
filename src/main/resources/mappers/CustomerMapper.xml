@@ -157,7 +157,7 @@
 
     <update id="updateCustomer" parameterType="CustomerVO" >
         update customer
-        set cus_email=#{cus_email}, cus_phone=#{cus_phone},cus_dep=#{cus_dep},cus_position=#{cus_position}
+        set cus_email=#{cus_email}, cus_phone=#{cus_phone},cus_dep=#{cus_dep},cus_position=#{cus_position}, com_num=#{com_num}
         where cus_num = #{cus_num}
     </update>
 

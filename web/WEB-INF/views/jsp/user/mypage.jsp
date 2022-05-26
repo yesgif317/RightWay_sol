@@ -25,7 +25,7 @@
                         <!-- Card Content - Collapse -->
                         <div class="collapse show" id="collapseCardExample">
                             <div class="card-body">
-                                <form method="post" action="mypage_update.do?cus_num=${login.cus_num}" id="updateform" name="updateform" enctype="application/x-www-form-urlencoded" class="form-horizontal">
+                                <form method="post" action="mypage_update.do?cus_num=${login.cus_num}" id="joinform" name="joinform" enctype="application/x-www-form-urlencoded" class="form-horizontal">
                                     <div class="row form-group">
                                         <div class="col col-md-3 text-right"><label class="form-control-label fa-solid m-2">ID</label></div>
                                         <div class="col-12 col-md-7 text-gray-900 text-lg mt-1">${login.cus_id} <a class="btn btn-sm btn-secondary ml-3 text-gray-100" data-toggle="modal" data-target="#passwordModal">비밀번호변경</a></div>
@@ -36,8 +36,20 @@
                                         <div class="col-12 col-md-7 text-gray-900 text-lg mt-1">${login.cus_name}</div>
                                     </div>
                                     <div class="row form-group">
-                                        <div class="col col-md-3 text-right"><label class="form-control-label fa-solid m-2">회사</label></div>
-                                        <div class="col-12 col-md-7 text-gray-900 text-lg mt-1">${login.com_name}</div>
+                                        <div class="col col-md-3 text-right"><label
+                                                class="form-control-label fa-solid m-2">회사</label></div>
+                                        <div class="col-sm-4 mb-2 mb-sm-0">
+                                            <input type="text" class="form-control text" name="com_name" id="com_name"
+                                                   placeholder="회사명" value="${login.com_name}" disabled>
+                                            <input type="hidden" class="form-control text" name="com_num" id="com_num"
+                                                   value="${login.com_num}">
+                                        </div>
+                                        <div class="form-label-group col-sm-2">
+                                            <button
+                                                    class="btn btn-secondary btn-user btn-block"
+                                                    type="button" onclick="comcheck()">회사 선택
+                                            </button>
+                                        </div>
                                     </div>
                                     <div class="row form-group">
                                         <div class="col col-md-3 text-right"><label class="form-control-label fa-solid m-2">이메일</label></div>
@@ -86,7 +98,7 @@
                                                 수정하시겠습니까?
                                             </div>
                                             <div class="modal-footer">
-                                                <button onclick= "document.getElementById('updateform').submit()" type="button" class="btn btn-info">확인</button>
+                                                <button onclick= "document.getElementById('joinform').submit()" type="button" class="btn btn-info">확인</button>
                                                 <button type="button" class="btn btn-secondary" data-dismiss="modal">취소</button>
                                             </div>
                                         </div>
@@ -152,6 +164,11 @@
     <!-- End of Main Content -->
 
 <script>
+        function comcheck() {
+        window.open("/comCheck.do?", "", "toolbar=no, menubar=yes, scrollbars=yes, resizable=no, width=800, height=500")
+
+    }
+
     function chk_form() {
         var pwdtext = /^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*#?&])[A-Za-z\d@$!%*#?&]{8,}$/;
 
