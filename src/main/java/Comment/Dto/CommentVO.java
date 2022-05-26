@@ -14,6 +14,9 @@ public class CommentVO {
     //private Date cmt_date;      //sysdate\
     private String cmt_date;
 
+//    private String rcmt_cnt;
+//    private String rcmt_date;
+
     // join (Customer)
     //private String cus_num;
     private String cus_id;
