@@ -38,13 +38,13 @@
                                     <div class="row form-group">
                                         <div class="col col-md-3 text-right"><label
                                                 class="form-control-label fa-solid m-2">회사</label></div>
-                                        <div class="col-sm-4 mb-2 mb-sm-0">
+                                        <div class="col-sm-3 mb-2 mb-sm-0">
                                             <input type="text" class="form-control text" name="com_name" id="com_name"
                                                    placeholder="회사명" value="${login.com_name}" disabled>
                                             <input type="hidden" class="form-control text" name="com_num" id="com_num"
                                                    value="${login.com_num}">
                                         </div>
-                                        <div class="form-label-group col-sm-2">
+                                        <div class="form-label-group col-sm-1">
                                             <button
                                                     class="btn btn-secondary btn-user btn-block"
                                                     type="button" onclick="comcheck()">회사 선택
