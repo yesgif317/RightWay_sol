@@ -25,7 +25,7 @@
                    and cus.cus_name=#{cus_name}
                    and cus.cus_dep=#{cus_dep}
                    and cus.cus_position=#{cus_position}),
-                #{rcmt_cnt, jdbcType=VARCHAR}, to_char(sysdate,'YYYY-MM-DD HH:MI:SS'))
+                #{rcmt_cnt, jdbcType=VARCHAR}, to_char(sysdate,'YYYY-MM-DD HH24:MI:SS'))
     </insert>
 
     <!-- 대댓글 수정 -->

@@ -174,13 +174,14 @@ public class MainController {
         List<RiskVO> IssueVOList = riskService.selectIssue(object);
         List<EventVO> EventVOList = eventService.selectEvent(object);
         List<CommentVO> CommentVOList = commentService.selectComment_fromNew(object_cus);
-
+        List<CommentVO> ReCommentVOList = commentService.selectReComment_fromNew(object_cus);
 
         httpSession.setAttribute("RVList", RiskVOList);
         httpSession.setAttribute("IVList", IssueVOList);
         httpSession.setAttribute("NormalList", normalVOList);
         httpSession.setAttribute("EvtList", EventVOList);
         httpSession.setAttribute("CommentList", CommentVOList);
+        httpSession.setAttribute("ReCommentList", ReCommentVOList);
 
         return "index";
     }

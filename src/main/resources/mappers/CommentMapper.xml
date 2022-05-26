@@ -32,7 +32,7 @@
                    and cus.cus_dep=#{cus_dep}
                    and cus.cus_position=#{cus_position}),
 
-                #{cmt_cnt, jdbcType=VARCHAR}, to_char(sysdate, 'YYYY-MM-DD HH:MI:SS'))
+                #{cmt_cnt, jdbcType=VARCHAR}, to_char(sysdate, 'YYYY-MM-DD HH24:MI:SS'))
     </insert>
 
 
@@ -73,37 +73,98 @@
 
 
     <select id="selectComment_fromNew" resultType="CommentVO">
-        select cmt_num, cmt_cnt, cmt_date, post_num, cate from comments
-        where
-                post_num in
-                (
-                    select post_num from
-                        (
-                            select post_num from
-                                (select post_num, cus_num from normal
-                                 union all
-                                 select post_num, cus_num from risk
-                                 union all
-                                 select post_num, cus_num from event)
-                            where cus_num = #{cus_num}
-                        )
-                )
-          AND
-                cate in
-                (
-                    select cate from
-                        (
-                            select cate, cus_num from
-                                (select cate, cus_num from normal
-                                 union all
-                                 select cate, cus_num from risk
-                                 union all
-                                 select cate, cus_num from event)
-                            where cus_num = #{cus_num}
-                        )
-                )
+        select cmt_num, cnt as cmt_cnt, date2 as cmt_date,
+               post_num, cate
+        from (
+                 select cmt_num, cmt_cnt as cnt, cmt_date as date2, post_num, cate
+                 from comments
+                 where post_num in
+                       (
+                           select post_num
+                           from (
+                                    select post_num
+                                    from (select post_num, cus_num
+                                          from normal
+                                          union
+                                          select post_num, cus_num
+                                          from risk
+                                          union
+                                          select post_num, cus_num
+                                          from event)
+                                    where cus_num = #{cus_num}
+                                )
+                       )
+                   AND cate in
+                       (
+                           select cate
+                           from (
+                                    select cate, cus_num
+                                    from (select cate, cus_num
+                                          from normal
+                                          union
+                                          select cate, cus_num
+                                          from risk
+                                          union
+                                          select cate, cus_num
+                                          from event)
+                                    where cus_num = #{cus_num}
+                                )
+                       )
 
+                 union all
+
+                 select cmt_num,
+                        rcmt_cnt  as cnt,
+                        rcmt_date as date2,
+                        null      as post_num,
+                        null      as cate
+                 from re_comments
+                 where cmt_num in
+                       (
+                           select cmt_num
+                           from comments
+                           where post_num in
+                                 (
+                                     select post_num
+                                     from (
+                                              select post_num
+                                              from (select post_num, cus_num
+                                                    from normal
+                                                    union
+                                                    select post_num, cus_num
+                                                    from risk
+                                                    union
+                                                    select post_num, cus_num
+                                                    from event)
+                                              where cus_num = #{cus_num}
+                                          )
+                                 )
+                             AND cate in
+                                 (
+                                     select cate
+                                     from (
+                                              select cate, cus_num
+                                              from (select cate, cus_num
+                                                    from normal
+                                                    union
+                                                    select cate, cus_num
+                                                    from risk
+                                                    union
+                                                    select cate, cus_num
+                                                    from event)
+                                              where cus_num = #{cus_num}
+                                          )
+                                 )
+                       )
+             )
         order by cmt_date desc
+    </select>
+
+    <select id="selectReComment_fromNew" resultType="CommentVO">
+        select *
+        from comments cmt, re_comments rcmt
+        where cmt.cmt_num = rcmt.cmt_num
+        order by rcmt_date desc
     </select>
 
 

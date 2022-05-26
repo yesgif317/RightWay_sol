@@ -438,6 +438,7 @@ window.onload=function(){
                         <div class="card-body">
                             <div class="row no-gutters align-items-center">
                                 <div class="col mr-2">
+                                    <c:set var="cmt_new_count" value="0"/>
                                     <c:choose>
                                         <c:when test="${CommentList != null}">
                                             <c:forEach items="${CommentList}" var="comments" step="1" begin="0" end="4">
@@ -481,6 +482,51 @@ window.onload=function(){
                                                        href="/request_content.do?post_num=${comments.post_num}">- ${comments.cmt_cnt}</a>
                                                     <span style="float: right">${comments.cmt_date}</span> <br>
                                                 </c:if>
+                                                <c:if test="${comments.cate eq 0}">
+                                                    <c:forEach items="${ReCommentList}" var="recomments" begin="${cmt_new_count}" end="${cmt_new_count}">
+                                                        <c:if test="${recomments.cate eq 1}">
+                                                            <a style="display:inline-block; width:300px; overflow:hidden; text-overflow:ellipsis; white-space:nowrap" class="dropdown-item-text h5 mb-0 font-weight-bold text-gray-800"
+                                                               href="/outputs_content.do?post_num=${recomments.post_num}">- ${recomments.rcmt_cnt}</a>
+                                                            <span style="float: right">${recomments.rcmt_date}</span> <br>
+                                                        </c:if>
+                                                        <c:if test="${recomments.cate eq 2}">
+                                                            <a style="display:inline-block; width:300px; overflow:hidden; text-overflow:ellipsis; white-space:nowrap" class="dropdown-item-text h5 mb-0 font-weight-bold text-gray-800"
+                                                               href="/meetingrecord_content.do?post_num=${recomments.post_num}">- ${recomments.rcmt_cnt}</a>
+                                                            <span style="float: right">${recomments.rcmt_date}</span> <br>
+                                                        </c:if>
+                                                        <c:if test="${recomments.cate eq 3}">
+                                                            <a style="display:inline-block; width:300px; overflow:hidden; text-overflow:ellipsis; white-space:nowrap" class="dropdown-item-text h5 mb-0 font-weight-bold text-gray-800"
+                                                               href="/regularreport_content.do?post_num=${recomments.post_num}">- ${recomments.rcmt_cnt}</a>
+                                                            <span style="float: right">${recomments.rcmt_date}</span> <br>
+                                                        </c:if>
+                                                        <c:if test="${recomments.cate eq 5}">
+                                                            <a style="display:inline-block; width:300px; overflow:hidden; text-overflow:ellipsis; white-space:nowrap" class="dropdown-item-text h5 mb-0 font-weight-bold text-gray-800"
+                                                               href="/event_content.do?post_num=${recomments.post_num}">- ${recomments.rcmt_cnt}</a>
+                                                            <span style="float: right">${recomments.rcmt_date}</span> <br>
+                                                        </c:if>
+                                                        <c:if test="${recomments.cate eq 9}">
+                                                            <a style="display:inline-block; width:300px; overflow:hidden; text-overflow:ellipsis; white-space:nowrap" class="dropdown-item-text h5 mb-0 font-weight-bold text-gray-800"
+                                                               href="/danger_content.do?post_num=${recomments.post_num}">- ${recomments.rcmt_cnt}</a>
+                                                            <span style="float: right">${recomments.rcmt_date}</span> <br>
+                                                        </c:if>
+                                                        <c:if test="${recomments.cate eq 10}">
+                                                            <a style="display:inline-block; width:300px; overflow:hidden; text-overflow:ellipsis; white-space:nowrap" class="dropdown-item-text h5 mb-0 font-weight-bold text-gray-800"
+                                                               href="/issue_content.do?post_num=${recomments.post_num}">- ${recomments.rcmt_cnt}</a>
+                                                            <span style="float: right">${recomments.rcmt_date}</span> <br>
+                                                        </c:if>
+                                                        <c:if test="${recomments.cate eq 12}">
+                                                            <a style="display:inline-block; width:300px; overflow:hidden; text-overflow:ellipsis; white-space:nowrap" class="dropdown-item-text h5 mb-0 font-weight-bold text-gray-800"
+                                                               href="/notice_content.do?post_num=${recomments.post_num}">- ${recomments.rcmt_cnt}</a>
+                                                            <span style="float: right">${recomments.rcmt_date}</span> <br>
+                                                        </c:if>
+                                                        <c:if test="${recomments.cate eq 15}">
+                                                            <a style="display:inline-block; width:300px; overflow:hidden; text-overflow:ellipsis; white-space:nowrap" class="dropdown-item-text h5 mb-0 font-weight-bold text-gray-800"
+                                                               href="/request_content.do?post_num=${recomments.post_num}">- ${recomments.rcmt_cnt}</a>
+                                                            <span style="float: right">${recomments.rcmt_date}</span> <br>
+                                                        </c:if>
+                                                    </c:forEach>
+                                                </c:if>
+                                                <c:set var="cmt_new_count" value="${cmt_new_count + 1}"/>
                                             </c:forEach>
                                         </c:when>
                                         <c:otherwise>
