@@ -11,7 +11,7 @@
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>솔리데오 프로젝트관리 로그인</title>
+    <title>MY - SIM</title>
 
     <!-- Custom fonts for this template-->
     <link href="/resources/vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
@@ -55,7 +55,7 @@
                                     <div class="form-group">
                                         <div class="custom-checkbox">
                                             <label>
-                                                <input type="checkbox" name="useCookie">로그인유지
+                                                <input type="checkbox" name="useCookie" checked hidden>
                                             </label>
                                         </div>
                                     </div>
@@ -81,6 +81,7 @@
 </div>
 
 <script>
+
 
     var msg = "${msg}";
     if (msg === "REGISTERED") {

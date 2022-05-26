@@ -26,23 +26,42 @@
     <bean id="rememberMeInterceptor" class="Commons.Interceptor.RememberMeInterceptor"/>
     <bean id="loginAfterInterceptor" class="Commons.Interceptor.LoginAfterInterceptor"/>
 
+
+    <!-- interceptor mapping -->
     <mvc:interceptors>
+        <mvc:interceptor>
+            <mvc:mapping path="/**/"/>
+            <mvc:exclude-mapping path="/login.do"/>
+            <mvc:exclude-mapping path="/loginPost.do"/>
+            <mvc:exclude-mapping path="/idCheck.do"/>
+            <mvc:exclude-mapping path="/comCheck.do"/>
+            <mvc:exclude-mapping path="/forgot_password.do"/>
+            <mvc:exclude-mapping path="/loginerror.do"/>
+            <mvc:exclude-mapping path="/register.do"/>
+            <mvc:exclude-mapping path="/logout.do"/>
+            <mvc:exclude-mapping path="/loginoverlap.do"/>
+            <bean id="webContentInterceptor" class="org.springframework.web.servlet.mvc.WebContentInterceptor">
+                <property name="cacheSeconds" value="0"/>
+                <property name="useExpiresHeader" value="true"/>
+                <property name="useCacheControlHeader" value="true"/>
+                <property name="useCacheControlNoStore" value="true"/>
+            </bean>
+        </mvc:interceptor>
         <mvc:interceptor>
             <mvc:mapping path="/loginPost.do"/>
             <ref bean="loginInterceptor"/>
         </mvc:interceptor>
         <mvc:interceptor>
-            <mvc:mapping path="/index.do"/>
-            <mvc:mapping path="/usermanagement.do"/>
-            <mvc:mapping path="/mypage.do"/>
-            <mvc:mapping path="/index.do"/>
-            <mvc:mapping path="/notice.do"/>
-            <mvc:mapping path="/outputs.do"/>
-            <mvc:mapping path="/project.do"/>
-            <mvc:mapping path="/regularreport.do"/>
-            <mvc:mapping path="/request.do"/>
-            <mvc:mapping path="/team.do"/>
-            <mvc:mapping path="/Select_project.do"/>
+            <mvc:mapping path="/**/"/>
+            <mvc:exclude-mapping path="/login.do"/>
+            <mvc:exclude-mapping path="/loginPost.do"/>
+            <mvc:exclude-mapping path="/idCheck.do"/>
+            <mvc:exclude-mapping path="/comCheck.do"/>
+            <mvc:exclude-mapping path="/forgot_password.do"/>
+            <mvc:exclude-mapping path="/loginerror.do"/>
+            <mvc:exclude-mapping path="/register.do"/>
+            <mvc:exclude-mapping path="/logout.do"/>
+            <mvc:exclude-mapping path="/loginoverlap.do"/>
             <ref bean="authInterceptor"/>
         </mvc:interceptor>
         <mvc:interceptor>
@@ -55,6 +74,4 @@
             <ref bean="loginAfterInterceptor"/>
         </mvc:interceptor>
     </mvc:interceptors>
-
-
 </beans>

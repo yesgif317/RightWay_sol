@@ -4,6 +4,7 @@ import Customer.Dto.CustomerVO;
 import Customer.Dto.LoginDTO;
 import jdk.internal.org.objectweb.asm.tree.LookupSwitchInsnNode;
 
+import javax.servlet.http.HttpServletResponse;
 import java.util.*;
 
 public interface CustomerService {
@@ -24,6 +25,8 @@ public interface CustomerService {
     //자동 로그인 서비스 계층
     void keepLogin(String cus_id, String cus_sess_key, Date cus_sess_lim) throws Exception;
 
+    CustomerVO checkLogin(LoginDTO loginDTO);
+
     CustomerVO checkLoginBefore(String value) throws Exception;
 
 
@@ -39,9 +42,17 @@ public interface CustomerService {
     List<CustomerVO> select_PermissionCustomer(int[] num);
     void PermissionCustomer(List<CustomerVO> customerVOList);
 
+    //이메일 발송
+    void sendEmail(CustomerVO customerVO, String div) throws Exception;
+
+    //비밀번호 찾기
+    void findPw(HttpServletResponse response, CustomerVO customerVO) throws Exception;
+
     //select one
     String selectNumToName(int cus_num);
 
     void resetPLState();
     void updatePLState(int cus_num);
+
+    int idnullCheck(LoginDTO loginDTO);
 }

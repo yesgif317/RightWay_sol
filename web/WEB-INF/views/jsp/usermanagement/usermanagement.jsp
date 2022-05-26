@@ -73,7 +73,7 @@
                             </label>
                         </form>
                         <form action="/ExcelDownload.do" id="frmExcelDown" method="GET">
-                            <button type=submit" class="btn btn-secondary ml-3">전체 인원 목록 다운로드
+                            <button type=submit" class="btn btn-secondary ml-3">프로젝트 투입 인원 목록 다운로드
                             </button>
                         </form>
                     </div>
@@ -84,29 +84,7 @@
     <!-- End of Main Content -->
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-    <jsp:include page="../../include/footer.jsp" flush="true" />
+    <jsp:include page="../../include/footer.jsp" flush="true"/>
 
     <jsp:include page="../../include/logoutModal.jsp" flush="true"/>
 
@@ -126,3 +104,105 @@
 
     <!-- Page level custom scripts -->
     <script src="<c:url value="/resources/js/demo/datatables-demo.js"/>"></script>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.15.5/xlsx.full.min.js"></script>
+
+    <script>
+        // 파일 선택(업로드) 이벤트
+        $("#btnUploadExcel").on("change", function (e) {
+            console.log("버튼입력 화긴");
+            fnUploadExcelRegChk();
+        });
+
+        var count = null;
+
+        // 엑셀업로드 체크
+        function fnUploadExcelRegChk() {
+            console.log("엑셀 업로드 화긴");
+            let msg = "";
+            let input = event.target;
+            let reader = new FileReader();
+            reader.onload = function () {
+                let fdata = reader.result;
+                let read_buffer = XLSX.read(fdata, {type: 'binary'});
+                read_buffer.SheetNames.forEach(function (sheetName) {
+                    let rowdata = XLSX.utils.sheet_to_json(read_buffer.Sheets[sheetName]); // Excel 입력 데이터
+
+                    console.log('SheetName: ' + sheetName);
+                    console.log(JSON.stringify(rowdata));
+                    // 행 수 만큼 반복
+                    for (let i = 0; i < rowdata.length; i++) {
+                        // 필수값 체크
+                        if (rowdata[i].id == null)
+                            msg += 'id 값이 존재하지 않습니다.';
+                        console.log(msg);
+                        count = rowdata.length;
+                        return false;
+                    }
+
+                    // 정규식 체크
+                    let keys = Object.keys(rowdata[i]);
+                    let re = /[^ㄱ-ㅎ가-힣a-zA-Z0-9\-\_\.\@]/gi;
+                    let reNum = /[^0-9]/gi;
+                    for (let j = 0; j < keys.length; j++) {
+                        let data = rowdata[i][keys[j]];
+                        if (keys[j] == 'id') {
+                            if (reNum.test(data)) {
+                                msg = keys[j] + '은 숫자만 입력 가능합니다.';
+                                console.log(msg);
+                                return false;
+                            }
+                        } else {
+                            if (re.test(data)) {
+                                msg = keys[j] + '에 허용되지않는 문자가 포함되어있습니다.';
+                                gfnFailAlert("", msg, gDelay2);
+                                return false;
+                            }
+                        }
+                    }
+                })
+                // console.log(JSON.stringify(rowdata));
+                console.log("함수 실행전")
+                fnUploadExcel();
+            }
+            reader.readAsBinaryString(input.files[0]);
+        }
+
+
+        // 엑셀업로드
+        function fnUploadExcel() {
+            var formData = new FormData($("#frmAttachedFiles")[0])
+            console.log(formData)
+            console.log("함수 실행후")
+            $.ajax({
+                url: "ExcelUpload.do",
+                type: "POST",
+                data: formData,
+                processData: false,
+                contentType: false,
+                async: false,
+                success: function (result) {
+
+                    var split_res = result.split(',');
+                    var add = count-(split_res.length-1);
+                    var allmem = count-1;
+
+                    if (split_res[0] == "OK") {
+                        alert('업로드 성공\n추가된 인원:'+count-1+'명');
+                        window.location.reload();
+                    } else if(split_res[0] == "BAD_REQUEST") {
+                        alert('인원 추가가 실패되었습니다. 사유 : 아이디 중복');
+                        alert('전체 인원:'+allmem+'명, 추가된 인원:'+add+'명\n중복되는 아이디 :' + split_res.slice(1,split_res.maxLength))
+                        alert('해당 아이디만 다시 수정하여 추가해주세요.\n중복되는 아이디 :' +split_res.slice(1,split_res.maxLength))
+                        window.location.reload();
+                    }
+                },
+                error: function (request, status, error) {
+                    alert("code:" + request.status + "\n" + "message:" + request.responseText + "\n" + "error:" + error);
+                    window.location.reload();
+                }
+
+            })
+        }
+
+    </script>

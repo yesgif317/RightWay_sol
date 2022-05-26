@@ -28,6 +28,8 @@ public class AuthInterceptor extends HandlerInterceptorAdapter {
         }
     }
 
+
+    //로그인 세션 없을시 login 페이지로 넘어가게함.
     @Override
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
 

@@ -63,6 +63,11 @@ public class CustomerDaoImpl implements CustomerDao {
         sqlSession.update(Namespace + ".keepLogin", paramMap);
     }
 
+    @Override
+    public CustomerVO checkLogin(LoginDTO loginDTO) {
+        return sqlSession.selectOne(Namespace+".checkLogin", loginDTO);
+    }
+
     // 세션키 검증
     @Override
     public CustomerVO checkUserWithSessionKey(String value) throws Exception {
@@ -98,6 +103,16 @@ public class CustomerDaoImpl implements CustomerDao {
         return sqlSession.selectOne(Namespace + ".selectNumToName", cus_num);
     }
 
+    @Override
+    public CustomerVO readMember(CustomerVO customerVO) {
+        return sqlSession.selectOne(Namespace+".readMember",customerVO);
+    }
+
+    @Override
+    public int updatePw(CustomerVO customerVO) throws Exception {
+        return sqlSession.update(Namespace+".updatePw", customerVO);
+    }
+
     //회원가입 Insert
     @Override
     public void insertCustomer(CustomerVO customerVO) {
@@ -117,4 +132,9 @@ public class CustomerDaoImpl implements CustomerDao {
 
     @Override
     public void updatePLState(int cus_num){sqlSession.update(Namespace+".updatePLState",cus_num);}
+
+    @Override
+    public int idnullCheck(LoginDTO loginDTO) {
+        return sqlSession.selectOne(Namespace+".idnullCheck",loginDTO);
+    }
 }

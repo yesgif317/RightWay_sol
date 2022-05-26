@@ -25,7 +25,7 @@ public class RememberMeInterceptor extends HandlerInterceptorAdapter {
 
         HttpSession httpSession = request.getSession();
         Cookie loginCookie = WebUtils.getCookie(request, "loginCookie");
-        logger.info("login cookie");
+        logger.info("login cookie check");
 
         if (loginCookie != null) {
             logger.info("loginCookie not null");

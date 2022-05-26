@@ -7,9 +7,9 @@ import java.util.List;
 
 public interface ExcelDao {
 
-    List<CustomerVO> getUserExcel(CustomerVO customerVO);
+    List<CustomerVO> getUserExcel(Object object);
 
-    void postUserExcel(ExcelVO excelVO) throws Exception;
+    int postUserExcel(ExcelVO excelVO) throws Exception;
 
     String checkcomname(int com_num) throws Exception;
 

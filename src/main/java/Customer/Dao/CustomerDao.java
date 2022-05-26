@@ -26,6 +26,9 @@ public interface CustomerDao {
     // 로그인 유지 처리
     void keepLogin(String cus_id, String cus_sess_key, Date cus_sess_lim) throws Exception;
 
+    // 세션 체크
+    CustomerVO checkLogin(LoginDTO loginDTO);
+
     // 세션키 검증
     CustomerVO checkUserWithSessionKey(String value) throws Exception;
 
@@ -36,11 +39,19 @@ public interface CustomerDao {
     List<CustomerVO> select_nonPermissionCus();
     List<CustomerVO> select_nonPermissionCusPL(int com_num);
     void PermissionCustomer(CustomerVO customerVO);
+
     //한명 찾기
     CustomerVO selectCusToNum(int i);
 
     String selectNumToName(int cus_num);
 
+    //입력받은 아이디,이메일로 데이터 조회
+    CustomerVO readMember(CustomerVO customerVO);
+
+    //비밀번호 변경
+    public int updatePw(CustomerVO customerVO) throws Exception;
     void resetPLState();
     void updatePLState(int cus_num);
+
+    int idnullCheck(LoginDTO loginDTO);
 }

@@ -67,7 +67,7 @@
                             </thead>
 
                             <tbody>
-                           <c:forEach items="${companyList}" var="com">
+                            <c:forEach items="${companyList}" var="com">
                                         <tr>
                                             <td>${com.com_name}</td>
                                             <td>${com.com_business}</td>
@@ -76,7 +76,7 @@
                                                 <a class="btn btn-info text-gray-100" onclick="comok('${com.com_name}','${com.com_num}')"> 선택</a>
                                             </td>
                                         </tr>
-                                </c:forEach>
+                           </c:forEach>
                             </tbody>
                         </table>
                     </div>

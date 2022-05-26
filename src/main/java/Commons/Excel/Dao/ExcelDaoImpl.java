@@ -21,14 +21,13 @@ public class ExcelDaoImpl implements ExcelDao {
     }
 
     @Override
-    public List<CustomerVO> getUserExcel(CustomerVO customerVO) {
-        return sqlSession.selectList(Namespace+".getUserExcel");
+    public List<CustomerVO> getUserExcel(Object object) {
+        return sqlSession.selectList(Namespace+".getUserExcel", object);
     }
 
     @Override
-    public void postUserExcel(ExcelVO excelVO) {
-        System.out.println("impl 실행");
-        sqlSession.insert(Namespace+".postUserExcel",excelVO);
+    public int postUserExcel(ExcelVO excelVO) {
+        return sqlSession.insert(Namespace+".postUserExcel",excelVO);
     }
 
     @Override

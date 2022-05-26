@@ -3,7 +3,8 @@ package Controller;
 import Board.Service.BoardService;
 import Comment.Dto.CommentVO;
 import Comment.Service.CommentService;
-import Commons.Excel.Dto.ExcelVO;
+import Commons.Excel.Dto.ExcelDTO;
+import Commons.Excel.Dto.StatusEnum;
 import Commons.Excel.Service.ExcelService;
 import Commons.ScriptUtil.ScriptUtil;
 import Company.Dto.CompanyVO;
@@ -31,8 +32,8 @@ import org.apache.poi.ss.usermodel.*;
 import org.apache.poi.ss.util.CellRangeAddress;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 import org.mindrot.jbcrypt.BCrypt;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.MediaType;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -48,10 +49,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.*;
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.Iterator;
-import java.util.List;
+import java.nio.charset.Charset;
+import java.util.*;
 
 import static java.lang.Integer.parseInt;
 
@@ -124,12 +123,12 @@ public class MainController {
 
     public class Selcus {
         public List<ProjectVO> selectcus(Model model, HttpSession httpSession) {
-            System.out.println("세션조회");
+
             //login시 만든 회원정보 세션 불러오기
             Object object = httpSession.getAttribute("login");
-            //cus_num 으로 프로젝트 조회
-            List<ProjectVO> projectVOList = projectService.projectVOList(object);
 
+            //로그인한 계정정보로 프로젝트 조회
+            List<ProjectVO> projectVOList = projectService.projectVOList(object);
             httpSession.setAttribute("ProjectList", projectVOList);
 
             return projectVOList;
@@ -147,17 +146,11 @@ public class MainController {
                        HttpServletResponse response,
                        HttpSession httpSession, ModelAndView modelAndView) {
 
-
         //프로젝트 이름이 선택되어있는 경우
         if (httpSession.getAttribute("prj_list") != null) {
-            System.out.println("selectone인데 두개잡히는지");
-
             Object object = httpSession.getAttribute("prj_list");
             ProjectVO selectproject_list = projectService.selectproject_list2(object);
             httpSession.setAttribute("prj_list", selectproject_list);
-
-            System.out.println(selectproject_list + "선택되어있는경우");
-
         }
         //프로젝트 이름이 선택되지 않은 경우
         else {
@@ -167,8 +160,6 @@ public class MainController {
             if (projectVOList.size() != 0) {
                 ProjectVO selectproject_list = projectService.selectproject_list(projectVOList.get(0).getPrj_name());
                 httpSession.setAttribute("prj_list", selectproject_list);
-
-                System.out.println(selectproject_list + "선택되어있지않은경우");
             } else {
                 System.out.println("do not have project");
                 httpSession.setAttribute("prj_list", null);
@@ -209,13 +200,14 @@ public class MainController {
     @PostMapping("Select_project.do")
     public String select_prj(@RequestParam(value = "prj_name", required = false) String prj_name, HttpSession httpSession, Model model) {
 
-        if (prj_name != null) {
+        //프로젝트 변경 메서드드
+       if (prj_name != null) {
             ProjectVO selectproject_list = projectService.selectproject_list(prj_name);
             httpSession.setAttribute("prj_list", selectproject_list);
         } else {
             return "forward:/index.do";
         }
-
+        //메인페이지 차트 데이터를 위한 세션 유지
         Object object = httpSession.getAttribute("prj_list");
         List<NormalVO> normalVOList = normalService.selectNotice(object);
         List<RiskVO> RiskVOList = riskService.selectDanger(object);
@@ -227,6 +219,19 @@ public class MainController {
         return "forward:/index.do";
     }
 
+    // 비밀번호 찾기 GET, POST
+    @RequestMapping(value = "/forgot_password.do", method = RequestMethod.GET)
+    public String forgot_password_GET() {
+        return "user/forgot_password";
+    }
+
+    @ResponseBody
+    @RequestMapping(value = "/forgot_password.do", method = RequestMethod.POST)
+    public String forgot_password_POST(@ModelAttribute CustomerVO customerVO, HttpServletResponse response) throws Exception {
+        customerService.findPw(response, customerVO);
+        return "user/forgot_password";
+    }
+
     //로그인 GET,POST
     @RequestMapping(value = "/login.do", method = RequestMethod.GET)
     public String loginGET(@ModelAttribute("LoginDTO") LoginDTO loginDTO) {
@@ -234,15 +239,25 @@ public class MainController {
     }
 
     @RequestMapping(value = "/loginPost.do", method = RequestMethod.POST)
-    public String loginPOST(LoginDTO loginDTO, HttpSession httpSession, Model model) throws Exception {
+    public String loginPOST(LoginDTO loginDTO, HttpServletRequest request, HttpServletResponse response, HttpSession httpSession, Model model) throws Exception {
+
+        //로그인창 Null값 제외하기위한 아이디 체크
+        if(customerService.idnullCheck(loginDTO) == 0) {
+            return "/loginPost";
+        }
+        //해당 아이디의 세션 유무 확인후 없을시 로그인 가능(다중로그인 차단용, 로그인 되어있는 계정 로그인시 차단)
+        CustomerVO checksession = customerService.checkLogin(loginDTO);
+        if (!Objects.equals(checksession.getCus_sess_key(), "none")){
+            return "user/loginoverlap";
+        }
 
         CustomerVO customerVO = customerService.login(loginDTO);
 
-        System.out.println("객체 확인");
-
+        //입력한 비밀번호와 암호화된 비밀번호 일치한지 확인
         if (customerVO == null || !BCrypt.checkpw(loginDTO.getCus_pwd(), customerVO.getCus_pwd())) {
             return "/loginPost";
         }
+        //계정 상태값 확인해서 승인안되어있을시 로그인에러 창으로 넘어가게함.
         if (customerVO.getCus_state() == 0) {
             return "user/loginerror";
         }
@@ -338,12 +353,6 @@ public class MainController {
         }
 
         return "user/logout";
-    }
-
-
-    @RequestMapping(value = "/forgot_password.do", method = RequestMethod.GET)
-    public String forgot_password() {
-        return "user/forgot_password";
     }
 
     //마이페이지
@@ -1918,13 +1927,16 @@ public class MainController {
     }
 
     @ResponseBody
-    @RequestMapping(value = "/ExcelUpload.do")
-    public ResponseEntity<ExcelVO> memberExcelUp(MultipartHttpServletRequest request, HttpServletResponse response) {
+    @RequestMapping(value = "/ExcelUpload.do", method = RequestMethod.POST)
+    public String memberExcelUp(MultipartHttpServletRequest request, HttpServletResponse response) {
         System.out.println("컨트롤러 넘어옴");
-
+        HttpHeaders header = new HttpHeaders();
+        header.setContentType(new MediaType("application", "json", Charset.forName("UTF-8")));
         response.setCharacterEncoding("UTF-8");
+
+        ExcelDTO excelDTO = new ExcelDTO();
+
         try {
-            ExcelVO excelVO = new ExcelVO();
             MultipartFile file = null;
             Iterator<String> iterator = request.getFileNames();
             if (iterator.hasNext()) {
@@ -1932,22 +1944,22 @@ public class MainController {
                 System.out.println(file);
             }
             System.out.println("서비스 실행전");
-            excelService.memberExcelUp(file);
-
-            System.out.println(HttpStatus.OK);
-            return new ResponseEntity<>(excelVO, HttpStatus.OK);
+            excelDTO = excelService.memberExcelUp(file);
+            System.out.println(excelDTO.toString());
+            return excelDTO.toString();
 
         } catch (Exception e) {
-            ExcelVO excelVO = new ExcelVO();
-            return new ResponseEntity<>(excelVO, HttpStatus.BAD_REQUEST);
+            excelDTO.setResultCode(StatusEnum.BAD_REQUEST);
+            System.out.println(excelDTO);
+            return excelDTO.toString();
         }
     }
 
     @RequestMapping(value = "/ExcelDownload.do", method = RequestMethod.GET)
-    public void ExcelGET(@ModelAttribute("customerVO") CustomerVO customerVO, HttpServletRequest
+    public void ExcelGET(@ModelAttribute("customerVO") CustomerVO customerVO, HttpSession httpSession, HttpServletRequest
             request, HttpServletResponse response) throws Exception {
         System.out.println("인원관리 다운로드");
-        excelService.getUserExcel(customerVO, request, response);
+        excelService.getUserExcel(customerVO, httpSession, request, response);
 
     }
 
