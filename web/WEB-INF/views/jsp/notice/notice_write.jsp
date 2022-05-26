@@ -44,13 +44,14 @@
                                           enctype="multipart/form-data" class="form-horizontal">
                                         </c:otherwise>
                                         </c:choose>
+                                            <input type="hidden" name="post_num" value="${PostList.post_num}"></div>
                                         <div class="row form-group">
                                             <div class="col col-md-3 text-right"><label for="title"
                                                                                         class=" form-control-label fa-solid text-gray-800 mt-2"><sup
                                                     class="text-danger small">*</sup>제목</label></div>
                                             <div class="col-12 col-md-7"><input type="text" id="title" name="title" maxlength="40"
                                                                                 placeholder="제목을 입력해주세요."
-                                                                                class="form-control" value=""></div>
+                                                                                class="form-control" value="${PostList.nor_tit}"></div>
                                         </div>
                                         <div class="row form-group">
                                             <div class="col col-md-3 text-right"><label for="contents"
@@ -59,7 +60,7 @@
                                             <div class="col-12 col-md-7"><textarea name="contents" id="contents"
                                                                                    rows="9"  maxlength="1000"
                                                                                    placeholder="공지사항 내용을 입력해주세요."
-                                                                                   class="form-control"></textarea>
+                                                                                   class="form-control">${PostList.nor_cnt}</textarea>
                                             </div>
                                         </div>
                                         <div class="row form-group">
@@ -95,33 +96,40 @@
                                     </span>
                                     <script>
                                         function chk_form() {
-                                            if (document.getElementById("contents").value == '') {
+                                            if (document.getElementById("title").value == '' || document.getElementById("contents").value == '') {
                                                 $('#exampleModal').modal('show')
-                                            } else if (document.getElementById("title").value == '') {
-                                                $('#exampleModal').modal('show')
+                                            } else {
+                                                if(${test eq 1}){
+                                                    document.getElementById('noticeupdateform').submit();
+
+                                                }
+                                                else{
+                                                    var formData = new FormData();
+                                                    var inputFile = $("input[name='uploadFile']");
+                                                    var title = $("input[name='title']").val();
+                                                    var writer = $("input[name='cus_num']").val();
+                                                    var contents = $("textarea[name='contents']").val();
+
+                                                    var files = inputFile[0].files;
+
+                                                    console.log(files);
+                                                    console.log(title + "/" + writer + "/" + contents)
+
+                                                    for (var i = 0; i < files.length; i++) {
+                                                        formData.append("uploadFile", files[i]);
+                                                    }
+                                                    formData.append("title", title);
+                                                    formData.append("writer", writer);
+                                                    formData.append("contents", contents);
+                                                    document.getElementById('noticewriteform').submit();
+
+
+                                                }
+
+
                                             }
-
-                                            var formData = new FormData();
-                                            var inputFile = $("input[name='uploadFile']");
-                                            var title = $("input[name='title']").val();
-                                            var writer = $("input[name='cus_num']").val();
-                                            var contents = $("textarea[name='contents']").val();
-
-                                            var files = inputFile[0].files;
-
-                                            console.log(files);
-                                            console.log(title + "/" + writer + "/" + contents)
-
-                                            for (var i = 0; i < files.length; i++) {
-                                                formData.append("uploadFile", files[i]);
-                                            }
-                                            formData.append("title", title);
-                                            formData.append("writer", writer);
-                                            formData.append("contents", contents);
-
-                                            document.getElementById('noticewriteform').submit();
-
                                         }
+
                                     </script>
                                     <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog"
                                          aria-labelledby="exampleModalLabel" aria-hidden="true">

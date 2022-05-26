@@ -53,7 +53,7 @@
                                                 <sup class="text-danger small">*</sup>제목</label></div>
                                             <div class="col-12 col-md-7">
                                                 <input type="text" id="nor_tit" name="title" maxlength="40" placeholder="제목을 입력해주세요."
-                                                       class="form-control" value=${PostList.nor_tit}>
+                                                       class="form-control" value='${PostList.nor_tit}'>
                                             </div>
                                         </div>
                                         <div class="row form-group">

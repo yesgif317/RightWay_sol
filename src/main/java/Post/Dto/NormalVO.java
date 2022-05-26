@@ -23,6 +23,8 @@ public class NormalVO {
     String nor_cnt;
     String prj_name;
     String cus_name;
+    String title;
+    String contents;
 
     public void setNor_cnt(String nor_cnt) {
         this.nor_cnt = nor_cnt;

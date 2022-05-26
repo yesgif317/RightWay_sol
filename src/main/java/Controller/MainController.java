@@ -463,26 +463,28 @@ public class MainController {
 
     //산출물 작성글 수정 기능
     @RequestMapping(value = "/outputs_update.do", method = RequestMethod.POST)
-    public String outputs_update(Model model, NormalVO postVO) {
-
-        String Result = normalService.updatePost(postVO);
-        model.addAttribute("PostList", Result);
+    public String outputs_update(MultipartFile[] uploadFile,NormalVO postVO) {
+        postVO.setNor_tit(postVO.getTitle());
+        postVO.setNor_cnt(postVO.getContents());
+        normalService.updatePost(postVO);
+        //첨부파일저장
+        if (uploadFile != null) {
+            fileService.insertFile(uploadFile, postVO.getPrj_num(), 2);
+        }
         return "redirect:/outputs.do";
     }
 
     // 산출물 게시글 작성 기능
     @RequestMapping(value = "/outputs_insert.do", method = RequestMethod.POST)
-    public String outputs_insert(MultipartFile[] uploadFile, @RequestParam(value = "title") String title
-            , @RequestParam(value = "contents") String contents, @RequestParam(value = "cus_num") String cus_num, @RequestParam(value = "prj_num") String prj_num) {
-        System.out.println("//Title : " + title + "//Contents : " + contents + "//requestFile : " + uploadFile + cus_num);
-
+    public String outputs_insert(MultipartFile[] uploadFile,NormalVO postVO/*, @RequestParam(value = "title") String title
+            , @RequestParam(value = "contents") String contents, @RequestParam(value = "cus_num") String cus_num, @RequestParam(value = "prj_num") String prj_num*/) {
+        System.out.println("//Title : " + postVO.getTitle() + "//Contents : " + postVO.getContents() + "//requestFile : " + uploadFile + postVO.getCus_num());
         //int prj_num = Integer.parseInt(request.getParameter("prj_num"));
         //게시글 저장
-        NormalVO normal = new NormalVO(1, Integer.parseInt(prj_num), title, contents, Integer.parseInt(cus_num));
+        NormalVO normal = new NormalVO(1, postVO.getPrj_num(), postVO.getTitle(), postVO.getContents(),postVO.getCus_num() );
         normalService.insertPost(normal);
         //첨부파일저장
-        fileService.insertFile(uploadFile, Integer.parseInt(prj_num), 1);
-
+        fileService.insertFile(uploadFile, postVO.getPost_num(), 1);
         return "redirect:/outputs.do";
     }
 
@@ -490,18 +492,24 @@ public class MainController {
     @RequestMapping(value = "/notice.do", method = RequestMethod.GET)//공지사항 게시판 글목록 보기
     public String notice(Model model, HttpSession httpSession) {
         //service 클래스에서 Dao 로 접근하여 쿼리 결과값 가져오기
-        Object object = httpSession.getAttribute("prj_list");
-        System.out.println(object);
-        List<NormalVO> normalVOList = normalService.selectNotice(object);
-        System.out.println(normalVOList);
-
+        ProjectVO object = (ProjectVO) httpSession.getAttribute("prj_list");
+        List<NormalVO> allpostVoList = normalService.selectAll(12);
+        List<NormalVO> normalVOList = new ArrayList<>();
+        for(int i=0; i < allpostVoList.size();i++)
+            if(allpostVoList.get(i).getPrj_num() == object.getPrj_num()){
+                normalVOList.add(allpostVoList.get(i));
+            }
         // .jsp 파일로 DB 결과값 전달하기
         model.addAttribute("NormalList", normalVOList);
         return "/notice/notice";
     }
 
     @RequestMapping(value = "/notice_write.do", method = RequestMethod.GET)
-    public String notice_write(Model model) {
+    public String notice_write(@RequestParam("post_num") int no,Model model) {
+        if (no > 0) {
+            NormalVO Result = normalService.viewPost(no);
+            model.addAttribute("PostList", Result);
+        }
 
         return "/notice/notice_write";
     }
@@ -522,7 +530,19 @@ public class MainController {
         }
         return "redirect:/notice.do";
     }
-
+    //공지사항 작성글 수정 기능
+    @RequestMapping(value = "/notice_update.do", method = RequestMethod.POST)
+    public String notice_update(MultipartFile[] uploadFile,NormalVO postVO) {
+        System.out.println("수정 확인" );
+        postVO.setNor_tit(postVO.getTitle());
+        postVO.setNor_cnt(postVO.getContents());
+        normalService.updatePost(postVO);
+        //첨부파일저장
+        if (uploadFile != null) {
+            fileService.insertFile(uploadFile, postVO.getPrj_num(), 12);
+        }
+        return "redirect:/notice.do";
+    }
     @RequestMapping(value = "/notice_content.do", method = RequestMethod.GET)
     public String notice_content(@RequestParam("post_num") int no, Model model, HttpServletRequest request, HttpServletResponse response) {
         NormalVO Result = normalService.viewPost(no);
@@ -817,26 +837,31 @@ public class MainController {
 
     //회의록 작성글 수정 기능
     @RequestMapping(value = "/meetingrecord_update.do", method = RequestMethod.POST)
-    public String meetingrecord_update(Model model, NormalVO postVO) {
+    public String meetingrecord_update(MultipartFile[] uploadFile, NormalVO postVO) {
 
-        String Result = normalService.updatePost(postVO);
-        model.addAttribute("PostList", Result);
+        postVO.setNor_tit(postVO.getTitle());
+        postVO.setNor_cnt(postVO.getContents());
+        normalService.updatePost(postVO);
+        //첨부파일저장
+        if (uploadFile != null) {
+            fileService.insertFile(uploadFile, postVO.getPrj_num(), 2);
+        }
         return "redirect:/meetingrecord.do";
     }
 
     // 회의록 게시글 작성 기능
     @RequestMapping(value = "/meetingrecord_insert.do", method = RequestMethod.POST)
-    public String meetingrecord_insert(MultipartFile[] uploadFile, @RequestParam(value = "title") String title
-            , @RequestParam(value = "contents") String contents, @RequestParam(value = "cus_num") String cus_num, @RequestParam(value = "prj_num") String prj_num) {
+    public String meetingrecord_insert(MultipartFile[] uploadFile, NormalVO postVO/*@RequestParam(value = "title") String title
+            , @RequestParam(value = "contents") String contents, @RequestParam(value = "cus_num") String cus_num, @RequestParam(value = "prj_num") String prj_num*/) {
 
-        System.out.println("//Title : " + title + "//Contents : " + contents + "//requestFile : " + uploadFile + cus_num);
+        System.out.println("//Title : " + postVO.getNor_tit() + "//Contents : " + postVO.getNor_cnt() + "//requestFile : " + uploadFile + postVO.getCus_num());
 
         //int prj_num = Integer.parseInt(request.getParameter("prj_num"));
         //게시글 저장
-        NormalVO normal = new NormalVO(2, Integer.parseInt(prj_num), title, contents, Integer.parseInt(cus_num));
+        NormalVO normal = new NormalVO(2, postVO.getPrj_num(), postVO.getTitle(), postVO.getContents(),postVO.getCus_num() );
         normalService.insertPost(normal);
         //첨부파일저장
-        fileService.insertFile(uploadFile, Integer.parseInt(prj_num), 2);
+        fileService.insertFile(uploadFile, postVO.getPrj_num(), 2);
 
         return "redirect:/meetingrecord.do";
     }
@@ -893,26 +918,30 @@ public class MainController {
 
     //정기보고 작성글 수정 기능
     @RequestMapping(value = "/regularreport_update.do", method = RequestMethod.POST)
-    public String regularreport_update(Model model, NormalVO postVO) {
+    public String regularreport_update(MultipartFile[] uploadFile, NormalVO postVO) {
 
-        String Result = normalService.updatePost(postVO);
-        model.addAttribute("PostList", Result);
+        System.out.println(postVO.getTitle());
+        postVO.setNor_tit(postVO.getTitle());
+        postVO.setNor_cnt(postVO.getContents());
+        normalService.updatePost(postVO);
+        //첨부파일저장
+        if (uploadFile != null) {
+            fileService.insertFile(uploadFile, postVO.getPrj_num(), 3);
+        }
         return "redirect:/regularreport.do";
     }
 
     // 정기보고 게시글 작성 기능
     @RequestMapping(value = "/regularreport_insert.do", method = RequestMethod.POST)
-    public String regularreport_insert(MultipartFile[] uploadFile, @RequestParam(value = "title") String title
-            , @RequestParam(value = "contents") String contents, @RequestParam(value = "cus_num") String cus_num, @RequestParam(value = "prj_num") String prj_num) {
-
-        System.out.println("//Title : " + title + "//Contents : " + contents + "//requestFile : " + uploadFile + cus_num);
+    public String regularreport_insert(MultipartFile[] uploadFile, NormalVO postVO/*@RequestParam(value = "title") String title
+            , @RequestParam(value = "contents") String contents, @RequestParam(value = "cus_num") String cus_num, @RequestParam(value = "prj_num") String prj_num*/) {
 
         //게시글 저장
-        NormalVO normal = new NormalVO(3, Integer.parseInt(prj_num), title, contents, Integer.parseInt(cus_num));
+        NormalVO normal = new NormalVO(3, postVO.getPrj_num(), postVO.getTitle(), postVO.getContents(),postVO.getCus_num() );
         normalService.insertPost(normal);
         //첨부파일저장
         if (uploadFile != null) {
-            fileService.insertFile(uploadFile, Integer.parseInt(prj_num), 12);
+            fileService.insertFile(uploadFile, postVO.getPrj_num(), 3);
         }
 
         return "redirect:/regularreport.do";
@@ -1759,10 +1788,13 @@ public class MainController {
     }
 
     @RequestMapping(value = "/datacenter_write.do", method = RequestMethod.GET)
-    public String datacenter_writer() {
+    public String datacenter_writer(@RequestParam("post_num") int no, Model model) {
+        if (no > 0) {
+            NormalVO Result = normalService.viewPost(no);
+            model.addAttribute("PostList", Result);
+        }
         return "/datacenter/datacenter_write";
     }
-
     //자료실 파일 업로드
     @RequestMapping(value = "/datacenter_insert.do", method = RequestMethod.POST)
     public String uploadAjaxPost(MultipartFile[] uploadFile, @RequestParam(value = "title") String title
@@ -1774,6 +1806,19 @@ public class MainController {
         normalService.insertPost(normalVO);
         if (uploadFile != null) {
             fileService.insertFile(uploadFile, Integer.parseInt(prj_num), 13);
+        }
+        return "redirect:/datacenter.do";
+    }
+
+    //자료실 작성글 수정 기능
+    @RequestMapping(value = "/datacenter_update.do", method = RequestMethod.POST)
+    public String datacenter_update(MultipartFile[] uploadFile,NormalVO postVO) {
+        postVO.setNor_tit(postVO.getTitle());
+        postVO.setNor_cnt(postVO.getContents());
+        normalService.updatePost(postVO);
+        //첨부파일저장
+        if (uploadFile != null) {
+            fileService.insertFile(uploadFile, postVO.getPrj_num(), 13);
         }
         return "redirect:/datacenter.do";
     }
