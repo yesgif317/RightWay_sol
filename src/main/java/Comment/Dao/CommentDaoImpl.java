@@ -60,5 +60,9 @@ public class CommentDaoImpl implements CommentDao{
     public List<CommentVO> selectComment_fromNew(Object object) {
         return sqlSession.selectList(Namespace +".selectComment_fromNew",object);
     }
+    @Override
+    public List<CommentVO> selectComment_fromNew_count(Object object) {
+        return sqlSession.selectList(Namespace +".selectComment_fromNew_count",object);
+    }
 
 }

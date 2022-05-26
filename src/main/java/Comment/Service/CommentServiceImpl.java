@@ -41,5 +41,7 @@ public class CommentServiceImpl implements CommentService {
 
     @Override
     public List<CommentVO> selectComment_fromNew(Object object) { return dao.selectComment_fromNew(object); }
+    @Override
+    public List<CommentVO> selectComment_fromNew_count(Object object) { return dao.selectComment_fromNew_count(object); }
 }
 

@@ -185,6 +185,18 @@ public class MainController {
         List<EventVO> EventVOList = eventService.selectEvent(object);
         List<CommentVO> CommentVOList = commentService.selectComment_fromNew(object_cus);
 
+//        normalVOList.size();
+        List<CommentVO> CommentVOList_count = commentService.selectComment_fromNew_count(object_cus);
+
+        int item = CommentVOList_count.size();
+        int item2 = CommentVOList.size();
+        System.out.println(object_cus);
+        System.out.println(item);
+        System.out.println(item2);
+        System.out.println(CommentVOList);
+        System.out.println(CommentVOList_count);
+
+
         httpSession.setAttribute("RVList", RiskVOList);
         httpSession.setAttribute("IVList", IssueVOList);
         httpSession.setAttribute("NormalList", normalVOList);

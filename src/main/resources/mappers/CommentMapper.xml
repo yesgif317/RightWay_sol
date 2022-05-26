@@ -73,51 +73,71 @@
 
 
     <select id="selectComment_fromNew" resultType="CommentVO">
-        select rownum, cmt_cnt, cmt_date, post_num, cate from
+        select cmt_num, cmt_cnt, cmt_date, post_num, cate from
+        (
+            select cmt_num, cmt_cnt, cmt_date, post_num, cate from comments
+            where
+            post_num in
             (
-                select cmt_cnt, cmt_date, post_num, cate from comments
-                where
-                        post_num =
-                        (
-                            select post_num from
-                                (
-                                    select rownum, post_num, cate, cus_num, date1 from
-                                        (
-                                            select rownum, post_num, cate, cus_num, date1 from
-                                                (select post_num, cate, cus_num, nor_reg as date1 from normal
-                                                 union
-                                                 select post_num, cate, cus_num, risk_reg as date1 from risk
-                                                 union
-                                                 select post_num, cate, cus_num, evt_reg as date1 from event)
-                                            where cus_num = #{cus_num}
-                                            order by date1 desc
-                                        )
-                                    order by rownum
-                                )
-                            where rownum = 1
-                        ) AND
-                        cate =
-                        (
-                            select cate from
-                                (
-                                    select rownum, post_num, cate, cus_num, date1 from
-                                        (
-                                            select rownum, post_num, cate, cus_num, date1 from
-                                                (select post_num, cate, cus_num, nor_reg as date1 from normal
-                                                 union
-                                                 select post_num, cate, cus_num, risk_reg as date1 from risk
-                                                 union
-                                                 select post_num, cate, cus_num, evt_reg as date1 from event)
-                                            where cus_num = #{cus_num}
-                                            order by date1 desc
-                                        )
-                                    order by rownum
-                                )
-                            where rownum = 1
-                        )
-                order by cmt_date desc
+                select post_num from
+                (
+                    select rownum, post_num, cate, cus_num, date1 from
+                    (
+                        select post_num, cate, cus_num, date1 from
+                            (select post_num, cate, cus_num, nor_reg as date1 from normal
+                            union
+                            select post_num, cate, cus_num, risk_reg as date1 from risk
+                            union
+                            select post_num, cate, cus_num, evt_reg as date1 from event)
+                        where cus_num = #{cus_num}
+                    )
+                )
+                    /*
+                    where rownum in
+                        (1,2,3,4,5)*/
+                    where rownum > 0
+<!--                                <foreach collection="list" item="item" index="index" open="(" close=")" separator=",">-->
+<!--                                    #{item}-->
+<!--                                </foreach>-->
+<!--                                &lt;!&ndash; foreach 결과 : STUDENT_ID IN("ST0001","ST0002","ST0003") &ndash;&gt;-->
+
             )
-        order by rownum
+            AND
+            cate in
+            (
+                select cate from
+                (
+                    select rownum, post_num, cate, cus_num, date1 from
+                    (
+                        select post_num, cate, cus_num, date1 from
+                            (select post_num, cate, cus_num, nor_reg as date1 from normal
+                            union
+                            select post_num, cate, cus_num, risk_reg as date1 from risk
+                            union
+                            select post_num, cate, cus_num, evt_reg as date1 from event)
+                        where cus_num = #{cus_num}
+                    )
+                )/*
+                    where rownum in
+                        (1,2,3,4,5)*/
+                    where rownum > 0
+<!--                                <foreach collection="list" item="item" index="index" open="(" close=")" separator=",">-->
+<!--                                    #{item}-->
+<!--                                </foreach>-->
+<!--                                &lt;!&ndash; foreach 결과 : STUDENT_ID IN("ST0001","ST0002","ST0003") &ndash;&gt;-->
+            )
+        )
+        order by cmt_date desc
+    </select>
+
+    <select id="selectComment_fromNew_count" resultType="CommentVO">
+        select post_num, cate, cus_num, date1 from
+            (select post_num, cate, cus_num, nor_reg as date1 from normal
+             union
+             select post_num, cate, cus_num, risk_reg as date1 from risk
+             union
+             select post_num, cate, cus_num, evt_reg as date1 from event)
+        where cus_num = #{cus_num}
     </select>
 
 </mapper>
