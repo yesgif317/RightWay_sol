@@ -147,7 +147,7 @@ public class CustomerServiceimpl implements CustomerService {
             email.setCharset(charSet);
             email.setSSL(true);
             email.setHostName(hostSMTP);
-            email.setSmtpPort(587); //네이버 이용시 587
+            email.setSmtpPort(587); //465
 
 
             email.setAuthentication(hostSMTPid, hostSMTPpwd);

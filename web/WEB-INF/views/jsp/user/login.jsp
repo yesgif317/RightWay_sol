@@ -53,7 +53,7 @@
                                                placeholder="Password">
                                     </div>
                                     <div class="form-group">
-                                        <div class="custom-checkbox">
+                                        <div class="custom-checkbox" hidden>
                                             <label>
                                                 <input type="checkbox" name="useCookie" checked hidden>
                                             </label>

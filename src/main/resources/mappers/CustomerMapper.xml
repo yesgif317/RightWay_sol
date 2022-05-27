@@ -105,9 +105,9 @@
     <!-- 회원가입(Insert) -->
     <insert id="insertCustomer">
         insert into customer (cus_num, cus_id, cus_pwd, cus_name, cus_email, cus_phone, cus_dep, cus_position, cus_state,
-                             com_num)
+                             com_num, cus_sess_lim)
         values (cus_seq.NEXTVAL, #{cus_id}, #{cus_pwd}, #{cus_name}, #{cus_email}, #{cus_phone}, #{cus_dep},
-                #{cus_position}, #{cus_state}, #{com_num})
+                #{cus_position}, #{cus_state}, #{com_num}, sysdate)
     </insert>
 
     <!-- excel로 계정 업로드 및 다운로드 -->
@@ -123,9 +123,9 @@
     <!-- 엑셀 업로드 -->
     <insert id="postUserExcel">
         insert into customer (cus_num, cus_id, cus_pwd, cus_name, cus_email, cus_phone, cus_dep, cus_position, cus_state,
-                              com_num)
+                              com_num, cus_sess_lim)
         values (cus_seq.NEXTVAL, #{cus_id}, #{cus_pwd}, #{cus_name}, #{cus_email}, #{cus_phone}, #{cus_dep},
-                #{cus_position}, #{cus_state}, #{com_num})
+                #{cus_position}, #{cus_state}, #{com_num}, sysdate)
     </insert>
 
     <select id="select_nonPermissionCus" parameterType="CustomerVO" resultType="CustomerVo">

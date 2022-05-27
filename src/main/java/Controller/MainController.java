@@ -238,14 +238,17 @@ public class MainController {
         }
         //해당 아이디의 세션 유무 확인후 없을시 로그인 가능(다중로그인 차단용, 로그인 되어있는 계정 로그인시 차단)
         CustomerVO checksession = customerService.checkLogin(loginDTO);
+        System.out.println(checksession);
 
-        String todayfm = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss.SSS").format(new Date(System.currentTimeMillis()));
-        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss.SSS");
+        String todayfm = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(new Date(System.currentTimeMillis()));
 
+        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
         Date sessdate = new Date(dateFormat.parse(checksession.getCus_sess_lim()).getTime());
+
         Date today = new Date(dateFormat.parse(todayfm).getTime());
 
         int compare = sessdate.compareTo(today);
+        System.out.println(compare);
         if(compare > 0){
             return "user/loginoverlap";
         } else if(compare < 0){
