@@ -220,6 +220,11 @@ window.onload=function(){
     else{
         imp_div_location.innerHTML=emergencydata_issue.length+'건';
     }
+
+    //프로젝트 종료일 보여주는 함수
+    prj_end='${prj_list.prj_end}'
+    var prj_end_location = document.getElementById('div_prjend');
+    prj_end_location.innerHTML=prj_end.slice(0,10);
 }
 </script>
 
@@ -248,7 +253,6 @@ window.onload=function(){
                                         <c:if test = "${prj_list.prj_end eq null}">
                                             미정
                                         </c:if>
-                                        ${prj_list.prj_end}
                                         <div id="div_prjend"> </div>
                                     </div>
                                 </div>
