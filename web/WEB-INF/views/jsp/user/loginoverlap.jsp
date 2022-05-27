@@ -5,7 +5,7 @@
 </head>
 <body>
 <script>
-    alert("이미 로그인이 되어있는 계정입니다.\n다른 환경에서 로그아웃 해주시길 바랍니다.");
+    alert("이전 환경에 이미 로그인이 되어있어 해당계정을 로그아웃합니다.\n다시 로그인 해주시길 바랍니다.");
     self.location = "/login.do";
 </script>
 </body>

@@ -55,7 +55,7 @@
 
     <!-- 해당 계정 세션 확인해서 중복로그인 차단 -->
     <select id="checkLogin" parameterType="LoginDTO" resultType="CustomerVO">
-        select cus_sess_key
+        select cus_sess_key, cus_sess_lim
         from customer
         where cus_id = #{cus_id}
     </select>
