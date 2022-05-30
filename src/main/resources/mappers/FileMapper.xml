@@ -8,14 +8,23 @@
     <!--Customer-->
     <!-- Select 문 -->
     <select id="selectFile" resultType="FileVO">
-        SELECT * FROM files
+        SELECT *
+        FROM files
     </select>
 
     <!-- 게시물 작성(Insert) -->
-    <insert id="insertFile" parameterType="FileVO" >
-        insert into files(post_num , cate, file_name)
-        values (#{post_num}, #{cate}, #{file_name})
+    <insert id="insertFile" parameterType="FileVO">
+        insert into files(post_num, cate, file_link)
+        values (${post_num}, ${cate}, '${file_name}')
     </insert>
+
+    <delete id="deleteFile" parameterType="FileVO">
+        delete
+        from files
+        where post_num = #{post_num}
+          and cate = #{cate}
+          and file_link = #{file_name}
+    </delete>
     <select id="viewFiles" parameterType="int" resultType="FileVO">
         SELECT *
         FROM files

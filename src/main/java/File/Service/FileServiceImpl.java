@@ -13,6 +13,9 @@ import java.util.List;
 public class FileServiceImpl implements FileService{
     @Inject
     private FileDao dao;
+    public int deleteFile(FileVO fileVO) { return
+            dao.deleteFile(fileVO);
+    }
 
     @Override
     public void insertFile(MultipartFile[] uploadFile, int pro_num,int cate){

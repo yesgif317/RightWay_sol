@@ -5,7 +5,6 @@ import org.apache.ibatis.session.SqlSession;
 import org.springframework.stereotype.Repository;
 
 import javax.inject.Inject;
-import javax.naming.Name;
 import java.util.List;
 
 @Repository
@@ -24,6 +23,11 @@ public class FileDaoImpl implements FileDao{
         return sqlSession.selectList(Namespace + ".viewFiles",n);
     }
 
+    public int deleteFile(FileVO fileVO) {
+
+        //Ibatis Update 사용법
+        return sqlSession.delete(Namespace+".deleteFile",fileVO);
+    }
     @Override
     public int selectSeq() {
         return sqlSession.selectOne(Namespace + ".selectSeq");

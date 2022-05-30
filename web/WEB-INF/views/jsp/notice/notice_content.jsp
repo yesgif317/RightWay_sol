@@ -57,13 +57,20 @@
                                     </div>
                                 </form>
                             </div>
-                            <c:forEach items="${FileList}" var="file">
 
-                                <div>
-                                    <a href="/download.do?file_name=${file.file_name}" id = "${file.file_name}">${file.file_name}</a>
+                                <div class="row form-group">
+                                    <div class="col-2"></div>
+                                    <div class="col-8" > &nbsp;&nbsp;&nbsp;첨부 파일<br>
+                                        <c:forEach items="${FileList}" var="file">
+                                        <a href="/download.do?file_name=${file.file_name}" id = "${file.file_name}"> &nbsp;${file.file_name}</a>
+                                            <br>
+                                        </c:forEach>
+                                        <br><br>
+                                    </div>
                                 </div>
 
-                            </c:forEach>
+
+
                         </div>
 
                         <!-- 수정/삭제/목록 버튼 -->

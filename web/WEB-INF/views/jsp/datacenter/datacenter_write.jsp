@@ -62,80 +62,93 @@
 </div>
 <!-- Content Wrapper -->
 <div id="content-wrapper" class="d-flex flex-column">
-    <jsp:include page="../../include/topbar.jsp" flush="true"/>
+
     <!-- Main Content -->
-    <div class="card-body">
-        <div id="content">
-            <!-- Begin Page Content -->
-            <div class="container-fluid">
-                <div class="row">
-                    <div class="col-lg-12">
-                        <!-- Collapsable Card Example -->
-                        <div class="card shadow mb-4" >
-                            <!-- Card Header - Accordion -->
-                            <a class="d-block card-header py-3" >
-                                <div id="pagetitle"> </div>
-                            </a>
-                            <!-- Card Content - Collapse -->
-                            <div class="collapse show" id="collapseCardExample">
-                                <div class="card-body" id="postbody">
-                                    <%--<form method="post" id="file-update-form" name="file-update-form" enctype="multipart/form-data" class="form-horizontal" action="/datacenter_update.do?post_num=${PostList.post_num}">
-                                        <input type="hidden" name="post_num" value="${PostList.post_num}" readonly class="form-control"/>
-                                    </form>--%>
-                                    <form method="post" id="fileuploadform" action="datacenter_insert.do" name="fileuploadform" enctype="multipart/form-data" class="form-horizontal" >
-                                        <input type="hidden" name="post_num" value="${PostList.post_num}" readonly class="form-control"/>
-                                        <div class="row form-group">
-                                            <div class="col col-md-3 text-right"><label class=" form-control-label fa-solid text-gray-800 mt-2"><sup class="text-danger small">*</sup>제목</label></div>
-                                            <div class="col-12 col-md-7"><input type="text" id="title" name="title" maxlength="40" placeholder="제목을 입력해주세요" class="form-control" value="${PostList.nor_tit}"></div>
-                                        </div>
-                                        <div class="row form-group">
-                                            <div class="col col-md-3 text-right"><label class=" form-control-label fa-solid text-gray-800 mt-2">작성자</label></div>
-                                            <div class="col-12 col-md-7"><input type="email" id="writer" name="writer" placeholder="${login.cus_name}" readonly class="form-control"></div>
-                                        </div>
-                                        <div class="row form-group">
-                                            <div class="col col-md-3 text-right"><label class=" form-control-label fa-solid text-gray-800 mt-2"><sup class="text-danger small">*</sup>내용 작성</label></div>
-                                            <div class="col-12 col-md-7"><textarea name="contents" id="contents" rows="9" maxlength="1000" placeholder="내용을 입력해주세요" class="form-control">${PostList.nor_cnt}</textarea></div>
-                                        </div>
+    <div id="content">
 
-                                        <div class="row form-group">
-                                            <div class="col col-md-3 text-right"><label class=" form-control-label fa-solid text-gray-800 mt-2">업로드 파일</label></div>
-                                            <div class="col-12 col-md-7"><input type="file" name="uploadFile" multiple></div>
-                                        </div>
-                                        <input type="text" name="cus_num" value="${login.cus_num}" hidden>
-                                        <input type="text" name="prj_num" value="${prj_list.prj_num}" hidden>
+        <jsp:include page="../../include/topbar.jsp" flush="true"/>
+        <!-- Begin Page Content -->
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-lg-12">
 
-                                        <div class="text-center d-block card-header py-3">
-                                            <a href="javascript:chk_form();" class="btn btn-primary btn-icon-split" id="uploadBtn">
+                    <!-- Collapsable Card Example -->
+                    <div class="card shadow mb-4">
+                        <!-- Card Header - Accordion -->
+                        <a class="d-block card-header py-3" >
+                            <div id="pagetitle"></div>
+                        </a>
+                        <!-- Card Content - Collapse -->
+                        <div class="collapse show" id="collapseCardExample">
+                            <div class="card-body">
+
+                                <form method="post" id="fileuploadform" action="datacenter_insert.do" name="fileuploadform" enctype="multipart/form-data" class="form-horizontal" >
+
+                                <input type="hidden" id="cus_num" name="cus_num" value=${login.cus_num}>
+                                        <div class="row form-group">
+                                            <div class="col col-md-3 text-right"><label for="title" class=" form-control-label fa-solid text-gray-800 mt-2">
+                                                <sup class="text-danger small">*</sup>제목</label></div>
+                                            <div class="col-12 col-md-7">
+                                                <input  id="title" name="title" maxlength="40" placeholder="제목을 입력해주세요."
+                                                        class="form-control" value='${PostList.nor_tit}'>
+                                            </div>
+                                        </div>
+                                        <div class="row form-group">
+                                            <div class="col col-md-3 text-right"><label for="contents"
+                                                                                        class=" form-control-label fa-solid text-gray-800 mt-2"><sup
+                                                    class="text-danger small">*</sup>내용</label></div>
+                                            <div class="col-12 col-md-7">
+                                                <textarea name="contents" id="contents" rows="9"
+                                                          placeholder="내용을 입력해주세요." maxlength="1000"
+                                                          class="form-control">${PostList.nor_cnt}</textarea>
+                                            </div>
+                                        </div>
+                                        <div class="row form-group">
+                                            <div class="col col-md-3 text-right"><label for="uploadFile"
+                                                                                        class=" form-control-label fa-solid text-gray-800 mt-2">첨부파일</label>
+                                            </div>
+                                            <div class="col-12 col-md-9"><input type="file" id="uploadFile"
+                                                                                name="uploadFile" multiple></div>
+                                        </div>
+                                        <input type="hidden" id="cate" name="cate" placeholder="제목을 입력해주세요."
+                                               class="form-control" value="1">
+                                        <input type="hidden" id="prj_num" name="prj_num" placeholder="제목을 입력해주세요."
+                                               class="form-control" value="${prj_list.prj_num}">
+                                    </form>
+
+                            </div>
+
+                            <div class="text-center d-block card-header py-3">
+                                <a href="javascript:chk_form();" class="btn btn btn-info btn-icon-split" id="uploadBtn">
                           <span class="icon text-white-50">
                             <i class="fas fa-pen"></i>
                           </span>
-                                                <span class="text" id="writebutton">글쓰기</span>
-                                            </a>
-                                            <%--</button>--%>
-                                            <a href="datacenter.do" class="btn btn-secondary">
+                                    <span class="text" id="writebutton">글쓰기</span>
+                                </a>
+
+                                <%--</button>--%>
+                                <a href="outputs.do" class="btn btn-secondary">
                                                 <span class="icon text-white-50">
                                                        <i class="fas fa-list"></i>
                                                 </span>
-                                                <span class="text">취소</span>
+                                    <span class="text">취소</span>
 
-                                            </a>
-                                        </div>
-                                    </form>
-
-                                </div>
+                                </a>
                             </div>
                         </div>
                     </div>
+
                 </div>
-                <!-- /.container-fluid -->
+
             </div>
+
         </div>
+        <!-- /.container-fluid -->
+
     </div>
+    <!-- End of Main Content -->
 
-
-    <script src="http://code.jquery.com/jquery-3.3.1.min.js"
-            integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
-            crossorigin="anonymous"></script>
+    <jsp:include page="../../include/footer.jsp" flush="true"/>
 
 </div>
 

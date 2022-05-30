@@ -530,6 +530,13 @@ public class MainController {
         if (no > 0) {
             NormalVO Result = normalService.viewPost(no);
             model.addAttribute("PostList", Result);
+            //첨부파일 불러오기
+            List<FileVO> files = fileService.viewFiles(no);
+            System.out.println(files);
+            for (int i = 0; i < files.size(); i++) {
+                files.get(i).setFile_link("/upload/" + files.get(i).getFile_name());
+            }
+            model.addAttribute("FileList", files);
         }
 
         return "/notice/notice_write";
@@ -637,7 +644,34 @@ public class MainController {
             throw new RuntimeException("file Save Error");
         }
     }
-
+    //첨부파일 삭제
+    @RequestMapping(value = "/file_delete.do", method = RequestMethod.DELETE)
+    public String file_delete(@RequestParam(value = "cate") int cate, @RequestParam(value = "post_num") int post_num
+            ,@RequestParam(value = "file_name") String file_name) {
+        System.out.println('a');
+        FileVO filevo = new FileVO(post_num, cate, file_name);
+        fileService.deleteFile(filevo);
+        System.out.println('c');
+        switch (filevo.getCate()) {
+            case 12:
+                return "redirect:/notice_write.do?post_num="+filevo.getPost_num()+"&update=1";
+            case 13:
+                return "redirect:/datacenter_write.do?post_num="+filevo.getPost_num()+"&update=1";
+            case 15:
+                return "redirect:/request_write.do?post_num="+filevo.getPost_num()+"&update=1";
+            case 9:
+                return "redirect:/danger_write.do?post_num="+filevo.getPost_num()+"&update=1";
+            case 10:
+                return "redirect:/iwwue_write.do?post_num="+filevo.getPost_num()+"&update=1";
+            case 3:
+                return "redirect:/regularreport_write.do?post_num="+filevo.getPost_num()+"&update=1";
+            case 2:
+                return "redirect:/meetingrecord_write.do?post_num="+filevo.getPost_num()+"&update=1";
+            case 1:
+                return "redirect:/outputs_write.do?post_num="+filevo.getPost_num()+"&update=1";
+        }
+        return "redirect:/index.do";
+    }
 
     //요청사항 게시판 글목록 보기 cate=15
     @RequestMapping(value = "/request.do", method = RequestMethod.GET)
