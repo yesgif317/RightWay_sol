@@ -2,20 +2,8 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <jsp:include page="../../include/header.jsp" flush="true"/>
 <jsp:include page="../../include/sidebar.jsp" flush="true"/>
-<script>
-    function delete_form(cate,post_num,file_name) {
-        alert(file_name);
-        document.getElementById('cate').setAttribute("value",cate);
-        document.getElementById('post_num').setAttribute("value",post_num);
-        document.getElementById('file_name').setAttribute("value",file_name);
-        document.getElementById('deleteform').submit();
-    }
-    var parent = document.getElementById("div1");
-    var child = document.getElementById("p1");
-    parent.removeChild(child);
 
-
-</script>
+<script src="<c:url value="/resources/js/demo/filedelete.js"/>"></script>
 <!-- Content Wrapper -->
 <div id="content-wrapper" class="d-flex flex-column">
 
@@ -57,7 +45,12 @@
                                           enctype="multipart/form-data" class="form-horizontal">
                                         </c:otherwise>
                                         </c:choose>
+                                            <div id="filedelete">
+
+                                            </div>
                                             <input type="hidden" name="post_num" value="${PostList.post_num}"></div>
+                            <input type="hidden" name="post_num" value="${PostList.post_num}">
+                            <input type="hidden" name="file_name" value="">
                                         <div class="row form-group">
                                             <div class="col col-md-3 text-right"><label for="title"
                                                                                         class=" form-control-label fa-solid text-gray-800 mt-2"><sup
@@ -87,15 +80,15 @@
                                 <div class="col-3"></div>
                                 <div class="col-3" > &nbsp;&nbsp;&nbsp;첨부 파일<br>
                                     <c:forEach items="${FileList}" var="file">
-                                    <div class="row form-group">
-                                        <a href="/download.do?file_name=${file.file_name}" id = "${file.file_name}"> &nbsp; ${file.file_name}</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                        <div class="row form-group">
+                                            <a href="/download.do?file_name=${file.file_name}" id = "${file.file_name}"> &nbsp; ${file.file_name}</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 
-                                        <a onclick="delete_form(${file.cate},${file.post_num},'${file.file_name}')" id = x_"${file.file_name}">
-                                             X
-                                             <%--<i class="fa-solid fa-circle-xmark"></i>--%>
-                                        </a>
-                                        <br>
-                                    </div>
+                                            <a onclick="delete_form(${file.cate},${file.post_num},'${file.file_name}')" id = "x_${file.file_name}">
+                                                <i class="fa-solid fa-trash"></i>
+                                                    <%--<i class="fa-solid fa-circle-xmark"></i>--%>
+                                            </a>
+                                            <br>
+                                        </div>
                                     </c:forEach>
                                     <br><br>
                                 </div>
@@ -109,13 +102,8 @@
                                     </form>
                             <form method="post" action="/file_delete.do" id="deleteform">
                                 <input type="hidden" name="_method" value="delete" />
-                                <input type="hidden" id="cate" name="cate"   />
-                                <input type="hidden" id="post_num" name="post_num"   />
-                                <input type="hidden" id="file_name" name="file_name"   />
 
-                                <div id="filedelete">
 
-                                </div>
                             </form>
 
                             </div>

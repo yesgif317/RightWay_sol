@@ -565,10 +565,19 @@ public class MainController {
     }
     //공지사항 작성글 수정 기능
     @RequestMapping(value = "/notice_update.do", method = RequestMethod.POST)
-    public String notice_update(MultipartFile[] uploadFile,NormalVO postVO) {
-        System.out.println("수정 확인" );
+    public String notice_update(MultipartFile[] uploadFile,NormalVO postVO,@RequestParam(value = "cate") List<Integer> cate, @RequestParam(value = "post_num") List<Integer> post_num
+            ,@RequestParam(value = "file_name") List<String> file_name) {
         postVO.setNor_tit(postVO.getTitle());
         postVO.setNor_cnt(postVO.getContents());
+        if(cate.size()>1) {
+            for (int i = 0; i < cate.size(); i++) {
+                System.out.println(post_num);
+                System.out.println(post_num.get(0));
+                FileVO filevo = new FileVO(post_num.get(i), cate.get(i), file_name.get(i));
+                System.out.println(filevo);
+                fileService.deleteFile(filevo);
+            }
+        }
         normalService.updatePost(postVO);
         //첨부파일저장
         if (uploadFile != null) {
