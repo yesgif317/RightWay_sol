@@ -12,6 +12,7 @@ public interface CustomerService {
     List<CustomerVO> selectAll();
     List<CustomerVO> selectAllCustomer();
     List<CustomerVO> selectCustomerManagement(Object object);
+    List<CustomerVO> selectCustomerManagementAdmin();
     CustomerVO viewCustomer(int cus_num);
     String updateCustomer(CustomerVO customerVO);
 

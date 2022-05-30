@@ -126,6 +126,8 @@ public class CustomerDaoImpl implements CustomerDao {
 
     @Override
     public List<CustomerVO> selectCustomerManagement(Object object){return sqlSession.selectList(Namespace + ".selectCustomerManagement",object);}
+    @Override
+    public List<CustomerVO> selectCustomerManagementAdmin(){return sqlSession.selectList(Namespace + ".selectCustomerManagementAdmin");}
 
     @Override
     public void resetPLState(){sqlSession.update(Namespace+".resetPLState");}

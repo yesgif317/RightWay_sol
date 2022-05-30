@@ -146,7 +146,12 @@ public class MainController {
     public String main(Model model, HttpServletRequest request,
                        HttpServletResponse response,
                        HttpSession httpSession, ModelAndView modelAndView) {
-
+        //관리자 로그인인 경우 관리자승인페이지로 이동
+        CustomerVO logininfo = (CustomerVO) httpSession.getAttribute("login");
+        if(logininfo.getCus_state()==3)
+        {
+            return "redirect:/adminpermission.do";
+        }
         //프로젝트 이름이 선택되어있는 경우
         if (httpSession.getAttribute("prj_list") != null) {
             Object object = httpSession.getAttribute("prj_list");
@@ -752,11 +757,17 @@ public class MainController {
     public String issue_write(@RequestParam("post_num") int post_num, Model model, HttpSession httpSession) {
         List<CustomerVO> customerVOList = customerService.selectCustomerManagement(httpSession.getAttribute("prj_list"));
         model.addAttribute("CustomerList", customerVOList);
-        if (post_num > 0) {
-            RiskVO Result = riskService.viewRisk(post_num);
+        CustomerVO logininfo = (CustomerVO) httpSession.getAttribute("login");
+        RiskVO Result = riskService.viewRisk(post_num);
+        if (post_num == 0) {
+            return "issue/issue_write";
+        } else if (Result.getCus_num() == parseInt(logininfo.getCus_num()) || logininfo.getCus_state()==3) {
             model.addAttribute("RiskList", Result);
+            return "issue/issue_write";
         }
-        return "issue/issue_write";
+        model.addAttribute("msg", "접근권한이 없습니다.");
+        model.addAttribute("url", "issue.do");
+        return "alert";
     }
 
     //issue 상세 페이지 이동
@@ -1019,11 +1030,17 @@ public class MainController {
     public String danger_write(@RequestParam("post_num") int post_num, Model model, HttpSession httpSession) {
         List<CustomerVO> customerVOList = customerService.selectCustomerManagement(httpSession.getAttribute("prj_list"));
         model.addAttribute("CustomerList", customerVOList);
-        if (post_num > 0) {
-            RiskVO Result = riskService.viewRisk(post_num);
+        CustomerVO logininfo = (CustomerVO) httpSession.getAttribute("login");
+        RiskVO Result = riskService.viewRisk(post_num);
+        if (post_num == 0) {
+            return "danger/danger_write";
+        } else if (Result.getCus_num() == parseInt(logininfo.getCus_num()) || logininfo.getCus_state()==3) {
             model.addAttribute("RiskList", Result);
+            return "danger/danger_write";
         }
-        return "danger/danger_write";
+        model.addAttribute("msg", "접근권한이 없습니다.");
+        model.addAttribute("url", "danger.do");
+        return "alert";
     }
 
     //danger 상세 페이지 이동
@@ -1082,10 +1099,8 @@ public class MainController {
     @RequestMapping(value = "/adminpermission.do", method = RequestMethod.GET)
     public String adminpermission(Model model, HttpSession httpSession) {
         CustomerVO cust = (CustomerVO) httpSession.getAttribute("login");
-        ProjectVO prj = (ProjectVO) httpSession.getAttribute("prj_list");
         int cus_num = Integer.parseInt(cust.getCus_num());
         int cus_state = cust.getCus_state();
-        int pl = prj.getCus_num();
         //관리자로 접속하는 경우
         if (cus_state == 3) {
             List<CustomerVO> customerVOList = customerService.select_nonPermissionCus();
@@ -1093,8 +1108,12 @@ public class MainController {
             // .jsp 파일로 DB 결과값 전달하기
             model.addAttribute("CustomerList", customerVOList);
             return "/adminpermission/adminpermission";
-            //PL계정으로 접속하는 경우
-        } else if (cus_state == 2 && cus_num == pl) {
+
+        }
+        //PL계정으로 접속하는 경우
+        ProjectVO prj = (ProjectVO) httpSession.getAttribute("prj_list");
+        int pl = prj.getCus_num();
+        if (cus_state == 2 && cus_num == pl) {
             List<CustomerVO> customerVOList = customerService.select_nonPermissionCusPL(Integer.parseInt(cust.getCom_num()));
             // .jsp 파일로 DB 결과값 전달하기
             model.addAttribute("CustomerList", customerVOList);
@@ -1120,12 +1139,18 @@ public class MainController {
 
     //행사관리 글쓰기 페이지 이동
     @RequestMapping(value = "/event_write.do", method = RequestMethod.GET)
-    public String event_write(@RequestParam("post_num") int post_num, Model model) {
-        if (post_num > 0) {
-            EventVO Result = eventService.viewEvent(post_num);
+    public String event_write(@RequestParam("post_num") int post_num, Model model,HttpSession httpSession) {
+        EventVO Result = eventService.viewEvent(post_num);
+        CustomerVO logininfo = (CustomerVO) httpSession.getAttribute("login");
+        if (post_num == 0) {
+            return "event/event_write";
+        } else if (Result.getCus_num() == parseInt(logininfo.getCus_num()) || logininfo.getCus_state()==3) {
             model.addAttribute("EventList", Result);
+            return "event/event_write";
         }
-        return "event/event_write";
+        model.addAttribute("msg", "접근권한이 없습니다.");
+        model.addAttribute("url", "event.do");
+        return "alert";
     }
 
     //행사관리 상세 페이지 이동
@@ -1609,20 +1634,21 @@ public class MainController {
     //투입인력관리 page
     @RequestMapping(value = "/usermanagement.do", method = RequestMethod.GET)
     public String usermanagement(HttpSession httpSession, Model model) {
-        Object object = httpSession.getAttribute("prj_list");
         CustomerVO cust = (CustomerVO) httpSession.getAttribute("login");
-        ProjectVO prj = (ProjectVO) object;
         int cus_num = Integer.parseInt(cust.getCus_num());
         int cus_state = cust.getCus_state();
-        int pl = prj.getCus_num();
         //관리자로 접속하는 경우
         if (cus_state == 3) {
-            List<CustomerVO> customerVOList = customerService.selectCustomerManagement(object);
+            List<CustomerVO> customerVOList = customerService.selectCustomerManagementAdmin();
             // .jsp 파일로 DB 결과값 전달하기
             model.addAttribute("CustomerList", customerVOList);
             return "/usermanagement/usermanagement";
-            //PL계정으로 접속하는 경우
-        } else if (cus_state == 2 && cus_num == pl) {
+        }
+        //PL계정으로 접속하는 경우
+        Object object = httpSession.getAttribute("prj_list");
+        ProjectVO prj = (ProjectVO) object;
+        int pl = prj.getCus_num();
+        if (cus_state == 2 && cus_num == pl) {
             List<CustomerVO> customerVOList = customerService.selectCustomerManagement(object);
             // .jsp 파일로 DB 결과값 전달하기
             model.addAttribute("CustomerList", customerVOList);

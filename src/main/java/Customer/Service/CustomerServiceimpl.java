@@ -218,6 +218,11 @@ public class CustomerServiceimpl implements CustomerService {
     }
 
     @Override
+    public List<CustomerVO> selectCustomerManagementAdmin() {
+        return dao.selectCustomerManagementAdmin();
+    }
+
+    @Override
     public void resetPLState(){dao.resetPLState();}
 
     @Override

@@ -14,7 +14,7 @@
         <div class="container-fluid">
 
             <!-- Page Heading -->
-            <h1 class="h4 mb-2 text-gray-800">관리자승인</h1>
+            <h1 class="h3 mb-2 text-gray-800">관리자승인</h1>
             <p class="mb-4">승인대기중인 회원을 승인처리 해주는 페이지 입니다.</p>
 
             <!-- DataTales Example -->

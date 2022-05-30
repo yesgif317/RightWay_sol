@@ -29,8 +29,9 @@
                         <table class="table table-bordered table-hover" id="dataTable">
                             <thead>
                             <tr>
-                                <th>ID</th>
+                                <th>NO</th>
                                 <th>이름</th>
+                                <th>ID</th>
                                 <th>직급</th>
                                 <th>회사</th>
                                 <th>이메일</th>
@@ -44,17 +45,18 @@
                                     onmouseover="this.style.fontWeight='bold';this.style.color='black'"  onmouseout=" this.style.fontWeight='';this.style.color='#858796'">
                                     <td>${status.count}</td>
                                     <td>${cust.cus_name}</td>
+                                    <td>${cust.cus_id}</td>
                                     <td>${cust.cus_position}</td>
                                     <td>${cust.com_name}</td>
                                     <td>${cust.cus_email}</td>
                                     <td>${cust.cus_phone}</td>
                                     <td>
                                         <c:choose>
-                                            <c:when test="${cust.cus_state eq '1'}">
-                                                승인
+                                            <c:when test="${cust.cus_state eq '0'}">
+                                                미승인
                                             </c:when>
                                             <c:otherwise>
-                                                미승인
+                                                승인
                                             </c:otherwise>
                                         </c:choose>
                                     </td>

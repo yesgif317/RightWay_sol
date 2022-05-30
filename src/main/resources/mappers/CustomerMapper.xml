@@ -185,6 +185,13 @@
         where com.com_num = cust.com_num and pd.cus_num = cust.cus_num and pd.prj_num = #{prj_num}
         order by cust.cus_num desc
     </select>
+
+    <select id="selectCustomerManagementAdmin" resultType="CustomerVO">
+        select *
+        from customer cust, company com
+        where com.com_num = cust.com_num
+        order by cust.cus_num desc
+    </select>
     <!-- 비밀번호 찾기 사용자 조회 -->
     <select id="readMember" resultType="CustomerVO">
         select cus_id , cus_email
