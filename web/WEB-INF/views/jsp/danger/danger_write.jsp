@@ -59,7 +59,7 @@
                                                                                 name="risk_tit"
                                                                                 placeholder="제목을 입력해주세요."
                                                                                 class="form-control"
-                                                                                value="${RiskList.risk_tit}"></div>
+                                                                                value="${RiskList.risk_tit}" maxlength="65"></div>
                                         </div>
                                         <div class="row form-group">
                                             <div class="col col-md-3 text-right"><label
@@ -292,7 +292,7 @@
                                             <div class="col-12 col-md-7"><textarea name="risk_con" id="risk_con"
                                                                                    rows="8"
                                                                                    placeholder="위험 내용 및 재현경로를 입력해주세요."
-                                                                                   class="form-control">${RiskList.risk_con}</textarea>
+                                                                                   class="form-control" maxlength="1000">${RiskList.risk_con}</textarea>
                                             </div>
                                         </div>
                                         <div class="row form-group">

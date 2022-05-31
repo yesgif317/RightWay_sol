@@ -56,7 +56,7 @@
                                                                                 name="com_name"
                                                                                 placeholder="회사명을 입력해주세요."
                                                                                 class="form-control"
-                                                                                value="${CompanyList.com_name}"></div>
+                                                                                value="${CompanyList.com_name}" maxlength="65"></div>
                                         </div>
                                         <div class="row form-group">
                                             <div class="col col-md-3 text-right"><label for="com_tel"
@@ -66,7 +66,7 @@
                                                                                          name="com_tel"
                                                                                          placeholder="회사 대표번호를 입력해주세요."
                                                                                          class="form-control"
-                                                                                         value="${CompanyList.com_tel}">
+                                                                                         value="${CompanyList.com_tel}" maxlength="20">
                                             </div>
                                         </div>
                                         <div class="row form-group">
@@ -83,7 +83,7 @@
                                                                                          name="com_addr"
                                                                                          placeholder="주소를 입력해주세요."
                                                                                          class="form-control"
-                                                                                         value="${CompanyList.com_addr}">
+                                                                                         value="${CompanyList.com_addr}" maxlength="50">
                                             </div>
                                         </div>
                                         <div class="row form-group">
@@ -94,7 +94,7 @@
                                                                                          name="com_business"
                                                                                          placeholder="주요업무 입력해주세요."
                                                                                          class="form-control"
-                                                                                         value="${CompanyList.com_business}">
+                                                                                         value="${CompanyList.com_business}" maxlength="60">
                                             </div>
                                         </div>
                                         <div class="row form-group">
