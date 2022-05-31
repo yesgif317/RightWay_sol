@@ -3,13 +3,57 @@
 <jsp:include page="../../include/header.jsp" flush="true" />
 <jsp:include page="../../include/sidebar.jsp" flush="true" />
 
+<script src="<c:url value="/resources/js/demo/filedelete.js"/>"></script>
+<%int test = Integer.parseInt(request.getParameter("post_num"));
+    pageContext.setAttribute("test", test);%>
+<script>
+    function chk_form() {
+        if (document.getElementById("title").value == '' || document.getElementById("contents").value == '') {
+            $('#exampleModal').modal('show')
+        } else {
+            if(${test ne '0'}){
+
+                var theForm = document.fileuploadform;
+                theForm.method = "post";
+                theForm.action = "/datacenter_update.do?post_num=${PostList.post_num}";
+                theForm.submit();
+
+            }
+            else{
+
+                var formData = new FormData();
+                var inputFile = $("input[name='uploadFile']");
+                var title = $("input[name='title']").val();
+                var writer = $("input[name='cus_num']").val();
+                var contents = $("textarea[name='contents']").val();
+
+                var files = inputFile[0].files;
+
+                console.log(files);
+                console.log(title + "/" + writer + "/" + contents)
+
+                for (var i = 0; i < files.length; i++) {
+                    formData.append("uploadFile", files[i]);
+                }
+                formData.append("title", title);
+                formData.append("writer", writer);
+                formData.append("contents", contents);
+                document.getElementById('fileuploadform').submit();
+
+
+            }
+
+
+        }
+    }
+
+</script>
 <script>
     //update 파라미터 받기
-    <%int test = Integer.parseInt(request.getParameter("post_num"));
-    pageContext.setAttribute("post_num", test);%>
+
     //update 에 따라 버튼 수정 및 등록 반영
     window.onload = function() {
-        if(${post_num eq '0'}){
+        if(${test eq '0'}){
             document.getElementById("pagetitle").innerHTML = '<h6 class="m-0 font-weight-bold text-primary text-center">글 등록</h6>';
             document.getElementById("writebutton").innerHTML = '등록';
         }
@@ -18,24 +62,7 @@
             document.getElementById("writebutton").innerHTML = '수정';
         }
     }
-    //모달 실행 함수
-    function chk_form() {
-        if( document.getElementById("contents").value==''||document.getElementById("title").value==''){
-            $('#exampleModal').modal('show')
-        }
-        else {
-            if(${post_num eq '0'}){
-                document.getElementById("fileuploadform").submit();
-            }
-            else {
-                var theForm = document.fileuploadform;
-                theForm.method = "post";
-                theForm.action = "/datacenter_update.do?post_num=${PostList.post_num}";
-                theForm.submit();
-            }
 
-        }
-    }
 
 </script>
 <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog"
@@ -83,7 +110,11 @@
                             <div class="card-body">
 
                                 <form method="post" id="fileuploadform" action="datacenter_insert.do" name="fileuploadform" enctype="multipart/form-data" class="form-horizontal" >
+                                    <div id="filedelete">
 
+                                    </div>
+                                    <input type="hidden" name="post_num" value="${PostList.post_num}">
+                                    <input type="hidden" name="file_name" value="">
                                 <input type="hidden" id="cus_num" name="cus_num" value=${login.cus_num}>
                                         <div class="row form-group">
                                             <div class="col col-md-3 text-right"><label for="title" class=" form-control-label fa-solid text-gray-800 mt-2">
@@ -110,6 +141,26 @@
                                             <div class="col-12 col-md-9"><input type="file" id="uploadFile"
                                                                                 name="uploadFile" multiple></div>
                                         </div>
+                                    <div class="row form-group">
+                                        <div class="col-3"></div>
+                                        <div class="col-3" > &nbsp;&nbsp;&nbsp;첨부 파일<br>
+                                            <c:forEach items="${FileList}" var="file">
+                                                <div class="row form-group">
+                                                    <a href="/download.do?file_name=${file.file_name}" id = "${file.file_name}"> &nbsp; ${file.file_name}</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+
+                                                    <a onclick="delete_form(${file.cate},${file.post_num},'${file.file_name}')" id = "x_${file.file_name}">
+                                                        <i class="fa-solid fa-trash"></i>
+                                                            <%--<i class="fa-solid fa-circle-xmark"></i>--%>
+                                                    </a>
+                                                    <br>
+                                                </div>
+                                            </c:forEach>
+                                            <br><br>
+                                        </div>
+                                        <div class="col-4" >
+                                        </div>
+
+                                    </div>
                                         <input type="hidden" id="cate" name="cate" placeholder="제목을 입력해주세요."
                                                class="form-control" value="1">
                                         <input type="hidden" id="prj_num" name="prj_num" placeholder="제목을 입력해주세요."

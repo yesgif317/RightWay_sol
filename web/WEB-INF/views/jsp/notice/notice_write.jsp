@@ -48,7 +48,7 @@
                                             <div id="filedelete">
 
                                             </div>
-                                            <input type="hidden" name="post_num" value="${PostList.post_num}"></div>
+                                            </div>
                             <input type="hidden" name="post_num" value="${PostList.post_num}">
                             <input type="hidden" name="file_name" value="">
                                         <div class="row form-group">

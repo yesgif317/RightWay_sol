@@ -6,6 +6,11 @@
 <jsp:include page="../../include/header.jsp" flush="true"/>
 <jsp:include page="../../include/sidebar.jsp" flush="true"/>
 <script>
+    window.onload=function() {
+        if(${FileList.size()<1}){
+            document.getElementById('file').innerText='   ';
+        }
+    }
     function delete_form () {
         document.getElementById('deleteform').submit();
     }
@@ -58,6 +63,19 @@
                                         </div>
                                     </div>
                                 </form>
+                            </div>
+                            <div class="row form-group">
+                                <div class="col-2"></div>
+                                <div class="col-8" id="file" > &nbsp;&nbsp;&nbsp;첨부 파일<br>
+                                    <c:forEach items="${FileList}" var="file">
+
+                                        <a href="/download.do?file_name=${file.file_name}" id = "${file.file_name}">
+                                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<i class="fa-solid fa-file-arrow-down"></i>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;${file.file_name}
+                                        </a>
+                                        <br>
+                                    </c:forEach>
+                                    <br><br>
+                                </div>
                             </div>
                         </div>
 

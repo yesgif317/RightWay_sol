@@ -62,7 +62,6 @@
                                     </div>
                                 </form>
                             </div>
-
                             <div class="row form-group">
                                 <div class="col-2"></div>
                                 <div class="col-8" id="file" > &nbsp;&nbsp;&nbsp;첨부 파일<br>
@@ -76,8 +75,6 @@
                                     <br><br>
                                 </div>
                             </div>
-
-
                         </div>
 
                         <!-- 수정/삭제/목록 버튼 -->

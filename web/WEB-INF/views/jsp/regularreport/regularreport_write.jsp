@@ -2,8 +2,48 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <jsp:include page="../../include/header.jsp" flush="true"/>
 <jsp:include page="../../include/sidebar.jsp" flush="true"/>
+<script src="<c:url value="/resources/js/demo/filedelete.js"/>"></script>
+<%
+    int test = Integer.parseInt(request.getParameter("update"));
+    pageContext.setAttribute("test", test);
+%>
+<script>
+    function chk_form() {
+        if (document.getElementById("title").value == '' || document.getElementById("contents").value == '') {
+            $('#exampleModal').modal('show')
+        } else {
+            if(${test eq 1}){
+                document.getElementById('regularreportupdateform').submit();
+
+            }
+            else{
+                var formData = new FormData();
+                var inputFile = $("input[name='uploadFile']");
+                var title = $("input[name='title']").val();
+                var writer = $("input[name='cus_num']").val();
+                var contents = $("textarea[name='contents']").val();
 
 
+                var files = inputFile[0].files;
+
+                console.log(files);
+                console.log(title + "/" + writer + "/" + contents)
+                for (var i = 0; i < files.length; i++) {
+                    formData.append("uploadFile", files[i]);
+                }
+                formData.append("title", title);
+                formData.append("writer", writer);
+                formData.append("contents", contents);
+                document.getElementById('regularreportwriteform').submit();
+
+
+            }
+
+
+        }
+    }
+
+</script>
 <!-- Content Wrapper -->
 <div id="content-wrapper" class="d-flex flex-column">
 
@@ -20,10 +60,7 @@
                     <div class="card shadow mb-4">
                         <!-- Card Header - Accordion -->
                         <a class="d-block card-header py-3">
-                            <%
-                                int test = Integer.parseInt(request.getParameter("update"));
-                                pageContext.setAttribute("test", test);
-                            %>
+
                             <c:choose>
                                 <c:when test="${test eq '1'}">
                                     <h6 class="m-0 font-weight-bold text-primary text-center">정기보고 수정</h6>
@@ -38,7 +75,7 @@
                             <div class="card-body">
                                 <c:choose>
                                 <c:when test="${test eq '1'}">
-                                <form method="post" action="regularreport_update.do?post_num=${PostList.post_num}"
+                                <form method="post" action="regularreport_update.do"
                                       id="regularreportupdateform"
                                       enctype="multipart/form-data" class="form-horizontal">
                                     </c:when>
@@ -47,26 +84,31 @@
                                           enctype="multipart/form-data" class="form-horizontal">
                                         </c:otherwise>
                                         </c:choose>
+                                            <div id="filedelete">
+
+                                            </div>
+                                            <input type="hidden" name="post_num" value="${PostList.post_num}">
+                                            <input type="hidden" name="file_name" value="">
                                         <input type="hidden" id="cus_num" name="cus_num" value=${login.cus_num}>
                                         <div class="row form-group">
                                             <div class="col col-md-3 text-right">
-                                                <label for="nor_tit"
+                                                <label for="title"
                                                        class=" form-control-label fa-solid text-gray-800 mt-2">
                                                     <sup class="text-danger small">*</sup>제목
                                                 </label>
                                             </div>
                                             <div class="col-12 col-md-7">
-                                                <input type="text" id="nor_tit" name="title" maxlength="40"
+                                                <input type="text" id="title" name="title" maxlength="40"
                                                        placeholder="제목을 입력해주세요."
                                                        class="form-control" value='${PostList.nor_tit}'>
                                             </div>
                                         </div>
                                         <div class="row form-group">
-                                            <div class="col col-md-3 text-right"><label for="nor_cnt"
+                                            <div class="col col-md-3 text-right"><label for="contents"
                                                                                         class=" form-control-label fa-solid text-gray-800 mt-2"><sup
                                                     class="text-danger small">*</sup>내용</label></div>
                                             <div class="col-12 col-md-7">
-                                                <textarea name="contents" id="nor_cnt" rows="9" maxlength="1000"
+                                                <textarea name="contents" id="contents" rows="9" maxlength="1000"
                                                           placeholder="정기보고 내용을 입력해주세요."
                                                           class="form-control">${PostList.nor_cnt}</textarea>
                                             </div>
@@ -83,7 +125,26 @@
                                         <input type="hidden" id="prj_num" name="prj_num" placeholder="제목을 입력해주세요."
                                                class="form-control" value="${prj_list.prj_num}">
                                     </form>
+                                        <div class="row form-group">
+                                            <div class="col-3"></div>
+                                            <div class="col-3" > &nbsp;&nbsp;&nbsp;첨부 파일<br>
+                                                <c:forEach items="${FileList}" var="file">
+                                                    <div class="row form-group">
+                                                        <a href="/download.do?file_name=${file.file_name}" id = "${file.file_name}"> &nbsp; ${file.file_name}</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 
+                                                        <a onclick="delete_form(${file.cate},${file.post_num},'${file.file_name}')" id = "x_${file.file_name}">
+                                                            <i class="fa-solid fa-trash"></i>
+                                                                <%--<i class="fa-solid fa-circle-xmark"></i>--%>
+                                                        </a>
+                                                        <br>
+                                                    </div>
+                                                </c:forEach>
+                                                <br><br>
+                                            </div>
+                                            <div class="col-4" >
+                                            </div>
+
+                                        </div>
                             </div>
 
                             <div class="text-center d-block card-header py-3">
@@ -101,22 +162,7 @@
                                             </c:otherwise>
                                         </c:choose>
                                             </span>
-                                    <script>
-                                        function chk_form() {
-                                            if (document.getElementById("nor_tit").value == '' || document.getElementById("nor_cnt").value == '') {
-                                                $('#exampleModal').modal('show')
-                                            } else {
-                                                <c:choose>
-                                                <c:when test="${test eq '1'}">
-                                                document.getElementById('regularreportupdateform').submit();
-                                                </c:when>
-                                                <c:otherwise>
-                                                document.getElementById('regularreportwriteform').submit();
-                                                </c:otherwise>
-                                                </c:choose>
-                                            }
-                                        }
-                                    </script>
+
                                     <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog"
                                          aria-labelledby="exampleModalLabel" aria-hidden="true">
                                         <div class="modal-dialog" role="document">
