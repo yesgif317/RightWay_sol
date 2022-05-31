@@ -110,7 +110,7 @@
                                             <div class="col-4 ">
                                                 <div><sup class="text-danger small">*</sup>팀명</div>
                                                 <input style="solid: whitesmoke" value="${TeamList.team_name}"
-                                                       placeholder="입력해주세요" type="text" id="team_name"
+                                                       placeholder="입력해주세요" type="text" maxlength="40" id="team_name"
                                                        name="team_name" class="form-control"/>
                                             </div>
                                             <div class="col-4" >
@@ -202,7 +202,7 @@
                                             <div class="col-2"></div>
                                             <div class="col-5">
                                                 <div><sup class="text-danger small">*</sup>팀설명</div>
-                                                <textarea style=" solid: whitesmoke; width: 100%;  resize: both"
+                                                <textarea style=" solid: whitesmoke; width: 100%;  resize: both" maxlength="100"
                                                           placeholder="입력해주세요" id="team_desc"
                                                           name="team_desc" class="form-control">${TeamList.team_desc}</textarea>
                                             </div>

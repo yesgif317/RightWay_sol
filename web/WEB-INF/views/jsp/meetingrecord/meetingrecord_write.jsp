@@ -23,11 +23,11 @@
                 var writer = $("input[name='cus_num']").val();
                 var contents = $("textarea[name='contents']").val();
 
+
                 var files = inputFile[0].files;
 
                 console.log(files);
                 console.log(title + "/" + writer + "/" + contents)
-
                 for (var i = 0; i < files.length; i++) {
                     formData.append("uploadFile", files[i]);
                 }
@@ -75,74 +75,76 @@
                             <div class="card-body">
                                 <c:choose>
                                 <c:when test="${test eq '1'}">
-                                <form method="post" action="meetingrecord_update.do?post_num=${PostList.post_num}"
+                                <form method="post" action="meetingrecord_update.do"
                                       id="meetingrecordupdateform"
-                                      enctype="application/x-www-form-urlencoded" class="form-horizontal">
+                                      enctype="multipart/form-data" class="form-horizontal">
                                     </c:when>
                                     <c:otherwise>
                                     <form method="post" action="meetingrecord_insert.do" id="meetingrecordwriteform"
                                           enctype="multipart/form-data" class="form-horizontal">
                                         </c:otherwise>
                                         </c:choose>
-                                            <div id="filedelete">
+                                        <div id="filedelete">
 
-                                            </div>
-                                            <input type="hidden" name="post_num" value="${PostList.post_num}">
-                                            <input type="hidden" name="file_name" value="">
+                                        </div>
+                                        <input type="hidden" name="post_num" value="${PostList.post_num}">
+                                        <input type="hidden" name="file_name" value="">
                                         <input type="hidden" id="cus_num" name="cus_num" value=${login.cus_num}>
                                         <div class="row form-group">
-                                            <div class="col col-md-3 text-right"><label for="title" class=" form-control-label fa-solid text-gray-800 mt-2">
-                                                <sup class="text-danger small">*</sup>제목</label></div>
+                                            <div class="col col-md-3 text-right">
+                                                <label for="title"
+                                                       class=" form-control-label fa-solid text-gray-800 mt-2">
+                                                    <sup class="text-danger small">*</sup>제목
+                                                </label>
+                                            </div>
                                             <div class="col-12 col-md-7">
-                                                <input type="text" id="title" name="title" maxlength="40" placeholder="제목을 입력해주세요."
+                                                <input type="text" id="title" name="title" maxlength="40"
+                                                       placeholder="제목을 입력해주세요."
                                                        class="form-control" value='${PostList.nor_tit}'>
                                             </div>
                                         </div>
                                         <div class="row form-group">
-                                            <div class="col col-md-3 text-right">
-                                                <label for="contents" class=" form-control-label fa-solid text-gray-800 mt-2">
-                                                    <sup class="text-danger small">*</sup>내용</label>
-                                            </div>
+                                            <div class="col col-md-3 text-right"><label for="contents"
+                                                                                        class=" form-control-label fa-solid text-gray-800 mt-2"><sup
+                                                    class="text-danger small">*</sup>내용</label></div>
                                             <div class="col-12 col-md-7">
-                                                <textarea name="contents" id="contents" rows="9"
-                                                          placeholder="회의록 내용을 입력해주세요." maxlength="1000"
+                                                <textarea name="contents" id="contents" rows="9" maxlength="1000"
+                                                          placeholder="회의록 내용을 입력해주세요."
                                                           class="form-control">${PostList.nor_cnt}</textarea>
                                             </div>
                                         </div>
                                         <div class="row form-group">
-                                            <div class="col col-md-3 text-right">
-                                                <label for="file_link" class=" form-control-label fa-solid text-gray-800 mt-2">첨부파일</label>
+                                            <div class="col col-md-3 text-right"><label for="file_link"
+                                                                                        class=" form-control-label fa-solid text-gray-800 mt-2">첨부파일</label>
                                             </div>
-                                            <div class="col-12 col-md-9">
-                                                <input type="file" id="file_link" name="uploadFile" multiple>
-                                            </div>
+                                            <div class="col-12 col-md-9"><input type="file" id="file_link"
+                                                                                name="uploadFile" multiple></div>
                                         </div>
-                                            <div class="row form-group">
-                                                <div class="col-3"></div>
-                                                <div class="col-3" > &nbsp;&nbsp;&nbsp;첨부 파일<br>
-                                                    <c:forEach items="${FileList}" var="file">
-                                                        <div class="row form-group">
-                                                            <a href="/download.do?file_name=${file.file_name}" id = "${file.file_name}"> &nbsp; ${file.file_name}</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-
-                                                            <a onclick="delete_form(${file.cate},${file.post_num},'${file.file_name}')" id = "x_${file.file_name}">
-                                                                <i class="fa-solid fa-trash"></i>
-                                                                    <%--<i class="fa-solid fa-circle-xmark"></i>--%>
-                                                            </a>
-                                                            <br>
-                                                        </div>
-                                                    </c:forEach>
-                                                    <br><br>
-                                                </div>
-                                                <div class="col-4" >
-                                                </div>
-
-                                            </div>
                                         <input type="hidden" id="cate" name="cate" placeholder="제목을 입력해주세요."
                                                class="form-control" value="2">
                                         <input type="hidden" id="prj_num" name="prj_num" placeholder="제목을 입력해주세요."
                                                class="form-control" value="${prj_list.prj_num}">
                                     </form>
+                                    <div class="row form-group">
+                                        <div class="col-3"></div>
+                                        <div class="col-3" > &nbsp;&nbsp;&nbsp;첨부 파일<br>
+                                            <c:forEach items="${FileList}" var="file">
+                                                <div class="row form-group">
+                                                    <a href="/download.do?file_name=${file.file_name}" id = "${file.file_name}"> &nbsp; ${file.file_name}</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 
+                                                    <a onclick="delete_form(${file.cate},${file.post_num},'${file.file_name}')" id = "x_${file.file_name}">
+                                                        <i class="fa-solid fa-trash"></i>
+                                                            <%--<i class="fa-solid fa-circle-xmark"></i>--%>
+                                                    </a>
+                                                    <br>
+                                                </div>
+                                            </c:forEach>
+                                            <br><br>
+                                        </div>
+                                        <div class="col-4" >
+                                        </div>
+
+                                    </div>
                             </div>
 
                             <div class="text-center d-block card-header py-3">
@@ -186,7 +188,7 @@
 
                                 </a>
                                 <%--</button>--%>
-                                <a href="meetingrecord.do" class="btn btn-secondary">
+                                <a href="regularreport.do" class="btn btn-secondary">
                                                 <span class="icon text-white-50">
                                                        <i class="fas fa-list"></i>
                                                 </span>

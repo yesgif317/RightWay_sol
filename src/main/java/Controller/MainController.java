@@ -588,7 +588,8 @@ public class MainController {
             ,@RequestParam(value = "file_name") List<String> file_name) {
         postVO.setNor_tit(postVO.getTitle());
         postVO.setNor_cnt(postVO.getContents());
-        if(cate.size()>1) {
+        if(cate.size()>1)
+        {
             for (int i = 0; i < cate.size(); i++) {
                 System.out.println(post_num);
                 System.out.println(post_num.get(0));
@@ -602,7 +603,7 @@ public class MainController {
         if (uploadFile != null) {
             fileService.insertFile(uploadFile, postVO.getPrj_num(), 12);
         }
-        return "redirect:/notice.do";
+        return "redirect:/notice_content.do?post_num="+post_num.get(0);
     }
     @RequestMapping(value = "/notice_content.do", method = RequestMethod.GET)
     public String notice_content(@RequestParam("post_num") int no, Model model, HttpServletRequest request, HttpServletResponse response) {
@@ -1003,7 +1004,7 @@ public class MainController {
         if (uploadFile != null) {
             fileService.insertFile(uploadFile, postVO.getPrj_num(), 2);
         }
-        return "redirect:/meetingrecord.do";
+        return "redirect:/meetingrecord_content.do?post_num="+post_num.get(0);
     }
 
     // 회의록 게시글 작성 기능
@@ -1104,7 +1105,7 @@ public class MainController {
         if (uploadFile != null) {
             fileService.insertFile(uploadFile, postVO.getPrj_num(), 3);
         }
-        return "redirect:/regularreport.do?post_num="+post_num.get(0);
+        return "redirect:/regularreport_content.do?post_num="+post_num.get(0);
     }
 
     // 정기보고 게시글 작성 기능
