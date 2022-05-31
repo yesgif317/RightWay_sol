@@ -118,18 +118,18 @@
                                                 <div class="form-group">
                                                     <input type="password" class="form-control form-control-user" name="old_pwd"
                                                            id="old_pwd"
-                                                           placeholder="기존비밀번호">
+                                                           placeholder="기존비밀번호" maxlength="20">
                                                 </div>
                                                 <div class="form-group text-left">
                                                     <input type="password" class="form-control form-control-user" name="cus_pwd"
                                                            id="cus_pwd"
-                                                           placeholder="변경비밀번호">
-                                                    <small>&nbsp; 8자 이상의 영문자,숫자,특수문자 조합으로 입력되어야 합니다.</small>
+                                                           placeholder="변경비밀번호" maxlength="20">
+                                                    <small>&nbsp; 8 ~ 20자 길이의 영문자,숫자,특수문자 조합으로 입력되어야 합니다.</small>
                                                 </div>
                                                 <div class="form-group">
                                                     <input type="password" class="form-control form-control-user" name="new_pwd"
                                                            id="new_pwd"
-                                                           placeholder="변경비밀번호확인">
+                                                           placeholder="변경비밀번호확인" maxlength="20">
                                                 </div>
                                             </div>
                                                 <input  type="hidden" name="cus_num" value="${login.cus_num}">
