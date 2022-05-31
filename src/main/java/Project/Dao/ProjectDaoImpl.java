@@ -29,6 +29,11 @@ public class ProjectDaoImpl implements ProjectDao{
     }
 
     @Override
+    public List<ProjectDetailVO> selectProject_detailPL(ProjectVO projectVO) {
+        return sqlSession.selectList(Namespace + ".selectProject_detailPL",projectVO);
+    }
+
+    @Override
     public ProjectVO selectProjectNum(String prj_name){
         return sqlSession.selectOne(Namespace+".selectProjectNum",prj_name);
     }

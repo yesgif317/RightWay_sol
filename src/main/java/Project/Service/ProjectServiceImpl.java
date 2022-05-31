@@ -22,6 +22,11 @@ public class ProjectServiceImpl implements ProjectService {
     }
 
     @Override
+    public List<ProjectDetailVO> selectProject_detailPL(ProjectVO projectVO) {
+        return dao.selectProject_detailPL(projectVO);
+    }
+
+    @Override
     public String insertProject(ProjectVO projectVO){return dao.insertProject(projectVO);}
 
     @Override

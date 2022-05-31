@@ -97,4 +97,10 @@
         from project
     </select>
 
+    <select id="selectProject_detailPL" resultType="ProjectDetailVO">
+        SELECT *
+        FROM project_detail
+        WHERE prj_num=${prj_num} and cus_num=${cus_num}
+    </select>
+
 </mapper>

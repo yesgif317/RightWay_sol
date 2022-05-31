@@ -9,7 +9,7 @@ public interface ProjectDao {
     //사용자의 프로젝트 목록 가져오도록 바꿀거
     List<ProjectVO> selectProject();
     List<ProjectDetailVO> selectProject_detail(int prj_no);
-
+    List<ProjectDetailVO> selectProject_detailPL(ProjectVO projectVO);
     ProjectVO selectProjectNum(String prj_name);
 
     //프로젝트 추가

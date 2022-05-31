@@ -197,7 +197,7 @@ public class MainController {
     public String select_prj(@RequestParam(value = "prj_name", required = false) String prj_name, HttpSession httpSession, Model model) {
 
         //프로젝트 변경 메서드드
-       if (prj_name != null) {
+        if (prj_name != null) {
             ProjectVO selectproject_list = projectService.selectproject_list(prj_name);
             httpSession.setAttribute("prj_list", selectproject_list);
         } else {
@@ -798,7 +798,7 @@ public class MainController {
     @RequestMapping(value = "/request_insert.do", method = RequestMethod.POST)
     public String request_insert(MultipartFile[] uploadFile, HttpSession httpSession, @RequestParam(value = "title") String title
             , @RequestParam(value = "contents") String contents, @RequestParam(value = "cus_num") String cus_num, @RequestParam(value = "prj_num") int prj_num)
-        {
+    {
         System.out.println("//Title : " + title + "//Contents : " + contents + "//requestFile : " + uploadFile + cus_num);
 
         //게시글 저장
@@ -832,7 +832,7 @@ public class MainController {
         RiskVO Result = riskService.viewRisk(post_num);
         if (post_num == 0) {
             return "issue/issue_write";
-        } else if (Result.getCus_num() == parseInt(logininfo.getCus_num()) || logininfo.getCus_state()==3) {
+        }else if (Result.getCus_num() == parseInt(logininfo.getCus_num()) || logininfo.getCus_state()==3 || Result.risk_mng == parseInt(logininfo.getCus_num())) {
             model.addAttribute("RiskList", Result);
             return "issue/issue_write";
         }
@@ -1145,7 +1145,7 @@ public class MainController {
         RiskVO Result = riskService.viewRisk(post_num);
         if (post_num == 0) {
             return "danger/danger_write";
-        } else if (Result.getCus_num() == parseInt(logininfo.getCus_num()) || logininfo.getCus_state()==3) {
+        } else if (Result.getCus_num() == parseInt(logininfo.getCus_num()) || logininfo.getCus_state()==3 || Result.risk_mng == parseInt(logininfo.getCus_num())) {
             model.addAttribute("RiskList", Result);
             return "danger/danger_write";
         }
@@ -1577,10 +1577,13 @@ public class MainController {
             //프로젝트 업데이트
             projectService.updateProject(projectVO);
             //프로젝트 PL을 detail 테이블에도 추가하는 코드
-            projectDetailVO.setCus_num(projectVO.getCus_num());
-            projectDetailVO.setAuth("1");
-            projectDetailVO.setPrj_num(projectService.selectProjectNum(projectVO.getPrj_name()).getPrj_num());
-            projectService.insertProject_detail(projectDetailVO);
+            List<ProjectDetailVO> projectLeader = projectService.selectProject_detailPL(projectVO);
+            if(projectLeader.size()==0){
+                projectDetailVO.setCus_num(projectVO.getCus_num());
+                projectDetailVO.setAuth("1");
+                projectDetailVO.setPrj_num(projectService.selectProjectNum(projectVO.getPrj_name()).getPrj_num());
+                projectService.insertProject_detail(projectDetailVO);
+            }
 
             //PL 권한부여
             List<ProjectVO> pl_num = projectService.selectPL();
@@ -1596,10 +1599,13 @@ public class MainController {
             projectService.updateProject(projectVO);
 
             //프로젝트 PL을 detail 테이블에도 추가하는 코드
-            projectDetailVO.setCus_num(projectVO.getCus_num());
-            projectDetailVO.setAuth("1");
-            projectDetailVO.setPrj_num(projectService.selectProjectNum(projectVO.getPrj_name()).getPrj_num());
-            projectService.insertProject_detail(projectDetailVO);
+            List<ProjectDetailVO> projectLeader = projectService.selectProject_detailPL(projectVO);
+            if(projectLeader.size()==0){
+                projectDetailVO.setCus_num(projectVO.getCus_num());
+                projectDetailVO.setAuth("1");
+                projectDetailVO.setPrj_num(projectService.selectProjectNum(projectVO.getPrj_name()).getPrj_num());
+                projectService.insertProject_detail(projectDetailVO);
+            }
 
             //PL 권한부여
             List<ProjectVO> pl_num = projectService.selectPL();
