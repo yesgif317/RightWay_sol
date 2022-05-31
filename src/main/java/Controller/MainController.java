@@ -148,8 +148,7 @@ public class MainController {
                        HttpSession httpSession, ModelAndView modelAndView) {
         //관리자 로그인인 경우 관리자승인페이지로 이동
         CustomerVO logininfo = (CustomerVO) httpSession.getAttribute("login");
-        if(logininfo.getCus_state()==3)
-        {
+        if (logininfo.getCus_state() == 3) {
             return "redirect:/adminpermission.do";
         }
         //프로젝트 이름이 선택되어있는 경우
@@ -238,7 +237,7 @@ public class MainController {
     public String loginPOST(LoginDTO loginDTO, HttpServletRequest request, HttpServletResponse response, HttpSession httpSession, Model model) throws Exception {
 
         //로그인창 Null값 제외하기위한 아이디 체크
-        if(customerService.idnullCheck(loginDTO) == 0) {
+        if (customerService.idnullCheck(loginDTO) == 0) {
             return "/loginPost";
         }
         //해당 아이디의 세션 유무 확인후 없을시 로그인 가능(다중로그인 차단용, 로그인 되어있는 계정 로그인시 차단)
@@ -254,17 +253,17 @@ public class MainController {
 
         int compare = sessdate.compareTo(today);
         System.out.println(compare);
-        if(compare > 0){
+        if (compare > 0) {
             return "user/loginoverlap";
-        } else if(compare < 0){
+        } else if (compare < 0) {
             //세션 키값 none 처리 및 리미트 해제
             customerService.keepLogin(loginDTO.getCus_id(), "none", new Date());
-        } else{
+        } else {
             //세션 키값 none 처리 및 리미트 해제
             customerService.keepLogin(loginDTO.getCus_id(), "none", new Date());
         }
 
-        if (!Objects.equals(checksession.getCus_sess_key(), "none")){
+        if (!Objects.equals(checksession.getCus_sess_key(), "none")) {
             return "user/loginoverlap";
         }
 
@@ -496,11 +495,11 @@ public class MainController {
 
     //산출물 작성글 수정 기능
     @RequestMapping(value = "/outputs_update.do", method = RequestMethod.POST)
-    public String outputs_update(MultipartFile[] uploadFile,NormalVO postVO,@RequestParam(value = "cate") List<Integer> cate, @RequestParam(value = "post_num") List<Integer> post_num
-            ,@RequestParam(value = "file_name") List<String> file_name) {
+    public String outputs_update(MultipartFile[] uploadFile, NormalVO postVO, @RequestParam(value = "cate") List<Integer> cate, @RequestParam(value = "post_num") List<Integer> post_num
+            , @RequestParam(value = "file_name") List<String> file_name) {
         postVO.setNor_tit(postVO.getTitle());
         postVO.setNor_cnt(postVO.getContents());
-        if(cate.size()>1) {
+        if (cate.size() > 1) {
             for (int i = 0; i < cate.size(); i++) {
                 System.out.println(post_num);
                 System.out.println(post_num.get(0));
@@ -514,7 +513,7 @@ public class MainController {
         if (uploadFile != null) {
             fileService.insertFile(uploadFile, postVO.getPrj_num(), 1);
         }
-        return "redirect:/outputs.do?post_num="+post_num.get(0);
+        return "redirect:/outputs.do?post_num=" + post_num.get(0);
     }
 
     // 산출물 게시글 작성 기능
@@ -540,8 +539,8 @@ public class MainController {
         ProjectVO object = (ProjectVO) httpSession.getAttribute("prj_list");
         List<NormalVO> allpostVoList = normalService.selectAll(12);
         List<NormalVO> normalVOList = new ArrayList<>();
-        for(int i=0; i < allpostVoList.size();i++)
-            if(allpostVoList.get(i).getPrj_num() == object.getPrj_num()){
+        for (int i = 0; i < allpostVoList.size(); i++)
+            if (allpostVoList.get(i).getPrj_num() == object.getPrj_num()) {
                 normalVOList.add(allpostVoList.get(i));
             }
         // .jsp 파일로 DB 결과값 전달하기
@@ -550,7 +549,7 @@ public class MainController {
     }
 
     @RequestMapping(value = "/notice_write.do", method = RequestMethod.GET)
-    public String notice_write(@RequestParam("post_num") int no,Model model) {
+    public String notice_write(@RequestParam("post_num") int no, Model model) {
         if (no > 0) {
             NormalVO Result = normalService.viewPost(no);
             model.addAttribute("PostList", Result);
@@ -582,14 +581,14 @@ public class MainController {
         }
         return "redirect:/notice.do";
     }
+
     //공지사항 작성글 수정 기능
     @RequestMapping(value = "/notice_update.do", method = RequestMethod.POST)
-    public String notice_update(MultipartFile[] uploadFile,NormalVO postVO,@RequestParam(value = "cate") List<Integer> cate, @RequestParam(value = "post_num") List<Integer> post_num
-            ,@RequestParam(value = "file_name") List<String> file_name) {
+    public String notice_update(MultipartFile[] uploadFile, NormalVO postVO, @RequestParam(value = "cate") List<Integer> cate, @RequestParam(value = "post_num") List<Integer> post_num
+            , @RequestParam(value = "file_name") List<String> file_name) {
         postVO.setNor_tit(postVO.getTitle());
         postVO.setNor_cnt(postVO.getContents());
-        if(cate.size()>1)
-        {
+        if (cate.size() > 1) {
             for (int i = 0; i < cate.size(); i++) {
                 System.out.println(post_num);
                 System.out.println(post_num.get(0));
@@ -603,8 +602,9 @@ public class MainController {
         if (uploadFile != null) {
             fileService.insertFile(uploadFile, postVO.getPrj_num(), 12);
         }
-        return "redirect:/notice_content.do?post_num="+post_num.get(0);
+        return "redirect:/notice_content.do?post_num=" + post_num.get(0);
     }
+
     @RequestMapping(value = "/notice_content.do", method = RequestMethod.GET)
     public String notice_content(@RequestParam("post_num") int no, Model model, HttpServletRequest request, HttpServletResponse response) {
         NormalVO Result = normalService.viewPost(no);
@@ -678,31 +678,32 @@ public class MainController {
             throw new RuntimeException("file Save Error");
         }
     }
+
     //첨부파일 삭제
     @RequestMapping(value = "/file_delete.do", method = RequestMethod.DELETE)
     public String file_delete(@RequestParam(value = "cate") int cate, @RequestParam(value = "post_num") int post_num
-            ,@RequestParam(value = "file_name") String file_name) {
+            , @RequestParam(value = "file_name") String file_name) {
         System.out.println('a');
         FileVO filevo = new FileVO(post_num, cate, file_name);
         fileService.deleteFile(filevo);
         System.out.println('c');
         switch (filevo.getCate()) {
             case 12:
-                return "redirect:/notice_write.do?post_num="+filevo.getPost_num()+"&update=1";
+                return "redirect:/notice_write.do?post_num=" + filevo.getPost_num() + "&update=1";
             case 13:
-                return "redirect:/datacenter_write.do?post_num="+filevo.getPost_num()+"&update=1";
+                return "redirect:/datacenter_write.do?post_num=" + filevo.getPost_num() + "&update=1";
             case 15:
-                return "redirect:/request_write.do?post_num="+filevo.getPost_num()+"&update=1";
+                return "redirect:/request_write.do?post_num=" + filevo.getPost_num() + "&update=1";
             case 9:
-                return "redirect:/danger_write.do?post_num="+filevo.getPost_num()+"&update=1";
+                return "redirect:/danger_write.do?post_num=" + filevo.getPost_num() + "&update=1";
             case 10:
-                return "redirect:/iwwue_write.do?post_num="+filevo.getPost_num()+"&update=1";
+                return "redirect:/iwwue_write.do?post_num=" + filevo.getPost_num() + "&update=1";
             case 3:
-                return "redirect:/regularreport_write.do?post_num="+filevo.getPost_num()+"&update=1";
+                return "redirect:/regularreport_write.do?post_num=" + filevo.getPost_num() + "&update=1";
             case 2:
-                return "redirect:/meetingrecord_write.do?post_num="+filevo.getPost_num()+"&update=1";
+                return "redirect:/meetingrecord_write.do?post_num=" + filevo.getPost_num() + "&update=1";
             case 1:
-                return "redirect:/outputs_write.do?post_num="+filevo.getPost_num()+"&update=1";
+                return "redirect:/outputs_write.do?post_num=" + filevo.getPost_num() + "&update=1";
         }
         return "redirect:/index.do";
     }
@@ -713,8 +714,8 @@ public class MainController {
         ProjectVO object = (ProjectVO) httpSession.getAttribute("prj_list");
         List<NormalVO> allpostVoList = normalService.selectAll(15);
         List<NormalVO> normalVOList = new ArrayList<>();
-        for(int i=0; i < allpostVoList.size();i++)
-            if(allpostVoList.get(i).getPrj_num() == object.getPrj_num()){
+        for (int i = 0; i < allpostVoList.size(); i++)
+            if (allpostVoList.get(i).getPrj_num() == object.getPrj_num()) {
                 normalVOList.add(allpostVoList.get(i));
             }
         // .jsp 파일로 DB 결과값 전달하기
@@ -772,12 +773,12 @@ public class MainController {
 
     //요청사항 작성글 수정 기능
     @RequestMapping(value = "/request_update.do", method = RequestMethod.POST)
-    public String request_update(MultipartFile[] uploadFile,NormalVO postVO,@RequestParam(value = "cate") List<Integer> cate, @RequestParam(value = "post_num") List<Integer> post_num
-            ,@RequestParam(value = "file_name") List<String> file_name) {
+    public String request_update(MultipartFile[] uploadFile, NormalVO postVO, @RequestParam(value = "cate") List<Integer> cate, @RequestParam(value = "post_num") List<Integer> post_num
+            , @RequestParam(value = "file_name") List<String> file_name) {
 
         postVO.setNor_tit(postVO.getTitle());
         postVO.setNor_cnt(postVO.getContents());
-        if(cate.size()>1) {
+        if (cate.size() > 1) {
             for (int i = 0; i < cate.size(); i++) {
                 System.out.println(post_num);
                 System.out.println(post_num.get(0));
@@ -791,14 +792,13 @@ public class MainController {
         if (uploadFile != null) {
             fileService.insertFile(uploadFile, postVO.getPrj_num(), 15);
         }
-        return "redirect:/request.do?post_num="+post_num.get(0);
+        return "redirect:/request.do?post_num=" + post_num.get(0);
     }
 
     // 요청사항 게시글 작성 기능
     @RequestMapping(value = "/request_insert.do", method = RequestMethod.POST)
     public String request_insert(MultipartFile[] uploadFile, HttpSession httpSession, @RequestParam(value = "title") String title
-            , @RequestParam(value = "contents") String contents, @RequestParam(value = "cus_num") String cus_num, @RequestParam(value = "prj_num") int prj_num)
-    {
+            , @RequestParam(value = "contents") String contents, @RequestParam(value = "cus_num") String cus_num, @RequestParam(value = "prj_num") int prj_num) {
         System.out.println("//Title : " + title + "//Contents : " + contents + "//requestFile : " + uploadFile + cus_num);
 
         //게시글 저장
@@ -832,7 +832,7 @@ public class MainController {
         RiskVO Result = riskService.viewRisk(post_num);
         if (post_num == 0) {
             return "issue/issue_write";
-        }else if (Result.getCus_num() == parseInt(logininfo.getCus_num()) || logininfo.getCus_state()==3 || Result.risk_mng == parseInt(logininfo.getCus_num())) {
+        } else if (Result.getCus_num() == parseInt(logininfo.getCus_num()) || logininfo.getCus_state() == 3 || Result.risk_mng == parseInt(logininfo.getCus_num())) {
             model.addAttribute("RiskList", Result);
             return "issue/issue_write";
         }
@@ -985,12 +985,12 @@ public class MainController {
 
     //회의록 작성글 수정 기능
     @RequestMapping(value = "/meetingrecord_update.do", method = RequestMethod.POST)
-    public String meetingrecord_update(MultipartFile[] uploadFile,NormalVO postVO,@RequestParam(value = "cate") List<Integer> cate, @RequestParam(value = "post_num") List<Integer> post_num
-            ,@RequestParam(value = "file_name") List<String> file_name) {
+    public String meetingrecord_update(MultipartFile[] uploadFile, NormalVO postVO, @RequestParam(value = "cate") List<Integer> cate, @RequestParam(value = "post_num") List<Integer> post_num
+            , @RequestParam(value = "file_name") List<String> file_name) {
 
         postVO.setNor_tit(postVO.getTitle());
         postVO.setNor_cnt(postVO.getContents());
-        if(cate.size()>1) {
+        if (cate.size() > 1) {
             for (int i = 0; i < cate.size(); i++) {
                 System.out.println(post_num);
                 System.out.println(post_num.get(0));
@@ -1004,7 +1004,7 @@ public class MainController {
         if (uploadFile != null) {
             fileService.insertFile(uploadFile, postVO.getPrj_num(), 2);
         }
-        return "redirect:/meetingrecord_content.do?post_num="+post_num.get(0);
+        return "redirect:/meetingrecord_content.do?post_num=" + post_num.get(0);
     }
 
     // 회의록 게시글 작성 기능
@@ -1028,8 +1028,8 @@ public class MainController {
         ProjectVO object = (ProjectVO) httpSession.getAttribute("prj_list");
         List<NormalVO> allpostVoList = normalService.selectAll(3);
         List<NormalVO> normalVOList = new ArrayList<>();
-        for(int i=0; i < allpostVoList.size();i++)
-            if(allpostVoList.get(i).getPrj_num() == object.getPrj_num()){
+        for (int i = 0; i < allpostVoList.size(); i++)
+            if (allpostVoList.get(i).getPrj_num() == object.getPrj_num()) {
                 normalVOList.add(allpostVoList.get(i));
             }
         // .jsp 파일로 DB 결과값 전달하기
@@ -1086,12 +1086,12 @@ public class MainController {
 
     //정기보고 작성글 수정 기능
     @RequestMapping(value = "/regularreport_update.do", method = RequestMethod.POST)
-    public String regularreport_update(MultipartFile[] uploadFile,NormalVO postVO,@RequestParam(value = "cate") List<Integer> cate, @RequestParam(value = "post_num") List<Integer> post_num
-            ,@RequestParam(value = "file_name") List<String> file_name) {
+    public String regularreport_update(MultipartFile[] uploadFile, NormalVO postVO, @RequestParam(value = "cate") List<Integer> cate, @RequestParam(value = "post_num") List<Integer> post_num
+            , @RequestParam(value = "file_name") List<String> file_name) {
 
         postVO.setNor_tit(postVO.getTitle());
         postVO.setNor_cnt(postVO.getContents());
-        if(cate.size()>1) {
+        if (cate.size() > 1) {
             for (int i = 0; i < cate.size(); i++) {
                 System.out.println(post_num);
                 System.out.println(post_num.get(0));
@@ -1105,7 +1105,7 @@ public class MainController {
         if (uploadFile != null) {
             fileService.insertFile(uploadFile, postVO.getPrj_num(), 3);
         }
-        return "redirect:/regularreport_content.do?post_num="+post_num.get(0);
+        return "redirect:/regularreport_content.do?post_num=" + post_num.get(0);
     }
 
     // 정기보고 게시글 작성 기능
@@ -1145,7 +1145,7 @@ public class MainController {
         RiskVO Result = riskService.viewRisk(post_num);
         if (post_num == 0) {
             return "danger/danger_write";
-        } else if (Result.getCus_num() == parseInt(logininfo.getCus_num()) || logininfo.getCus_state()==3 || Result.risk_mng == parseInt(logininfo.getCus_num())) {
+        } else if (Result.getCus_num() == parseInt(logininfo.getCus_num()) || logininfo.getCus_state() == 3 || Result.risk_mng == parseInt(logininfo.getCus_num())) {
             model.addAttribute("RiskList", Result);
             return "danger/danger_write";
         }
@@ -1215,7 +1215,6 @@ public class MainController {
         //관리자로 접속하는 경우
         if (cus_state == 3) {
             List<CustomerVO> customerVOList = customerService.select_nonPermissionCus();
-            System.out.println(customerVOList);
             // .jsp 파일로 DB 결과값 전달하기
             model.addAttribute("CustomerList", customerVOList);
             return "/adminpermission/adminpermission";
@@ -1241,7 +1240,6 @@ public class MainController {
         //service 클래스에서 Dao 로 접근하여 쿼리 결과값 가져오기
         Object object = httpSession.getAttribute("prj_list");
         List<EventVO> eventVOList = eventService.selectEvent(object);
-        System.out.println(eventVOList);
         // .jsp 파일로 DB 결과값 전달하기
         model.addAttribute("EventList", eventVOList);
 
@@ -1250,12 +1248,12 @@ public class MainController {
 
     //행사관리 글쓰기 페이지 이동
     @RequestMapping(value = "/event_write.do", method = RequestMethod.GET)
-    public String event_write(@RequestParam("post_num") int post_num, Model model,HttpSession httpSession) {
+    public String event_write(@RequestParam("post_num") int post_num, Model model, HttpSession httpSession) {
         EventVO Result = eventService.viewEvent(post_num);
         CustomerVO logininfo = (CustomerVO) httpSession.getAttribute("login");
         if (post_num == 0) {
             return "event/event_write";
-        } else if (Result.getCus_num() == parseInt(logininfo.getCus_num()) || logininfo.getCus_state()==3) {
+        } else if (Result.getCus_num() == parseInt(logininfo.getCus_num()) || logininfo.getCus_state() == 3) {
             model.addAttribute("EventList", Result);
             return "event/event_write";
         }
@@ -1320,40 +1318,61 @@ public class MainController {
 
     //company page
     @RequestMapping(value = "/company.do", method = RequestMethod.GET)
-    public String company(Model model) {
+    public String company(Model model, HttpSession httpSession) {
+        CustomerVO cust = (CustomerVO) httpSession.getAttribute("login");
+        int cus_state = cust.getCus_state();
         //service 클래스에서 Dao 로 접근하여 쿼리 결과값 가져오기
-        List<CompanyVO> companyVOList = companyService.selectCompany();
-        // .jsp 파일로 DB 결과값 전달하기
-        model.addAttribute("CompanyList", companyVOList);
+        //관리자로 접속하는 경우
+        if (cus_state == 3) {
+            List<CompanyVO> companyVOList = companyService.selectCompany();
+            model.addAttribute("CompanyList", companyVOList);
+            return "company/company";
 
-        return "company/company";
+        }
+        model.addAttribute("msg", "접근권한이 없습니다.");
+        model.addAttribute("url", "index.do");
+        return "alert";
     }
 
     //company 글쓰기 페이지 이동
     @RequestMapping(value = "/company_write.do", method = RequestMethod.GET)
-    public String company_write(@RequestParam("com_num") int com_num, Model model) {
-        if (com_num > 0) {
-            CompanyVO Result = companyService.viewCompany(com_num);
-            model.addAttribute("CompanyList", Result);
+    public String company_write(@RequestParam("com_num") int com_num, Model model, HttpSession httpSession) {
+        CustomerVO cust = (CustomerVO) httpSession.getAttribute("login");
+        int cus_state = cust.getCus_state();
+        //관리자로 접속하는 경우
+        if (cus_state == 3) {
+            if (com_num != 0) {
+                CompanyVO Result = companyService.viewCompany(com_num);
+                model.addAttribute("CompanyList", Result);
+            }
+            return "company/company_write";
         }
-        return "company/company_write";
+        model.addAttribute("msg", "접근권한이 없습니다.");
+        model.addAttribute("url", "index.do");
+        return "alert";
     }
 
     //company 상세 페이지 이동
     @RequestMapping(value = "/company_content.do", method = RequestMethod.GET)
-    public String company_content(@RequestParam("com_num") int com_num, Model model, HttpServletResponse response) {
-        CompanyVO Result = companyService.viewCompany(com_num);
-        if (Result == null) {
-            try {
-                ScriptUtil.alertAndMovePage(response, "존재하지 않는 게시글 입니다.", "/company.do");
-            } catch (IOException ex) {
-                System.out.println(ex);
+    public String company_content(@RequestParam("com_num") int com_num, HttpSession httpSession, Model model, HttpServletResponse response) {
+        CustomerVO cust = (CustomerVO) httpSession.getAttribute("login");
+        int cus_state = cust.getCus_state();
+        //관리자로 접속하는 경우
+        if (cus_state == 3) {
+            CompanyVO Result = companyService.viewCompany(com_num);
+            if (Result == null) {
+                try {
+                    ScriptUtil.alertAndMovePage(response, "존재하지 않는 게시글 입니다.", "/company.do");
+                } catch (IOException ex) {
+                    System.out.println(ex);
+                }
             }
+            model.addAttribute("CompanyList", Result);
+            return "company/company_content";
         }
-
-
-        model.addAttribute("CompanyList", Result);
-        return "company/company_content";
+        model.addAttribute("msg", "접근권한이 없습니다.");
+        model.addAttribute("url", "index.do");
+        return "alert";
     }
 
     //company insert
@@ -1415,31 +1434,38 @@ public class MainController {
 
     //project 글쓰기 페이지 이동
     @RequestMapping(value = "/project_write.do", method = RequestMethod.GET)
-    public String project_write(@RequestParam(value = "prj_num") int prj_num, Model model) {
+    public String project_write(@RequestParam(value = "prj_num") int prj_num, Model model, HttpSession httpSession) {
+        ProjectVO Result = projectService.viewProject(prj_num);
+        CustomerVO cust = (CustomerVO) httpSession.getAttribute("login");
+        int cus_num = Integer.parseInt(cust.getCus_num());
+        int cus_state = cust.getCus_state();
+        //관리자/PL 접속하는 경우
+        if (cus_state == 3 || cus_num == Result.getCus_num()) {
+            List<CustomerVO> customerVoList = customerService.selectAllCustomer();
+            List<ProjectDetailVO> projectDetailVOList = projectService.selectProject_detail(prj_num);
+            List<CustomerVO> cusmodalVoList = new ArrayList<>();
 
-        List<CustomerVO> customerVoList = customerService.selectAllCustomer();
-        List<ProjectDetailVO> projectDetailVOList = projectService.selectProject_detail(prj_num);
-        List<CustomerVO> cusmodalVoList = new ArrayList<>();
-
-        for (CustomerVO customerVO : customerVoList) {
-            int i = 0;
-            for (ProjectDetailVO projectDetailVO : projectDetailVOList) {
-                if (parseInt(customerVO.getCus_num()) == projectDetailVO.getCus_num()) {
-                    i += 1;
+            for (CustomerVO customerVO : customerVoList) {
+                int i = 0;
+                for (ProjectDetailVO projectDetailVO : projectDetailVOList) {
+                    if (parseInt(customerVO.getCus_num()) == projectDetailVO.getCus_num()) {
+                        i += 1;
+                    }
+                }
+                if (i == 0) {
+                    cusmodalVoList.add(customerVO);
                 }
             }
-            if (i == 0) {
-                cusmodalVoList.add(customerVO);
-            }
+
+            model.addAttribute("CusmodalList", cusmodalVoList);
+            model.addAttribute("CustomerList", customerVoList);
+            model.addAttribute("Project_detailList", projectDetailVOList);
+            model.addAttribute("ProjectList1", Result);
+            return "project/project_write";
         }
-
-        model.addAttribute("CusmodalList", cusmodalVoList);
-        model.addAttribute("CustomerList", customerVoList);
-        model.addAttribute("Project_detailList", projectDetailVOList);
-
-        ProjectVO Result = projectService.viewProject(prj_num);
-        model.addAttribute("ProjectList1", Result);
-        return "project/project_write";
+        model.addAttribute("msg", "접근권한이 없습니다.");
+        model.addAttribute("url", "index.do");
+        return "alert";
     }
 
     //project 상세 페이지 이동
@@ -1462,8 +1488,8 @@ public class MainController {
 
     //project insert
     @RequestMapping(value = "/project_insert.do", method = RequestMethod.POST)
-    public String project_insert(Model model, ProjectVO projectVO,HttpSession httpSession) {
-        CustomerVO logininfo = (CustomerVO)httpSession.getAttribute("login");
+    public String project_insert(Model model, ProjectVO projectVO, HttpSession httpSession) {
+        CustomerVO logininfo = (CustomerVO) httpSession.getAttribute("login");
         if (projectService.selectproject_list(projectVO.getPrj_name()) == null) {
             projectService.insertProject(projectVO);
             //프로젝트 PL을 detail 테이블에도 추가하는 코드
@@ -1569,8 +1595,8 @@ public class MainController {
 
     //project update
     @RequestMapping(value = "/project_update.do", method = RequestMethod.POST)
-    public String project_update(Model model, ProjectVO projectVO,HttpSession httpSession) {
-        CustomerVO logininfo = (CustomerVO)httpSession.getAttribute("login");
+    public String project_update(Model model, ProjectVO projectVO, HttpSession httpSession) {
+        CustomerVO logininfo = (CustomerVO) httpSession.getAttribute("login");
         ProjectDetailVO projectDetailVO = new ProjectDetailVO();
         ProjectVO namechk = projectService.selectproject_list(projectVO.getPrj_name());
         if (namechk == null) {
@@ -1578,7 +1604,7 @@ public class MainController {
             projectService.updateProject(projectVO);
             //프로젝트 PL을 detail 테이블에도 추가하는 코드
             List<ProjectDetailVO> projectLeader = projectService.selectProject_detailPL(projectVO);
-            if(projectLeader.size()==0){
+            if (projectLeader.size() == 0) {
                 projectDetailVO.setCus_num(projectVO.getCus_num());
                 projectDetailVO.setAuth("1");
                 projectDetailVO.setPrj_num(projectService.selectProjectNum(projectVO.getPrj_name()).getPrj_num());
@@ -1600,7 +1626,7 @@ public class MainController {
 
             //프로젝트 PL을 detail 테이블에도 추가하는 코드
             List<ProjectDetailVO> projectLeader = projectService.selectProject_detailPL(projectVO);
-            if(projectLeader.size()==0){
+            if (projectLeader.size() == 0) {
                 projectDetailVO.setCus_num(projectVO.getCus_num());
                 projectDetailVO.setAuth("1");
                 projectDetailVO.setPrj_num(projectService.selectProjectNum(projectVO.getPrj_name()).getPrj_num());
@@ -1983,8 +2009,8 @@ public class MainController {
         ProjectVO object = (ProjectVO) httpSession.getAttribute("prj_list");
         List<NormalVO> allpostVoList = normalService.selectAll(13);
         List<NormalVO> normalVOList = new ArrayList<>();
-        for(int i=0; i < allpostVoList.size();i++)
-            if(allpostVoList.get(i).getPrj_num() == object.getPrj_num()){
+        for (int i = 0; i < allpostVoList.size(); i++)
+            if (allpostVoList.get(i).getPrj_num() == object.getPrj_num()) {
                 normalVOList.add(allpostVoList.get(i));
             }
         // .jsp 파일로 DB 결과값 전달하기
@@ -2007,6 +2033,7 @@ public class MainController {
         }
         return "/datacenter/datacenter_write";
     }
+
     //자료실 파일 업로드
     @RequestMapping(value = "/datacenter_insert.do", method = RequestMethod.POST)
     public String uploadAjaxPost(MultipartFile[] uploadFile, @RequestParam(value = "title") String title
@@ -2023,11 +2050,11 @@ public class MainController {
 
     //자료실 작성글 수정 기능
     @RequestMapping(value = "/datacenter_update.do", method = RequestMethod.POST)
-    public String datacenter_update(MultipartFile[] uploadFile,NormalVO postVO,@RequestParam(value = "cate") List<Integer> cate, @RequestParam(value = "post_num") List<Integer> post_num
-            ,@RequestParam(value = "file_name") List<String> file_name) {
+    public String datacenter_update(MultipartFile[] uploadFile, NormalVO postVO, @RequestParam(value = "cate") List<Integer> cate, @RequestParam(value = "post_num") List<Integer> post_num
+            , @RequestParam(value = "file_name") List<String> file_name) {
         postVO.setNor_tit(postVO.getTitle());
         postVO.setNor_cnt(postVO.getContents());
-        if(cate.size()>1) {
+        if (cate.size() > 1) {
             for (int i = 0; i < cate.size(); i++) {
                 System.out.println(post_num);
                 System.out.println(post_num.get(0));
@@ -2041,7 +2068,7 @@ public class MainController {
         if (uploadFile != null) {
             fileService.insertFile(uploadFile, postVO.getPrj_num(), 13);
         }
-        return "redirect:/datacenter_content.do?post_num="+post_num.get(0);
+        return "redirect:/datacenter_content.do?post_num=" + post_num.get(0);
     }
 
     @RequestMapping(value = "/userreport.do", method = RequestMethod.GET)

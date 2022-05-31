@@ -144,7 +144,6 @@
                     <h6 class="collapse-header">투입인력</h6>
                     <a class="collapse-item font-weight-bold text-gray-600" href="usermanagement.do">인원관리</a>
                     <a class="collapse-item font-weight-bold text-gray-600" href="team.do">팀관리</a>
-                    <a class="collapse-item font-weight-bold text-gray-600" href="company.do">업체관리</a>
                     <a class="collapse-item font-weight-bold text-gray-600" href="adminpermission.do">관리자승인</a>
                         <%--                    <a class="collapse-item font-weight-bold text-gray-600" href="userreport.do">투입인력보고</a>--%>
                 </div>

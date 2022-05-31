@@ -115,6 +115,7 @@
 
                         <!-- 수정/삭제/목록 버튼 -->
                         <div class="text-center d-block card-header py-3">
+                            <c:if test="${login.cus_num eq ProjectList1.cus_num || login.cus_state eq 3}">
                             <a href="project_write.do?prj_num=${ProjectList1.prj_num}&update=1" class="btn btn-info">
                                               <span class="icon text-white-50">
                                               <i class="fas fa-pen"></i>
@@ -128,6 +129,7 @@
                                                  </span>
                                 <span class="text" style="color:white">  삭제</span>
                             </a>
+
                                 <!-- Modal -->
                                 <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
                                     <div class="modal-dialog" role="document">
@@ -149,7 +151,7 @@
                                         </div>
                                     </div>
                                 </div>
-
+                            </c:if>
 
                             <a href="project.do" class="btn btn-secondary">
                                              <span class="icon text-white-50">
