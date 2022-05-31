@@ -46,7 +46,7 @@
                                 <div class="col-sm-5 mb-3 mb-sm-0">
                                     <div class="form-label-group">
                                         <input type="text" name="cus_id" id="cus_id" class="form-control"
-                                               placeholder="아이디" required autofocus value="${cus_id}">
+                                               placeholder="아이디" required autofocus value="${cus_id}" maxlength="20">
                                         <input type="hidden" name="reid" id="reid">
                                     </div>
                                 </div>
@@ -64,7 +64,7 @@
                                 <div class="col-sm-5 mb-3 mb-sm-0">
                                     <input type="password" class="form-control form-control-user" name="cus_pwd"
                                            id="cus_pwd"
-                                           placeholder="비밀번호">
+                                           placeholder="비밀번호" maxlength="20">
                                 </div>
                                 <b class="text-danger small">*</b>
                                     <div class="col-sm-5 mb-3 mb-sm-0">
@@ -73,20 +73,20 @@
                                                id="cus_pwdcheck"
                                                placeholder="비밀번호 확인">
                                     </div>
-                                <small class="mt-2 ml-3">8자 이상의 영문자,숫자,특수문자 조합으로 입력되어야 합니다.</small>
+                                <small class="mt-2 ml-3">8~20자리의 길이의 영문자,숫자,특수문자 조합으로 입력되어야 합니다.</small>
                                 </div>
 
                             <div class="form-group row">
                                 <b class="text-danger small">*</b>
                                 <div class="col-sm-5 mb-3 mb-sm-0">
                                 <input type="text" class="form-control form-control-user" name="cus_name" id="cus_name"
-                                       placeholder="이름">
+                                       placeholder="이름" maxlength="20">
                                 </div>
                                 <b class="text-danger small">*</b>
                                 <div class="col-sm-5 mb-3 mb-sm-0">
                                     <input type="text" class="form-control form-control-user mb-1" name="cus_phone"
                                            id="cus_phone"
-                                           placeholder="연락처">
+                                           placeholder="연락처" maxlength="20">
                                     <sup>&nbsp;010-0000-0000 형식으로 입력</sup>
                             </div>
                             </div>
@@ -96,7 +96,7 @@
                                 <div class="col-sm-10 mb-3 mb-sm-0">
                                 <input type="email" class="form-control form-control-user" name="cus_email"
                                        id="cus_email"
-                                       placeholder="이메일 (example@example.com)">
+                                       placeholder="이메일 (example@example.com)" maxlength="30">
                                 </div>
                                 <small class="mt-2 ml-3">비밀번호 분실시 이메일을 통하여 발급됩니다.</small>
                             </div>
@@ -121,13 +121,13 @@
                             <div class="form-group row" >
                                 <div class="col-sm-5 mb-3 mb-sm-0" style="margin-left: 1.3%">
                                 <input type="text" class="form-control form-control-user" name="cus_dep" id="cus_dep"
-                                       placeholder="부서명">
+                                       placeholder="부서명" maxlength="20">
                             </div>
 
                                 <div class="col-sm-5 mb-3 mb-sm-0">
                                 <input type="text" class="form-control form-control-user" name="cus_position"
                                        id="cus_position"
-                                       placeholder="직책">
+                                       placeholder="직책" maxlength="20">
                             </div>
                             </div>
 

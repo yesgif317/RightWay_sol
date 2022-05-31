@@ -62,7 +62,7 @@
                                         <div class="col-12 col-md-7 text-gray-900">
                                             <input type="email" id="cus_email" name="cus_email"
                                                    placeholder="이메일주소를 입력해주세요." class="form-control"
-                                                   value="${CustomerList.cus_email}">
+                                                   value="${CustomerList.cus_email}" maxlength="30">
                                         </div>
                                     </div>
                                     <div class="row form-group">
@@ -71,7 +71,7 @@
                                         <div class="col-12 col-md-7 text-gray-900">
                                             <input type="text" id="cus_phone" name="cus_phone"
                                                    placeholder="연락처를 입력해주세요.( - 포함 입력)" class="form-control"
-                                                   value="${CustomerList.cus_phone}">
+                                                   value="${CustomerList.cus_phone}" maxlength="20">
                                         </div>
                                     </div>
                                     <div class="row form-group">
@@ -79,7 +79,7 @@
                                                 class="form-control-label fa-solid m-2">부서</label></div>
                                         <div class="col-12 col-md-7 text-gray-900">
                                             <input type="text" id="cus_dep" name="cus_dep" placeholder="소속부서를 입력해주세요."
-                                                   class="form-control" value="${CustomerList.cus_dep}">
+                                                   class="form-control" value="${CustomerList.cus_dep}" maxlength="20">
                                         </div>
                                     </div>
                                     <div class="row form-group">
@@ -88,7 +88,7 @@
                                         <div class="col-12 col-md-7 text-gray-900">
                                             <input type="text" id="cus_position" name="cus_position"
                                                    placeholder="직책을 입력해주세요." class="form-control"
-                                                   value="${CustomerList.cus_position}">
+                                                   value="${CustomerList.cus_position}" maxlength="20">
                                         </div>
                                     </div>
                                 </form>

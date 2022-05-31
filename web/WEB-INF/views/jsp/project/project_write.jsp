@@ -47,7 +47,7 @@
                                         </c:choose>
                                     <div class="row form-group">
                                         <div class="col col-md-3 text-right"><label for="prj_name" class=" form-control-label fa-solid text-gray-800 m-2"><sup class="text-danger small">*</sup>프로젝트명</label></div>
-                                        <div class="col-12 col-md-7"><input type="text" id="prj_name" name="prj_name" placeholder="프로젝트명을 입력해주세요." class="form-control" value="${ProjectList1.prj_name}"></div>
+                                        <div class="col-12 col-md-7"><input type="text" id="prj_name" name="prj_name" placeholder="프로젝트명을 입력해주세요." class="form-control" value="${ProjectList1.prj_name}" maxlength="30"></div>
                                     </div>
                                     <div class="row form-group">
                                         <div class="col col-md-3 text-right"><label for="cus_num" class=" form-control-label fa-solid text-gray-800 m-2"><sup class="text-danger small">*</sup>PL</label></div>
@@ -57,7 +57,7 @@
                                             </a>
                                             <!-- Modal -->
                                             <div class="modal fade" id="PLModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel1" aria-hidden="true" >
-                                                <div class="modal-dialog" role="document">
+                                                <div class="modal-dialog modal-lg" role="document">
                                                     <div class="modal-content">
                                                         <div class="modal-header">
                                                             <h5 class="modal-title" id="exampleModalLabel1">PL선택</h5>
@@ -72,8 +72,8 @@
                                                                     <table class="table table-sm table-bordered table-hover" id="dataTable_pl">
                                                                         <thead>
                                                                         <tr>
-                                                                            <th width="30%">이름</th>
-                                                                            <th width="20%">직책</th>
+                                                                            <th>이름</th>
+                                                                            <th>직책</th>
                                                                             <th>이메일</th>
                                                                             <th></th>
                                                                         </tr>
@@ -84,19 +84,18 @@
                                                                                 <td>${customer.cus_name}</td>
                                                                                 <td>${customer.cus_position}</td>
                                                                                 <td>${customer.cus_email}</td>
-                                                                                <td onclick="return plselect('${customer.cus_num}','${customer.cus_name}','${customer.cus_position}')">
-                                                                                    <a class="btn btn-secondary text-gray-100" data-dismiss="modal">선택</a>
+                                                                                <td class = "text-center" onclick="return plselect('${customer.cus_num}','${customer.cus_name}','${customer.cus_position}')">
+                                                                                    <a class="btn btn-info text-gray-100" data-dismiss="modal">선택</a>
                                                                                 </td>
                                                                             </tr>
                                                                         </c:forEach>
                                                                         </tbody>
                                                                     </table>
                                                                 </div>
+                                                                <div class="modal-footer">
+                                                                    <button class="btn btn-secondary" type="button" data-dismiss="modal">취소</button>
+                                                                </div>
                                                             </div>
-                                                        </div>
-
-                                                        <div class="modal-footer">
-                                                            <button class="btn btn-secondary" type="button" data-dismiss="modal">취소</button>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -122,9 +121,8 @@
                                                     <span class="text " style="color:white">프로젝트원 추가</span>
                                                 </a>
                                                 <!-- Modal -->
-
-                                                <div class="modal fade" id="exampleModal1"  role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                                                    <div class="modal-dialog" role="document">
+                                                <div class="modal fade"  id="exampleModal1"  role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                                    <div class="modal-dialog modal-lg" role="document">
                                                         <div class="modal-content">
                                                             <div class="modal-header">
                                                                 프로젝트원선택
@@ -134,19 +132,18 @@
                                                                 </button>
                                                             </div>
 
-                                                            <div class="modal-body">
+                                                            <div class="modal-body text-left">
                                                                 <div class="card-body">
                                                                     <div class="table-responsive">
                                                                         <table class="table table-sm table-bordered table-hover" id="dataTable">
-
-                                                                    <thead>
-                                                                    <tr>
-                                                                        <th>이름</th>
-                                                                        <th>직책</th>
-                                                                        <th>연락처</th>
-                                                                        <th>이메일</th>
-                                                                    </tr>
-                                                                    </thead>
+                                                                            <thead>
+                                                                            <tr>
+                                                                                <th>이름</th>
+                                                                                <th>직책</th>
+                                                                                <th>이메일</th>
+                                                                                <th></th>
+                                                                            </tr>
+                                                                            </thead>
                                                                             <tbody>
                                                                     <c:forEach items="${CusmodalList}" var="cusmodal">
                                                                         <c:set var="i" value="${i+1}"/>
@@ -155,10 +152,10 @@
                                                                             <td>${cusmodal.cus_name}</td>
                                                                             <td>${cusmodal.cus_position}</td>
                                                                             <td>${cusmodal.cus_email}</td>
-                                                                            <td>
+                                                                            <td class="text-center">
                                                                                 <input type="hidden" id='${i}'
                                                                                        value='${cusmodal.cus_num}'>
-                                                                                <a class="btn btn-secondary text-gray-100" data-dismiss="modal"
+                                                                                <a class="btn btn-info text-gray-100" data-dismiss="modal"
                                                                                    onclick="return memberselect('${i}')">선택</a>
                                                                             </td>
                                                                         </tr>

@@ -54,25 +54,25 @@
                                     <div class="row form-group">
                                         <div class="col col-md-3 text-right"><label class="form-control-label fa-solid m-2">이메일</label></div>
                                         <div class="col-12 col-md-7 text-gray-900">
-                                            <input type="email" id="cus_email" name="cus_email" placeholder="이메일주소를 입력해주세요." class="form-control" value="${login.cus_email}">
+                                            <input type="email" id="cus_email" name="cus_email" placeholder="이메일주소를 입력해주세요." class="form-control" value="${login.cus_email}" maxlength="30">
                                         </div>
                                     </div>
                                     <div class="row form-group">
                                         <div class="col col-md-3 text-right"><label class="form-control-label fa-solid m-2">연락처</label></div>
                                         <div class="col-12 col-md-7 text-gray-900">
-                                            <input type="text" id="cus_phone" name="cus_phone" placeholder="연락처를 입력해주세요.( - 포함 입력)" class="form-control" value="${login.cus_phone}">
+                                            <input type="text" id="cus_phone" name="cus_phone" placeholder="연락처를 입력해주세요.( - 포함 입력)" class="form-control" value="${login.cus_phone}" maxlength="20">
                                         </div>
                                     </div>
                                     <div class="row form-group">
                                         <div class="col col-md-3 text-right"><label class="form-control-label fa-solid m-2">부서</label></div>
                                         <div class="col-12 col-md-7 text-gray-900">
-                                            <input type="text" id="cus_dep" name="cus_dep" placeholder="소속부서를 입력해주세요." class="form-control" value="${login.cus_dep}">
+                                            <input type="text" id="cus_dep" name="cus_dep" placeholder="소속부서를 입력해주세요." class="form-control" value="${login.cus_dep}" maxlength="20">
                                         </div>
                                     </div>
                                     <div class="row form-group">
                                         <div class="col col-md-3 text-right"><label class="form-control-label fa-solid m-2">직책</label></div>
                                         <div class="col-12 col-md-7 text-gray-900">
-                                            <input type="text" id="cus_position" name="cus_position" placeholder="직책을 입력해주세요." class="form-control" value="${login.cus_position}">
+                                            <input type="text" id="cus_position" name="cus_position" placeholder="직책을 입력해주세요." class="form-control" value="${login.cus_position}" maxlength="20">
                                         </div>
                                     </div>
                                 </form>

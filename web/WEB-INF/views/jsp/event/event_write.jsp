@@ -47,11 +47,11 @@
                                             </c:choose>
                                         <div class="row form-group">
                                             <div class="col col-md-3 text-right"><label for="evt_tit" class=" form-control-label fa-solid text-gray-800 mt-2"><sup class="text-danger small">*</sup>행사명</label></div>
-                                            <div class="col-12 col-md-7"><input type="text" id="evt_tit" name="evt_tit" placeholder="행사명을 입력해주세요." class="form-control" value="${EventList.evt_tit}"></div>
+                                            <div class="col-12 col-md-7"><input type="text" id="evt_tit" name="evt_tit" placeholder="행사명을 입력해주세요." class="form-control" value="${EventList.evt_tit}" maxlength="65"></div>
                                         </div>
                                         <div class="row form-group">
                                             <div class="col col-md-3 text-right"><label for="evt_sbj" class=" form-control-label fa-solid text-gray-800 mt-2">행사목적</label></div>
-                                            <div class="col-12 col-md-7"><input type="email" id="evt_sbj" name="evt_sbj" placeholder="행사목적을 입력해주세요." class="form-control" value="${EventList.evt_sbj}"></div>
+                                            <div class="col-12 col-md-7"><input type="email" id="evt_sbj" name="evt_sbj" placeholder="행사목적을 입력해주세요." class="form-control" value="${EventList.evt_sbj}" maxlength="30"></div>
                                         </div>
 
                                         <div class="row form-group">
@@ -63,23 +63,23 @@
 
                                         <div class="row form-group">
                                             <div class="col col-md-3 text-right"><label for="evt_host" class=" form-control-label fa-solid text-gray-800 mt-2">행사주최</label></div>
-                                            <div class="col-12 col-md-7"><input type="text" id="evt_host" name="evt_host" placeholder="행사주최를 입력해주세요." class="form-control" value="${EventList.evt_host}"></div>
+                                            <div class="col-12 col-md-7"><input type="text" id="evt_host" name="evt_host" placeholder="행사주최를 입력해주세요." class="form-control" value="${EventList.evt_host}" maxlength="30"></div>
                                         </div>
                                         <div class="row form-group">
                                             <div class="col col-md-3 text-right"><label for="evt_supervise" class=" form-control-label fa-solid text-gray-800 mt-2">행사주관</label></div>
-                                            <div class="col-12 col-md-7"><input type="text" id="evt_supervise" name="evt_supervise" placeholder="행사주관을 입력해주세요." class="form-control" value="${EventList.evt_supervise}"></div>
+                                            <div class="col-12 col-md-7"><input type="text" id="evt_supervise" name="evt_supervise" placeholder="행사주관을 입력해주세요." class="form-control" value="${EventList.evt_supervise}" maxlength="30"></div>
                                         </div>
                                         <div class="row form-group">
                                             <div class="col col-md-3 text-right"><label for="evt_loc" class=" form-control-label fa-solid text-gray-800 mt-2"><sup class="text-danger small">*</sup>행사장소</label></div>
-                                            <div class="col-12 col-md-7"><input type="text" id="evt_loc" name="evt_loc" placeholder="행사장소를 입력해주세요." class="form-control" value="${EventList.evt_loc}"></div>
+                                            <div class="col-12 col-md-7"><input type="text" id="evt_loc" name="evt_loc" placeholder="행사장소를 입력해주세요." class="form-control" value="${EventList.evt_loc}" maxlength="50"></div>
                                         </div>
                                         <div class="row form-group">
                                             <div class="col col-md-3 text-right"><label for="evt_url" class=" form-control-label fa-solid text-gray-800 mt-2">URL</label></div>
-                                            <div class="col-12 col-md-7"><input type="text" id="evt_url" name="evt_url" placeholder="참고URL을 입력해주세요." class="form-control" value="${EventList.evt_url}"></div>
+                                            <div class="col-12 col-md-7"><input type="text" id="evt_url" name="evt_url" placeholder="참고URL을 입력해주세요." class="form-control" value="${EventList.evt_url}" maxlength="500"></div>
                                         </div>
                                         <div class="row form-group">
                                             <div class="col col-md-3 text-right"><label for="evt_cnt" class=" form-control-label fa-solid text-gray-800 mt-2">행사내용</label></div>
-                                            <div class="col-12 col-md-7"><textarea name="evt_cnt" id="evt_cnt" rows="10" placeholder="행사내용을 입력해주세요." class="form-control">${EventList.evt_cnt}</textarea></div>
+                                            <div class="col-12 col-md-7"><textarea name="evt_cnt" id="evt_cnt" rows="10" placeholder="행사내용을 입력해주세요." class="form-control" maxlength="1000">${EventList.evt_cnt}</textarea></div>
                                         </div>
                                         <div class="row form-group">
                                             <div class="col col-md-3 text-right"><label for="evt_pri" class=" form-control-label fa-solid text-gray-800 mt-2"><sup class="text-danger small">*</sup>참가비용</label></div>
