@@ -278,8 +278,7 @@ jsp:include page="../../include/footer.jsp" flush="true" />
                                         </c:when>
                                         <c:otherwise>
                                             <br><br>
-                                            <input type="submit" class="btn btn-comment_delete" value=""
-                                                   style="float:right"/>
+                                            <p> </p>
                                         </c:otherwise>
                                     </c:choose>
 
@@ -302,8 +301,7 @@ jsp:include page="../../include/footer.jsp" flush="true" />
                                                onmouseenter="zoomIn(event)" onmouseleave="zoomOut(event)"/>
                                         </c:when>
                                         <c:otherwise>
-                                            <input type="submit" class="btn btn-comment_delete" value=""
-                                                   style="float:right"/>
+                                            <p> </p>
                                         </c:otherwise>
                                         </c:choose>
                                     </form>
@@ -504,8 +502,7 @@ jsp:include page="../../include/footer.jsp" flush="true" />
                                                 </c:when>
                                                 <c:otherwise>
                                                     <br><br>
-                                                    <input type="submit" class="btn btn-comment_delete" value=""
-                                                           style="float:right"/>
+                                                    <p> </p>
                                                 </c:otherwise>
                                             </c:choose>
 
@@ -531,8 +528,7 @@ jsp:include page="../../include/footer.jsp" flush="true" />
                                                        onmouseenter="zoomIn(event)" onmouseleave="zoomOut(event)"/>
                                                 </c:when>
                                                 <c:otherwise>
-                                                    <input type="submit" class="btn btn-rcmt-delete" value=""
-                                                           style="float:right"/>
+                                                    <p> </p>
                                                 </c:otherwise>
                                                 </c:choose>
                                             </form>

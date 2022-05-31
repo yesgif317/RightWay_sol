@@ -421,7 +421,7 @@ window.onload=function(){
                                     <c:choose>
                                         <c:when test="${NormalList != null}">
                                             <c:forEach items="${NormalList}" var="post" step="1" begin="0" end="4">
-                                                <a class="dropdown-item-text h5 mb-0 font-weight-bold text-gray-800"
+                                                <a class="dropdown-item-text h7 mb-0 font-weight-bold text-gray-800" style="display:inline-block; width:300px; overflow:hidden; text-overflow:ellipsis; white-space:nowrap"
                                                    href="/notice_content.do?post_num=${post.post_num}">- ${post.nor_tit}</a>
                                             </c:forEach>
                                         </c:when>
@@ -437,7 +437,7 @@ window.onload=function(){
 
                 <!-- Earnings (Monthly) Card Example -->
                 <div class="col-xl-4 col-md-6 mb-4">
-                    <div class="text-xs font-weight-bold text-success text-uppercase mb-1">내 최신 게시물에 달린 댓글</div>
+                    <div class="text-xs font-weight-bold text-success text-uppercase mb-1">내 게시물에 달린 댓글</div>
                     <div class="card border-left-success">
                         <div class="card-body">
                             <div class="row no-gutters align-items-center">
@@ -447,86 +447,70 @@ window.onload=function(){
                                         <c:when test="${CommentList != null}">
                                             <c:forEach items="${CommentList}" var="comments" step="1" begin="0" end="4">
                                                 <c:if test="${comments.cate eq 1}">
-                                                    <a style="display:inline-block; width:300px; overflow:hidden; text-overflow:ellipsis; white-space:nowrap" class="dropdown-item-text h5 mb-0 font-weight-bold text-gray-800"
+                                                    <a style="display:inline-block; width:300px; overflow:hidden; text-overflow:ellipsis; white-space:nowrap" class="dropdown-item-text h7 mb-0 font-weight-bold text-gray-800"
                                                        href="/outputs_content.do?post_num=${comments.post_num}">- ${comments.cmt_cnt}</a>
-                                                    <span style="float: right">${comments.cmt_date}</span> <br>
                                                 </c:if>
                                                 <c:if test="${comments.cate eq 2}">
-                                                    <a style="display:inline-block; width:300px; overflow:hidden; text-overflow:ellipsis; white-space:nowrap" class="dropdown-item-text h5 mb-0 font-weight-bold text-gray-800"
+                                                    <a style="display:inline-block; width:300px; overflow:hidden; text-overflow:ellipsis; white-space:nowrap" class="dropdown-item-text h7 mb-0 font-weight-bold text-gray-800"
                                                        href="/meetingrecord_content.do?post_num=${comments.post_num}">- ${comments.cmt_cnt}</a>
-                                                    <span style="float: right">${comments.cmt_date}</span> <br>
                                                 </c:if>
                                                 <c:if test="${comments.cate eq 3}">
-                                                    <a style="display:inline-block; width:300px; overflow:hidden; text-overflow:ellipsis; white-space:nowrap" class="dropdown-item-text h5 mb-0 font-weight-bold text-gray-800"
+                                                    <a style="display:inline-block; width:300px; overflow:hidden; text-overflow:ellipsis; white-space:nowrap" class="dropdown-item-text h7 mb-0 font-weight-bold text-gray-800"
                                                        href="/regularreport_content.do?post_num=${comments.post_num}">- ${comments.cmt_cnt}</a>
-                                                    <span style="float: right">${comments.cmt_date}</span> <br>
                                                 </c:if>
                                                 <c:if test="${comments.cate eq 5}">
-                                                    <a style="display:inline-block; width:300px; overflow:hidden; text-overflow:ellipsis; white-space:nowrap" class="dropdown-item-text h5 mb-0 font-weight-bold text-gray-800"
+                                                    <a style="display:inline-block; width:300px; overflow:hidden; text-overflow:ellipsis; white-space:nowrap" class="dropdown-item-text h7 mb-0 font-weight-bold text-gray-800"
                                                        href="/event_content.do?post_num=${comments.post_num}">- ${comments.cmt_cnt}</a>
-                                                    <span style="float: right">${comments.cmt_date}</span> <br>
                                                 </c:if>
                                                 <c:if test="${comments.cate eq 9}">
-                                                    <a style="display:inline-block; width:300px; overflow:hidden; text-overflow:ellipsis; white-space:nowrap" class="dropdown-item-text h5 mb-0 font-weight-bold text-gray-800"
+                                                    <a style="display:inline-block; width:300px; overflow:hidden; text-overflow:ellipsis; white-space:nowrap" class="dropdown-item-text h7 mb-0 font-weight-bold text-gray-800"
                                                        href="/danger_content.do?post_num=${comments.post_num}">- ${comments.cmt_cnt}</a>
-                                                    <span style="float: right">${comments.cmt_date}</span> <br>
                                                 </c:if>
                                                 <c:if test="${comments.cate eq 10}">
-                                                    <a style="display:inline-block; width:300px; overflow:hidden; text-overflow:ellipsis; white-space:nowrap" class="dropdown-item-text h5 mb-0 font-weight-bold text-gray-800"
+                                                    <a style="display:inline-block; width:300px; overflow:hidden; text-overflow:ellipsis; white-space:nowrap" class="dropdown-item-text h7 mb-0 font-weight-bold text-gray-800"
                                                        href="/issue_content.do?post_num=${comments.post_num}">- ${comments.cmt_cnt}</a>
-                                                    <span style="float: right">${comments.cmt_date}</span> <br>
                                                 </c:if>
                                                 <c:if test="${comments.cate eq 12}">
-                                                    <a style="display:inline-block; width:300px; overflow:hidden; text-overflow:ellipsis; white-space:nowrap" class="dropdown-item-text h5 mb-0 font-weight-bold text-gray-800"
+                                                    <a style="display:inline-block; width:300px; overflow:hidden; text-overflow:ellipsis; white-space:nowrap" class="dropdown-item-text h7 mb-0 font-weight-bold text-gray-800"
                                                        href="/notice_content.do?post_num=${comments.post_num}">- ${comments.cmt_cnt}</a>
-                                                    <span style="float: right">${comments.cmt_date}</span> <br>
                                                 </c:if>
                                                 <c:if test="${comments.cate eq 15}">
-                                                    <a style="display:inline-block; width:300px; overflow:hidden; text-overflow:ellipsis; white-space:nowrap" class="dropdown-item-text h5 mb-0 font-weight-bold text-gray-800"
+                                                    <a style="display:inline-block; width:300px; overflow:hidden; text-overflow:ellipsis; white-space:nowrap" class="dropdown-item-text h7 mb-0 font-weight-bold text-gray-800"
                                                        href="/request_content.do?post_num=${comments.post_num}">- ${comments.cmt_cnt}</a>
-                                                    <span style="float: right">${comments.cmt_date}</span> <br>
                                                 </c:if>
                                                 <c:if test="${comments.cate eq 0}">
                                                     <c:forEach items="${ReCommentList}" var="recomments" begin="${cmt_new_count}" end="${cmt_new_count}">
                                                         <c:if test="${recomments.cate eq 1}">
-                                                            <a style="display:inline-block; width:300px; overflow:hidden; text-overflow:ellipsis; white-space:nowrap" class="dropdown-item-text h5 mb-0 font-weight-bold text-gray-800"
+                                                            <a style="display:inline-block; width:300px; overflow:hidden; text-overflow:ellipsis; white-space:nowrap" class="dropdown-item-text h7 mb-0 font-weight-bold text-gray-800"
                                                                href="/outputs_content.do?post_num=${recomments.post_num}">- ${recomments.rcmt_cnt}</a>
-                                                            <span style="float: right">${recomments.rcmt_date}</span> <br>
                                                         </c:if>
                                                         <c:if test="${recomments.cate eq 2}">
-                                                            <a style="display:inline-block; width:300px; overflow:hidden; text-overflow:ellipsis; white-space:nowrap" class="dropdown-item-text h5 mb-0 font-weight-bold text-gray-800"
+                                                            <a style="display:inline-block; width:300px; overflow:hidden; text-overflow:ellipsis; white-space:nowrap" class="dropdown-item-text h7 mb-0 font-weight-bold text-gray-800"
                                                                href="/meetingrecord_content.do?post_num=${recomments.post_num}">- ${recomments.rcmt_cnt}</a>
-                                                            <span style="float: right">${recomments.rcmt_date}</span> <br>
                                                         </c:if>
                                                         <c:if test="${recomments.cate eq 3}">
-                                                            <a style="display:inline-block; width:300px; overflow:hidden; text-overflow:ellipsis; white-space:nowrap" class="dropdown-item-text h5 mb-0 font-weight-bold text-gray-800"
+                                                            <a style="display:inline-block; width:300px; overflow:hidden; text-overflow:ellipsis; white-space:nowrap" class="dropdown-item-text h7 mb-0 font-weight-bold text-gray-800"
                                                                href="/regularreport_content.do?post_num=${recomments.post_num}">- ${recomments.rcmt_cnt}</a>
-                                                            <span style="float: right">${recomments.rcmt_date}</span> <br>
                                                         </c:if>
                                                         <c:if test="${recomments.cate eq 5}">
-                                                            <a style="display:inline-block; width:300px; overflow:hidden; text-overflow:ellipsis; white-space:nowrap" class="dropdown-item-text h5 mb-0 font-weight-bold text-gray-800"
+                                                            <a style="display:inline-block; width:300px; overflow:hidden; text-overflow:ellipsis; white-space:nowrap" class="dropdown-item-text h7 mb-0 font-weight-bold text-gray-800"
                                                                href="/event_content.do?post_num=${recomments.post_num}">- ${recomments.rcmt_cnt}</a>
-                                                            <span style="float: right">${recomments.rcmt_date}</span> <br>
                                                         </c:if>
                                                         <c:if test="${recomments.cate eq 9}">
-                                                            <a style="display:inline-block; width:300px; overflow:hidden; text-overflow:ellipsis; white-space:nowrap" class="dropdown-item-text h5 mb-0 font-weight-bold text-gray-800"
+                                                            <a style="display:inline-block; width:300px; overflow:hidden; text-overflow:ellipsis; white-space:nowrap" class="dropdown-item-text h7 mb-0 font-weight-bold text-gray-800"
                                                                href="/danger_content.do?post_num=${recomments.post_num}">- ${recomments.rcmt_cnt}</a>
-                                                            <span style="float: right">${recomments.rcmt_date}</span> <br>
                                                         </c:if>
                                                         <c:if test="${recomments.cate eq 10}">
-                                                            <a style="display:inline-block; width:300px; overflow:hidden; text-overflow:ellipsis; white-space:nowrap" class="dropdown-item-text h5 mb-0 font-weight-bold text-gray-800"
+                                                            <a style="display:inline-block; width:300px; overflow:hidden; text-overflow:ellipsis; white-space:nowrap" class="dropdown-item-text h7 mb-0 font-weight-bold text-gray-800"
                                                                href="/issue_content.do?post_num=${recomments.post_num}">- ${recomments.rcmt_cnt}</a>
-                                                            <span style="float: right">${recomments.rcmt_date}</span> <br>
                                                         </c:if>
                                                         <c:if test="${recomments.cate eq 12}">
-                                                            <a style="display:inline-block; width:300px; overflow:hidden; text-overflow:ellipsis; white-space:nowrap" class="dropdown-item-text h5 mb-0 font-weight-bold text-gray-800"
+                                                            <a style="display:inline-block; width:300px; overflow:hidden; text-overflow:ellipsis; white-space:nowrap" class="dropdown-item-text h7 mb-0 font-weight-bold text-gray-800"
                                                                href="/notice_content.do?post_num=${recomments.post_num}">- ${recomments.rcmt_cnt}</a>
-                                                            <span style="float: right">${recomments.rcmt_date}</span> <br>
                                                         </c:if>
                                                         <c:if test="${recomments.cate eq 15}">
-                                                            <a style="display:inline-block; width:300px; overflow:hidden; text-overflow:ellipsis; white-space:nowrap" class="dropdown-item-text h5 mb-0 font-weight-bold text-gray-800"
+                                                            <a style="display:inline-block; width:300px; overflow:hidden; text-overflow:ellipsis; white-space:nowrap" class="dropdown-item-text h7 mb-0 font-weight-bold text-gray-800"
                                                                href="/request_content.do?post_num=${recomments.post_num}">- ${recomments.rcmt_cnt}</a>
-                                                            <span style="float: right">${recomments.rcmt_date}</span> <br>
                                                         </c:if>
                                                     </c:forEach>
                                                 </c:if>
@@ -553,7 +537,7 @@ window.onload=function(){
                                     <c:choose>
                                         <c:when test="${EvtList != null}">
                                             <c:forEach items="${EvtList}" var="post" step="1" begin="0" end="4">
-                                                <a class="dropdown-item-text h5 mb-0 font-weight-bold text-gray-800"
+                                                <a class="dropdown-item-text h7 mb-0 font-weight-bold text-gray-800"
                                                    href="/event_content.do?post_num=${post.post_num}">- ${post.evt_tit}</a>
                                             </c:forEach>
                                         </c:when>

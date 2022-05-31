@@ -1437,10 +1437,37 @@ public class MainController {
     public String project_write(@RequestParam(value = "prj_num") int prj_num, Model model, HttpSession httpSession) {
         ProjectVO Result = projectService.viewProject(prj_num);
         CustomerVO cust = (CustomerVO) httpSession.getAttribute("login");
+
         int cus_num = Integer.parseInt(cust.getCus_num());
         int cus_state = cust.getCus_state();
+        List<ProjectVO> projectVOList = projectService.projectVOList(cust.getCus_num());
+        System.out.println(projectVOList.size());
+        System.out.println(Result);
+
         //관리자/PL 접속하는 경우
-        if (cus_state == 3 || cus_num == Result.getCus_num()) {
+        if (cus_state == 3 || Result == null || projectVOList.size() == 0) {
+            List<CustomerVO> customerVoList = customerService.selectAllCustomer();
+            List<ProjectDetailVO> projectDetailVOList = projectService.selectProject_detail(prj_num);
+            List<CustomerVO> cusmodalVoList = new ArrayList<>();
+
+            for (CustomerVO customerVO : customerVoList) {
+                int i = 0;
+                for (ProjectDetailVO projectDetailVO : projectDetailVOList) {
+                    if (parseInt(customerVO.getCus_num()) == projectDetailVO.getCus_num()) {
+                        i += 1;
+                    }
+                }
+                if (i == 0) {
+                    cusmodalVoList.add(customerVO);
+                }
+            }
+
+            model.addAttribute("CusmodalList", cusmodalVoList);
+            model.addAttribute("CustomerList", customerVoList);
+            model.addAttribute("Project_detailList", projectDetailVOList);
+            model.addAttribute("ProjectList1", Result);
+            return "project/project_write";
+        } else if (cus_num == Result.getCus_num()) {
             List<CustomerVO> customerVoList = customerService.selectAllCustomer();
             List<ProjectDetailVO> projectDetailVOList = projectService.selectProject_detail(prj_num);
             List<CustomerVO> cusmodalVoList = new ArrayList<>();
